@@ -1,0 +1,6095 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>GTT Sales Order Fulfillment Extractors</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTT_SOFF01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTT_SOFF02</SOBJ_NAME>
+    <SOBJ_NAME>LZGTT_SOFF03</SOBJ_NAME>
+    <SOBJ_NAME>LZGTT_SOFTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTT_SOF</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTT_ADD_TRACKID_OTE_DEITEM</FUNCNAME>
+     <SHORT_TEXT>Function for setup of tracking IDs of delivery item</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/TRACK_ID_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TID_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tracking IDs for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TID_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Tracking IDs could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_ADD_TRACKID_OTE_SHPHDR</FUNCNAME>
+     <SHORT_TEXT>Function for setup of tracking IDs of shipment</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/TRACK_ID_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TID_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tracking IDs for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TID_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Tracking IDs could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_ADD_TRACKID_OTE_SOITEM</FUNCNAME>
+     <SHORT_TEXT>Function for setup of tracking IDs of sales order item</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/TRACK_ID_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TID_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TRACKIDDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tracking IDs for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TID_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Tracking IDs could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_GET_STOPS_FROM_SHIPMENT</FUNCNAME>
+     <SHORT_TEXT>Get stops information from shipment stages (GTT)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_TKNUM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TKNUM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_VTTS_NEW</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VTTSVB_TAB</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_VTSP_NEW</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VTSPVB_TAB</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_VTTP_NEW</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VTTPVB_TAB</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ET_STOPS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTT_STOPS</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_DLV_WATCHING_STOPS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTT_DLV_WATCH_STOPS</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_TKNUM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Shipment Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_VTTS_NEW</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>New Content for Shipment Stages w/ dynamic data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_VTSP_NEW</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table type for VTSPVB: Shpmnt Items on Stage w/ dynamic data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_VTTP_NEW</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table type for VTTPVB: Shipment Items w/ dynamic data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_STOPS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table of stops (GTT)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_DLV_WATCHING_STOPS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Stops info. which deliveries are watching in shipment(GTT)</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_GI</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Goods Issue</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_GI_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Goods Issue Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_HD</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Planned Event for Delivery Header of Outbound Delivery</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/EXP_EVENTS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/MEASR_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/INFO_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EXP_EVENT_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Expected events for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement data of application object</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Infodata for tracking object characterization</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXP_EVENT_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Expected events could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_ITM</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Planned Event for Delivery Item of Outbound Delivery</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/EXP_EVENTS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/MEASR_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/INFO_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EXP_EVENT_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Expected events for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement data of application object</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Infodata for tracking object characterization</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXP_EVENT_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Expected events could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_PACKING</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Packing</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_PACKING_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Packing Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_PICKING</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Picking</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_PICKING_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Picking Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_POD</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of POD</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_DE_POD_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for POD Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_ARRIVAL</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Arrival</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_ARRIVAL_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Arrival Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_CHECKIN</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Check In</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_CHECKIN_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Check In Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_DEPARTURE</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Departure</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_DEPARTURE_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Departure Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_HD</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Planned Event for Shipment</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/EXP_EVENTS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/MEASR_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/INFO_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EXP_EVENT_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Expected events for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement data of application object</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Infodata for tracking object characterization</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXP_EVENT_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Expected events could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_LOAD_END</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Loading End</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_LOAD_END_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Loading End Event</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_LOAD_START</FUNCNAME>
+     <SHORT_TEXT>SOF Extractor: Actual Event of Loading Start</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVTID_EVTCNT_MAP</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_HEADER</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_LOCATIONID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_ADDRESS</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCDESCR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_LOCADDID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_PARTNERID</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARTNERADDID</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_ESTIMDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_CONFSTAT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_NEXTEVENT</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_NEXTEVDEADL</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_REFERENCE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_MEASRESULT</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_STATUSATTR</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_PARAMETERS</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_FILEHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEREF</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILEBIN</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_FILECHAR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <TYPES>O</TYPES>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>/SAPTRX/BAPI_EVM_TEXTHEADER</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_TEXTLINES</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <DBSTRUCT>/SAPTRX/BAPI_EVM_EE_MODIFY</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <DBSTRUCT>BAPIPAREX</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EVENT_DATA_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all event types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKINGHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Bapi for message input: message Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKADDRESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message Location / Partner Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCATIONDESCR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location description table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKLOCADDITIONALID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Location Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Header  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARTNERADDID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Partner Additional Identifier table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKESTIMDEADLINE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estimated Deadline table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKCONFIRMSTATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Confirmation Status table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKNEXTEVDEADLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Next Event Deadlines table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKREFERENCES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Further Reference table for event message input.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKMEASURESULTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement Results  table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKSTATUSATTRIB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Status Attribute Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKPARAMETERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI structure for Event Handler control parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Attached file: header table.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEREF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>File reference</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILEBIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a binary file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKFILECHAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Contents of a text  file</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTHEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Text Header table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKTEXTLINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event message table for event message input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_TRACKEEMODIFY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Modification to Expected Event List</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_EXTENSIONOUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ref. structure for BAPI parameter ExtensionIn/ExtensionOut</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_EVENTID_MAP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Mapping between ctab and BAPI header entries</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EVENT_DATA_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>event data could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_EE_SHP_LOAD_START_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Loading Start</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/EVTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVENTTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_EVT_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical System ID of an Application System</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with References to all Tables Passed by the Application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENTTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control Tables and Nametabs for all EventTypes</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EVENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Event Data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_DE_HD</FUNCNAME>
+     <SHORT_TEXT>Function for setup of control parameters of delivery header</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/CONTROL_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>CDATA_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control data for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CDATA_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in control data determination</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_DE_HDR_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Delivery Order Header</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_DE_ITEM</FUNCNAME>
+     <SHORT_TEXT>Function for setup of control parameters of delivery item</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/CONTROL_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>CDATA_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control data for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CDATA_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in control data determination</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_DE_ITM_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Delivery Order Items</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SHP_HD</FUNCNAME>
+     <SHORT_TEXT>Function for setup of control parameters of shipment</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/CONTROL_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>CDATA_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control data for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CDATA_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in control data determination</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SHP_HDR_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Shipment</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SO_HD</FUNCNAME>
+     <SHORT_TEXT>Function for setup of control parameters of sales order header</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/CONTROL_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>CDATA_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control data for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CDATA_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in control data determination</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SO_HDR_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Sales Order Header</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SO_ITEM</FUNCNAME>
+     <SHORT_TEXT>Function for setup of control parameters of sales order item</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/CONTROL_DATA</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>CDATA_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Tables all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_CONTROL_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control data for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CDATA_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in control data determination</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTT_SOF_OTE_SO_ITM_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for Sales Order Items</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS_WA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTAB_WA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <DBFIELD>SY-BINPT</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>RELEVANCE_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APPTYPE_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object data</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Result of evaluation</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RELEVANCE_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>EM relevance could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop processing</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
