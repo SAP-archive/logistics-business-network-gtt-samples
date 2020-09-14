@@ -8,9 +8,9 @@ You can find SAP LBN Track and Trace Option sample code in this project. The pro
 3.	Backend and Frontend code to build Fiori application on SAP LBN Track and Trace Option (Java and JavaScript)
 
 ## Requirements
-•	An SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 10 GB Application Runtime quota.
-•	To integrate with ERP, you need an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
-•	To integrate with visibility provider, please log your incident in SAP BCP system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
+1.	An SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 10 GB Application Runtime quota.
+2.	To integrate with ERP, you need an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
+3.	To integrate with visibility provider, please log your incident in SAP BCP system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
 
 ## Download and Installation
 Check document folder in this GitHub to find detailed installation guide for each tracking scenario
