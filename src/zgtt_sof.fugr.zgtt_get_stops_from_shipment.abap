@@ -68,7 +68,8 @@ FUNCTION zgtt_get_stops_from_shipment.
   SORT lt_vttsvb BY tsrfo.
 
 * Fill source & destination
-  LOOP AT lt_vttsvb INTO ls_vttsvb WHERE tknum = iv_tknum.
+  LOOP AT lt_vttsvb INTO ls_vttsvb WHERE tknum = iv_tknum
+                                     AND updkz <> 'D'.    .
     IF ls_vttsvb-kunna IS NOT INITIAL.
       lv_srcloctype = 'Customer'.
       lv_srclocid   = ls_vttsvb-kunna.
@@ -247,7 +248,9 @@ FUNCTION zgtt_get_stops_from_shipment.
            WHERE tknum = iv_tknum.
   ENDIF.
 
-  LOOP AT lt_vtspvb INTO ls_vtspvb.
+  LOOP AT lt_vtspvb INTO ls_vtspvb WHERE tknum IS NOT INITIAL
+                                     AND tpnum IS NOT INITIAL
+                                     AND updkz <> 'D'.
     CLEAR ls_dlv_watching_stop.
 
     READ TABLE lt_vttpvb INTO ls_vttpvb WITH KEY tknum = ls_vtspvb-tknum

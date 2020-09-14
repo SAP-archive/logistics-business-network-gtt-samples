@@ -213,7 +213,9 @@ FUNCTION zgtt_sof_ote_shp_hd.
     APPEND ls_control_data TO e_control_data.
 
 * Shipment Item table
-    LOOP AT lt_xvttp INTO ls_xvttp WHERE updkz <> 'D'.
+    LOOP AT lt_xvttp INTO ls_xvttp WHERE tknum IS NOT INITIAL
+                                     AND tpnum IS NOT INITIAL
+                                     AND updkz <> 'D'.
       lv_tabix = sy-tabix.
       ls_control_data-paramindex = lv_tabix.
       ls_control_data-paramname = gc_cp_yn_shp_dlv_cnt.
