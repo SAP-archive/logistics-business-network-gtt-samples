@@ -1,0 +1,1991 @@
+<?xml version="1.0" ?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="1.0"
+		xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="com.sap.gtt.app.sof.sofService"
+			xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="Action">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.Action_texts" FromRole="Action" ToRole="Action_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.Action_localized" FromRole="Action" ToRole="Action_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="Action_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="CorrelationType">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.CorrelationType_texts" FromRole="CorrelationType" ToRole="CorrelationType_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.CorrelationType_localized" FromRole="CorrelationType" ToRole="CorrelationType_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="CorrelationType_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="Event">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.Event_references" FromRole="Event" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.Event_eventProcesses" FromRole="Event" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="EventStatus">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.EventStatus_texts" FromRole="EventStatus" ToRole="EventStatus_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.EventStatus_localized" FromRole="EventStatus" ToRole="EventStatus_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="EventStatus_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="GTTDPPBlockingEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent_references" FromRole="GTTDPPBlockingEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent_eventProcesses" FromRole="GTTDPPBlockingEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTDPPDeletionEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent_references" FromRole="GTTDPPDeletionEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent_eventProcesses" FromRole="GTTDPPDeletionEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTDelayedEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="refPlannedEventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="refPlannedEventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="refPlannedEventLocationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTDelayedEvent_references" FromRole="GTTDelayedEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTDelayedEvent_eventProcesses" FromRole="GTTDelayedEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTDeletionEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTDeletionEvent_references" FromRole="GTTDeletionEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTDeletionEvent_eventProcesses" FromRole="GTTDeletionEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTOverdueEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="refPlannedEventUUID" Type="Edm.Guid" Nullable="false"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTOverdueEvent_references" FromRole="GTTOverdueEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTOverdueEvent_eventProcesses" FromRole="GTTOverdueEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTResetPlannedEventStatusEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="refPlannedEventType" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="refPlannedEventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="refPlannedEventLocationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent_references" FromRole="GTTResetPlannedEventStatusEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent_eventProcesses" FromRole="GTTResetPlannedEventStatusEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="GTTUpdatePlanEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_references" FromRole="GTTUpdatePlanEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_eventProcesses" FromRole="GTTUpdatePlanEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_plannedEvents" FromRole="GTTUpdatePlanEvent" ToRole="PlannedEventForUpdatePlanEvent"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="Incoterms">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="20"></Property>
+				<Property Name="name" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.Incoterms_texts" FromRole="Incoterms" ToRole="Incoterms_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.Incoterms_localized" FromRole="Incoterms" ToRole="Incoterms_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="Incoterms_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="20"></Property>
+				<Property Name="name" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="LifeCycleStatus">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.LifeCycleStatus_texts" FromRole="LifeCycleStatus" ToRole="LifeCycleStatus_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.LifeCycleStatus_localized" FromRole="LifeCycleStatus" ToRole="LifeCycleStatus_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="LifeCycleStatus_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="PlannedEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="eventType" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="isFinalPlannedEvent" Type="Edm.Boolean"></Property>
+				<Property Name="plannedTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="process_id" Type="Edm.Guid"></Property>
+				<Property Name="payloadSequence" Type="Edm.Int32"></Property>
+				<Property Name="nextOverdueDetection" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="overdueDetectionCounter" Type="Edm.Int32"></Property>
+				<Property Name="eventStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lastProcessEventDirectory_id" Type="Edm.Guid"></Property>
+				<NavigationProperty Name="process" Relationship="com.sap.gtt.app.sof.sofService.PlannedEvent_process" FromRole="PlannedEvent" ToRole="TrackedProcess"></NavigationProperty>
+				<NavigationProperty Name="eventStatus" Relationship="com.sap.gtt.app.sof.sofService.PlannedEvent_eventStatus" FromRole="PlannedEvent" ToRole="EventStatus"></NavigationProperty>
+				<NavigationProperty Name="lastProcessEventDirectory" Relationship="com.sap.gtt.app.sof.sofService.PlannedEvent_lastProcessEventDirectory" FromRole="PlannedEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="PlannedEventForEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="eventType" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="isFinalPlannedEvent" Type="Edm.Boolean"></Property>
+				<Property Name="plannedTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="event_id" Type="Edm.Guid"></Property>
+				<NavigationProperty Name="event" Relationship="com.sap.gtt.app.sof.sofService.PlannedEventForEvent_event" FromRole="PlannedEventForEvent" ToRole="Event"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="PlannedEventForUpdatePlanEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="eventType" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="isFinalPlannedEvent" Type="Edm.Boolean"></Property>
+				<Property Name="plannedTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedTechTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsEarliest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBizTsLatest" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="plannedBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="event_id" Type="Edm.Guid"></Property>
+				<Property Name="action_code" Type="Edm.String" MaxLength="50"></Property>
+				<NavigationProperty Name="event" Relationship="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent_event" FromRole="PlannedEventForUpdatePlanEvent" ToRole="Event"></NavigationProperty>
+				<NavigationProperty Name="action" Relationship="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent_action" FromRole="PlannedEventForUpdatePlanEvent" ToRole="UpdatePlanAction"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="ProcessEventDirectory">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="process_id" Type="Edm.Guid"></Property>
+				<Property Name="plannedEvent_id" Type="Edm.Guid"></Property>
+				<Property Name="event_id" Type="Edm.Guid"></Property>
+				<Property Name="correlationType_code" Type="Edm.String" MaxLength="50"></Property>
+				<NavigationProperty Name="process" Relationship="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_process" FromRole="ProcessEventDirectory" ToRole="TrackedProcess"></NavigationProperty>
+				<NavigationProperty Name="plannedEvent" Relationship="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_plannedEvent" FromRole="ProcessEventDirectory" ToRole="PlannedEvent"></NavigationProperty>
+				<NavigationProperty Name="event" Relationship="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_event" FromRole="ProcessEventDirectory" ToRole="Event"></NavigationProperty>
+				<NavigationProperty Name="correlationType" Relationship="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_correlationType" FromRole="ProcessEventDirectory" ToRole="CorrelationType"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="ProcessStatus">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.ProcessStatus_texts" FromRole="ProcessStatus" ToRole="ProcessStatus_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.ProcessStatus_localized" FromRole="ProcessStatus" ToRole="ProcessStatus_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="ProcessStatus_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="QualifiedTrackingId">
+				<Key>
+					<PropertyRef Name="process_id"></PropertyRef>
+					<PropertyRef Name="observedProcess_id"></PropertyRef>
+				</Key>
+				<Property Name="process_id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="validFrom" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="validTo" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="observedProcess_id" Type="Edm.Guid" Nullable="false"></Property>
+				<NavigationProperty Name="process" Relationship="com.sap.gtt.app.sof.sofService.QualifiedTrackingId_process" FromRole="QualifiedTrackingId" ToRole="TrackedProcess"></NavigationProperty>
+				<NavigationProperty Name="observedProcess" Relationship="com.sap.gtt.app.sof.sofService.QualifiedTrackingId_observedProcess" FromRole="QualifiedTrackingId" ToRole="TrackedProcess"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="Reference">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="event_id" Type="Edm.Guid"></Property>
+				<Property Name="altKey" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="validFrom" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="validTo" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="referenceType_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="action_code" Type="Edm.String" MaxLength="50"></Property>
+				<NavigationProperty Name="event" Relationship="com.sap.gtt.app.sof.sofService.Reference_event" FromRole="Reference" ToRole="Event"></NavigationProperty>
+				<NavigationProperty Name="referenceType" Relationship="com.sap.gtt.app.sof.sofService.Reference_referenceType" FromRole="Reference" ToRole="ReferenceType"></NavigationProperty>
+				<NavigationProperty Name="action" Relationship="com.sap.gtt.app.sof.sofService.Reference_action" FromRole="Reference" ToRole="Action"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="ReferenceType">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.ReferenceType_texts" FromRole="ReferenceType" ToRole="ReferenceType_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.ReferenceType_localized" FromRole="ReferenceType" ToRole="ReferenceType_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="ReferenceType_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<EntityType Name="SalesOrder">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="trackedProcessType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lastChangedAtBusinessTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="lastChangedByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="lastChangeDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="version" Type="Edm.Int32"></Property>
+				<Property Name="salesOrderNo" Type="Edm.String" Nullable="false" MaxLength="10"></Property>
+				<Property Name="shipToPartyId" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="netValue" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2"></Property>
+				<Property Name="currency" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="customerReference" Type="Edm.String" MaxLength="35"></Property>
+				<Property Name="documentDate" Type="Edm.DateTime" sap:display-format="Date"
+					xmlns:sap="http://www.sap.com/Protocols/SAPData"></Property>
+				<Property Name="incotermsLocation" Type="Edm.String" MaxLength="70"></Property>
+				<Property Name="incotermsVersion" Type="Edm.String" MaxLength="4"></Property>
+				<Property Name="processStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lifeCycleStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="incoterms_code" Type="Edm.String" MaxLength="20"></Property>
+				<NavigationProperty Name="processStatus" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_processStatus" FromRole="SalesOrder" ToRole="ProcessStatus"></NavigationProperty>
+				<NavigationProperty Name="trackingIds" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_trackingIds" FromRole="SalesOrder" ToRole="QualifiedTrackingId"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_plannedEvents" FromRole="SalesOrder" ToRole="PlannedEvent"></NavigationProperty>
+				<NavigationProperty Name="processEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_processEvents" FromRole="SalesOrder" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="lifeCycleStatus" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_lifeCycleStatus" FromRole="SalesOrder" ToRole="LifeCycleStatus"></NavigationProperty>
+				<NavigationProperty Name="incoterms" Relationship="com.sap.gtt.app.sof.sofService.SalesOrder_incoterms" FromRole="SalesOrder" ToRole="Incoterms"></NavigationProperty>
+				<NavigationProperty Name="salesOrderItems" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems_salesOrder" FromRole="SalesOrder" ToRole="SalesOrderSalesOrderItems"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="SalesOrderEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="salesOrderNo" Type="Edm.String" Nullable="false" MaxLength="10"></Property>
+				<Property Name="shipToPartyId" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="netValue" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2"></Property>
+				<Property Name="currency" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="customerReference" Type="Edm.String" MaxLength="35"></Property>
+				<Property Name="documentDate" Type="Edm.DateTime" sap:display-format="Date"
+					xmlns:sap="http://www.sap.com/Protocols/SAPData"></Property>
+				<Property Name="incotermsLocation" Type="Edm.String" MaxLength="70"></Property>
+				<Property Name="incotermsVersion" Type="Edm.String" MaxLength="4"></Property>
+				<Property Name="incoterms_code" Type="Edm.String" MaxLength="20"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEvent_references" FromRole="SalesOrderEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEvent_eventProcesses" FromRole="SalesOrderEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEvent_plannedEvents" FromRole="SalesOrderEvent" ToRole="PlannedEventForEvent"></NavigationProperty>
+				<NavigationProperty Name="incoterms" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEvent_incoterms" FromRole="SalesOrderEvent" ToRole="Incoterms"></NavigationProperty>
+				<NavigationProperty Name="salesOrderItems" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems_salesOrderEvent" FromRole="SalesOrderEvent" ToRole="SalesOrderEventSalesOrderItems"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="SalesOrderEventSalesOrderItems">
+				<Key>
+					<PropertyRef Name="salesOrderItemTPAltKey"></PropertyRef>
+				</Key>
+				<Property Name="salesOrderItemTPAltKey" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="salesOrderItemTP_id" Type="Edm.Guid"></Property>
+				<Property Name="salesOrderEvent_id" Type="Edm.Guid"></Property>
+				<NavigationProperty Name="salesOrderItemTP" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems_salesOrderItemTP" FromRole="SalesOrderEventSalesOrderItems" ToRole="SalesOrderItem"></NavigationProperty>
+				<NavigationProperty Name="salesOrderEvent" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems_salesOrderEvent" FromRole="SalesOrderEventSalesOrderItems" ToRole="SalesOrderEvent"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="SalesOrderItem">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="trackedProcessType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lastChangedAtBusinessTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="lastChangedByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="lastChangeDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="version" Type="Edm.Int32"></Property>
+				<Property Name="salesOrderNo" Type="Edm.String" Nullable="false" MaxLength="10"></Property>
+				<Property Name="itemNo" Type="Edm.String" Nullable="false" MaxLength="6"></Property>
+				<Property Name="materialNo" Type="Edm.String" Nullable="false" MaxLength="40"></Property>
+				<Property Name="materialDescription" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="orderQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"></Property>
+				<Property Name="uom" Type="Edm.String" Nullable="false" MaxLength="3"></Property>
+				<Property Name="netValue" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2"></Property>
+				<Property Name="delayedQuantity" Type="Edm.Decimal" Precision="13" Scale="3"></Property>
+				<Property Name="completionQuantity" Type="Edm.Decimal" Precision="13" Scale="3"></Property>
+				<Property Name="processStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lifeCycleStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<NavigationProperty Name="processStatus" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItem_processStatus" FromRole="SalesOrderItem" ToRole="ProcessStatus"></NavigationProperty>
+				<NavigationProperty Name="trackingIds" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItem_trackingIds" FromRole="SalesOrderItem" ToRole="QualifiedTrackingId"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItem_plannedEvents" FromRole="SalesOrderItem" ToRole="PlannedEvent"></NavigationProperty>
+				<NavigationProperty Name="processEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItem_processEvents" FromRole="SalesOrderItem" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="lifeCycleStatus" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItem_lifeCycleStatus" FromRole="SalesOrderItem" ToRole="LifeCycleStatus"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="SalesOrderItemEvent">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="modelNamespace" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonText" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventReasonCode" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="senderPartyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="reportedBy" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="priority" Type="Edm.Int32"></Property>
+				<Property Name="actualTechnicalTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimestamp" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="actualBusinessTimeZone" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="locationAltKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="eventMatchKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="longitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="latitude" Type="Edm.Decimal" Precision="12" Scale="9"></Property>
+				<Property Name="messageSourceType" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="salesOrderNo" Type="Edm.String" Nullable="false" MaxLength="10"></Property>
+				<Property Name="itemNo" Type="Edm.String" Nullable="false" MaxLength="6"></Property>
+				<Property Name="materialNo" Type="Edm.String" Nullable="false" MaxLength="40"></Property>
+				<Property Name="materialDescription" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="orderQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"></Property>
+				<Property Name="uom" Type="Edm.String" Nullable="false" MaxLength="3"></Property>
+				<Property Name="netValue" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2"></Property>
+				<Property Name="delayedQuantity" Type="Edm.Decimal" Precision="13" Scale="3"></Property>
+				<Property Name="completionQuantity" Type="Edm.Decimal" Precision="13" Scale="3"></Property>
+				<NavigationProperty Name="references" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_references" FromRole="SalesOrderItemEvent" ToRole="Reference"></NavigationProperty>
+				<NavigationProperty Name="eventProcesses" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_eventProcesses" FromRole="SalesOrderItemEvent" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_plannedEvents" FromRole="SalesOrderItemEvent" ToRole="PlannedEventForEvent"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="SalesOrderSalesOrderItems">
+				<Key>
+					<PropertyRef Name="salesOrderItemTPAltKey"></PropertyRef>
+				</Key>
+				<Property Name="salesOrderItemTPAltKey" Type="Edm.String" Nullable="false" MaxLength="255"></Property>
+				<Property Name="salesOrderItemTP_id" Type="Edm.Guid"></Property>
+				<Property Name="salesOrder_id" Type="Edm.Guid"></Property>
+				<NavigationProperty Name="salesOrderItemTP" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems_salesOrderItemTP" FromRole="SalesOrderSalesOrderItems" ToRole="SalesOrderItem"></NavigationProperty>
+				<NavigationProperty Name="salesOrder" Relationship="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems_salesOrder" FromRole="SalesOrderSalesOrderItems" ToRole="SalesOrder"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="TrackedProcess">
+				<Key>
+					<PropertyRef Name="id"></PropertyRef>
+				</Key>
+				<Property Name="id" Type="Edm.Guid" Nullable="false"></Property>
+				<Property Name="subaccountId" Type="Edm.Guid"></Property>
+				<Property Name="cloneInstanceId" Type="Edm.Guid"></Property>
+				<Property Name="trackedProcessType" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="altKey" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="scheme" Type="Edm.String" MaxLength="255"></Property>
+				<Property Name="partyId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="logicalSystem" Type="Edm.String" MaxLength="10"></Property>
+				<Property Name="trackingIdType" Type="Edm.String" MaxLength="40"></Property>
+				<Property Name="trackingId" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lastChangedAtBusinessTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="createdByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="creationDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="lastChangedByUser" Type="Edm.String" MaxLength="64"></Property>
+				<Property Name="lastChangeDateTime" Type="Edm.DateTimeOffset"></Property>
+				<Property Name="version" Type="Edm.Int32"></Property>
+				<Property Name="processStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<Property Name="lifeCycleStatus_code" Type="Edm.String" MaxLength="50"></Property>
+				<NavigationProperty Name="processStatus" Relationship="com.sap.gtt.app.sof.sofService.TrackedProcess_processStatus" FromRole="TrackedProcess" ToRole="ProcessStatus"></NavigationProperty>
+				<NavigationProperty Name="trackingIds" Relationship="com.sap.gtt.app.sof.sofService.TrackedProcess_trackingIds" FromRole="TrackedProcess" ToRole="QualifiedTrackingId"></NavigationProperty>
+				<NavigationProperty Name="plannedEvents" Relationship="com.sap.gtt.app.sof.sofService.TrackedProcess_plannedEvents" FromRole="TrackedProcess" ToRole="PlannedEvent"></NavigationProperty>
+				<NavigationProperty Name="processEvents" Relationship="com.sap.gtt.app.sof.sofService.TrackedProcess_processEvents" FromRole="TrackedProcess" ToRole="ProcessEventDirectory"></NavigationProperty>
+				<NavigationProperty Name="lifeCycleStatus" Relationship="com.sap.gtt.app.sof.sofService.TrackedProcess_lifeCycleStatus" FromRole="TrackedProcess" ToRole="LifeCycleStatus"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="UpdatePlanAction">
+				<Key>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+				<NavigationProperty Name="texts" Relationship="com.sap.gtt.app.sof.sofService.UpdatePlanAction_texts" FromRole="UpdatePlanAction" ToRole="UpdatePlanAction_texts"></NavigationProperty>
+				<NavigationProperty Name="localized" Relationship="com.sap.gtt.app.sof.sofService.UpdatePlanAction_localized" FromRole="UpdatePlanAction" ToRole="UpdatePlanAction_texts"></NavigationProperty>
+			</EntityType>
+			<EntityType Name="UpdatePlanAction_texts">
+				<Key>
+					<PropertyRef Name="locale"></PropertyRef>
+					<PropertyRef Name="code"></PropertyRef>
+				</Key>
+				<Property Name="locale" Type="Edm.String" Nullable="false" MaxLength="5"></Property>
+				<Property Name="code" Type="Edm.String" Nullable="false" MaxLength="50"></Property>
+				<Property Name="name" Type="Edm.String" MaxLength="255"></Property>
+			</EntityType>
+			<Association Name="Action_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.Action" Multiplicity="*" Role="Action"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Action_texts" Multiplicity="*" Role="Action_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="Action">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="Action_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Action_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.Action" Multiplicity="*" Role="Action"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Action_texts" Multiplicity="0..1" Role="Action_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="Action_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="Action">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="CorrelationType_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.CorrelationType" Multiplicity="*" Role="CorrelationType"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.CorrelationType_texts" Multiplicity="*" Role="CorrelationType_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="CorrelationType">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="CorrelationType_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="CorrelationType_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.CorrelationType" Multiplicity="*" Role="CorrelationType"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.CorrelationType_texts" Multiplicity="0..1" Role="CorrelationType_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="CorrelationType_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="CorrelationType">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Event_references">
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="*" Role="Event"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="Event">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Event_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="*" Role="Event"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="EventStatus_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.EventStatus" Multiplicity="*" Role="EventStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.EventStatus_texts" Multiplicity="*" Role="EventStatus_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="EventStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="EventStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EventStatus_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.EventStatus" Multiplicity="*" Role="EventStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.EventStatus_texts" Multiplicity="0..1" Role="EventStatus_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="EventStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="EventStatus">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTDPPBlockingEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent" Multiplicity="*" Role="GTTDPPBlockingEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTDPPBlockingEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTDPPBlockingEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent" Multiplicity="*" Role="GTTDPPBlockingEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTDPPDeletionEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent" Multiplicity="*" Role="GTTDPPDeletionEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTDPPDeletionEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTDPPDeletionEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent" Multiplicity="*" Role="GTTDPPDeletionEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTDelayedEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDelayedEvent" Multiplicity="*" Role="GTTDelayedEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTDelayedEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTDelayedEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDelayedEvent" Multiplicity="*" Role="GTTDelayedEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTDeletionEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDeletionEvent" Multiplicity="*" Role="GTTDeletionEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTDeletionEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTDeletionEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTDeletionEvent" Multiplicity="*" Role="GTTDeletionEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTOverdueEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTOverdueEvent" Multiplicity="*" Role="GTTOverdueEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTOverdueEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTOverdueEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTOverdueEvent" Multiplicity="*" Role="GTTOverdueEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTResetPlannedEventStatusEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent" Multiplicity="*" Role="GTTResetPlannedEventStatusEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTResetPlannedEventStatusEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTResetPlannedEventStatusEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent" Multiplicity="*" Role="GTTResetPlannedEventStatusEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTUpdatePlanEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent" Multiplicity="*" Role="GTTUpdatePlanEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTUpdatePlanEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="GTTUpdatePlanEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent" Multiplicity="*" Role="GTTUpdatePlanEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="GTTUpdatePlanEvent_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent" Multiplicity="*" Role="GTTUpdatePlanEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent" Multiplicity="*" Role="PlannedEventForUpdatePlanEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="GTTUpdatePlanEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForUpdatePlanEvent">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Incoterms_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms" Multiplicity="*" Role="Incoterms"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms_texts" Multiplicity="*" Role="Incoterms_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="Incoterms">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="Incoterms_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Incoterms_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms" Multiplicity="*" Role="Incoterms"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms_texts" Multiplicity="0..1" Role="Incoterms_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="Incoterms_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="Incoterms">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="LifeCycleStatus_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus" Multiplicity="*" Role="LifeCycleStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus_texts" Multiplicity="*" Role="LifeCycleStatus_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="LifeCycleStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="LifeCycleStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="LifeCycleStatus_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus" Multiplicity="*" Role="LifeCycleStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus_texts" Multiplicity="0..1" Role="LifeCycleStatus_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="LifeCycleStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="LifeCycleStatus">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEvent_process">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="0..1" Role="TrackedProcess"></End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEvent_eventStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.EventStatus" Multiplicity="0..1" Role="EventStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="EventStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="eventStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEvent_lastProcessEventDirectory">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="0..1" Role="ProcessEventDirectory"></End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessEventDirectory">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="lastProcessEventDirectory_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEventForEvent_event">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForEvent" Multiplicity="*" Role="PlannedEventForEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="0..1" Role="Event"></End>
+				<ReferentialConstraint>
+					<Principal Role="Event">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForEvent">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEventForUpdatePlanEvent_event">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent" Multiplicity="*" Role="PlannedEventForUpdatePlanEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="0..1" Role="Event"></End>
+				<ReferentialConstraint>
+					<Principal Role="Event">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForUpdatePlanEvent">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PlannedEventForUpdatePlanEvent_action">
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent" Multiplicity="*" Role="PlannedEventForUpdatePlanEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.UpdatePlanAction" Multiplicity="0..1" Role="UpdatePlanAction"></End>
+				<ReferentialConstraint>
+					<Principal Role="UpdatePlanAction">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForUpdatePlanEvent">
+						<PropertyRef Name="action_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessEventDirectory_process">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="0..1" Role="TrackedProcess"></End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessEventDirectory_plannedEvent">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="0..1" Role="PlannedEvent"></End>
+				<ReferentialConstraint>
+					<Principal Role="PlannedEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="plannedEvent_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessEventDirectory_event">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="0..1" Role="Event"></End>
+				<ReferentialConstraint>
+					<Principal Role="Event">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessEventDirectory_correlationType">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.CorrelationType" Multiplicity="0..1" Role="CorrelationType"></End>
+				<ReferentialConstraint>
+					<Principal Role="CorrelationType">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="correlationType_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessStatus_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus" Multiplicity="*" Role="ProcessStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus_texts" Multiplicity="*" Role="ProcessStatus_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ProcessStatus_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus" Multiplicity="*" Role="ProcessStatus"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus_texts" Multiplicity="0..1" Role="ProcessStatus_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessStatus_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessStatus">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="QualifiedTrackingId_process">
+				<End Type="com.sap.gtt.app.sof.sofService.QualifiedTrackingId" Multiplicity="*" Role="QualifiedTrackingId"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="0..1" Role="TrackedProcess"></End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="QualifiedTrackingId">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="QualifiedTrackingId_observedProcess">
+				<End Type="com.sap.gtt.app.sof.sofService.QualifiedTrackingId" Multiplicity="*" Role="QualifiedTrackingId"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="0..1" Role="TrackedProcess"></End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="QualifiedTrackingId">
+						<PropertyRef Name="observedProcess_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Reference_event">
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Event" Multiplicity="0..1" Role="Event"></End>
+				<ReferentialConstraint>
+					<Principal Role="Event">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Reference_referenceType">
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ReferenceType" Multiplicity="0..1" Role="ReferenceType"></End>
+				<ReferentialConstraint>
+					<Principal Role="ReferenceType">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="referenceType_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Reference_action">
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Action" Multiplicity="0..1" Role="Action"></End>
+				<ReferentialConstraint>
+					<Principal Role="Action">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="action_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ReferenceType_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.ReferenceType" Multiplicity="*" Role="ReferenceType"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ReferenceType_texts" Multiplicity="*" Role="ReferenceType_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="ReferenceType">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="ReferenceType_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ReferenceType_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.ReferenceType" Multiplicity="*" Role="ReferenceType"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ReferenceType_texts" Multiplicity="0..1" Role="ReferenceType_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="ReferenceType_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="ReferenceType">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_processStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus" Multiplicity="0..1" Role="ProcessStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrder">
+						<PropertyRef Name="processStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_trackingIds">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.QualifiedTrackingId" Multiplicity="*" Role="QualifiedTrackingId">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrder">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="QualifiedTrackingId">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrder">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_processEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrder">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_lifeCycleStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus" Multiplicity="0..1" Role="LifeCycleStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="LifeCycleStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrder">
+						<PropertyRef Name="lifeCycleStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrder_incoterms">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="*" Role="SalesOrder"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms" Multiplicity="0..1" Role="Incoterms"></End>
+				<ReferentialConstraint>
+					<Principal Role="Incoterms">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrder">
+						<PropertyRef Name="incoterms_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEvent" Multiplicity="*" Role="SalesOrderEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEvent" Multiplicity="*" Role="SalesOrderEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="SalesOrderEvent_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEvent" Multiplicity="*" Role="SalesOrderEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForEvent" Multiplicity="*" Role="PlannedEventForEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForEvent">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderEvent_incoterms">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEvent" Multiplicity="*" Role="SalesOrderEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Incoterms" Multiplicity="0..1" Role="Incoterms"></End>
+				<ReferentialConstraint>
+					<Principal Role="Incoterms">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderEvent">
+						<PropertyRef Name="incoterms_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderEventSalesOrderItems_salesOrderItemTP">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems" Multiplicity="*" Role="SalesOrderEventSalesOrderItems"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="0..1" Role="SalesOrderItem"></End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItem">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderEventSalesOrderItems">
+						<PropertyRef Name="salesOrderItemTP_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderEventSalesOrderItems_salesOrderEvent">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems" Multiplicity="*" Role="SalesOrderEventSalesOrderItems">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderEvent" Multiplicity="0..1" Role="SalesOrderEvent"></End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderEventSalesOrderItems">
+						<PropertyRef Name="salesOrderEvent_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItem_processStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus" Multiplicity="0..1" Role="ProcessStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderItem">
+						<PropertyRef Name="processStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItem_trackingIds">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.QualifiedTrackingId" Multiplicity="*" Role="QualifiedTrackingId">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItem">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="QualifiedTrackingId">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItem_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItem">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItem_processEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItem">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItem_lifeCycleStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus" Multiplicity="0..1" Role="LifeCycleStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="LifeCycleStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderItem">
+						<PropertyRef Name="lifeCycleStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItemEvent_references">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent" Multiplicity="*" Role="SalesOrderItemEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.Reference" Multiplicity="*" Role="Reference">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItemEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="Reference">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderItemEvent_eventProcesses">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent" Multiplicity="*" Role="SalesOrderItemEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory"></End>
+			</Association>
+			<Association Name="SalesOrderItemEvent_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent" Multiplicity="*" Role="SalesOrderItemEvent"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEventForEvent" Multiplicity="*" Role="PlannedEventForEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItemEvent">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEventForEvent">
+						<PropertyRef Name="event_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderSalesOrderItems_salesOrderItemTP">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems" Multiplicity="*" Role="SalesOrderSalesOrderItems"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderItem" Multiplicity="0..1" Role="SalesOrderItem"></End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderItem">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderSalesOrderItems">
+						<PropertyRef Name="salesOrderItemTP_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="SalesOrderSalesOrderItems_salesOrder">
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems" Multiplicity="*" Role="SalesOrderSalesOrderItems">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<End Type="com.sap.gtt.app.sof.sofService.SalesOrder" Multiplicity="0..1" Role="SalesOrder"></End>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrder">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="SalesOrderSalesOrderItems">
+						<PropertyRef Name="salesOrder_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="TrackedProcess_processStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="*" Role="TrackedProcess"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessStatus" Multiplicity="0..1" Role="ProcessStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="ProcessStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="TrackedProcess">
+						<PropertyRef Name="processStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="TrackedProcess_trackingIds">
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="*" Role="TrackedProcess"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.QualifiedTrackingId" Multiplicity="*" Role="QualifiedTrackingId">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="QualifiedTrackingId">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="TrackedProcess_plannedEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="*" Role="TrackedProcess"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.PlannedEvent" Multiplicity="*" Role="PlannedEvent">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="PlannedEvent">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="TrackedProcess_processEvents">
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="*" Role="TrackedProcess"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.ProcessEventDirectory" Multiplicity="*" Role="ProcessEventDirectory">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="TrackedProcess">
+						<PropertyRef Name="id"></PropertyRef>
+					</Principal>
+					<Dependent Role="ProcessEventDirectory">
+						<PropertyRef Name="process_id"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="TrackedProcess_lifeCycleStatus">
+				<End Type="com.sap.gtt.app.sof.sofService.TrackedProcess" Multiplicity="*" Role="TrackedProcess"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.LifeCycleStatus" Multiplicity="0..1" Role="LifeCycleStatus"></End>
+				<ReferentialConstraint>
+					<Principal Role="LifeCycleStatus">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="TrackedProcess">
+						<PropertyRef Name="lifeCycleStatus_code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="UpdatePlanAction_texts">
+				<End Type="com.sap.gtt.app.sof.sofService.UpdatePlanAction" Multiplicity="*" Role="UpdatePlanAction"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.UpdatePlanAction_texts" Multiplicity="*" Role="UpdatePlanAction_texts">
+					<OnDelete Action="Cascade"></OnDelete>
+				</End>
+				<ReferentialConstraint>
+					<Principal Role="UpdatePlanAction">
+						<PropertyRef Name="code"></PropertyRef>
+					</Principal>
+					<Dependent Role="UpdatePlanAction_texts">
+						<PropertyRef Name="code"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="UpdatePlanAction_localized">
+				<End Type="com.sap.gtt.app.sof.sofService.UpdatePlanAction" Multiplicity="*" Role="UpdatePlanAction"></End>
+				<End Type="com.sap.gtt.app.sof.sofService.UpdatePlanAction_texts" Multiplicity="0..1" Role="UpdatePlanAction_texts"></End>
+				<ReferentialConstraint>
+					<Principal Role="UpdatePlanAction_texts">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="locale"></PropertyRef>
+					</Principal>
+					<Dependent Role="UpdatePlanAction">
+						<PropertyRef Name="code"></PropertyRef>
+						<PropertyRef Name="$user"></PropertyRef>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="Action" EntityType="com.sap.gtt.app.sof.sofService.Action"></EntitySet>
+				<EntitySet Name="Action_texts" EntityType="com.sap.gtt.app.sof.sofService.Action_texts"></EntitySet>
+				<EntitySet Name="CorrelationType" EntityType="com.sap.gtt.app.sof.sofService.CorrelationType"></EntitySet>
+				<EntitySet Name="CorrelationType_texts" EntityType="com.sap.gtt.app.sof.sofService.CorrelationType_texts"></EntitySet>
+				<EntitySet Name="Event" EntityType="com.sap.gtt.app.sof.sofService.Event"></EntitySet>
+				<EntitySet Name="EventStatus" EntityType="com.sap.gtt.app.sof.sofService.EventStatus"></EntitySet>
+				<EntitySet Name="EventStatus_texts" EntityType="com.sap.gtt.app.sof.sofService.EventStatus_texts"></EntitySet>
+				<EntitySet Name="GTTDPPBlockingEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent"></EntitySet>
+				<EntitySet Name="GTTDPPDeletionEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent"></EntitySet>
+				<EntitySet Name="GTTDelayedEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTDelayedEvent"></EntitySet>
+				<EntitySet Name="GTTDeletionEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTDeletionEvent"></EntitySet>
+				<EntitySet Name="GTTOverdueEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTOverdueEvent"></EntitySet>
+				<EntitySet Name="GTTResetPlannedEventStatusEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent"></EntitySet>
+				<EntitySet Name="GTTUpdatePlanEvent" EntityType="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent"></EntitySet>
+				<EntitySet Name="Incoterms" EntityType="com.sap.gtt.app.sof.sofService.Incoterms"></EntitySet>
+				<EntitySet Name="Incoterms_texts" EntityType="com.sap.gtt.app.sof.sofService.Incoterms_texts"></EntitySet>
+				<EntitySet Name="LifeCycleStatus" EntityType="com.sap.gtt.app.sof.sofService.LifeCycleStatus"></EntitySet>
+				<EntitySet Name="LifeCycleStatus_texts" EntityType="com.sap.gtt.app.sof.sofService.LifeCycleStatus_texts"></EntitySet>
+				<EntitySet Name="PlannedEvent" EntityType="com.sap.gtt.app.sof.sofService.PlannedEvent"></EntitySet>
+				<EntitySet Name="PlannedEventForEvent" EntityType="com.sap.gtt.app.sof.sofService.PlannedEventForEvent"></EntitySet>
+				<EntitySet Name="PlannedEventForUpdatePlanEvent" EntityType="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent"></EntitySet>
+				<EntitySet Name="ProcessEventDirectory" EntityType="com.sap.gtt.app.sof.sofService.ProcessEventDirectory"></EntitySet>
+				<EntitySet Name="ProcessStatus" EntityType="com.sap.gtt.app.sof.sofService.ProcessStatus"></EntitySet>
+				<EntitySet Name="ProcessStatus_texts" EntityType="com.sap.gtt.app.sof.sofService.ProcessStatus_texts"></EntitySet>
+				<EntitySet Name="QualifiedTrackingId" EntityType="com.sap.gtt.app.sof.sofService.QualifiedTrackingId"></EntitySet>
+				<EntitySet Name="Reference" EntityType="com.sap.gtt.app.sof.sofService.Reference"></EntitySet>
+				<EntitySet Name="ReferenceType" EntityType="com.sap.gtt.app.sof.sofService.ReferenceType"></EntitySet>
+				<EntitySet Name="ReferenceType_texts" EntityType="com.sap.gtt.app.sof.sofService.ReferenceType_texts"></EntitySet>
+				<EntitySet Name="SalesOrder" EntityType="com.sap.gtt.app.sof.sofService.SalesOrder"></EntitySet>
+				<EntitySet Name="SalesOrderEvent" EntityType="com.sap.gtt.app.sof.sofService.SalesOrderEvent"></EntitySet>
+				<EntitySet Name="SalesOrderEventSalesOrderItems" EntityType="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems"></EntitySet>
+				<EntitySet Name="SalesOrderItem" EntityType="com.sap.gtt.app.sof.sofService.SalesOrderItem"></EntitySet>
+				<EntitySet Name="SalesOrderItemEvent" EntityType="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent"></EntitySet>
+				<EntitySet Name="SalesOrderSalesOrderItems" EntityType="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems"></EntitySet>
+				<EntitySet Name="TrackedProcess" EntityType="com.sap.gtt.app.sof.sofService.TrackedProcess"></EntitySet>
+				<EntitySet Name="UpdatePlanAction" EntityType="com.sap.gtt.app.sof.sofService.UpdatePlanAction"></EntitySet>
+				<EntitySet Name="UpdatePlanAction_texts" EntityType="com.sap.gtt.app.sof.sofService.UpdatePlanAction_texts"></EntitySet>
+				<AssociationSet Name="Action_texts" Association="com.sap.gtt.app.sof.sofService.Action_texts">
+					<End EntitySet="Action" Role="Action"></End>
+					<End EntitySet="Action_texts" Role="Action_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="Action_localized" Association="com.sap.gtt.app.sof.sofService.Action_localized">
+					<End EntitySet="Action" Role="Action"></End>
+					<End EntitySet="Action_texts" Role="Action_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="CorrelationType_texts" Association="com.sap.gtt.app.sof.sofService.CorrelationType_texts">
+					<End EntitySet="CorrelationType" Role="CorrelationType"></End>
+					<End EntitySet="CorrelationType_texts" Role="CorrelationType_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="CorrelationType_localized" Association="com.sap.gtt.app.sof.sofService.CorrelationType_localized">
+					<End EntitySet="CorrelationType" Role="CorrelationType"></End>
+					<End EntitySet="CorrelationType_texts" Role="CorrelationType_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="Event_references" Association="com.sap.gtt.app.sof.sofService.Event_references">
+					<End EntitySet="Event" Role="Event"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="Event_eventProcesses" Association="com.sap.gtt.app.sof.sofService.Event_eventProcesses">
+					<End EntitySet="Event" Role="Event"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="EventStatus_texts" Association="com.sap.gtt.app.sof.sofService.EventStatus_texts">
+					<End EntitySet="EventStatus" Role="EventStatus"></End>
+					<End EntitySet="EventStatus_texts" Role="EventStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="EventStatus_localized" Association="com.sap.gtt.app.sof.sofService.EventStatus_localized">
+					<End EntitySet="EventStatus" Role="EventStatus"></End>
+					<End EntitySet="EventStatus_texts" Role="EventStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDPPBlockingEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent_references">
+					<End EntitySet="GTTDPPBlockingEvent" Role="GTTDPPBlockingEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDPPBlockingEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTDPPBlockingEvent_eventProcesses">
+					<End EntitySet="GTTDPPBlockingEvent" Role="GTTDPPBlockingEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDPPDeletionEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent_references">
+					<End EntitySet="GTTDPPDeletionEvent" Role="GTTDPPDeletionEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDPPDeletionEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTDPPDeletionEvent_eventProcesses">
+					<End EntitySet="GTTDPPDeletionEvent" Role="GTTDPPDeletionEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDelayedEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTDelayedEvent_references">
+					<End EntitySet="GTTDelayedEvent" Role="GTTDelayedEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDelayedEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTDelayedEvent_eventProcesses">
+					<End EntitySet="GTTDelayedEvent" Role="GTTDelayedEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDeletionEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTDeletionEvent_references">
+					<End EntitySet="GTTDeletionEvent" Role="GTTDeletionEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTDeletionEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTDeletionEvent_eventProcesses">
+					<End EntitySet="GTTDeletionEvent" Role="GTTDeletionEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTOverdueEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTOverdueEvent_references">
+					<End EntitySet="GTTOverdueEvent" Role="GTTOverdueEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTOverdueEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTOverdueEvent_eventProcesses">
+					<End EntitySet="GTTOverdueEvent" Role="GTTOverdueEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTResetPlannedEventStatusEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent_references">
+					<End EntitySet="GTTResetPlannedEventStatusEvent" Role="GTTResetPlannedEventStatusEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTResetPlannedEventStatusEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTResetPlannedEventStatusEvent_eventProcesses">
+					<End EntitySet="GTTResetPlannedEventStatusEvent" Role="GTTResetPlannedEventStatusEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTUpdatePlanEvent_references" Association="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_references">
+					<End EntitySet="GTTUpdatePlanEvent" Role="GTTUpdatePlanEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTUpdatePlanEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_eventProcesses">
+					<End EntitySet="GTTUpdatePlanEvent" Role="GTTUpdatePlanEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="GTTUpdatePlanEvent_plannedEvents" Association="com.sap.gtt.app.sof.sofService.GTTUpdatePlanEvent_plannedEvents">
+					<End EntitySet="GTTUpdatePlanEvent" Role="GTTUpdatePlanEvent"></End>
+					<End EntitySet="PlannedEventForUpdatePlanEvent" Role="PlannedEventForUpdatePlanEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="Incoterms_texts" Association="com.sap.gtt.app.sof.sofService.Incoterms_texts">
+					<End EntitySet="Incoterms" Role="Incoterms"></End>
+					<End EntitySet="Incoterms_texts" Role="Incoterms_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="Incoterms_localized" Association="com.sap.gtt.app.sof.sofService.Incoterms_localized">
+					<End EntitySet="Incoterms" Role="Incoterms"></End>
+					<End EntitySet="Incoterms_texts" Role="Incoterms_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="LifeCycleStatus_texts" Association="com.sap.gtt.app.sof.sofService.LifeCycleStatus_texts">
+					<End EntitySet="LifeCycleStatus" Role="LifeCycleStatus"></End>
+					<End EntitySet="LifeCycleStatus_texts" Role="LifeCycleStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="LifeCycleStatus_localized" Association="com.sap.gtt.app.sof.sofService.LifeCycleStatus_localized">
+					<End EntitySet="LifeCycleStatus" Role="LifeCycleStatus"></End>
+					<End EntitySet="LifeCycleStatus_texts" Role="LifeCycleStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEvent_process" Association="com.sap.gtt.app.sof.sofService.PlannedEvent_process">
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEvent_eventStatus" Association="com.sap.gtt.app.sof.sofService.PlannedEvent_eventStatus">
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+					<End EntitySet="EventStatus" Role="EventStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEvent_lastProcessEventDirectory" Association="com.sap.gtt.app.sof.sofService.PlannedEvent_lastProcessEventDirectory">
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEventForEvent_event" Association="com.sap.gtt.app.sof.sofService.PlannedEventForEvent_event">
+					<End EntitySet="PlannedEventForEvent" Role="PlannedEventForEvent"></End>
+					<End EntitySet="Event" Role="Event"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEventForUpdatePlanEvent_event" Association="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent_event">
+					<End EntitySet="PlannedEventForUpdatePlanEvent" Role="PlannedEventForUpdatePlanEvent"></End>
+					<End EntitySet="Event" Role="Event"></End>
+				</AssociationSet>
+				<AssociationSet Name="PlannedEventForUpdatePlanEvent_action" Association="com.sap.gtt.app.sof.sofService.PlannedEventForUpdatePlanEvent_action">
+					<End EntitySet="PlannedEventForUpdatePlanEvent" Role="PlannedEventForUpdatePlanEvent"></End>
+					<End EntitySet="UpdatePlanAction" Role="UpdatePlanAction"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessEventDirectory_process" Association="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_process">
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessEventDirectory_plannedEvent" Association="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_plannedEvent">
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessEventDirectory_event" Association="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_event">
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+					<End EntitySet="Event" Role="Event"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessEventDirectory_correlationType" Association="com.sap.gtt.app.sof.sofService.ProcessEventDirectory_correlationType">
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+					<End EntitySet="CorrelationType" Role="CorrelationType"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessStatus_texts" Association="com.sap.gtt.app.sof.sofService.ProcessStatus_texts">
+					<End EntitySet="ProcessStatus" Role="ProcessStatus"></End>
+					<End EntitySet="ProcessStatus_texts" Role="ProcessStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="ProcessStatus_localized" Association="com.sap.gtt.app.sof.sofService.ProcessStatus_localized">
+					<End EntitySet="ProcessStatus" Role="ProcessStatus"></End>
+					<End EntitySet="ProcessStatus_texts" Role="ProcessStatus_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="QualifiedTrackingId_process" Association="com.sap.gtt.app.sof.sofService.QualifiedTrackingId_process">
+					<End EntitySet="QualifiedTrackingId" Role="QualifiedTrackingId"></End>
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+				</AssociationSet>
+				<AssociationSet Name="QualifiedTrackingId_observedProcess" Association="com.sap.gtt.app.sof.sofService.QualifiedTrackingId_observedProcess">
+					<End EntitySet="QualifiedTrackingId" Role="QualifiedTrackingId"></End>
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+				</AssociationSet>
+				<AssociationSet Name="Reference_event" Association="com.sap.gtt.app.sof.sofService.Reference_event">
+					<End EntitySet="Reference" Role="Reference"></End>
+					<End EntitySet="Event" Role="Event"></End>
+				</AssociationSet>
+				<AssociationSet Name="Reference_referenceType" Association="com.sap.gtt.app.sof.sofService.Reference_referenceType">
+					<End EntitySet="Reference" Role="Reference"></End>
+					<End EntitySet="ReferenceType" Role="ReferenceType"></End>
+				</AssociationSet>
+				<AssociationSet Name="Reference_action" Association="com.sap.gtt.app.sof.sofService.Reference_action">
+					<End EntitySet="Reference" Role="Reference"></End>
+					<End EntitySet="Action" Role="Action"></End>
+				</AssociationSet>
+				<AssociationSet Name="ReferenceType_texts" Association="com.sap.gtt.app.sof.sofService.ReferenceType_texts">
+					<End EntitySet="ReferenceType" Role="ReferenceType"></End>
+					<End EntitySet="ReferenceType_texts" Role="ReferenceType_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="ReferenceType_localized" Association="com.sap.gtt.app.sof.sofService.ReferenceType_localized">
+					<End EntitySet="ReferenceType" Role="ReferenceType"></End>
+					<End EntitySet="ReferenceType_texts" Role="ReferenceType_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_processStatus" Association="com.sap.gtt.app.sof.sofService.SalesOrder_processStatus">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="ProcessStatus" Role="ProcessStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_trackingIds" Association="com.sap.gtt.app.sof.sofService.SalesOrder_trackingIds">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="QualifiedTrackingId" Role="QualifiedTrackingId"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_plannedEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrder_plannedEvents">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_processEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrder_processEvents">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_lifeCycleStatus" Association="com.sap.gtt.app.sof.sofService.SalesOrder_lifeCycleStatus">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="LifeCycleStatus" Role="LifeCycleStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrder_incoterms" Association="com.sap.gtt.app.sof.sofService.SalesOrder_incoterms">
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+					<End EntitySet="Incoterms" Role="Incoterms"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEvent_references" Association="com.sap.gtt.app.sof.sofService.SalesOrderEvent_references">
+					<End EntitySet="SalesOrderEvent" Role="SalesOrderEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.SalesOrderEvent_eventProcesses">
+					<End EntitySet="SalesOrderEvent" Role="SalesOrderEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEvent_plannedEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrderEvent_plannedEvents">
+					<End EntitySet="SalesOrderEvent" Role="SalesOrderEvent"></End>
+					<End EntitySet="PlannedEventForEvent" Role="PlannedEventForEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEvent_incoterms" Association="com.sap.gtt.app.sof.sofService.SalesOrderEvent_incoterms">
+					<End EntitySet="SalesOrderEvent" Role="SalesOrderEvent"></End>
+					<End EntitySet="Incoterms" Role="Incoterms"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEventSalesOrderItems_salesOrderItemTP" Association="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems_salesOrderItemTP">
+					<End EntitySet="SalesOrderEventSalesOrderItems" Role="SalesOrderEventSalesOrderItems"></End>
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderEventSalesOrderItems_salesOrderEvent" Association="com.sap.gtt.app.sof.sofService.SalesOrderEventSalesOrderItems_salesOrderEvent">
+					<End EntitySet="SalesOrderEventSalesOrderItems" Role="SalesOrderEventSalesOrderItems"></End>
+					<End EntitySet="SalesOrderEvent" Role="SalesOrderEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItem_processStatus" Association="com.sap.gtt.app.sof.sofService.SalesOrderItem_processStatus">
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+					<End EntitySet="ProcessStatus" Role="ProcessStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItem_trackingIds" Association="com.sap.gtt.app.sof.sofService.SalesOrderItem_trackingIds">
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+					<End EntitySet="QualifiedTrackingId" Role="QualifiedTrackingId"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItem_plannedEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrderItem_plannedEvents">
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItem_processEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrderItem_processEvents">
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItem_lifeCycleStatus" Association="com.sap.gtt.app.sof.sofService.SalesOrderItem_lifeCycleStatus">
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+					<End EntitySet="LifeCycleStatus" Role="LifeCycleStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItemEvent_references" Association="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_references">
+					<End EntitySet="SalesOrderItemEvent" Role="SalesOrderItemEvent"></End>
+					<End EntitySet="Reference" Role="Reference"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItemEvent_eventProcesses" Association="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_eventProcesses">
+					<End EntitySet="SalesOrderItemEvent" Role="SalesOrderItemEvent"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderItemEvent_plannedEvents" Association="com.sap.gtt.app.sof.sofService.SalesOrderItemEvent_plannedEvents">
+					<End EntitySet="SalesOrderItemEvent" Role="SalesOrderItemEvent"></End>
+					<End EntitySet="PlannedEventForEvent" Role="PlannedEventForEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderSalesOrderItems_salesOrderItemTP" Association="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems_salesOrderItemTP">
+					<End EntitySet="SalesOrderSalesOrderItems" Role="SalesOrderSalesOrderItems"></End>
+					<End EntitySet="SalesOrderItem" Role="SalesOrderItem"></End>
+				</AssociationSet>
+				<AssociationSet Name="SalesOrderSalesOrderItems_salesOrder" Association="com.sap.gtt.app.sof.sofService.SalesOrderSalesOrderItems_salesOrder">
+					<End EntitySet="SalesOrderSalesOrderItems" Role="SalesOrderSalesOrderItems"></End>
+					<End EntitySet="SalesOrder" Role="SalesOrder"></End>
+				</AssociationSet>
+				<AssociationSet Name="TrackedProcess_processStatus" Association="com.sap.gtt.app.sof.sofService.TrackedProcess_processStatus">
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+					<End EntitySet="ProcessStatus" Role="ProcessStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="TrackedProcess_trackingIds" Association="com.sap.gtt.app.sof.sofService.TrackedProcess_trackingIds">
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+					<End EntitySet="QualifiedTrackingId" Role="QualifiedTrackingId"></End>
+				</AssociationSet>
+				<AssociationSet Name="TrackedProcess_plannedEvents" Association="com.sap.gtt.app.sof.sofService.TrackedProcess_plannedEvents">
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+					<End EntitySet="PlannedEvent" Role="PlannedEvent"></End>
+				</AssociationSet>
+				<AssociationSet Name="TrackedProcess_processEvents" Association="com.sap.gtt.app.sof.sofService.TrackedProcess_processEvents">
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+					<End EntitySet="ProcessEventDirectory" Role="ProcessEventDirectory"></End>
+				</AssociationSet>
+				<AssociationSet Name="TrackedProcess_lifeCycleStatus" Association="com.sap.gtt.app.sof.sofService.TrackedProcess_lifeCycleStatus">
+					<End EntitySet="TrackedProcess" Role="TrackedProcess"></End>
+					<End EntitySet="LifeCycleStatus" Role="LifeCycleStatus"></End>
+				</AssociationSet>
+				<AssociationSet Name="UpdatePlanAction_texts" Association="com.sap.gtt.app.sof.sofService.UpdatePlanAction_texts">
+					<End EntitySet="UpdatePlanAction" Role="UpdatePlanAction"></End>
+					<End EntitySet="UpdatePlanAction_texts" Role="UpdatePlanAction_texts"></End>
+				</AssociationSet>
+				<AssociationSet Name="UpdatePlanAction_localized" Association="com.sap.gtt.app.sof.sofService.UpdatePlanAction_localized">
+					<End EntitySet="UpdatePlanAction" Role="UpdatePlanAction"></End>
+					<End EntitySet="UpdatePlanAction_texts" Role="UpdatePlanAction_texts"></End>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

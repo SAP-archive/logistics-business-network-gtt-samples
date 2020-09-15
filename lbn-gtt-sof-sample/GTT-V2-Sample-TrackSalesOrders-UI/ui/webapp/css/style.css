@@ -1,0 +1,176 @@
+@font-face {
+  font-family: BusinessSuiteInAppSymbols;
+  src: url("BusinessSuiteInAppSymbols.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SAP-icons-TNT;
+  src: url("SAP-icons-TNT.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.gttSampleSofNoMarginTop {
+  margin-top: 0px !important;
+}
+
+.sofObjectNumber .sapMObjectNumberUnit {
+  font-size: 1rem !important;
+}
+
+.sofSalesOrderItemsTable .sapUiCompUoMPart,
+.sofSalesOrderListTable .sapUiCompUoMPart,
+.sofDeliveryItemsTable .sapUiCompUoMPart {
+  width: auto !important;
+  padding-left: 0px;
+}
+
+.sofDeliveryItemsTable .sapMListTblCell .sapMHBox {
+  padding-top: 0.1rem;
+}
+
+.sofSalesOrderListTable .sapMTableTH,
+.sofSalesOrderItemsTable .sapMTableTH,
+.sofDeliveryItemsTable .sapMTableTH {
+  vertical-align: top;
+}
+
+.sofDeliveryItemsTable .sapMListTblCell {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.sofDeliveryItemsTable .sapMListTbl .sapUiIcon:not(.sapMLIBImgNav):not(.sapMBtnIcon) {
+  font-size: 0.875rem;
+}
+
+.sofDeltaMicroChart.sapSuiteDMC.sapSuiteDMCLookXS .sapSuiteDMCBar {
+  height: 0.4rem;
+}
+
+.sofProcessFlowNodeETA {
+  white-space: pre-line;
+}
+
+.sofDynamicPageTitle .sapFDynamicPageTitleMainContent {
+  flex-basis: unset !important;
+}
+
+.sofTinyMarginTopBottom {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.sofCustomListItemPadding {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+.sofGenericTag,
+.sofProcessFlow .sofProcessFlowNodePlannedEvent {
+  pointer-events: none;
+}
+
+.sofProcessFlow .sofProcessFlowNodePlannedEvent span {
+  opacity: 0.7;
+}
+
+.sofProcessFlow .suiteUiProcessFlowLaneHeaderPointer,
+.sofProcessFlow .sofProcessFlowNodePlannedEvent .sapSuiteUiCommonsProcessFlowNodeHover {
+  cursor: default;
+}
+
+.sofProcessFlowNodeLabel {
+  font-size: 0.8rem;
+}
+
+.sofProcessFlowNodeETA .sapMObjStatusText {
+  font-size: 0.8rem;
+}
+
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeLabel {
+  font-size: 0.875rem;
+  line-height: 1.2rem;
+}
+
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeValue {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+
+.sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeLabel,
+.sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeValue,
+.sapSuiteUiCommonsPFZoomLevel3 .sofProcessFlowNodeLabel,
+.sapSuiteUiCommonsPFZoomLevel3 .sofProcessFlowNodeValue {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventStatus {
+  font-size: 1.2rem !important;
+}
+
+.sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeEventStatus,
+.sapSuiteUiCommonsPFZoomLevel3 .sofProcessFlowNodeEventStatus {
+  font-size: 1rem !important;
+}
+
+.sapSuiteUiCommonsPFZoomLevel4 .sofProcessFlowNodeEventStatus {
+  font-size: 0.675rem;
+}
+
+.sofSideContentTitlePadding {
+  padding-left: 0.75rem !important;
+}
+
+.sofTimelineTitle {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+}
+
+.sofDetailCustomListItemPadding {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.sofLocationPopoverTitle {
+  font-weight: bold;
+}
+
+.sofImpactAnalysisNode {
+  cursor: pointer;
+}
+
+.sofDestinationDescriptionLink {
+  font-size: larger;
+}
+
+.sofProcessFlow.sofMilestone .suiteUiProcessFlowLaneHeaderText {
+  white-space: pre;
+}
+
+div[id*="salesOrder--documentFlowView--networkGraph-tooltip-tooltip-popover"] .sapMPanelContent > span {
+  text-align: left !important;
+}
+
+html[dir="rtl"] div[id*="salesOrder--documentFlowView--networkGraph-tooltip-tooltip-popover"] .sapMPanelContent > span {
+  text-align: right !important;
+}
+
+.sofHeaderContentHBox .sapSuiteHBMC .sapSuiteHBMCTextContainerHide {
+  display: inherit !important;
+}
+
+.sofHeaderContentPropertyLabel:after {
+  content: ":";
+}
+
+.sofHeaderContentPropertyLabel,
+.sofHeaderContentPropertyText {
+  line-height: 1.320rem;
+}

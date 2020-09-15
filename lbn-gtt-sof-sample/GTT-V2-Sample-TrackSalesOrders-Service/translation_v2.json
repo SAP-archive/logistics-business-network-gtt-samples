@@ -1,0 +1,23 @@
+{
+  "comment": "This is the TEW config file for the GTT V2 service sample Track Sales Orders",
+  "collections": [
+    {
+      "collectionName": "GTT_V2_Sample_TrackSalesOrders_Service",
+      "folders": [
+        {
+          "startingFolderPath": "/srv/src/main/resources/i18n",
+          "sourceFilters": [
+            "messages.properties"
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultConfiguration": {
+    "xlfFolderPath": "/XLF/[FullPath]",
+    "targetFolderPath": ".",
+    "pseudoLocFolderPath": ".",
+    "oneQFolderPath": ".",
+    "targetFileNamingConvention": "[filename]_[langCode].[extension]"
+  }
+}

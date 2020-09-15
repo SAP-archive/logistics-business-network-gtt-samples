@@ -1,0 +1,184 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<smartTable:SmartTable
+		id="smartTable"
+		tableType="ResponsiveTable"
+		demandPopin="true"
+		editable="false"
+		entitySet="DeliveryItem"
+		tableBindingPath=""
+		useTablePersonalisation="true"
+		header="{i18n>listItems}"
+		showRowCount="true"
+		useExportToExcel="false"
+		enableAutoBinding="true"
+		beforeRebindTable=".onBeforeRebindDeliveryItemsTable"
+		requestAtLeastFields="id">
+		<smartTable:customData>
+			<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+			<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+		</smartTable:customData>
+		<Table id="deliveryItemsTable" class="sofDeliveryItemsTable">
+			<columns>
+				<Column id="deliveryNoItemNoColumn">
+					<Text id="deliveryNoItemNoTitle" text="{parts: [{'value': 'deliveryNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'} / {parts: [{'value': 'itemNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "deliveryNoItemNo", "leadingProperty": "deliveryNo, itemNo", "sortProperty": "deliveryNo", columnIndex: 0}'/>
+					</customData>
+				</Column>
+				<Column id="initialPlannedDateColumn" hAlign="Right">
+					<Text text="{parts: [{'value': 'initialPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "initialPlannedDate", "leadingProperty": "initialPlannedDate", "sortProperty": "initialPlannedDate", columnIndex: 1}'/>
+					</customData>
+				</Column>
+				<Column id="revisedPlannedDateColumn" hAlign="Right">
+					<Text text="{parts: [{'value': 'revisedPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "revisedPlannedDate", "leadingProperty": "revisedPlannedDate", "sortProperty": "revisedPlannedDate", columnIndex: 2}'/>
+					</customData>
+				</Column>
+				<Column id="processStatusColumn">
+					<Text id="processStatusTitle" text="{parts: [{'value': 'processStatus_code'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code, processStatus/name, processStatus/localized/name", "navigationProperty": "processStatus/localized", "sortProperty": "", columnIndex: 4}'/>
+					</customData>
+				</Column>
+				<Column id="executionStatusColumn">
+					<Text id="executionStatusTitle"
+						text="{
+							parts: [
+								{'value': 'executionStatus_code'},
+								{'value': 'DeliveryItem'}
+							],
+							formatter: '.getPropertyLabelText'
+						}" />
+					<customData>
+						<core:CustomData key="p13nData"
+							value='{
+								"columnKey": "executionStatus_code, lastEventName, lastLocationDescription, lastVPLocationType_code",
+								"leadingProperty": "executionStatus_code, executionStatus/name, executionStatus/localized/name, lastEventName, lastLocationDescription, lastVPLocationType_code, lastVPLocationType/name, lastVPLocationType/localized/name",
+								"navigationProperty": "executionStatus/localized, lastVPLocationType/localized",
+								columnIndex: 6
+							}' />
+					</customData>
+				</Column>
+				<Column id="deltaArrivalTimeColumn">
+					<Text id="deltaArrivalTimeTitle"
+						text="{i18n>deltaArrivalTimeColumnTitle}" />
+					<customData>
+						<core:CustomData key="p13nData"
+							value='{
+								"columnKey": "arrivalTimes",
+								"leadingProperty": "arrivalTimes",
+								"navigationProperty": "arrivalTimes",
+								columnIndex: 8
+							}' />
+					</customData>
+				</Column>
+				<Column id="documentDateColumn" hAlign="Right" visible="false">
+					<Text text="{parts: [{'value': 'documentDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "sortProperty": "documentDate", columnIndex: 10000}'/>
+					</customData>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Top" type="Navigation" press=".onDeliveryItemPressed">
+					<cells>
+						<ObjectIdentifier id="deliveryNoItemNo" title="{deliveryNo}" text="{itemNo}"/>
+						<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+						<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+						<ObjectStatus id="processStatus"
+							text="{path: 'processStatus', formatter: '.formatter.codeListDescription'}"
+							icon="{path: 'processStatus_code', formatter: '.formatter.processStatus.getIcon'}"
+							state="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"/>
+						<ObjectStatus id="executionStatus"
+							text="{
+								parts: [
+									'executionStatus',
+									'lastEventName',
+									'lastLocationDescription',
+									'lastVPLocationType/localized/name'
+								],
+								formatter: '.formatter.executionStatusWithLastActivity'
+							}"
+							state="{path: 'executionStatus_code', formatter: '.formatter.executionStatus.getState'}"/>
+						<VBox id="deltaArrivalTimeVBox"
+							items="{
+								path: 'arrivalTimes',
+								templateShareable: false
+							}">
+							<mc:BulletMicroChart id="deltaArrivalTimeChart"
+								visible="{:= ${plannedBizTs} !== null &amp;&amp; ${actualBizTs} !== null }"
+								class="sapUiSmallMarginEnd"
+								size="Responsive"
+								scale=""
+								targetValue="{:=
+									${plannedBizTsEarliest} !== null
+										? (${plannedBizTs} - ${plannedBizTsEarliest}) * 2
+										: ${salesOrderItem>/criticalThreshold} * 2
+								}"
+								minValue="0"
+								maxValue="{:=
+									${plannedBizTsEarliest} !== null
+										? (${plannedBizTs} - ${plannedBizTsEarliest}) * 4
+										: ${salesOrderItem>/criticalThreshold} * 4
+								}"
+								mode="Delta"
+								showDeltaValue="true"
+								deltaValueLabel="{
+									parts: ['plannedBizTs', 'actualBizTs', { value: 'short' }],
+									formatter: '.formatter.timeDuration'
+								}"
+								showValueMarker="true"
+								showActualValueInDeltaMode="false"
+								showTargetValue="false"
+								tooltip="{
+									parts: [
+										{path: 'plannedBizTs', type: 'sap.ui.model.odata.type.DateTimeOffset'},
+										{path: 'actualBizTs', type: 'sap.ui.model.odata.type.DateTimeOffset'}
+									],
+									formatter: '.formatter.deltaTimeTooltip'
+								}">
+								<mc:BulletMicroChartData id="deltaArrivalTimeChartData"
+									value="{:=
+										${plannedBizTsEarliest} !== null
+											? ${actualBizTs} - ${plannedBizTs} + (${plannedBizTs} - ${plannedBizTsEarliest}) * 2
+											: ${actualBizTs} - ${plannedBizTs} + ${salesOrderItem>/criticalThreshold} * 2
+									}"
+									color="{:=
+										Math.abs(${actualBizTs} - ${plannedBizTs}) >= (${plannedBizTs} - ${plannedBizTsEarliest})
+											? 'Error'
+											: 'Good'
+									}" />
+								<mc:thresholds>
+									<mc:BulletMicroChartData color="Critical"
+										value="{:=
+											${plannedBizTsEarliest} !== null
+												? ${plannedBizTs} - ${plannedBizTsEarliest}
+												: ${salesOrderItem>/criticalThreshold}
+										}"
+										tooltip="" />
+									<mc:BulletMicroChartData color="Critical"
+										value="{:=
+											${plannedBizTsEarliest} !== null
+												? (${plannedBizTs} - ${plannedBizTsEarliest}) * 3
+												: ${salesOrderItem>/criticalThreshold} * 3
+										}"
+										tooltip="" />
+								</mc:thresholds>
+							</mc:BulletMicroChart>
+						</VBox>
+						<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

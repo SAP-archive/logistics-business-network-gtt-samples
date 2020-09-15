@@ -1,0 +1,11 @@
+{
+  "id": "com.sap.gtt.app.deliverysample",
+  "namespace": "com.sap.gtt.app.deliverysample",
+  "name": "Outbound Delivery",
+  "description": "Outbound Delivery process",
+  "entitySet": "DeliveryProcess",
+  "status": "ACTIVE",
+  "lastUpdateTime": 1525835307081,
+  "coreModelVersion": "11.1.0",
+  "compilerVersion": "1.0.30"
+}

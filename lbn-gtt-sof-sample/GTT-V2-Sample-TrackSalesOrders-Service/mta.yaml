@@ -1,0 +1,30 @@
+---
+_schema-version: '3.1'
+ID: gtt-v2-sample-track-salesorders-service
+version: 2.2.0
+modules:
+- name: gtt-sample-track-salesorders-service
+  type: java
+  path: srv/
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    GTT_CORE_ENGINE_API_URL_FLP_BASED: https://{lbn-gtt-flp-base-url}/api
+    GTT_CORE_ENGINE_TECHNICAL_USER: {technical-user-name}
+    GTT_CORE_ENGINE_TECHNICAL_PWD: {technical-user-pwd}
+    HERE_MAP_KEY: {here-map-license-key}
+  parameters:
+    buildpack: java_buildpack
+    health-check-timeout: 180
+    host: gtt-sample-track-salesorders-service-{unique-identifier}
+  build-parameters:
+    ignore:
+    - "*.md"
+    build-result: target/*.jar
+    timeout: 10m
+  requires:
+  - name: lbn-gtt-sample-app-uaa
+
+resources:
+- name: lbn-gtt-sample-app-uaa
+  type: org.cloudfoundry.existing-service
+

@@ -1,0 +1,83 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<HBox id="salesOrderItemHeaderContentHBox"
+		class="sofHeaderContentHBox"
+		wrap="Wrap"
+		fitContainer="true">
+		<VBox id="metadataVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="shipToPartyLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="shipToParty"
+						text="{parts: [{'value': 'shipToPartyId'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="shipToParty" class="sofHeaderContentPropertyText" text="{shipToPartyId}"/>
+				</items>
+			</HBox>
+		</VBox>
+
+		<VBox id="netValueVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="netValueTitle"
+				text="{parts: [{'value': 'netValue'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<ObjectNumber id="netValue"
+				emphasized="false"
+				class="sapMObjectNumberLarge sofObjectNumber"
+				number="{
+					parts: [{path: 'netValue'}, {path: 'currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false,
+						decimals: 2
+					}
+				}"
+				unit="{currency}" />
+		</VBox>
+
+		<VBox id="completionRateVBox"
+			visible="{
+				parts: ['completionValue', 'netValue'],
+				formatter: '.formatter.completionRateVisibility'
+			}"
+			class="sapUiSmallMarginBottom">
+			<Title id="completionRateTitle"
+				text="{i18n>completionRate}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<mc:HarveyBallMicroChart id="completionRate"
+				class="sofCompletionRate"
+				size="L"
+				total="{= parseFloat(${netValue}) }"
+				totalScale="{currency}"
+				colorPalette="sapUiChartPaletteQualitativeHue1"
+				tooltip="{i18n>completionRate}">
+				<mc:items>
+					<mc:HarveyBallMicroChartItem fraction="{= parseFloat(${completionValue}) }"
+						fractionScale="{currency}" />
+				</mc:items>
+			</mc:HarveyBallMicroChart>
+		</VBox>
+
+		<VBox id="overallDelayVBox"
+			visible="{= parseFloat(${delayedValue}) > 0}"
+			class="sapUiLargeMarginBegin sapUiSmallMarginBottom">
+			<Title id="overallDelayTitle"
+				text="{i18n>overallDelay}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<ObjectNumber id="overallDelay"
+				state="{path: 'delayedValue', formatter: '.formatter.delayStatus'}"
+				emphasized="false"
+				class="sapMObjectNumberLarge sofObjectNumber"
+				number="{
+					parts: [{path: 'delayedValue'}, {path: 'netValue'}],
+					formatter: '.formatter.formattedRate'
+				}"
+				unit="%" />
+			<Label id="delayValue"
+				text="({delayedValue} {currency})" />
+		</VBox>
+	</HBox>
+</core:FragmentDefinition>

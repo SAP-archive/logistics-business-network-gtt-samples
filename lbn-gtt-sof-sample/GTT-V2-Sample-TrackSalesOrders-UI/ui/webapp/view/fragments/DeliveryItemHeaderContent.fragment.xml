@@ -1,0 +1,105 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<HBox id="deliveryItemHeaderContentHBox"
+		class="sapUiSmallMarginBottom"
+		wrap="Wrap"
+		fitContainer="true">
+		<VBox id="metadataVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="materialDescriptionLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="materialDescription"
+						text="{parts: [{'value': 'materialDescription'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="materialDescription" class="sofHeaderContentPropertyText" text="{materialDescription}"/>
+				</items>
+			</HBox>
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="materialNoLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="materialNo"
+						text="{parts: [{'value': 'materialNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="materialNo" class="sofHeaderContentPropertyText" text="{materialNo}"/>
+				</items>
+			</HBox>
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="orderQuantityLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="orderQuantity"
+						text="{parts: [{'value': 'orderQuantity'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="orderQuantity" class="sofHeaderContentPropertyText" text="{orderQuantity} {quantityUoM}"/>
+				</items>
+			</HBox>
+		</VBox>
+
+		<VBox id="destinationVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="destinationTitle"
+				class="sapUiTinyMarginBottom"
+				text="{i18n>destination}"
+				level="H4" />
+			<Link id="destinationDescriptionLink"
+				class="sapUiTinyMarginBottom sofDestinationDescriptionLink"
+				text="{deliveryItem>/destination/locationDescription}"
+				press=".openLocationQuickView" />
+			<ObjectAttribute id="eta"
+				visible="{= !!${deliveryItem>/earliestETA} }"
+				class="sapUiTinyMarginBottom"
+				title="{i18n>earliestETA}"
+				text="{
+					path: 'deliveryItem>/earliestETA',
+					type: 'sap.ui.model.odata.type.DateTimeOffset'
+				} {deliveryItem>/earliestETATimeZone}" />
+			<ObjectAttribute id="plannedArrivalTime"
+				visible="{= !${deliveryItem>/earliestETA} &amp;&amp; !!${deliveryItem>/plannedArrivalTime} }"
+				class="sapUiTinyMarginBottom"
+				title="{i18n>plannedArrivalAt}"
+				text="{
+					path: 'deliveryItem>/plannedArrivalTime',
+					type: 'sap.ui.model.odata.type.DateTimeOffset'
+				}" />
+			<ObjectStatus id="etaDelta"
+				visible="{= !!${deliveryItem>/earliestETA} &amp;&amp; !!${deliveryItem>/plannedArrivalTime} }"
+				inverted="true"
+				state="Warning"
+				text="{
+					parts: ['deliveryItem>/earliestETA', 'deliveryItem>/plannedArrivalTime', { value: 'short' }],
+					formatter: '.formatter.timeDuration'
+				}"
+				tooltip="{
+					parts: ['deliveryItem>/earliestETA', 'deliveryItem>/plannedArrivalTime'],
+					formatter: '.formatter.destinationDurationTooltip'
+				}" />
+		</VBox>
+
+		<VBox id="fulfillmentStatusVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+			width="19rem"
+			height="8rem">
+			<Title id="fulfillmentStatusTitle"
+				text="{i18n>fulfillmentStatus}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<mc:InteractiveDonutChart id="fulfillmentStatusDonutChart"
+				selectionEnabled="false"
+				displayedSegments="{deliveryItem>/actualEventsCount}"
+				segments="{deliveryItem>/fulfillmentStatusSet}"
+				tooltip="{
+					path: 'deliveryItem>/fulfillmentStatusSet',
+					formatter: '.formatter.deliveryItemFulfillmentStatusTooltip'
+				}">
+				<mc:segments>
+					<mc:InteractiveDonutChartSegment value="{deliveryItem>count}"
+						displayedValue="{deliveryItem>count}"
+						label="{
+							path: 'deliveryItem>eventStatus_code',
+							formatter: '.formatter.eventStatusText'
+						}"
+						color="{
+							path: 'deliveryItem>eventStatus_code',
+							formatter: '.formatter.eventStatus.getColor'
+						}" />
+				</mc:segments>
+			</mc:InteractiveDonutChart>
+		</VBox>
+	</HBox>
+</core:FragmentDefinition>

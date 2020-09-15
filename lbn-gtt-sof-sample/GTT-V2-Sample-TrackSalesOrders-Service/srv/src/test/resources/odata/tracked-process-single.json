@@ -1,0 +1,289 @@
+{
+  "d": {
+    "__metadata": {
+      "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')",
+      "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')",
+      "type": "com.sap.gtt.app.tfo.TFOService.TrackedProcess"
+    },
+    "id": "996f8dd3-b2e0-582e-ae1b-9d7d851c030d",
+    "subaccountId": "d4cc9022-312f-43f6-895b-318a67b36495",
+    "cloneInstanceId": "938ee3a9-88ed-4ec2-939a-bc9c6774cc17",
+    "trackedProcessType": "com.sap.gtt.app.tfo.FreightOrderModel.FreightOrderProcess",
+    "altKey": "xri://sap.com/id:LBN#10000002:QM7_910:FreightOrder:1587094667",
+    "scheme": "xri://sap.com/id",
+    "partyId": "LBN#10000002",
+    "logicalSystem": "QM7_910",
+    "trackingIdType": "FreightOrder",
+    "trackingId": "1587094667",
+    "lastChangedAtBusinessTime": "/Date(1568880000213)/",
+    "createdByUser": null,
+    "creationDateTime": "/Date(1587094673230)/",
+    "lastChangedByUser": null,
+    "lastChangeDateTime": "/Date(1587267930621)/",
+    "version": 21,
+    "processStatus_code": "OVERDUE",
+    "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+    "processStatus": {
+      "__metadata": {
+        "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/ProcessStatus('OVERDUE')",
+        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/ProcessStatus('OVERDUE')",
+        "type": "com.sap.gtt.app.tfo.TFOService.ProcessStatus"
+      },
+      "code": "OVERDUE",
+      "name": "Overdue",
+      "texts": {
+        "__deferred": {
+          "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/ProcessStatus('OVERDUE')/texts"
+        }
+      },
+      "localized": {
+        "__deferred": {
+          "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/ProcessStatus('OVERDUE')/localized"
+        }
+      }
+    },
+    "trackingIds": {
+      "__deferred": {
+        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')/trackingIds"
+      }
+    },
+    "plannedEvents": {
+      "results": [
+        {
+          "__metadata": {
+            "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1bb96f2-805c-11ea-a4ad-dd7f3c1c3fc6')",
+            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1bb96f2-805c-11ea-a4ad-dd7f3c1c3fc6')",
+            "type": "com.sap.gtt.app.tfo.TFOService.PlannedEvent"
+          },
+          "id": "d1bb96f2-805c-11ea-a4ad-dd7f3c1c3fc6",
+          "process_id": "996f8dd3-b2e0-582e-ae1b-9d7d851c030d",
+          "eventType": "com.sap.gtt.app.tfo.FreightOrderModel.DepartureEvent",
+          "locationAltKey": "xri://sap.com/id:LBN#10000002:QM7_910:Location:LogisticLocation:LBN_TST_CHICAGO",
+          "eventMatchKey": "1",
+          "longitude": "0.000000000",
+          "latitude": "0.000000000",
+          "payloadSequence": 1,
+          "isFinalPlannedEvent": false,
+          "nextOverdueDetection": "/Date(1587094973230)/",
+          "overdueDetectionCounter": 0,
+          "plannedTechnicalTimestamp": "/Date(1569711682000)/",
+          "plannedTechTsEarliest": "/Date(1569711082000)/",
+          "plannedTechTsLatest": "/Date(1569712282000)/",
+          "plannedBusinessTimestamp": "/Date(1569711682000)/",
+          "plannedBizTsEarliest": "/Date(1569711082000)/",
+          "plannedBizTsLatest": "/Date(1569712282000)/",
+          "plannedBusinessTimeZone": "CST",
+          "eventStatus_code": "REPORTED",
+          "lastProcessEventDirectory_id": "d6b6eb5b-805c-11ea-a4ad-911c2800fcfe",
+          "process": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1bb96f2-805c-11ea-a4ad-dd7f3c1c3fc6')/process"
+            }
+          },
+          "eventStatus": {
+            "__metadata": {
+              "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('REPORTED')",
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('REPORTED')",
+              "type": "com.sap.gtt.app.tfo.TFOService.EventStatus"
+            },
+            "code": "REPORTED",
+            "name": "Reported",
+            "texts": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('REPORTED')/texts"
+              }
+            },
+            "localized": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('REPORTED')/localized"
+              }
+            }
+          },
+          "lastProcessEventDirectory": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1bb96f2-805c-11ea-a4ad-dd7f3c1c3fc6')/lastProcessEventDirectory"
+            }
+          }
+        },
+        {
+          "__metadata": {
+            "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c3ad43-805c-11ea-a4ad-c9f13da96a10')",
+            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c3ad43-805c-11ea-a4ad-c9f13da96a10')",
+            "type": "com.sap.gtt.app.tfo.TFOService.PlannedEvent"
+          },
+          "id": "d1c3ad43-805c-11ea-a4ad-c9f13da96a10",
+          "process_id": "996f8dd3-b2e0-582e-ae1b-9d7d851c030d",
+          "eventType": "com.sap.gtt.app.tfo.FreightOrderModel.ArrivalEvent",
+          "locationAltKey": "xri://sap.com/id:LBN#10000002:QM7_910:Location:LogisticLocation:LBN_TST_MI",
+          "eventMatchKey": "2",
+          "longitude": "0.000000000",
+          "latitude": "0.000000000",
+          "payloadSequence": 2,
+          "isFinalPlannedEvent": true,
+          "nextOverdueDetection": "/Date(253402300799999)/",
+          "overdueDetectionCounter": 3,
+          "plannedTechnicalTimestamp": "/Date(1569762082000)/",
+          "plannedTechTsEarliest": "/Date(1569761482000)/",
+          "plannedTechTsLatest": "/Date(1569762682000)/",
+          "plannedBusinessTimestamp": "/Date(1569762082000)/",
+          "plannedBizTsEarliest": "/Date(1569761482000)/",
+          "plannedBizTsLatest": "/Date(1569762682000)/",
+          "plannedBusinessTimeZone": "EST",
+          "eventStatus_code": "OVERDUE",
+          "lastProcessEventDirectory_id": "3689dc5f-81f0-11ea-9355-83d68051162d",
+          "process": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c3ad43-805c-11ea-a4ad-c9f13da96a10')/process"
+            }
+          },
+          "eventStatus": {
+            "__metadata": {
+              "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "type": "com.sap.gtt.app.tfo.TFOService.EventStatus"
+            },
+            "code": "OVERDUE",
+            "name": "Overdue",
+            "texts": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/texts"
+              }
+            },
+            "localized": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/localized"
+              }
+            }
+          },
+          "lastProcessEventDirectory": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c3ad43-805c-11ea-a4ad-c9f13da96a10')/lastProcessEventDirectory"
+            }
+          }
+        },
+        {
+          "__metadata": {
+            "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7a4e4-805c-11ea-a4ad-6d1b22a85e2b')",
+            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7a4e4-805c-11ea-a4ad-6d1b22a85e2b')",
+            "type": "com.sap.gtt.app.tfo.TFOService.PlannedEvent"
+          },
+          "id": "d1c7a4e4-805c-11ea-a4ad-6d1b22a85e2b",
+          "process_id": "996f8dd3-b2e0-582e-ae1b-9d7d851c030d",
+          "eventType": "com.sap.gtt.app.tfo.FreightOrderModel.DepartureEvent",
+          "locationAltKey": "xri://sap.com/id:LBN#10000002:QM7_910:Location:LogisticLocation:LBN_TST_MI",
+          "eventMatchKey": "2",
+          "longitude": "0.000000000",
+          "latitude": "0.000000000",
+          "payloadSequence": 3,
+          "isFinalPlannedEvent": false,
+          "nextOverdueDetection": "/Date(253402300799999)/",
+          "overdueDetectionCounter": 3,
+          "plannedTechnicalTimestamp": "/Date(1569765682000)/",
+          "plannedTechTsEarliest": "/Date(1569765082000)/",
+          "plannedTechTsLatest": "/Date(1569766282000)/",
+          "plannedBusinessTimestamp": "/Date(1569765682000)/",
+          "plannedBizTsEarliest": "/Date(1569765082000)/",
+          "plannedBizTsLatest": "/Date(1569766282000)/",
+          "plannedBusinessTimeZone": "EST",
+          "eventStatus_code": "OVERDUE",
+          "lastProcessEventDirectory_id": "36edf561-81f0-11ea-9355-4dc96f7c3d30",
+          "process": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7a4e4-805c-11ea-a4ad-6d1b22a85e2b')/process"
+            }
+          },
+          "eventStatus": {
+            "__metadata": {
+              "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "type": "com.sap.gtt.app.tfo.TFOService.EventStatus"
+            },
+            "code": "OVERDUE",
+            "name": "Overdue",
+            "texts": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/texts"
+              }
+            },
+            "localized": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/localized"
+              }
+            }
+          },
+          "lastProcessEventDirectory": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7a4e4-805c-11ea-a4ad-6d1b22a85e2b')/lastProcessEventDirectory"
+            }
+          }
+        },
+        {
+          "__metadata": {
+            "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7cbf5-805c-11ea-a4ad-45db3d99592b')",
+            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7cbf5-805c-11ea-a4ad-45db3d99592b')",
+            "type": "com.sap.gtt.app.tfo.TFOService.PlannedEvent"
+          },
+          "id": "d1c7cbf5-805c-11ea-a4ad-45db3d99592b",
+          "process_id": "996f8dd3-b2e0-582e-ae1b-9d7d851c030d",
+          "eventType": "com.sap.gtt.app.tfo.FreightOrderModel.ArrivalEvent",
+          "locationAltKey": "xri://sap.com/id:LBN#10000002:QM7_910:Location:LogisticLocation:LBN_TST_PB",
+          "eventMatchKey": "3",
+          "longitude": "0.000000000",
+          "latitude": "0.000000000",
+          "payloadSequence": 4,
+          "isFinalPlannedEvent": false,
+          "nextOverdueDetection": "/Date(253402300799999)/",
+          "overdueDetectionCounter": 3,
+          "plannedTechnicalTimestamp": "/Date(1569809122000)/",
+          "plannedTechTsEarliest": "/Date(1569808522000)/",
+          "plannedTechTsLatest": "/Date(1569809722000)/",
+          "plannedBusinessTimestamp": "/Date(1569809122000)/",
+          "plannedBizTsEarliest": "/Date(1569808522000)/",
+          "plannedBizTsLatest": "/Date(1569809722000)/",
+          "plannedBusinessTimeZone": "EST",
+          "eventStatus_code": "OVERDUE",
+          "lastProcessEventDirectory_id": "372f6b33-81f0-11ea-9355-e99a92c8265f",
+          "process": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7cbf5-805c-11ea-a4ad-45db3d99592b')/process"
+            }
+          },
+          "eventStatus": {
+            "__metadata": {
+              "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')",
+              "type": "com.sap.gtt.app.tfo.TFOService.EventStatus"
+            },
+            "code": "OVERDUE",
+            "name": "Overdue",
+            "texts": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/texts"
+              }
+            },
+            "localized": {
+              "__deferred": {
+                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/EventStatus('OVERDUE')/localized"
+              }
+            }
+          },
+          "lastProcessEventDirectory": {
+            "__deferred": {
+              "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/PlannedEvent(guid'd1c7cbf5-805c-11ea-a4ad-45db3d99592b')/lastProcessEventDirectory"
+            }
+          }
+        }
+      ]
+    },
+    "processEvents": {
+      "__deferred": {
+        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')/processEvents"
+      }
+    },
+    "lifeCycleStatus": {
+      "__deferred": {
+        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.sap.gtt.app.tfo.TFOService/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')/lifeCycleStatus"
+      }
+    }
+  }
+}

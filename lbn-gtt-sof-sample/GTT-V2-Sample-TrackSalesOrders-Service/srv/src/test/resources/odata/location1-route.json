@@ -1,0 +1,43 @@
+{
+  "d": {
+    "__count": "1",
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'800d826f-b26c-4f91-8e36-54742a3a0962')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'800d826f-b26c-4f91-8e36-54742a3a0962')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "800d826f-b26c-4f91-8e36-54742a3a0962",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QM7CLNT910:LBN_CUS_CL",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:LBN_CUS_CL",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "LBN_CUS_CL",
+        "longitude": "-82.27283890",
+        "latitude": "41.37207780",
+        "locationTypeCode": null,
+        "locationDescription": "Golden Nuts Inc.",
+        "objectTypeCode": "Customer",
+        "objectTypeDescription": "Customer",
+        "locationTypeDescription": null,
+        "postalCode": "44113",
+        "houseNumber": "2799",
+        "streetName": "Jay Ave",
+        "cityName": "Cleveland",
+        "regionCode": "OH",
+        "regionName": "Ohio",
+        "countryCode": "US",
+        "countryName": "United States (the)",
+        "addressTimeZone": null,
+        "timeZoneDisplayName": null,
+        "addressDetail": "2799 Jay Ave, 44113 Cleveland Ohio United States (the)",
+        "formattedAddress": "Golden Nuts Inc.$2799 Jay Ave$Cleveland Ohio 44113$United States",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": ""
+      }
+    ]
+  }
+}

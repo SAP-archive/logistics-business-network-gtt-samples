@@ -1,0 +1,44 @@
+{
+  "value": [
+    {
+      "id": "com.sap.gtt.app.deliverysample",
+      "namespace": "com.sap.gtt.app.deliverysample",
+      "name": "Outbound Delivery",
+      "description": "Outbound Delivery process",
+      "entitySet": "DeliveryProcess",
+      "lastUpdateTime": 1525835307081,
+      "coreModelVersion": "11.1.0",
+      "compilerVersion": "1.0.30"
+    },
+    {
+      "id": "com.sap.gtt.app.shipment",
+      "namespace": "com.sap.gtt.app.shipment",
+      "name": "Shipment",
+      "description": "Shipment process",
+      "entitySet": "ShipmentProcess",
+      "lastUpdateTime": 1525835107081,
+      "coreModelVersion": "11.0.0",
+      "compilerVersion": "1.0.30"
+    },
+    {
+      "id": "com.sap.gtt.app.po",
+      "namespace": "com.sap.gtt.app.po",
+      "name": "PO",
+      "description": "Purchase Order",
+      "entitySet": "PurchaseOrderProcess",
+      "lastUpdateTime": 1525835907081,
+      "coreModelVersion": "10.0.0",
+      "compilerVersion": "1.0.30"
+    },
+    {
+      "id": "com.sap.gtt.app.deliverysample.outdated",
+      "namespace": "com.sap.gtt.app.deliverysample.outdated",
+      "name": "Outbound Delivery Outdated",
+      "description": "Outbound Delivery Process Outdated",
+      "entitySet": "DeliveryProcess",
+      "lastUpdateTime": 1525835907081,
+      "coreModelVersion": "9.0.0",
+      "compilerVersion": "1.0.30"
+    }
+  ]
+}

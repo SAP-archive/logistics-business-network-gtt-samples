@@ -1,0 +1,74 @@
+{
+  "value": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa1",
+      "action": "DEPLOY",
+      "comment": "Initial deploy the model",
+      "changedAt": "2019-12-25T00:00:00.000Z",
+      "changedBy": "joe@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa2",
+      "action": "REDEPLOY",
+      "comment": "Redeployed the model",
+      "changedAt": "2019-12-26T00:00:00.000Z",
+      "changedBy": "joe@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa3",
+      "action": "REDEPLOY",
+      "comment": "Plans, organizes and manages the operations and activities of an accounts payables",
+      "changedAt": "2020-01-02T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa4",
+      "action": "REDEPLOY",
+      "comment": "Implementing new Public Cloud ERP Financials system into his company and keeping it aligned with business.",
+      "changedAt": "2020-02-12T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa5",
+      "action": "REDEPLOY",
+      "comment": "Responsible for a high number of accounts (ca. 4000 customers).",
+      "changedAt": "2020-02-13T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "action": "REDEPLOY",
+      "comment": "Ensure and adjust correct structuring of company (e.g. chart of accounts, legal/management entities , profit centers etc. …)",
+      "changedAt": "2020-02-14T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      "action": "REDEPLOY",
+      "comment": "I am a diligent person. I  put great attention to detail.",
+      "changedAt": "2020-02-15T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa8",
+      "action": "REDEPLOY",
+      "comment": "Execute the audit (Setup meeting, request documents, do interview, etc.).\nFinish the report (Working papers, findings).",
+      "changedAt": "2020-02-16T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa9",
+      "action": "REDEPLOY",
+      "comment": "Keep Organizational Structure updated.",
+      "changedAt": "2020-02-17T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    },
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afaa",
+      "action": "REDEPLOY",
+      "comment": "Responsible for a high number of accounts (ca. 5000 customers).",
+      "changedAt": "2020-02-18T00:00:00.000Z",
+      "changedBy": "somebody@example.com"
+    }
+  ]
+}

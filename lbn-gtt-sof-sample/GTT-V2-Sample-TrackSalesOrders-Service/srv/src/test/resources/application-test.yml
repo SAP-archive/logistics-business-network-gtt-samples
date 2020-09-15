@@ -1,0 +1,13 @@
+
+security:
+  basic:
+    enabled: false
+
+server:
+  port: 9098
+
+GTT_CORE_ENGINE_TECHNICAL_USER: gtt_sof_tech01@163.com
+GTT_CORE_ENGINE_TECHNICAL_PWD: Welcome1
+GTT_CORE_ENGINE_API_URL_FLP_BASED: https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/api
+
+HERE_MAP_KEY: 6OYdhmagtGi6hns0-O56oK6gy1QxujVp1peN0XeN4Sc

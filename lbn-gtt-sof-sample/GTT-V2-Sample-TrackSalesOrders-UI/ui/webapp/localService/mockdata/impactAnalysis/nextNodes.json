@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "006b296e-10e1-5d4d-b700-f6f748a06fb8",
+      "key": null,
+      "title": "1100022688",
+      "group": 2,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "DELAYED",
+          "group": 5,
+          "valueStatus": "ValueStatusError"
+        }
+      ],
+      "trackingIdType": "SHIPMENT_ORDER"
+    },
+    {
+      "id": "ac631b79-f718-563e-be8e-0e2695786ddc",
+      "key": null,
+      "title": "9980075407",
+      "group": 3,
+      "status": "Warning",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 4,
+          "valueStatus": "ValueStatusWarning"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": null,
+          "group": 4
+        }
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY"
+    }
+  ],
+  "lines": [],
+  "groups": [
+    {
+      "key": 1,
+      "title": "Sales Order",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 2,
+      "title": "Sales Order Item",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 3,
+      "title": "Delivery Item",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 4,
+      "title": "Delivery",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 5,
+      "title": "Shipment",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 6,
+      "title": "Resource",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    }
+  ]
+}
