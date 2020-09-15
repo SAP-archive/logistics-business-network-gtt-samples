@@ -18,19 +18,18 @@ Check document folder in this GitHub to find detailed installation guide for eac
 ## Limitation
 Sales Order Fulfillment app
 
-Limitation for Document Flow implementation:
-
-Recommended number of layers in document flow ≤6, for number of layers > 6, please use table view or extend the document flow click by click
+Limitation for Document Flow implementation:  
+Recommended number of layers in document flow ≤6, for number of layers > 6, please use table view or extend the document flow click by click  
 Recommended number of nodes in document flow: ≤500, for number of nodes > 500, please use table view
 
-Limitation for ERP Extractor implementation:
+Limitation for ERP Extractor implementation:  
 Shipment’s planned event’ eventMatchKey = shipmentNo+stopId, stopId is set by stage’s sequence.
 
 ## FAQ
 Check document folder in this GitHub to find detailed installation guide for each tracking scenario:
 
 ## How to obtain support
-The project is provided "as-is", with no expected support.
+The project is provided "as-is", with no expected support.  
 If it is an LBN Track & Trace option issue, please log your incidents in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Contributing     
