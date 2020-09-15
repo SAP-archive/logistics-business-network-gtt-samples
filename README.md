@@ -32,7 +32,7 @@ Check document folder in this GitHub to find detailed installation guide for eac
 The project is provided "as-is", with no expected support.
 If it is an LBN Track & Trace option issue, please log your incidents in SAP BCP system with component “SCM-LBN-GTT-COR”
 
-## Contributing
+## Contributing     
 
 ## License
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.
+Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
