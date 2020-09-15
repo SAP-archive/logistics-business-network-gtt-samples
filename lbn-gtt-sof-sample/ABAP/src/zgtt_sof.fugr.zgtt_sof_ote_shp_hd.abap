@@ -144,7 +144,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
     ls_control_data-paramname = gc_cp_yn_shp_shipping_type.
     CLEAR lv_count.
     LOOP AT lt_xvttp INTO ls_xvttp WHERE tknum = <ls_xvttk>-tknum.
-      lv_count = sy-tabix.
+      lv_count = lv_count + 1.
     ENDLOOP.
     IF lv_count LE 1.
       IF <ls_xvttk>-vsart = '01'.
