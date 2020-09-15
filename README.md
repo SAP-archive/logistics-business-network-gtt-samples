@@ -15,10 +15,11 @@ You can find SAP LBN Track and Trace Option sample code in this project. The pro
 ## Download and Installation
 Check document folder in this GitHub to find detailed installation guide for each tracking scenario
 
-
 ## Limitation
 Sales Order Fulfillment app
+
 Limitation for Document Flow implementation:
+
 Recommended number of layers in document flow ≤6, for number of layers > 6, please use table view or extend the document flow click by click
 Recommended number of nodes in document flow: ≤500, for number of nodes > 500, please use table view
 
