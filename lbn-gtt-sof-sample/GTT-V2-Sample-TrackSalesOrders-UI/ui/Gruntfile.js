@@ -54,52 +54,6 @@ module.exports = (grunt) => {
     },
   });
 
-  // sonar scan
-  const sonarGroupId = 'com.sap.gtt.v2';
-  const sonarArtifactId = process.env.npm_package_name;
-  const sonarBranch = process.env.SONAR_BRANCH || 'master';
-  const sonarProjectKey = `${sonarGroupId}:${sonarArtifactId}:${sonarBranch}`;
-
-  grunt.loadNpmTasks('grunt-sonar-runner');
-  grunt.config.set('sonarRunner', {
-    analysis: {
-      options: {
-        debug: true,
-        projectHome: './',
-        sonar: {
-          host: {
-            url: 'https://sonarci.wdf.sap.corp:8443/sonar',
-          },
-          login: '4716347bf1abc1e3386aaeb0542ceef83ebfc912', // I068400 <roger.xu@sap.com>
-          projectKey: sonarProjectKey,
-          projectName: process.env.npm_package_description,
-          projectVersion: process.env.npm_package_version,
-          sources: 'webapp',
-          tests: 'webapp/test',
-          exclusions: 'webapp/test/**,webapp/localService/**',
-          eslint: {
-            reportPaths: 'target/eslint.json',
-          },
-          javascript: {
-            eslint: {
-              reportPath: 'target/jslint-result.xml',
-              overrideSeverity: false,
-            },
-            qunit: {
-              reportPath: 'target/surefire-reports',
-            },
-            lcov: {
-              reportPaths: 'coverage/lcov.info',
-            },
-          },
-          coverage: {
-            exclusions: 'webapp/localService/**',
-          },
-        },
-      },
-    },
-  });
-
   // tasks
   grunt.registerTask('eslint-report', 'ESLint Report', () => {
     const customRulePath = path.relative(
@@ -184,10 +138,4 @@ module.exports = (grunt) => {
   });
 
   grunt.registerTask('eslint', ['clean:target', 'eslint-report']);
-
-  grunt.registerTask('sonar', 'SonarQube Scan', () => {
-    if (process.env.SONAR_BRANCH) {
-      grunt.task.run('sonarRunner:analysis');
-    }
-  });
 };

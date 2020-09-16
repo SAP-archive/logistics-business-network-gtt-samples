@@ -18,7 +18,6 @@
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "fs-extra": "^9.0.0",
-    "grunt-sonar-runner": "^2.4.8",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.1",
@@ -36,9 +35,8 @@
   "scripts": {
     "build": "grunt",
     "lint": "grunt eslint",
-    "test": "npm run lint && npm run test:ci && npm run sonar",
+    "test": "npm run lint && npm run test:ci",
     "test:ci": "karma start karma-ci.conf.js",
-    "test:debug": "karma start",
-    "sonar": "grunt sonar"
+    "test:debug": "karma start"
   }
 }
