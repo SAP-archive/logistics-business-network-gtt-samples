@@ -1,0 +1,22 @@
+[
+  {
+    "code": "AS_PLANNED",
+    "name": "As Planned"
+  },
+  {
+    "code": "LATE",
+    "name": "Late"
+  },
+  {
+    "code": "EARLY",
+    "name": "Early"
+  },
+  {
+    "code": "OVERDUE",
+    "name": "Overdue"
+  },
+  {
+    "code": "DELAYED",
+    "name": "Delayed"
+  }
+]

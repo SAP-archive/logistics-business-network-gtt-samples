@@ -1,0 +1,117 @@
+[
+  {
+    "eventType": "Arrival",
+    "eventStatusCode": "PLANNED",
+    "plannedBusinessTimestamp": "2020-09-19T22:00:00Z",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:LBN_CUS_CL",
+    "location": {
+      "locationDescription": "Golden Nuts Inc.",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:LBN_CUS_CL",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "LBN_CUS_CL",
+      "objectTypeDescription": "Customer",
+      "formattedAddress": "Golden Nuts Inc.$2799 Jay Ave$Cleveland Ohio 44113$United States",
+      "locationId": "QM7CLNT910:LBN_CUS_CL",
+      "longitude": -82.27283890,
+      "latitude": 41.37207780
+    },
+    "actualBusinessTimestamp": null,
+    "plannedEventId": "343fce93-dd15-11ea-aea4-fbf74fd502e6",
+    "isPlannedEvent": true,
+    "isActualEvent": false,
+    "eventMatchKey": "00000020170004",
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival"
+  },
+  {
+    "eventType": "Arrival",
+    "eventStatusCode": "PLANNED",
+    "plannedBusinessTimestamp": "2020-09-18T14:00:00Z",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK",
+    "location": {
+      "locationDescription": "New York Harbor",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "NEWYORK",
+      "objectTypeDescription": "Logistic Location",
+      "formattedAddress": "New York Harbor$70 Hamilton Ave$New York New York 11231$United States",
+      "locationId": "QM7CLNT910:NEWYORK",
+      "longitude": -74.20532840,
+      "latitude": 40.64396630
+    },
+    "actualBusinessTimestamp": null,
+    "plannedEventId": "343d3682-dd15-11ea-aea4-0f24daf727a8",
+    "isPlannedEvent": true,
+    "isActualEvent": false,
+    "eventMatchKey": "00000020170003",
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival"
+  },
+  {
+    "eventType": "Departure",
+    "eventStatusCode": "REPORTED",
+    "plannedBusinessTimestamp": "2020-08-18T14:00:00Z",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
+    "location": {
+      "locationDescription": "Port of Hamburg",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "HAMBURG",
+      "objectTypeDescription": "Logistic Location",
+      "formattedAddress": "Port of Hamburg$Industriestraße 100-102$21107 Hamburg$Deutschland",
+      "locationId": "QM7CLNT910:HAMBURG",
+      "longitude": 9.97806580,
+      "latitude": 53.51248010
+    },
+    "actualBusinessTimestamp": "2020-08-18T14:02:00Z",
+    "plannedEventId": "34356e4f-dd15-11ea-aea4-b1851fb40893",
+    "isPlannedEvent": true,
+    "isActualEvent": true,
+    "eventMatchKey": "00000020170002",
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure"
+  },
+  {
+    "eventType": "Arrival",
+    "eventStatusCode": "REPORTED",
+    "plannedBusinessTimestamp": "2020-08-17T20:00:00Z",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
+    "location": {
+      "locationDescription": "Port of Hamburg",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "HAMBURG",
+      "objectTypeDescription": "Logistic Location",
+      "formattedAddress": "Port of Hamburg$Industriestraße 100-102$21107 Hamburg$Deutschland",
+      "locationId": "QM7CLNT910:HAMBURG",
+      "longitude": 9.97806580,
+      "latitude": 53.51248010
+    },
+    "actualBusinessTimestamp": "2020-08-17T20:08:00Z",
+    "plannedEventId": "343a9e71-dd15-11ea-aea4-21de78b809b4",
+    "isPlannedEvent": true,
+    "isActualEvent": true,
+    "eventMatchKey": "00000020170002",
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival"
+  },
+  {
+    "eventType": "Departure",
+    "eventStatusCode": "DELAYED",
+    "plannedBusinessTimestamp": "2020-08-17T14:00:00Z",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+    "location": {
+      "locationDescription": "ABC Company",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "0001",
+      "objectTypeDescription": "Shipping Point",
+      "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+      "locationId": "QM7CLNT910:0001",
+      "longitude": 8.57215730,
+      "latitude": 49.29337810
+    },
+    "actualBusinessTimestamp": "2020-08-17T14:10:00Z",
+    "plannedEventId": "3432fd4e-dd15-11ea-aea4-05185dc0a15d",
+    "isPlannedEvent": true,
+    "isActualEvent": true,
+    "eventMatchKey": "00000020170001",
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure"
+  }
+]

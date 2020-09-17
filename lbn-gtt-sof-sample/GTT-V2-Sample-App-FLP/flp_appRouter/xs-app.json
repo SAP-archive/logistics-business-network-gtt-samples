@@ -1,0 +1,12 @@
+{
+  "welcomeFile": "/cp.portal",
+  "authenticationMethod": "route",
+  "sessionTimeout": 20,
+  "routes": [
+    {
+      "source": "^/(token.json)(.*)$",
+      "target": "$1",
+      "localDir": "resources"
+    }
+  ]
+}

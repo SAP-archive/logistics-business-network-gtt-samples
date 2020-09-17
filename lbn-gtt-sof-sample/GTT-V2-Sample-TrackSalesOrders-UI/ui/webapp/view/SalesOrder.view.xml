@@ -1,0 +1,80 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sof.controller.SalesOrder"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core">
+	<ObjectPageLayout id="objectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		enableLazyLoading="false"
+		upperCaseAnchorBar="false"
+		busy="{salesOrder>/busy}"
+		busyIndicatorDelay="{salesOrder>/delay}">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="lbnTfoDynamicPageTitle" areaShrinkRatio="1:1.6:1.6">
+				<breadcrumbs>
+				</breadcrumbs>
+				<expandedHeading>
+					<m:Title id="expandedHeadingTitle" text="{salesOrderNo}" wrapping="true"/>
+				</expandedHeading>
+				<snappedHeading>
+					<m:Title id="snappedHeadingTitle" text="{salesOrderNo}" wrapping="true"/>
+				</snappedHeading>
+				<content>
+					<m:OverflowToolbar>
+						<m:GenericTag id="isDelayedGenericTag"
+							visible="{= ${isDelayed} === true}"
+							class="sofGenericTag"
+							design="StatusIconHidden"
+							status="Error"
+							text="{i18n>delayed}">
+							<m:layoutData>
+								<m:OverflowToolbarLayoutData priority="{salesOrder>/genericTagPriority}"/>
+							</m:layoutData>
+						</m:GenericTag>
+					</m:OverflowToolbar>
+				</content>
+				<actions>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<core:Fragment id="headerContentFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.SalesOrderHeaderContent" type="XML"/>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection id="informationSection" title="{i18n>generalInformationView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="generalInfoFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.SalesOrderGeneralInfo" type="XML"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="salesOrderItemsSection" title="{i18n>salesOrderItemsView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="salesOrderItemsView" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.SalesOrderItems" type="XML"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="documentFlowSection" title="{i18n>documentFlowView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<mvc:XMLView id="documentFlowView" viewName="com.sap.gtt.app.sample.sof.view.DocumentFlow"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

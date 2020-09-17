@@ -1,0 +1,22 @@
+{
+  "comment": "More information: https://jam4.sapjam.com/wiki/show/UFKzGv6i81yui7orPvmwtQ",
+  "collections": [{
+    "collectionName": "GTT_V2_Sample_App_FLP",
+    "folders": [{
+      "startingFolderPath": "**/i18n/**",
+      "sourceFilters": [
+        "*.properties"
+      ],
+      "excludedSourceFilters": [
+        "*_*.properties"
+      ]
+    }]
+  }],
+  "defaultConfiguration": {
+    "xlfFolderPath": "/XLF/[FullPath]",
+    "targetFolderPath": ".",
+    "pseudoLocFolderPath": ".",
+    "oneQFolderPath": ".",
+    "targetFileNamingConvention": "[filename]_[langCode].[extension]"
+  }
+}

@@ -1,0 +1,381 @@
+[
+  {
+    "actualSpotsValidation": {
+      "invalid": false,
+      "missing": false,
+      "valid": true
+    },
+    "plannedLocationsValidation": {
+      "invalid": false,
+      "missing": false,
+      "valid": false
+    },
+    "stops": [
+      {
+        "stopId": "00000020230001",
+        "ordinalNumber": 1,
+        "warehouse": "",
+        "gate": "",
+        "loadingPoint": "",
+        "unloadingPoint": "",
+        "warehouseDescription": "",
+        "locationId": "0001",
+        "locationTypeCode": "ShippingPoint",
+        "locationType": {
+          "code": null,
+          "name": null,
+          "localized": null
+        },
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+        "location": {
+          "locationDescription": "ABC Company",
+          "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+          "sourceSystem": "QM7CLNT910",
+          "externalId": "0001",
+          "objectTypeDescription": "Shipping Point",
+          "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+          "locationId": "QM7CLNT910:0001",
+          "longitude": 8.57215730,
+          "latitude": 49.29337810
+        }
+      }
+    ],
+    "plannedSpots": [
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1001",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+        "eventId": "86ccd3f0-d54d-11ea-98b4-f173f9021ad8",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": "2020-07-03T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-03T03:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      }
+    ],
+    "destinationLocationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+    "destinationLocation": {
+      "locationDescription": "ABC Company",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "0001",
+      "objectTypeDescription": "Shipping Point",
+      "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+      "locationId": "0001",
+      "longitude": 12.12345000,
+      "latitude": 21.12345000
+    },
+    "currentLocation": {
+      "eventId": "d1403fda-d550-11ea-98b4-5177a81adcaf",
+      "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080024320000020",
+      "eventType": "LoadingEnd",
+      "refPlannedEventType": null,
+      "refPlannedEventMatchKey": null,
+      "refPlannedEventLocationAltKey": null,
+      "longitude": 121.500100000,
+      "latitude": 41.000100000,
+      "transportationModeCode": "01",
+      "eventStatusCode": "PLANNED",
+      "estimatedArrival": {
+        "estimatedArrivalTime": "2020-07-03T03:09:24.119Z"
+      }
+    },
+    "nextStopEvent": {
+      "eventStatusCode": "PLANNED",
+      "location": {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000
+      }
+    },
+    "groupId": "0080024320000020",
+    "actualSpots": [
+      {
+        "longitude": 120.000100000,
+        "latitude": 39.000100000,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080024320000020",
+        "transportationModeCode": null,
+        "eventId": "f0228c87-d54f-11ea-98b4-f338c3d4edec",
+        "eventType": "Picking",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1002"
+      },
+      {
+        "longitude": 121.000100000,
+        "latitude": 40.000100000,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080024320000020",
+        "transportationModeCode": null,
+        "eventId": "f6de559c-d54f-11ea-98b4-8d3ceeaa266e",
+        "eventType": "GoodsIssued",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1003"
+      },
+      {
+        "longitude": 121.000100000,
+        "latitude": 41.000100000,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080024320000020",
+        "transportationModeCode": null,
+        "eventId": "a2613204-d550-11ea-98b4-997e7ec3c9c6",
+        "eventType": "LocationUpdate",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1004"
+      },
+      {
+        "longitude": 121.500100000,
+        "latitude": 41.000100000,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080024320000020",
+        "transportationModeCode": null,
+        "eventId": "d1403fda-d550-11ea-98b4-5177a81adcaf",
+        "eventType": "LoadingEnd",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1005"
+      }
+    ],
+    "transportationModeCode": "01",
+    "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:0000002017",
+    "firstPlannedEventId": "343d3682-dd15-11ea-aea4-0f24daf727a8",
+    "executionStatusCode": "IN_TRANSIT"
+  },
+  {
+    "actualSpotsValidation": {
+      "invalid": false,
+      "missing": false,
+      "valid": true
+    },
+    "plannedLocationsValidation": {
+      "invalid": false,
+      "missing": false,
+      "valid": true
+    },
+    "stops": [
+      {
+        "stopId": "00000020230001",
+        "ordinalNumber": 1,
+        "warehouse": "",
+        "gate": "",
+        "loadingPoint": "",
+        "unloadingPoint": "",
+        "warehouseDescription": "",
+        "locationId": "0001",
+        "locationTypeCode": "ShippingPoint",
+        "locationType": {
+          "code": null,
+          "name": null,
+          "localized": null
+        },
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+        "location": {
+          "locationDescription": "ABC Company",
+          "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+          "sourceSystem": "QM7CLNT910",
+          "externalId": "0001",
+          "objectTypeDescription": "Shipping Point",
+          "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+          "locationId": "QM7CLNT910:0001",
+          "longitude": 8.57215730,
+          "latitude": 49.29337810
+        }
+      }
+    ],
+    "plannedSpots": [
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+        "eventId": "86ccd3f0-d54d-11ea-98b4-f173f9021ad8",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "locationTypeCode": "1001",
+        "plannedBusinessTimestamp": "2020-07-02T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-02T04:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1002",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0002",
+        "eventId": "86bf8d7c-d54d-11ea-98b4-2fcad70270fb",
+        "eventType": "Picking",
+        "eventStatusCode": "OVERDUE",
+        "plannedBusinessTimestamp": null,
+        "estimatedArrival": null
+      },
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1003",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0003",
+        "eventId": "86c2e8dd-d54d-11ea-98b4-ed6327a6c5ed",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": "2020-07-03T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-03T05:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1004",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0004",
+        "eventId": "86c6443e-d54d-11ea-98b4-7d2091e162ef",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": "2020-07-04T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-04T05:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 12.12345000,
+        "latitude": 21.12345000,
+        "eventMatchKey": "00000017820000",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "ShippingPoint",
+        "locationTypeCode": "1005",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0005",
+        "eventId": "86c99f9f-d54d-11ea-98b4-bf3323cc99a6",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": null,
+        "estimatedArrival": null
+      },
+      {
+        "longitude": 120.00100000,
+        "latitude": 37.00100000,
+        "eventMatchKey": "00000017820001",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "LogisticLocation",
+        "locationTypeCode": "1006",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0006",
+        "eventId": "86d05661-d54d-11ea-98b4-9fa50a41f585",
+        "eventType": "Picking",
+        "eventStatusCode": "PLANNED",
+        "plannedBusinessTimestamp": "2020-07-05T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-05T06:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 120.00100000,
+        "latitude": 37.00100000,
+        "eventMatchKey": "00000017820001",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "LogisticLocation",
+        "locationTypeCode": "1007",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0007",
+        "eventId": "86d38ab2-d54d-11ea-98b4-e9bb92264e34",
+        "eventType": "Picking",
+        "eventStatusCode": "PLANNED",
+        "plannedBusinessTimestamp": "2020-07-06T03:09:24.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-06T07:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 9.96637630,
+        "latitude": 53.50982120,
+        "eventMatchKey": "00000017820002",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "LogisticLocation",
+        "locationTypeCode": "1001",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0008",
+        "eventId": "86d6e613-d54d-11ea-98b4-1b4f8f0c39c3",
+        "eventType": "Picking",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": null,
+        "estimatedArrival": null
+      },
+      {
+        "longitude": 9.96637630,
+        "latitude": 53.50982120,
+        "eventMatchKey": "00000017820002",
+        "locationDescription": "Shanghai",
+        "objectTypeCode": "LogisticLocation",
+        "locationTypeCode": "1002",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+        "eventId": "86da4174-d54d-11ea-98b4-0b0a964fd91d",
+        "eventType": "Arrival",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": "2020-07-08T00:10:22.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-08T08:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      },
+      {
+        "longitude": 9.99573600,
+        "latitude": 53.53968000,
+        "eventMatchKey": "00000017820003",
+        "locationDescription": null,
+        "objectTypeCode": "Customer",
+        "locationTypeCode": "1003",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+        "eventId": "86dd75c5-d54d-11ea-98b4-65af76f053aa",
+        "eventType": "Arrival",
+        "eventStatusCode": "DELAYED",
+        "plannedBusinessTimestamp": "2020-07-09T03:10:21.119Z",
+        "estimatedArrival": {
+          "estimatedArrivalTime": "2020-07-09T09:09:24.119Z",
+          "estimatedArrivalTimeZone": "CET",
+          "stopId": "00000020230001"
+        }
+      }
+    ],
+    "destinationLocationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+    "destinationLocation": {
+      "locationDescription": "ABC Company",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+      "sourceSystem": "QM7CLNT910",
+      "externalId": "0001",
+      "objectTypeDescription": "Shipping Point",
+      "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+      "locationId": "0001",
+      "longitude": 12.12345000,
+      "latitude": 21.12345000
+    },
+    "currentLocation": null,
+    "nextStopEvent": null,
+    "groupId": "0000001782",
+    "actualSpots": [],
+    "transportationModeCode": "03",
+    "altKey": null,
+    "firstPlannedEventId": null,
+    "executionStatusCode": "IN_TRANSIT"
+  }
+]

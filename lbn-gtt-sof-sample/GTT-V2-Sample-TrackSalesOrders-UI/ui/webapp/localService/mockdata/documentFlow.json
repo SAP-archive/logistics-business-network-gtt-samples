@@ -1,0 +1,170 @@
+{
+  "nodes": [
+    {
+      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
+      "key": 0,
+      "title": "No.123",
+      "group": 1,
+      "status": "Warning",
+      "attributes": [
+        {
+          "propertyName": "shipToPartyId",
+          "value": "Möller Maersk",
+          "group": 1
+        },
+        {
+          "propertyName": "netValue",
+          "value": "29400.0000",
+          "uom": "EUR",
+          "group": 1
+        }, {
+          "propertyName": "isDelayed",
+          "value": "true",
+          "valueStatus": "ValueStatusError",
+          "group": 1
+        }
+      ]
+    },
+    {
+      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
+      "key": 1,
+      "title": "LBN_M01 (LBN_M01 LBN_M01 LBN_M01 LBN_M01 LBN_M01 )",
+      "group": 2,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "orderQuantity",
+          "value": "400.000",
+          "uom": "EA",
+          "group": 2
+        },
+        {
+          "propertyName": "netValue",
+          "value": null,
+          "uom": "EUR",
+          "group": 2
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "DELAYED",
+          "valueStatus": "ValueStatusError",
+          "group": 2
+        }, {
+          "propertyName": "isDelayed",
+          "value": "no",
+          "group": 2
+        }
+      ]
+    },
+    {
+      "id": "1781028f-e85a-584f-9e95-b878cbf6e92c",
+      "key": 2,
+      "title": "item no",
+      "group": 3,
+      "status": "Success",
+      "attributes": [
+        {
+          "propertyName": "orderQuantity",
+          "value": "400",
+          "uom": "pcs",
+          "group": 3
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "valueStatus": "ValueStatusWarning",
+          "group": 3
+        }
+      ]
+    },
+    {
+      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
+      "key": 3,
+      "title": "item no",
+      "group": 3,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "orderQuantity",
+          "value": "400",
+          "uom": "pcs",
+          "group": 3
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "DELAYED",
+          "valueStatus": "ValueStatusError",
+          "group": 3
+        }
+      ]
+    },
+    {
+      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
+      "key": 4,
+      "title": "item no",
+      "group": 3,
+      "status": "Standard",
+      "attributes": [
+        {
+          "propertyName": "orderQuantity",
+          "value": "400",
+          "uom": "pcs",
+          "group": 3
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "DELAYED",
+          "valueStatus": "ValueStatusWarning",
+          "group": 3
+        }
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "from": 0,
+      "to": 1,
+      "status": "Warning"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "status": "Error"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 4,
+      "status": "Warning"
+    },
+    {
+      "from": 4,
+      "to": 0,
+      "status": "Success"
+    }
+  ],
+  "groups": [
+    {
+      "key": 1,
+      "title": "salesOrder",
+      "status": "Warning",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 2,
+      "title": "salesOrderItem",
+      "status": "Error",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 3,
+      "title": "deliveryItem",
+      "status": "Warning",
+      "icon": "sap-icon://lead"
+    }
+  ]
+}

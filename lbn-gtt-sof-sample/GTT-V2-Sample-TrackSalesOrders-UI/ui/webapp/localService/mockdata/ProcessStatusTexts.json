@@ -1,0 +1,28 @@
+[
+  {
+    "code": "AS_PLANNED",
+    "name": "As Planned",
+    "locale": "en"
+  },
+  {
+    "code": "LATE",
+    "name": "Late",
+    "locale": "en"
+  },
+  {
+    "code": "EARLY",
+    "name": "Early",
+    "locale": "en"
+  },
+  {
+    "code": "OVERDUE",
+    "name": "Overdue",
+    "locale": "en"
+  },
+  {
+    "code": "DELAYED",
+    "name": "Delayed",
+    "locale": "en"
+  }
+]
+

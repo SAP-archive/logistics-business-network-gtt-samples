@@ -1,0 +1,38 @@
+{
+  "d": {
+    "__count": "1",
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-so-01.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'23b99558-eabb-466e-83a2-8281222810f1')",
+          "uri": "https://gtt-sample-so-01.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'23b99558-eabb-466e-83a2-8281222810f1')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "23b99558-eabb-466e-83a2-8281222810f1",
+        "tenantId": "20d81d3a-1ff0-49d5-a737-ec98ae7cf587",
+        "locationId": "INT_TEST_CORE_ENGINE:{{EXTERNALID_COREENGINE}}",
+        "locationAltKey": "xri://sap.com/id:LBN#10013165:INT_TEST_CORE_ENGINE:Location:Customer:{{EXTERNALID_COREENGINE}}",
+        "sourceSystem": "INT_TEST_CORE_ENGINE",
+        "externalId": "{{EXTERNALID_COREENGINE}}",
+        "longitude": "12.12345000",
+        "latitude": "21.12345000",
+        "locationTypeCode": null,
+        "locationDescription": "Created by CoreEngine: {{ExternalId_CoreEngine}}",
+        "objectTypeCode": "Customer",
+        "objectTypeDescription": "Customer",
+        "locationTypeDescription": null,
+        "postalCode": "100000",
+        "houseNumber": "No.10",
+        "streetName": "TIanze road",
+        "cityName": "Des Moines",
+        "regionCode": "IA",
+        "regionName": "Iowa",
+        "countryCode": "US",
+        "countryName": "United States (the)",
+        "addressTimeZone": "123456",
+        "addressDetail": "No.10 TIanze road, 100000 Des Moines Iowa United States (the)",
+        "formattedAddress": "Created by CoreEngine: {{ExternalId_CoreEngine}}$No.10 TIanze road$Des Moines Iowa 100000$United States"
+      }
+    ]
+  }
+}

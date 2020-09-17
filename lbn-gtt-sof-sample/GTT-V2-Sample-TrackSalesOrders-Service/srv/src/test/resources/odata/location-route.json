@@ -1,0 +1,43 @@
+{
+  "d": {
+    "__count": "1",
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "8708084a-0ea5-4ba6-a7ef-42918a363bdd",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QM7CLNT910:NEWYORK",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "NEWYORK",
+        "longitude": "-74.20532840",
+        "latitude": "40.64396630",
+        "locationTypeCode": null,
+        "locationDescription": "New York Harbor",
+        "objectTypeCode": "LogisticLocation",
+        "objectTypeDescription": "Logistic Location",
+        "locationTypeDescription": null,
+        "postalCode": "11231",
+        "houseNumber": "70",
+        "streetName": "Hamilton Ave",
+        "cityName": "New York",
+        "regionCode": "NY",
+        "regionName": "New York",
+        "countryCode": "US",
+        "countryName": "United States (the)",
+        "addressTimeZone": null,
+        "timeZoneDisplayName": null,
+        "addressDetail": "70 Hamilton Ave, 11231 New York New York United States (the)",
+        "formattedAddress": "New York Harbor$70 Hamilton Ave$New York New York 11231$United States",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": ""
+      }
+    ]
+  }
+}

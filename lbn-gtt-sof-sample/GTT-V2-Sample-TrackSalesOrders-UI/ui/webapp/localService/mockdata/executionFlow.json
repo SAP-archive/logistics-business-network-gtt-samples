@@ -1,0 +1,139 @@
+{
+  "lanes": [
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e921",
+      "eventType": "Departure",
+      "locationDescription": null,
+      "locationTypeCode": "1001",
+      "position": 0
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e922",
+      "eventType": "UnLoadingStart",
+      "locationDescription": null,
+      "locationTypeCode": "1002",
+      "position": 1
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e923",
+      "eventType": "UnLoadingEnd",
+      "locationDescription": null,
+      "locationTypeCode": "1003",
+      "position": 2
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e924",
+      "eventType": "Empty",
+      "locationDescription": null,
+      "locationTypeCode": "1004",
+      "position": 3
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e925",
+      "eventType": "Arrival",
+      "locationDescription": null,
+      "locationTypeCode": "1005",
+      "position": 4
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e926",
+      "eventType": "Stuffing",
+      "locationDescription": "Descr",
+      "locationTypeCode": "1006",
+      "position": 5
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e927",
+      "eventType": "Stripping",
+      "locationDescription": "Descr",
+      "locationTypeCode": "1007",
+      "position": 6
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e928",
+      "eventType": "POPU",
+      "locationDescription": "Descr",
+      "locationTypeCode": "1050",
+      "position": 7
+    }
+  ],
+  "nodes": [
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e921",
+      "eventType": "Departure",
+      "eventStatus": "LATE_REPORTED",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "actualAt": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e922"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e922",
+      "eventType": "CarrierArrival",
+      "eventStatus": "EARLY_REPORTED",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e923"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e923",
+      "eventType": "Arrival",
+      "eventStatus": "PLANNED",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e924"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e924",
+      "eventType": "CarrierArrival",
+      "eventStatus": "REPORTED",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e925"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e925",
+      "eventType": "CarrierArrival",
+      "eventStatus": "OVERDUE",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e926"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e926",
+      "eventType": "CarrierArrival",
+      "eventStatus": "OVERDUE",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e927"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e927",
+      "eventType": "CarrierArrival",
+      "eventStatus": "DELAYED",
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": [
+        "8781028f-e85a-584f-9e95-b878cbf6e928"
+      ]
+    },
+    {
+      "eventId": "8781028f-e85a-584f-9e95-b878cbf6e928",
+      "eventType": "CarrierArrival",
+      "eventStatus": null,
+      "plannedAt": "2020-07-03T03:09:24.119Z",
+      "eta": "2020-07-03T03:09:24.119Z",
+      "children": null
+    }
+  ]
+}

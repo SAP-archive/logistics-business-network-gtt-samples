@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ef57cc3d-db01-11ea-88be-bfcc584bbdcf",
+    "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+    "actualBusinessTimestamp": 1597061182000,
+    "actualBusinessTimeZone": "CET",
+    "eventType": "Picking",
+    "longitude": null,
+    "latitude": null,
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
+    "reportedBy": null,
+    "senderPartyId": "LBN#10010001016",
+    "eventMatchKey": null,
+    "locationType": null,
+    "eta": null,
+    "actualAt": "2020-08-10T12:06:22Z",
+    "refPlannedEventType": null,
+    "refPlannedEventMatchKey": null,
+    "refPlannedEventLocationAltKey": null,
+    "eventProcesses": null
+  }
+]

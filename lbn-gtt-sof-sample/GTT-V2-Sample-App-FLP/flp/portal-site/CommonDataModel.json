@@ -1,0 +1,101 @@
+{
+  "_version": "3.0.0",
+  "identification": {
+    "id": "ee7d30df-c86c-48b1-8f02-c2abc4e18f54-1578021444073",
+    "entityType": "bundle"
+  },
+  "payload": {
+    "catalogs": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "defaultCatalogId",
+          "title": "{{title}}",
+          "entityType": "catalog",
+          "i18n": "i18n/defaultCatalogId.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.sof",
+              "vizId": "SalesOrders-track"
+            }
+          ]
+        }
+      }
+    ],
+    "groups": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "salesOrder",
+          "title": "{{title}}",
+          "entityType": "group",
+          "i18n": "i18n/salesOrder.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.sof",
+              "appId": "com.sap.gtt.app.sample.sof",
+              "vizId": "SalesOrders-track"
+            }
+          ]
+        }
+      }
+    ],
+    "sites": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "a3eee102-5181-4222-9924-8b8e90985f07-1578021444073",
+          "entityType": "site",
+          "title": "SAP Fiori launchpad site on Cloud Foundry",
+          "description": "SAP Fiori launchpad site on Cloud Foundry, deployed from SAP Web IDE"
+        },
+        "payload": {
+          "config": {
+            "ushellConfig": {
+              "renderers": {
+                "fiori2": {
+                  "componentData": {
+                    "config": {
+                      "applications": {
+                        "Shell-home": {}
+                      },
+                      "enableHelp": false,
+                      "enableSearch": false,
+                      "sessionTimeoutIntervalInMinutes": 19,
+                      "sessionTimeoutReminderInMinutes": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "groupsOrder": [
+            "salesOrder"
+          ],
+          "sap.cloud.portal": {
+            "config": {
+              "theme.id": "sap_fiori_3",
+              "theme.active": [
+                "sap_fiori_3",
+                "sap_belize_hcb",
+                "sap_belize_hcw"
+              ],
+              "ui5VersionNumber": "1.75.0",
+              "InAppHelp": {
+                "config": {
+                  "enabled": false,
+                  "productName": "SAP_GLOBAL_TRACK_AND_TRACE_V2",
+                  "productVersion": "Cloud"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

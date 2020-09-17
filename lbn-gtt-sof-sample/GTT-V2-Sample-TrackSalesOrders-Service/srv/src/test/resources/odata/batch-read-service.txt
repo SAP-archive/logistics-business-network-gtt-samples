@@ -1,0 +1,16 @@
+--batch_7c1a-2423-f901
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+GET SalesOrder?$skip=0&$top=20&$orderby=lastChangeDateTime%20desc&$select=salesOrderNo%2cshipToPartyId%2cnetValue%2ccurrency%2cid&$inlinecount=allpages HTTP/1.1
+sap-cancel-on-close: true
+Cache-Control: max-age=360
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en-US
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+x-csrf-token: 59d88716037e5d5e-XJnlOQLRgaabvDLZsc8vZOVFARY
+
+
+--batch_7c1a-2423-f901--

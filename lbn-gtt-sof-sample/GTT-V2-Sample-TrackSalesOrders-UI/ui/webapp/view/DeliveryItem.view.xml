@@ -1,0 +1,125 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sof.controller.DeliveryItem"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<ObjectPageLayout id="objectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		enableLazyLoading="false"
+		upperCaseAnchorBar="false"
+		busy="{deliveryItem>/busy}"
+		busyIndicatorDelay="{deliveryItem>/delay}">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="sofDynamicPageTitle" areaShrinkRatio="1:1.6:1.6">
+				<breadcrumbs>
+					<m:Breadcrumbs class="sapUiTinyMarginTop sapUiTinyMarginBottom" currentLocationText="">
+						<m:Link text="{i18n>salesOrderList}" press=".navToSalesOrderList"/>
+						<m:Link visible="{= !!${deliveryItem>/urlParams/salesOrderId} }" text="{salesOrderItem/salesOrderNo}" press=".navToSalesOrder"
+							customData:salesOrderId="{deliveryItem>/urlParams/salesOrderId}"/>
+						<m:Link visible="{= !!${deliveryItem>/urlParams/salesOrderId} }" text="{salesOrderItem/itemNo}" press=".navToSalesOrderItem"
+							customData:salesOrderItemId="{salesOrderItem/id}"
+							customData:salesOrderId="{deliveryItem>/urlParams/salesOrderId}"/>
+					</m:Breadcrumbs>
+				</breadcrumbs>
+				<expandedHeading>
+					<m:Title id="expandedHeadingTitle" text="{deliveryNo} / {itemNo}" wrapping="true"/>
+				</expandedHeading>
+				<expandedContent>
+					<!-- <m:Text id="expandedContentTitle" text="{itemNo}" wrapping="true"/> -->
+				</expandedContent>
+				<snappedHeading>
+					<m:Title id="snappedHeadingTitle" text="{deliveryNo} / {itemNo}" wrapping="true"/>
+				</snappedHeading>
+				<snappedContent>
+					<!-- <m:Text id="snappedContentTitle" text="{itemNo}" wrapping="true"/> -->
+				</snappedContent>
+				<content>
+					<m:OverflowToolbar>
+						<m:content>
+							<m:GenericTag id="lastActivityGenericTag"
+								visible="{= ${lastEventName} !== null }"
+								class="sapUiTinyMarginEnd sofGenericTag"
+								design="StatusIconHidden"
+								text="{
+									parts: [
+										'lastEventName',
+										'lastLocationDescription',
+										'lastVPLocationType/localized/name'
+									],
+									formatter: '.formatter.lastActivity'
+								}"
+								status="{
+									path: 'executionStatus_code',
+									formatter: '.formatter.executionStatus.getState'
+								}">
+								<m:layoutData>
+									<m:OverflowToolbarLayoutData priority="{deliveryItem>/genericTagPriority}"/>
+								</m:layoutData>
+							</m:GenericTag>
+							<m:GenericTag id="processStatusGenericTag" class="sofGenericTag sofProcessStatusGenericTag" design="StatusIconHidden"
+								status="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"
+								text="{= ${processStatus/localized/name} ? ${processStatus/localized/name} : ${processStatus/name} }">
+								<m:layoutData>
+									<m:OverflowToolbarLayoutData priority="{deliveryItem>/genericTagPriority}"/>
+								</m:layoutData>
+							</m:GenericTag>
+						</m:content>
+					</m:OverflowToolbar>
+				</content>
+				<actions>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<core:Fragment id="headerContentFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.DeliveryItemHeaderContent" type="XML"/>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection id="informationSection" title="{i18n>generalInformationView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="generalInfoFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.DeliveryItemGeneralInfo" type="XML"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="referenceDocumentsSection" title="{i18n>referenceDocumentsView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="referenceDocumentsFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.ReferenceDocuments" type="XML"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="executionFlowSection" title="{i18n>executionFlowView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<mvc:XMLView id="executionFlowView" viewName="com.sap.gtt.app.sample.sof.view.ExecutionFlow"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="mapSection" title="{i18n>mapView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<mvc:XMLView id="mapView" viewName="com.sap.gtt.app.sample.sof.view.Map"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,15 @@
+[
+  {
+    "locationDescription": "ABC Company",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0010",
+    "sourceSystem": "QM7CLNT910",
+    "externalId": "0001",
+    "objectTypeDescription": "Shipping Point",
+    "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+    "locationId": "QM7CLNT910:0001",
+    "longitude": 8.57215730,
+    "latitude": 49.29337810,
+    "locationTypeCode": "ShippingPoint",
+    "locationTypeDescription": "Shipping Point"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "lanes": [
+    {
+      "id": "0",
+      "name": "salesOrderItemCreated",
+      "count": 10,
+      "total": 10,
+      "position": 0
+    },
+    {
+      "id": "1",
+      "name": "salesOrderItemConfirmed",
+      "rejectCount": 5,
+      "count": 5,
+      "total": 10,
+      "position": 1
+    },
+    {
+      "id": "2",
+      "name": "deliveryCreated",
+      "count": 3,
+      "total": 10,
+      "position": 2
+    },
+    {
+      "id": "3",
+      "name": "deliveryGoodsIssued",
+      "count": 4,
+      "total": 10,
+      "position": 3
+    },
+    {
+      "id": "4",
+      "name": "deliveryCompleted",
+      "count": 3,
+      "total": 12,
+      "position": 4
+    }
+  ]
+}

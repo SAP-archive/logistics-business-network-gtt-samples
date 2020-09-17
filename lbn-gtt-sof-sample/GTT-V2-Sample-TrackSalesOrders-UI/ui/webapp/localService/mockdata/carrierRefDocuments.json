@@ -1,0 +1,12 @@
+[
+  {
+    "docId": "20200729001",
+    "shipmentNo": "60006",
+    "docType_code": "BN"
+  },
+  {
+    "docId": "vp-001",
+    "shipmentNo": "60006",
+    "docType_code": "VP"
+  }
+]

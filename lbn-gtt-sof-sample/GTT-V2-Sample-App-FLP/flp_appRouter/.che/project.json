@@ -1,0 +1,1 @@
+{"type":"approuter.nodejs","builders":{"default":"sap.nodejs","configs":{}},"runners":{"configs":{}},"attributes":{},"description":"gtt-v2-flp_appRouter","mixinTypes":["mtamodule"]}
