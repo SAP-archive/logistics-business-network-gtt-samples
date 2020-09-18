@@ -3,12 +3,12 @@
 ## Description
 The project aims to provide examples to build your own tracking application on top of [SAP LBN Global Track and Trace Option]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task). You could just implement the template code or do the modification according to your specific requirements. For each tracking scenario, the template code includes:
 * ERP extractor to send out the tracked processes and actual events to SAP LBN Global Track and Trace Option (ABAP).
-* Tracked process model required to import into Manage Models app of SAP LBN Global Track and Trace Option (model file).
+* GTT model required to import into Manage Models app of SAP LBN Global Track and Trace Option (model file).
 * Backend and Frontend code to build Fiori application on top of SAP LBN Global Track and Trace Option (Java and JavaScript).
 
 ## Requirements
-* A SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 2 GB Application Runtime quota.
-* To integrate with ERP, you need an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
+* A SAP Cloud Platform global account with entitlements for SAP LBN Global Track and Trace option, 1 portal service quota and 2 GB Application Runtime quota.
+* To integrate with ERP, you need a SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
 * To integrate with visibility provider, please log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
 
 ## Download and Installation
