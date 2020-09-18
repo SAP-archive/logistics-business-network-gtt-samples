@@ -9,18 +9,18 @@ The project aims to provide examples to build your own tracking application on t
 ## Requirements
 * An SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 2 GB Application Runtime quota.
 * To integrate with ERP, you need a S/4, SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
-* To integrate with visibility provider, please log your incident in SAP [BCP]( https://support.wdf.sap.corp/)  system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
+* To integrate with visibility provider, please log your incident in SAP [BCP](https://support.wdf.sap.corp/)  system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
 
 ## Download and Installation
 Click below link to check detailed installation guide for each tracking scenario, or you can find them in corresponding scenario’s “Document” folder.
-* [Sales Order Fulfillment – Implementation Guide] (https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
+* [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
 ## Limitation
 Click below link to check limitation for each tracking scenario, or you can find them in corresponding scenario’s “Readme” file.
-* [Sales Order Fulfillment – Limitation]( https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/README.md#limitation)
+* [Sales Order Fulfillment – Limitation](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/README.md#limitation)
 ## FAQ
 Click below link to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “Document” folder.
-* [Sales Order Fulfillment – FAQ] (https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/02_FAQ%20-%20SOF.pdf)
+* [Sales Order Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/02_FAQ%20-%20SOF.pdf)
 
 ## How to obtain support
 The project is provided "as-is", with no expected support. 
