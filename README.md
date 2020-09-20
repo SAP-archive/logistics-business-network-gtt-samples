@@ -21,7 +21,7 @@ Click below link to check limitation for each tracking scenario, or you can find
 
 ## FAQ
 Click below link to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “Readme” file.
-* [Sales Order Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#FAQ)
+* [Sales Order Fulfillment – FAQs](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#FAQs)
 
 ## How to obtain support
 The project is provided "as-is", with no expected support. </br>
