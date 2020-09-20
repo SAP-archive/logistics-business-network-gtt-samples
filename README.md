@@ -21,11 +21,11 @@ Click below link to check limitation for each tracking scenario, or you can find
 
 ## FAQ
 Click below link to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “Readme” file.
-* [Sales Order Fulfillment – FAQs](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#FAQs)
+* [Sales Order Fulfillment – FAQs](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#faqs)
 
 ## How to obtain support
 The project is provided "as-is", with no expected support. </br>
-If it is an LBN Global Track & Trace option issue, please log your incidents in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”.
+If it is a LBN Global Track & Trace option issue, please log your incidents in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”.
 
 ## License
 Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
