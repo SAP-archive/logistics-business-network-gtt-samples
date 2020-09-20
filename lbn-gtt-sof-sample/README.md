@@ -7,6 +7,8 @@ Sales Order Fulfillment is designed for internal sales representative to monitor
 * Where are my sales orders?
 * What is the ETA of my sales orders?
 * ……
+![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/screenshot.png)
+
 
 ## Requirements
 * An SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 2 GB Application Runtime quota.
