@@ -23,7 +23,7 @@ Sales Order Fulfillment is designed for internal sales representative to monitor
 Recommended number of layers in document flow ≤6, for number of layers > 6, please use table view or extend the document flow click by click. </br>
 Recommended number of nodes in document flow: ≤500, for number of nodes > 500, please use table view. </br>
 * Limitation for ERP Extractor implementation:
-Shipment’s planned event’ eventMatchKey = shipmentNo+stopId, stopId is set by stage’s sequence.## FAQ. </br>
+Shipment’s planned event’ eventMatchKey = shipmentNo+stopId, stopId is set by stage’s sequence. </br>
 
 ## FAQs
 * Why my shipment events could not be correlated to the delivery and then to delivery item? <br>
