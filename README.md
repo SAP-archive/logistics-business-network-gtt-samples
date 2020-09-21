@@ -20,8 +20,8 @@ Click the link below to check limitation for each tracking scenario, or you can 
 * [Sales Order Fulfillment – Limitation](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#limitation)
 
 ## FAQ
-Click the link below to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “Document” folder.
-* [Sales Order Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_FAQ%20-%20SOF.pdf)
+Click the link below to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “Readme” file.
+* [Sales Order Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#faqs)
 
 ## How to obtain support
 The project is provided "as-is", with no further support. </br>
