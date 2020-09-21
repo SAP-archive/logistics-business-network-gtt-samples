@@ -15,9 +15,9 @@ You can find the template code for [SAP Logistics Business Network, global track
 Click the link below to find the detailed installation guide for each tracking scenario, or you can find them in corresponding scenario’s “Document” folder.
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
-## Limitation
-Click the link below to check limitation for each tracking scenario, or you can find them in corresponding scenario’s “README.md” file.
-* [Sales Order Fulfillment – Limitation](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#limitation)
+## Limitation & Assumption
+Click the link below to check limitation & Assumption for each tracking scenario, or you can find them in corresponding scenario’s “README.md” file.
+* [Sales Order Fulfillment – Limitation](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#limitation--assumption)
 
 ## Known Issue
 Click the link below to check known issues for each tracking scenario, or you can find them in corresponding scenario’s “README.md” file.
