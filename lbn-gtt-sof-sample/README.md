@@ -57,8 +57,8 @@ Once the execution status is set as “Completed”, it cannot be changed any mo
 You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to obtain support
-The project is provided "as-is", with no expected support. 
-If it is an LBN Global Track & Trace option issue, please log your incidents in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”
+The project is provided "as-is", with no further support. </br>
+If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
 
 ## License
 Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
