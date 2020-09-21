@@ -1,4 +1,4 @@
-# Sales Order Fulfillment - a GTT template app
+# Sales Order Fulfillment - a gloabl track and trace template app
 
 ## Description
 Sales Order Fulfillment is designed for internal sales representative to monitor its sales order fulfillment status, it mainly answers following questions:
@@ -9,43 +9,52 @@ Sales Order Fulfillment is designed for internal sales representative to monitor
 * ……
 ![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/screenshot.png)
 
-
 ## Requirements
-* An SAP Cloud Platform global account with entitlements for SAP LBN Track and Trace option, 1 portal service quota and 2 GB Application Runtime quota.
-* To integrate with ERP, you need a S/4, SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
-* To integrate with visibility provider, please log your incident in SAP [BCP]( https://support.wdf.sap.corp/)  system under component “SCM-LBN-GTT-COR”. Currently it will be supported manually.
+* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota. 
+* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
+* To integrate with visibility provider, log your incidents in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
 
 ## Download and Installation
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
 ## Limitation
 * Limitation for Document Flow implementation: </br>
-Recommended number of layers in document flow ≤6, for number of layers > 6, please use table view or extend the document flow click by click. </br>
-Recommended number of nodes in document flow: ≤500, for number of nodes > 500, please use table view. </br>
+Recommended number of layers in document flow: ≤6; </br>
+For number of layers > 6, please use table view or extend the document flow by clicking. </br>
+Recommended number of nodes in document flow: ≤500; </br>
+For number of nodes > 500, please use table view. </br>
+
 * Limitation for ERP Extractor implementation:
 Shipment’s planned event’ eventMatchKey = shipmentNo+stopId, stopId is set by stage’s sequence. </br>
 
 ## FAQs
-* Why my shipment events could not be correlated to the delivery and then to delivery item? <br>
-The correlation period starts 90 minutes before the shipment’s first stop’ planned departure date time and ends when the shipment’s last stop’ POD has been reported. Only in the correlation period, the shipment events will be correlated to the delivery and then to delivery item.
-You can set your own correlation period in Event-to-Action by updating “validFrom” and “validTo” logic.
+* Why couldn’t my shipment events be correlated with the delivery and then with the delivery item? </br>
+The correlation period starts from 90 minutes before the shipment’s first stop’s planned departure time to the time when the shipment’s last stop’s POD is reported. </br>
+Only during the correlation period can the shipment events be correlated with the delivery and then with the delivery item. </br>
+You can set your own correlation period in Event-to-Action by updating “validFrom” and “validTo” logic. </br>
 
-* Why I cannot find any stops and any planned routes in the map? <br>
-You haven’t assigned the delivery to any shipments, or the shipments don’t have any stages.
+* Why can’t I find any stops and any planned routes in the map? </br>
+Check if you have assigned the delivery to any shipments. Or the shipments do not have any stages. </br>
+ 
+* Why are some stops missing in the map? </br>
+Check if you have updated the right geocoordinates for those locations in the Manage Locations app. </br>
 
-* Why some stops are missing in the map? <br>
-You haven’t maintained the right geocoordinates for those locations in the Manage Location’s app.
+* Why are some actual events missing in the map? </br>
+Only events with valid geocoordinates are shown in the map. </br>
 
-* Why some actual events are missing in the map? <br>
-Only events with valid geocoordinates will be shown in the map.
+* How is the shipment’s execution status changed? </br>
+By default, the shipment’s execution status is “Not Started”. </br>
+If the shipment’s planned event is reported, the execution status will change to “In Transit”. </br>
+If the shipment’s all planned PODs are reported, the execution status will change to “Executed”. </br>
+Once the execution status is set as “Executed”, it cannot be changed any more. </br>
+You can set your own execution status logic in Event-to-Action. </br>
 
-* How the shipment’s execution status is changed? <br>
-By default, the shipment’s execution status is Not Started; if the shipment’s planned event has been reported, the execution status changed to “In Transit”; If shipment’s all planned POD has been reported, the execution status changed to “Executed”. Once the execution status is set to “Executed”, then it cannot be changed any more.
-You can set your own execution status logic in Event-to-Action.
-
-* How the delivery’s execution status is changed? <br>
-By default, the delivery item’ execution status is Not Started; if the delivery item’s planned event has been reported, the execution status changed to “In Transit”; If delivery item’s all planned POD from shipment has been reported or the delivery item’s own planned POD has been reported, the execution status changed to “Executed”. Once the execution status is set to “Executed”, then it cannot be changed any more.
-You can set your own execution status logic in Event-to-Action.
+* How is the delivery’s execution status changed? </br>
+By default, the delivery item’ execution status is “Not Started”. </br>
+If the delivery item’s planned event is reported, the execution status will change to “In Transit”. </br>
+If the delivery item’s all planned PODs from shipment are reported or the delivery item’s own planned POD is reported, the execution status will change to “Executed”. </br>
+Once the execution status is set as “Executed”, it cannot be changed any more. </br>
+You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to obtain support
 The project is provided "as-is", with no expected support. 
