@@ -45,15 +45,15 @@ Only events with valid geocoordinates are shown in the map. </br>
 * How is the shipment’s execution status changed? </br>
 By default, the shipment’s execution status is “Not Started”. </br>
 If the shipment’s planned event is reported, the execution status will change to “In Transit”. </br>
-If the shipment’s all planned PODs are reported, the execution status will change to “Executed”. </br>
-Once the execution status is set as “Executed”, it cannot be changed any more. </br>
+If the shipment’s all planned PODs are reported, the execution status will change to “Completed”. </br>
+Once the execution status is set as “Completed”, it cannot be changed any more. </br>
 You can set your own execution status logic in Event-to-Action. </br>
 
 * How is the delivery’s execution status changed? </br>
 By default, the delivery item’ execution status is “Not Started”. </br>
 If the delivery item’s planned event is reported, the execution status will change to “In Transit”. </br>
-If the delivery item’s all planned PODs from shipment are reported or the delivery item’s own planned POD is reported, the execution status will change to “Executed”. </br>
-Once the execution status is set as “Executed”, it cannot be changed any more. </br>
+If the delivery item’s all planned PODs from shipment are reported or the delivery item’s own planned POD is reported, the execution status will change to “Completed”. </br>
+Once the execution status is set as “Completed”, it cannot be changed any more. </br>
 You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to obtain support
