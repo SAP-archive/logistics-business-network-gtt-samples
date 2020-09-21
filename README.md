@@ -21,7 +21,7 @@ Click the link below to check limitation for each tracking scenario, or you can 
 
 ## Known Issue
 Click the link below to check known issues for each tracking scenario, or you can find them in corresponding scenario’s “README.md” file.
-* [Sales Order Fulfillment – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#knownissue)
+* [Sales Order Fulfillment – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#known-issue)
 
 ## FAQ
 Click the link below to check FAQs for each tracking scenario, or you can find them in corresponding scenario’s “README.md” file.
