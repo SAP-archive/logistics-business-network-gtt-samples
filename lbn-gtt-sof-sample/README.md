@@ -17,15 +17,16 @@ Sales Order Fulfillment is designed for internal sales representative to monitor
 ## Download and Installation
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
-## Limitation
+## Limitation & Assumption
 * Limitation for Document Flow implementation: </br>
 Recommended number of layers in document flow: ≤6; </br>
 For number of layers > 6, please use table view or extend the document flow by clicking. </br>
 Recommended number of nodes in document flow: ≤500; </br>
 For number of nodes > 500, please use table view. </br>
 
-* Limitation for ERP Extractor implementation:
-Shipment’s planned event’ eventMatchKey = shipmentNo+stopId, stopId is set by stage’s sequence. </br>
+* Assumption for ERP Extractor implementation: </br>
+Shipment’s planned event’ eventMatchKey = shipmentNo + stopId, stopId is set by stage’s sequence. </br>
+Delivery and delivery item's planned event's eventMatchKey is null. </br>
 
 ## Known Issue
 * If multiple iDoc payloads are generated at the same time or in a very short time in ERP, those payload might enter global track and trace system in a disorder way. This might cause update error for some tracked processes. It is a known issue and is expected to fix with following global track and trace release.
