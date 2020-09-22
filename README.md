@@ -16,7 +16,7 @@ Click the link below to find the detailed installation guide for each tracking s
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
 ## Limitations
-Click the link below to check the limitations for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
+Click the link below to check the limitations of each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
 * [Sales Order Fulfillment – Limitation & Assumption](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#limitation--assumption)
 
 ## Known Issues
