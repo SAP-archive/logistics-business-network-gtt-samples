@@ -77,7 +77,7 @@ FUNCTION ZGTT_SOF_EE_DE_PICKING.
   FIELD-SYMBOLS:
 *   Work Structure for Delivery Header
     <ls_xlikp>        TYPE likpvb,
-*   Work Structure for Delivery Item
+*   Work Structure for Delivery Item New
     <ls_xlips>        TYPE lipsvb.
 
 * <1> Fill general data for all control data records
@@ -114,6 +114,11 @@ FUNCTION ZGTT_SOF_EE_DE_PICKING.
     ASSIGN ls_events-mastertabref->* TO <ls_xlikp>.
 *   Read Main Object Table (Delivery Item - LIPSVB)
     ASSIGN ls_events-maintabref->* TO <ls_xlips>.
+
+    IF <ls_xlips>-updkz <> 'U'
+    AND <ls_xlips>-updkz <> 'I'.
+      CONTINUE.
+    ENDIF.
 
 *   Picking Event Code Set
     ls_trackingheader-trxcod = 'OUTBOUND_DELIVERY_IT'.
