@@ -15,8 +15,8 @@ You can find the template code for [SAP Logistics Business Network, global track
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
-## Limitations & Assumptions
-Click the link below to check limitations and assumptions of each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
+## Limitations
+Click the link below to check the limitations for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
 * [Sales Order Fulfillment – Limitation & Assumption](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#limitation--assumption)
 
 ## Known Issues
@@ -28,7 +28,7 @@ Click the link below to check FAQs for each tracking scenario. You can also find
 * [Sales Order Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/README.md#faqs)
 
 ## How to Obtain Support
-The project is provided "as-is", with no further support. </br>
+The project is provided "as-is", with no expected support. </br>
 If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
 
 ## License
