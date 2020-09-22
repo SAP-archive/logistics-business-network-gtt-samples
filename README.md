@@ -31,5 +31,7 @@ Click the link below to check FAQs for each tracking scenario. You can also find
 The project is provided "as-is", with no expected support. </br>
 If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
 
+For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html?additionalTagId=73555000100800000602).
+
 ## License
 Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
