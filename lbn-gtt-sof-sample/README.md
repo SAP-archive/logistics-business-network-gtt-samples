@@ -28,10 +28,7 @@ For number of nodes > 500, please use table view. </br>
 Shipment’s planned event’ eventMatchKey = shipmentNo + stopId, stopId is set by stage’s sequence. </br>
 Delivery and delivery item's planned event's eventMatchKey is null. </br>
 To integrate with visibility provider properly, below code list sent out from ERP system should follow the code list in Sales Order Fulfillment template model </br>
-** transportation mode  
-** shipping type  
-** tracked process type  
-** carrier refrence document type  
+transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue
 * If multiple iDoc payloads are generated at the same time or in a very short time in ERP, those payloads might enter global track and trace system out of order. This might cause update error under some situation. It is a known issue and is expected to be fixed with following global track and trace release.
