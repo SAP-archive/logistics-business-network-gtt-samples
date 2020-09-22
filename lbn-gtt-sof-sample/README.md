@@ -1,41 +1,41 @@
-# Sales Order Fulfillment - a gloabl track and trace template app
+# Sales Order Fulfillment - A Template App for Global Track and Trace Option
 
 ## Description
-Sales Order Fulfillment is designed for internal sales representative to monitor its sales order fulfillment status, it mainly answers following questions:
+Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
 * How many deliveries in my sales order are delayed?
-* How many are completed?
+* How many deliveries in my sales order are completed?
 * Where are my sales orders?
 * What is the ETA of my sales orders?
 * ……
 ![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/screenshot.png)
 
-## Requirements
-* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota. 
-* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. 
-* To integrate with visibility provider, log your incidents in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
+## Prerequisites
+* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
+* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented 
+* To integrate with visibility provider, log your incident in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
 * [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
 
-## Limitation & Assumption
-* Limitation for Document Flow implementation: </br>
+## Limitations
+* Limitations for Document Flow Implementation: </br>
 Recommended number of layers in document flow: ≤6; </br>
-For number of layers > 6, please use table view or extend the document flow by clicking. </br>
+For number of layers > 6, please use table view or extend the document flow by click. </br>
 Recommended number of nodes in document flow: ≤500; </br>
 For number of nodes > 500, please use table view. </br>
 
-* Assumption for ERP Extractor implementation: </br>
-Shipment’s planned event’ eventMatchKey = shipmentNo + stopId, stopId is set by stage’s sequence. </br>
-Delivery and delivery item's planned event's eventMatchKey is null. </br>
-To integrate with visibility provider properly, below code list sent out from ERP system should follow the code list in Sales Order Fulfillment template model </br>
+* Notes for ERP Extractor Implementation: </br>
+The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence. </br>
+The eventMatchKey of the delivery's and delivery item's planned event is null. </br>
+To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Sales Order Fulfillment template model: </br>
 transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue
-* If multiple iDoc payloads are generated at the same time or in a very short time in ERP, those payloads might enter global track and trace system out of order. This might cause update error under some situation. It is a known issue and is expected to be fixed with following global track and trace release.
+* If multiple iDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the global track and trace system in disorder. This will cause update error in some situations. It is a known issue and is expected to be fixed in the next release.
 
 ## FAQs
 * Why couldn’t my shipment events be correlated with the delivery and then with the delivery item? </br>
-The correlation period starts from 90 minutes before the shipment’s first stop’s planned departure time to the time when the shipment’s last stop’s POD is reported. </br>
+The correlation starts 90 minutes before the planned departure time of the shipment’s first stop and ends when the shipment’s last stop’s POD is reported. </br>
 Only during the correlation period can the shipment events be correlated with the delivery and then with the delivery item. </br>
 You can set your own correlation period in Event-to-Action by updating “validFrom” and “validTo” logic. </br>
 
@@ -50,20 +50,20 @@ Only events with valid geocoordinates are shown in the map. </br>
 
 * How is the shipment’s execution status changed? </br>
 By default, the shipment’s execution status is “Not Started”. </br>
-If the shipment’s planned event is reported, the execution status will change to “In Transit”. </br>
-If the shipment’s all planned PODs are reported, the execution status will change to “Completed”. </br>
+If the shipment’s planned event is reported, the execution status will be changed to “In Transit”. </br>
+If the shipment’s all planned PODs are reported, the execution status will be changed to “Completed”. </br>
 Once the execution status is set as “Completed”, it cannot be changed any more. </br>
 You can set your own execution status logic in Event-to-Action. </br>
 
 * How is the delivery’s execution status changed? </br>
 By default, the delivery item’ execution status is “Not Started”. </br>
-If the delivery item’s planned event is reported, the execution status will change to “In Transit”. </br>
-If the delivery item’s all planned PODs from shipment are reported or the delivery item’s own planned POD is reported, the execution status will change to “Completed”. </br>
+If the delivery item’s planned event is reported, the execution status will be changed to “In Transit”. </br>
+If the delivery item’s all planned PODs from shipment are reported or the delivery item’s own planned POD is reported, the execution status will be changed to “Completed”. </br>
 Once the execution status is set as “Completed”, it cannot be changed any more. </br>
 You can set your own execution status logic in Event-to-Action. </br>
 
-## How to obtain support
-The project is provided "as-is", with no further support. </br>
+## How to Obtain Support
+The project is provided "as-is", with no expected support. </br>
 If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
 
 ## License
