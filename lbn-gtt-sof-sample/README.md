@@ -12,10 +12,11 @@ Sales Order Fulfillment template app is designed for internal sales representati
 ## Requirements
 * An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
 * To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented 
-* To integrate with visibility provider, log your incident in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”
+* To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf)
+* [01_Implementation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf)
+* [02_Extractor_Creation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-SOF.pdf)
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
