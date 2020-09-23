@@ -1,4 +1,4 @@
-# Sales Order Fulfillment - A Template App for Global Track and Trace Option
+# Sales Order Fulfillment Template App
 
 ## Description
 Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
@@ -15,7 +15,7 @@ Sales Order Fulfillment template app is designed for internal sales representati
 * To integrate with visibility provider, log your incident in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
+* [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf)
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
@@ -64,7 +64,4 @@ You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
-
-## License
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
+If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”. 
