@@ -1,7 +1,6 @@
 package com.sap.gtt.v2.sample.sof.odata.handler;
 
 import com.sap.gtt.v2.sample.sof.constant.Constants;
-import com.sap.gtt.v2.sample.sof.odata.model.ArrivalTime;
 import org.apache.olingo.odata2.api.edm.EdmType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

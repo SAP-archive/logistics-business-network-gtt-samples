@@ -36,3 +36,11 @@ npm run test:debug
 ```
 
 You can visit http://localhost:5000/test/flpSandboxMockServer.html in the browser.
+
+## Deploy
+
+### Prerequisites
+
+Change the TENANT_NAME in .env file
+
+

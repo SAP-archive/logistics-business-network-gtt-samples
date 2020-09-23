@@ -51,10 +51,10 @@ public class ExecutionFlowServiceTest {
         String packingEventJson = SOFUtils.getStringFromResource("/odata/execution-flow-packing-event.json");
         String locationJson = SOFUtils.getStringFromResource("/odata/execution-flow-location.json");
 
-        Mockito.when(client.readEntitySet(contains("/ProcessEventDirectory?$filter=process_id eq"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class));
-        Mockito.when(client.readEntitySet(contains("/Departure"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(departureEventJson, EventEx.class));
-        Mockito.when(client.readEntitySet(contains("/Arrival"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(arrivalEventJson, EventEx.class));
-        Mockito.when(client.readEntitySet(contains("/Packing"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(packingEventJson, EventEx.class));
+        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$filter=process_id eq"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class));
+        Mockito.when(client.readEntitySetAll(contains("/Departure"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(departureEventJson, EventEx.class));
+        Mockito.when(client.readEntitySetAll(contains("/Arrival"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(arrivalEventJson, EventEx.class));
+        Mockito.when(client.readEntitySetAll(contains("/Packing"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(packingEventJson, EventEx.class));
 
         Mockito.when(client.getLocations(any())).thenReturn(ODataUtils.readEntitySet(locationJson, Location.class).getResults());
         Mockito.when(sofService.getPlannedEvents4TP(any())).thenReturn(ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class).getResults());
@@ -97,7 +97,7 @@ public class ExecutionFlowServiceTest {
     @Test
     public void testGetEventReportHistory() {
         String json = SOFUtils.getStringFromResource("/odata/execution-flow-event-history.json");
-        Mockito.when(client.readEntitySet(contains("/ProcessEventDirectory?$filter=plannedEvent_id"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(json, ProcessEventDirectory.class));
+        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$filter=plannedEvent_id"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(json, ProcessEventDirectory.class));
 
         List<EventEx> eventHistory = executionFlowService.getEventReportHistory(UUID.fromString("4dd9275a-ee76-11ea-829a-5bf1fbadcdd1"));
         Assert.assertEquals(2, eventHistory.size());

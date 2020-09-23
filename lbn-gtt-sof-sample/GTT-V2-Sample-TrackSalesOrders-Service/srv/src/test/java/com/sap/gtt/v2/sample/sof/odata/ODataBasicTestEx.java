@@ -3,10 +3,7 @@ package com.sap.gtt.v2.sample.sof.odata;
 import com.sap.gtt.v2.sample.sof.App;
 import com.sap.gtt.v2.sample.sof.domain.Location;
 import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
-import com.sap.gtt.v2.sample.sof.odata.model.Event;
-import com.sap.gtt.v2.sample.sof.odata.model.ExecutionStatus;
-import com.sap.gtt.v2.sample.sof.odata.model.SalesOrder;
-import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItem;
+import com.sap.gtt.v2.sample.sof.odata.model.*;
 import com.sap.gtt.v2.sample.sof.service.SOFService;
 import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
 import com.sap.gtt.v2.sample.sof.utils.ODataUtils;
@@ -384,5 +381,16 @@ public class ODataBasicTestEx {
 
         ResponseEntity<String> response = restTemplate.getForEntity(query, String.class);
         System.out.println(response);
+    }
+
+    @Test
+    public void testReadEntitySetAll() {
+        String query = "/TrackedProcess?$filter=trackedProcessType eq 'com.lbngttsamples.gtt.app.sof.SalesOrder.SalesOrder'";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAcceptLanguageAsLocales(Arrays.asList(Locale.SIMPLIFIED_CHINESE));
+
+        ODataResultList<TrackedProcess> res = gttCoreServiceClient.readEntitySetAll(query, TrackedProcess.class, headers);
+        Assertions.assertThat(res.getCount()).isEqualTo(res.getResults().size());
+        System.out.println(res.getCount());
     }
 }

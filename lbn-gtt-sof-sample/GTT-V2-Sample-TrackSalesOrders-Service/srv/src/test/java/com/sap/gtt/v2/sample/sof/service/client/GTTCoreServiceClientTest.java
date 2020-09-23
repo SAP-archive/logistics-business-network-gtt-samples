@@ -50,7 +50,7 @@ public class GTTCoreServiceClientTest {
                 ResponseEntity.ok().body(json));
 
         json = SOFUtils.getStringFromResource("/odata/tracked-process-single.json");
-        Mockito.when(restTemplate.exchange(contains("/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')"), eq(HttpMethod.GET),
+        Mockito.when(restTemplate.exchange(contains("/TrackedProcess(guid'10106f8dd3-b2e0-582e-ae1b-10d7d851c030d')"), eq(HttpMethod.GET),
                 any(HttpEntity.class), eq(String.class))).thenReturn(
                 ResponseEntity.ok().body(json));
 
@@ -84,13 +84,13 @@ public class GTTCoreServiceClientTest {
     @Test
     public void testReadEntitySet() {
         ODataResultList<TrackedProcess> res = gttCoreServiceClient.readEntitySet("/TrackedProcess", TrackedProcess.class);
-        Assertions.assertThat(res.getCount()).isEqualTo(624);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
         Assertions.assertThat(res.getResults()).hasSize(2);
     }
 
     @Test
     public void testReadEntity() {
-        TrackedProcess res = gttCoreServiceClient.readEntity("/TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d')", TrackedProcess.class);
+        TrackedProcess res = gttCoreServiceClient.readEntity("/TrackedProcess(guid'10106f8dd3-b2e0-582e-ae1b-10d7d851c030d')", TrackedProcess.class);
         Assertions.assertThat(res.getId().toString()).isEqualTo("996f8dd3-b2e0-582e-ae1b-9d7d851c030d");
         Assertions.assertThat(res.getPlannedEvents()).hasSize(4);
     }
@@ -162,5 +162,27 @@ public class GTTCoreServiceClientTest {
         Assertions.assertThat(location.getLatitude()).isEqualTo(new BigDecimal("21.12345000"));
 
         Assertions.assertThat(location.getFormattedAddress()).isEqualTo("Created by CoreEngine: {{ExternalId_CoreEngine}}$No.10 TIanze road$Des Moines Iowa 100000$United States");
+    }
+
+    @Test
+    public void testReadEntitySetAll() {
+        ODataResultList<TrackedProcess> res = gttCoreServiceClient.readEntitySetAll("/TrackedProcess", TrackedProcess.class);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
+        Assertions.assertThat(res.getResults()).hasSize(10);
+        Mockito.verify(restTemplate, times(5)).exchange(contains("/TrackedProcess"), eq(HttpMethod.GET),
+                any(HttpEntity.class), eq(String.class));
+
+        res = gttCoreServiceClient.readEntitySetAll("/TrackedProcess?$inlinecount=allpages", TrackedProcess.class);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
+        Assertions.assertThat(res.getResults()).hasSize(10);
+
+        res = gttCoreServiceClient.readEntitySetAll("/TrackedProcess?$inlinecount=none", TrackedProcess.class);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
+        Assertions.assertThat(res.getResults()).hasSize(10);
+
+        res = gttCoreServiceClient.readEntitySetAll("/TrackedProcess?" +
+                "$filter=altKey eq 'xri://sap.com/id:LBN#10010001006:QM7CLNT910:OUTBOUND_DELIVERY:0080037614'", TrackedProcess.class);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
+        Assertions.assertThat(res.getResults()).hasSize(10);
     }
 }

@@ -1,6 +1,5 @@
 package com.sap.gtt.v2.sample.sof.odata.model;
 
-import com.google.gson.annotations.SerializedName;
 import com.sap.gtt.v2.sample.sof.constant.Constants;
 import org.apache.olingo.odata2.api.annotation.edm.*;
 

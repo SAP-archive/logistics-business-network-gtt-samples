@@ -28,10 +28,10 @@
       {
         "_version": "3.0.0",
         "identification": {
-          "id": "salesOrder",
+          "id": "sample-apps",
           "title": "{{title}}",
           "entityType": "group",
-          "i18n": "i18n/salesOrder.properties"
+          "i18n": "i18n/sampleApps.properties"
         },
         "payload": {
           "viz": [
@@ -65,8 +65,9 @@
                       },
                       "enableHelp": false,
                       "enableSearch": false,
-                      "sessionTimeoutIntervalInMinutes": 19,
-                      "sessionTimeoutReminderInMinutes": 3
+                      "enablePersonalization": true,
+                      "enableSetTheme": true,
+                      "enableSetLanguage": true
                     }
                   }
                 }
@@ -74,7 +75,7 @@
             }
           },
           "groupsOrder": [
-            "salesOrder"
+            "sample-apps"
           ],
           "sap.cloud.portal": {
             "config": {

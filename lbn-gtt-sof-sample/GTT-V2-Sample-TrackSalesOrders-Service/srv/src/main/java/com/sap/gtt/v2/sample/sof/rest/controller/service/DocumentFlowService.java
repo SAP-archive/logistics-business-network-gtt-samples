@@ -32,7 +32,7 @@ public class DocumentFlowService extends DocumentFlowServiceBase {
 
     public DocumentFlow generateDocumentFlow(UUID salesOrderId) {
         SalesOrder salesOrder = querySalesOrder(salesOrderId);
-        Pair<List<Object>, List<TPRelation>> bfsResult = broadFirstSearch(salesOrder);
+        Pair<List<Object>, List<TPRelation>> bfsResult = breadthFirstSearch(salesOrder);
         List<Object> tps = bfsResult.getLeft();
         List<TPRelation> tpRelations = bfsResult.getRight();
 
@@ -56,11 +56,11 @@ public class DocumentFlowService extends DocumentFlowServiceBase {
     }
 
     /***
-     * Use broad first search algorithm to loop the structure of a sale order
+     * Use breadth first search algorithm to loop the structure of a sale order
      * @param salesOrder Object of a sales order
      * @return A list of objects (tps related to the sales order) and a list of tp relations (relationship between tps)
      */
-    private Pair<List<Object>, List<TPRelation>> broadFirstSearch(SalesOrder salesOrder) {
+    private Pair<List<Object>, List<TPRelation>> breadthFirstSearch(SalesOrder salesOrder) {
         Set<UUID> visitedTPIds = new HashSet<>();
         Queue<Object> queue = new LinkedList<>();
         List<Object> tps = new LinkedList<>();

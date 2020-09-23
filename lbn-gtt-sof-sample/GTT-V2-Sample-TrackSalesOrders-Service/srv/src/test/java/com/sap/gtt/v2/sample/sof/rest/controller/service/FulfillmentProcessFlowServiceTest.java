@@ -39,7 +39,7 @@ public class FulfillmentProcessFlowServiceTest {
         String partRejectJson = SOFUtils.getStringFromResource("/odata/fulfillment-process-flow-part-reject.json");
         String goodsIssueJson = SOFUtils.getStringFromResource("/odata/fulfillment-process-flow-goods-issue.json");
         Mockito.when(client.readEntity(contains("/SalesOrderItem(guid'7a9cd038-0e53-509d-a75a-c2cb6801d1f8')"), eq(SalesOrderItem.class))).thenReturn(ODataUtils.readEntity(partRejectJson, SalesOrderItem.class));
-        Mockito.when(client.readEntitySet(contains("/ProcessEventDirectory?$expand=process"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(goodsIssueJson, ProcessEventDirectory.class));
+        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$expand=process"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(goodsIssueJson, ProcessEventDirectory.class));
 
         FulfillmentProcessFlow flow = fulfillmentProcessFlowService.generateFulfillmentProcessFlow(UUID.fromString("7a9cd038-0e53-509d-a75a-c2cb6801d1f8"));
         List<Lane> lanes =  flow.getLanes();

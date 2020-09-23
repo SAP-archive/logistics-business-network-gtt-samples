@@ -1,7 +1,6 @@
 {
   "welcomeFile": "/cp.portal",
   "authenticationMethod": "route",
-  "sessionTimeout": 20,
   "routes": [
     {
       "source": "^/(token.json)(.*)$",

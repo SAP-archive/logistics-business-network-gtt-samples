@@ -41,8 +41,8 @@ public class SOFService {
     public static final String SALES_ORDER_ITEM_ID = "salesOrderItem_id";
     public static final String ACTUAL_EVENT = "actualEvent";
     public static final String EVENT_TYPE = "eventType";
-    public static final String SHIPMENT_DELAY = "com.lbngttsamples.gtt.app.sof.Shipment.Delay";
-    public static final String SHIPMENT_LOCATION_UPDATE = "com.lbngttsamples.gtt.app.sof.Shipment.LocationUpdate";
+    public static final String SHIPMENT_DELAY = GTT_MODEL_NAMESPACE + ".Shipment.Delay";
+    public static final String SHIPMENT_LOCATION_UPDATE = GTT_MODEL_NAMESPACE + ".Shipment.LocationUpdate";
     public static final String VP = "VP";
     public static final String LAST_CORRELATED_EVENT_ID = "lastCorrelatedEventId";
     public static final String ID = "id";
@@ -404,12 +404,12 @@ public class SOFService {
 
     public List<PlannedEvent> getPlannedEvents4TP(UUID tpId) {
         String query = "/PlannedEvent?$filter=process_id eq guid'" + tpId + "'";
-        ODataResultList<PlannedEvent> result = gttCoreServiceClient.readEntitySet(query, PlannedEvent.class);
+        ODataResultList<PlannedEvent> result = gttCoreServiceClient.readEntitySetAll(query, PlannedEvent.class);
         return result.getResults();
     }
 
     public List<FulfillmentStatus> getFulfillmentStatus(UUID deliveryItemId) {
-        ODataResultList<EventStatus> eventStatusList = gttCoreServiceClient.readEntitySet("/EventStatus?$inlinecount=allpages", EventStatus.class);
+        ODataResultList<EventStatus> eventStatusList = gttCoreServiceClient.readEntitySetAll("/EventStatus?$inlinecount=allpages", EventStatus.class);
         Map<String, Integer> map = new HashMap<>();
         for (EventStatus eventStatus : eventStatusList.getResults()) {
             String eventStatusCode = eventStatus.getCode();
@@ -458,7 +458,7 @@ public class SOFService {
                 Class<?> codeListTextClazz = navigationFields.get(0).getDeclaredAnnotation(EdmNavigationProperty.class).toType();
 
                 String query = URL_SPLITTER + codeListName + "?$expand=localized";
-                List<?> list = gttCoreServiceClient.readEntitySet(query, codeListClazz, headers).getResults();
+                List<?> list = gttCoreServiceClient.readEntitySetAll(query, codeListClazz, headers).getResults();
 
                 list.forEach(entity -> {
                     try {

@@ -86,6 +86,16 @@ public class SOFUtils {
     public static boolean isEventStatusInWhiteList(String eventStatus) {
         return EVENT_STATUS_WHITE_LIST_IN_MAP.stream().anyMatch(typeName -> typeName.equals(eventStatus));
     }
+
+    private static final List<String> EVENT_TYPE_BLACK_LIST_IN_MAP = Arrays.asList(
+            "Delay",
+            "LocationUpdate"
+    );
+
+    public static boolean isEventTypeInBlackList(String eventType) {
+        return EVENT_TYPE_BLACK_LIST_IN_MAP.stream().anyMatch(typeName -> typeName.equals(eventType));
+    }
+
     private static final List<String> EVENT_TYPE_WHITE_LIST_FOR_ESTIMATED_ARRIVAL = Arrays.asList(
             "Shipment.Departure",
             "Shipment.Arrival",
@@ -208,7 +218,20 @@ public class SOFUtils {
         }
         return filterCorrelationTypeCode;
     }
-
+    private static final String[] reportedCorrelationTypeCode = {
+            "EARLY_REPORTED",
+            "REPORTED",
+            "LATE_REPORTED",
+    };
+    public static String getReportedCorrelationTypeCode() {
+        String filterCorrelationTypeCode = "";
+        for (int i = 0;  i < reportedCorrelationTypeCode.length; i++) {
+            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + " eq '" + reportedCorrelationTypeCode[i] + "' or";
+        }
+        filterCorrelationTypeCode = filterCorrelationTypeCode.substring(0, filterCorrelationTypeCode.lastIndexOf("or"));
+        filterCorrelationTypeCode = " (".concat(filterCorrelationTypeCode).concat(") ");
+        return filterCorrelationTypeCode;
+    }
     public static String generateUrl(String targetEntityName, List<FilterCondition> filterConditions, BinaryOperator andOr, List<String> expand, List<OrderBy> orderby) {
         return SOFUtils.generateUrl(targetEntityName, filterConditions, andOr, false, false, expand, orderby);
     }

@@ -58,32 +58,32 @@ public class MapServiceTest {
 
         String pedJson = IOUtils.toString(new ClassPathResource("/odata/ped-route.json").getInputStream());
         ODataResultList<ProcessEventDirectory> processEventDirectoryODataResultList = ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(pedUrl, ProcessEventDirectory.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(pedUrl, ProcessEventDirectory.class)).thenReturn(
                 processEventDirectoryODataResultList);
 
         String goodsIssuedJsonUrl = "/GoodsIssued?&$filter= (id eq guid'cf32a237-e760-11ea-b9d1-df5840db32fa') ";
         String goodsIssuedJson = IOUtils.toString(new ClassPathResource("/odata/goodsIssued-route.json").getInputStream());
         ODataResultList<EventEx> goodsIssued = ODataUtils.readEntitySet(goodsIssuedJson, EventEx.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(goodsIssuedJsonUrl, EventEx.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(goodsIssuedJsonUrl, EventEx.class)).thenReturn(
                 goodsIssued);
 
 
         String pickingUrl = "/Picking?&$filter= (id eq guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a') ";
         String pickingJson = IOUtils.toString(new ClassPathResource("/odata/picking-route.json").getInputStream());
         ODataResultList<EventEx> picking = ODataUtils.readEntitySet(pickingJson, EventEx.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(pickingUrl, EventEx.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(pickingUrl, EventEx.class)).thenReturn(
                 picking);
 
         String delayUrl = "/Delay?&$filter= (id eq guid'913570d5-ea85-11ea-b9d1-57ee9073f52e') &$expand=estimatedArrival ";
         String delayJson = IOUtils.toString(new ClassPathResource("/odata/delay-route.json").getInputStream());
         ODataResultList<EventEx> delay = ODataUtils.readEntitySet(delayJson, EventEx.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(delayUrl, EventEx.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(delayUrl, EventEx.class)).thenReturn(
                 delay);
 
         String plannedEventUrl = "/PlannedEvent?&$filter= (((eventMatchKey eq '00000020900003') and (eventType eq 'com.lbngttsamples.gtt.app.sof.Shipment.Arrival')) and (process_id eq guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff')) ";
         String plannedEventJson = IOUtils.toString(new ClassPathResource("/odata/planned-event-route.json").getInputStream());
         ODataResultList<PlannedEvent> plannedEvent = ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(plannedEventUrl, PlannedEvent.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(plannedEventUrl, PlannedEvent.class)).thenReturn(
                 plannedEvent);
 
         String locationAltKey = "xri://sap.com/id:LBN%2310010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK";
@@ -104,7 +104,7 @@ public class MapServiceTest {
         String shipmentUrl = "/Shipment?&$filter= (altKey eq 'xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:0000002090') &$expand=stopsForVP ";
         String shipmentJson = IOUtils.toString(new ClassPathResource("/odata/shipment-route.json").getInputStream());
         ODataResultList<Shipment> shipment = ODataUtils.readEntitySet(shipmentJson, Shipment.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(shipmentUrl, Shipment.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(shipmentUrl, Shipment.class)).thenReturn(
                 shipment);
 
         String deliveryItemUrl = "/DeliveryItem(guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff')";
@@ -121,7 +121,7 @@ public class MapServiceTest {
         String getDepartureEventUrl = "/Departure?$filter=(id eq guid'fb122676-ea82-11ea-b9d1-bda152ca4d8c') or (id eq guid'71dd2c10-e763-11ea-b9d1-5ba2a71155f8')";
         String departureEventJson = IOUtils.toString(new ClassPathResource("/odata/departure-event-route.json").getInputStream());
         ODataResultList<EventEx> departureEvent = ODataUtils.readEntitySet(departureEventJson, EventEx.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(getDepartureEventUrl, EventEx.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(getDepartureEventUrl, EventEx.class)).thenReturn(
                 departureEvent);
 
 
@@ -129,7 +129,7 @@ public class MapServiceTest {
         String getArrivalEventUrl = "/Arrival?$filter=id eq guid'b524a419-e762-11ea-b9d1-e5a04a2b62ad'";
         String arrivalEventJson = IOUtils.toString(new ClassPathResource("/odata/arrival-event-route.json").getInputStream());
         ODataResultList<EventEx> arrivalEvent = ODataUtils.readEntitySet(arrivalEventJson, EventEx.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(getArrivalEventUrl, EventEx.class)).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(getArrivalEventUrl, EventEx.class)).thenReturn(
                 arrivalEvent);
 
         List<Route> routes = mapService.getRoutes(deliveryItemId);
@@ -157,12 +157,12 @@ public class MapServiceTest {
         String plannedEventId = "8eeb8e94-e760-11ea-b9d1-cf9f4484a832";
         String pedJson = IOUtils.toString(new ClassPathResource("/odata/ped-sideContent.json").getInputStream());
         ODataResultList<ProcessEventDirectory> processEventDirectoryODataResultList = ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class);
-        Mockito.when(gttCoreServiceClient.readEntitySet(anyString(), eq(ProcessEventDirectory.class))).thenReturn(
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(anyString(), eq(ProcessEventDirectory.class))).thenReturn(
                 processEventDirectoryODataResultList);
         String plannedEventJson = IOUtils.toString(new ClassPathResource("/odata/plannedEvent-sideContent.json").getInputStream());
         ODataResultList<PlannedEvent> plannedEventODataResultList = ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class);
         String generatePlannedEventUrl = "/PlannedEvent?&$filter= (process_id eq guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff') and (substringof('0000002090',eventMatchKey)) &$orderby=eventMatchKey desc,plannedBusinessTimestamp desc,payloadSequence desc";
-        Mockito.when(gttCoreServiceClient.readEntitySet(generatePlannedEventUrl,PlannedEvent.class)).thenReturn(plannedEventODataResultList);
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(generatePlannedEventUrl,PlannedEvent.class)).thenReturn(plannedEventODataResultList);
 
         List<SideContent> sideContents = mapService.getSideContents(deliveryItemId,altKey,eventMatchKey,plannedEventId);
         Assert.assertEquals(7,sideContents.size());

@@ -19,7 +19,7 @@ public class ODataUtilsExTest {
         String json = IOUtils.toString(new ClassPathResource("/odata/tracked-processes.json").getInputStream());
         ODataResultList<TrackedProcess> res = ODataUtils.readEntitySet(json, TrackedProcess.class);
         System.out.println(res);
-        Assertions.assertThat(res.getCount()).isEqualTo(624);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
         List<TrackedProcess> tpList = res.getResults();
         Assertions.assertThat(tpList).hasSize(2);
 

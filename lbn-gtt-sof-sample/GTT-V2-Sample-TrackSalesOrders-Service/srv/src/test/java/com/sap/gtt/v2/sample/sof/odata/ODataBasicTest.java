@@ -61,7 +61,7 @@ public class ODataBasicTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         ODataResultList<TrackedProcess> res = ODataUtils.readEntitySet(response.getBody(), TrackedProcess.class);
-        Assertions.assertThat(res.getCount()).isEqualTo(624);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
         Assertions.assertThat(res.getResults()).hasSize(2);
 
         TrackedProcess tp0 = res.getResults().get(0);
@@ -81,7 +81,7 @@ public class ODataBasicTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         ODataResultList<TrackedProcess> res = ODataUtils.readEntitySet(response.getBody(), TrackedProcess.class);
-        Assertions.assertThat(res.getCount()).isEqualTo(624);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
         Assertions.assertThat(res.getResults()).hasSize(2);
 
         TrackedProcess tp0 = res.getResults().get(0);
@@ -102,7 +102,7 @@ public class ODataBasicTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         ODataResultList<TrackedProcess> res = ODataUtils.readEntitySet(response.getBody(), TrackedProcess.class);
-        Assertions.assertThat(res.getCount()).isEqualTo(624);
+        Assertions.assertThat(res.getCount()).isEqualTo(10);
         Assertions.assertThat(res.getResults()).hasSize(2);
 
         TrackedProcess tp0 = res.getResults().get(0);

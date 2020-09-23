@@ -2,12 +2,12 @@ package com.sap.gtt.v2.sample.sof.service.client;
 
 import com.sap.gtt.v2.sample.sof.constant.Constants;
 import com.sap.gtt.v2.sample.sof.domain.Location;
-import com.sap.gtt.v2.sample.sof.exception.GeneralNoneTranslatableException;
 import com.sap.gtt.v2.sample.sof.exception.SOFServiceException;
 import com.sap.gtt.v2.sample.sof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.sof.odata.filter.FilterExpressionBuilder;
 import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.sof.utils.ODataUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.slf4j.Logger;
@@ -42,9 +42,12 @@ public class GTTCoreServiceClient {
     public static final String LOCATION_V_1_LOCATION = "/location/v1/Location";
     public static final String FORMAT = "$format";
     public static final String JSON = "json";
+    public static final String FILTER = "$filter";
     public static final String INLINECOUNT = "$inlinecount";
     public static final String ALLPAGES = "allpages";
-    public static final String FILTER = "$filter";
+    public static final String INLINECOUNT_ALLPAGES = INLINECOUNT + "=" + ALLPAGES;
+    public static final String INLINECOUNT_NONE = "$inlinecount=none";
+    public static final String SKIP = "&$skip=";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -57,6 +60,36 @@ public class GTTCoreServiceClient {
 
     @Value("${GTT_CORE_ENGINE_TECHNICAL_PWD}")
     private String criticalInfo;
+
+    public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT, HttpHeaders headers) {
+        uri = StringUtils.replaceIgnoreCase(uri, INLINECOUNT_NONE, INLINECOUNT_ALLPAGES);
+        if (!StringUtils.containsIgnoreCase(uri, INLINECOUNT_ALLPAGES)) {
+            if (!uri.contains("?")) {
+                uri += "?" + INLINECOUNT_ALLPAGES;
+            } else {
+                uri += "&" + INLINECOUNT_ALLPAGES;
+            }
+        }
+
+        ODataResultList<T> res = readEntitySet(uri, classOfT, headers);
+        if (res.getCount() != null && res.getCount() > 2000) {
+            logger.warn("total count is: {}, url: {}", res.getCount(), uri);
+        }
+
+        while (res.getCount() != null && res.getCount() > res.getResults().size()) {
+            String skip = SKIP + res.getResults().size();
+            uri += skip;
+            ODataResultList<T> tmp = readEntitySet(uri, classOfT, headers);
+            res.setCount(tmp.getCount());
+            res.getResults().addAll(tmp.getResults());
+            uri = uri.replace(skip, "");
+        }
+        return res;
+    }
+
+    public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT) {
+        return readEntitySetAll(uri, classOfT, null);
+    }
 
     public <T> ODataResultList<T> readEntitySet(String uri, Class<T> classOfT) {
         String json = query(uri);
@@ -117,7 +150,7 @@ public class GTTCoreServiceClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setBasicAuth(techUser, criticalInfo);
 
-        String writeServiceUrl = gttBaseUrl + INBOUND_REST_V_1 + Constants.WRITE_SERVICE_MODEL_NAMESPACE + uri;
+        String writeServiceUrl = gttBaseUrl + INBOUND_REST_V_1 + Constants.GTT_MODEL_NAMESPACE_WRITE_SERVICE + uri;
         logger.debug("ready to call write service: {}", writeServiceUrl);
         try {
             restTemplate.exchange(writeServiceUrl, HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
@@ -203,16 +236,12 @@ public class GTTCoreServiceClient {
                     .queryParam(INLINECOUNT, ALLPAGES)
                     .queryParam(FILTER, filter.getExpressionString()).build().encode().toUriString();
 
-            ResponseEntity<String> responseEntity;
             try {
-                responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
-                        new HttpEntity<>(null, headers), String.class);
-            } catch (HttpStatusCodeException e) {
+                result = readEntitySetAll(locationService, Location.class, headers).getResults();
+            } catch (SOFServiceException e) {
                 logger.error("Call location service failed:", e);
                 throw new SOFServiceException(MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED);
             }
-
-            result = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class).getResults();
         }
 
         return result;

@@ -189,7 +189,7 @@ public class FulfillmentProcessFlowService {
             }
 
             String query = Constants.URL_SPLITTER + "ProcessEventDirectory?$expand=process&$filter=" + filter.getExpressionString();
-            List<ProcessEventDirectory> processEventDirectories = gttCoreServiceClient.readEntitySet(query, ProcessEventDirectory.class).getResults();
+            List<ProcessEventDirectory> processEventDirectories = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class).getResults();
 
             Set<String> reportedTrackingIds = processEventDirectories.stream()
                     .map(ProcessEventDirectory::getProcess)

@@ -1,0 +1,42 @@
+{
+  "name": "gtt-v2-ui-sample-track-salesorders",
+  "version": "2.0.0",
+  "description": "GTT Sample UI",
+  "license": "ISC",
+  "author": "SAP SE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.wdf.sap.corp/TrackAndTrace/GTT-V2-Sample-TrackSalesOrders-UI.git"
+  },
+  "private": true,
+  "engines": {
+    "node": "^10",
+    "npm": "^6"
+  },
+  "devDependencies": {
+    "@sap/grunt-sapui5-bestpractice-build": "1.4.2",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "fs-extra": "^9.0.0",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.0.1",
+    "karma-junit-reporter": "^2.0.1",
+    "karma-ui5": "^1.1.0",
+    "koa": "^2.11.0",
+    "koa-compress": "^3.0.0",
+    "koa-conditional-get": "^2.0.0",
+    "koa-etag": "^3.0.0",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
+    "prettier": "^2.0.4"
+  },
+  "dependencies": {},
+  "scripts": {
+    "build": "grunt",
+    "lint": "grunt eslint",
+    "test": "npm run lint && npm run test:ci",
+    "test:ci": "karma start karma-ci.conf.js",
+    "test:debug": "karma start"
+  }
+}

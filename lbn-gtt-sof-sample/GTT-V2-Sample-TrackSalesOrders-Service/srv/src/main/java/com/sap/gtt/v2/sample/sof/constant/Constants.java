@@ -1,24 +1,11 @@
 package com.sap.gtt.v2.sample.sof.constant;
 
 public class Constants {
-    public static final String MODEL_ATTRIBUTE_KEY = "GTT_CORE_ENGINE_MODEL";
-    public static final String URL_SPLITTER = "/";
-    public static final String RESULTS_NODE = "results";
-    public static final String D_NODE = "d";
-    public static final String INLINECOUNT_NODE = "__count";
-    public static final String MODEL_ATTRIBUTE_ORIGIN_KEY = "MODEL_ATTRIBUTE_ORIGIN_KEY";
-    public static final String ODATA_BATCH_PARENT_CONTEXT = "~odataBatchParentContext";
-    public static final String EDM_DATETIME_TYPE = "Edm.DateTime";
-    public static final String EDM_GUID_TYPE = "Edm.Guid";
-    public static final String EDM_DECIMAL_TYPE = "Edm.Decimal";
-    public static final String EDM_DATEOFFSET_TYPE = "Edm.DateTimeOffset";
-    public static final String EDM_INT16_TYPE = "Edm.Int16";
-    public static final String EDM_INT32_TYPE = "Edm.Int32";
-    public static final String EDM_INT64_TYPE = "Edm.Int64";
-    public static final String EDM_DOUBLE_TYPE = "Edm.Double";
     public static final String GTT_MODEL_NAMESPACE = "com.lbngttsamples.gtt.app.sof";
-    public static final String MODEL_NAMESPACE = "com.lbngttsamples.gtt.app.sof.sofService";
-    public static final String WRITE_SERVICE_MODEL_NAMESPACE = "com.lbngttsamples.gtt.app.sof.sofWriteService";
+    public static final String GTT_MODEL_NAMESPACE_WRITE_SERVICE = GTT_MODEL_NAMESPACE + ".sofWriteService";
+    public static final String MODEL_NAMESPACE = GTT_MODEL_NAMESPACE + ".sofService";
+
+    public static final String URL_SPLITTER = "/";
     public static final String ENTITY_CONTAINER_NAME = "EntityContainer";
     public static final String SAP_ICON_LEAD = "sap-icon://lead";
     public static final String ID = "id";
@@ -28,8 +15,6 @@ public class Constants {
     public static final String PROCESS_STATUS_OVERDUE = "OVERDUE";
     public static final String PROCESS_STATUS_DELAYED = "DELAYED";
     public static final String PROCESS_STATUS_LATE = "LATE";
-
-    public static final String EXECUTION_STATUS_POD = "POD";
 
     public static final String CORRELATION_TYPE_CODE = "correlationType_code";
     public static final String BLANK = " ";

@@ -1,0 +1,83 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sof.controller.SalesOrderItem"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<ObjectPageLayout id="objectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		enableLazyLoading="false"
+		upperCaseAnchorBar="false"
+		busy="{salesOrderItem>/busy}"
+		busyIndicatorDelay="{salesOrderItem>/delay}">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="lbnTfoDynamicPageTitle" areaShrinkRatio="1:1.6:1.6">
+				<breadcrumbs>
+					<m:Breadcrumbs class="sapUiTinyMarginTop sapUiTinyMarginBottom" currentLocationText="">
+						<m:Link text="{i18n>salesOrderList}" press=".navToSalesOrderList"/>
+						<m:Link visible="{= !!${salesOrderItem>/urlParams/salesOrderId} }" text="{salesOrderNo}" press=".navToSalesOrder" customData:salesOrderId="{salesOrderItem>/urlParams/salesOrderId}"/>
+						<!-- visible="{view>/shellServiceUnavailable}" -->
+					</m:Breadcrumbs>
+				</breadcrumbs>
+				<expandedHeading>
+					<m:Title id="expandedHeadingTitle" text="{materialDescription}" wrapping="true"/>
+				</expandedHeading>
+				<expandedContent>
+					<m:Text id="expandedContentTitle" text="{materialNo}" wrapping="true"/>
+				</expandedContent>
+				<snappedHeading>
+					<m:Title id="snappedHeadingTitle" text="{materialDescription}" wrapping="true"/>
+				</snappedHeading>
+				<snappedContent>
+					<m:Text id="snappedContentTitle" text="{materialNo}" wrapping="true"/>
+				</snappedContent>
+				<content>
+					<m:OverflowToolbar>
+						<m:GenericTag id="isDelayedGenericTag"
+							visible="{= ${isDelayed} === true}"
+							class="sofGenericTag"
+							design="StatusIconHidden"
+							status="Error"
+							text="{i18n>delayed}">
+							<m:layoutData>
+								<m:OverflowToolbarLayoutData priority="{salesOrderItem>/genericTagPriority}"/>
+							</m:layoutData>
+						</m:GenericTag>
+					</m:OverflowToolbar>
+				</content>
+				<actions>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<core:Fragment id="headerContentFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.SalesOrderItemHeaderContent" type="XML"/>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection id="milestoneSection" title="{i18n>milestoneView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<mvc:XMLView id="milestoneView" viewName="com.sap.gtt.app.sample.sof.view.Milestone"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="deliveryItemsSection" title="{i18n>deliveryItemsView}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="deliveryItemsView" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.DeliveryItems" type="XML"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

@@ -39,7 +39,7 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
         query = query.replace("{deliveryItemId}", deliveryItemId.toString())
                 .replace("{plannedEventId}", plannedEventId.toString());
 
-        ODataResultList<DelayEvent> res = gttCoreServiceClient.readEntitySet(query, DelayEvent.class);
+        ODataResultList<DelayEvent> res = gttCoreServiceClient.readEntitySetAll(query, DelayEvent.class);
         if (res.getResults().size() != 1) {
             throw new SOFServiceException(SOFServiceException.MESSAGE_CODE_ERROR_NO_DELAY_EVENT_FOUND);
         }
@@ -64,7 +64,7 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
         List<Delivery> deliveries = new ArrayList<>();
         if (filter != null) {
             query = "/Delivery?$filter=" + filter.getExpressionString();
-            ODataResultList<Delivery> deliveryResults = gttCoreServiceClient.readEntitySet(query, Delivery.class);
+            ODataResultList<Delivery> deliveryResults = gttCoreServiceClient.readEntitySetAll(query, Delivery.class);
             deliveries = deliveryResults.getResults();
         }
 

@@ -1,7 +1,7 @@
 ---
 _schema-version: '3.1'
 ID: gtt-v2-sample-track-salesorders-service
-version: 2.2.0
+version: 2.3.0
 modules:
 - name: gtt-sample-track-salesorders-service
   type: java

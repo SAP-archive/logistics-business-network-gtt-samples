@@ -6,8 +6,8 @@ security:
 server:
   port: 9098
 
-GTT_CORE_ENGINE_TECHNICAL_USER: {techincal-user-name}
-GTT_CORE_ENGINE_TECHNICAL_PWD: {techincal-user-pwd}
-GTT_CORE_ENGINE_API_URL_FLP_BASED: https://{lbn-gtt-flp-base-url}/api
+GTT_CORE_ENGINE_TECHNICAL_USER: dummy
+GTT_CORE_ENGINE_TECHNICAL_PWD: dummy
+GTT_CORE_ENGINE_API_URL_FLP_BASED: https://dummy/api
 
-HERE_MAP_KEY: <here-map-license-key>
+HERE_MAP_KEY: dummy

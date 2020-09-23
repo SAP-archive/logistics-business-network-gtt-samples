@@ -79,7 +79,7 @@ public class MapService {
             FilterExpression filter = FilterExpressionBuilder.createFilterExpression(filterConditions, BinaryOperator.OR);
             if (filter != null) {
                 String url = Constants.URL_SPLITTER + k + "?$filter=" + filter.getExpressionString();
-                List<EventEx> events = gttCoreServiceClient.readEntitySet(url, EventEx.class).getResults();
+                List<EventEx> events = gttCoreServiceClient.readEntitySetAll(url, EventEx.class).getResults();
                 events.forEach(eventEx -> eventExMap.put(eventEx.getId(), eventEx));
             }
         });
@@ -161,7 +161,7 @@ public class MapService {
                 Location location = locationMap.get(actualSpot.getLocationAltKey());
                 LocationDTO locationDTO = getLocationDetail(location);
                 actualSpot.setLocation(locationDTO);
-                if (locationDTO != null) {
+                if (locationDTO != null ) {
                     actualSpot.setLocationDescription(locationDTO.getLocationDescription());
                     actualSpot.setObjectTypeCode(locationDTO.getObjectTypeCode());
                 }
@@ -248,7 +248,7 @@ public class MapService {
         List<OrderBy> orderbys = new ArrayList<>();
         orderbys.add(new OrderBy("stopsForVP/ordinalNo", ""));
         String url = SOFUtils.generateUrl("Shipment", filterConditions, BinaryOperator.AND, expand, null);
-        ODataResultList<Shipment> resultList = gttCoreServiceClient.readEntitySet(url, Shipment.class);
+        ODataResultList<Shipment> resultList = gttCoreServiceClient.readEntitySetAll(url, Shipment.class);
         if (CollectionUtils.isEmpty(resultList.getResults())) {
             return new Shipment();
         }
@@ -274,7 +274,7 @@ public class MapService {
         UUID eventId = spot.getEventId();
         String eventType = spot.getEventTypeOrign();
         String url = this.generateCurrentLocationUrl(eventType, eventId);
-        ODataResultList<EventEx> events = gttCoreServiceClient.readEntitySet(url, EventEx.class);
+        ODataResultList<EventEx> events = gttCoreServiceClient.readEntitySetAll(url, EventEx.class);
         if (events.getResults().isEmpty()) {
             return;
         }
@@ -414,7 +414,7 @@ public class MapService {
             return null;
         }
         String url = generatePlannedEventUrl(eventMatchKey, eventType, deliveryItemId);
-        ODataResultList<PlannedEvent> entitySet = gttCoreServiceClient.readEntitySet(url, PlannedEvent.class);
+        ODataResultList<PlannedEvent> entitySet = gttCoreServiceClient.readEntitySetAll(url, PlannedEvent.class);
         if (entitySet.getResults().isEmpty()) {
             return null;
         }
@@ -436,7 +436,7 @@ public class MapService {
 
     public Map<String, Route> getActualRoute(Set<String> trackingIdTypes, Set<String> partyIds, String deliveryItemId) {
         String url = getActualRouteUrl(deliveryItemId);
-        ODataResultList<ProcessEventDirectory> entityList = gttCoreServiceClient.readEntitySet(url, ProcessEventDirectory.class);
+        ODataResultList<ProcessEventDirectory> entityList = gttCoreServiceClient.readEntitySetAll(url, ProcessEventDirectory.class);
         List<ProcessEventDirectory> processEventDirectories = entityList.getResults();
         return getRoutesFromEvents(trackingIdTypes, partyIds, processEventDirectories);
     }
@@ -494,7 +494,7 @@ public class MapService {
         actualSpot.setLatitude(event.getLatitude());
         actualSpot.setLongitude(event.getLongitude());
         actualSpot.setPlannedEventId(processEventDirectory.getPlannedEventId());
-        if (plannedEvent != null) {
+        if (plannedEvent != null &&!SOFUtils.isEventTypeInBlackList(actualSpot.getEventType())) {
             actualSpot.setLocationAltKey(plannedEvent.getLocationAltKey());
             actualSpot.setEventMatchKey(plannedEvent.getEventMatchKey());
         }
@@ -554,7 +554,7 @@ public class MapService {
 
     public List<SideContent> getSideContentsInActualEvent(String deliveryItemId, String altKey) {
         String url = generateContentSideUrl(deliveryItemId, altKey);
-        ODataResultList<ProcessEventDirectory> entityList = gttCoreServiceClient.readEntitySet(url, ProcessEventDirectory.class);
+        ODataResultList<ProcessEventDirectory> entityList = gttCoreServiceClient.readEntitySetAll(url, ProcessEventDirectory.class);
         List<ProcessEventDirectory> processEventDirectories = entityList.getResults();
         return getSideContentsFromPED(processEventDirectories);
     }
@@ -610,7 +610,7 @@ public class MapService {
 
     public List<PlannedEvent> getPlannedEventWithTPIdAndEventMatchKey(String deliveryItemId, String eventMatchKey) {
         String url = generatePlannedEventUrl(deliveryItemId, eventMatchKey);
-        ODataResultList<PlannedEvent> oDataResultList = gttCoreServiceClient.readEntitySet(url, PlannedEvent.class);
+        ODataResultList<PlannedEvent> oDataResultList = gttCoreServiceClient.readEntitySetAll(url, PlannedEvent.class);
         return oDataResultList.getResults();
     }
 

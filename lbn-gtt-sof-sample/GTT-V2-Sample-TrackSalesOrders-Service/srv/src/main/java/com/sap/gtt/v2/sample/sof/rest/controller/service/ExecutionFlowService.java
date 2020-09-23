@@ -58,7 +58,7 @@ public class ExecutionFlowService {
         List<EventEx> eventHistory = new ArrayList<>();
         String query = String.format("/ProcessEventDirectory?$filter=plannedEvent_id eq guid'%s' or event_id eq guid'%s'&$expand=plannedEvent,event",
                 eventId, eventId);
-        ODataResultList<ProcessEventDirectory> response = gttCoreServiceClient.readEntitySet(query, ProcessEventDirectory.class);
+        ODataResultList<ProcessEventDirectory> response = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class);
         List<ProcessEventDirectory> processEventDirectories = response.getResults();
 
         if (processEventDirectories.stream().anyMatch(ped -> ped.getPlannedEventId() != null && eventId.compareTo(ped.getPlannedEventId()) == 0)) {
@@ -85,7 +85,7 @@ public class ExecutionFlowService {
 
     private List<ProcessEventDirectory> getPED4TP(UUID tpId) {
         String query = String.format("/ProcessEventDirectory?$filter=process_id eq guid'%s'&$expand=plannedEvent,event", tpId);
-        ODataResultList<ProcessEventDirectory> result = gttCoreServiceClient.readEntitySet(query, ProcessEventDirectory.class);
+        ODataResultList<ProcessEventDirectory> result = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class);
         return result.getResults();
     }
 
@@ -199,7 +199,7 @@ public class ExecutionFlowService {
                     FilterExpression filter = FilterExpressionBuilder.createFilterExpression(conditions, BinaryOperator.OR);
                     assert filter != null;
                     String query = Constants.URL_SPLITTER + eventType + "?$filter=" + filter.getExpressionString();
-                    events = gttCoreServiceClient.readEntitySet(query, EventEx.class).getResults();
+                    events = gttCoreServiceClient.readEntitySetAll(query, EventEx.class).getResults();
                     events.forEach(event -> eventMap.put(event.getId(), event));
                 });
 

@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<smartTable:SmartTable
+		id="smartTable"
+		tableType="ResponsiveTable"
+		demandPopin="true"
+		editable="false"
+		entitySet="SalesOrderItem"
+		tableBindingPath=""
+		useTablePersonalisation="true"
+		header="{i18n>listItems}"
+		showRowCount="true"
+		useExportToExcel="false"
+		enableAutoBinding="true"
+		beforeRebindTable=".onBeforeRebindSalesOrderItemsTable"
+		requestAtLeastFields="id,processStatus_code">
+		<smartTable:customData>
+			<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+			<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+		</smartTable:customData>
+		<Table id="salesOrderItemsTable" class="sofSalesOrderItemsTable" growing="true">
+			<columns>
+				<Column hAlign="Right">
+					<Text text="{i18n>delayRate}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "delayedQuantity", "leadingProperty": "delayedQuantity, orderQuantity, uom", "sortProperty": "delayedQuantity", "columnIndex": "4"}'/>
+					</customData>
+				</Column>
+				<Column>
+					<Text text="{i18n>completionRate}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "completionQuantity", "leadingProperty": "completionQuantity, orderQuantity, currency", "sortProperty": "completionQuantity", "columnIndex": "5"}'/>
+					</customData>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press=".onSalesOrderItemPressed">
+					<cells>
+						<ObjectStatus id="delayQuantity" text="{parts: ['delayedQuantity', 'orderQuantity', 'uom'], formatter: '.formatter.formattedRateWithQuantityAndUnit'}" state="{path: 'delayedQuantity', formatter: '.formatter.delayStatus'}"/>
+						<mc:HarveyBallMicroChart id="harveyBallChart" size="XS" isResponsive="false"
+							visible="{parts: ['completionQuantity', 'orderQuantity'], formatter: '.formatter.listCompletionRateVisibility'}"
+							total="100" totalScale="%" tooltip="{i18n>completionRate}">
+							<mc:items>
+								<mc:HarveyBallMicroChartItem fraction="{parts: ['completionQuantity', 'orderQuantity'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
+							</mc:items>
+						</mc:HarveyBallMicroChart>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>
+

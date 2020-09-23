@@ -53,7 +53,7 @@ resources:
     type: org.cloudfoundry.managed-service
   - name: lbn-gtt-sof-api
     properties:
-      url: https://gtt-sample-track-salesorders-service-{unique-identifier}.${domain}
+      url: https://gtt-sample-track-salesorders-service-{unique-identifier}.${default-domain}
   - name: lbn-gtt-sample-app-uaa
     type: com.sap.xs.uaa-application
     parameters:

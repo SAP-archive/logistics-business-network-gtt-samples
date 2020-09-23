@@ -1,0 +1,131 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<HBox id="salesOrderHeaderContentHBox"
+		class="sofHeaderContentHBox"
+		wrap="Wrap"
+		fitContainer="true">
+		<VBox id="metadataVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="basicInformationTitle"
+				text="{i18n>basicInformation}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="plantLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="plant"
+						text="{parts: [{'value': 'plant'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="plant" class="sofHeaderContentPropertyText" text="{plant}"/>
+				</items>
+			</HBox>
+			<HBox wrap="Wrap">
+				<items>
+					<Label id="quantityLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="quantity"
+						text="{parts: [{'value': 'orderQuantity'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="quantity" class="sofHeaderContentPropertyText" text="{orderQuantity} {uom}"/>
+				</items>
+			</HBox>
+		</VBox>
+
+		<VBox id="netValueVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="netValueTitle"
+				text="{parts: [{'value': 'netValue'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<ObjectNumber id="netValue"
+				emphasized="false"
+				class="sapMObjectNumberLarge sofObjectNumber"
+				number="{
+					parts: [{path: 'netValue'}, {path: 'currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false,
+						decimals: 2
+					}
+				}"
+				unit="{currency}" />
+		</VBox>
+
+		<VBox id="completionRateVBox"
+			visible="{
+				parts: ['completionQuantity', 'orderQuantity'],
+				formatter: '.formatter.completionRateVisibility'
+			}"
+			class="sapUiSmallMarginBottom">
+			<Title id="completionRateTitle"
+				text="{i18n>completionRate}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<mc:HarveyBallMicroChart id="completionRate"
+				class="sofCompletionRate"
+				size="L"
+				total="{= parseFloat(${orderQuantity}) }"
+				totalScale="{uom}"
+				colorPalette="sapUiChartPaletteQualitativeHue1"
+				tooltip="{i18n>completionRate}">
+				<mc:items>
+					<mc:HarveyBallMicroChartItem fraction="{= parseFloat(${completionQuantity}) }"
+						fractionScale="{uom}" />
+				</mc:items>
+			</mc:HarveyBallMicroChart>
+		</VBox>
+
+		<VBox id="delayVBox"
+			visible="{= parseFloat(${delayedQuantity}) > 0}"
+			class="sapUiLargeMarginBegin sapUiSmallMarginBottom">
+			<Title id="delayTitle"
+				text="{i18n>delayRate}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<ObjectNumber id="delay"
+				state="{
+					path: 'delayedQuantity',
+					formatter: '.formatter.delayStatus'
+				}"
+				emphasized="false"
+				class="sapMObjectNumberLarge sofObjectNumber"
+				number="{
+					parts: [{path: 'delayedQuantity'}, {path: 'orderQuantity'}],
+					formatter: '.formatter.formattedRate'
+				}"
+				unit="%" />
+			<Label id="delayValue"
+				text="({path: 'delayedQuantity', formatter: '.formatter.getFormattedFloatNumber'} {uom})" />
+		</VBox>
+
+		<VBox id="fulfillmentStatusVBox"
+			class="sapUiLargeMarginBegin sapUiSmallMarginBottom">
+			<Title id="fulfillmentStatusTitle"
+				text="{i18n>fulfillmentStatus}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<mc:ComparisonMicroChart id="fulfillmentStatus"
+				class="sofComparisonChart"
+				scale=""
+				view="Wide"
+				width="25rem"
+				maxValue="{salesOrderItem>/deliveryItemsCount}"
+				shrinkable="true"
+				data="{salesOrderItem>/fulFillmentStatusSet}"
+				tooltip="{i18n>salesOrderItemFulfillmentStatusTooltip}">
+				<mc:data>
+					<mc:ComparisonMicroChartData value="{salesOrderItem>value}"
+						displayValue="{salesOrderItem>value}"
+						title="{
+							path: 'salesOrderItem>status',
+							formatter: '.formatter.processStatusText'
+						}"
+						color="{
+							path: 'salesOrderItem>status',
+							formatter: '.formatter.processStatus.getColor'
+						}"
+						tooltip="{
+							path: 'salesOrderItem>',
+							formatter: '.formatter.fulfillmentStatusTooltip'
+						}" />
+				</mc:data>
+			</mc:ComparisonMicroChart>
+		</VBox>
+	</HBox>
+</core:FragmentDefinition>
