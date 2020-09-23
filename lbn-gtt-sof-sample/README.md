@@ -32,7 +32,7 @@ To integrate with visibility provider, the following code list sent out from ERP
 transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue
-* If multiple iDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the global track and trace system in disorder. This will cause update error in some situations. It is a known issue and is expected to be fixed in the next release.
+* If multiple IDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the global track and trace system in disorder. This will cause update error in some situations. It is a known issue and is expected to be fixed in the next release.
 
 ## FAQs
 * Why couldn’t my shipment events be correlated with the delivery and then with the delivery item? </br>
