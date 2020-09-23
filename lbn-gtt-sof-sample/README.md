@@ -1,4 +1,4 @@
-# Sales Order Fulfillment - A Template App for Global Track and Trace Option
+# Sales Order Fulfillment Template App
 
 ## Description
 Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
@@ -12,10 +12,11 @@ Sales Order Fulfillment template app is designed for internal sales representati
 ## Requirements
 * An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
 * To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented 
-* To integrate with visibility provider, log your incident in SAP [BCP](https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”
+* To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [Sales Order Fulfillment – Implementation Guide](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/dev/lbn-gtt-sof-sample/Documents/01_Implementation%20Guide%20-%20SOF.pdf)
+* [01_Implementation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf)
+* [02_Extractor_Creation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-SOF.pdf)
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
@@ -31,7 +32,7 @@ To integrate with visibility provider, the following code list sent out from ERP
 transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue
-* If multiple iDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the global track and trace system in disorder. This will cause update error in some situations. It is a known issue and is expected to be fixed in the next release.
+* If multiple IDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the global track and trace system in disorder. This will cause update error in some situations. It is a known issue and is expected to be fixed in the next release.
 
 ## FAQs
 * Why couldn’t my shipment events be correlated with the delivery and then with the delivery item? </br>
@@ -64,7 +65,4 @@ You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with global track and trace option, log your incident in SAP [BCP]( https://support.wdf.sap.corp/) system with component “SCM-LBN-GTT-COR”. 
-
-## License
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.   
+If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”. 
