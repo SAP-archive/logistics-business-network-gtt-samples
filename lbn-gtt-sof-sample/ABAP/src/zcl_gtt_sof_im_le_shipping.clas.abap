@@ -209,6 +209,12 @@ METHOD if_ex_le_shp_delivery_proc~save_and_publish_document .
 
   ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_ITEM'. APPEND ls_aotype TO lt_aotype.
   ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_INT_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_AZ_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_IF_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_PF_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_PR_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_PT_ITEM'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_SORDER'. ls_aotype-aot_type = 'ZGTT_SO_ACC_DM_ITEM'. APPEND ls_aotype TO lt_aotype.
 
   LOOP AT it_xlikp INTO ls_likp WHERE lfart = 'LBNP'.
 
