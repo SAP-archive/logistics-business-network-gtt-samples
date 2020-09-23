@@ -3,8 +3,8 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')",
-          "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.GoodsIssued"
         },
         "id": "cf32a237-e760-11ea-b9d1-df5840db32fa",
@@ -31,16 +31,16 @@
         "longitude": null,
         "latitude": null,
         "messageSourceType": null,
-        "createdByUser": "gtt_sof_tech01@163.com",
+        "createdByUser": "abc@abc.com",
         "creationDateTime": "/Date(1598421356740)/",
         "references": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')/references"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')/references"
           }
         },
         "eventProcesses": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')/eventProcesses"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/GoodsIssued(guid'cf32a237-e760-11ea-b9d1-df5840db32fa')/eventProcesses"
           }
         }
       }

@@ -3,8 +3,8 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')",
-          "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.Picking"
         },
         "id": "cb2186b0-e760-11ea-b9d1-493ddc8ffb9a",
@@ -31,17 +31,17 @@
         "longitude": null,
         "latitude": null,
         "messageSourceType": null,
-        "createdByUser": "gtt_sof_tech01@163.com",
+        "createdByUser": "abc@abc.com",
         "creationDateTime": "/Date(1598421349917)/",
         "quantity": "1.000",
         "references": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')/references"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')/references"
           }
         },
         "eventProcesses": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')/eventProcesses"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Picking(guid'cb2186b0-e760-11ea-b9d1-493ddc8ffb9a')/eventProcesses"
           }
         }
       }

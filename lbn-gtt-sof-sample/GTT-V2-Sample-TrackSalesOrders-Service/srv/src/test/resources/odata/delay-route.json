@@ -3,8 +3,8 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
-          "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.Delay"
         },
         "id": "913570d5-ea85-11ea-b9d1-57ee9073f52e",
@@ -31,7 +31,7 @@
         "longitude": "-23.838938100",
         "latitude": "43.605271300",
         "messageSourceType": null,
-        "createdByUser": "gtt_sof_tech01@163.com",
+        "createdByUser": "abc@abc.com",
         "creationDateTime": "/Date(1598766997606)/",
         "refPlannedEventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
         "refPlannedEventMatchKey": "00000020900003",
@@ -40,20 +40,20 @@
         "locationType": null,
         "references": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/references"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/references"
           }
         },
         "eventProcesses": {
           "__deferred": {
-            "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/eventProcesses"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Delay(guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/eventProcesses"
           }
         },
         "estimatedArrival": {
           "results": [
             {
               "__metadata": {
-                "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
-                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
                 "type": "com.lbngttsamples.gtt.app.sof.sofService.DelayEstimatedArrival"
               },
               "estimatedArrivalTime": "/Date(1603846920000)/",
@@ -63,14 +63,14 @@
               "delay_id": "913570d5-ea85-11ea-b9d1-57ee9073f52e",
               "delay": {
                 "__deferred": {
-                  "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/delay"
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900003',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/delay"
                 }
               }
             },
             {
               "__metadata": {
-                "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
-                "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')",
                 "type": "com.lbngttsamples.gtt.app.sof.sofService.DelayEstimatedArrival"
               },
               "estimatedArrivalTime": "/Date(1603933320000)/",
@@ -80,7 +80,7 @@
               "delay_id": "913570d5-ea85-11ea-b9d1-57ee9073f52e",
               "delay": {
                 "__deferred": {
-                  "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/delay"
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/DelayEstimatedArrival(stopId='00000020900004',delay_id=guid'913570d5-ea85-11ea-b9d1-57ee9073f52e')/delay"
                 }
               }
             }
