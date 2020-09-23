@@ -223,7 +223,7 @@ public class GTTCoreServiceClient {
     public List<Location> getLocations(Set<String> locationAltKeys) {
         List<Location> result = new ArrayList<>();
 
-        if (!locationAltKeys.isEmpty()) {
+        if(!locationAltKeys.isEmpty()) {
             HttpHeaders headers = new HttpHeaders();
             headers.setBasicAuth(techUser, criticalInfo);
             List<FilterCondition> conditions = new ArrayList<>();
@@ -236,12 +236,10 @@ public class GTTCoreServiceClient {
                     .queryParam(INLINECOUNT, ALLPAGES)
                     .queryParam(FILTER, filter.getExpressionString()).build().encode().toUriString();
 
-            try {
-                result = readEntitySetAll(locationService, Location.class, headers).getResults();
-            } catch (SOFServiceException e) {
-                logger.error("Call location service failed:", e);
-                throw new SOFServiceException(MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED);
-            }
+            ResponseEntity<String> responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
+                    new HttpEntity<>(null, headers), String.class);
+
+            result = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class).getResults();
         }
 
         return result;
