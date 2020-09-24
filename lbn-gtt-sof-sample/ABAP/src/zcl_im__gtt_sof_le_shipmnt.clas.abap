@@ -26,15 +26,14 @@ METHOD if_ex_badi_le_shipment~before_update.
   DATA: l_structure_package TYPE devclass,
         l_extflag           TYPE flag.
 
-  DATA: lv_count      TYPE i,
-        ls_comwa5     TYPE vbco5,
-        ls_comwa6     TYPE vbco6,
-        lv_fstop      TYPE char255,
-        lv_lstop      TYPE char255,
+  DATA: lv_count    TYPE i,
+        ls_comwa5   TYPE vbco5,
+        ls_comwa6   TYPE vbco6,
+        lv_fstop    TYPE char255,
+        lv_lstop    TYPE char255,
 *   Location Id
-        lv_locid      TYPE zgtt_locid,
-        lv_appobjid   TYPE /saptrx/aoid,
-        lv_loc_update TYPE boolean.
+        lv_locid    TYPE zgtt_locid,
+        lv_appobjid TYPE /saptrx/aoid.
 
   DATA: ls_vttk_old          TYPE vttkvb,
         ls_vttk              TYPE vttkvb,
@@ -148,8 +147,20 @@ METHOD if_ex_badi_le_shipment~before_update.
 
   ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_HD'. APPEND ls_aotype TO lt_aotype.
   ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_INT_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_AZ_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_IF_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PF_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PR_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PT_HD'. APPEND ls_aotype TO lt_aotype.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_DM_HD'. APPEND ls_aotype TO lt_aotype.
   ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_ITEM'. APPEND ls_aotype TO lt_aotype_item.
   ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_INT_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_AZ_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_IF_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PF_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PR_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_PT_ITEM'. APPEND ls_aotype TO lt_aotype_item.
+  ls_aotype-obj_type = 'ESC_DELIV'. ls_aotype-aot_type = 'ZGTT_DE_ACC_DM_ITEM'. APPEND ls_aotype TO lt_aotype_item.
 
 *   get the shipment header
   MOVE im_shipments_before_update-new_vttk TO lt_vttk.
@@ -195,13 +206,9 @@ METHOD if_ex_badi_le_shipment~before_update.
 
     IF lt_vtts_delta IS NOT INITIAL.
       LOOP AT lt_vtts_delta INTO ls_vtts_delta WHERE updkz = 'I' OR updkz = 'D'.
-        EXIT.
-      ENDLOOP.
-      IF sy-subrc = 0.
-        LOOP AT lt_vtts_delta INTO ls_vtts_delta.
-          CLEAR: ls_vtsp_delta,  ls_vttp_delta.
-          READ TABLE lt_vtsp_delta_tmp INTO ls_vtsp_delta WITH KEY tknum = ls_vtts_delta-tknum
-                                                                   tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
+        CLEAR: ls_vtsp_delta,  ls_vttp_delta.
+        LOOP AT lt_vtsp_delta_tmp INTO ls_vtsp_delta WHERE tknum = ls_vtts_delta-tknum
+                                                       AND tsnum = ls_vtts_delta-tsnum.
           READ TABLE lt_vttp_delta_tmp INTO ls_vttp_delta WITH KEY tknum = ls_vtsp_delta-tknum
                                                                    tpnum = ls_vtsp_delta-tpnum BINARY SEARCH.
           IF sy-subrc EQ 0.
@@ -209,59 +216,37 @@ METHOD if_ex_badi_le_shipment~before_update.
             COLLECT ls_likp_delta INTO lt_likp_delta.
           ENDIF.
         ENDLOOP.
-      ELSE.
-        CLEAR lv_loc_update.
-        LOOP AT lt_vtts_delta INTO ls_vtts_delta.
-          READ TABLE im_shipments_before_update-old_vtts INTO ls_vtts_old WITH KEY tknum = ls_vtts_delta-tknum
-                                                                                   tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
-          CHECK sy-subrc IS INITIAL.
-          IF  ls_vtts_delta-knota NE ls_vtts_old-knota OR
-              ls_vtts_delta-vstel NE ls_vtts_old-vstel OR
-              ls_vtts_delta-werka NE ls_vtts_old-werka OR
-              ls_vtts_delta-kunna NE ls_vtts_old-kunna OR
-              ls_vtts_delta-lifna NE ls_vtts_old-lifna OR
-              ls_vtts_delta-kunnz NE ls_vtts_old-kunnz OR
-              ls_vtts_delta-vstez NE ls_vtts_old-vstez OR
-              ls_vtts_delta-lifnz NE ls_vtts_old-lifnz OR
-              ls_vtts_delta-werkz NE ls_vtts_old-werkz OR
-              ls_vtts_delta-knotz NE ls_vtts_old-knotz.
-            lv_loc_update = 'X'.
-            LOOP AT lt_vtts_delta INTO ls_vtts_delta.
-              CLEAR: ls_vtsp_delta,  ls_vttp_delta.
-              READ TABLE lt_vtsp_delta_tmp INTO ls_vtsp_delta WITH KEY tknum = ls_vtts_delta-tknum
-                                                                       tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
-              READ TABLE lt_vttp_delta_tmp INTO ls_vttp_delta WITH KEY tknum = ls_vtsp_delta-tknum
-                                                                       tpnum = ls_vtsp_delta-tpnum BINARY SEARCH.
-              IF sy-subrc EQ 0.
-                MOVE ls_vttp_delta-vbeln TO ls_likp_delta-vbeln.
-                COLLECT ls_likp_delta INTO lt_likp_delta.
-              ENDIF.
-            ENDLOOP.
-            EXIT.
-          ENDIF.
-        ENDLOOP.
-        IF lv_loc_update IS INITIAL.
-          LOOP AT lt_vtts_delta INTO ls_vtts_delta.
-            READ TABLE im_shipments_before_update-old_vtts INTO ls_vtts_old WITH KEY tknum = ls_vtts_delta-tknum
-                                                                                     tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
-            CHECK sy-subrc IS INITIAL.
-            IF  ls_vtts_delta-dptbg NE ls_vtts_old-dptbg OR
-                ls_vtts_delta-uptbg NE ls_vtts_old-uptbg OR
-                ls_vtts_delta-dpten NE ls_vtts_old-dpten OR
-                ls_vtts_delta-upten NE ls_vtts_old-upten.
-              CLEAR: ls_vtsp_delta,  ls_vttp_delta.
-              READ TABLE lt_vtsp_delta_tmp INTO ls_vtsp_delta WITH KEY tknum = ls_vtts_delta-tknum
-                                                                       tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
-              READ TABLE lt_vttp_delta_tmp INTO ls_vttp_delta WITH KEY tknum = ls_vtsp_delta-tknum
-                                                                       tpnum = ls_vtsp_delta-tpnum BINARY SEARCH.
-              IF sy-subrc EQ 0.
-                MOVE ls_vttp_delta-vbeln TO ls_likp_delta-vbeln.
-                COLLECT ls_likp_delta INTO lt_likp_delta.
-              ENDIF.
+      ENDLOOP.
+      LOOP AT lt_vtts_delta INTO ls_vtts_delta WHERE updkz <> 'I' AND updkz <> 'D'.
+        READ TABLE im_shipments_before_update-old_vtts INTO ls_vtts_old WITH KEY tknum = ls_vtts_delta-tknum
+                                                                                 tsnum = ls_vtts_delta-tsnum BINARY SEARCH.
+        CHECK sy-subrc IS INITIAL.
+        IF  ls_vtts_delta-knota NE ls_vtts_old-knota OR
+            ls_vtts_delta-vstel NE ls_vtts_old-vstel OR
+            ls_vtts_delta-werka NE ls_vtts_old-werka OR
+            ls_vtts_delta-kunna NE ls_vtts_old-kunna OR
+            ls_vtts_delta-lifna NE ls_vtts_old-lifna OR
+            ls_vtts_delta-kunnz NE ls_vtts_old-kunnz OR
+            ls_vtts_delta-vstez NE ls_vtts_old-vstez OR
+            ls_vtts_delta-lifnz NE ls_vtts_old-lifnz OR
+            ls_vtts_delta-werkz NE ls_vtts_old-werkz OR
+            ls_vtts_delta-knotz NE ls_vtts_old-knotz OR
+            ls_vtts_delta-dptbg NE ls_vtts_old-dptbg OR
+            ls_vtts_delta-uptbg NE ls_vtts_old-uptbg OR
+            ls_vtts_delta-dpten NE ls_vtts_old-dpten OR
+            ls_vtts_delta-upten NE ls_vtts_old-upten.            .
+          CLEAR: ls_vtsp_delta,  ls_vttp_delta.
+          LOOP AT lt_vtsp_delta_tmp INTO ls_vtsp_delta WHERE tknum = ls_vtts_delta-tknum
+                                                         AND tsnum = ls_vtts_delta-tsnum.
+            READ TABLE lt_vttp_delta_tmp INTO ls_vttp_delta WITH KEY tknum = ls_vtsp_delta-tknum
+                                                                     tpnum = ls_vtsp_delta-tpnum BINARY SEARCH.
+            IF sy-subrc EQ 0.
+              MOVE ls_vttp_delta-vbeln TO ls_likp_delta-vbeln.
+              COLLECT ls_likp_delta INTO lt_likp_delta.
             ENDIF.
           ENDLOOP.
         ENDIF.
-      ENDIF.
+      ENDLOOP.
     ENDIF.
 
     CLEAR: lt_vbfa_new, lt_likp_new.
