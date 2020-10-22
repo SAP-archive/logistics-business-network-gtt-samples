@@ -1,6 +1,8 @@
 package com.sap.gtt.v2.sample.sof.odata;
 
 import com.sap.gtt.v2.sample.sof.App;
+import com.sap.gtt.v2.sample.sof.configuration.Destination;
+import com.sap.gtt.v2.sample.sof.configuration.VcapParser;
 import com.sap.gtt.v2.sample.sof.domain.Location;
 import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.sof.odata.model.*;
@@ -14,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
@@ -392,5 +395,16 @@ public class ODataBasicTestEx {
         ODataResultList<TrackedProcess> res = gttCoreServiceClient.readEntitySetAll(query, TrackedProcess.class, headers);
         Assertions.assertThat(res.getCount()).isEqualTo(res.getResults().size());
         System.out.println(res.getCount());
+    }
+
+    @Autowired
+    private VcapParser vcapParser;
+
+    @Value("${DESTINATION_GTT:#{null}}")
+    private String destinationGTT;
+
+    @Test
+    public void testVcapParser() {
+        Destination destination = vcapParser.getDestination(destinationGTT);
     }
 }

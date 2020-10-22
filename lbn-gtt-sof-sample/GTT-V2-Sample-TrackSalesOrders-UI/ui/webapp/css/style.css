@@ -50,10 +50,6 @@
   height: 0.4rem;
 }
 
-.sofProcessFlowNodeETA {
-  white-space: pre-line;
-}
-
 .sofDynamicPageTitle .sapFDynamicPageTitleMainContent {
   flex-basis: unset !important;
 }
@@ -74,8 +70,8 @@
   pointer-events: none;
 }
 
-.sofProcessFlow .sofProcessFlowNodePlannedEvent span {
-  opacity: 0.7;
+.sofProcessFlow .sofProcessFlowNodePlannedEvent {
+  opacity: 0.65;
 }
 
 .sofProcessFlow .suiteUiProcessFlowLaneHeaderPointer,
@@ -87,8 +83,13 @@
   font-size: 0.8rem;
 }
 
-.sofProcessFlowNodeETA .sapMObjStatusText {
-  font-size: 0.8rem;
+.sofProcessFlowNodeETA .sapMObjStatusTitle,
+.sofProcessFlowNodeEventReason .sapMObjStatusTitle {
+  display: block;
+}
+
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventStatus {
+  font-size: 1.2rem !important;
 }
 
 .sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeLabel {
@@ -101,16 +102,22 @@
   line-height: 1.2rem;
 }
 
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeETA .sapMObjStatusTitle,
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventReason .sapMObjStatusTitle {
+  font-size: 0.875rem;
+  line-height: 1.2rem;
+}
+
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeValue.sofProcessFlowNodeEventReason {
+  line-height: 1rem;
+}
+
 .sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeLabel,
 .sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeValue,
 .sapSuiteUiCommonsPFZoomLevel3 .sofProcessFlowNodeLabel,
 .sapSuiteUiCommonsPFZoomLevel3 .sofProcessFlowNodeValue {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventStatus {
-  font-size: 1.2rem !important;
 }
 
 .sapSuiteUiCommonsPFZoomLevel2 .sofProcessFlowNodeEventStatus,
@@ -128,7 +135,7 @@
 
 .sofTimelineTitle {
   margin-top: 1rem;
-  padding-left: 1.25rem;
+  padding: 0 1.25rem;
 }
 
 .sofDetailCustomListItemPadding {

@@ -146,7 +146,11 @@ public class ExecutionFlowService {
                 if (!Constants.EVENT_STATUS_PLANNED.equals(plannedEvent.getEventStatusCode())) {
                     Optional<EventEx> maxActualBusinessTimestampEvent = actualEvents.stream()
                             .filter(actualEvent -> actualEvent.getEventType().equals(plannedEvent.getEventType()))
-                            .max(Comparator.comparing(Event::getActualBusinessTimestamp));
+                            .max(Comparator.comparing(EventEx::getActualBusinessTimestamp));
+                    Optional<EventEx> maxActualBusinessTimestampDelayedEvent = actualEvents.stream()
+                            .filter(actualEvent -> actualEvent.getEventType().contains("Shipment.Delay"))
+                            .max(Comparator.comparing(EventEx::getActualBusinessTimestamp));
+
                     maxActualBusinessTimestampEvent.ifPresent(actualEvent -> {
                         Long actualBusinessTimestamp = actualEvent.getActualBusinessTimestamp();
                         String locationTypeCode = eventMap.get(actualEvent.getId()).getLocationTypeCode();
@@ -155,6 +159,8 @@ public class ExecutionFlowService {
                         node.setLocationAltKey(actualEvent.getLocationAltKey());
                         node.setLocationTypeCode(locationTypeCode);
                     });
+                    maxActualBusinessTimestampDelayedEvent.ifPresent(actualEvent ->
+                            node.setEventReasonText(actualEvent.getEventReasonText()));
                 }
                 // Set ETA for planned event
                 if (plannedEvent.getEventType().contains(Constants.SHIPMENT_ARRIVAL) && plannedEvent.getEventMatchKey() != null) {

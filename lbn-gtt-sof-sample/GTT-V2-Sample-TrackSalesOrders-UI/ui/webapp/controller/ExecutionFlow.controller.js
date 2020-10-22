@@ -25,6 +25,7 @@ sap.ui.define(
 
       initModel: function () {
         var model = new JSONModel();
+        model.setSizeLimit(10000);
         this.setModel(model, "executionFlow");
       },
 
@@ -135,10 +136,6 @@ sap.ui.define(
         this.updateHistoricalEvents(context.getModel(), {
           eventId: context.getProperty("eventId"),
         });
-      },
-
-      getETAText: function (datetime) {
-        return this.getText("estimatedArrivalTime").concat(":\n").concat(datetime);
       },
     });
   }

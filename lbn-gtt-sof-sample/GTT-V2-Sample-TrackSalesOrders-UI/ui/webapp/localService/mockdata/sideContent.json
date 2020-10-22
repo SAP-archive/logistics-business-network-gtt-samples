@@ -112,6 +112,7 @@
     "isPlannedEvent": true,
     "isActualEvent": true,
     "eventMatchKey": "00000020170001",
-    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure"
+    "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure",
+    "eventReasonText": "This is the reason why it is delayed"
   }
 ]

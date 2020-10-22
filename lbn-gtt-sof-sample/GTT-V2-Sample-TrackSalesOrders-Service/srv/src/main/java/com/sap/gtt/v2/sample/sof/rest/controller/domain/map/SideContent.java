@@ -17,6 +17,15 @@ public class SideContent {
     private boolean isActualEvent;
     private String eventMatchKey;
     private String eventTypeFullName;
+    private String eventReasonText;
+
+    public String getEventReasonText() {
+        return eventReasonText;
+    }
+
+    public void setEventReasonText(String eventReasonText) {
+        this.eventReasonText = eventReasonText;
+    }
 
     public String getEventMatchKey() {
         return eventMatchKey;

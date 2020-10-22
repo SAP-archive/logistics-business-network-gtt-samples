@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import com.google.gson.Gson;
 
-import com.sap.gtt.v2.sample.sof.domain.EventEx;
-import com.sap.gtt.v2.sample.sof.domain.Location;
-import com.sap.gtt.v2.sample.sof.domain.PlannedEvent;
-import com.sap.gtt.v2.sample.sof.domain.ProcessEventDirectory;
+import com.sap.gtt.v2.sample.sof.domain.*;
 import com.sap.gtt.v2.sample.sof.odata.model.Delivery;
 import com.sap.gtt.v2.sample.sof.odata.model.DeliveryItem;
 import com.sap.gtt.v2.sample.sof.odata.model.Shipment;
@@ -163,7 +160,17 @@ public class MapServiceTest {
         ODataResultList<PlannedEvent> plannedEventODataResultList = ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class);
         String generatePlannedEventUrl = "/PlannedEvent?&$filter= (process_id eq guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff') and (substringof('0000002090',eventMatchKey)) &$orderby=eventMatchKey desc,plannedBusinessTimestamp desc,payloadSequence desc";
         Mockito.when(gttCoreServiceClient.readEntitySetAll(generatePlannedEventUrl,PlannedEvent.class)).thenReturn(plannedEventODataResultList);
+        String getEventReasonTextUrl = "/ProcessEventDirectory?&$filter= (plannedEvent_id eq guid'8eeb8e94-e760-11ea-b9d1-cf9f4484a832') and (substringof('Delay',event/eventType)) &$expand=event &$orderby=event/actualBusinessTimestamp desc&$top=1";
+        ODataResultList<ProcessEventDirectory> oDataResultList = new ODataResultList<>();
 
+        List<ProcessEventDirectory> list = new LinkedList<>();
+        ProcessEventDirectory processEventDirectory = new ProcessEventDirectory();
+        list.add(processEventDirectory);
+        Event event = new Event();
+        event.setEventReasonText("eventReasonText");
+        processEventDirectory.setEvent(event);
+        oDataResultList.setResults(list);
+        Mockito.when(gttCoreServiceClient.readEntitySet(getEventReasonTextUrl,ProcessEventDirectory.class)).thenReturn(oDataResultList);
         List<SideContent> sideContents = mapService.getSideContents(deliveryItemId,altKey,eventMatchKey,plannedEventId);
         Assert.assertEquals(7,sideContents.size());
         Assert.assertEquals("POD",sideContents.get(0).getEventType());

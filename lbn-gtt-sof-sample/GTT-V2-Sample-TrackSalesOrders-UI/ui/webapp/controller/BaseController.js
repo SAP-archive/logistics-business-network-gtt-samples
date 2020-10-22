@@ -300,10 +300,17 @@ sap.ui.define(
       },
 
       handleLocationQuickViewAfterOpen: function () {
-        var modelName = this.selectedLocation.data("modelName");
         var propertyName = this.selectedLocation.data("propertyName");
-        if (modelName && propertyName) {
-          var bindingContext = this.selectedLocation.getBindingContext(modelName);
+        if (propertyName) {
+          var modelName = this.selectedLocation.data("modelName");
+          var bindingContext = null;
+          if (modelName) {
+            bindingContext = this.selectedLocation.getBindingContext(modelName);
+          } else {
+            bindingContext = this.selectedLocation.getBindingContext();
+          }
+
+          // update location object
           var model = this.locationQuickView.getModel();
           model.setProperty("/", bindingContext.getProperty(propertyName));
         } else {

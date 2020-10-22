@@ -57,6 +57,7 @@ sap.ui.define(
       getExpandList: function () {
         return [
           "incoterms",
+          "shipToPartyLocation",
         ];
       },
 

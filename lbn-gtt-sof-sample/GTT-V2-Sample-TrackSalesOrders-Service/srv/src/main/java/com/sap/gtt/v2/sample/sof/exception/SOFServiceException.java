@@ -24,7 +24,7 @@ public class SOFServiceException extends BaseRuntimeException {
     public static final String MESSAGE_CODE_CALL_WRITE_SERVICE_FAILED = SOFServiceException.class.getName() + ".CallWriteServiceFailed";
     public static final String MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED = SOFServiceException.class.getName() + ".CallMetadataServiceFailed";
     public static final String MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED = SOFServiceException.class.getName() + ".CallLocationServiceFailed";
-
+    public static final String MESSAGE_CODE_DESTINATION_SERVICE_BINDING_NOT_FOUND = SOFServiceException.class.getName() + ".DestinationServiceBindingNotFound";
 
     public SOFServiceException(String internalMessage, Throwable cause, String messageCode) {
         super(internalMessage, cause, messageCode, new Object[]{});

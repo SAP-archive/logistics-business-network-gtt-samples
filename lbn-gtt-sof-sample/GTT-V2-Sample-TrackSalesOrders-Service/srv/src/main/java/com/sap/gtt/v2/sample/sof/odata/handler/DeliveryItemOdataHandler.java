@@ -1,9 +1,9 @@
 package com.sap.gtt.v2.sample.sof.odata.handler;
 
 
+import com.sap.gtt.v2.sample.sof.domain.Location;
 import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.sof.odata.model.DeliveryItem;
-import com.sap.gtt.v2.sample.sof.service.SOFService;
 import com.sap.gtt.v2.sample.sof.utils.ODataUtils;
 import com.sap.gtt.v2.sample.sof.utils.SOFUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +20,8 @@ import java.util.Map;
 @Component
 public class DeliveryItemOdataHandler extends SOFDefaultODataHandler {
     private static final Logger logger = LoggerFactory.getLogger(DeliveryItemOdataHandler.class);
+    public static final String DESTINATION_LOCATION = "destinationLocation";
+    public static final String ARRIVAL_TIMES = "arrivalTimes";
 
     @Autowired
     private ArrivalTimeOdataHandler arrivalTimeOdataHandler;
@@ -28,9 +30,9 @@ public class DeliveryItemOdataHandler extends SOFDefaultODataHandler {
     @Override
     public ODataResultList<Map<String, Object>> handleReadEntitySet(GetEntitySetUriInfo uriInfo, ODataContext oDataContext) {
         String uri = SOFUtils.getNormalizedUri(oDataContext);
-        boolean containsArrivalTimes = uri.contains("arrivalTimes");
+        boolean containsArrivalTimes = uri.contains(ARRIVAL_TIMES);
         if(containsArrivalTimes) {
-            uri = SOFUtils.removeArrivalTimesInUrl(uri);
+            uri = SOFUtils.removeFieldInUrl(uri,ARRIVAL_TIMES);
         }
         ODataResultList<DeliveryItem> entityList = gttCoreServiceClient.readEntitySet(uri, DeliveryItem.class);
         if(containsArrivalTimes) {
@@ -45,13 +47,13 @@ public class DeliveryItemOdataHandler extends SOFDefaultODataHandler {
     @Override
     public Map<String, Object> handleReadEntity(GetEntityUriInfo uriInfo, ODataContext oDataContext) {
         String uri = SOFUtils.getNormalizedUri(oDataContext);
-        boolean containsArrivalTimes = uri.contains("arrivalTimes");
+        boolean containsArrivalTimes = uri.contains(ARRIVAL_TIMES);
         if(containsArrivalTimes) {
-            uri = SOFUtils.removeArrivalTimesInUrl(uri);
+            uri = SOFUtils.removeFieldInUrl(uri,ARRIVAL_TIMES);
         }
-        boolean containsDestinationLocation = uri.contains("destinationLocation");
+        boolean containsDestinationLocation = uri.contains(DESTINATION_LOCATION);
         if(containsDestinationLocation) {
-            uri = SOFUtils.removeDestinationLocationInUrl(uri);
+            uri = SOFUtils.removeFieldInUrl(uri,DESTINATION_LOCATION);
         }
         DeliveryItem deliveryItem = gttCoreServiceClient.readEntity(uri, DeliveryItem.class);
         if(containsArrivalTimes) {
@@ -71,8 +73,10 @@ public class DeliveryItemOdataHandler extends SOFDefaultODataHandler {
         }
 
         if (StringUtils.isNotEmpty(deliveryItem.getLastLocationAltKey())) {
-            deliveryItem.setLastLocationDescription(
-                    gttCoreServiceClient.getLocation(deliveryItem.getLastLocationAltKey()).getLocationDescription());
+            Location location = gttCoreServiceClient.getLocation(deliveryItem.getLastLocationAltKey());
+            if(location!=null) {
+                deliveryItem.setLastLocationDescription(location.getLocationDescription());
+            }
         }
     }
 }

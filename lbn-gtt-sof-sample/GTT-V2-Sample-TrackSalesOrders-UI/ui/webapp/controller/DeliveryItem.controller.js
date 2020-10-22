@@ -72,6 +72,20 @@ sap.ui.define(
         // refresh subsections
         this.refreshSubSection("executionFlowView");
         this.refreshSubSection("mapView");
+
+        var model = this.getModel("view");
+        model.setProperty(
+          "/lastUpdatedAtTime",
+          model.getProperty("/lastUpdatedOn" + this.getView().getElementBinding().getPath())
+        );
+      },
+
+      /**
+       * Trigged by pressing the refresh button in order to refresh the view
+       */
+      onRefreshPressed: function() {
+        var view = this.getView();
+        view.getElementBinding().refresh(true);
       },
 
       clearPlannedArrivalETA: function () {
@@ -180,6 +194,7 @@ sap.ui.define(
 
       updateReferenceDocuments: function () {
         var model = this.getModel(this.routeName);
+        model.setProperty("/isReferenceDocumentsLoaded", false);
 
         var jsonService = ServiceUtils.getDataSource("restService");
         var bindingContext = this.getView().getBindingContext();
@@ -197,9 +212,11 @@ sap.ui.define(
               return referenceDocument.docType_code !== "VP";
             }
           ));
+          model.setProperty("/isReferenceDocumentsLoaded", true);
         }, function (error) {
           this.handleServerError(error);
           Log.error(error.data);
+          model.setProperty("/isReferenceDocumentsLoaded", true);
         }.bind(this));
       },
     });

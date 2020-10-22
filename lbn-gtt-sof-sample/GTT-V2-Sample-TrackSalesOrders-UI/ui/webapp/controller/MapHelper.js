@@ -43,7 +43,7 @@ sap.ui.define(
           "tileX": "256",
           "tileY": "256",
           "maxLOD": "22",
-          "copyright": "Copyright © HERE",
+          "copyright": "",
           "Source": [{
             "id": "s1",
             "url": formatMessage("{0}://{1}/maptile/2.1/maptile/newest/normal.day/'{LOD}'/'{X}'/'{Y}'/256/png8?apikey={2}&lg={3}", protocal, hereHost, keys.HERE, tileLanguage),
@@ -55,7 +55,7 @@ sap.ui.define(
           "tileX": "256",
           "tileY": "256",
           "maxLOD": "22",
-          "copyright": "Copyright © OpenStreet",
+          "copyright": "",
           "Source": [{
             "id": "s1",
             "url": formatMessage("{0}://maps.geoapify.com/v1/tile/osm-carto/'{LOD}'/'{X}'/'{Y}'.png?apiKey={1}", protocal, keys.OpenStreet),

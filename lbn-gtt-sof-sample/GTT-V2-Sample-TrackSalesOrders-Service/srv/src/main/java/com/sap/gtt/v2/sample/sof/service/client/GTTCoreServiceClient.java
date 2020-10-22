@@ -1,5 +1,7 @@
 package com.sap.gtt.v2.sample.sof.service.client;
 
+import com.sap.gtt.v2.sample.sof.configuration.Destination;
+import com.sap.gtt.v2.sample.sof.configuration.VcapParser;
 import com.sap.gtt.v2.sample.sof.constant.Constants;
 import com.sap.gtt.v2.sample.sof.domain.Location;
 import com.sap.gtt.v2.sample.sof.exception.SOFServiceException;
@@ -24,6 +26,8 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.PostConstruct;
+import javax.script.ScriptEngine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,18 +52,28 @@ public class GTTCoreServiceClient {
     public static final String INLINECOUNT_ALLPAGES = INLINECOUNT + "=" + ALLPAGES;
     public static final String INLINECOUNT_NONE = "$inlinecount=none";
     public static final String SKIP = "&$skip=";
+    public static final int TOO_MANY_RECORDS = 2000;
+
+    @Value("${DESTINATION_GTT:#{null}}")
+    private String destinationGTT;
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${GTT_CORE_ENGINE_API_URL_FLP_BASED}")
+    @Autowired
+    private VcapParser vcapParser;
+
     private String gttBaseUrl;
-
-    @Value("${GTT_CORE_ENGINE_TECHNICAL_USER}")
     private String techUser;
-
-    @Value("${GTT_CORE_ENGINE_TECHNICAL_PWD}")
     private String criticalInfo;
+
+    @PostConstruct
+    public void init() {
+        Destination destination = vcapParser.getDestination(destinationGTT);
+        gttBaseUrl = destination.getUrl();
+        techUser = destination.getUser();
+        criticalInfo = destination.getPassword();
+    }
 
     public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT, HttpHeaders headers) {
         uri = StringUtils.replaceIgnoreCase(uri, INLINECOUNT_NONE, INLINECOUNT_ALLPAGES);
@@ -72,7 +86,7 @@ public class GTTCoreServiceClient {
         }
 
         ODataResultList<T> res = readEntitySet(uri, classOfT, headers);
-        if (res.getCount() != null && res.getCount() > 2000) {
+        if (res.getCount() != null && res.getCount() > TOO_MANY_RECORDS) {
             logger.warn("total count is: {}, url: {}", res.getCount(), uri);
         }
 

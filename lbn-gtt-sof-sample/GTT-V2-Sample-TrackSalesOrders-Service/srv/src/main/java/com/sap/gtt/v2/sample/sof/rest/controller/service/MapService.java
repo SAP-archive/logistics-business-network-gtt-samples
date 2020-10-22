@@ -527,6 +527,14 @@ public class MapService {
         return true;
     }
 
+    /**
+     *
+     * @param deliveryItemId the deliveryItem Id of this route
+     * @param altKey the altKey of actualSpots in this route
+     * @param eventMatchKey  the eventMatchKey of plannedSpots in this route
+     * @param plannedEventId the first planned event's Id of this route
+     * @return the side contents of this route
+     */
     public List<SideContent> getSideContents(String deliveryItemId, String altKey, String eventMatchKey, String plannedEventId) {
         List<SideContent> actualEventInsideContents = new ArrayList<>();
         if (StringUtils.isNotBlank(altKey)) {
@@ -537,8 +545,35 @@ public class MapService {
             sideContents = getSideContentsInPlannedEvents(deliveryItemId, eventMatchKey, plannedEventId);
         }
         sideContents.addAll(actualEventInsideContents);
+        setEventResonText(sideContents);
         setLocationInSideContent(sideContents);
         return sideContents;
+    }
+
+    public void setEventResonText(List<SideContent> sideContents) {
+        sideContents.stream().filter(sideContent -> sideContent.getIsPlannedEvent()&&sideContent.getEventStatusCode().contains("DELAYED")).forEach(sideContent -> {
+            UUID plannedEventId = sideContent.getPlannedEventId();
+            String url = getLastestReportedDelayEvent(plannedEventId);
+            ODataResultList<ProcessEventDirectory> processEventDirectories = gttCoreServiceClient.readEntitySet(url,ProcessEventDirectory.class);
+            if(!CollectionUtils.isEmpty(processEventDirectories.getResults())) {
+                String eventResonText = processEventDirectories.getResults().get(0).getEvent().getEventReasonText();
+                sideContent.setEventReasonText(eventResonText);
+            }
+        });
+    }
+
+    public String getLastestReportedDelayEvent(UUID plannedEventId) {
+        List<FilterCondition> filterConditions = new ArrayList<>();
+        FilterCondition propertyCondition = null;
+        propertyCondition = new FilterCondition("plannedEvent_id", FilterCondition.EDM_TYPE_GUID, plannedEventId.toString(), BinaryOperator.EQ);
+        filterConditions.add(propertyCondition);
+        List<OrderBy> orderbys = new ArrayList<>();
+        orderbys.add(new OrderBy("event/actualBusinessTimestamp", "desc"));
+        String targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
+        String filter = "and (substringof('Delay',event/eventType)) ";
+        List<String> expand = new ArrayList<>();
+        expand.add("event");
+        return SOFUtils.generateUrl(targetEntityName, filter, filterConditions, BinaryOperator.AND, false, false, expand, orderbys)+"&$top=1";
     }
 
     public void removeReportedPlannedEventInSideContent(List<PlannedEvent> plannedEvents) {

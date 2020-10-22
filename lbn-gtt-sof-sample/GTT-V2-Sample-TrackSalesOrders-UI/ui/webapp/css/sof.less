@@ -7,18 +7,16 @@
   background-color: @sapUiButtonDisabledBackground !important;
 }
 
-// .sofComparisonChart .sapSuiteCpMCChartItem:first-child .sapSuiteCpMCTitle {
-//   color: @sapUiFieldInformationColor;
-// }
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventReason .sapMObjStatusTitle,
+.sofSideContentEventReason .sapMObjStatusTitle,
+.sofProcessFlowNodeETA.sapMObjStatusError .sapMObjStatusTitle {
+  color: @sapUiNegativeText;
+}
 
-// .sofComparisonChart .sapSuiteCpMCChartItem:first-child .sapSuiteCpMCChartBarValue {
-//   background-color: @sapUiFieldInformationColor;
-// }
+.sofProcessFlowNodeETA.sapMObjStatusWarning .sapMObjStatusTitle {
+  color: @sapUiCriticalText;
+}
 
-// .sofComparisonChart .sapSuiteCpMCChartItem:last-child .sapSuiteCpMCTitle {
-//   color: @sapUiIndication1;
-// }
-
-// .sofComparisonChart .sapSuiteCpMCChartItem:last-child .sapSuiteCpMCChartBarValue {
-//   background-color: @sapUiIndication1;
-// }
+.sofProcessFlowNodeETA.sapMObjStatusSuccess .sapMObjStatusTitle {
+  color: @sapUiPositiveText;
+}

@@ -121,6 +121,7 @@
       "eventId": "8781028f-e85a-584f-9e95-b878cbf6e927",
       "eventType": "CarrierArrival",
       "eventStatus": "DELAYED",
+      "eventReasonText": "delayed reason delayed reason delayed reason delayed reason reason delayed reason",
       "plannedAt": "2020-07-03T03:09:24.119Z",
       "eta": "2020-07-03T03:09:24.119Z",
       "children": [

@@ -192,6 +192,8 @@
 								<PropertyPath>completedAndLateValue</PropertyPath>
 								<PropertyPath>vShipmentNo</PropertyPath>
 								<PropertyPath>trackingIdType</PropertyPath>
+								<PropertyPath>partyId</PropertyPath>
+								<PropertyPath>shipToPartyLocation</PropertyPath>
 							</Collection>
 						</PropertyValue>
 					</Record>

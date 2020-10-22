@@ -1,6 +1,6 @@
 logging:
   level:
-    root: DEBUG
+    root: INFO
     
 server:
   max-http-header-size: 65536

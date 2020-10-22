@@ -2,6 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<Table id="table"
+		busy="{= !${deliveryItem>/isReferenceDocumentsLoaded} }"
 		growing="true"
 		items="{deliveryItem>/referenceDocuments}">
 		<columns>

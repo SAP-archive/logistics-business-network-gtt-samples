@@ -3,11 +3,13 @@ sap.ui.define(
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device",
+    "sap/ui/core/format/DateFormat",
   ],
   function (
     BaseController,
     JSONModel,
-    Device
+    Device,
+    DateFormat
   ) {
     "use strict";
 
@@ -23,9 +25,6 @@ sap.ui.define(
        * @param {string} entitySetKey The key of the entityset like EntitySet('id')
        */
       bindView: function (entitySetKey) {
-        var model = this.getModel(this.routeName);
-        this.setViewBusy(model);
-
         var view = this.getView();
         var parameters = {};
         var expandList = this.getExpandList();
@@ -38,6 +37,8 @@ sap.ui.define(
           parameters: parameters,
           events: {
             change: this.onBindingChange.bind(this),
+            dataRequested: this.onDataRequested.bind(this),
+            dataReceived: this.onDataReceived.bind(this),
           },
         });
       },
@@ -51,8 +52,6 @@ sap.ui.define(
        * If binding context is null, show 'Not Found' page.
        */
       onBindingChange: function () {
-        this.setViewFree(this.getModel(this.routeName));
-
         var bindingContext = this.getView().getBindingContext();
         if (!bindingContext) {
           // If there is no binding context, show 'Not Found' page.
@@ -63,10 +62,41 @@ sap.ui.define(
         }
       },
 
+      onDataRequested: function () {
+        this.setViewBusy(this.getModel(this.routeName));
+        this.updateLastUpdatedAtTime();
+      },
+
+      onDataReceived: function () {
+        this.setViewFree(this.getModel(this.routeName));
+      },
+
       /**
        * @abstract
        */
       updateView: function () {
+      },
+
+      /**
+       * Update last updated time
+       */
+      updateLastUpdatedAtTime: function() {
+        var model = this.getModel("view");
+        if (!model.getProperty("/lastUpdatedOn")) {
+          model.setProperty("/lastUpdatedOn", {});
+        }
+
+        var dateTimeInstance = DateFormat.getTimeInstance({
+          style: "medium",
+          UTC: false,
+        });
+
+        model.setProperty(
+          "/lastUpdatedOn" + this.getView().getElementBinding().getPath(),
+          this.getText("lastUpdatedAt", [
+            dateTimeInstance.format(new Date())
+          ])
+        );
       },
 
       /**

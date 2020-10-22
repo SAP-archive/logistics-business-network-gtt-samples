@@ -35,6 +35,7 @@ public class Constants {
     public static final String EVENT_STATUS_LATE_REPORTED = "LATE_REPORTED";
     public static final String RESOURCE = "RESOURCE";
     public static final String SHIPMENT_ARRIVAL = "Shipment.Arrival";
+    public static final String SHIP_TO_PARTY_LOCATION = "shipToPartyLocation";
 
 
     private Constants() {

@@ -100,6 +100,28 @@ public class SalesOrder {
     @EdmProperty(name = "trackingIdType")
     private String trackingIdType;
 
+    @EdmProperty(name = "partyId")
+    private String partyId;
+
+    @EdmNavigationProperty(name = Constants.SHIP_TO_PARTY_LOCATION, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE, toType = LocationDTO.class)
+    private LocationDTO locationDTO;
+
+    public LocationDTO getLocationDTO() {
+        return locationDTO;
+    }
+
+    public void setLocationDTO(LocationDTO locationDTO) {
+        this.locationDTO = locationDTO;
+    }
+
+    public String getPartyId() {
+        return partyId;
+    }
+
+    public void setPartyId(String partyId) {
+        this.partyId = partyId;
+    }
+
     public String getTrackingIdType() {
         return trackingIdType;
     }

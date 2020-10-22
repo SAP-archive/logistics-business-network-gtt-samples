@@ -22,7 +22,8 @@
     "isDelayed": true,
     "completedAndLateValue": "100.00",
     "isCompleted": false,
-    "trackingIdType": "SALES_ORDER"
+    "trackingIdType": "SALES_ORDER",
+    "partyId": "10000034"
   },
   {
     "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
@@ -47,7 +48,8 @@
     "isDelayed": null,
     "completedAndLateValue": "100.00",
     "isCompleted": false,
-    "trackingIdType": "SALES_ORDER"
+    "trackingIdType": "SALES_ORDER",
+    "partyId": "10000034"
   },
   {
     "id": "8781028f-e85a-584f-9e95-b878cbf6e92d",
@@ -72,6 +74,7 @@
     "isDelayed": false,
     "completedAndLateValue": "100.00",
     "isCompleted": false,
-    "trackingIdType": "SALES_ORDER"
+    "trackingIdType": "SALES_ORDER",
+    "partyId": "10000034"
   }
 ]

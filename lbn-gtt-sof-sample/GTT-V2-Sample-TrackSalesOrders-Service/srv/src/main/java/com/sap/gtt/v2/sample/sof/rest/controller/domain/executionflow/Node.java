@@ -19,6 +19,8 @@ public class Node {
     private String actualAt;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String eta;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String eventReasonText;
     @JsonIgnore
     private Long plannedBusinessTimestamp;
     @JsonIgnore
@@ -62,6 +64,14 @@ public class Node {
 
     public void setEta(String eta) {
         this.eta = eta;
+    }
+
+    public String getEventReasonText() {
+        return eventReasonText;
+    }
+
+    public void setEventReasonText(String eventReasonText) {
+        this.eventReasonText = eventReasonText;
     }
 
     public String getLocationTypeCode() {

@@ -7,9 +7,7 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:sv="sap.ui.comp.smartvariants"
-	xmlns:mc="sap.suite.ui.microchart"
-	xmlns:uxap="sap.uxap"
-	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	xmlns:mc="sap.suite.ui.microchart">
 	<f:DynamicPage id="dynamicPage">
 		<f:title>
 			<f:DynamicPageTitle>
@@ -72,6 +70,12 @@
 				<Table id="innerTable" class="sofSalesOrderListTable" growing="true">
 					<columns>
 						<Column>
+							<Text text="{parts: [{'value': 'shipToPartyId'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "shipToPartyId", "leadingProperty": "shipToPartyId, shipToPartyLocation", "navigationProperty": "shipToPartyLocation", columnIndex: 1}'/>
+							</customData>
+						</Column>
+						<Column>
 							<Text text="{i18n>completionRate}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "sortProperty": "", "columnIndex": 2}'/>
@@ -92,13 +96,18 @@
 						<Column id="incotermsColumn" visible="visible">
 							<Text text="{parts: [{'value': 'incoterms_code'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code, incoterms/name, incoterms/localized/name", "navigationProperty": "incoterms/localized", columnIndex: 10000}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code, incoterms/name, incoterms/localized/name", "navigationProperty": "incoterms/localized", columnIndex: 10001}'/>
 							</customData>
 						</Column>
 					</columns>
 					<items>
 						<ColumnListItem type="Navigation" highlight="{= ${isDelayed} === true ? 'Error' : 'None' }" press=".onSalesOrderPressed">
 							<cells>
+								<Link id="shipToParty" text="{shipToPartyLocation/locationDescription}" press=".openLocationQuickView">
+									<customData>
+										<core:CustomData key="propertyName" value="shipToPartyLocation"/>
+									</customData>
+								</Link>
 								<mc:HarveyBallMicroChart id="completionRate" class="sofTinyMarginTopBottom" size="XS" isResponsive="false"
 									visible="{parts: ['completionValue', 'netValue'], formatter: '.formatter.listCompletionRateVisibility'}"
 									total="{= parseFloat(${netValue}) }" totalScale="{currency}" tooltip="{i18n>completionRate}">

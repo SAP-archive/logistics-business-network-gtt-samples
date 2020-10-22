@@ -16,6 +16,7 @@ public class Event {
     private String senderPartyId;
     private String eventMatchKey;
     private String trackingId;
+    private String eventReasonText;
 
     public String getEventMatchKey() {
         return eventMatchKey;
@@ -112,5 +113,13 @@ public class Event {
 
     public void setTrackingId(String trackingId) {
         this.trackingId = trackingId;
+    }
+
+    public String getEventReasonText() {
+        return eventReasonText;
+    }
+
+    public void setEventReasonText(String eventReasonText) {
+        this.eventReasonText = eventReasonText;
     }
 }

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class LocationDTOOdataHandler extends SOFDefaultODataHandler {
@@ -42,9 +43,20 @@ public class LocationDTOOdataHandler extends SOFDefaultODataHandler {
 
     public void getLocationDTO4TP(DeliveryItem deliveryItem) {
         String destinationAltKey = SOFUtils.generateLocationAltKey(deliveryItem.getPartyId(),deliveryItem.getLogicalSystem(),deliveryItem.getDestinationLocationTypeCode(),deliveryItem.getDestination());
-        Location location = gttCoreServiceClient.getLocation(destinationAltKey);
-        LocationDTO locationDTO = mapService.getLocationDetail(location);
-        deliveryItem.setDestinationLocation(locationDTO);
+        deliveryItem.setDestinationLocation(getLocationDTO(destinationAltKey));
         deliveryItem.setDestinationAltKey(destinationAltKey);
+    }
+
+    public LocationDTO getLocationDTO(String locationAltKey) {
+        Location location = gttCoreServiceClient.getLocation(locationAltKey);
+        LocationDTO locationDTO = mapService.getLocationDetail(location);
+        return locationDTO;
+    }
+
+    public Map<String,LocationDTO> getLocationDTOs(Set<String> LocationAltKeys) {
+        List<Location> locations = gttCoreServiceClient.getLocations(LocationAltKeys);
+        Map<String,LocationDTO> map = new HashMap<>();
+        locations.forEach(location -> map.put(location.getLocationAltKey(),mapService.getLocationDetail(location)));
+        return map;
     }
 }

@@ -29,6 +29,7 @@ sap.ui.define(
 
       initModel: function () {
         var model = new JSONModel();
+        model.setSizeLimit(10000);
         this.setModel(model, "map");
         this.setModel(model, "impactAnalysis");
       },

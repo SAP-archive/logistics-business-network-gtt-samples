@@ -143,7 +143,7 @@ public class DeliveryItem {
     private String destinationLocationTypeCode;
     @EdmNavigationProperty(name = "arrivalTimes",toType = ArrivalTime.class,toMultiplicity = Multiplicity.MANY)
     private List<ArrivalTime> arrivalTimes;
-    @EdmProperty(name = "destinationAltKey")
+
     private String destinationAltKey;
     @EdmNavigationProperty(name = "destinationLocation", toType = LocationDTO.class,toMultiplicity = Multiplicity.ONE)
     private LocationDTO destinationLocation;

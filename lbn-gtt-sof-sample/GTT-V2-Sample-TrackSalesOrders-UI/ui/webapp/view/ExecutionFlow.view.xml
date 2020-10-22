@@ -44,10 +44,16 @@
 						<m:Label id="levelOnePlannedAtLabel" class="sofProcessFlowNodeLabel" visible="{= !!${executionFlow>plannedAt} }" text="{i18n>plannedAt}:" labelFor="levelOnePlannedAt"/>
 						<m:Text id="levelOnePlannedAt" class="sofProcessFlowNodeValue sapUiTinyMarginBottom" visible="{= !!${executionFlow>plannedAt} }" text="{path: 'executionFlow>plannedAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>
 
-						<m:ObjectStatus id="levelOneETA" visible="{= !!${executionFlow>eta} }" class="sofProcessFlowNodeETA sapUiTinyMarginBottom" text="{path: 'executionFlow>eta', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime', formatter: '.getETAText'}" state="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatus.getETAState'}"/>
+						<m:ObjectStatus id="levelOneETA" visible="{= !!${executionFlow>eta} }" class="sofProcessFlowNodeValue sofProcessFlowNodeETA sapUiTinyMarginBottom"
+							title="{i18n>estimatedArrivalTime}"
+							text="{path: 'executionFlow>eta', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}" state="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatus.getETAState'}"/>
 
 						<m:Label id="levelOneActualAtLabel" class="sofProcessFlowNodeLabel" visible="{= !!${executionFlow>actualAt} }" text="{i18n>actualAt}:" labelFor="levelOneActualAt"/>
 						<m:Text id="levelOneActualAt" class="sofProcessFlowNodeValue" visible="{= !!${executionFlow>actualAt} }" text="{path: 'executionFlow>actualAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>
+
+						<m:ObjectStatus id="levelOneEventReason" class="sofProcessFlowNodeValue sofProcessFlowNodeEventReason" visible="{= ${executionFlow>eventStatus} === 'DELAYED' ? true : false }"
+							title="{i18n>eventReason}"
+							text="{executionFlow>eventReasonText}" state="Error"/>
 					</m:VBox>
 				</zoomLevelOneContent>
 				<zoomLevelTwoContent>
@@ -57,7 +63,9 @@
 						<m:Label id="levelTwoPlannedAtLabel" class="sofProcessFlowNodeLabel" text="{i18n>plannedAt}:" visible="{= !!${executionFlow>plannedAt} }" labelFor="levelTwoPlannedAt"/>
 						<m:Text id="levelTwoPlannedAt" class="sofProcessFlowNodeValue sapUiTinyMarginBottom" visible="{= !!${executionFlow>plannedAt} }" text="{path: 'executionFlow>plannedAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>
 
-						<m:ObjectStatus id="levelTwoETA" visible="{= !!${executionFlow>eta} }" class="sofProcessFlowNodeETA sapUiTinyMarginBottom" text="{path: 'executionFlow>eta', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime', formatter: '.getETAText'}" state="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatus.getETAState'}"/>
+						<m:ObjectStatus id="levelTwoETAText" visible="{= !!${executionFlow>eta} }" class="sofProcessFlowNodeValue sofProcessFlowNodeETA sapUiTinyMarginBottom"
+							title="{i18n>estimatedArrivalTime}"
+							text="{path: 'executionFlow>eta', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}" state="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatus.getETAState'}"/>
 
 						<m:Label id="levelTwoActualAtLabel" class="sofProcessFlowNodeLabel" visible="{= !!${executionFlow>actualAt} }" text="{i18n>actualAt}:" labelFor="levelTwoActualAt"/>
 						<m:Text id="levelTwoActualAt" class="sofProcessFlowNodeValue" visible="{= !!${executionFlow>actualAt} }" text="{path: 'executionFlow>actualAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>

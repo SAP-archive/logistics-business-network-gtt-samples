@@ -328,18 +328,11 @@ public class SOFUtils {
         return formatter.format(data);
     }
 
-    public static String removeArrivalTimesInUrl(String uri) {
-        String regex_arrivalTime = "((\\s){0,}((\\$expand=)|(\\$filter=)|(\\$orderby=))(\\s){0,}(arrivalTimes)(\\s)*(&|$))|(,{1}(\\s){0,}(arrivalTimes))|((\\s){0,}(arrivalTimes)(\\s)*,{1})";
-        uri = uri.replaceAll(regex_arrivalTime, "");
-        return uri;
-    }
-
-    public static String removeDestinationLocationInUrl(String uri) {
-        String regex_destinationLocation = "((\\s){0,}((\\$expand=)|(\\$orderby=))(\\s){0,}(destinationLocation)(\\s)*(&|$))|(,{1}(\\s){0,}(destinationLocation))|((\\s){0,}(destinationLocation)(\\s)*,{1})";
+    public static String removeFieldInUrl(String uri,String removeField) {
+        String regex_destinationLocation = "((\\s){0,}((\\$expand=)|(\\$orderby=))(\\s){0,}("+removeField+")(\\s)*(&|$))|(,{1}(\\s){0,}("+removeField+"))|((\\s){0,}("+removeField+")(\\s)*,{1})";
         uri = uri.replaceAll(regex_destinationLocation, "");
         return uri;
     }
-
     public static String generateJsonStringFromBean(Object object) {
         return getGson().toJson(object);
     }

@@ -131,14 +131,14 @@ public class SOFUtilsTest {
     @Test
     public void removeArrivalTimesInUrl() {
         String url = "?$expand=arrivalTimes";
-        String actual = SOFUtils.removeArrivalTimesInUrl(url);
+        String actual = SOFUtils.removeFieldInUrl(url,"arrivalTimes");
         Assert.assertEquals("?",actual);
     }
 
     @Test
     public void removeDestinationLocationInUrl() {
         String url = "?$expand=destinationLocation";
-        String actual = SOFUtils.removeDestinationLocationInUrl(url);
+        String actual = SOFUtils.removeFieldInUrl(url,"destinationLocation");
         Assert.assertEquals("?",actual);
     }
 }

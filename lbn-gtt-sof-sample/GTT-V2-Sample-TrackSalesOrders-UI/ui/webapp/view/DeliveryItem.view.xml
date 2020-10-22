@@ -75,6 +75,16 @@
 					</m:OverflowToolbar>
 				</content>
 				<actions>
+					<m:Label id="lastUpdatedAtTime"
+						text="{view>/lastUpdatedAtTime}"
+						labelFor="refreshActionButton" />
+					<ObjectPageHeaderActionButton
+						id="refreshActionButton"
+						type="Transparent"
+						icon="sap-icon://refresh"
+						text="{i18n>refresh}"
+						tooltip="{i18n>refresh}"
+						press="onRefreshPressed" />
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>

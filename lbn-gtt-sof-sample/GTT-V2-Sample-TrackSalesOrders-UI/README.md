@@ -39,8 +39,8 @@ You can visit http://localhost:5000/test/flpSandboxMockServer.html in the browse
 
 ## Deploy
 
-### Prerequisites
+### Pre-requisites
 
-Change the TENANT_NAME in .env file
+Change the TENANT_NAME in ui/.env file
 
 

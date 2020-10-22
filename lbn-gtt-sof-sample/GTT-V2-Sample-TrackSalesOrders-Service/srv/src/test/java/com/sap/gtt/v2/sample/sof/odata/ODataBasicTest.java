@@ -1,6 +1,7 @@
 package com.sap.gtt.v2.sample.sof.odata;
 
 import com.sap.gtt.v2.sample.sof.App;
+import com.sap.gtt.v2.sample.sof.configuration.VcapParser;
 import com.sap.gtt.v2.sample.sof.odata.handler.ODataHandlerFactory;
 import com.sap.gtt.v2.sample.sof.odata.handler.PlannedEventHandler;
 import com.sap.gtt.v2.sample.sof.odata.handler.TrackedProcessHandler;
@@ -228,4 +229,5 @@ public class ODataBasicTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         Assertions.assertThat(response.getBody()).contains("Unsupported tracking id type: SHIPMENT_ORDER");
     }
+
 }

@@ -11,7 +11,14 @@
 				<items>
 					<Label id="shipToPartyLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="shipToParty"
 						text="{parts: [{'value': 'shipToPartyId'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
-					<Text id="shipToParty" class="sofHeaderContentPropertyText" text="{shipToPartyId}"/>
+					<Link id="shipToParty"
+						class="sofHeaderContentPropertyText"
+						text="{shipToPartyLocation/locationDescription}"
+						press=".openLocationQuickView">
+						<customData>
+							<core:CustomData key="propertyName" value="shipToPartyLocation"/>
+						</customData>
+					</Link>
 				</items>
 			</HBox>
 		</VBox>
