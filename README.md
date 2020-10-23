@@ -1,6 +1,9 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/logistics-business-network-gtt-samples)](https://api.reuse.software/info/github.com/SAP-samples/logistics-business-network-gtt-samples) 
 # Template Apps for SAP Logistics Business Network, Global Track and Trace Option
 
+## Announcement (2020.10.22):
+To adapt to the newest change of GTT October release, please upgrade your SOF model to version: sof-model-2020101501.json
+
 ## Description
 You can find the template code for [SAP Logistics Business Network, global track and trace option]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the option. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes: 
 * ERP extractor to send out the tracked process to global track and trace option (ABAP) 
