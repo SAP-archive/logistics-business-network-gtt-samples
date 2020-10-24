@@ -25,4 +25,5 @@ modules:
 resources:
 - name: lbn-gtt-sample-app-uaa
   type: org.cloudfoundry.existing-service
-
+- name: lbn-gtt-sample-destination
+  type: org.cloudfoundry.existing-service
