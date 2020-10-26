@@ -80,3 +80,8 @@ resources:
               - "uaa.user"
   - name: gtt-ui-sample-track-salesorders-app-host
     type: org.cloudfoundry.existing-service
+  - name: lbn-gtt-sample-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
