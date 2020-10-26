@@ -21,6 +21,7 @@ modules:
     timeout: 10m
   requires:
   - name: lbn-gtt-sample-app-uaa
+  - name: lbn-gtt-sample-destination
 
 resources:
 - name: lbn-gtt-sample-app-uaa
