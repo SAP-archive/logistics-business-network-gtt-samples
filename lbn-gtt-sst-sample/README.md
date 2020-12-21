@@ -6,7 +6,7 @@ Track Shipments template app is designed for transportation planner to monitor t
 * What is the next stop of my shipment/road freight order/ocean freight booking?
 * What is the ETA of my shipment/road freight order/ocean freight booking?
 * …… </br>
-More details, please refer to [01_Application_Introduction-TS.pdf]
+More details, please refer to [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/01_Application_Introduction-TS.pdf)
 
 ## Requirements
 * An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
