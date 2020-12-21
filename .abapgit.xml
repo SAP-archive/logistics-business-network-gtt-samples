@@ -5,6 +5,7 @@
    <MASTER_LANGUAGE>E</MASTER_LANGUAGE>
    <FOLDER_LOGIC>PREFIX</FOLDER_LOGIC>
    <IGNORE>
+    <item>/.abapgit.xml</item>    
     <item>/.gitignore</item>
     <item>/LICENSE</item>
     <item>/README.md</item>
