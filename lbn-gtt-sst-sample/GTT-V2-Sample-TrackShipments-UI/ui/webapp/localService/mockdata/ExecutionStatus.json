@@ -1,0 +1,14 @@
+[
+  {
+    "code": "NOT_STARTED",
+    "name": "Not Started"
+  },
+  {
+    "code": "IN_TRANSIT",
+    "name": "In Transit"
+  },
+  {
+    "code": "COMPLETED",
+    "name": "Completed"
+  }
+]

@@ -1,0 +1,118 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+  xmlns:suite="sap.suite.ui.commons"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+  core:require="{formatMessage: 'sap/base/strings/formatMessage'}"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+  <suite:Timeline
+    id="trackingTimeline"
+    noDataText="{i18n>noData}"
+    showIcons="false"
+    showSort="false"
+    showSearch="true"
+    showTimeFilter="false"
+    sort="false"
+    growingThreshold="0"
+    filterTitle="{i18n>eventStatusLabel}"
+    content="{
+      path: 'trackingTimeline>/timelineEvents',
+      templateShareable: false
+    }">
+    <suite:layoutData>
+			<layout:SplitterLayoutData
+        size="425px"
+				minSize="225px" />
+		</suite:layoutData>
+    <suite:TimelineItem
+      class="pofTimelineItem"
+      filterValue="{
+        path: 'trackingTimeline>eventStatusCode',
+        formatter: '.formatter.formatEventStatusText'  
+      }"
+      title="{
+        path: 'trackingTimeline>',
+        formatter: '.formatter.formatEventTitle'
+      }"
+      dateTime="{
+        path: 'trackingTimeline>actualBusinessTimestamp', 
+        formatter: '.formatTimestamp'
+      }">
+      <suite:customData>
+        <core:CustomData key="is-reported-event"
+          value="{= (!!${path: 'trackingTimeline>actualEventId'}).toString() }"
+          writeToDom="true" />
+        <core:CustomData key="is-planned-event"
+          value="{= (${trackingTimeline>eventStatusCode} !== 'UNPLANNED').toString() }"
+          writeToDom="true" />
+      </suite:customData>
+      <VBox wrap="Wrap" justifyContent="Start">        
+        <HBox
+          class="pofTimelineMainContentContainer"
+          width="100%"
+          alignItems="Center">
+          <ObjectAttribute 
+            class="sapUiTinyMarginTop"
+            visible="{= ${trackingTimeline>eventStatusCode} !== 'UNPLANNED' }"
+            title="{i18n>plannedAtLabel}"
+            text="{
+              path: 'trackingTimeline>plannedBusinessTimestamp',
+              formatter: '.formatTimestamp'
+            }" />
+          <ObjectStatus
+            class="sapUiTinyMarginTop"
+            state="{
+              path:'trackingTimeline>eventStatusCode',
+              formatter: '.formatter.formatEventStatusState'
+            }"
+            text="{
+              path:'trackingTimeline>eventStatusCode',
+              formatter: '.formatter.formatEventStatusText'
+            }"
+            inverted="{= ${trackingTimeline>eventStatusCode} === 'DELAYED' || ${trackingTimeline>eventStatusCode} === 'LATE' }"/>
+        </HBox>
+        <ObjectAttribute
+          class="sapUiTinyMarginTop"
+          visible="{= ${trackingTimeline>eventStatusCode} !== 'UNPLANNED' }"
+          title="{i18n>eventMatchKeyLabel}"
+          text="{trackingTimeline>eventMatchKey}" />
+        <ctrl:link.LinkPopover
+          id="reporting"
+          class="sapUiTinyMarginTop sapUiSmallMarginEnd"
+          contentHeight="10rem" contentWidth="20rem"
+          visible="{path: 'trackingTimeline>', formatter: '.getHistoryVisibility'}"
+          title="{i18n>reportingHistoryLabel} ({= ${trackingTimeline>historicalEvents}.length })"
+          linkText="{i18n>reportingHistoryLabel} ({= ${trackingTimeline>historicalEvents}.length })"
+          popoverItems="{
+            path: 'trackingTimeline>historicalEvents',
+            templateShareable: false
+          }"
+          press="onReportingHistoryLinkPress">
+          <ctrl:popoverItems>
+            <CustomListItem>
+              <ObjectAttribute 
+                class="sapUiTinyMarginBottom"
+                title="{i18n>actualAtLabel}"
+                text="{
+                  path: 'trackingTimeline>actualBusinessTimestamp',
+                  formatter: '.formatTimestamp'
+                }"
+                active="false" />
+              <ObjectAttribute 
+                class="sapUiTinyMarginBottom"
+                title="{i18n>reportedByLabel}"
+                text="{trackingTimeline>reportedBy}"
+                active="false" />
+              <ObjectAttribute 
+                class="sapUiTinyMarginBottom"
+                title="{i18n>senderPartyLabel}"
+                text="{trackingTimeline>senderPartyId}"
+                active="false" />
+            </CustomListItem>
+          </ctrl:popoverItems>
+        </ctrl:link.LinkPopover>
+      </VBox>
+    </suite:TimelineItem>
+  </suite:Timeline>
+</core:FragmentDefinition>

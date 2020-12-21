@@ -1,0 +1,34 @@
+@font-face {
+  font-family: BusinessSuiteInAppSymbols;
+  src: url("BusinessSuiteInAppSymbols.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: SAP-icons-TNT;
+  src: url("SAP-icons-TNT.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.emphasizedDocumentFlowNode() {
+  .sapSuiteUiCommonsNetworkGraphDivInner {
+    .sapMText {
+      color: #fff;
+    }
+    border-color: #0854a0;
+    background-color: #0854a0;
+  }
+}
+@media (max-width: 600px) {
+  .purchaseOrderDetailItemsSection {
+    margin-bottom: 1rem;
+  }
+}
+
+@import "../view/list/style/poList.less";
+@import "../view/order/style/poDetail.less";
+@import "../view/item/style/poItemDetail.less";
+@import "../view/deliveryItem/style/deliveryItem.less";
+@import "../control/popover/style/popover.less";
+ 

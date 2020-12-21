@@ -7,6 +7,7 @@ import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItem;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.deliveryitem.CarrierRefDocumentForDeliveryItem;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.deliveryitem.FulfillmentStatus;
 import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
+import com.sap.gtt.v2.sample.sof.utils.ODataUtils;
 import com.sap.gtt.v2.sample.sof.utils.SOFUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
@@ -18,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
+@PrepareForTest(ODataUtils.class)
 public class SOFServiceTest {
 
     @Spy
@@ -54,7 +57,7 @@ public class SOFServiceTest {
         ReflectionTestUtils.setField(sofService, "gttCoreServiceClient", gttCoreServiceClient);
     }
 
-    @Test
+    /*@Test
     public void testUpdateCompletedAndLateValues() {
         String json = SOFUtils.getStringFromResource("/odata/sales-order-single.json");
         Mockito.when(restTemplate.exchange(contains("/SalesOrder"), eq(HttpMethod.GET),
@@ -88,6 +91,7 @@ public class SOFServiceTest {
 
     @Test
     public void testExecuteTasks() {
+
         Mockito.doNothing().when(sofService).updateCompletionAndDelayedQuantities(anyString());
         Mockito.doNothing().when(sofService).updateCompletedAndLateValues(anyString());
         Mockito.doNothing().when(sofService).updateLastActivityOfDeliveryItem(any());
@@ -96,8 +100,25 @@ public class SOFServiceTest {
 
         verify(sofService, times(1)).updateCompletionAndDelayedQuantities(anyString());
         verify(sofService, times(1)).updateCompletedAndLateValues(anyString());
-    }
+    }*/
+    @Test
+    public void testExecuteTasks() {
+        String json = SOFUtils.getStringFromResource("/odata/sales-order-single-odataList.json");
+        Mockito.when(restTemplate.exchange(contains("/SalesOrder"), eq(HttpMethod.GET),
+                any(HttpEntity.class), eq(String.class))).thenReturn(
+                ResponseEntity.ok().body(json));
 
+        Mockito.doNothing().when(sofService).updateLastActivityOfDeliveryItem(any());
+
+        Mockito.when(restTemplate.exchange(anyString(),eq(HttpMethod.POST), any(HttpEntity.class) ,eq(String.class))).thenReturn(
+                ResponseEntity.ok().body(null));
+
+
+        String payload = SOFUtils.getStringFromResource("/odata/payload-received-shipment-pod.json");
+        sofService.executeTasks(payload);
+        verify(sofService, times(1)).updateLastActivityOfDeliveryItem(any());
+
+    }
     @Test
     public void testGetCarrierRefDocuments() {
         String json = SOFUtils.getStringFromResource("/odata/delivery-item-carrierRefDocuments.json");
@@ -156,7 +177,7 @@ public class SOFServiceTest {
     }
 
 
-    @Test
+    /*@Test
     public void testUpdateCompletionAndDelayedQuantities() {
         String json = SOFUtils.getStringFromResource("/odata/sales-order-single.json");
         Mockito.when(restTemplate.exchange(contains("/SalesOrder"), eq(HttpMethod.GET),
@@ -172,7 +193,7 @@ public class SOFServiceTest {
                 ResponseEntity.ok().body(null));
 
         sofService.updateCompletionAndDelayedQuantities("afe8b268-3994-5331-afac-52e669da9b7f");
-    }
+    }*/
 
 
     @Test

@@ -1,0 +1,11 @@
+{
+  "welcomeFile": "/cp.portal",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/(token.json)(.*)$",
+      "target": "$1",
+      "localDir": "resources"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Table id="referenceDocumentsTable"
+		growing="true"
+		items="{
+			path: 'carrierRefDocuments',
+			parameters: {
+				expand: 'docType/localized'
+			}
+		}"
+		updateFinished=".addVpRowInRefDocumentsTable(${$source>}, ${trackId})">
+		<columns>
+			<Column>
+				<Text id="documentTypeColumn"
+					text="{i18n>referenceDocumentType}" />
+			</Column>
+
+			<Column>
+				<Text id="documentIdColumn"
+					text="{i18n>referenceDocumentId}" />
+			</Column>
+		</columns>
+
+		<ColumnListItem>
+			<Text text="{=
+				!!${docType/localized/name} ? ${docType/localized/name} : ${docType/name}
+			}" />
+			<Text text="{docId}" />
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

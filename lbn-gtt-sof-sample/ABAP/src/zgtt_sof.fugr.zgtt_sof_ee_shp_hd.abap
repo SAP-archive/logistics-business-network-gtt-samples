@@ -123,7 +123,7 @@ FUNCTION zgtt_sof_ee_shp_hd.
     APPEND ls_expeventdata TO e_expeventdata.
 
 * Planned Load-Start
-    ls_expeventdata-milestone    = 'LOAD_START'.
+    ls_expeventdata-milestone    = 'LOAD_BEGIN'.
 *   Get Planned Load-Start datetime
     PERFORM set_local_timestamp
       USING    <ls_xvttk>-dplbg
@@ -150,9 +150,9 @@ FUNCTION zgtt_sof_ee_shp_hd.
 
     LOOP AT lt_stops INTO ls_stop.
       IF ls_stop-loccat = 'S'.
-        ls_expeventdata-milestone    = 'SHP_DEPARTURE'.
+        ls_expeventdata-milestone    = 'DEPARTURE'.
       ELSE.
-        ls_expeventdata-milestone    = 'SHP_ARRIVAL'.
+        ls_expeventdata-milestone    = 'ARRIV_DEST'.
       ENDIF.
 
       ls_expeventdata-locid2       = ls_stop-stopid.
@@ -182,7 +182,7 @@ FUNCTION zgtt_sof_ee_shp_hd.
       ENDLOOP.
 
       IF lv_pod_pln = 'X'.
-        ls_expeventdata-milestone    = 'SHP_POD'.
+        ls_expeventdata-milestone    = 'POD'.
         ls_expeventdata-locid2       = ls_stop-stopid.
         ls_expeventdata-loctype      = ls_stop-loctype.
         ls_expeventdata-locid1       = ls_stop-locid.

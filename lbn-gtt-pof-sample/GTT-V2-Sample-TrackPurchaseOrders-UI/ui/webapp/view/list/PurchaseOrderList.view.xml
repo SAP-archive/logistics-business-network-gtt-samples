@@ -1,0 +1,427 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.pof.controller.list.PurchaseOrderList"
+	core:require="{formatMessage: 'sap/base/strings/formatMessage'}"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:uxap="sap.uxap"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage" class="purchaseOrderListPage">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="pageVariant"
+						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="true"/>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"/>
+				</f:snappedContent>
+				<f:actions>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<smartFilterBar:SmartFilterBar
+						id="smartFilterBar"
+						smartVariant="pageVariant"
+						useToolbar="false"
+						entitySet="PurchaseOrderItem"
+						useDateRangeType="true"
+						considerSelectionVariants="true"
+						persistencyKey="listReportFilterBar"
+						reset="onFilterReset"
+						assignedFiltersChanged=".onAssignedFiltersChanged"
+						beforeVariantSave=".onBeforeVariantSave"
+						beforeVariantFetch=".onBeforeVariantFetch"
+						afterVariantLoad=".onAfterVariantLoad"
+						showClearButton="false">
+						<smartFilterBar:controlConfiguration>
+							<core:Fragment id="customFilterFragment" fragmentName="com.sap.gtt.app.sample.pof.view.list.fragments.CustomFilters" type="XML"/>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<IconTabBar
+				class="purchaseOrderListBar"
+				selectedKey="{purchaseOrderList>/selectedTabFitlerKey}"
+				expand=""
+				expandable="false">
+				<items>
+					<IconTabFilter
+						key="purchaseOrderTab"
+						text="{
+							parts: [
+								{path: 'i18n>titleAmountTabBarTemplate'},
+								{path: 'i18n>purchaseOrderListTitle'},
+								{path: 'view>/purchaseOrderAmount'}
+							],
+							formatter: 'formatMessage'
+						}">
+            <smartTable:SmartTable
+              id="purchaseOrderSmartTable"
+              smartFilterId="smartFilterBar"
+              smartVariant="pageVariant"
+              persistencyKey="listReportOrdersTable"
+              tableType="ResponsiveTable"
+              requestAtLeastFields="id,incoterms,toSupplierLocation,toReceivingLocation,receivingLocationType,supplierLocationType"
+              demandPopin="true"
+              noData="{i18n>noDataFoundText}"
+              editable="false"
+              entitySet="PurchaseOrder"
+              useVariantManagement="true"
+              useTablePersonalisation="true"
+              header="{i18n>purchaseOrderListTitle}"
+              showRowCount="true"
+              useExportToExcel="false"
+              enableAutoBinding="true"
+              beforeRebindTable="onBeforeRebindPOTable"
+              ignoreFromPersonalisation="id,currency,logicalSystem,totalDeliveredValue,totalDelayedValue,processStatus_code,trackingIdType,partyId,receivingLocationDescription,supplierDescription,receivingLocationType,,toReceivingLocation,receivingLocationType_code,altKey">
+              <smartTable:customData>
+                <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+                <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+              </smartTable:customData>
+              <Table id="innerTable" growing="true" >
+                <columns>
+                  <Column >
+                    <Text text="{@i18n>EL_PurchaseOrder_supplierId_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "supplierId", "leadingProperty": "supplierId", "sortProperty": "supplierId", "navigationProperty": "toSupplierLocation", "columnIndex": 1}'/>
+                    </customData>
+                  </Column>
+                  <Column >
+                    <Text text="{@i18n>EL_PurchaseOrder_receivingLocationId_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "receivingLocationId, receivingLocationId", "leadingProperty": "receivingLocationId", "sortProperty": "receivingLocationId",  "navigationProperty": "toReceivingLocation", "columnIndex": 2}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrder_plannedDeliveryDate_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "sortProperty": "plannedDeliveryDate", "columnIndex": 3}'/>
+                    </customData>
+                  </Column>
+                  <Column>
+                    <Text text="{i18n>completionRate}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 5}'/>
+                    </customData>
+                  </Column>
+                  <Column>
+                    <Text text="{@i18n>EL_PurchaseOrder_incoterms_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "sortProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 6}'/>
+                    </customData>
+                  </Column>
+                </columns>
+                <items>
+                  <ColumnListItem type="Navigation" press=".onPurchaseOrderPressed">
+                    <cells>
+                      <ctrl:link.LinkPopover
+                        relatedObject="toSupplierLocation"
+                        placement="Right"
+                        contentHeight="15rem"
+                        title="{i18n>locationDetailsPopoverTitle}"
+                        text="{supplierId}"
+                        linkText="{toSupplierLocation/locationDescription}">
+                        <ctrl:content>
+                          <VBox>
+                          <Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
+                          <Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                          <Text id="supplierLocationObjectType" text="{toSupplierLocation/objectTypeDescription}" />
+                          <Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                          <Text id="supplierLocationSourceSystemId" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
+                          <Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                          <HBox justifyContent="SpaceBetween">
+                            <Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                            <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                          </HBox>
+                          </VBox>
+                        </ctrl:content>
+                      </ctrl:link.LinkPopover>
+                      <ctrl:link.LinkPopover
+                        placement="Right"
+                        contentHeight="15rem"
+                        title="{i18n>locationDetailsPopoverTitle}"
+                        text="{receivingLocationId}"
+                        linkText="{toReceivingLocation/locationDescription}"
+                        relatedObject="toReceivingLocation">
+                        <ctrl:content>
+                          <VBox>
+                            <Title class="pofLocationPopoverTitle" text="{toReceivingLocation/locationDescription}"/>
+                            <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                            <Text id="receivingLocationObjectType" text="{toReceivingLocation/objectTypeDescription}" />
+                            <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                            <Text id="receivingLocationSourceSystemId" text="{toReceivingLocation/sourceSystem} / {toReceivingLocation/externalId}"/>
+                            <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                            <HBox justifyContent="SpaceBetween">
+                              <Text id="receivingLocationAddress" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                              <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                            </HBox>
+                          </VBox>
+                        </ctrl:content>
+                      </ctrl:link.LinkPopover>
+                      <Text text="{
+                        path: 'plannedDeliveryDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                          style: 'medium',
+                          UTC: true
+                        }
+                      }" />
+                      <mc:HarveyBallMicroChart
+                        id="orderCompletionRate"
+                        size="XS"
+                        class="completionRateTableChart"
+                        isResponsive="false"
+                        total="100"
+                        totalScale="%"
+                        tooltip="{i18n>completionRate}">
+                        <mc:items>
+                          <mc:HarveyBallMicroChartItem fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
+                        </mc:items>
+                      </mc:HarveyBallMicroChart>
+                      <Text text="{incoterms/name}" />
+                    </cells>
+                  </ColumnListItem>
+                </items>
+              </Table>
+            </smartTable:SmartTable>
+					</IconTabFilter>
+					<IconTabFilter
+						key="purchaseOrderItemsTab"
+						text="{
+							parts: [
+								{path: 'i18n>titleAmountTabBarTemplate'},
+								{path: 'i18n>purchaseOrderItemListTitle'},
+								{path: 'view>/purchaseOrderItemsAmount'}
+							],
+							formatter: 'formatMessage'
+						}">
+            <smartTable:SmartTable
+              id="purchaseOrderItemsSmartTable"
+              class="purchaseOrderItemsSmartTable"
+              smartFilterId="smartFilterBar"
+              smartVariant="pageVariant"
+              persistencyKey="listReportItemsTable"
+              tableType="ResponsiveTable"
+              requestAtLeastFields="id,incoterms,toSupplierLocation,toReceivingLocation,receivingLocationType,supplierLocationType,altKey"
+              demandPopin="true"
+              noData="{i18n>noDataFoundText}"
+              editable="false"
+              entitySet="PurchaseOrderItem"
+              useVariantManagement="true"
+              useTablePersonalisation="true"
+              header="{i18n>purchaseOrderItemListTitle}"
+              showRowCount="true"
+              useExportToExcel="false"
+              enableAutoBinding="true"
+              beforeRebindTable="onBeforeRebindPOItemsTable"
+              ignoredFields="id,purchaseOrderNo,nextETA,orderQuantityUoM,volumeUoM,weightUoM,currency,completedQuantity,processStatus_code,purchaseOrder_id,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,receivingLocationId,supplierDescription,logicalSystem,lastReportedEvent,altKey">
+              <smartTable:customData>
+                <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+                <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+              </smartTable:customData>
+              <Table
+                id="innerTableItem"
+                growing="true">
+                <columns>
+                  <Column>
+                    <Text text="{@i18n>EL_PurchaseOrderItem_itemNo_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "itemNo", "leadingProperty": "itemNo,purchaseOrderNo,altKey", "sortProperty": "altKey", "columnIndex": 0}'/>
+                    </customData>
+                  </Column>
+                  <Column >
+                    <Text text="{@i18n>EL_PurchaseOrderItem_supplierId_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "supplierId", "leadingProperty": "supplierId", "sortProperty": "supplierId", "navigationProperty": "toSupplierLocation", "columnIndex": 1}'/>
+                    </customData>
+                  </Column>
+                  <Column >
+                    <Text text="{@i18n>EL_PurchaseOrderItem_receivingLocationId_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "receivingLocationType_code", "leadingProperty": "receivingLocationType_code, receivingLocationId", "sortProperty": "receivingLocationId", "navigationProperty": "toReceivingLocation", "columnIndex": 2}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_plannedDeliveryDate_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "sortProperty": "plannedDeliveryDate", "columnIndex": 3}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_orderQuantity_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "orderQuantity", "leadingProperty": "orderQuantity,orderQuantityUoM", "sortProperty": "orderQuantity", "columnIndex": 4}'/>
+                    </customData>
+                  </Column>
+                  <Column>
+                    <Text text="{i18n>completionRate}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 5}'/>
+                    </customData>
+                  </Column>
+                  <!-- hidden -->
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_netWeight_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "sortProperty": "netWeight", "columnIndex": 7}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_grossWeight_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "sortProperty": "grossWeight",  "columnIndex": 8}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_volume_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "sortProperty": "volume", "columnIndex": 9}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_netValue_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "netValue", "leadingProperty": "netValue,currency", "sortProperty": "netValue", "columnIndex": 10}'/>
+                    </customData>
+                  </Column>
+                  <Column visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_incoterms_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "sortProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 11}'/>
+                    </customData>
+                  </Column>
+                </columns>
+                <items>
+                  <ColumnListItem type="Navigation" press=".onPurchaseOrderItemPressed">
+                    <cells>
+                      <Text class="tableKeyColumn" text="{purchaseOrderNo} / {itemNo}"></Text>
+                      <ctrl:link.LinkPopover
+                        placement="Right"
+                        contentHeight="15rem"
+                        title="{i18n>locationDetailsPopoverTitle}"
+                        text="{supplierId}"
+                        linkText="{toSupplierLocation/locationDescription}"
+                        relatedObject="toSupplierLocation">
+                        <ctrl:content>
+                          <VBox>
+                          <Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
+                          <Label labelFor="supplierLocationObjectTypeItem" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                          <Text id="supplierLocationObjectTypeItem" text="{toSupplierLocation/objectTypeDescription}" />
+                          <Label labelFor="supplierLocationSourceSystemIdItem" text="{i18n>sourceSystemLocationLabel}"/>
+                          <Text id="supplierLocationSourceSystemIdItem" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
+                          <Label labelFor="supplierLocationAddressItem" text="{i18n>formattedAddressLocationLabel}"/>
+                          <HBox justifyContent="SpaceBetween">
+                            <Text id="supplierLocationAddressItem" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                            <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                          </HBox>
+                          </VBox>
+                        </ctrl:content>
+                      </ctrl:link.LinkPopover>
+                      <ctrl:link.LinkPopover
+                        placement="Right"
+                        contentHeight="15rem"
+                        title="{i18n>locationDetailsPopoverTitle}"
+                        text="{receivingLocationId}"
+                        linkText="{toReceivingLocation/locationDescription}"
+                        relatedObject="toReceivingLocation">
+                        <ctrl:content>
+                          <VBox>
+                            <Title class="pofLocationPopoverTitle" text="{toReceivingLocation/locationDescription}"/>
+                            <Label labelFor="receivingLocationObjectTypeItem" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                            <Text id="receivingLocationObjectTypeItem" text="{toReceivingLocation/objectTypeDescription}" />
+                            <Label labelFor="receivingLocationSourceSystemIdItem" text="{i18n>sourceSystemLocationLabel}"/>
+                            <Text id="receivingLocationSourceSystemIdItem" text="{toReceivingLocation/sourceSystem} / {toReceivingLocation/externalId}"/>
+                            <Label labelFor="receivingLocationAddressItem" text="{i18n>formattedAddressLocationLabel}"/>
+                            <HBox justifyContent="SpaceBetween">
+                              <Text id="receivingLocationAddressItem" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                              <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                            </HBox>
+                          </VBox>
+                        </ctrl:content>
+                      </ctrl:link.LinkPopover>
+                      <Text text="{
+                        path: 'plannedDeliveryDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                          style: 'medium',
+                          UTC: true
+                        }
+                      }" />
+                      <Text
+                        text="{
+                          parts: [
+                            {path: 'orderQuantity', type: 'sap.ui.model.odata.type.Decimal', constraints: {scale: 3}},
+                            {path: 'orderQuantityUoM'}
+                          ],
+                          formatter: '.formatter.formatAmountUnitField'
+                        }" />
+                      <mc:HarveyBallMicroChart
+                        id="itemCompletionRate"
+                        size="XS"
+                        isResponsive="false"
+                        class="completionRateTableChart"
+                        total="100"
+                        totalScale="%"
+                        tooltip="{i18n>completionRate}">
+                        <mc:items>
+                          <mc:HarveyBallMicroChartItem fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
+                        </mc:items>
+                      </mc:HarveyBallMicroChart>
+                      <!-- hidden -->
+                      <Text text="{
+                        parts: [
+                          {path: 'netWeight'},
+                          {path: 'weightUoM'}
+                        ],
+                        formatter: '.formatter.formatAmountUnitField'
+                      }" />
+                      <Text text="{
+                        parts: [
+                          {path: 'grossWeight'},
+                          {path: 'weightUoM'}
+                        ],
+                        formatter: '.formatter.formatAmountUnitField'
+                      }" />
+                      <Text text="{
+                        parts: [
+                          {path: 'volume'},
+                          {path: 'volumeUoM'}
+                        ],
+                        formatter: '.formatter.formatAmountUnitField'
+                      }" />
+                      <Text text="{
+                        parts: [
+                          {path: 'netValue'},
+                          {path: 'currency'}
+                        ],
+                        formatter: '.formatter.formatAmountUnitField'
+                      }" />
+
+                      <Text text="{incoterms/name}" />
+                    </cells>
+                  </ColumnListItem>
+                </items>
+              </Table>
+            </smartTable:SmartTable>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

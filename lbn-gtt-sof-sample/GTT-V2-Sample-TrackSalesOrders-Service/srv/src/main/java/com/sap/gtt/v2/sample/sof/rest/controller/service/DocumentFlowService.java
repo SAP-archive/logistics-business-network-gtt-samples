@@ -4,11 +4,7 @@ import com.sap.gtt.v2.sample.sof.constant.DocumentFlowGeneralStatusEnum;
 import com.sap.gtt.v2.sample.sof.constant.DocumentFlowGroupEnum;
 import com.sap.gtt.v2.sample.sof.exception.SOFServiceException;
 import com.sap.gtt.v2.sample.sof.odata.model.*;
-import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.DocumentFlow;
-import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.Group;
-import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.Line;
-import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.Node;
-import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.TPRelation;
+import com.sap.gtt.v2.sample.sof.rest.controller.domain.documentflow.*;
 import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -16,11 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.EXPAND;
+import static java.lang.String.format;
 
 @Service
 public class DocumentFlowService extends DocumentFlowServiceBase {
@@ -50,8 +50,10 @@ public class DocumentFlowService extends DocumentFlowServiceBase {
     }
 
     private SalesOrder querySalesOrder(UUID salesOrderId) {
-        String query = String.format("/SalesOrder(guid'%s')?&$expand=salesOrderItemTPs/salesOrderItem/deliveryItemTPs/deliveryItem" +
-                "/delivery/shipmentTPs/shipment/resourceTPs/resource", salesOrderId);
+        String query = UriComponentsBuilder.fromUriString(format("/SalesOrder(guid'%s')", salesOrderId))
+                .queryParam(EXPAND, "salesOrderItemTPs/salesOrderItem/deliveryItemTPs/deliveryItem" +
+                        "/delivery/shipmentTPs/shipment/resourceTPs/resource")
+                .build().encode().toUriString();
         return gttCoreServiceClient.readEntity(query, SalesOrder.class);
     }
 

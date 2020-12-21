@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		id="deliveryNoFilterDialog"
+		title="{parts: [{value: 'deliveryNo'}, {value: 'Delivery'}], formatter: '.getPropertyLabelText'}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		key="deliveryTPs.delivery.deliveryNo"
+		_enhancedExcludeOperations="true"
+		descriptionKey="deliveryTPs.delivery.deliveryNo"
+		supportRanges="true"
+		supportRangesOnly="true"/>
+</core:FragmentDefinition>

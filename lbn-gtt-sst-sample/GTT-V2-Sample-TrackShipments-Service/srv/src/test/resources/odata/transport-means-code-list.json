@@ -1,0 +1,294 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('8')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('8')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "8",
+        "name": "Container Ship",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('8')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='8')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='8')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "8",
+          "name": "Container Ship"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('11')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('11')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "11",
+        "name": "Ship",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('11')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='11')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='11')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "11",
+          "name": "Ship"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('13')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('13')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "13",
+        "name": "Ocean Vessel",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('13')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='13')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='13')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "13",
+          "name": "Ocean Vessel"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('16')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('16')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "16",
+        "name": "Barge",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('16')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='16')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='16')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "16",
+          "name": "Barge"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('28')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('28')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "28",
+        "name": "Refrigerated Truck and Trailer",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('28')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='28')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='28')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "28",
+          "name": "Refrigerated Truck and Trailer"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('29')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('29')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "29",
+        "name": "Freezer Truck and Trailer",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('29')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='29')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='29')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "29",
+          "name": "Freezer Truck and Trailer"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('31')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('31')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "31",
+        "name": "Truck",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('31')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='31')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='31')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "31",
+          "name": "Truck"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('41')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('41')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "41",
+        "name": "Freezer Truck",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('41')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='41')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='41')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "41",
+          "name": "Freezer Truck"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('42')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('42')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "42",
+        "name": "Isothermic Truck",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('42')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='42')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='42')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "42",
+          "name": "Isothermic Truck"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('43')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('43')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "43",
+        "name": "Refrigerated truck",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('43')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='43')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='43')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "43",
+          "name": "Refrigerated truck"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('46')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('46')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "46",
+        "name": "Refrigerated Van",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('46')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='46')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='46')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "46",
+          "name": "Refrigerated Van"
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('65')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('65')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode"
+        },
+        "code": "65",
+        "name": "Container only Vessel",
+        "texts": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode('65')/texts"
+          }
+        },
+        "localized": {
+          "__metadata": {
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='65')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/TransportMeansStandardCode_texts(locale='en',code='65')",
+            "type": "com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode_texts"
+          },
+          "locale": "en",
+          "code": "65",
+          "name": "Container only Vessel"
+        }
+      }
+    ]
+  }
+}

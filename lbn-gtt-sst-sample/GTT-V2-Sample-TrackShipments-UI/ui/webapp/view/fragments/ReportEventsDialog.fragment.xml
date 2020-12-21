@@ -1,0 +1,258 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Dialog id="dialog"
+		contentWidth="60rem"
+		title="{= ${props>/eventStatus} === 'Planned'
+			? ${i18n>reportPlannedEvent}
+			: ${i18n>reportUnplannedEvent}
+		}"
+		busy="{state>/isEventReporting}"
+		busyIndicatorDelay="0"
+		afterOpen=".onAfterOpen"
+		afterClose=".onAfterClose">
+		<VBox id="contentVBox">
+			<f:Form id="eventDetailForm">
+				<f:layout>
+					<f:ColumnLayout columnsM="2" />
+				</f:layout>
+
+				<f:FormContainer id="eventDetailFormContainer"
+					title="{= ${props>/eventStatus} === 'Planned'
+						? ${i18n>plannedEventDetails}
+						: ${i18n>unplannedEventDetails}
+					}">
+					<f:FormElement visible="{= ${props>/eventStatus} === 'Unplanned' }">
+						<f:label>
+							<Label id="unplannedEventLabel"
+								text="{i18n>unplannedEvent}"
+								required="true" />
+						</f:label>
+						<Select id="unplannedEvent"
+							forceSelection="false"
+							items="{props>/unplannedEvents}"
+							valueState="{= ${state>/isUnplannedEventValid} ? 'None' : 'Error' }"
+							valueStateText="{i18n>mandatoryCheckWarningMsg}"
+							change=".handleUnplannedEventSelect(${$parameters>/selectedItem})">
+							<core:Item text="{props>eventType/descr}" />
+						</Select>
+					</f:FormElement>
+
+					<f:FormElement visible="{= ${props>/eventStatus} === 'Unplanned' }">
+						<f:label>
+							<Label id="refPlannedEventLabel"
+								text="{i18n>refPlannedEvent}" />
+						</f:label>
+						<Select id="refPlannedEvent"
+							enabled="{state>/hasRefFields}"
+							forceSelection="false"
+							showSecondaryValues="true"
+							items="{
+								path: 'props>/refPlannedEvents',
+								sorter: [
+									{
+										path: 'eventMatchKey',
+										descending: false
+									},
+									{
+										path: 'plannedBusinessTimestamp',
+										descending: false
+									}
+								]
+							}"
+							change=".handleRefPlannedEventSelect(${$parameters>/selectedItem})">
+							<core:ListItem
+								text="{
+									parts: [
+										'props>eventType',
+										'props>location/locationDescription',
+										'props>locationType/name'
+									],
+									formatter: '.formatter.eventSummary'
+								}"
+								additionalText="{i18n>plannedAt}: {
+									path: 'props>plannedBusinessTimestamp',
+									type: 'sap.ui.model.odata.type.DateTimeOffset'
+								}">
+								<core:customData>
+									<core:CustomData
+										key="is-planned-event-selection"
+										value="true"
+										writeToDom="true" />
+								</core:customData>
+							</core:ListItem>
+						</Select>
+					</f:FormElement>
+
+					<f:FormElement visible="{= ${props>/eventStatus} === 'Planned' }">
+						<f:label>
+							<Label id="plannedEventLabel"
+								text="{i18n>plannedEvent}"
+								required="true" />
+						</f:label>
+						<Select id="plannedEvent"
+							forceSelection="false"
+							showSecondaryValues="true"
+							items="{
+								path: 'props>/plannedEvents',
+								sorter: [
+									{
+										path: 'eventMatchKey',
+										descending: false
+									},
+									{
+										path: 'plannedBusinessTimestamp',
+										descending: false
+									}
+								]
+							}"
+							valueState="{= ${state>/isPlannedEventValid} ? 'None' : 'Error' }"
+							valueStateText="{i18n>mandatoryCheckWarningMsg}"
+							change=".handlePlannedEventSelect(${$parameters>/selectedItem})">
+							<core:ListItem
+								text="{
+									parts: [
+										'props>eventType',
+										'props>location/locationDescription',
+										'props>locationType/name'
+									],
+									formatter: '.formatter.eventSummary'
+								}"
+								additionalText="{i18n>plannedAt}: {
+									path: 'props>plannedBusinessTimestamp',
+									type: 'sap.ui.model.odata.type.DateTimeOffset'
+								}">
+								<core:customData>
+									<core:CustomData
+										key="is-planned-event-selection"
+										value="true"
+										writeToDom="true" />
+								</core:customData>
+							</core:ListItem>
+						</Select>
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>actualBusinessTime}">
+						<DateTimePicker id="actualBusinessTime"
+							required="true"
+							value="{eventDetail>/actualBusinessTimestamp}"
+							valueFormat="yyyy-MM-dd'T'HH:mm:ss.SSSX"
+							valueState="{= ${state>/isActualBusinessTimeValid} ? 'None' : 'Error' }"
+							valueStateText="{=
+								${eventDetail>/actualBusinessTimestamp}
+									? ${i18n>wrongFormatWarningMsg}
+									: ${i18n>mandatoryCheckWarningMsg}
+							}"
+							change=".handleActualBusinessTimeChange(${$parameters>/valid})" />
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>actualBusinessTimeZone}">
+						<ComboBox id="actualBusinessTimeZone"
+							showSecondaryValues="true"
+							value="{eventDetail>/actualBusinessTimeZone}"
+							items="{
+								path: 'props>/timeZones',
+								length: 1000
+							}"
+							enabled="{= !!${props>/timeZones} }"
+							valueState="{= ${state>/isActualBusinessTimeZoneValid} ? 'None' : 'Error' }"
+							valueStateText="{i18n>wrongFormatWarningMsg}"
+							change=".handleActualBusinessTimeZoneChange(${$parameters>value}, ${$parameters>itemPressed})">
+							<core:ListItem
+								text="{props>timeZoneCode}"
+								additionalText="{props>description}">
+							</core:ListItem>
+						</ComboBox>
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>longitude} / {i18n>latitude}">
+						<Input id="longitude"
+							type="Number"
+							value="{
+								path: 'eventDetail>/longitude',
+								type: 'sap.ui.model.type.Float',
+								formatOptions: {
+									emptyString: null
+								},
+								constraints: {
+									minimum: -180,
+									maximum: 180
+								}
+							}" />
+						<Input id="latitude"
+							type="Number"
+							value="{
+								path: 'eventDetail>/latitude',
+								type: 'sap.ui.model.type.Float',
+								formatOptions: {
+									emptyString: null
+								},
+								constraints: {
+									minimum: -90,
+									maximum: 90
+								}
+							}" />
+						<!-- <Button width="2rem" tooltip="Generate Geo Coordinator" /> -->
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>reportedBy}">
+						<Input id="reportedBy"
+							value="{eventDetail>/reportedBy}"
+							maxLength="255"
+							required="true"
+							valueState="{= ${state>/isReportedByValid} ? 'None' : 'Error' }"
+							valueStateText="{i18n>mandatoryCheckWarningMsg}"
+							change=".handleReportedByChange(${$parameters>value})" />
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>priority}">
+						<Input id="priority"
+							type="Number"
+							value="{
+								path: 'eventDetail>/priority',
+								type: 'sap.ui.model.type.Integer',
+								formatOptions: {
+									emptyString: null
+								}
+							}" />
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>eventReasonCode}">
+						<Input id="eventReasonCode"
+							value="{eventDetail>/eventReasonCode}"
+							maxLength="255" />
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>eventReasonText}">
+						<Input id="eventReasonText"
+							value="{eventDetail>/eventReasonText}"
+							maxLength="255" />
+					</f:FormElement>
+				</f:FormContainer>
+			</f:Form>
+
+			<f:Form id="userDefinedFieldsForm"
+				visible="{= ${state>/eventType} !== '' }"
+				busy="{state>/isUserDefinedFieldsLoading}"
+				busyIndicatorDelay="0">
+				<f:layout>
+					<f:ColumnLayout columnsM="2" />
+				</f:layout>
+
+				<f:FormContainer id="userDefinedFieldsFormContainer" />
+			</f:Form>
+		</VBox>
+
+		<beginButton>
+			<Button text="{i18n>report}"
+				type="Emphasized"
+				press=".reportEvent" />
+		</beginButton>
+
+		<endButton>
+			<Button text="{i18n>cancel}"
+				press=".close" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

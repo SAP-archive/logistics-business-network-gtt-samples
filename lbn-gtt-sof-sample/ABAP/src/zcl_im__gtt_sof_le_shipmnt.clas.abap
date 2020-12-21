@@ -449,7 +449,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDIF.
 
-        ls_expeventdata-milestone    = 'SHP_DEPARTURE'.
+        ls_expeventdata-milestone    = 'DEPARTURE'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_likp_new-vbeln
                                                                   AND loccat = 'S'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -462,7 +462,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDLOOP.
 
-        ls_expeventdata-milestone    = 'SHP_ARRIVAL'.
+        ls_expeventdata-milestone    = 'ARRIV_DEST'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_likp_new-vbeln
                                                                   AND loccat = 'D'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -475,7 +475,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDLOOP.
 
-        ls_expeventdata-milestone    = 'SHP_POD'.
+        ls_expeventdata-milestone    = 'POD'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_likp_new-vbeln
                                                                   AND loccat = 'D'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -626,7 +626,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDIF.
 
-        ls_expeventdata-milestone    = 'SHP_DEPARTURE'.
+        ls_expeventdata-milestone    = 'DEPARTURE'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_lips-vbeln
                                                                   AND loccat = 'S'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -639,7 +639,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDLOOP.
 
-        ls_expeventdata-milestone    = 'SHP_ARRIVAL'.
+        ls_expeventdata-milestone    = 'ARRIV_DEST'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_lips-vbeln
                                                                   AND loccat = 'D'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -652,7 +652,7 @@ METHOD if_ex_badi_le_shipment~before_update.
           APPEND ls_expeventdata TO lt_exp_events.
         ENDLOOP.
 
-        ls_expeventdata-milestone    = 'SHP_POD'.
+        ls_expeventdata-milestone    = 'POD'.
         LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = ls_lips-vbeln
                                                                   AND loccat = 'D'.
           READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid

@@ -29,5 +29,5 @@ sap.ui.define([
     return ValueState.Information;
   };
 
-  return ExecutionStatus;
+  return Object.freeze(ExecutionStatus);
 });

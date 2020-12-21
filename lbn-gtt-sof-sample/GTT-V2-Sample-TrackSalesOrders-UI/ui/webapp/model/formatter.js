@@ -42,12 +42,8 @@ sap.ui.define(
         groupingEnabled: true,
       }, sap.ui.getCore().getConfiguration().getLocale()),
 
-      codeListDescription: function (code) {
-        if (!code) {
-          return "";
-        }
-
-        return code.localized && code.localized.name || code.name;
+      codeListDescription: function (localizedName, name, code) {
+        return localizedName || name || code || "";
       },
 
       getCodeListDescriptionFromI18n: function (code, key) {
@@ -77,6 +73,10 @@ sap.ui.define(
       carrierRefDocumentTypeText: function (type) {
         if (!type) {
           return "";
+        }
+
+        if (type === "VP") {
+          return this.getText("visibilityProvider");
         }
 
         var key = "CO_CarrierRefDocumentType_".concat(type).concat("_NAME");
@@ -133,15 +133,17 @@ sap.ui.define(
       /**
        * Get last activity string
        *
-       * @param {object} [executionStatus] The execution status
+       * @param {string} [statusLocalizedName] The execution status localized name
+       * @param {string} [statusName] The execution status name
+       * @param {string} [statusCode] The execution status code
        * @param {string} [lastEventName] Last event name
        * @param {string} [lastLocationDescription] Lats location description
        * @param {string} [lastVPLocationType] Last VP location type
        * @returns {string} Execution status with last activity
        */
-      executionStatusWithLastActivity: function (executionStatus, lastEventName, lastLocationDescription, lastVPLocationType) {
+      executionStatusWithLastActivity: function (statusLocalizedName, statusName, statusCode, lastEventName, lastLocationDescription, lastVPLocationType) {
         var description = "";
-        var executionStatusText = formatter.codeListDescription(executionStatus);
+        var executionStatusText = formatter.codeListDescription(statusLocalizedName, statusName, statusCode);
         var lastActivityText = formatter.lastActivity.call(this, lastEventName, lastLocationDescription, lastVPLocationType);
         if (executionStatusText) {
           description = executionStatusText;

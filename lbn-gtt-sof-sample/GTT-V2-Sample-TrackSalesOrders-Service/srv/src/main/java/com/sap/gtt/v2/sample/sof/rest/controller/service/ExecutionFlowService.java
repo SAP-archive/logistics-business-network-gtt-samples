@@ -18,11 +18,17 @@ import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static com.sap.gtt.v2.sample.sof.constant.Constants.*;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.EXPAND;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.FILTER;
+import static java.lang.String.format;
 
 @Service
 public class ExecutionFlowService {
@@ -56,8 +62,11 @@ public class ExecutionFlowService {
 
     public List<EventEx> getEventReportHistory(UUID eventId) {
         List<EventEx> eventHistory = new ArrayList<>();
-        String query = String.format("/ProcessEventDirectory?$filter=plannedEvent_id eq guid'%s' or event_id eq guid'%s'&$expand=plannedEvent,event",
-                eventId, eventId);
+        String query = UriComponentsBuilder.fromUriString(URL_SPLITTER + PROCESS_EVENT_DIRECTORY_ENTITY_NAME)
+                .queryParam(FILTER, format("plannedEvent_id eq guid'%s' or event_id eq guid'%s'", eventId, eventId))
+                .queryParam(EXPAND, format("%s,%s", PLANNED_EVENT_EXPAND, EVENT_EXPAND))
+                .build().encode().toUriString();
+
         ODataResultList<ProcessEventDirectory> response = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class);
         List<ProcessEventDirectory> processEventDirectories = response.getResults();
 
@@ -84,7 +93,10 @@ public class ExecutionFlowService {
     }
 
     private List<ProcessEventDirectory> getPED4TP(UUID tpId) {
-        String query = String.format("/ProcessEventDirectory?$filter=process_id eq guid'%s'&$expand=plannedEvent,event", tpId);
+        String query = UriComponentsBuilder.fromUriString(URL_SPLITTER + PROCESS_EVENT_DIRECTORY_ENTITY_NAME)
+                .queryParam(FILTER, format("process_id eq guid'%s'", tpId))
+                .queryParam(EXPAND, format("%s,%s", PLANNED_EVENT_EXPAND, EVENT_EXPAND))
+                .build().encode().toUriString();
         ODataResultList<ProcessEventDirectory> result = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class);
         return result.getResults();
     }
@@ -129,7 +141,7 @@ public class ExecutionFlowService {
                             node.setLocationTypeCode(locationTypeCode);
                             nodes.add(node);
                         });
-            } else if (SOFUtils.isEventTypeInWhiteList(plannedEvent.getEventType())){
+            } else if (SOFUtils.isEventTypeInWhiteList(plannedEvent.getEventType())) {
                 Node node = new Node();
                 Long plannedBusinessTimestamp = plannedEvent.getPlannedBusinessTimestamp();
                 node.setEventId(plannedEvent.getId());
@@ -143,15 +155,11 @@ public class ExecutionFlowService {
                         .map(Location::getLocationDescription).orElse(null));
                 node.setPayloadSequence(plannedEvent.getPayloadSequence());
 
-                if (!Constants.EVENT_STATUS_PLANNED.equals(plannedEvent.getEventStatusCode())) {
-                    Optional<EventEx> maxActualBusinessTimestampEvent = actualEvents.stream()
-                            .filter(actualEvent -> actualEvent.getEventType().equals(plannedEvent.getEventType()))
-                            .max(Comparator.comparing(EventEx::getActualBusinessTimestamp));
-                    Optional<EventEx> maxActualBusinessTimestampDelayedEvent = actualEvents.stream()
-                            .filter(actualEvent -> actualEvent.getEventType().contains("Shipment.Delay"))
-                            .max(Comparator.comparing(EventEx::getActualBusinessTimestamp));
-
-                    maxActualBusinessTimestampEvent.ifPresent(actualEvent -> {
+                if (Constants.EVENT_STATUS_EARLY_REPORTED.equals(plannedEvent.getEventStatusCode())
+                        || Constants.EVENT_STATUS_REPORTED.equals(plannedEvent.getEventStatusCode())
+                        || Constants.EVENT_STATUS_LATE_REPORTED.equals(plannedEvent.getEventStatusCode())) {
+                    Optional<EventEx> lastCorrelatedEvent = getLastCorrelatedEvent(plannedEvent, actualEvents);
+                    lastCorrelatedEvent.ifPresent(actualEvent -> {
                         Long actualBusinessTimestamp = actualEvent.getActualBusinessTimestamp();
                         String locationTypeCode = eventMap.get(actualEvent.getId()).getLocationTypeCode();
                         node.setActualBusinessTimestamp(actualBusinessTimestamp);
@@ -159,6 +167,10 @@ public class ExecutionFlowService {
                         node.setLocationAltKey(actualEvent.getLocationAltKey());
                         node.setLocationTypeCode(locationTypeCode);
                     });
+                } else if (Constants.EVENT_STATUS_DELAYED.equals(plannedEvent.getEventStatusCode())) {
+                    Optional<EventEx> maxActualBusinessTimestampDelayedEvent = actualEvents.stream()
+                            .filter(actualEvent -> actualEvent.getEventType().contains(SHIPMENT_DELAY))
+                            .max(Comparator.comparing(EventEx::getActualBusinessTimestamp));
                     maxActualBusinessTimestampDelayedEvent.ifPresent(actualEvent ->
                             node.setEventReasonText(actualEvent.getEventReasonText()));
                 }
@@ -173,6 +185,19 @@ public class ExecutionFlowService {
             }
         });
         return nodes;
+    }
+
+    private Optional<EventEx> getLastCorrelatedEvent(PlannedEvent plannedEvent, List<EventEx> actualEvents) {
+        Optional<UUID> lastCorrelatedEventId = Optional.ofNullable(plannedEvent.getLastProcessEventDirectory())
+                .map(ProcessEventDirectory::getEventId);
+        if (lastCorrelatedEventId.isPresent()) {
+            UUID id = lastCorrelatedEventId.get();
+            return actualEvents.stream()
+                    .filter(actualEvent -> actualEvent.getEventType().equals(plannedEvent.getEventType())
+                            && actualEvent.getId().compareTo(id) == 0)
+                    .findFirst();
+        }
+        return Optional.empty();
     }
 
     private Map<String, Location> createLocationMap(Map<PlannedEvent, List<EventEx>> plnAndActEventMap) {
@@ -204,7 +229,9 @@ public class ExecutionFlowService {
                             conditions.add(new FilterCondition(Constants.ID, FilterCondition.EDM_TYPE_GUID, event.getId().toString(), BinaryOperator.EQ)));
                     FilterExpression filter = FilterExpressionBuilder.createFilterExpression(conditions, BinaryOperator.OR);
                     assert filter != null;
-                    String query = Constants.URL_SPLITTER + eventType + "?$filter=" + filter.getExpressionString();
+                    String query = UriComponentsBuilder.fromUriString(URL_SPLITTER + eventType)
+                            .queryParam(FILTER, filter.getExpressionString())
+                            .build().encode().toUriString();
                     events = gttCoreServiceClient.readEntitySetAll(query, EventEx.class).getResults();
                     events.forEach(event -> eventMap.put(event.getId(), event));
                 });

@@ -1,0 +1,13 @@
+[{
+    "lineNo": 1,
+    "deliveryDate": "/Date(1603065600000)/",
+    "scheduledQuantityUoM": "KG",
+    "scheduledQuantity": "22.00"
+  },
+  {
+    "lineNo": 2,
+    "deliveryDate": "/Date(1604188800000)/",
+    "scheduledQuantityUoM": "KG",
+    "scheduledQuantity": "2.00"
+  }
+]

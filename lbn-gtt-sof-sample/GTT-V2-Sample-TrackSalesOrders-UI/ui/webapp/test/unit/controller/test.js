@@ -6,6 +6,7 @@ sap.ui.define([
   "./DocumentFlow",
   "./Map",
   "./SalesOrderItem",
+  "./DeliveryItem",
   "./NotFound",
   "./ErrorHandler",
 ], function () {

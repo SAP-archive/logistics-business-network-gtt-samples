@@ -1,7 +1,7 @@
-# Track Sales Orders Template App
+# Sales Order Fulfillment Template App
 
 ## Description
-Track Sales Orders template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
+Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
 * How many deliveries in my sales order are delayed?
 * How many deliveries in my sales order are completed?
 * Where are my sales orders?
@@ -28,7 +28,7 @@ For number of nodes > 500, please use table view. </br>
 * Notes for ERP Extractor Implementation: </br>
 The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence. </br>
 The eventMatchKey of the delivery's and delivery item's planned event is null. </br>
-To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Track Sales Orders template model: </br>
+To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Sales Order Fulfillment template model: </br>
 transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue

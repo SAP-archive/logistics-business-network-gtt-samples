@@ -1,0 +1,25 @@
+--batch_1f1e-8cdb-aefd
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET TrackedProcess?$filter=id%20eq%20guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d' HTTP/1.1
+sap-cancel-on-close: true
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 4.0
+
+
+--batch_1f1e-8cdb-aefd
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET TrackedProcess(guid'996f8dd3-b2e0-582e-ae1b-9d7d851c030d') HTTP/1.1
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 4.0
+
+
+--batch_1f1e-8cdb-aefd--

@@ -1,0 +1,12 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.pof.controller.deliveryItem.TrackingTimeline"
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<layout:Splitter 
+		id="trackingTimelineMap"
+		height="600px">		
+		<core:Fragment id="trackingTimelineEvents" fragmentName="com.sap.gtt.app.sample.pof.view.deliveryItem.fragments.TimelineEvents" type="XML" />
+		<core:Fragment id="trackingTimelineMap" fragmentName="com.sap.gtt.app.sample.pof.view.deliveryItem.fragments.TrackingTimelineMap" type="XML" />
+	</layout:Splitter>
+</mvc:View>

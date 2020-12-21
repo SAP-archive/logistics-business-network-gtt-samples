@@ -39,7 +39,7 @@ sap.ui.define(
         var property = this.getProperty(propertyName, entityType);
 
         if (!property) {
-          return "";
+          return propertyName;
         }
 
         // if no label is set for property use property name as fallback

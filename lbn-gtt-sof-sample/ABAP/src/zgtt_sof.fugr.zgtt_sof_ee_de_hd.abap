@@ -164,7 +164,7 @@ FUNCTION zgtt_sof_ee_de_hd.
     DELETE ADJACENT DUPLICATES FROM lt_stops COMPARING stopid loccat.
     DELETE ADJACENT DUPLICATES FROM lt_dlv_watching_stops COMPARING vbeln stopid loccat.
 
-    ls_expeventdata-milestone    = 'SHP_DEPARTURE'.
+    ls_expeventdata-milestone    = 'DEPARTURE'.
     LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = <ls_xlikp>-vbeln
                                                               AND loccat = 'S'.
       READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -177,7 +177,7 @@ FUNCTION zgtt_sof_ee_de_hd.
       APPEND ls_expeventdata TO e_expeventdata.
     ENDLOOP.
 
-    ls_expeventdata-milestone    = 'SHP_ARRIVAL'.
+    ls_expeventdata-milestone    = 'ARRIV_DEST'.
     LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = <ls_xlikp>-vbeln
                                                               AND loccat = 'D'.
       READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid
@@ -190,7 +190,7 @@ FUNCTION zgtt_sof_ee_de_hd.
       APPEND ls_expeventdata TO e_expeventdata.
     ENDLOOP.
 
-    ls_expeventdata-milestone    = 'SHP_POD'.
+    ls_expeventdata-milestone    = 'POD'.
     LOOP AT lt_dlv_watching_stops INTO ls_dlv_watching_stop WHERE vbeln = <ls_xlikp>-vbeln
                                                               AND loccat = 'D'.
       READ TABLE lt_stops INTO ls_stop WITH KEY stopid = ls_dlv_watching_stop-stopid

@@ -85,8 +85,9 @@ sap.ui.define(
       navToDetailPage: function (oEvent) {
         var viewBindingContext = this.getView().getBindingContext();
         var bindingContext = oEvent.getSource().getBindingContext("graph");
+        var id = bindingContext.getProperty("id");
         var config = {
-          id: bindingContext.getProperty("id"),
+          id: id,
           params: {
             salesOrderId: viewBindingContext.getProperty("id"),
           },
@@ -98,6 +99,9 @@ sap.ui.define(
         }
         if (group === 3) {
           this.getRouter().navTo("deliveryItem", config);
+        }
+        if (group === 5) {
+          this.navToShipmentApplication(id);
         }
       },
 

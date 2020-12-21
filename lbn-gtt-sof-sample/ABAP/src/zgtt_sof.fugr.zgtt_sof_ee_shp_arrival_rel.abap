@@ -1,4 +1,4 @@
-FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL_REL .
+FUNCTION zgtt_sof_ee_shp_arrival_rel .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -22,15 +22,15 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL_REL .
 *----------------------------------------------------------------------*
   DATA:
 * Shipment Leg new
-    lt_xvtts TYPE STANDARD TABLE OF vttsvb,
+    lt_xvtts         TYPE STANDARD TABLE OF vttsvb,
 * Shipment Hearder old
-    lt_yvtts TYPE STANDARD TABLE OF vttsvb,
+    lt_yvtts         TYPE STANDARD TABLE OF vttsvb,
     lv_aot_relevance TYPE boole_d.
 
   FIELD-SYMBOLS:
-    <ls_xvttk>       TYPE vttkvb,
-    <ls_xvtts>       TYPE vttsvb,
-    <ls_yvtts>       TYPE vttsvb.
+    <ls_xvttk> TYPE vttkvb,
+    <ls_xvtts> TYPE vttsvb,
+    <ls_yvtts> TYPE vttsvb.
 
 * <1> Read necessary application tables from table reference
   PERFORM read_appl_tables_shipment_leg
@@ -48,7 +48,7 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL_REL .
           i_event-eventtype
           i_appsys.
     RAISE parameter_error.
- ELSE.
+  ELSE.
 *   Read Main Object Table (Shipment  - VTTS)
     ASSIGN i_event-maintabref->*  TO <ls_xvttk>.
   ENDIF.
@@ -63,8 +63,7 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL_REL .
   lv_aot_relevance = gc_false.
   LOOP AT lt_xvtts ASSIGNING <ls_xvtts>.
     IF <ls_xvtts>-updkz EQ gc_insert.
-      IF <ls_xvtts>-daten IS NOT INITIAL
-      OR <ls_xvtts>-uaten IS NOT INITIAL.
+      IF <ls_xvtts>-daten IS NOT INITIAL.
         lv_aot_relevance = gc_true.
         EXIT.
       ENDIF.
@@ -76,8 +75,10 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL_REL .
       IF sy-subrc IS INITIAL.
         IF <ls_xvtts>-daten <> <ls_yvtts>-daten
         OR <ls_xvtts>-uaten <> <ls_yvtts>-uaten.
-          lv_aot_relevance = gc_true.
-          EXIT.
+          IF <ls_xvtts>-daten IS NOT INITIAL.
+            lv_aot_relevance = gc_true.
+            EXIT.
+          ENDIF.
         ENDIF.
       ENDIF.
     ENDIF.

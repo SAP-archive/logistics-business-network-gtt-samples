@@ -1,0 +1,287 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+  xmlns:layout="sap.ui.layout"
+  >
+  <smartTable:SmartTable 
+    id="deliveryItemsSmartTable" 
+    class="deliveryItemsSmartTable"
+    persistencyKey="listReportTable" 
+    tableType="ResponsiveTable" 
+    requestAtLeastFields="id,inboundDeliveryNo,incoterms,toPlantLocation,toSupplierLocation,supplierLocationType,plantLocationType"
+    demandPopin="true"
+    noData="{i18n>noDataFoundText}" 
+    editable="false" 
+    entitySet="InboundDeliveryItem"
+    tableBindingPath="inboundDeliveryItems"  
+    useVariantManagement="false" 
+    useTablePersonalisation="true" 
+    header="{i18n>deliveryItemListTitle}" 
+    showRowCount="true" 
+    useExportToExcel="false"
+    enableAutoBinding="true"
+    beforeRebindTable="onBeforeRebindTable"
+    ignoredFields="id,inboundDeliveryNo,weightUoM,departure,destination,volumeUoM,doorText,destinationAddress,departureAddress,departureEmail,departureTelephone,inboundDelivery,orderQuantityUoM,plantLocationType,purchaseOrderItem,purchaseOrderItem_id,supplierLocationType,materialDescription,logicalSystem,partyId,plantLocationDescription,trackingIdType,altKey,lastReportedEvent">
+    <smartTable:customData>
+      <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+      <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}, sort: {visible: false}}"/>
+    </smartTable:customData>
+    <Table 
+      id="innerTable" 
+      growing="true"
+      growingThreshold="5">
+      <columns>
+        <Column>
+          <Text text="{@i18n>EL_InboundDeliveryItem_itemNo_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "itemNo", "leadingProperty": "itemNo", "columnIndex": 0}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right">
+          <Text text="{@i18n>EL_InboundDeliveryItem_plannedDeliveryDate_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "columnIndex": 1}'/>
+          </customData>
+        </Column>
+        <Column>
+          <Text text="{@i18n>EL_InboundDeliveryItem_departure_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "supplier", "leadingProperty": "supplier", "navigationProperty": "inboundDeliveryItem/toSupplierLocation", "columnIndex": 2}'/>
+          </customData>
+        </Column>
+        <Column>
+          <Text text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "plant", "leadingProperty": "plant", "navigationProperty": "inboundDeliveryItem/toPlantLocation", "columnIndex": 3}'/>
+          </customData>
+        </Column>
+        <Column>
+          <Text text="{@i18n>EL_InboundDeliveryItem_materialNumber_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "materialNumber", "leadingProperty": "materialNumber", "columnIndex": 4}'/>
+          </customData>
+        </Column>
+        <Column>
+          <Text text="{@i18n>EL_TrackedProcess_processStatus_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code", "columnIndex": 5}'/>
+          </customData>
+        </Column>
+        <Column>
+          <Text text="{@i18n>EL_InboundDeliveryItem_executionStatus_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code", "columnIndex": 6}'/>
+          </customData>
+        </Column>
+        <!-- hidden -->
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_itemDescription_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "itemDescription", "leadingProperty": "itemDescription", "columnIndex": 7}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_orderQuantity_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "orderQuantity", "leadingProperty": "orderQuantity,orderQuantityUoM", "columnIndex": 8}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_documentDate_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "columnIndex": 9}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_warehouseNo_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "warehouseNo", "leadingProperty": "warehouseNo", "columnIndex": 10}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_doorForWarehouse_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "doorForWarehouse", "leadingProperty": "doorForWarehouse", "columnIndex": 11}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_warehouseDescription_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "warehouseDescription", "leadingProperty": "warehouseDescription", "columnIndex": 12}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_grossWeight_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "columnIndex": 13}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_netWeight_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "columnIndex": 14}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_volume_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "columnIndex": 15}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_billOfLading_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "billOfLading", "leadingProperty": "billOfLading", "columnIndex": 16}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_dangerousGoods_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "dangerousGoods", "leadingProperty": "dangerousGoods", "columnIndex": 17}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_incotermsVersion_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsVersion", "leadingProperty": "incotermsVersion", "columnIndex": 18}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_incoterms_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "inboundDeliveryItem/incoterms", "columnIndex": 19}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
+          <Text text="{@i18n>EL_InboundDeliveryItem_incotermsLocation_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsLocation", "leadingProperty": "incotermsLocation", "columnIndex": 20}'/>
+          </customData>
+        </Column>
+      </columns>
+      <items>
+        <ColumnListItem type="Navigation" press=".onDeliveryItemPressed">
+          <cells>
+            <Text class="tableKeyColumn" text="{inboundDeliveryItem/inboundDeliveryNo} / {inboundDeliveryItem/itemNo}"></Text>
+            <Text text="{
+              path: 'inboundDeliveryItem/plannedDeliveryDate', 
+              type: 'sap.ui.model.type.Date', 
+              formatOptions: {
+                style: 'medium',
+                UTC: true
+              }
+            }" />
+            <ctrl:link.LinkPopover
+              placement="Right"
+              contentHeight="15rem"
+              title="{i18n>locationDetailsPopoverTitle}"
+              text="{inboundDeliveryItem/supplier}"
+              linkText="{inboundDeliveryItem/toSupplierLocation/locationDescription}"
+              relatedObject="inboundDeliveryItem/toSupplierLocation">
+              <ctrl:content>
+                <VBox>
+                <Title class="pofLocationPopoverTitle" text="{inboundDeliveryItem/toSupplierLocation/locationDescription}"/>
+                <Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                <Text id="supplierLocationObjectType" text="{inboundDeliveryItem/toSupplierLocation/objectTypeDescription}" />
+                <Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                <Text id="supplierLocationSourceSystemId" text="{inboundDeliveryItem/toSupplierLocation/sourceSystem} / {inboundDeliveryItem/toSupplierLocation/externalId}"/>
+                <Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                <HBox justifyContent="SpaceBetween">
+                <Text id="supplierLocationAddress" text="{path: 'inboundDeliveryItem/toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                <core:Icon src="sap-icon://globe" color="{= ${inboundDeliveryItem/toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                  tooltip="{= ${inboundDeliveryItem/toSupplierLocation/latitude} !== null ? ${inboundDeliveryItem/toSupplierLocation/latitude} + ', ' + ${inboundDeliveryItem/toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                </HBox>
+                </VBox>
+              </ctrl:content>
+            </ctrl:link.LinkPopover>
+            <ctrl:link.LinkPopover
+              contentHeight="15rem"
+              placement="Right"
+              title="{i18n>locationDetailsPopoverTitle}"
+              text="{inboundDeliveryItem/plant}"
+              linkText="{inboundDeliveryItem/toPlantLocation/locationDescription}"
+              relatedObject="inboundDeliveryItem/toPlantLocation">
+              <ctrl:content>
+                <VBox>
+                  <Title class="pofLocationPopoverTitle" text="{inboundDeliveryItem/toPlantLocation/locationDescription}"/>
+                  <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                  <Text id="receivingLocationObjectType" text="{inboundDeliveryItem/toPlantLocation/objectTypeDescription}" />
+                  <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                  <Text id="receivingLocationSourceSystemId" text="{inboundDeliveryItem/toPlantLocation/sourceSystem} / {inboundDeliveryItem/toPlantLocation/externalId}"/>
+                  <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                  <HBox justifyContent="SpaceBetween">
+                  <Text id="receivingLocationAddress" text="{path: 'inboundDeliveryItem/toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                  <core:Icon src="sap-icon://globe" color="{= ${inboundDeliveryItem/toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                    tooltip="{= ${inboundDeliveryItem/toPlantLocation/latitude} !== null ? ${inboundDeliveryItem/toPlantLocation/latitude} + ', ' + ${inboundDeliveryItem/toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                  </HBox>
+                </VBox>
+              </ctrl:content>
+            </ctrl:link.LinkPopover>
+            <Text text="{inboundDeliveryItem/materialNumber}"/>
+            <ObjectStatus id="processStatus"
+							text="{path:'inboundDeliveryItem/processStatus_code', formatter:'.formatter.getProcessStatusText'}"
+							state="{path: 'inboundDeliveryItem/processStatus_code', formatter: '.formatter.getProcessStatusState'}"/>
+            <ObjectStatus id="executionStatus"
+              text="{
+                parts:[
+                  {path:'inboundDeliveryItem/executionStatus_code'},
+                  {path:'inboundDeliveryItem/lastReportedEvent'}], formatter:'.formatter.getTableExecutionStatusText'}"
+							state="{path: 'inboundDeliveryItem/executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
+              icon="{path: 'inboundDeliveryItem/executionStatus_code', formatter: '.formatter.getExecutionStatusIcon'}"/>
+            <!-- hidden -->
+            <Text text="{inboundDeliveryItem/itemDescription}"/>
+            <ObjectNumber
+              emphasized="false"
+              number="{ 
+                path: 'inboundDeliveryItem/orderQuantity',
+                type: 'sap.ui.model.odata.type.Decimal',
+                constraints: {scale: 3}
+              }"
+              unit="{inboundDeliveryItem/orderQuantityUoM}"/>
+            <Text text="{
+              path: 'inboundDeliveryItem/documentDate', 
+              type: 'sap.ui.model.type.Date', 
+              formatOptions: {
+                style: 'medium',
+                UTC: true
+              }
+            }" />
+            <Text text="{inboundDeliveryItem/warehouseNo}"/>
+            <Text text="{inboundDeliveryItem/doorForWarehouse}"/>
+            <Text text="{inboundDeliveryItem/warehouseDescription}"/>
+            <ObjectNumber
+              emphasized="false"
+              number="{ 
+                path: 'inboundDeliveryItem/grossWeight',
+                type: 'sap.ui.model.odata.type.Decimal',
+                constraints: {scale: 3}
+              }"
+              unit="{inboundDeliveryItem/weightUoM}"/>
+              <ObjectNumber
+              emphasized="false"
+              number="{ 
+                path: 'inboundDeliveryItem/netWeight',
+                type: 'sap.ui.model.odata.type.Decimal',
+                constraints: {scale: 3}
+              }"
+              unit="{inboundDeliveryItem/weightUoM}"/>
+              <ObjectNumber
+              emphasized="false"
+              number="{ 
+                path: 'inboundDeliveryItem/volume',
+                type: 'sap.ui.model.odata.type.Decimal',
+                constraints: {scale: 3}
+              }"
+              unit="{inboundDeliveryItem/volumeUoM}"/>
+              <Text text="{inboundDeliveryItem/billOfLading}"/>
+              <Text text="{path:'inboundDeliveryItem/dangerousGoods', formatter:'.formatter.formatBooleanFields'}"/>
+              <Text text="{inboundDeliveryItem/incotermsVersion}"/>
+              <Text text="{inboundDeliveryItem/incoterms/name}"/>
+              <Text text="{inboundDeliveryItem/incotermsLocation}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </smartTable:SmartTable>
+</core:FragmentDefinition>

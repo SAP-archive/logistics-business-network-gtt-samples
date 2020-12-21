@@ -1,0 +1,23 @@
+logging:
+  level:
+    root: DEBUG
+    
+server:
+  max-http-header-size: 65536
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,multipart/mixed
+
+management:
+  health.defaults.enabled: false
+  security:
+    enabled: true
+  endpoints:
+    web:
+      base-path: /
+      path-mapping:
+        health: health
+        heapdump: heap-dump
+  endpoint:
+    heapdump:
+      enabled: true

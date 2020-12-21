@@ -1,4 +1,4 @@
-FUNCTION ZGTT_SOF_EE_SHP_LOAD_START .
+FUNCTION zgtt_sof_ee_shp_load_start .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -83,7 +83,7 @@ FUNCTION ZGTT_SOF_EE_SHP_LOAD_START .
 * <2> Loop at application objects for geting shipment item data
   LOOP AT i_events INTO ls_events.
 *   Check if Main table is Shipment Header or not.
-     IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
+    IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
       PERFORM create_logtable_et
           TABLES ct_logtable
           USING  ls_events-maintabdef
@@ -118,7 +118,7 @@ FUNCTION ZGTT_SOF_EE_SHP_LOAD_START .
     ENDIF.
     ls_trackingheader-evtcnt  = lv_cnt.
 *   Event ID
-    ls_trackingheader-evtid     = 'LOAD_START'.
+    ls_trackingheader-evtid     = 'LOAD_BEGIN'.
 *   Event Date
     ls_trackingheader-evtdat  = <ls_xvttk>-dalbg.
 *   Event Time

@@ -1,0 +1,17 @@
+[
+  {
+    "code": "BN",
+    "name": "Consignment Identifier",
+    "locale": "en"
+  },
+  {
+    "code": "T50",
+    "name": "Bill of Lading",
+    "locale": "en"
+  },
+  {
+    "code": "VP",
+    "name": "Visibility Provider",
+    "locale": "en"
+  }
+]

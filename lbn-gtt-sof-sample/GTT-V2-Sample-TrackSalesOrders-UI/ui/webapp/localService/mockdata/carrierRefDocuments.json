@@ -1,11 +1,13 @@
 [
   {
     "docId": "20200729001",
+    "shipmentId": "8781028f-e85a-584f-9e95-b878cbf6e92a",
     "shipmentNo": "60006",
     "docType_code": "BN"
   },
   {
     "docId": "vp-001",
+    "shipmentId": "8781028f-e85a-584f-9e95-b878cbf6e92b",
     "shipmentNo": "60006",
     "docType_code": "VP"
   }

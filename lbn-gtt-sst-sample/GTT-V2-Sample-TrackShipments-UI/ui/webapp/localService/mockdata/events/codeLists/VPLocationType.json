@@ -1,0 +1,353 @@
+[
+  {
+    "code": "1001",
+    "name": "Production Plant",
+    "localized": {
+      "locale": "en",
+      "code": "1001",
+      "name": "Production Plant"
+    }
+  },
+  {
+    "code": "1002",
+    "name": "Distribution Center",
+    "localized": {
+      "locale": "en",
+      "code": "1002",
+      "name": "Distribution Center"
+    }
+  },
+  {
+    "code": "1003",
+    "name": "Shipping Point",
+    "localized": {
+      "locale": "en",
+      "code": "1003",
+      "name": "Shipping Point"
+    }
+  },
+  {
+    "code": "1005",
+    "name": "Transportation Zone",
+    "localized": {
+      "locale": "en",
+      "code": "1005",
+      "name": "Transportation Zone"
+    }
+  },
+  {
+    "code": "1006",
+    "name": "Stock Transfer Point",
+    "localized": {
+      "locale": "en",
+      "code": "1006",
+      "name": "Stock Transfer Point"
+    }
+  },
+  {
+    "code": "1007",
+    "name": "Storage Location MRP Area",
+    "localized": {
+      "locale": "en",
+      "code": "1007",
+      "name": "Storage Location MRP Area"
+    }
+  },
+  {
+    "code": "1050",
+    "name": "Subcontractor",
+    "localized": {
+      "locale": "en",
+      "code": "1050",
+      "name": "Subcontractor"
+    }
+  },
+  {
+    "code": "1020",
+    "name": "Transportation Service Provider",
+    "localized": {
+      "locale": "en",
+      "code": "1020",
+      "name": "Transportation Service Provider"
+    }
+  },
+  {
+    "code": "1021",
+    "name": "Business Partner",
+    "localized": {
+      "locale": "en",
+      "code": "1021",
+      "name": "Business Partner"
+    }
+  },
+  {
+    "code": "1030",
+    "name": "Terminal",
+    "localized": {
+      "locale": "en",
+      "code": "1030",
+      "name": "Terminal"
+    }
+  },
+  {
+    "code": "1031",
+    "name": "Geographical Area",
+    "localized": {
+      "locale": "en",
+      "code": "1031",
+      "name": "Geographical Area"
+    }
+  },
+  {
+    "code": "1040",
+    "name": "Store",
+    "localized": {
+      "locale": "en",
+      "code": "1040",
+      "name": "Store"
+    }
+  },
+  {
+    "code": "1200",
+    "name": "Loading Point",
+    "localized": {
+      "locale": "en",
+      "code": "1200",
+      "name": "Loading Point"
+    }
+  },
+  {
+    "code": "1201",
+    "name": "Docking Location",
+    "localized": {
+      "locale": "en",
+      "code": "1201",
+      "name": "Docking Location"
+    }
+  },
+  {
+    "code": "1100",
+    "name": "Port",
+    "localized": {
+      "locale": "en",
+      "code": "1100",
+      "name": "Port"
+    }
+  },
+  {
+    "code": "1110",
+    "name": "Airport",
+    "localized": {
+      "locale": "en",
+      "code": "1110",
+      "name": "Airport"
+    }
+  },
+  {
+    "code": "1120",
+    "name": "Railway Station",
+    "localized": {
+      "locale": "en",
+      "code": "1120",
+      "name": "Railway Station"
+    }
+  },
+  {
+    "code": "1130",
+    "name": "Container Freight Station",
+    "localized": {
+      "locale": "en",
+      "code": "1130",
+      "name": "Container Freight Station"
+    }
+  },
+  {
+    "code": "1140",
+    "name": "Hub",
+    "localized": {
+      "locale": "en",
+      "code": "1140",
+      "name": "Hub"
+    }
+  },
+  {
+    "code": "1150",
+    "name": "Gateway",
+    "localized": {
+      "locale": "en",
+      "code": "1150",
+      "name": "Gateway"
+    }
+  },
+  {
+    "code": "1160",
+    "name": "Container Yard",
+    "localized": {
+      "locale": "en",
+      "code": "1160",
+      "name": "Container Yard"
+    }
+  },
+  {
+    "code": "1170",
+    "name": "Warehouse",
+    "localized": {
+      "locale": "en",
+      "code": "1170",
+      "name": "Warehouse"
+    }
+  },
+  {
+    "code": "1180",
+    "name": "Carrier Warehouse",
+    "localized": {
+      "locale": "en",
+      "code": "1180",
+      "name": "Carrier Warehouse"
+    }
+  },
+  {
+    "code": "1190",
+    "name": "Rail Junction",
+    "localized": {
+      "locale": "en",
+      "code": "1190",
+      "name": "Rail Junction"
+    }
+  },
+  {
+    "code": "1191",
+    "name": "Border Crossing Point",
+    "localized": {
+      "locale": "en",
+      "code": "1191",
+      "name": "Border Crossing Point"
+    }
+  },
+  {
+    "code": "1101",
+    "name": "Port of Origin",
+    "localized": {
+      "locale": "en",
+      "code": "1101",
+      "name": "Port of Origin"
+    }
+  },
+  {
+    "code": "1102",
+    "name": "Port of Discharge",
+    "localized": {
+      "locale": "en",
+      "code": "1102",
+      "name": "Port of Discharge"
+    }
+  },
+  {
+    "code": "1103",
+    "name": "Container Terminal of Port of Origin",
+    "localized": {
+      "locale": "en",
+      "code": "1103",
+      "name": "Container Terminal of Port of Origin"
+    }
+  },
+  {
+    "code": "1104",
+    "name": "Container Terminal of Port of Discharge",
+    "localized": {
+      "locale": "en",
+      "code": "1104",
+      "name": "Container Terminal of Port of Discharge"
+    }
+  },
+  {
+    "code": "1141",
+    "name": "Transshipment Hub",
+    "localized": {
+      "locale": "en",
+      "code": "1141",
+      "name": "Transshipment Hub"
+    }
+  },
+  {
+    "code": "1142",
+    "name": "Transshipment Port",
+    "localized": {
+      "locale": "en",
+      "code": "1142",
+      "name": "Transshipment Port"
+    }
+  },
+  {
+    "code": "1171",
+    "name": "Export Warehouse",
+    "localized": {
+      "locale": "en",
+      "code": "1171",
+      "name": "Export Warehouse"
+    }
+  },
+  {
+    "code": "1172",
+    "name": "Import Warehouse",
+    "localized": {
+      "locale": "en",
+      "code": "1172",
+      "name": "Import Warehouse"
+    }
+  },
+  {
+    "code": "3001",
+    "name": "Depot",
+    "localized": {
+      "locale": "en",
+      "code": "3001",
+      "name": "Depot"
+    }
+  },
+  {
+    "code": "3002",
+    "name": "Origin",
+    "localized": {
+      "locale": "en",
+      "code": "3002",
+      "name": "Origin"
+    }
+  },
+  {
+    "code": "3003",
+    "name": "Destination",
+    "localized": {
+      "locale": "en",
+      "code": "3003",
+      "name": "Destination"
+    }
+  },
+  {
+    "code": "3004",
+    "name": "Shipper Location",
+    "localized": {
+      "locale": "en",
+      "code": "3004",
+      "name": "Shipper Location"
+    }
+  },
+  {
+    "code": "3005",
+    "name": "Consignee Location",
+    "localized": {
+      "locale": "en",
+      "code": "3005",
+      "name": "Consignee Location"
+    }
+  },
+  {
+    "code": "3006",
+    "name": "Interim Location",
+    "localized": {
+      "locale": "en",
+      "code": "3006",
+      "name": "Interim Location"
+    }
+  }
+]

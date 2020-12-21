@@ -1,4 +1,4 @@
-FUNCTION ZGTT_SOF_EE_SHP_LOAD_END_REL .
+FUNCTION zgtt_sof_ee_shp_load_end_rel .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -22,14 +22,14 @@ FUNCTION ZGTT_SOF_EE_SHP_LOAD_END_REL .
 *----------------------------------------------------------------------*
   DATA:
 * Shipment Hearder new
-    lt_xvttk TYPE STANDARD TABLE OF vttkvb,
+    lt_xvttk         TYPE STANDARD TABLE OF vttkvb,
 * Shipment Hearder old
-    lt_yvttk TYPE STANDARD TABLE OF vttkvb,
+    lt_yvttk         TYPE STANDARD TABLE OF vttkvb,
     lv_aot_relevance TYPE boole_d.
 
   FIELD-SYMBOLS:
-    <ls_xvttk>       TYPE vttkvb,
-    <ls_yvttk>       TYPE vttkvb.
+    <ls_xvttk> TYPE vttkvb,
+    <ls_yvttk> TYPE vttkvb.
 
 * <1> Read necessary application tables from table reference
   PERFORM read_appl_tables_shipmt_header
@@ -47,7 +47,7 @@ FUNCTION ZGTT_SOF_EE_SHP_LOAD_END_REL .
           i_event-eventtype
           i_appsys.
     RAISE parameter_error.
- ELSE.
+  ELSE.
 *   Read Main Object Table (Shipment  - VTTK)
     ASSIGN i_event-maintabref->*  TO <ls_xvttk>.
   ENDIF.
@@ -76,20 +76,21 @@ FUNCTION ZGTT_SOF_EE_SHP_LOAD_END_REL .
 * <5> Check actual event date and time changed.
   lv_aot_relevance = gc_false.
   IF <ls_xvttk>-updkz EQ gc_insert.
-    IF <ls_xvttk>-dalen IS NOT INITIAL
-    OR <ls_xvttk>-ualen IS NOT INITIAL.
+    IF <ls_xvttk>-dalen IS NOT INITIAL.
       lv_aot_relevance = gc_true.
     ENDIF.
-   ELSE.
-     READ TABLE lt_yvttk ASSIGNING <ls_yvttk>
-       WITH KEY tknum = <ls_xvttk>-tknum
-     BINARY SEARCH.
-     IF sy-subrc IS INITIAL.
-       IF <ls_xvttk>-dalen <> <ls_yvttk>-dalen
-       OR <ls_xvttk>-ualen <> <ls_yvttk>-ualen.
-         lv_aot_relevance = gc_true.
-       ENDIF.
-     ENDIF.
+  ELSE.
+    READ TABLE lt_yvttk ASSIGNING <ls_yvttk>
+      WITH KEY tknum = <ls_xvttk>-tknum
+    BINARY SEARCH.
+    IF sy-subrc IS INITIAL.
+      IF <ls_xvttk>-dalen <> <ls_yvttk>-dalen
+      OR <ls_xvttk>-ualen <> <ls_yvttk>-ualen.
+        IF <ls_xvttk>-dalen IS NOT INITIAL.
+          lv_aot_relevance = gc_true.
+        ENDIF.
+      ENDIF.
+    ENDIF.
   ENDIF.
 
   IF lv_aot_relevance = gc_true.

@@ -44,7 +44,7 @@
 						<PropertyPath>isDelayed</PropertyPath>
 					</Collection>
 				</Annotation>
-				<Annotation Term="UI.FilterFacets"/>
+				<!-- <Annotation Term="UI.FilterFacets"/> -->
 				<Annotation Term="UI.LineItem">
 					<Collection>
 						<Record Type="UI.DataField">
@@ -64,6 +64,29 @@
 						</Record>
 						<Record Type="UI.DataField">
 							<PropertyValue Property="Value" Path="isDelayed"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>salesOrderItem/itemNo</PropertyPath>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="salesOrderItem/itemNo"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="salesOrderItem/materialDescription"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="salesOrderItem/orderQuantity"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="salesOrderItem/netValue"/>
 						</Record>
 					</Collection>
 				</Annotation>
@@ -118,7 +141,7 @@
 				<Annotation Term="Measures.Unit" Path="uom"/>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem/netValue">
-				<Annotation Term="Measures.Unit" Path="currency"/>
+				<Annotation Term="Measures.ISOCurrency" Path="currency"/>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem/processStatus_code">
 				<Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
@@ -127,10 +150,10 @@
 				<Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrder/netValue">
-				<Annotation Term="Measures.Unit" Path="currency"/>
+				<Annotation Term="Measures.ISOCurrency" Path="currency"/>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrder/completedAndLateValue">
-				<Annotation Term="Measures.Unit" Path="currency"/>
+				<Annotation Term="Measures.ISOCurrency" Path="currency"/>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/orderQuantity">
 				<Annotation Term="Measures.Unit" Path="quantityUoM"/>
@@ -199,52 +222,61 @@
 					</Record>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/incoterms_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/incoterms_code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="incoterms/localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/incoterms_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/incoterms_code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="incoterms/localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/packingStatus_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/packingStatus_code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="packingStatus/localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/destinationAltKey">
 				<Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/pickingStatus_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/pickingStatus_code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="pickingStatus/localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/podStatus_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.DeliveryItem/podStatus_code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="podStatus/localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Incoterms/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Incoterms/code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.PackingStatus/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.PackingStatus/code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.PickingStatus/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.PickingStatus/code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.OperationStatus/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.OperationStatus/code"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
 				<Annotation Term="Common.Text" Path="localized/name">
-				<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
 				</Annotation>
 			</Annotations>
 		</Schema>

@@ -1,0 +1,17 @@
+[
+  {
+    "code": "NOT_STARTED",
+    "name": "Not Started",
+    "locale": "en"
+  },
+  {
+    "code": "IN_TRANSIT",
+    "name": "In Transit",
+    "locale": "en"
+  },
+  {
+    "code": "COMPLETED",
+    "name": "Completed",
+    "locale": "en"
+  }
+]

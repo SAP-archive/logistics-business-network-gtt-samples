@@ -1,0 +1,56 @@
+[
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('LogisticLocation')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('LogisticLocation')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "LogisticLocation",
+    "name": "Logistic Location"
+  },
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Customer')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Customer')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "Customer",
+    "name": "Customer"
+  },
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('BusinessPartner')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('BusinessPartner')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "BusinessPartner",
+    "name": "Business Partner"
+  },
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Plant')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Plant')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "Plant",
+    "name": "Plant"
+  },
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('ShippingPoint')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('ShippingPoint')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "ShippingPoint",
+    "name": "Shipping Point"
+  },
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Supplier')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Supplier')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+    },
+    "code": "Supplier",
+    "name": "Supplier"
+  }
+]

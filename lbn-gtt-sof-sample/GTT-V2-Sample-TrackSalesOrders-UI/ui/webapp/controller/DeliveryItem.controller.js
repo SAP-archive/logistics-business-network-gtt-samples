@@ -13,6 +13,11 @@ sap.ui.define(
   ) {
     "use strict";
 
+    var PropertyPaths = Object.freeze({
+      IS_REFERENCED_DOCUMENTS_LOADED: "/isReferenceDocumentsLoaded",
+      DESTINATION: "/destination",
+    });
+
     return BaseDetailController.extend("com.sap.gtt.app.sample.sof.controller.DeliveryItem", {
       routeName: "deliveryItem",
 
@@ -83,14 +88,14 @@ sap.ui.define(
       /**
        * Trigged by pressing the refresh button in order to refresh the view
        */
-      onRefreshPressed: function() {
+      onRefreshPressed: function () {
         var view = this.getView();
         view.getElementBinding().refresh(true);
       },
 
       clearPlannedArrivalETA: function () {
         var model = this.getModel(this.routeName);
-        model.setProperty("/destination", null);
+        model.setProperty(PropertyPaths.DESTINATION, null);
         model.setProperty("/earliestETA", null);
         model.setProperty("/earliestETATimeZone", "");
         model.setProperty("/plannedArrivalTime", null);
@@ -109,7 +114,7 @@ sap.ui.define(
         }
 
         var model = this.getModel(this.routeName);
-        var destination = model.getProperty("/destination");
+        var destination = model.getProperty(PropertyPaths.DESTINATION);
         if (destination === null) {
           return;
         }
@@ -142,14 +147,14 @@ sap.ui.define(
 
       updateLocationQuickViewData: function () {
         var model = this.locationQuickView.getModel();
-        var destination = this.getModel(this.routeName).getProperty("/destination");
+        var destination = this.getModel(this.routeName).getProperty(PropertyPaths.DESTINATION);
         model.setProperty("/", destination);
       },
 
       updateDestination: function () {
         var context = this.getView().getBindingContext();
         var destinationLocation = context.getProperty("destinationLocation");
-        this.getModel(this.routeName).setProperty("/destination", destinationLocation);
+        this.getModel(this.routeName).setProperty(PropertyPaths.DESTINATION, destinationLocation);
       },
 
       updateDeliveryItemFulfillmentStatus: function () {
@@ -194,7 +199,7 @@ sap.ui.define(
 
       updateReferenceDocuments: function () {
         var model = this.getModel(this.routeName);
-        model.setProperty("/isReferenceDocumentsLoaded", false);
+        model.setProperty(PropertyPaths.IS_REFERENCED_DOCUMENTS_LOADED, false);
 
         var jsonService = ServiceUtils.getDataSource("restService");
         var bindingContext = this.getView().getBindingContext();
@@ -207,16 +212,12 @@ sap.ui.define(
         });
 
         request.then(function (data) {
-          model.setProperty("/referenceDocuments", data.filter(
-            function (referenceDocument) {
-              return referenceDocument.docType_code !== "VP";
-            }
-          ));
-          model.setProperty("/isReferenceDocumentsLoaded", true);
+          model.setProperty("/referenceDocuments", data);
+          model.setProperty(PropertyPaths.IS_REFERENCED_DOCUMENTS_LOADED, true);
         }, function (error) {
           this.handleServerError(error);
           Log.error(error.data);
-          model.setProperty("/isReferenceDocumentsLoaded", true);
+          model.setProperty(PropertyPaths.IS_REFERENCED_DOCUMENTS_LOADED, true);
         }.bind(this));
       },
     });

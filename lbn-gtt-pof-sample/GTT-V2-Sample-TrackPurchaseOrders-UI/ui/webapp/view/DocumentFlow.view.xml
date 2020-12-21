@@ -1,0 +1,76 @@
+<mvc:View
+  controllerName="com.sap.gtt.app.sample.pof.controller.DocumentFlow"
+  height="100%"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.suite.ui.commons.networkgraph">
+  <Graph id="networkGraph"
+    backgroundColor="Default"
+    enableWheelZoom="false"
+    height="100%" width="100%"
+    nodes="{graph>/nodes}"
+    lines="{graph>/lines}"
+    groups="{graph>/groups}">
+    <nodes>
+      <Node
+        status="{graph>status}"
+        key="{graph>key}"
+        title="{graph>title}"
+        group="{graph>group}"
+        icon="{
+          path: 'graph>group', 
+          formatter: '.getGraphGroupIcon'
+        }"
+        attributes="{
+          path: 'graph>attributes', 
+          templateShareable: false
+        }"
+        showActionLinksButton="false"				
+        shape="Box" width="250" height="default">
+        <attributes>
+          <ElementAttribute
+            id="elementAttribute"
+            label="{
+              path: 'graph>',
+              formatter: '.getGraphAttributeLabel'
+            }"
+            value="{
+              path: 'graph>',
+              formatter: '.getAttributeValue'
+            }"
+            valueStatus="{graph>valueStatus}"/>
+        </attributes>
+        <actionLinks>
+        </actionLinks>
+        <actionButtons>
+          <ActionButton 
+            enabled="{
+              path: 'graph>',
+              formatter: '.formatActionBtnState'
+            }"
+            icon="sap-icon://attachment"
+            press="navToDetailPage"/>
+        </actionButtons>
+      </Node>
+    </nodes>
+    <lines>
+      <Line
+        from="{graph>from}"
+        to="{graph>to}"
+        status="{graph>status}">
+      </Line>
+    </lines>
+    <groups>
+      <Group
+        id="networkGraphGroup"
+        key="{graph>key}"
+        status="{graph>status}"
+        icon="{
+          path: 'graph>key', 
+          formatter: '.getGraphGroupIcon'
+        }"
+        title="{path: 'graph>title', formatter: '.getText'}">
+      </Group>
+    </groups>
+  </Graph>
+</mvc:View>

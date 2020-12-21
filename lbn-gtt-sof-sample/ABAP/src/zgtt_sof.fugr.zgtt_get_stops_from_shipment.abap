@@ -49,7 +49,7 @@ FUNCTION zgtt_get_stops_from_shipment.
       OTHERS              = 2.
 
 * Read Stage Information
-  IF it_vtts_new IS NOT INITIAL.
+  IF it_vtts_new IS SUPPLIED.
     MOVE it_vtts_new TO lt_vttsvb.
   ELSE.
     ls_tknum_range-sign   = 'I'.
@@ -219,7 +219,7 @@ FUNCTION zgtt_get_stops_from_shipment.
   CHECK et_stops IS NOT INITIAL.
 
 * Read Stage / Item relation Information
-  IF it_vtsp_new IS NOT INITIAL.
+  IF it_vtsp_new IS SUPPLIED.
     MOVE it_vtsp_new TO lt_vtspvb.
   ELSE.
     CLEAR ls_tknum_range.
@@ -240,7 +240,7 @@ FUNCTION zgtt_get_stops_from_shipment.
   CHECK lt_vtspvb IS NOT INITIAL.
 
 * Read Item Information
-  IF it_vttp_new IS NOT INITIAL.
+  IF it_vttp_new IS SUPPLIED.
     MOVE it_vttp_new TO lt_vttpvb.
   ELSE.
     SELECT * INTO CORRESPONDING FIELDS OF TABLE lt_vttpvb

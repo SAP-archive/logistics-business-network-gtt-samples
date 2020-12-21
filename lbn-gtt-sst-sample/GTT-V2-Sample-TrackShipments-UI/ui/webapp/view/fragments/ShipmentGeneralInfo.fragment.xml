@@ -1,0 +1,194 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield">
+	<smartForm:SmartForm id="shipmentGeneralInfoSmartForm"
+		editTogglable="false">
+		<smartForm:layout>
+			<smartForm:Layout labelSpanS="12"
+				labelSpanM="12"
+				labelSpanL="12"
+				labelSpanXL="12"
+				columnsM="2"
+				columnsL="3" />
+		</smartForm:layout>
+
+		<smartForm:Group>
+			<smartForm:GroupElement>
+				<smartField:SmartField id="serviceAgentLbnId"
+					textLabel="{i18n>carrier}"
+					value="{serviceAgentLbnId}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement>
+				<smartField:SmartField id="shippingType"
+					textLabel="{
+						parts: [
+							{ value: 'shippingType_code' },
+							{ value: 'Shipment' }
+						],
+						formatter: '.getPropertyLabelText'
+					}"
+					value="{=
+						!!${shippingType/localized/name} ? ${shippingType/localized/name} : ${shippingType/name}
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				>
+				<smartField:SmartField id="trafficDirection"
+					textLabel="{
+						parts: [
+							{ value: 'trafficDirection_code' },
+							{ value: 'Shipment' }
+						],
+						formatter: '.getPropertyLabelText'
+					}"
+					value="{=
+						!!${trafficDirection/localized/name} ? ${trafficDirection/localized/name} : ${trafficDirection/name}
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement>
+				<smartField:SmartField id="incoterms"
+					textLabel="{
+						parts: [
+							{ value: 'incoterms_code' },
+							{ value: 'Shipment' }
+						],
+						formatter: '.getPropertyLabelText'
+					}"
+					value="{=
+						!!${incoterms/localized/name} ? ${incoterms/localized/name} : ${incoterms/name}
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement>
+				<smartField:SmartField id="incotermLocation"
+					value="{incotermLocation}" />
+			</smartForm:GroupElement>
+		</smartForm:Group>
+
+		<smartForm:Group>
+			<smartForm:GroupElement>
+				<smartField:SmartField id="dangerousGoods"
+					value="{dangerousGoods}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'plannedTotalDistance' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text text="{
+					parts: ['plannedTotalDistance'],
+					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
+				}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'plannedGrossDuration' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text id="plannedGrossDuration"
+					text="{
+						path: 'plannedGrossDuration',
+						formatter: '.formatter.formatGrossNetDuration'
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'plannedNetDuration' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text id="plannedNetDuration"
+					text="{
+						path: 'plannedNetDuration',
+						formatter: '.formatter.formatGrossNetDuration'
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement>
+				<smartField:SmartField id="transportMeans"
+					textLabel="{
+						parts: [
+							{ value: 'transportMeans_code' },
+							{ value: 'Shipment' }
+						],
+						formatter: '.getPropertyLabelText'
+					}"
+					value="{=
+						!!${transportMeans/localized/name} ? ${transportMeans/localized/name} : ${transportMeans/name}
+					}" />
+			</smartForm:GroupElement>
+		</smartForm:Group>
+
+		<smartForm:Group>
+			<smartForm:GroupElement label="{i18n>registrationCountryRegionAndNumber}">
+				<Text id="registrationCountryRegionAndNumber"
+					text="{
+						parts: ['registrationCountry', 'registrationNumber'],
+						formatter: '.formatter.registrationCountryRegionAndNumber'
+					}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement>
+				<smartField:SmartField id="vehicle"
+					value="{vehicle}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'cargoWeight' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text text="{
+					parts: ['cargoWeight', 'weightUoM'],
+					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
+				}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'cargoVolumn' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text text="{
+					parts: ['cargoVolumn', 'volumnUoM'],
+					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
+				}" />
+			</smartForm:GroupElement>
+
+			<smartForm:GroupElement
+				label="{
+					parts: [
+						{ value: 'cargoQuantity' },
+						{ value: 'Shipment' }
+					],
+					formatter: '.getPropertyLabelText'
+				}">
+				<Text text="{
+					parts: ['cargoQuantity', 'quantityUoM'],
+					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
+				}" />
+			</smartForm:GroupElement>
+		</smartForm:Group>
+	</smartForm:SmartForm>
+</core:FragmentDefinition>

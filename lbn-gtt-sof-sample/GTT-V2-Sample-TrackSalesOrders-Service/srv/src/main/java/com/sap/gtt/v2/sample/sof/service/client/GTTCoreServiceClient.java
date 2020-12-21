@@ -27,7 +27,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
-import javax.script.ScriptEngine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,11 +47,15 @@ public class GTTCoreServiceClient {
     public static final String JSON = "json";
     public static final String FILTER = "$filter";
     public static final String INLINECOUNT = "$inlinecount";
+    public static final String SKIP = "$skip";
+    public static final String TOP = "$top";
+    public static final String ORDERBY = "$orderby";
     public static final String ALLPAGES = "allpages";
     public static final String INLINECOUNT_ALLPAGES = INLINECOUNT + "=" + ALLPAGES;
     public static final String INLINECOUNT_NONE = "$inlinecount=none";
-    public static final String SKIP = "&$skip=";
+    public static final String SKIP_SKIP = "&$skip=";
     public static final int TOO_MANY_RECORDS = 2000;
+    public static final String EXPAND = "$expand";
 
     @Value("${DESTINATION_GTT:#{null}}")
     private String destinationGTT;
@@ -91,7 +94,7 @@ public class GTTCoreServiceClient {
         }
 
         while (res.getCount() != null && res.getCount() > res.getResults().size()) {
-            String skip = SKIP + res.getResults().size();
+            String skip = SKIP_SKIP + res.getResults().size();
             uri += skip;
             ODataResultList<T> tmp = readEntitySet(uri, classOfT, headers);
             res.setCount(tmp.getCount());
@@ -139,13 +142,13 @@ public class GTTCoreServiceClient {
         if (headers != null) {
             finalHeaders.addAll(headers);
         }
-        finalHeaders.setBasicAuth(techUser, criticalInfo);
+        setHeaders(finalHeaders);
         if (finalHeaders.getAcceptLanguage() == null || finalHeaders.getAcceptLanguage().isEmpty()) {
             finalHeaders.setAcceptLanguageAsLocales(Collections.singletonList(LocaleContextHolder.getLocale()));
         }
 
         String readServiceUrl = UriComponentsBuilder.fromHttpUrl(gttBaseUrl + OUTBOUND_ODATA_V_1 +
-                Constants.MODEL_NAMESPACE + uri).build().encode().toUriString();
+                Constants.MODEL_NAMESPACE + uri).build().toUriString();
         logger.debug("ready to call read service: {}", readServiceUrl);
 
         ResponseEntity<String> responseEntity;
@@ -153,7 +156,7 @@ public class GTTCoreServiceClient {
             responseEntity = restTemplate.exchange(readServiceUrl, HttpMethod.GET,
                     new HttpEntity<>(null, finalHeaders), String.class);
         } catch (HttpStatusCodeException e) {
-            logger.error("Call read service failed:", e);
+            logger.error("Call read service failed, readServiceUrl:{}", readServiceUrl, e);
             throw new SOFServiceException(MESSAGE_CODE_CALL_READ_SERVICE_FAILED);
         }
         return responseEntity.getBody();
@@ -162,21 +165,21 @@ public class GTTCoreServiceClient {
 
     public void write(String body, String uri) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(techUser, criticalInfo);
+        setHeaders(headers);
 
         String writeServiceUrl = gttBaseUrl + INBOUND_REST_V_1 + Constants.GTT_MODEL_NAMESPACE_WRITE_SERVICE + uri;
         logger.debug("ready to call write service: {}", writeServiceUrl);
         try {
             restTemplate.exchange(writeServiceUrl, HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
         } catch (HttpStatusCodeException e) {
-            logger.error("Call write service failed:", e);
+            logger.error("Call write service failed, writeServiceUrl:{}", writeServiceUrl, e);
             throw new SOFServiceException(MESSAGE_CODE_CALL_WRITE_SERVICE_FAILED);
         }
     }
 
     public String getUiAnnotation() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(techUser, criticalInfo);
+        setHeaders(headers);
 
         String metadataServiceUrl = gttBaseUrl + METADATA_V_1_MODEL + Constants.GTT_MODEL_NAMESPACE + "/annotation";
         logger.debug("ready to call metadata service: {}", metadataServiceUrl);
@@ -185,7 +188,7 @@ public class GTTCoreServiceClient {
             responseEntity = restTemplate.exchange(metadataServiceUrl, HttpMethod.GET,
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
-            logger.error("Call metadata service failed:", e);
+            logger.error("Call metadata service failed, metadataServiceUrl:{}", metadataServiceUrl, e);
             throw new SOFServiceException(MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED);
         }
         return responseEntity.getBody();
@@ -193,7 +196,7 @@ public class GTTCoreServiceClient {
 
     public String getI18n(String properties) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(techUser, criticalInfo);
+        setHeaders(headers);
 
         String metadataServiceUrl = gttBaseUrl + METADATA_V_1_MODEL1 + Constants.GTT_MODEL_NAMESPACE + "/i18n/" + properties;
         logger.debug("ready to call metadata service: {}", metadataServiceUrl);
@@ -202,16 +205,20 @@ public class GTTCoreServiceClient {
             responseEntity = restTemplate.exchange(metadataServiceUrl, HttpMethod.GET,
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
-            logger.error("Call metadata service failed:", e);
+            logger.error("Call metadata service failed, metadataServiceUrl:{}", metadataServiceUrl, e);
             throw new SOFServiceException(MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED);
         }
 
         return responseEntity.getBody();
     }
 
+    private void setHeaders(HttpHeaders headers) {
+        headers.setBasicAuth(techUser, criticalInfo);
+    }
+
     public Location getLocation(String locationAltKey) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(techUser, criticalInfo);
+        setHeaders(headers);
 
         // encode().build() has unexpected result, use build().encode()
         String locationService = UriComponentsBuilder.fromHttpUrl(gttBaseUrl + LOCATION_V_1_LOCATION)
@@ -225,7 +232,7 @@ public class GTTCoreServiceClient {
             responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
-            logger.error("Call location service failed:", e);
+            logger.error("Call location service failed, locationService:{}", locationService, e);
             throw new SOFServiceException(MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED);
         }
 
@@ -239,7 +246,7 @@ public class GTTCoreServiceClient {
 
         if(!locationAltKeys.isEmpty()) {
             HttpHeaders headers = new HttpHeaders();
-            headers.setBasicAuth(techUser, criticalInfo);
+            setHeaders(headers);
             List<FilterCondition> conditions = new ArrayList<>();
             locationAltKeys.forEach(locationAltKey ->
                     conditions.add(new FilterCondition("locationAltKey", FilterCondition.EDM_TYPE_STRING, locationAltKey, BinaryOperator.EQ)));
@@ -250,10 +257,16 @@ public class GTTCoreServiceClient {
                     .queryParam(INLINECOUNT, ALLPAGES)
                     .queryParam(FILTER, filter.getExpressionString()).build().encode().toUriString();
 
-            ResponseEntity<String> responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
-                    new HttpEntity<>(null, headers), String.class);
+            try {
+                ResponseEntity<String> responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
+                        new HttpEntity<>(null, headers), String.class);
 
-            result = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class).getResults();
+                result = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class).getResults();
+            } catch (HttpStatusCodeException e) {
+                logger.error("Call location service failed, locationService:{}", locationService, e);
+                throw new SOFServiceException(MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED);
+            }
+
         }
 
         return result;

@@ -1,0 +1,219 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<HBox id="shipmentItemHeaderContentHBox"
+		class="sofHeaderContentHBox"
+		wrap="Wrap"
+		fitContainer="true">
+		<VBox id="sourceLocationVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="sourceLocationTitle"
+				text="{i18n>sourceLocation}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+
+			<HBox wrap="Wrap">
+				<Label id="sourceLocationLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>location}"
+					labelFor="sourceLocation" />
+				<ObjectIdentifier class="sstDepartureLocation sstHeaderContentPropertyText"
+					titleActive="{= !!${departureLocation} }"
+					titlePress=".openLocationQuickView"
+					title="{= ${departureLocation} ? ${departureLocation/locationDescription} : (${departureLocationId} ? ${departureLocationId} : ${i18n>locationUndefined})}">
+					<customData>
+						<core:CustomData key="propertyName" value="departureLocation"/>
+					</customData>
+				</ObjectIdentifier>
+			</HBox>
+
+			<HBox wrap="Wrap">
+				<Label id="sourceAddressLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>address}"
+					labelFor="sourceAddress" />
+				<Text id="sourceAddress"
+					class="sstHeaderContentPropertyText"
+					text="{departureLocation/addressDetail}" />
+			</HBox>
+
+			<HBox wrap="Wrap">
+				<Label id="plannedDepartureTimeLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>plannedDepartureAt}"
+					labelFor="plannedDepartureTime" />
+				<Text id="plannedDepartureTime"
+					class="sstHeaderContentPropertyText"
+					text="{
+						path: 'plannedDepartureDateTime',
+						type: 'sap.ui.model.odata.type.DateTimeOffset'
+					}" />
+			</HBox>
+		</VBox>
+
+		<VBox id="destinationLocationVBox"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="destinationLocationTitle"
+				class="sapUiTinyMarginBottom"
+				text="{i18n>destinationLocation}"
+				level="H4" />
+
+			<HBox wrap="Wrap">
+				<Label id="destinationLocationLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>location}"
+					labelFor="destinationLocation" />
+				<ObjectIdentifier class="sstArrivalLocation sstHeaderContentPropertyText"
+					titleActive="{= !!${arrivalLocation} }"
+					titlePress=".openLocationQuickView"
+					title="{= ${arrivalLocation} ? ${arrivalLocation/locationDescription} : (${arrivalLocationId} ? ${arrivalLocationId} : ${i18n>locationUndefined})}">
+					<customData>
+						<core:CustomData key="propertyName" value="arrivalLocation"/>
+					</customData>
+				</ObjectIdentifier>
+			</HBox>
+
+			<HBox wrap="Wrap">
+				<Label id="destinationAddressLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>address}"
+					labelFor="destinationAddress" />
+				<Text id="destinationAddress"
+					class="sstHeaderContentPropertyText"
+					text="{arrivalLocation/addressDetail}" />
+			</HBox>
+
+			<HBox wrap="Wrap">
+				<Label id="plannedArrivalTimeLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>plannedArrivalAt}"
+					labelFor="plannedArrivalTime" />
+				<Text id="plannedArrivalTime"
+					class="sstHeaderContentPropertyText"
+					text="{
+						path: 'plannedArrivalDateTime',
+						type: 'sap.ui.model.odata.type.DateTimeOffset'
+					}" />
+			</HBox>
+		</VBox>
+
+		<VBox id="nextStopVBox"
+			visible="{= !!${shipment>/nextStop} &amp;&amp; !${shipment>/isCompleted} }"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="nextStopTitle"
+				class="sapUiTinyMarginBottom"
+				text="{i18n>nextStop}"
+				level="H4" />
+
+			<Link id="nextStopLocationLink"
+				class="sstNextStopLocationLink"
+				text="{shipment>/nextStop/location/locationDescription}"
+				press=".openLocationQuickView">
+				<customData>
+					<core:CustomData key="modelName" value="shipment"/>
+					<core:CustomData key="propertyName" value="nextStop/location"/>
+				</customData>
+			</Link>
+
+			<HBox wrap="Wrap">
+				<Label id="etaLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>eta}"
+					labelFor="eta" />
+				<Text id="eta"
+					class="sstHeaderContentPropertyText"
+					text="{
+						path: 'shipment>/nextStop/estimatedArrivalTime',
+						type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
+					}" />
+			</HBox>
+
+			<ObjectStatus id="etaDelta"
+				visible="{=
+					!!${shipment>/nextStop/estimatedArrivalTime} &amp;&amp;
+					!!${shipment>/nextStop/plannedBusinessTimestamp}
+				}"
+				inverted="true"
+				state="Warning"
+				text="{
+					parts: [
+						'shipment>/nextStop/estimatedArrivalTime',
+						'shipment>/nextStop/plannedBusinessTimestamp',
+						{ value: 'short' }
+					],
+					formatter: '.formatter.timeDuration'
+				}"
+				tooltip="{
+					parts: [
+						'shipment>/nextStop/estimatedArrivalTime',
+						'shipment>/nextStop/plannedBusinessTimestamp'
+					],
+					formatter: '.formatter.etaDetlaTooltip'
+				}" />
+		</VBox>
+
+		<VBox id="deliveredVBox"
+			visible="{shipment>/isCompleted}"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+			<Title id="deliveredAtTitle"
+				class="sapUiTinyMarginBottom"
+				text="{i18n>deliveredAt}"
+				level="H4" />
+
+			<Link id="deliveryAtLocationLink"
+				class="sstDeliveryAtLocationLink"
+				text="{shipment>/deliveryInformation/location/locationDescription}"
+				press=".openLocationQuickView">
+				<customData>
+					<core:CustomData key="modelName" value="shipment"/>
+					<core:CustomData key="propertyName" value="deliveryInformation/location"/>
+				</customData>
+			</Link>
+
+			<HBox wrap="Wrap">
+				<Label id="deliveredTimeLabel"
+					class="sstHeaderContentPropertyLabel sapUiTinyMarginEnd"
+					text="{i18n>actualAt}"
+					labelFor="deliveredTime" />
+				<Text id="deliveredTime"
+					class="sstHeaderContentPropertyText"
+					text="{
+						path: 'shipment>/deliveryInformation/actualBusinessTimestamp',
+						type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
+					}" />
+			</HBox>
+		</VBox>
+
+		<VBox id="eventsByStatusVBox"
+			visible="{= ${shipment>/eventsCount} > 0 }"
+			class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+			width="19rem"
+			height="8rem">
+			<Title id="eventsByStatusTitle"
+				text="{i18n>eventsByStatus}"
+				level="H4"
+				class="sapUiTinyMarginBottom" />
+			<mc:InteractiveDonutChart id="eventsByStatusDonutChart"
+				selectionEnabled="false"
+				displayedSegments="{shipment>/eventStatusTypeCount}"
+				segments="{shipment>/eventsByStatusSet}"
+				tooltip="{
+					path: 'shipment>/eventsByStatusSet',
+					formatter: '.formatter.shipmentEventsByStatusTooltip'
+				}">
+				<mc:segments>
+					<mc:InteractiveDonutChartSegment value="{shipment>count}"
+						displayedValue="{shipment>count}"
+						label="{
+							path: 'shipment>eventStatus_code',
+							formatter: '.formatter.eventStatusText'
+						}"
+						color="{
+							path: 'shipment>eventStatus_code',
+							formatter: '.formatter.eventStatus.getColor'
+						}" />
+				</mc:segments>
+			</mc:InteractiveDonutChart>
+		</VBox>
+	</HBox>
+</core:FragmentDefinition>

@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Popover
+    id="popover" class="pofReportingHistoryPopover"
+    contentHeight="{$this>contentHeight}"
+    contentWidth="{$this>contentWidth}"
+    placement="{$this>placement}"
+    title="{$this>title}">
+      <VBox 
+        id="innerVBox" 
+        visible="{= !!${$this>popoverContent} }"
+        width="100%"
+        class="pofReportingHistoryList">
+      </VBox>
+      <List 
+        id="innerList" visible="{= !${$this>popoverContent} }" class="pofReportingHistoryList">
+      </List>
+  </Popover>
+</core:FragmentDefinition>

@@ -21,13 +21,13 @@
 				type="Warning"
 				showIcon="true"
 				showCloseButton="true"
-				visible="{map>/hasInvalidActualEventLocations}"/>
+				visible="{= !!${map>/hasInvalidActualEventLocations} }"/>
 			<MessageStrip
 				text="{i18n>invalidPlannedEventLocationMsg}"
 				type="Warning"
 				showIcon="true"
 				showCloseButton="true"
-				visible="{map>/hasInvalidPlannedEventLocations}"/>
+				visible="{= !!${map>/hasInvalidPlannedEventLocations} }"/>
 			<vk:MapContainer autoAdjustHeight="true" class="sapUiNoContentPadding" showSelection="false" showSettings="false">
 				<vk:listPanelStack>
 					<vk:ListPanelStack>

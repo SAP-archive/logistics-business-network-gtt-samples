@@ -1,0 +1,110 @@
+@font-face {
+  font-family: BusinessSuiteInAppSymbols;
+  src: url("BusinessSuiteInAppSymbols.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: SAP-icons-TNT;
+  src: url("SAP-icons-TNT.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@media (max-width: 600px) {
+  .purchaseOrderDetailItemsSection {
+    margin-bottom: 1rem;
+  }
+}
+.purchaseOrderListPage .sapFDynamicPageContent,
+.purchaseOrderListPage .sapFDynamicPageContentFitContainer {
+  padding: 0;
+}
+.purchaseOrderListPage .sapMITH {
+  padding-left: 3rem;
+}
+.purchaseOrderListPage .sapMITBContent {
+  width: 95%;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 1rem;
+}
+.purchaseOrderDetailItemsTableContainer {
+  max-height: 450px;
+}
+.purchaseOrderItemDetail .milestoneProcess .suiteUiProcessFlowLaneHeaderText {
+  white-space: pre;
+}
+.purchaseOrderItemDetailDeliveryItemsTableContainer {
+  max-height: 450px;
+}
+.pofTimelineItem[data-is-reported-event="false"] {
+  opacity: 0.65;
+}
+.pofTimelineItem[data-is-reported-event="false"] .sapSuiteUiCommonsTimelineItemShellDateTime {
+  display: none;
+}
+.pofTimelineItem[data-is-reported-event="true"] .sapSuiteUiCommonsTimelineItemShellHdr {
+  font-weight: bold;
+}
+.pofTimelineItem[data-is-planned-event="false"] .pofTimelineMainContentContainer {
+  width: 85%;
+  justify-content: flex-end;
+}
+.pofTimelineItem[data-is-planned-event="true"] .pofTimelineMainContentContainer {
+  justify-content: space-between;
+}
+.pofTimelineItem .sapMObjStatusInverted .sapMObjStatusText {
+  padding: 0.3rem 0.4rem;
+}
+.pofTrackingMap .sapMPanelWrappingDivTb > .sapMBtn[aria-expanded="true"] {
+  right: 0;
+}
+.pofTrackingMap .sapMPanelWrappingDivTb > .sapMBtn[aria-expanded="false"] {
+  display: none;
+}
+.pofReportingHistoryList {
+  padding: 0.5rem 1rem;
+}
+.pofReportingHistoryList .sapMLIB .sapMLIBContent {
+  padding: 0.2rem 0;
+}
+.purchaseOrderItemDetailScheduleLinesTableContainer {
+  max-height: 450px;
+}
+.pofLocationPopoverTitle {
+  font-weight: bold;
+}
+.pofHeaderContentPropertyLabel:after {
+  content: ":";
+}
+.pofGenericTag {
+  pointer-events: none;
+}
+.deliveryItemDetailReferenceDocumentsTableContainer {
+  max-height: 450px;
+}
+.pofObjectNumber .sapMObjectNumberText {
+  font-size: 1.5rem;
+}
+.pofObjectNumber .sapMObjectNumberUnit {
+  font-size: 1rem;
+}
+.completionRateTableChart .sapSuiteHBMCChartSvg {
+  border-radius: 50%;
+  background-color: #d5dadc;
+}
+.sapMListTblCell .tableKeyColumn {
+  font-weight: bold;
+}
+.sapMListTblHeaderCell .sapMColumnHeaderContent {
+  margin-top: 0.2rem;
+}
+.sapMListTblCell {
+  vertical-align: middle;
+}
+.sapMListTblHasPopin .sapMListTblCell {
+  vertical-align: top;
+}
+.sapMListTblHasPopin .sapMListTblCell > * {
+  margin-top: 0.3rem;
+}

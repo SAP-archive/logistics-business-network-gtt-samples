@@ -244,7 +244,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: "/hereKey",
+                  path: "/hereMapKey",
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "hereKey.json"

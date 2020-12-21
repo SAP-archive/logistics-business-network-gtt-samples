@@ -1,0 +1,528 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "9d2cd5b8-2991-11eb-992f-bf0c299134c6",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1100053116",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1100053116",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605699094889)\/",
+        "actualBusinessTimestamp": "\/Date(1637206292000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "11000531160002",
+        "longitude": "123.000100000",
+        "latitude": "43.000100000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605699094889)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'9d2cd5b8-2991-11eb-992f-bf0c299134c6')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "28b37441-2994-11eb-992f-d7f3c56d89f7",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1100015256",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1100015256",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605700187968)\/",
+        "actualBusinessTimestamp": "\/Date(1628697600000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "11000152560003",
+        "longitude": "18.375884600",
+        "latitude": "-38.914651000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605700187968)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'28b37441-2994-11eb-992f-d7f3c56d89f7')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "33e8696a-2994-11eb-992f-4fbd4b96f92b",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1200069250",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1200069250",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605700206770)\/",
+        "actualBusinessTimestamp": "\/Date(1629151500000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "12000692500004",
+        "longitude": "18.375884600",
+        "latitude": "-38.914651000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605700206770)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'33e8696a-2994-11eb-992f-4fbd4b96f92b')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "4cc1a61b-2994-11eb-992f-892ff99be881",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1100015256",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1100015256",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605700248460)\/",
+        "actualBusinessTimestamp": "\/Date(1628690400000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "11000152560003",
+        "longitude": "18.375884600",
+        "latitude": "-38.914651000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605700248460)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'4cc1a61b-2994-11eb-992f-892ff99be881')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "52d9b51e-2994-11eb-992f-9f57a35c771c",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1100015256",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1100015256",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605700258683)\/",
+        "actualBusinessTimestamp": "\/Date(1628804700000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "11000152560003",
+        "longitude": "18.375884600",
+        "latitude": "-38.914651000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605700258683)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'52d9b51e-2994-11eb-992f-9f57a35c771c')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "6c727142-2994-11eb-992f-6df20580792e",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001016",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:SHIPMENT_ORDER:1200069250",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SHIPMENT_ORDER",
+        "trackingId": "1200069250",
+        "priority": 0,
+        "actualTechnicalTimestamp": "\/Date(1605700301627)\/",
+        "actualBusinessTimestamp": "\/Date(1629152400000)\/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:Customer:0000010105",
+        "eventMatchKey": "12000692500004",
+        "longitude": "18.375884600",
+        "latitude": "-38.914651000",
+        "messageSourceType": null,
+        "createdByUser": "abc@abc.com",
+        "creationDateTime": "\/Date(1605700301627)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'6c727142-2994-11eb-992f-6df20580792e')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "ed32550b-29da-11eb-992f-eb3b512c6e44",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "10000014",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:RESOURCE:0000002341TGHU7898666",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "RESOURCE",
+        "trackingId": "0000002341TGHU7898666",
+        "priority": 10,
+        "actualTechnicalTimestamp": "\/Date(1605730582404)\/",
+        "actualBusinessTimestamp": "\/Date(1604935044000)\/",
+        "actualBusinessTimeZone": null,
+        "locationAltKey": null,
+        "eventMatchKey": null,
+        "longitude": "176.100000000",
+        "latitude": "-37.410000000",
+        "messageSourceType": null,
+        "createdByUser": null,
+        "creationDateTime": "\/Date(1605730582404)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'ed32550b-29da-11eb-992f-eb3b512c6e44')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "bff998b1-2a2e-11eb-992f-6d8c23687350",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "10000014",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:RESOURCE:0000002341TGHU7898666",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "RESOURCE",
+        "trackingId": "0000002341TGHU7898666",
+        "priority": 10,
+        "actualTechnicalTimestamp": "\/Date(1605766584260)\/",
+        "actualBusinessTimestamp": "\/Date(1604935044000)\/",
+        "actualBusinessTimeZone": null,
+        "locationAltKey": null,
+        "eventMatchKey": null,
+        "longitude": "176.100000000",
+        "latitude": "-37.410000000",
+        "messageSourceType": null,
+        "createdByUser": null,
+        "creationDateTime": "\/Date(1605766584260)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'bff998b1-2a2e-11eb-992f-6d8c23687350')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.Arrival"
+        },
+        "id": "24a6c87c-2a37-11eb-992f-3ba8385d9418",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.sof",
+        "eventType": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "10000014",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:RESOURCE:0000002341TGHU7898666",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001016",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "RESOURCE",
+        "trackingId": "0000002341TGHU7898666",
+        "priority": 10,
+        "actualTechnicalTimestamp": "\/Date(1605770189141)\/",
+        "actualBusinessTimestamp": "\/Date(1604935044000)\/",
+        "actualBusinessTimeZone": null,
+        "locationAltKey": null,
+        "eventMatchKey": null,
+        "longitude": "176.100000000",
+        "latitude": "-37.410000000",
+        "messageSourceType": null,
+        "createdByUser": null,
+        "creationDateTime": "\/Date(1605770189141)\/",
+        "transportationMeans_code": null,
+        "locationType_code": null,
+        "references": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')/eventProcesses"
+          }
+        },
+        "transportationMeans": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')/transportationMeans"
+          }
+        },
+        "locationType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Arrival(guid'24a6c87c-2a37-11eb-992f-3ba8385d9418')/locationType"
+          }
+        },
+        "estimatedArrival": {
+          "results": []
+        }
+      }
+    ]
+  }
+}

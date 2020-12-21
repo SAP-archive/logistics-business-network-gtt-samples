@@ -13,6 +13,10 @@ sap.ui.define(
   ) {
     "use strict";
 
+    var PropertyPaths = Object.freeze({
+      LAST_UPDATED_ON: "/lastUpdatedOn",
+    });
+
     var controllerClassInfo = {
 
       initModel: function () {
@@ -80,10 +84,10 @@ sap.ui.define(
       /**
        * Update last updated time
        */
-      updateLastUpdatedAtTime: function() {
+      updateLastUpdatedAtTime: function () {
         var model = this.getModel("view");
-        if (!model.getProperty("/lastUpdatedOn")) {
-          model.setProperty("/lastUpdatedOn", {});
+        if (!model.getProperty(PropertyPaths.LAST_UPDATED_ON)) {
+          model.setProperty(PropertyPaths.LAST_UPDATED_ON, {});
         }
 
         var dateTimeInstance = DateFormat.getTimeInstance({
@@ -92,9 +96,9 @@ sap.ui.define(
         });
 
         model.setProperty(
-          "/lastUpdatedOn" + this.getView().getElementBinding().getPath(),
+          PropertyPaths.LAST_UPDATED_ON + this.getView().getElementBinding().getPath(),
           this.getText("lastUpdatedAt", [
-            dateTimeInstance.format(new Date())
+            dateTimeInstance.format(new Date()),
           ])
         );
       },

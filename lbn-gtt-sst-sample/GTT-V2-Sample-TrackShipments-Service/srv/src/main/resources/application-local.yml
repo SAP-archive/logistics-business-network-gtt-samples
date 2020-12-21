@@ -1,0 +1,27 @@
+management:
+  context-path: /system
+  security:
+    enabled: true
+  health:
+    defaults:
+      enabled: false
+
+security:
+  basic:
+    enabled: false
+
+endpoints:
+  health:
+    enabled: false
+
+server:
+  port: 9098
+  max-http-header-size: 65536
+
+debug: false
+
+HERE_MAP_KEY: {here-map-license-key}
+
+GTT_CORE_ENGINE_TECHNICAL_USER: {techincal-user-name}
+GTT_CORE_ENGINE_TECHNICAL_PWD: {techincal-user-pwd}
+GTT_CORE_ENGINE_API_URL_FLP_BASED: {here-map-license-key}

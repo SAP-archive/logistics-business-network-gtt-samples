@@ -76,6 +76,6 @@ sap.ui.define(
       }
     };
 
-    return ProcessStatus;
+    return Object.freeze(ProcessStatus);
   }
 );

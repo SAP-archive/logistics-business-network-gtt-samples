@@ -1,0 +1,50 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/GoodsReceipt(guid'fbb26df3-1a81-11eb-b5f4-9561ca468fff')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/GoodsReceipt(guid'fbb26df3-1a81-11eb-b5f4-9561ca468fff')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.GoodsReceipt"
+        },
+        "id": "fbb26df3-1a81-11eb-b5f4-9561ca468fff",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "modelNamespace": "com.lbngttsamples.gtt.app.pof",
+        "eventType": "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.GoodsReceipt",
+        "eventReasonText": null,
+        "eventReasonCode": null,
+        "senderPartyId": "LBN#10010001006",
+        "reportedBy": null,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005522100010",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001006",
+        "logicalSystem": "QW9CLNT170",
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "trackingId": "450005522100010",
+        "priority": 0,
+        "actualTechnicalTimestamp": "/Date(1604043114081)/",
+        "actualBusinessTimestamp": "/Date(1604043100000)/",
+        "actualBusinessTimeZone": "CET",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+        "eventMatchKey": null,
+        "longitude": null,
+        "latitude": null,
+        "messageSourceType": null,
+        "createdByUser": "gtt_sof_tech02@163.com",
+        "creationDateTime": "/Date(1604043114081)/",
+        "quantity": "10.00",
+        "references": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/GoodsReceipt(guid'fbb26df3-1a81-11eb-b5f4-9561ca468fff')/references"
+          }
+        },
+        "eventProcesses": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/GoodsReceipt(guid'fbb26df3-1a81-11eb-b5f4-9561ca468fff')/eventProcesses"
+          }
+        }
+      }
+    ]
+  }
+}

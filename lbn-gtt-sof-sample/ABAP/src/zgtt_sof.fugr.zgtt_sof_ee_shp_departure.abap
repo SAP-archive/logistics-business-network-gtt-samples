@@ -177,7 +177,7 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
 
           ls_trackingheader-evtcnt  = lv_cnt.
 *         Event ID
-          ls_trackingheader-evtid     = 'SHP_DEPARTURE'.
+          ls_trackingheader-evtid     = 'DEPARTURE'.
 *         Event Date
           ls_trackingheader-evtdat  = <ls_xvtts>-datbg.
 *         Event Time

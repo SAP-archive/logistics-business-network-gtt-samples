@@ -1,0 +1,166 @@
+<mvc:View controllerName="com.sap.gtt.app.sample.pof.controller.deliveryItem.DeliveryItemDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+	xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+  xmlns:mc="sap.suite.ui.microchart"
+	core:require="{formatMessage: 'sap/base/strings/formatMessage'}"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:core="sap.ui.core">
+	<uxap:ObjectPageLayout 
+		id="objectPageLayout" 
+		showTitleInHeaderContent="true" 
+		alwaysShowContentHeader="false" 
+		preserveHeaderStateOnScroll="false" 
+		headerContentPinnable="true" 
+		isChildPage="true" 
+		enableLazyLoading="false" 
+		upperCaseAnchorBar="false" 
+		busy="{DeliveryItemDetails>/busy}" 
+		busyIndicatorDelay="{DeliveryItemDetails>/delay}">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="lbnTfoDynamicPageTitle" areaShrinkRatio="1:1.6:1.6">
+				<uxap:heading>
+					<Title id="deliveryItemHeaderTitle" text="{inboundDeliveryNo} / {itemNo}"/>
+				</uxap:heading>
+				<uxap:content>
+        <OverflowToolbar>
+						<content>
+              <GenericTag visible="{= !!${executionStatus_code}}" id="executionStatusGenericTag" class="pofGenericTag" design="StatusIconHidden"
+                  status="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
+                  text="{path:'executionStatus_code', formatter:'.formatter.getExecutionStatusText'}">
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="{DeliveryItemDetails>/genericTagPriority}"/>
+                  </layoutData>
+              </GenericTag>  
+							<GenericTag visible="{= !!${processStatus_code}}" id="processStatusGenericTag" class="pofGenericTag" design="StatusIconHidden"
+								status="{path: 'processStatus_code', formatter: '.formatter.getProcessStatusState'}"
+								text="{path:'processStatus_code', formatter:'.formatter.getProcessStatusText'}">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="{DeliveryItemDetails>/genericTagPriority}"/>
+								</layoutData>
+							</GenericTag>
+						</content>
+					</OverflowToolbar>
+				</uxap:content>
+				<uxap:actions>
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<HBox wrap="Wrap" fitContainer="true" width="100%">
+				<VBox class="sapUiLargeMarginEnd">
+					<ObjectAttribute title="{@i18n>EL_InboundDeliveryItem_itemDescription_LABEL}" text="{itemDescription}" />
+					<ObjectAttribute class="sapUiTinyMarginTop" title="{@i18n>EL_InboundDeliveryItem_materialNumber_LABEL}" text="{materialNumber}" />
+					<ObjectAttribute class="sapUiTinyMarginTop" title="{@i18n>EL_InboundDeliveryItem_orderQuantity_LABEL}" text="{orderQuantity} {orderQuantityUoM}" />
+				</VBox>
+        <VBox
+          width="19rem"
+          class="sapUiSmallMarginBottom sapUiLargeMarginEnd">
+          <Title id="fulfillmentStatusTitle"
+            text="{i18n>fulfillmentStatus}"
+            level="H4"
+            class="sapUiTinyMarginBottom" />
+          <mc:InteractiveDonutChart 
+            id="fulfillmentStatusDonutChart"
+            selectionEnabled="false"
+            displayedSegments="{DeliveryItemDetails>/actualEventsCount}"
+            segments="{DeliveryItemDetails>/fulfillmentStatusSet}"
+            tooltip="{
+              path: 'DeliveryItemDetails>/fulfillmentStatusSet',
+              formatter: '.formatter.deliveryItemFulfillmentStatusTooltip'
+            }">
+            <mc:segments>
+              <mc:InteractiveDonutChartSegment value="{DeliveryItemDetails>count}"
+                displayedValue="{DeliveryItemDetails>count}"
+                label="{
+                  path: 'DeliveryItemDetails>eventStatus_code',
+                  formatter: '.formatter.eventStatusText'
+                }"
+                color="{
+                  path: 'DeliveryItemDetails>eventStatus_code',
+                  formatter: '.formatter.getColor'
+                }" />
+            </mc:segments>
+          </mc:InteractiveDonutChart>
+        </VBox>
+          <VBox alignContent="Start">
+					<Title 
+              text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"
+              level="H4"/>
+              <ctrl:link.LinkPopover
+                id="plantLocationPopoverId"
+								contentHeight="15rem"
+								placement="Right"
+								title="{i18n>locationDetailsPopoverTitle}"
+								text="{plant}"
+								linkText="{toPlantLocation/locationDescription}"
+								relatedObject="toPlantLocation">
+                <ctrl:content>
+                  <VBox>
+                    <Title class="pofLocationPopoverTitle" text="{toPlantLocation/locationDescription}"/>
+                    <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                    <Text id="receivingLocationObjectType" text="{toPlantLocation/objectTypeDescription}" />
+                    <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                    <Text id="receivingLocationSourceSystemId" text="{toPlantLocation/sourceSystem} / {toPlantLocation/externalId}"/>
+                    <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                    <HBox justifyContent="SpaceBetween">
+                      <Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                      <core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                        tooltip="{= ${toPlantLocation/latitude} !== null ? ${toPlantLocation/latitude} + ', ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                    </HBox>  
+                  </VBox>
+                </ctrl:content>
+              </ctrl:link.LinkPopover>
+            </VBox>
+			</HBox>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection id="generalInformationSection" title="{i18n>generalInfo}" titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+							<core:Fragment id="deliveryItemGeneralInfo" fragmentName="com.sap.gtt.app.sample.pof.view.deliveryItem.fragments.DeliveryItemGeneralInfo" type="XML" />
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="referenceBusinessDocumentsSection" title="{i18n>referenceBusinessDocumentsTitle}" titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+            <ScrollContainer
+                class="deliveryItemDetailReferenceDocumentsTableContainer"
+                width="100%"
+                horizontal="false"
+                vertical="true">
+                <core:Fragment id="referenceBusinessDocumentsTable" fragmentName="com.sap.gtt.app.sample.pof.view.deliveryItem.fragments.ReferenceBusinessDocumentsTable" type="XML" />
+              </ScrollContainer>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection
+				id="trackingTimelineSection" 
+				title="{
+					parts: [
+						{path: 'i18n>trackingTimelineTitleTemplate'},
+						{path: 'DeliveryItemDetails>/timelineEventsNumber'}
+					],
+					formatter: 'formatMessage'
+				}"
+				titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+              <mvc:XMLView id="trackingTimelineView" viewName="com.sap.gtt.app.sample.pof.view.deliveryItem.TrackingTimeline"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</mvc:View>

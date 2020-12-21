@@ -15,6 +15,10 @@ sap.ui.define(
   ) {
     "use strict";
 
+    var PropertyPaths = Object.freeze({
+      CUSTOM_FILTERS: "/customFilters",
+    });
+
     return BaseController.extend("com.sap.gtt.app.sample.sof.controller.SalesOrderList", {
       routeName: "salesOrderList",
 
@@ -70,7 +74,7 @@ sap.ui.define(
        * @param {object[]} filters The filters of the odata service
        */
       addCustomFilters: function (filters) {
-        var customFilters = this.getModel(this.routeName).getProperty("/customFilters");
+        var customFilters = this.getModel(this.routeName).getProperty(PropertyPaths.CUSTOM_FILTERS);
         var filterList = [];
         for (var key in customFilters) {
           if (customFilters[key] && customFilters[key].filter) {
@@ -190,7 +194,7 @@ sap.ui.define(
         var model = this.getModel(this.routeName);
         var smartFilterBar = this.byId("smartFilterBar");
         var data = smartFilterBar.getFilterData();
-        model.setProperty("/customFilters", data._CUSTOM);
+        model.setProperty(PropertyPaths.CUSTOM_FILTERS, data._CUSTOM);
       },
 
       onBeforeVariantSave: function (event) {
@@ -205,7 +209,7 @@ sap.ui.define(
 
       updateCustomFilter: function () {
         var model = this.getModel(this.routeName);
-        var customFilters = model.getProperty("/customFilters");
+        var customFilters = model.getProperty(PropertyPaths.CUSTOM_FILTERS);
 
         var smartFilterBar = this.byId("smartFilterBar");
         smartFilterBar.setFilterData({

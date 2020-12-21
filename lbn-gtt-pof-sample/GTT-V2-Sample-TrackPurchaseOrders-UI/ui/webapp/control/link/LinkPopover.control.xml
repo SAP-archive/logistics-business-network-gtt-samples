@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+  xmlns:core="sap.ui.core">
+  <HBox id="linkPopoverContainer">
+    <dependents>
+      <ctrl:popover.PopoverList
+				id="reportingPopover"
+				title="{$this>title}"
+        placement="{$this>placement}"
+        contentHeight="{$this>contentHeight}"
+        contentWidth="{$this>contentWidth}">
+			</ctrl:popover.PopoverList>
+    </dependents>
+    <Text text="{$this>text}" visible="{= !${$this>linkText} }" />
+    <Link 
+      id="innerLink" text="{$this>linkText}" press="onLinkPress"
+      visible="{= !!${$this>relatedObject} || (!${$this>relatedObject} &amp;&amp; !!${$this>linkText}) }" />
+  </HBox>
+</core:FragmentDefinition>

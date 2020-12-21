@@ -18,5 +18,5 @@ sap.ui.define(function () {
     RESOURCE: 6,
   };
 
-  return NetworkGraph;
+  return Object.freeze(NetworkGraph);
 });

@@ -1,0 +1,234 @@
+[
+  {
+    "eventType": {
+      "target": "Shipment.GateInStart",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.GateInStart",
+      "isFromCoreModel": false,
+      "descr": "Gate-In Start"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.GateInEnd",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.GateInEnd",
+      "isFromCoreModel": false,
+      "descr": "Gate-In End"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.GateOutStart",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.GateOutStart",
+      "isFromCoreModel": false,
+      "descr": "Gate-Out Start"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.GateOutEnd",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.GateOutEnd",
+      "isFromCoreModel": false,
+      "descr": "Gate-Out End"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.UnloadingStart",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.UnloadingStart",
+      "isFromCoreModel": false,
+      "descr": "Unloading Start"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.UnloadingEnd",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.UnloadingEnd",
+      "isFromCoreModel": false,
+      "descr": "Unloading End"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.LocationUpdate",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.LocationUpdate",
+      "isFromCoreModel": false,
+      "descr": "Location Update"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Delay",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Delay",
+      "isFromCoreModel": false,
+      "descr": "Delay"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Stuffing",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Stuffing",
+      "isFromCoreModel": false,
+      "descr": "Stuffing"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Return",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Return",
+      "isFromCoreModel": false,
+      "descr": "Return"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.POPU",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.POPU",
+      "isFromCoreModel": false,
+      "descr": "POPU"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.POD",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.POD",
+      "isFromCoreModel": false,
+      "descr": "POD"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Departure",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Departure",
+      "isFromCoreModel": false,
+      "descr": "Departure"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Arrival",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+      "isFromCoreModel": false,
+      "descr": "Arrival"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.LoadingEnd",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.LoadingEnd",
+      "isFromCoreModel": false,
+      "descr": "Loading End"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.LoadingStart",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.LoadingStart",
+      "isFromCoreModel": false,
+      "descr": "Loading Start"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.CheckIn",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.CheckIn",
+      "isFromCoreModel": false,
+      "descr": "Check-in"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Decoupling",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Decoupling",
+      "isFromCoreModel": false,
+      "descr": "Decoupling"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Coupling",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Coupling",
+      "isFromCoreModel": false,
+      "descr": "Coupling"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Receive",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Receive",
+      "isFromCoreModel": false,
+      "descr": "Receive"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Unstuffing",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Unstuffing",
+      "isFromCoreModel": false,
+      "descr": "Unstuffing"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.Delivered",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.Delivered",
+      "isFromCoreModel": false,
+      "descr": "Delivered"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.OutForDelivery",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.OutForDelivery",
+      "isFromCoreModel": false,
+      "descr": "Out for Delivery"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.OtherEvent",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.OtherEvent",
+      "isFromCoreModel": false,
+      "descr": "Other Event"
+    }
+  },
+  {
+    "eventType": {
+      "target": "Shipment.ExceptionalEvent",
+      "name": "com.lbngttsamples.gtt.app.sof.Shipment.ExceptionalEvent",
+      "isFromCoreModel": false,
+      "descr": "Exceptional Event"
+    }
+  },
+  {
+    "eventType": {
+      "target": "CoreModel.GTTDelayedEvent",
+      "name": "com.sap.gtt.core.CoreModel.GTTDelayedEvent",
+      "isFromCoreModel": true,
+      "descr": "GTT Delayed Event"
+    }
+  },
+  {
+    "eventType": {
+      "target": "CoreModel.GTTDeletionEvent",
+      "name": "com.sap.gtt.core.CoreModel.GTTDeletionEvent",
+      "isFromCoreModel": true,
+      "descr": "GTT Deletion Event"
+    }
+  },
+  {
+    "eventType": {
+      "target": "CoreModel.GTTOnTimeEvent",
+      "name": "com.sap.gtt.core.CoreModel.GTTOnTimeEvent",
+      "isFromCoreModel": true,
+      "descr": "GTT On Time Event"
+    }
+  },
+  {
+    "eventType": {
+      "target": "CoreModel.GTTUpdatePlanEvent",
+      "name": "com.sap.gtt.core.CoreModel.GTTUpdatePlanEvent",
+      "isFromCoreModel": true,
+      "descr": "GTT Update Plan Event"
+    }
+  }
+]

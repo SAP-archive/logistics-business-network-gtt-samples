@@ -1,0 +1,12 @@
+/target/
+.classpath
+.project
+/.settings/
+LocalTest*
+/nbproject/
+.idea/
+**/selfTest/
+srv/target/
+*.iml
+srv/gtt-v2-sample-track-salesorders-service.iml
+/mta_archives/

@@ -1,0 +1,1395 @@
+{
+  "name": "GTTCodeList",
+  "codeLists": [
+    {
+      "name": "Incoterms",
+      "values": [
+        {
+          "code": "CFR",
+          "name": "Costs and freight"
+        },
+        {
+          "code": "CIF",
+          "name": "Costs, insurance & freight"
+        },
+        {
+          "code": "CIP",
+          "name": "Carriage and insurance paid to"
+        },
+        {
+          "code": "CPT",
+          "name": "Carriage paid to"
+        },
+        {
+          "code": "DAF",
+          "name": "Delivered at frontier"
+        },
+        {
+          "code": "DDP",
+          "name": "Delivered Duty Paid"
+        },
+        {
+          "code": "DDU",
+          "name": "Delivered Duty Unpaid"
+        },
+        {
+          "code": "DEQ",
+          "name": "Delivered ex quay (duty paid)"
+        },
+        {
+          "code": "DES",
+          "name": "Delivered ex ship"
+        },
+        {
+          "code": "EXW",
+          "name": "Ex Works"
+        },
+        {
+          "code": "FAS",
+          "name": "Free Alongside Ship"
+        },
+        {
+          "code": "FCA",
+          "name": "Free Carrier"
+        },
+        {
+          "code": "FH",
+          "name": "Free house"
+        },
+        {
+          "code": "FOB",
+          "name": "Free on board"
+        },
+        {
+          "code": "HWI",
+          "name": "Holgers Incoterm"
+        },
+        {
+          "code": "UN",
+          "name": "Not Free"
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "RejectionStatus",
+      "values": [
+        {
+          "code": "X",
+          "name": "Not Relevant",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "A",
+          "name": "Not yet rejected",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "B",
+          "name": "Partially rejected",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "C",
+          "name": "Completely rejected",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "OperationStatus",
+      "values": [
+        {
+          "code": "A",
+          "name": "Not yet processed"
+        },
+        {
+          "code": "B",
+          "name": "Partially processed"
+        },
+        {
+          "code": "C",
+          "name": "Completely processed"
+        },
+        {
+          "code": "X",
+          "name": "Not relevant"
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "ExecutionStatus",
+      "values": [
+        {
+          "code": "NOT_STARTED",
+          "name": "Not Started",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {
+                "zh_CN": "未开始"
+              }
+            }
+          }
+        },
+        {
+          "code": "IN_TRANSIT",
+          "name": "In Transit",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {
+                "zh_CN": "进行中"
+              }
+            }
+          }
+        },
+        {
+          "code": "COMPLETED",
+          "name": "Completed",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {
+                "zh_CN": "已完成"
+              }
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "TransportationMode",
+      "values": [
+        {
+          "code": "01",
+          "name": "Sea"
+        },
+        {
+          "code": "02",
+          "name": "Rail"
+        },
+        {
+          "code": "03",
+          "name": "Road"
+        },
+        {
+          "code": "04",
+          "name": "Air"
+        },
+        {
+          "code": "05",
+          "name": "Mail",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "00",
+          "name": "Not Specified",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "09",
+          "name": "Not Applicable",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "ShippingType",
+      "values": [
+        {
+          "code": "18",
+          "name": "FTL (Full Truck Load)"
+        },
+        {
+          "code": "17",
+          "name": "LTL (Less Than Truck Load)"
+        },
+        {
+          "code": "2",
+          "name": "LCL (Less Than Container Load)"
+        },
+        {
+          "code": "3",
+          "name": "FCL (Full Container Load)"
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "TrackedResourceType",
+      "values": [
+        {
+          "code": "31",
+          "name": "Truck",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "8",
+          "name": "Resource",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "110",
+          "name": "Vessel",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "CarrierRefDocumentType",
+      "values": [
+        {
+          "code": "T50",
+          "name": "Bill of Lading",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "T51",
+          "name": "House Bill of Lading",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "T52",
+          "name": "Master Bill of Lading",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "T67",
+          "name": "Reference Number of Carrier",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "BN",
+          "name": "Consignment Identifier",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "CUSTR",
+          "name": "Customer Reference",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "LocationType",
+      "values": [
+        {
+          "code": "LogisticLocation",
+          "name": "Logistic Location",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "Customer",
+          "name": "Customer",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "BusinessPartner",
+          "name": "Business Partner",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "Plant",
+          "name": "Plant",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "ShippingPoint",
+          "name": "Shipping Point",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "Supplier",
+          "name": "Supplier",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "TrackedObjectType",
+      "values": [
+        {
+          "code": "TRUCK_ID",
+          "name": "Truck ID",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "LICENSE_PLATE",
+          "name": "License Plate",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "MOBILE_NUMBER",
+          "name": "Mobile Number",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "CONTAINER_ID",
+          "name": "Container ID",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "VESSEL",
+          "name": "Ocean Vessel",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "NA",
+          "name": "N.A.",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "LocationCategory",
+      "values": [
+        {
+          "code": "S",
+          "name": "Source",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "D",
+          "name": "Destination",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "VPLocationType",
+      "values": [
+        {
+          "code": "1001",
+          "name": "Production Plant",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1002",
+          "name": "Distribution Center",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1003",
+          "name": "Shipping Point",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1005",
+          "name": "Transportation Zone",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1006",
+          "name": "Stock Transfer Point",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1007",
+          "name": "Storage Location MRP Area",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1050",
+          "name": "Subcontractor",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1020",
+          "name": "Transportation Service Provider",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1021",
+          "name": "Business Partner",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1030",
+          "name": "Terminal",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1031",
+          "name": "Geographical Area",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1040",
+          "name": "Store",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1200",
+          "name": "Loading Point",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1201",
+          "name": "Docking Location",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1100",
+          "name": "Port",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1110",
+          "name": "Airport",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1120",
+          "name": "Railway Station",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1130",
+          "name": "Container Freight Station",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1140",
+          "name": "Hub",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1150",
+          "name": "Gateway",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1160",
+          "name": "Container Yard",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1170",
+          "name": "Warehouse",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1180",
+          "name": "Carrier Warehouse",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1190",
+          "name": "Rail Junction",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1191",
+          "name": "Border Crossing Point",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1101",
+          "name": "Port of Origin",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1102",
+          "name": "Port of Discharge",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1103",
+          "name": "Container Terminal of Port of Origin",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1104",
+          "name": "Container Terminal of Port of Discharge",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1141",
+          "name": "Transshipment Hub",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1142",
+          "name": "Transshipment Port",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1171",
+          "name": "Export Warehouse",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "1172",
+          "name": "Import Warehouse",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3001",
+          "name": "Depot",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3002",
+          "name": "Origin",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3003",
+          "name": "Destination",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3004",
+          "name": "Shipper Location",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3005",
+          "name": "Consignee Location",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3006",
+          "name": "Interim Location",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "TrafficDirection",
+      "values": [
+        {
+          "code": "1",
+          "name": "Export",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "2",
+          "name": "Import",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "3",
+          "name": "In Transit",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "name": "TransportMeansStandardCode",
+      "values": [
+        {
+          "code": "8",
+          "name": "Container Ship",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "11",
+          "name": "Ship",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "13",
+          "name": "Ocean Vessel",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "16",
+          "name": "Barge",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "28",
+          "name": "Refrigerated Truck and Trailer",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "29",
+          "name": "Freezer Truck and Trailer",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "31",
+          "name": "Truck",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "41",
+          "name": "Freezer Truck",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "42",
+          "name": "Isothermic Truck",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "43",
+          "name": "Refrigerated truck",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "46",
+          "name": "Refrigerated Van",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "65",
+          "name": "Container only Vessel",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        },
+        {
+          "code": "38",
+          "name": "Car",
+          "translation": {
+            "name": {
+              "textType": "NAME",
+              "translation": {}
+            }
+          }
+        }
+      ],
+      "elements": [
+        {
+          "name": "code",
+          "label": "Code",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "required": true,
+          "readable": true,
+          "writable": true
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "length": 255,
+          "localized": true,
+          "key": false,
+          "required": true,
+          "readable": true,
+          "writable": true
+        }
+      ]
+    }
+  ]
+}

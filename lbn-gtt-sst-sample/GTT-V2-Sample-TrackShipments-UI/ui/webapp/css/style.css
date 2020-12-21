@@ -1,0 +1,118 @@
+/* Icon Fonts */
+
+@font-face {
+  font-family: BusinessSuiteInAppSymbols;
+  src: url("BusinessSuiteInAppSymbols.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SAP-icons-TNT;
+  src: url("SAP-icons-TNT.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Animations */
+
+@keyframes currentLocationRefresh
+{
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+/* Customized Styles */
+
+.sstGenericTag {
+  pointer-events: none;
+}
+
+.sstTrackingTimeline {
+  height: calc(600px - 88px);
+}
+
+.sstTrackingTimelineItem[data-is-actual-event="false"] {
+  opacity: 0.65;
+}
+
+/* Replace timeline item icon with a circle if is not an actual event */
+.sstTrackingTimelineItem[data-is-actual-event="false"] .sapUiIcon {
+  font-size: 0;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+}
+
+.sstTrackingTimelineItem[data-is-actual-event="true"] .sapUiIcon {
+  font-size: 10px;
+}
+
+.sstTrackingTimelineItem[data-is-actual-event="false"] .sapSuiteUiCommonsTimelineItemShellDateTime {
+  display: none;
+}
+
+.sstTrackingTimelineItem .sapMObjStatusInverted .sapMObjStatusText {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+}
+
+.sapMSelectListRow[data-is-planned-event-selection="true"] {
+  flex-direction: column;
+}
+
+.sapMSelectListRow[data-is-planned-event-selection="true"] .sapMSelectListFirstCell {
+  width: 100% !important;
+  padding-right: 1rem;
+  padding-bottom: 0.45rem !important;
+}
+
+.sapMSelectListRow[data-is-planned-event-selection="true"] .sapMSelectListLastCell {
+  width: 100% !important;
+  text-align: start;
+  padding-top: 0 !important;
+}
+
+.sstShipmentsTable tbody .sapMListTblCell {
+  padding-top: 0.35rem;
+}
+
+.sstHeaderContentPropertyLabel:after {
+  content: ":";
+}
+
+.sstHeaderContentPropertyLabel,
+.sstHeaderContentPropertyText {
+  line-height: 1.320rem;
+}
+
+.sstDepartureLocation .sapMObjectIdentifierTitle .sapMText,
+.sstDepartureLocation .sapMObjectIdentifierTitle .sapMLnk,
+.sstArrivalLocation .sapMObjectIdentifierTitle .sapMText,
+.sstArrivalLocation .sapMObjectIdentifierTitle .sapMLnk {
+  font-weight: normal;
+  font-size: 0.875rem;
+}
+
+.sstNextStopLocationLink,
+.sstDeliveryAtLocationLink {
+  font-size: larger;
+}
+
+.sstDeliveredAtLocation {
+  height: 1.5rem;
+}
+
+.sstDynamicPageTitle .sapFDynamicPageTitleMainContent {
+  flex-basis: unset !important;
+}
+
+.sstCustomListItemPadding {
+  padding: 0.5rem 1rem;
+}
+
+.sstMapCurrentLocation {
+  position: relative;
+  animation: currentLocationRefresh 1s ease-out infinite;
+}

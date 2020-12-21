@@ -1,0 +1,327 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent"
+        },
+        "eventType": "com.lbngttsamples.gtt.app.pof.InboundDeliveryItem.PutAway",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+        "eventMatchKey": null,
+        "payloadSequence": 0,
+        "longitude": null,
+        "latitude": null,
+        "isFinalPlannedEvent": null,
+        "plannedTechnicalTimestamp": "/Date(1606690800000)/",
+        "plannedTechTsEarliest": "/Date(1606690200000)/",
+        "plannedTechTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimestamp": "/Date(1606690800000)/",
+        "plannedBizTsEarliest": "/Date(1606690200000)/",
+        "plannedBizTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimeZone": "CET",
+        "id": "e83867b2-32d7-11eb-9ea6-0100464d4e24",
+        "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+        "nextOverdueDetection": "/Date(253402214400000)/",
+        "overdueDetectionCounter": 3,
+        "eventStatus_code": "OVERDUE",
+        "lastProcessEventDirectory_id": "04c18f73-32dc-11eb-9ea6-8d0235328141",
+        "process": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')/process"
+          }
+        },
+        "eventStatus": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')/eventStatus"
+          }
+        },
+        "lastProcessEventDirectory": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')",
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory"
+          },
+          "id": "04c18f73-32dc-11eb-9ea6-8d0235328141",
+          "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+          "plannedEvent_id": "e83867b2-32d7-11eb-9ea6-0100464d4e24",
+          "event_id": "fd8b3f7e-32db-11eb-a7c8-836fa8090e05",
+          "correlationType_code": "UNPLANNED_OVERDUE",
+          "process": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/process"
+            }
+          },
+          "plannedEvent": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/plannedEvent"
+            }
+          },
+          "event": {
+            "__metadata": {
+              "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')",
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')",
+              "type": "com.lbngttsamples.gtt.app.pof.pofService.Event"
+            },
+            "id": "fd8b3f7e-32db-11eb-a7c8-836fa8090e05",
+            "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+            "cloneInstanceId": null,
+            "modelNamespace": "com.lbngttsamples.gtt.app.pof",
+            "eventType": "com.sap.gtt.core.CoreModel.GTTOverdueEvent",
+            "eventReasonText": null,
+            "eventReasonCode": null,
+            "senderPartyId": "LBN#10010001006",
+            "reportedBy": null,
+            "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:INBOUND_DELIVERY_IT:0187020020000010",
+            "scheme": "xri://sap.com/id",
+            "partyId": "LBN#10010001006",
+            "logicalSystem": "QW9CLNT170",
+            "trackingIdType": "INBOUND_DELIVERY_IT",
+            "trackingId": "0187020020000010",
+            "priority": 0,
+            "actualTechnicalTimestamp": "/Date(1606720593478)/",
+            "actualBusinessTimestamp": "/Date(1606720590843)/",
+            "actualBusinessTimeZone": null,
+            "locationAltKey": null,
+            "eventMatchKey": null,
+            "longitude": null,
+            "latitude": null,
+            "messageSourceType": null,
+            "createdByUser": null,
+            "creationDateTime": "/Date(1606720599792)/",
+            "references": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')/references"
+              }
+            },
+            "eventProcesses": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')/eventProcesses"
+              }
+            }
+          },
+          "correlationType": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/correlationType"
+            }
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b3-32d7-11eb-9ea6-b59a5eb110f7')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b3-32d7-11eb-9ea6-b59a5eb110f7')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent"
+        },
+        "eventType": "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.GoodsReceipt",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+        "eventMatchKey": null,
+        "payloadSequence": 0,
+        "longitude": null,
+        "latitude": null,
+        "isFinalPlannedEvent": null,
+        "plannedTechnicalTimestamp": "/Date(1606690800000)/",
+        "plannedTechTsEarliest": "/Date(1606690200000)/",
+        "plannedTechTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimestamp": "/Date(1606690800000)/",
+        "plannedBizTsEarliest": "/Date(1606690200000)/",
+        "plannedBizTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimeZone": "CET",
+        "id": "e83867b3-32d7-11eb-9ea6-b59a5eb110f7",
+        "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+        "nextOverdueDetection": "/Date(253402214400000)/",
+        "overdueDetectionCounter": 3,
+        "eventStatus_code": "EARLY_REPORTED",
+        "lastProcessEventDirectory_id": "b965ec6b-32eb-11eb-8e3e-075cc19db303",
+        "process": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b3-32d7-11eb-9ea6-b59a5eb110f7')/process"
+          }
+        },
+        "eventStatus": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b3-32d7-11eb-9ea6-b59a5eb110f7')/eventStatus"
+          }
+        },
+        "lastProcessEventDirectory": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'b965ec6b-32eb-11eb-8e3e-075cc19db303')",
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'b965ec6b-32eb-11eb-8e3e-075cc19db303')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory"
+          },
+          "id": "b965ec6b-32eb-11eb-8e3e-075cc19db303",
+          "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+          "plannedEvent_id": "e83867b3-32d7-11eb-9ea6-b59a5eb110f7",
+          "event_id": "b7a63b3c-32eb-11eb-a7c8-77d41b2b58e2",
+          "correlationType_code": "EARLY_REPORTED",
+          "process": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'b965ec6b-32eb-11eb-8e3e-075cc19db303')/process"
+            }
+          },
+          "plannedEvent": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'b965ec6b-32eb-11eb-8e3e-075cc19db303')/plannedEvent"
+            }
+          },
+          "event": {
+            "__metadata": {
+              "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'b7a63b3c-32eb-11eb-a7c8-77d41b2b58e2')",
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'b7a63b3c-32eb-11eb-a7c8-77d41b2b58e2')",
+              "type": "com.lbngttsamples.gtt.app.pof.pofService.Event"
+            },
+            "id": "b7a63b3c-32eb-11eb-a7c8-77d41b2b58e3",
+            "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+            "cloneInstanceId": null,
+            "modelNamespace": "com.lbngttsamples.gtt.app.pof",
+            "eventType": "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.GoodsReceipt",
+            "eventReasonText": null,
+            "eventReasonCode": null,
+            "senderPartyId": "LBN#10010001006",
+            "reportedBy": null,
+            "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:INBOUND_DELIVERY_IT:0187020020000010",
+            "scheme": "xri://sap.com/id",
+            "partyId": "LBN#10010001006",
+            "logicalSystem": "QW9CLNT170",
+            "trackingIdType": "INBOUND_DELIVERY_IT",
+            "trackingId": "0187020020000010",
+            "priority": 1,
+            "actualTechnicalTimestamp": "/Date(1606627349144)/",
+            "actualBusinessTimestamp": "/Date(1606233200213)/",
+            "actualBusinessTimeZone": "CET",
+            "locationAltKey": null,
+            "eventMatchKey": null,
+            "longitude": null,
+            "latitude": null,
+            "messageSourceType": null,
+            "createdByUser": "P001941",
+            "creationDateTime": "/Date(1606727354476)/",
+            "references": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'b7a63b3c-32eb-11eb-a7c8-77d41b2b58e2')/references"
+              }
+            },
+            "eventProcesses": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'b7a63b3c-32eb-11eb-a7c8-77d41b2b58e2')/eventProcesses"
+              }
+            }
+          },
+          "correlationType": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'b965ec6b-32eb-11eb-8e3e-075cc19db303')/correlationType"
+            }
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent"
+        },
+        "eventType": "com.lbngttsamples.gtt.app.pof.InboundDeliveryItem.PutAway",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+        "eventMatchKey": null,
+        "payloadSequence": 0,
+        "longitude": null,
+        "latitude": null,
+        "isFinalPlannedEvent": null,
+        "plannedTechnicalTimestamp": "/Date(1606690800000)/",
+        "plannedTechTsEarliest": "/Date(1606690200000)/",
+        "plannedTechTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimestamp": "/Date(1606790801000)/",
+        "plannedBizTsEarliest": "/Date(1606690200000)/",
+        "plannedBizTsLatest": "/Date(1606691400000)/",
+        "plannedBusinessTimeZone": "CET",
+        "id": "e83867b2-32d7-11eb-9ea6-0100464d4e23",
+        "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+        "nextOverdueDetection": "/Date(253402214400000)/",
+        "overdueDetectionCounter": 3,
+        "eventStatus_code": "OVERDUE",
+        "lastProcessEventDirectory_id": "04c18f73-32dc-11eb-9ea6-8d0235328142",
+        "process": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')/process"
+          }
+        },
+        "eventStatus": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PlannedEvent(guid'e83867b2-32d7-11eb-9ea6-0100464d4e24')/eventStatus"
+          }
+        },
+        "lastProcessEventDirectory": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')",
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory"
+          },
+          "id": "04c18f73-32dc-11eb-9ea6-8d0235328142",
+          "process_id": "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2",
+          "plannedEvent_id": "e83867b2-32d7-11eb-9ea6-0100464d4e24",
+          "event_id": "fd8b3f7e-32db-11eb-a7c8-836fa8090e05",
+          "correlationType_code": "UNPLANNED_OVERDUE",
+          "process": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/process"
+            }
+          },
+          "plannedEvent": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/plannedEvent"
+            }
+          },
+          "event": {
+            "__metadata": {
+              "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')",
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')",
+              "type": "com.lbngttsamples.gtt.app.pof.pofService.Event"
+            },
+            "id": "fd8b3f7e-32db-11eb-a7c8-836fa8090e05",
+            "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+            "cloneInstanceId": null,
+            "modelNamespace": "com.lbngttsamples.gtt.app.pof",
+            "eventType": "com.sap.gtt.core.CoreModel.GTTOverdueEvent",
+            "eventReasonText": null,
+            "eventReasonCode": null,
+            "senderPartyId": "LBN#10010001006",
+            "reportedBy": null,
+            "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:INBOUND_DELIVERY_IT:0187020020000010",
+            "scheme": "xri://sap.com/id",
+            "partyId": "LBN#10010001006",
+            "logicalSystem": "QW9CLNT170",
+            "trackingIdType": "INBOUND_DELIVERY_IT",
+            "trackingId": "0187020020000010",
+            "priority": 0,
+            "actualTechnicalTimestamp": "/Date(1606720593478)/",
+            "actualBusinessTimestamp": "/Date(1606720590843)/",
+            "actualBusinessTimeZone": null,
+            "locationAltKey": null,
+            "eventMatchKey": null,
+            "longitude": null,
+            "latitude": null,
+            "messageSourceType": null,
+            "createdByUser": null,
+            "creationDateTime": "/Date(1606720599792)/",
+            "references": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')/references"
+              }
+            },
+            "eventProcesses": {
+              "__deferred": {
+                "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/Event(guid'fd8b3f7e-32db-11eb-a7c8-836fa8090e05')/eventProcesses"
+              }
+            }
+          },
+          "correlationType": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/ProcessEventDirectory(guid'04c18f73-32dc-11eb-9ea6-8d0235328141')/correlationType"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -116,8 +116,15 @@
 									</mc:items>
 								</mc:HarveyBallMicroChart>
 								<ObjectStatus id="delayedValue" text="{parts: ['delayedValue', 'netValue', 'currency'], formatter: '.formatter.formattedRateWithQuantityAndUnit'}" state="{path: 'delayedValue', formatter: '.formatter.delayStatus'}"/>
-								<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
-								<Text id="incoterms" text="{path: 'incoterms', formatter: '.formatter.codeListDescription'}"/>
+								<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
+								<Text id="incoterms" text="{
+									parts: [
+										'incoterms/localized/name',
+										'incoterms/name',
+										'incoterms_code'
+									],
+									formatter: '.formatter.codeListDescription'
+								}"/>
 							</cells>
 						</ColumnListItem>
 					</items>

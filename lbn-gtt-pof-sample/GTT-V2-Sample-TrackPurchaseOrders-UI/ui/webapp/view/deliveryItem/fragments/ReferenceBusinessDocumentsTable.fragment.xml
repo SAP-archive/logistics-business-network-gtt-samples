@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+  xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+  <Table 
+    id="innerTable"
+    busy="{= !${DeliveryItemDetails>/isReferenceDocumentsLoaded} }"
+    items="{DeliveryItemDetails>/referenceDocuments}" 
+    growing="true"
+    growingThreshold="5">
+    <headerToolbar>
+      <OverflowToolbar>
+        <content>
+          <Title text="{i18n>referenceBusinessDocumentsTableTitle} ({= ${DeliveryItemDetails>/referenceDocuments}.length})" level="H2"/>
+          <ToolbarSpacer />
+        </content>
+      </OverflowToolbar>
+		</headerToolbar>
+    <columns>
+      <Column>
+        <Text text="{@i18n>EL_Shipment_shipmentNo_LABEL}"/>
+      </Column>
+      <Column>
+        <Text text="{@i18n>EL_CarrierRefDocument_docType_LABEL}"/>
+      </Column>
+      <Column>
+        <Text text="{@i18n>EL_CarrierRefDocument_docId_LABEL}"/>
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem>
+        <cells>
+          <Text class="tableKeyColumn" text="{DeliveryItemDetails>shipmentNo}"/>
+          <Text class="tableKeyColumn" text="{
+						path: 'DeliveryItemDetails>docType_code',
+						formatter: '.formatter.carrierRefDocumentTypeText'
+					}"/>
+					<Text class="tableKeyColumn" text="{DeliveryItemDetails>docId}"/>
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+</core:FragmentDefinition>

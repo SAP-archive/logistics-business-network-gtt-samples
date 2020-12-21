@@ -1,0 +1,30 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.pof.controller.item.MilestoneFulfillmentProcess"
+	xmlns:mvc="sap.ui.core.mvc"
+  xmlns:m="sap.m"
+  xmlns="sap.suite.ui.commons"
+	height="100%">
+  <ProcessFlow
+    id="processflow"
+    lanes="{milestoneProcess>/lanes}">
+    <lanes>
+      <ProcessFlowLaneHeader
+        class="milestoneProcess"
+        laneId="{milestoneProcess>id}"
+        iconSrc="{
+          path: 'milestoneProcess>',
+          formatter: '.getProcessLaneIcon'  
+        }"
+        position="{milestoneProcess>position}"
+        state="{
+          path: 'milestoneProcess>',
+          formatter: '.getProcessLaneState'  
+        }"
+        text="{
+          path: 'milestoneProcess>',
+          formatter: '.getMilestoneProcessLabel'
+        }">
+      </ProcessFlowLaneHeader>
+    </lanes>
+  </ProcessFlow>
+</mvc:View>

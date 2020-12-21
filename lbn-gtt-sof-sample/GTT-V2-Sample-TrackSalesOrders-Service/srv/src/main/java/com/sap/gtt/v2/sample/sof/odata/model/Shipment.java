@@ -47,8 +47,8 @@ public class Shipment {
     @EdmProperty(name = "trackedResourceId", facets = @EdmFacets(maxLength = 20))
     private String trackedResourceId;
 
-    @EdmProperty(name = "trackID", facets = @EdmFacets(maxLength = 255))
-    private String trackID;
+    @EdmProperty(name = "trackId", facets = @EdmFacets(maxLength = 255))
+    private String trackId;
     @EdmProperty(name = "partyId")
     private String partyId;
     @EdmProperty(name = "logicalSystem")
@@ -271,12 +271,12 @@ public class Shipment {
         this.trackedResourceId = trackedResourceId;
     }
 
-    public String getTrackID() {
-        return trackID;
+    public String getTrackId() {
+        return trackId;
     }
 
-    public void setTrackID(String trackID) {
-        this.trackID = trackID;
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
     }
 
     public TrackedResourceType getTrackedResourceType() {

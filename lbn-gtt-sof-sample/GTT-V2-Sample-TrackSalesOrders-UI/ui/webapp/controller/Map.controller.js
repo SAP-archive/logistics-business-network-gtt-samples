@@ -20,6 +20,13 @@ sap.ui.define(
   ) {
     "use strict";
 
+    var PropertyPaths = Object.freeze({
+      SHOW_DETAILS: "/showDetails",
+      ACTUAL_ROUTES: "/actualRoutes",
+      PLANNED_ROUTES: "/plannedRoutes",
+      DELIVERY_ITEM_ID: "/deliveryItemId",
+    });
+
     return BaseController.extend("com.sap.gtt.app.sample.sof.controller.Map", {
 
       RouteWidth: {
@@ -40,7 +47,9 @@ sap.ui.define(
 
       initMap: function () {
         var map = this.byId("geoMap");
-        MapHelper.setMapConfiguration(map, "HERE");
+        MapHelper.getHereMapKey().then(function () {
+          MapHelper.setMapConfiguration(map, "HERE");
+        });
       },
 
       /**
@@ -71,7 +80,7 @@ sap.ui.define(
         var model = this.getModel("map");
         var bindingContext = this.getView().getBindingContext();
         var deliveryItemId = bindingContext.getProperty("id");
-        model.setProperty("/deliveryItemId", deliveryItemId);
+        model.setProperty(PropertyPaths.DELIVERY_ITEM_ID, deliveryItemId);
 
         this.updateRoutes();
       },
@@ -92,8 +101,8 @@ sap.ui.define(
           model.setProperty("/eventStops", eventStops.eventStops);
           model.setProperty("/currentLocations", this.getCurrentLocations(data));
           model.setProperty("/stopsWithETA", eventStops.stopsWithETA);
-          model.setProperty("/actualRoutes", routes.actualRoutes);
-          model.setProperty("/plannedRoutes", routes.plannedRoutes);
+          model.setProperty(PropertyPaths.ACTUAL_ROUTES, routes.actualRoutes);
+          model.setProperty(PropertyPaths.PLANNED_ROUTES, routes.plannedRoutes);
           model.setProperty("/hasInvalidActualEventLocations", checkResult.hasInvalidActualEventLocations);
           model.setProperty("/hasInvalidPlannedEventLocations", checkResult.hasInvalidPlannedEventLocations);
         }.bind(this), function (error) {
@@ -129,7 +138,7 @@ sap.ui.define(
         var model = this.getModel("map");
         var jsonService = ServiceUtils.getDataSource("restService");
 
-        var deliveryItemId = model.getProperty("/deliveryItemId");
+        var deliveryItemId = model.getProperty(PropertyPaths.DELIVERY_ITEM_ID);
         var url = ServiceUtils.getUrl(jsonService.uri.concat("/routes"));
 
         return RestClient.get(url, {
@@ -271,7 +280,7 @@ sap.ui.define(
         this.handleRouteHighlight(oEvent);
 
         var model = this.getModel("map");
-        model.setProperty("/showDetails", false);
+        model.setProperty(PropertyPaths.SHOW_DETAILS, false);
         this.showSideContent();
 
         var currentGroup = model.getProperty("/selectedRoute/groupId");
@@ -284,7 +293,7 @@ sap.ui.define(
           // update events on side content
           model.setProperty("/timeLineBusy", true);
           var params = {
-            deliveryItemId: model.getProperty("/deliveryItemId"),
+            deliveryItemId: model.getProperty(PropertyPaths.DELIVERY_ITEM_ID),
           };
           this.updateParametersForEvents(params, bindingContext);
           this.updateEventsOnSideContent(params);
@@ -332,7 +341,7 @@ sap.ui.define(
       showHistoricalReporting: function (oEvent) {
         var model = this.getModel("map");
         model.setProperty("/historicalEvents", []);
-        model.setProperty("/showDetails", true);
+        model.setProperty(PropertyPaths.SHOW_DETAILS, true);
         this.setControlFocus("backButton", "detailsPanel");
 
         var bindingContext = oEvent.getSource().getBindingContext("map");
@@ -351,7 +360,7 @@ sap.ui.define(
 
         var jsonService = ServiceUtils.getDataSource("restService");
         var url = ServiceUtils.getUrl(jsonService.uri.concat("/impactAnalysis/initialNodes"));
-        var deliveryItemId = this.getModel("map").getProperty("/deliveryItemId");
+        var deliveryItemId = this.getModel("map").getProperty(PropertyPaths.DELIVERY_ITEM_ID);
         var plannedEventId = model.getProperty("/plannedEventId");
 
         var request = RestClient.get(url, {
@@ -488,7 +497,7 @@ sap.ui.define(
        */
       showEventsPanel: function () {
         var model = this.getModel("map");
-        model.setProperty("/showDetails", false);
+        model.setProperty(PropertyPaths.SHOW_DETAILS, false);
         this.setControlFocus("closeButton", "eventsPanel");
       },
 
@@ -552,10 +561,10 @@ sap.ui.define(
         var plannedRoutePath = this.getRouteBindingPath(groupId, "planned");
         var actualRoutePath = this.getRouteBindingPath(groupId, "actual");
         if (plannedRoutePath) {
-          model.setProperty("/plannedRoutes" + plannedRoutePath + "/lineWidth", width);
+          model.setProperty(PropertyPaths.PLANNED_ROUTES + plannedRoutePath + "/lineWidth", width);
         }
         if (actualRoutePath) {
-          model.setProperty("/actualRoutes" + actualRoutePath + "/lineWidth", width);
+          model.setProperty(PropertyPaths.ACTUAL_ROUTES + actualRoutePath + "/lineWidth", width);
         }
       },
 
@@ -571,9 +580,9 @@ sap.ui.define(
         var routes = [];
         var path = null;
         if (type === "planned") {
-          routes = model.getProperty("/plannedRoutes");
+          routes = model.getProperty(PropertyPaths.PLANNED_ROUTES);
         } else {
-          routes = model.getProperty("/actualRoutes");
+          routes = model.getProperty(PropertyPaths.ACTUAL_ROUTES);
         }
         routes.forEach(function (route, index) {
           if (route.groupId === groupId) {

@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:vbm="sap.ui.vbm"
+	xmlns:vk="sap.ui.vk"
+	xmlns:core="sap.ui.core"
+	xmlns:controls="com.sap.gtt.app.sample.sst.controls">
+	<VBox height="100%" busy="{= !${map>/isStopsRoutesLoaded} }">
+		<items>
+			<MessageStrip
+				visible="{= !!${map>/routes/hasActualEventWithInvalidGeo} }"
+				text="{i18n>invalidActualEventLocationMsg}"
+				type="Warning"
+				showIcon="true"
+				showCloseButton="true"/>
+			<MessageStrip
+				visible="{= !!${map>/routes/hasLocationWithInvalidGeo} }"
+				text="{i18n>invalidPlannedEventLocationMsg}"
+				type="Warning"
+				showIcon="true"
+				showCloseButton="true"/>
+			<vk:MapContainer class="sapUiNoContentPadding" showFullScreen="true" showSelection="false" showSettings="false">
+				<vk:listPanelStack>
+					<vk:ListPanelStack>
+						<vk:content>
+							<vk:ListPanel headerText="{i18n>legend}" headerIcon="sap-icon://legend" selectionMode="None" expanded="false">
+								<vk:items>
+									<GroupHeaderListItem title="{i18n>location}"/>
+									<vk:LegendItem title="{i18n>sourceLocation}" icon="sap-icon://arrow-top"/>
+									<vk:LegendItem title="{i18n>intermediateLocation}" icon="sap-icon://functional-location"/>
+									<vk:LegendItem title="{i18n>destinationLocation}" icon="sap-icon://arrow-bottom"/>
+									<vk:LegendItem title="{i18n>currentLocation}" icon="sap-icon://circle-task-2"/>
+
+									<GroupHeaderListItem title="{i18n>route}"/>
+									<vk:LegendItem title="{i18n>actual}" icon="sap-icon://less"/>
+									<vk:LegendItem title="{i18n>planned}" icon="sap-icon://horizontal-grip"/>
+								</vk:items>
+							</vk:ListPanel>
+						</vk:content>
+					</vk:ListPanelStack>
+				</vk:listPanelStack>
+				<vk:content>
+					<vk:ContainerContent>
+						<vk:content>
+							<vbm:GeoMap id="geoMap" ariaLabel="Graphic" width="100%" height="100%">
+								<vbm:resources>
+								</vbm:resources>
+								<vbm:vos>
+									<!-- include a planned route and a actual route -->
+									<vbm:Routes id="routes" items="{map>/routes/plannedActualRoutes}">
+										<vbm:items>
+											<vbm:Route id="route" start="0" end="0" position="{map>pos}" lineDash="{map>lineDash}" tooltip="{map>tooltip}"
+												color="rgb(92, 186, 230)" hotDeltaColor="RHLSA(0;1.0;2.0;2.0)"/>
+										</vbm:items>
+									</vbm:Routes>
+									<vbm:Containers items="{map>/routes/currentLocations}">
+										<vbm:items>
+											<vbm:Container position="{map>pos}">
+												<vbm:item>
+													<controls:CurrentLocation id="currentLocation" color="rgb(92, 186, 230)" tooltip="{i18n>currentLocation}"/>
+												</vbm:item>
+											</vbm:Container>
+										</vbm:items>
+									</vbm:Containers>
+									<vbm:Spots id="stops" items="{map>/routes/stopsForVp}">
+										<vbm:items>
+											<vbm:Spot id="stop" position="{path: 'map>location', formatter: '.formatter.stopPosition'}" type="Default"
+												icon="{parts: ['map>locationId', 'map>isSource', 'departureLocationId', 'arrivalLocationId'], formatter: '.formatter.stopIcon'}"
+												tooltip="{parts: ['map>locationId', 'map>isSource', 'departureLocationId', 'arrivalLocationId', 'map>location/locationDescription'], formatter: '.formatter.stopTooltip'}"/>
+										</vbm:items>
+									</vbm:Spots>
+									<vbm:Spots id="stopsWithETA"
+										items="{map>/routes/stopsWithETA}">
+										<vbm:items>
+											<vbm:Spot id="stopWithETA"
+												position="{
+													path: 'map>location',
+													formatter: '.formatter.stopPosition'
+												}"
+												type="Hidden"
+												labelText="{i18n>eta}: {
+													path: 'map>estimatedArrival/estimatedArrivalTime',
+													type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
+												}"
+												labelType="None"
+												labelBorderColor="rgb(9, 97, 185)"
+												labelArrow="true"
+												labelPos="3"
+												tooltip="{
+													path: 'map>',
+													formatter: '.formatter.stopWithETATooltip'
+												}" />
+										</vbm:items>
+									</vbm:Spots>
+								</vbm:vos>
+							</vbm:GeoMap>
+						</vk:content>
+					</vk:ContainerContent>
+				</vk:content>
+				<vk:layoutData>
+					<FlexItemData baseSize="100%"/>
+				</vk:layoutData>
+			</vk:MapContainer>
+		</items>
+		<layoutData>
+			<layout:SplitterLayoutData size="auto"/>
+		</layoutData>
+	</VBox>
+</core:FragmentDefinition>

@@ -1,0 +1,185 @@
+{
+  "d": {
+    "results": [{
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 2,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 2,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(2)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"
+        },
+        "lineNo": 1,
+        "inboundDeliveryItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/inboundDeliveryItem"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItemInboundDeliveryItems(1)/purchaseOrderItem"
+          }
+        }
+      }
+    ]
+  }
+}

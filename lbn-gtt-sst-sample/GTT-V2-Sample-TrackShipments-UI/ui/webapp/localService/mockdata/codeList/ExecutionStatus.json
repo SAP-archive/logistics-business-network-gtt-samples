@@ -1,0 +1,23 @@
+[
+  {
+    "code": "NOT_STARTED",
+    "name": "Not Started",
+    "localized": {
+      "name": "Not Started"
+    }
+  },
+  {
+    "code": "IN_TRANSIT",
+    "name": "In Transit",
+    "localized": {
+      "name": "In Transit"
+    }
+  },
+  {
+    "code": "COMPLETED",
+    "name": "Completed",
+    "localized": {
+      "name": "Completed"
+    }
+  }
+]

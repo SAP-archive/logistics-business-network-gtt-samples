@@ -1,0 +1,20 @@
+[
+  {
+    "__metadata": {
+      "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQW9CLNT170%3ALocation%3APlant%3A0001')",
+      "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQW9CLNT170%3ALocation%3APlant%3A0001')",
+      "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationDTO"
+    },
+    "locationDescription": "Plant 0001",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+    "sourceSystem": "QW9CLNT170",
+    "externalId": "0001",
+    "objectTypeDescription": "Plant",
+    "formattedAddress": "Plant 0001$Teststreet 124$19745 Delhi$Indien",
+    "locationId": "QW9CLNT170:0001",
+    "longitude": "77.21690000",
+    "latitude": "28.63410000",
+    "objectTypeCode": "Plant",
+    "locationTypeDescription": "Plant"
+  }
+]

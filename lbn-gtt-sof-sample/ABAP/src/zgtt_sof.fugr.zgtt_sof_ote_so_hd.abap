@@ -30,6 +30,9 @@ FUNCTION zgtt_sof_ote_so_hd.
     ls_xvbpa        TYPE vbpavb,
 *    lv_timestamp    TYPE tzntstmps,
     lv_tzone        TYPE timezone,
+*    net value conversion
+    rv_external     TYPE netwr_ak,
+    lv_external     TYPE bapicurr_d,
     lt_xvbap        TYPE STANDARD TABLE OF vbapvb.
 
   FIELD-SYMBOLS:
@@ -101,12 +104,26 @@ FUNCTION zgtt_sof_ote_so_hd.
 
 *   Document date
     ls_control_data-paramname = gc_cp_yn_doc_date.
-    ls_control_data-value     = <ls_xvbak>-audat.
+    IF <ls_xvbak>-audat IS NOT INITIAL.
+      ls_control_data-value     = <ls_xvbak>-audat.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
     APPEND ls_control_data TO e_control_data.
 
 *   Net value
     ls_control_data-paramname = gc_cp_yn_net_value.
-    ls_control_data-value     = <ls_xvbak>-netwr.
+    CLEAR rv_external.
+    IF <ls_xvbak>-netwr IS NOT INITIAL.
+      CALL FUNCTION 'BAPI_CURRENCY_CONV_TO_EXTERNAL'
+        EXPORTING
+          currency        = <ls_xvbak>-waerk
+          amount_internal = <ls_xvbak>-netwr
+        IMPORTING
+          amount_external = lv_external.
+      rv_external   = round( val = lv_external dec = 2 ).
+    ENDIF.
+    ls_control_data-value     = rv_external.
     SHIFT ls_control_data-value LEFT  DELETING LEADING space.
     APPEND ls_control_data TO e_control_data.
 

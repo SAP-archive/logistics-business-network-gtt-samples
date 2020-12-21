@@ -3,6 +3,7 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "sap/base/Log",
+    "sap/base/strings/formatMessage",
     "sap/base/util/isPlainObject",
     "sap/m/MessageBox",
     "sap/ui/base/BindingParser",
@@ -17,6 +18,7 @@ sap.ui.define(
     Controller,
     Fragment,
     Log,
+    formatMessage,
     isPlainObject,
     MessageBox,
     BindingParser,
@@ -208,9 +210,9 @@ sap.ui.define(
       /**
        * @abstract
        */
-      initControls: function () {},
+      initControls: function () { },
 
-      getText: function (key, params, i18nModel)  {
+      getText: function (key, params, i18nModel) {
         var resourceBundle = this.getResourceBundle(i18nModel);
         return resourceBundle.getText(key, params);
       },
@@ -322,6 +324,29 @@ sap.ui.define(
        * @abstract update data for location quick view
        */
       updateLocationQuickViewData: function () {
+      },
+
+      navToShipmentApplication: function (id) {
+        var crossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+        var navObj = {
+          target: {
+            semanticObject: "Shipment",
+            action: "track",
+          },
+        };
+        crossAppNav.isNavigationSupported([navObj])
+          .done(function (results) {
+            if (results[0].supported) {
+              // Open a new page
+              var href = crossAppNav.hrefForExternal(navObj);
+              var privappHashPrefix = "&/";
+              var pattern = formatMessage("Shipment(guid''{0}'')", [id]);
+              var url = window.location.href.split("#")[0] + href + privappHashPrefix + pattern;
+              sap.m.URLHelper.redirect(url, true);
+            } else {
+              MessageBox.error(this.getText("crossNavigationNotSupportedMsg"));
+            }
+          }.bind(this));
       },
 
 

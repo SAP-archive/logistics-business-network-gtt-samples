@@ -22,22 +22,29 @@ FUNCTION zgtt_sof_ote_shp_hd.
 *----------------------------------------------------------------------*
 
   DATA:
-    ls_app_objects  TYPE trxas_appobj_ctab_wa,
-    ls_control_data TYPE /saptrx/control_data,
-    lt_xvtts        TYPE STANDARD TABLE OF vttsvb,
-    lt_xvttp        TYPE STANDARD TABLE OF vttpvb,
-    ls_xvtts        TYPE vttsvb,
-    ls_xvttp        TYPE vttpvb,
-    lv_tzone        TYPE timezone,
-    lv_forward_agt  TYPE bu_partner,
-    lt_bpdetail     TYPE STANDARD TABLE OF bapibus1006_id_details,
-    ls_bpdetail     TYPE bapibus1006_id_details,
-    lv_count        TYPE i,
-    lv_tabix        TYPE numc10,
-    lv_full_ind     TYPE char01,
-    lv_lgtratxt     TYPE char60,
-    lt_stops        TYPE zgtt_stops,
-    ls_stop         TYPE zgtt_stop_info.
+    ls_app_objects            TYPE trxas_appobj_ctab_wa,
+    ls_control_data           TYPE /saptrx/control_data,
+    lt_xvtts                  TYPE STANDARD TABLE OF vttsvb,
+    lt_xvttp                  TYPE STANDARD TABLE OF vttpvb,
+    ls_xvtts                  TYPE vttsvb,
+    ls_xvttp                  TYPE vttpvb,
+    lv_tzone                  TYPE timezone,
+    lv_forward_agt            TYPE bu_partner,
+    lt_bpdetail               TYPE STANDARD TABLE OF bapibus1006_id_details,
+    ls_bpdetail               TYPE bapibus1006_id_details,
+    lv_count                  TYPE i,
+    lv_tabix                  TYPE numc10,
+    lv_full_ind               TYPE char01,
+    lv_lgtratxt               TYPE char60,
+    lv_time_num               TYPE numc15,
+    lv_departure_datetime     TYPE timestamp,
+    lv_departure_timezone     TYPE timezone,
+    lv_departure_datetime_utc TYPE timestamp,
+    lv_arrival_datetime       TYPE timestamp,
+    lv_arrival_timezone       TYPE timezone,
+    lv_arrival_datetime_utc   TYPE timestamp,
+    lt_stops                  TYPE zgtt_stops,
+    ls_stop                   TYPE zgtt_stop_info.
 
   DATA: BEGIN OF ls_stop_id,
           stopid  TYPE zgtt_stopid,
@@ -73,6 +80,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
 * <3> Loop at application objects for geting Shipment Header
 *     add the following values which cannot be extracted in EM Data Extraction
 * Shipment number
+* Service Agent ERP ID
 * Service Agent LBN ID
 * Contains DG or not
 * Forwarding Agent Tracking ID
@@ -110,6 +118,11 @@ FUNCTION zgtt_sof_ote_shp_hd.
 * Shipment number: VTTK-TKNUM
     ls_control_data-paramname = gc_cp_yn_shp_no.
     ls_control_data-value     = <ls_xvttk>-tknum.
+    APPEND ls_control_data TO e_control_data.
+
+* Service Agent ERP ID
+    ls_control_data-paramname = gc_cp_yn_shp_sa_erp_id.
+    ls_control_data-value     = <ls_xvttk>-tdlnr.
     APPEND ls_control_data TO e_control_data.
 
 * Service Agent LBN ID
@@ -256,7 +269,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
       ls_control_data-paramindex = '1'.
       APPEND ls_control_data TO e_control_data.
     ELSE.
-      ls_control_data-paramname = gc_cp_yn_shp_res_id.
+      ls_control_data-paramname = gc_cp_yn_shp_res_value.
       ls_control_data-value     = ''.
       ls_control_data-paramindex = '1'.
       APPEND ls_control_data TO e_control_data.
@@ -312,7 +325,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
       ls_control_data-value = <ls_xvttk>-tndr_trkid.
       APPEND ls_control_data TO e_control_data.
     ELSE.
-      ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_type.
+      ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_value.
       ls_control_data-paramindex = '1'.
       ls_control_data-value = ''.
       APPEND ls_control_data TO e_control_data.
@@ -325,6 +338,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
         it_vtts_new = lt_xvtts
       IMPORTING
         et_stops    = lt_stops.
+
 
     CLEAR lv_count.
     LOOP AT lt_stops INTO ls_stop.
@@ -386,7 +400,11 @@ FUNCTION zgtt_sof_ote_shp_hd.
       APPEND ls_control_data TO e_control_data.
 
       ls_control_data-paramname = gc_cp_yn_shp_stops_pln_evt_dt.
-      ls_control_data-value = ls_stop-pln_evt_datetime.
+      IF ls_stop-pln_evt_datetime IS NOT INITIAL.
+        ls_control_data-value = ls_stop-pln_evt_datetime.
+      ELSE.
+        CLEAR ls_control_data-value.
+      ENDIF.
       APPEND ls_control_data TO e_control_data.
 
       ls_control_data-paramname = gc_cp_yn_shp_stops_pln_evt_tz.
@@ -432,6 +450,85 @@ FUNCTION zgtt_sof_ote_shp_hd.
     ENDIF.
 
     CLEAR ls_control_data-paramindex.
+
+*Planned Departure Location ID for 1st stop
+*Planned Departure Location Type for 1st stop
+*Planned Departure Business Datetime for 1st stop
+*Planned Departure Business Datetime Timezone for 1st stop
+*Planned Arrival Location ID for last stop
+*Planned Arrival Location Type for last stop
+*Planned Arrival Business Datetime for last stop
+*Planned Arrival  Datetime zone for last stop
+
+    CLEAR: lv_time_num.
+    READ TABLE lt_stops INTO ls_stop INDEX 1.
+    lv_departure_datetime = ls_stop-pln_evt_datetime.
+    lv_departure_timezone = ls_stop-pln_evt_timezone.
+
+    CALL FUNCTION '/SAPAPO/TIMESTAMP_ZONE_TO_UTC'
+      EXPORTING
+        iv_timezone  = lv_departure_timezone
+        iv_timestamp = lv_departure_datetime
+      IMPORTING
+        ev_timestamp = lv_departure_datetime_utc.
+
+    MOVE lv_departure_datetime_utc TO lv_time_num.
+
+    ls_control_data-paramname = gc_cp_yn_shp_departure_dt.
+    IF lv_time_num IS NOT INITIAL.
+      ls_control_data-value = lv_time_num.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_departure_tz.
+    ls_control_data-value = lv_departure_timezone.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_departure_locid.
+    ls_control_data-value = ls_stop-locid.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_departure_loctype.
+    ls_control_data-value = ls_stop-loctype.
+    APPEND ls_control_data TO e_control_data.
+
+    CLEAR: lv_count, lv_time_num.
+    DESCRIBE TABLE lt_stops LINES lv_count.
+    READ TABLE lt_stops INTO ls_stop INDEX lv_count.
+    lv_arrival_datetime = ls_stop-pln_evt_datetime.
+    lv_arrival_timezone = ls_stop-pln_evt_timezone.
+
+    CALL FUNCTION '/SAPAPO/TIMESTAMP_ZONE_TO_UTC'
+      EXPORTING
+        iv_timezone  = lv_arrival_timezone
+        iv_timestamp = lv_arrival_datetime
+      IMPORTING
+        ev_timestamp = lv_arrival_datetime_utc.
+
+    MOVE lv_arrival_datetime_utc TO lv_time_num.
+
+    ls_control_data-paramname = gc_cp_yn_shp_arrival_dt.
+    IF lv_time_num IS NOT INITIAL.
+      ls_control_data-value = lv_time_num.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_arrival_tz.
+    ls_control_data-value = lv_departure_timezone.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_arrival_locid.
+    ls_control_data-value = ls_stop-locid.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_shp_arrival_loctype.
+    ls_control_data-value = ls_stop-loctype.
+    APPEND ls_control_data TO e_control_data.
+
 
   ENDLOOP.
 ENDFUNCTION.

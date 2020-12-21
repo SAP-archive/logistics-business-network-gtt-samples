@@ -1,0 +1,26 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sst.controller.TrackingTimeline"
+	xmlns="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<ResponsiveSplitter height="600px"
+		defaultPane="trackingTimelineEventsPanel">
+		<PaneContainer>
+
+			<SplitPane id="trackingTimelineEventsPanel"
+				requiredParentWidth="425">
+				<core:Fragment id="trackingTimelineEvents"
+					fragmentName="com.sap.gtt.app.sample.sst.view.fragments.TrackingTimelineEvents"
+					type="XML" />
+			</SplitPane>
+
+			<SplitPane id="TrackingTimelineMapPanel"
+				requiredParentWidth="425">
+				<core:Fragment id="trackingTimelineMap"
+					fragmentName="com.sap.gtt.app.sample.sst.view.fragments.TrackingTimelineMap"
+					type="XML" />
+			</SplitPane>
+
+		</PaneContainer>
+	</ResponsiveSplitter>
+</mvc:View>

@@ -1,0 +1,110 @@
+{
+  "stopsForVp": [
+    {
+      "stopId": "00000020230001",
+      "ordinalNo": 1,
+      "locationId": "Departure Location Id 1",
+      "locationType_code": "ShippingPoint",
+      "location": {
+        "locationDescription": "ABC Company",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0011",
+        "objectTypeDescription": "Shipping Point",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "0001",
+        "address": "Address",
+        "formattedAddress": "ABC Company$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+        "longitude": 8.57215730,
+        "latitude": 49.29337810
+      },
+      "estimatedArrival": {
+        "estimatedArrivalTime": "2020-08-14T20:00:00Z"
+      }
+    },
+    {
+      "stopId": "00000020230002",
+      "ordinalNo": 2,
+      "locationId": "Arrival LocationId 1",
+      "locationType_code": "ShippingPoint",
+      "location": {
+        "locationDescription": "ABC Company 2",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0012",
+        "objectTypeDescription": "Shipping Point",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "0002",
+        "address": "Address 2",
+        "formattedAddress": "ABC Company 2$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+        "longitude": 18.57215730,
+        "latitude": -19.29337810
+      },
+      "estimatedArrival": {
+        "estimatedArrivalTime": "2020-08-18T20:00:00Z"
+      }
+    },
+    {
+      "stopId": "00000020230003",
+      "ordinalNo": 3,
+      "locationId": "LocationId 1",
+      "locationType_code": "ShippingPoint",
+      "location": {
+        "locationDescription": "ABC Company 3",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0013",
+        "objectTypeDescription": "Shipping Point",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "0003",
+        "address": "Address 3",
+        "formattedAddress": "ABC Company 3$Dietmar-Hopp-Allee 16$69190 Walldorf$Deutschland",
+        "longitude": 18.57215730,
+        "latitude": 59.29337810
+      },
+      "estimatedArrival": {
+        "estimatedArrivalTime": "2020-08-22T20:00:00Z"
+      }
+    }
+  ],
+  "actualRoute": [
+    {
+      "longitude": 120.000100000,
+      "latitude": 39.000100000,
+      "eventId": "f0228c87-d54f-11ea-98b4-f338c3d4edec",
+      "eventType": "Picking",
+      "locationDescription": "A"
+    },
+    {
+      "longitude": 121.000100000,
+      "latitude": 40.000100000,
+      "eventId": "f6de559c-d54f-11ea-98b4-8d3ceeaa266e",
+      "eventType": "GoodsIssued",
+      "locationDescription": "B"
+    },
+    {
+      "longitude": 121.000100000,
+      "latitude": 41.000100000,
+      "eventId": "a2613204-d550-11ea-98b4-997e7ec3c9c6",
+      "eventType": "LocationUpdate",
+      "locationDescription": "C"
+    },
+    {
+      "longitude": 121.500100000,
+      "latitude": 41.000100000,
+      "eventId": "d1403fda-d550-11ea-98b4-5177a81adcaf",
+      "eventType": "LoadingEnd",
+      "locationDescription": "D"
+    }
+  ],
+  "plannedRoute": [
+    {
+      "longitude": 12.12345000,
+      "latitude": 21.12345000,
+      "eventId": "86ccd3f0-d54d-11ea-98b4-f173f9021ad8",
+      "eventType": "Picking",
+      "eventMatchKey": "00000020230001",
+      "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0011"
+    }
+  ],
+  "currentLocation": {
+    "eventId": "16ccd3f0-d54d-11ea-98b4-f173f9021ad8"
+  },
+  "toConnectPlannedAndActualRoute": true,
+  "hasLocationWithInvalidGeo": false,
+  "hasActualEventWithInvalidGeo": false
+}

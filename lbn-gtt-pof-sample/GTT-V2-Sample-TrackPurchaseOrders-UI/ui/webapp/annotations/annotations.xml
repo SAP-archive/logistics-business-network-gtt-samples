@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0"
+  xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+    <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/462030211/Analytics.xml?api=v2">
+    <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+    <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="com.lbngttsamples.gtt.app.pof.pofService" Alias="com.lbngttsamples.gtt.app.pof.pofService"
+      xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder">
+        <Annotation Term="Common.SemanticKey">
+          <Collection>
+            <PropertyPath>purchaseOrderNo</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/netValue">
+          <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/completionValue">
+          <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/totalDeliveredValue">
+          <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/totalDelayedValue">
+          <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        </Annotations>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="purchaseOrderNo"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="supplierId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="receivingLocationId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="plannedDeliveryDate"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="netValue"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="completionValue"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="incoterms_code"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.EntityContainer/PurchaseOrderItem"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="NonFilterableProperties">
+              <Collection>
+                <PropertyPath>id</PropertyPath>
+                <PropertyPath>itemNo</PropertyPath>
+                <PropertyPath>nextETA</PropertyPath>
+                <PropertyPath>orderQuantity</PropertyPath>
+                <PropertyPath>orderQuantityUoM</PropertyPath>
+                <PropertyPath>netWeight</PropertyPath>
+                <PropertyPath>weightUoM</PropertyPath>
+                <PropertyPath>grossWeight</PropertyPath>
+                <PropertyPath>volume</PropertyPath>
+                <PropertyPath>volumeUoM</PropertyPath>
+                <PropertyPath>netValue</PropertyPath>
+                <PropertyPath>currency</PropertyPath>
+                <PropertyPath>completedQuantity</PropertyPath>
+                <PropertyPath>incotermsVersion</PropertyPath>
+                <PropertyPath>incotermsLocation</PropertyPath>
+                <PropertyPath>processStatus_code</PropertyPath>
+                <PropertyPath>incoterms_code</PropertyPath>
+                <PropertyPath>purchaseOrder_id</PropertyPath>
+                <PropertyPath>processStatus</PropertyPath>
+                <PropertyPath>incoterms</PropertyPath>
+                <PropertyPath>purchaseOrder</PropertyPath>
+                <PropertyPath>trackingIdType</PropertyPath>
+                <PropertyPath>receivingLocationType_code</PropertyPath>
+                <PropertyPath>receivingLocationType</PropertyPath>
+                <PropertyPath>receivingLocationDescription</PropertyPath>
+                <PropertyPath>supplierDescription</PropertyPath>
+                <PropertyPath>logicalSystem</PropertyPath>
+                <PropertyPath>partyId</PropertyPath>
+                <PropertyPath>supplierLocationType</PropertyPath>
+                <PropertyPath>toReceivingLocation</PropertyPath>
+                <PropertyPath>toSupplierLocation</PropertyPath>
+                <PropertyPath>completionValue</PropertyPath>
+                <PropertyPath>lastReportedEvent</PropertyPath>
+                <PropertyPath>altKey</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="plannedDeliveryDate" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem">
+        <Annotation Term="Common.SemanticKey">
+          <Collection>
+            <PropertyPath>itemNo</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>purchaseOrderNo</PropertyPath>
+            <PropertyPath>supplierId</PropertyPath>
+            <PropertyPath>receivingLocationId</PropertyPath>
+            <PropertyPath>plannedDeliveryDate</PropertyPath>
+            <PropertyPath>materialId</PropertyPath>
+            <PropertyPath>materialDescription</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/orderQuantity">
+          <Annotation Term="Measures.Unit" Path="orderQuantityUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/volume">
+          <Annotation Term="Measures.Unit" Path="volumeUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/grossWeight">
+          <Annotation Term="Measures.Unit" Path="weightUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/netWeight">
+          <Annotation Term="Measures.Unit" Path="weightUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/netValue">
+          <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/processStatus_code">
+          <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+        </Annotations>
+        <Annotation Term="com.sap.vocabularies.UI.v1.PresentationVariant">
+          <Record>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="RequestAtLeast">
+              <Collection>
+                <PropertyPath>purchaseOrderNo</PropertyPath>
+                <PropertyPath>itemNo</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="purchaseOrderNo"/>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="itemNo"/>
+                  <PropertyValue Property="Descending" Bool="false"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="itemNo" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="supplierId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="receivingLocationId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="plannedDeliveryDate"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="orderQuantity"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="materialId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="completionValue"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem">
+
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/orderQuantity">
+          <Annotation Term="Measures.Unit" Path="orderQuantityUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/volume">
+          <Annotation Term="Measures.Unit" Path="volumeUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/grossWeight">
+          <Annotation Term="Measures.Unit" Path="weightUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/netWeight">
+          <Annotation Term="Measures.Unit" Path="weightUoM"/>
+        </Annotations>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
+

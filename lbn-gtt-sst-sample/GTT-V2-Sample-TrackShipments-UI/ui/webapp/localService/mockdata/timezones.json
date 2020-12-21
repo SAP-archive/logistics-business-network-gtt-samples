@@ -1,0 +1,3009 @@
+{
+  "items": [
+    {
+      "timeZoneCode": "Etc/GMT+12",
+      "description": "Etc/GMT+12 (UTC-12:00)",
+      "offset": "-12:00"
+    },
+    {
+      "timeZoneCode": "US/Samoa",
+      "description": "Samoa Time (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Samoa",
+      "description": "Samoa Time (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Pago_Pago",
+      "description": "Samoa Time (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Niue",
+      "description": "Niue Time (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Midway",
+      "description": "Samoa Time (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+11",
+      "description": "Etc/GMT+11 (UTC-11:00)",
+      "offset": "-11:00"
+    },
+    {
+      "timeZoneCode": "US/Hawaii",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "US/Aleutian",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "SystemV/HST10",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Tahiti",
+      "description": "Tahiti Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Rarotonga",
+      "description": "Cook Is. Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Johnston",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Honolulu",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+10",
+      "description": "Etc/GMT+10 (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "America/Atka",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "America/Adak",
+      "description": "Hawaii Time (UTC-10:00)",
+      "offset": "-10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Marquesas",
+      "description": "Marquesas Time (UTC-09:30)",
+      "offset": "-09:30"
+    },
+    {
+      "timeZoneCode": "US/Alaska",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "SystemV/YST9YDT",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "SystemV/YST9",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Gambier",
+      "description": "Gambier Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+9",
+      "description": "Etc/GMT+9 (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Yakutat",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Sitka",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Nome",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Metlakatla",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Juneau",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "America/Anchorage",
+      "description": "Alaska Time (UTC-09:00)",
+      "offset": "-09:00"
+    },
+    {
+      "timeZoneCode": "US/Pacific-New",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "US/Pacific",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "SystemV/PST8PDT",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "SystemV/PST8",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Pitcairn",
+      "description": "Pitcairn Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "PST8PDT",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "Mexico/BajaNorte",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+8",
+      "description": "Etc/GMT+8 (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "Canada/Pacific",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "America/Vancouver",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "America/Tijuana",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "America/Santa_Isabel",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "America/Los_Angeles",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "America/Ensenada",
+      "description": "Pacific Time (UTC-08:00)",
+      "offset": "-08:00"
+    },
+    {
+      "timeZoneCode": "US/Mountain",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "US/Arizona",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "SystemV/MST7MDT",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "SystemV/MST7",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "Navajo",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "Mexico/BajaSur",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "MST7MDT",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+7",
+      "description": "Etc/GMT+7 (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "Canada/Yukon",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "Canada/Mountain",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Yellowknife",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Whitehorse",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Shiprock",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Phoenix",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Ojinaga",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Mazatlan",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Inuvik",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Hermosillo",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Fort_Nelson",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Edmonton",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Denver",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Dawson_Creek",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Dawson",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Creston",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Chihuahua",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Cambridge_Bay",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "America/Boise",
+      "description": "Mountain Time (UTC-07:00)",
+      "offset": "-07:00"
+    },
+    {
+      "timeZoneCode": "US/Indiana-Starke",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "US/Central",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "SystemV/CST6CDT",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "SystemV/CST6",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Galapagos",
+      "description": "Galapagos Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "Mexico/General",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+6",
+      "description": "Etc/GMT+6 (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "Canada/Saskatchewan",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "Canada/Central",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "CST6CDT",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Winnipeg",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Tegucigalpa",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Swift_Current",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Resolute",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Regina",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Rankin_Inlet",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Rainy_River",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/North_Dakota/New_Salem",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/North_Dakota/Center",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/North_Dakota/Beulah",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Monterrey",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Mexico_City",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Merida",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Menominee",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Matamoros",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Managua",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Knox_IN",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Tell_City",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Knox",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Guatemala",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/El_Salvador",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Costa_Rica",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Chicago",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Belize",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "America/Bahia_Banderas",
+      "description": "Central Time (UTC-06:00)",
+      "offset": "-06:00"
+    },
+    {
+      "timeZoneCode": "US/Michigan",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "US/Eastern",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "US/East-Indiana",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "SystemV/EST5EDT",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "SystemV/EST5",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Easter",
+      "description": "Easter Is. Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Jamaica",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+5",
+      "description": "Etc/GMT+5 (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "EST5EDT",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Cuba",
+      "description": "Cuba Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Chile/EasterIsland",
+      "description": "Easter Is. Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Canada/Eastern",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "Brazil/Acre",
+      "description": "Acre Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Toronto",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Thunder_Bay",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Rio_Branco",
+      "description": "Acre Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Porto_Acre",
+      "description": "Acre Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Port-au-Prince",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Pangnirtung",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Panama",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Nipigon",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/New_York",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Nassau",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Montreal",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Louisville",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Lima",
+      "description": "Peru Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Kentucky/Monticello",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Kentucky/Louisville",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Jamaica",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Iqaluit",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indianapolis",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Winamac",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Vincennes",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Vevay",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Petersburg",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Marengo",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Indiana/Indianapolis",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Havana",
+      "description": "Cuba Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Guayaquil",
+      "description": "Ecuador Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Grand_Turk",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Fort_Wayne",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Eirunepe",
+      "description": "Acre Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Detroit",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Coral_Harbour",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Cayman",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Cancun",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Bogota",
+      "description": "Colombia Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "America/Atikokan",
+      "description": "Eastern Time (UTC-05:00)",
+      "offset": "-05:00"
+    },
+    {
+      "timeZoneCode": "SystemV/AST4ADT",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "SystemV/AST4",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+4",
+      "description": "Etc/GMT+4 (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "Canada/Atlantic",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "Brazil/West",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/Bermuda",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Virgin",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Tortola",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Thule",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/St_Vincent",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/St_Thomas",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/St_Lucia",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/St_Kitts",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/St_Barthelemy",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Santo_Domingo",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Puerto_Rico",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Porto_Velho",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Port_of_Spain",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Montserrat",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Moncton",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Martinique",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Marigot",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Manaus",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Lower_Princes",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/La_Paz",
+      "description": "Bolivia Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Kralendijk",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Halifax",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Guyana",
+      "description": "Guyana Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Guadeloupe",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Grenada",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Goose_Bay",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Glace_Bay",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Dominica",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Curacao",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Cuiaba",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Caracas",
+      "description": "Venezuela Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Campo_Grande",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Boa_Vista",
+      "description": "Amazon Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Blanc-Sablon",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Barbados",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Aruba",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Antigua",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "America/Anguilla",
+      "description": "Atlantic Time (UTC-04:00)",
+      "offset": "-04:00"
+    },
+    {
+      "timeZoneCode": "Canada/Newfoundland",
+      "description": "Newfoundland Time (UTC-03:30)",
+      "offset": "-03:30"
+    },
+    {
+      "timeZoneCode": "America/St_Johns",
+      "description": "Newfoundland Time (UTC-03:30)",
+      "offset": "-03:30"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+3",
+      "description": "Etc/GMT+3 (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Chile/Continental",
+      "description": "Chile Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Brazil/East",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/Stanley",
+      "description": "Falkland Is. Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Rothera",
+      "description": "Rothera Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Palmer",
+      "description": "Chile Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Sao_Paulo",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Santiago",
+      "description": "Chile Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Santarem",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Rosario",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Recife",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Punta_Arenas",
+      "description": "America/Punta_Arenas (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Paramaribo",
+      "description": "Suriname Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Nuuk",
+      "description": "Western Greenland Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Montevideo",
+      "description": "Uruguay Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Miquelon",
+      "description": "Pierre & Miquelon Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Mendoza",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Maceio",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Jujuy",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Godthab",
+      "description": "Western Greenland Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Fortaleza",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Cordoba",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Cayenne",
+      "description": "French Guiana Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Catamarca",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Buenos_Aires",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Belem",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Bahia",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Asuncion",
+      "description": "Paraguay Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Ushuaia",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Tucuman",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/San_Luis",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/San_Juan",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Salta",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Rio_Gallegos",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Mendoza",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/La_Rioja",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Jujuy",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Cordoba",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/ComodRivadavia",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Catamarca",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Argentina/Buenos_Aires",
+      "description": "Argentine Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "America/Araguaina",
+      "description": "Brasilia Time (UTC-03:00)",
+      "offset": "-03:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+2",
+      "description": "Etc/GMT+2 (UTC-02:00)",
+      "offset": "-02:00"
+    },
+    {
+      "timeZoneCode": "Brazil/DeNoronha",
+      "description": "Fernando de Noronha Time (UTC-02:00)",
+      "offset": "-02:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/South_Georgia",
+      "description": "South Georgia Time (UTC-02:00)",
+      "offset": "-02:00"
+    },
+    {
+      "timeZoneCode": "America/Noronha",
+      "description": "Fernando de Noronha Time (UTC-02:00)",
+      "offset": "-02:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+1",
+      "description": "Etc/GMT+1 (UTC-01:00)",
+      "offset": "-01:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/Cape_Verde",
+      "description": "Cape Verde Time (UTC-01:00)",
+      "offset": "-01:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/Azores",
+      "description": "Azores Time (UTC-01:00)",
+      "offset": "-01:00"
+    },
+    {
+      "timeZoneCode": "America/Scoresbysund",
+      "description": "Eastern Greenland Time (UTC-01:00)",
+      "offset": "-01:00"
+    },
+    {
+      "timeZoneCode": "Zulu",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "WET",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Universal",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "UTC",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "UCT",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Portugal",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Iceland",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Greenwich",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "GMT0",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "GMT",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "GB-Eire",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "GB",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/London",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Lisbon",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Jersey",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Isle_of_Man",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Guernsey",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Dublin",
+      "description": "Irish Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Europe/Belfast",
+      "description": "British Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/Zulu",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/Universal",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/UTC",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/UCT",
+      "description": "Coordinated Universal Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/Greenwich",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/GMT0",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-0",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/GMT+0",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Etc/GMT",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Eire",
+      "description": "Irish Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/St_Helena",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/Reykjavik",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/Madeira",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/Faroe",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/Faeroe",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Atlantic/Canary",
+      "description": "Western European Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Antarctica/Troll",
+      "description": "Troll Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "America/Danmarkshavn",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Timbuktu",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Sao_Tome",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Ouagadougou",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Nouakchott",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Monrovia",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Lome",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Freetown",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Dakar",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Conakry",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Bissau",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Banjul",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Bamako",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Accra",
+      "description": "Ghana Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Africa/Abidjan",
+      "description": "Greenwich Mean Time (UTC+00:00)",
+      "offset": "Z"
+    },
+    {
+      "timeZoneCode": "Poland",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "MET",
+      "description": "Middle Europe Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Zurich",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Zagreb",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Warsaw",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Vienna",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Vatican",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Vaduz",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Tirane",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Stockholm",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Skopje",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Sarajevo",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/San_Marino",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Rome",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Prague",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Podgorica",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Paris",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Oslo",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Monaco",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Malta",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Madrid",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Luxembourg",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Ljubljana",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Gibraltar",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Copenhagen",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Busingen",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Budapest",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Brussels",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Bratislava",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Berlin",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Belgrade",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Andorra",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Europe/Amsterdam",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-1",
+      "description": "Etc/GMT-1 (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "CET",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Atlantic/Jan_Mayen",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Arctic/Longyearbyen",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Tunis",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Porto-Novo",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Niamey",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Ndjamena",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Malabo",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Luanda",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Libreville",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Lagos",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Kinshasa",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/El_Aaiun",
+      "description": "Western European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Douala",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Ceuta",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Casablanca",
+      "description": "Western European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Brazzaville",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Bangui",
+      "description": "Western African Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Africa/Algiers",
+      "description": "Central European Time (UTC+01:00)",
+      "offset": "+01:00"
+    },
+    {
+      "timeZoneCode": "Libya",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Israel",
+      "description": "Israel Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Zaporozhye",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Vilnius",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Uzhgorod",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Tiraspol",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Tallinn",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Sofia",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Riga",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Nicosia",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Mariehamn",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Kiev",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Kaliningrad",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Helsinki",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Chisinau",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Bucharest",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Europe/Athens",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-2",
+      "description": "Etc/GMT-2 (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Egypt",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "EET",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Tel_Aviv",
+      "description": "Israel Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Nicosia",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Jerusalem",
+      "description": "Israel Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Hebron",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Gaza",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Famagusta",
+      "description": "Asia/Famagusta (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Damascus",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Beirut",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Asia/Amman",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Windhoek",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Tripoli",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Mbabane",
+      "description": "South Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Maseru",
+      "description": "South Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Maputo",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Lusaka",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Lubumbashi",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Kigali",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Khartoum",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Johannesburg",
+      "description": "South Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Harare",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Gaborone",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Cairo",
+      "description": "Eastern European Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Bujumbura",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "Africa/Blantyre",
+      "description": "Central Africa Time (UTC+02:00)",
+      "offset": "+02:00"
+    },
+    {
+      "timeZoneCode": "W-SU",
+      "description": "Moscow Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Turkey",
+      "description": "Turkey Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Indian/Mayotte",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Indian/Comoro",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Indian/Antananarivo",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Europe/Simferopol",
+      "description": "Moscow Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Europe/Moscow",
+      "description": "Moscow Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Europe/Minsk",
+      "description": "Moscow Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Europe/Kirov",
+      "description": "Europe/Kirov (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Europe/Istanbul",
+      "description": "Turkey Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-3",
+      "description": "Etc/GMT-3 (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Riyadh",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Qatar",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kuwait",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Istanbul",
+      "description": "Turkey Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Bahrain",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Baghdad",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Asia/Aden",
+      "description": "Arabia Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Syowa",
+      "description": "Syowa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Nairobi",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Mogadishu",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Kampala",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Juba",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Djibouti",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Dar_es_Salaam",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Asmera",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Asmara",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Africa/Addis_Ababa",
+      "description": "Eastern Africa Time (UTC+03:00)",
+      "offset": "+03:00"
+    },
+    {
+      "timeZoneCode": "Iran",
+      "description": "Iran Time (UTC+03:30)",
+      "offset": "+03:30"
+    },
+    {
+      "timeZoneCode": "Asia/Tehran",
+      "description": "Iran Time (UTC+03:30)",
+      "offset": "+03:30"
+    },
+    {
+      "timeZoneCode": "Indian/Reunion",
+      "description": "Reunion Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Indian/Mauritius",
+      "description": "Mauritius Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Indian/Mahe",
+      "description": "Seychelles Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Europe/Volgograd",
+      "description": "Moscow Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Europe/Ulyanovsk",
+      "description": "Europe/Ulyanovsk (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Europe/Saratov",
+      "description": "Europe/Saratov (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Europe/Samara",
+      "description": "Samara Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Europe/Astrakhan",
+      "description": "Europe/Astrakhan (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-4",
+      "description": "Etc/GMT-4 (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Yerevan",
+      "description": "Armenia Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Tbilisi",
+      "description": "Georgia Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Muscat",
+      "description": "Gulf Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Dubai",
+      "description": "Gulf Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Baku",
+      "description": "Azerbaijan Time (UTC+04:00)",
+      "offset": "+04:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kabul",
+      "description": "Afghanistan Time (UTC+04:30)",
+      "offset": "+04:30"
+    },
+    {
+      "timeZoneCode": "Indian/Maldives",
+      "description": "Maldives Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Indian/Kerguelen",
+      "description": "French Southern & Antarctic Lands Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-5",
+      "description": "Etc/GMT-5 (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Yekaterinburg",
+      "description": "Yekaterinburg Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Tashkent",
+      "description": "Uzbekistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Samarkand",
+      "description": "Uzbekistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Qyzylorda",
+      "description": "Qyzylorda Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Oral",
+      "description": "Oral Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Karachi",
+      "description": "Pakistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Dushanbe",
+      "description": "Tajikistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Atyrau",
+      "description": "Asia/Atyrau (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ashkhabad",
+      "description": "Turkmenistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ashgabat",
+      "description": "Turkmenistan Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Aqtobe",
+      "description": "Aqtobe Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Aqtau",
+      "description": "Aqtau Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Mawson",
+      "description": "Mawson Time (UTC+05:00)",
+      "offset": "+05:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kolkata",
+      "description": "India Time (UTC+05:30)",
+      "offset": "+05:30"
+    },
+    {
+      "timeZoneCode": "Asia/Colombo",
+      "description": "India Time (UTC+05:30)",
+      "offset": "+05:30"
+    },
+    {
+      "timeZoneCode": "Asia/Calcutta",
+      "description": "India Time (UTC+05:30)",
+      "offset": "+05:30"
+    },
+    {
+      "timeZoneCode": "Asia/Katmandu",
+      "description": "Nepal Time (UTC+05:45)",
+      "offset": "+05:45"
+    },
+    {
+      "timeZoneCode": "Asia/Kathmandu",
+      "description": "Nepal Time (UTC+05:45)",
+      "offset": "+05:45"
+    },
+    {
+      "timeZoneCode": "Indian/Chagos",
+      "description": "Indian Ocean Territory Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-6",
+      "description": "Etc/GMT-6 (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Urumqi",
+      "description": "Xinjiang Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Thimphu",
+      "description": "Bhutan Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Thimbu",
+      "description": "Bhutan Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Qostanay",
+      "description": "Kostanay Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Omsk",
+      "description": "Omsk Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kashgar",
+      "description": "Xinjiang Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Dhaka",
+      "description": "Bangladesh Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Dacca",
+      "description": "Bangladesh Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Bishkek",
+      "description": "Kirgizstan Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Asia/Almaty",
+      "description": "Alma-Ata Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Vostok",
+      "description": "Vostok Time (UTC+06:00)",
+      "offset": "+06:00"
+    },
+    {
+      "timeZoneCode": "Indian/Cocos",
+      "description": "Cocos Islands Time (UTC+06:30)",
+      "offset": "+06:30"
+    },
+    {
+      "timeZoneCode": "Asia/Yangon",
+      "description": "Myanmar Time (UTC+06:30)",
+      "offset": "+06:30"
+    },
+    {
+      "timeZoneCode": "Asia/Rangoon",
+      "description": "Myanmar Time (UTC+06:30)",
+      "offset": "+06:30"
+    },
+    {
+      "timeZoneCode": "Indian/Christmas",
+      "description": "Christmas Island Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-7",
+      "description": "Etc/GMT-7 (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Vientiane",
+      "description": "Indochina Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Tomsk",
+      "description": "Asia/Tomsk (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Saigon",
+      "description": "Indochina Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Pontianak",
+      "description": "West Indonesia Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Phnom_Penh",
+      "description": "Indochina Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Novosibirsk",
+      "description": "Novosibirsk Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Novokuznetsk",
+      "description": "Krasnoyarsk Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Krasnoyarsk",
+      "description": "Krasnoyarsk Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Jakarta",
+      "description": "West Indonesia Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Hovd",
+      "description": "Hovd Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ho_Chi_Minh",
+      "description": "Indochina Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Barnaul",
+      "description": "Asia/Barnaul (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Asia/Bangkok",
+      "description": "Indochina Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Davis",
+      "description": "Davis Time (UTC+07:00)",
+      "offset": "+07:00"
+    },
+    {
+      "timeZoneCode": "Singapore",
+      "description": "Singapore Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "PRC",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Hongkong",
+      "description": "Hong Kong Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-8",
+      "description": "Etc/GMT-8 (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Australia/West",
+      "description": "Australian Western Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Australia/Perth",
+      "description": "Australian Western Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ulan_Bator",
+      "description": "Ulaanbaatar Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ulaanbaatar",
+      "description": "Ulaanbaatar Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ujung_Pandang",
+      "description": "Central Indonesia Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Taipei",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Singapore",
+      "description": "Singapore Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Shanghai",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Manila",
+      "description": "Philippines Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Makassar",
+      "description": "Central Indonesia Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Macau",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Macao",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kuching",
+      "description": "Malaysia Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kuala_Lumpur",
+      "description": "Malaysia Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Irkutsk",
+      "description": "Irkutsk Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Hong_Kong",
+      "description": "Hong Kong Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Harbin",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Chungking",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Chongqing",
+      "description": "China Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Choibalsan",
+      "description": "Choibalsan Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Asia/Brunei",
+      "description": "Brunei Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Casey",
+      "description": "Australian Western Time (UTC+08:00)",
+      "offset": "+08:00"
+    },
+    {
+      "timeZoneCode": "Australia/Eucla",
+      "description": "Australian Central Western Time (UTC+08:45)",
+      "offset": "+08:45"
+    },
+    {
+      "timeZoneCode": "ROK",
+      "description": "Korea Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Palau",
+      "description": "Palau Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Japan",
+      "description": "Japan Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-9",
+      "description": "Etc/GMT-9 (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Yakutsk",
+      "description": "Yakutsk Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Tokyo",
+      "description": "Japan Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Seoul",
+      "description": "Korea Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Pyongyang",
+      "description": "Korea Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Khandyga",
+      "description": "Yakutsk Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Jayapura",
+      "description": "East Indonesia Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Dili",
+      "description": "Timor-Leste Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Asia/Chita",
+      "description": "Yakutsk Time (UTC+09:00)",
+      "offset": "+09:00"
+    },
+    {
+      "timeZoneCode": "Australia/North",
+      "description": "Australian Central Time (Northern Territory) (UTC+09:30)",
+      "offset": "+09:30"
+    },
+    {
+      "timeZoneCode": "Australia/Darwin",
+      "description": "Australian Central Time (Northern Territory) (UTC+09:30)",
+      "offset": "+09:30"
+    },
+    {
+      "timeZoneCode": "Pacific/Yap",
+      "description": "Chuuk Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Truk",
+      "description": "Chuuk Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Saipan",
+      "description": "Chamorro Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Port_Moresby",
+      "description": "Papua New Guinea Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Guam",
+      "description": "Chamorro Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Chuuk",
+      "description": "Chuuk Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-10",
+      "description": "Etc/GMT-10 (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Australia/Queensland",
+      "description": "Australian Eastern Time (Queensland) (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Australia/Lindeman",
+      "description": "Australian Eastern Time (Queensland) (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Australia/Brisbane",
+      "description": "Australian Eastern Time (Queensland) (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Asia/Vladivostok",
+      "description": "Vladivostok Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Asia/Ust-Nera",
+      "description": "Ust-Nera Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/DumontDUrville",
+      "description": "Dumont-d'Urville Time (UTC+10:00)",
+      "offset": "+10:00"
+    },
+    {
+      "timeZoneCode": "Australia/Yancowinna",
+      "description": "Australian Central Time (South Australia/New South Wales) (UTC+10:30)",
+      "offset": "+10:30"
+    },
+    {
+      "timeZoneCode": "Australia/South",
+      "description": "Australian Central Time (South Australia) (UTC+10:30)",
+      "offset": "+10:30"
+    },
+    {
+      "timeZoneCode": "Australia/Broken_Hill",
+      "description": "Australian Central Time (South Australia/New South Wales) (UTC+10:30)",
+      "offset": "+10:30"
+    },
+    {
+      "timeZoneCode": "Australia/Adelaide",
+      "description": "Australian Central Time (South Australia) (UTC+10:30)",
+      "offset": "+10:30"
+    },
+    {
+      "timeZoneCode": "Pacific/Ponape",
+      "description": "Ponape Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Pohnpei",
+      "description": "Ponape Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Noumea",
+      "description": "New Caledonia Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Kosrae",
+      "description": "Kosrae Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Guadalcanal",
+      "description": "Solomon Is. Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Efate",
+      "description": "Vanuatu Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Bougainville",
+      "description": "Bougainville Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-11",
+      "description": "Etc/GMT-11 (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Victoria",
+      "description": "Australian Eastern Time (Victoria) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Tasmania",
+      "description": "Australian Eastern Time (Tasmania) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Sydney",
+      "description": "Australian Eastern Time (New South Wales) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/NSW",
+      "description": "Australian Eastern Time (New South Wales) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Melbourne",
+      "description": "Australian Eastern Time (Victoria) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Lord_Howe",
+      "description": "Lord Howe Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/LHI",
+      "description": "Lord Howe Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Hobart",
+      "description": "Australian Eastern Time (Tasmania) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Currie",
+      "description": "Australian Eastern Time (New South Wales) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/Canberra",
+      "description": "Australian Eastern Time (New South Wales) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Australia/ACT",
+      "description": "Australian Eastern Time (New South Wales) (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Asia/Srednekolymsk",
+      "description": "Srednekolymsk Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Asia/Sakhalin",
+      "description": "Sakhalin Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Asia/Magadan",
+      "description": "Magadan Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/Macquarie",
+      "description": "Macquarie Island Time (UTC+11:00)",
+      "offset": "+11:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Wallis",
+      "description": "Wallis & Futuna Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Wake",
+      "description": "Wake Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Tarawa",
+      "description": "Gilbert Is. Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Norfolk",
+      "description": "Norfolk Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Nauru",
+      "description": "Nauru Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Majuro",
+      "description": "Marshall Islands Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Kwajalein",
+      "description": "Marshall Islands Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Funafuti",
+      "description": "Tuvalu Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Kwajalein",
+      "description": "Marshall Islands Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-12",
+      "description": "Etc/GMT-12 (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Asia/Kamchatka",
+      "description": "Petropavlovsk-Kamchatski Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Asia/Anadyr",
+      "description": "Anadyr Time (UTC+12:00)",
+      "offset": "+12:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Tongatapu",
+      "description": "Tonga Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Fiji",
+      "description": "Fiji Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Fakaofo",
+      "description": "Tokelau Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Enderbury",
+      "description": "Phoenix Is. Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Auckland",
+      "description": "New Zealand Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "NZ",
+      "description": "New Zealand Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-13",
+      "description": "Etc/GMT-13 (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/South_Pole",
+      "description": "New Zealand Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Antarctica/McMurdo",
+      "description": "New Zealand Time (UTC+13:00)",
+      "offset": "+13:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Chatham",
+      "description": "Chatham Time (UTC+13:45)",
+      "offset": "+13:45"
+    },
+    {
+      "timeZoneCode": "NZ-CHAT",
+      "description": "Chatham Time (UTC+13:45)",
+      "offset": "+13:45"
+    },
+    {
+      "timeZoneCode": "Pacific/Kiritimati",
+      "description": "Line Is. Time (UTC+14:00)",
+      "offset": "+14:00"
+    },
+    {
+      "timeZoneCode": "Pacific/Apia",
+      "description": "West Samoa Time (UTC+14:00)",
+      "offset": "+14:00"
+    },
+    {
+      "timeZoneCode": "Etc/GMT-14",
+      "description": "Etc/GMT-14 (UTC+14:00)",
+      "offset": "+14:00"
+    }
+  ]
+}

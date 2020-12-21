@@ -1,0 +1,59 @@
+{
+  "d": {
+    "__metadata": {
+      "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+      "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+      "type": "LocationService.LocationForTfo"
+    },
+    "id": "138def1d-9523-4cb0-962a-0a6050ad2c94",
+    "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+    "locationId": "QM7CLNT910:NL-HARBOR",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NL-HARBOR",
+    "sourceSystem": "QM7CLNT910",
+    "externalId": "NL-HARBOR",
+    "longitude": "4.15848700",
+    "latitude": "52.20936580",
+    "locationTypeCode": null,
+    "locationDescription": "NL Harbor",
+    "objectTypeCode": "LogisticLocation",
+    "objectTypeDescription": "Logistic Location",
+    "locationTypeDescription": null,
+    "postalCode": "466555",
+    "houseNumber": null,
+    "streetName": null,
+    "cityName": "Leiden",
+    "regionCode": null,
+    "regionName": null,
+    "countryCode": "NL",
+    "countryName": "Netherlands (the)",
+    "addressTimeZone": null,
+    "timeZoneId": "",
+    "timeZoneDisplayName": null,
+    "addressDetail": " , 466555 Leiden  Netherlands (the)",
+    "formattedAddress": "NL Harbor$466555 Leiden$Niederlande",
+    "gln": "",
+    "duns": "",
+    "unlocode": "",
+    "iataAirportCode": "",
+    "to_Gln": {
+      "__deferred": {
+        "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Gln"
+      }
+    },
+    "to_Duns": {
+      "__deferred": {
+        "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Duns"
+      }
+    },
+    "to_Unlocode": {
+      "__deferred": {
+        "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Unlocode"
+      }
+    },
+    "to_IataAirportCode": {
+      "__deferred": {
+        "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_IataAirportCode"
+      }
+    }
+  }
+}

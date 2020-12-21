@@ -115,7 +115,7 @@ public class SOFController {
         return ResponseEntity.ok().body(executionFlowService.getEventReportHistory(eventId));
     }
 
-    @GetMapping(value = "/hereMapKey")
+    @GetMapping(value = "/hereMapKey", produces = "application/json")
     public String getHereMapKey() throws JSONException {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("key", hereMapKey);

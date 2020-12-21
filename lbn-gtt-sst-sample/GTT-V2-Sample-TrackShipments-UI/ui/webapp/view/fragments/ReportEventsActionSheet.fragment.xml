@@ -1,0 +1,23 @@
+<ActionSheet id="actionSheet"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Button id="reportPlannedEventsButton"
+		enabled="{timeline>/hasPlannedEvents}"
+		text="{i18n>reportPlannedEvent}"
+		press=".openReportEventsDialog('Planned', ${timeline>/timelineEvents})"
+		tooltip="{=
+			!${timeline>/hasPlannedEvents}
+				? ${i18n>noPlannedEventsTooltip}
+				: ''
+		}" />
+
+	<Button id="reportUnplannedEventsButton"
+		enabled="{timeline>/hasUnplannedEvents}"
+		text="{i18n>reportUnplannedEvent}"
+		press=".openReportEventsDialog('Unplanned', ${timeline>/timelineEvents})"
+		tooltip="{=
+			!${timeline>/hasUnplannedEvents}
+				? ${i18n>noUnplannedEventsTooltip}
+				: ''
+		}" />
+</ActionSheet>

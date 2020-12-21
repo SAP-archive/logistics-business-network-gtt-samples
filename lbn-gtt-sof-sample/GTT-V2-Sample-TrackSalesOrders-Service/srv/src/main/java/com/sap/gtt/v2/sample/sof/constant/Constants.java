@@ -10,8 +10,6 @@ public class Constants {
     public static final String SAP_ICON_LEAD = "sap-icon://lead";
     public static final String ID = "id";
 
-    public static final String EVENT_STATUS_PLANNED = "PLANNED";
-
     public static final String PROCESS_STATUS_OVERDUE = "OVERDUE";
     public static final String PROCESS_STATUS_DELAYED = "DELAYED";
     public static final String PROCESS_STATUS_LATE = "LATE";
@@ -33,9 +31,16 @@ public class Constants {
     public static final String EVENT_STATUS_REPORTED = "REPORTED";
     public static final String EVENT_STATUS_EARLY_REPORTED = "EARLY_REPORTED";
     public static final String EVENT_STATUS_LATE_REPORTED = "LATE_REPORTED";
+    public static final String EVENT_STATUS_DELAYED = "DELAYED";
+
     public static final String RESOURCE = "RESOURCE";
     public static final String SHIPMENT_ARRIVAL = "Shipment.Arrival";
+    public static final String SHIPMENT_DELAY = "Shipment.Delay";
     public static final String SHIP_TO_PARTY_LOCATION = "shipToPartyLocation";
+    public static final String CUSTOMER = "Customer";
+    public static final String PROCESS_ID = "process_id";
+    public static final String EVENT_ACTUAL_BUSINESS_TIMESTAMP = "event/actualBusinessTimestamp";
+    public static final String LAST_PROCESS_EVENT_DIRECTORY_EVENT = "lastProcessEventDirectory/event";
 
 
     private Constants() {

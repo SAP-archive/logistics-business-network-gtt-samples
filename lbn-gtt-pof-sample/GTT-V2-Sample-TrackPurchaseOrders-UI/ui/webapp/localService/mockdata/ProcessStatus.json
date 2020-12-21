@@ -1,0 +1,72 @@
+[
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('AS_PLANNED')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('AS_PLANNED')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"
+        },
+        "code": "AS_PLANNED",
+        "name": "As Planned",
+        "localized": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('AS_PLANNED')/localized"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('EARLY')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('EARLY')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"
+        },
+        "code": "EARLY",
+        "name": "Early",
+        "localized": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('EARLY')/localized"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('LATE')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('LATE')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"
+        },
+        "code": "LATE",
+        "name": "Late",
+        "localized": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('LATE')/localized"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('OVERDUE')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('OVERDUE')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"
+        },
+        "code": "OVERDUE",
+        "name": "Overdue",
+        "localized": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('OVERDUE')/localized"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('DELAYED')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('DELAYED')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"
+        },
+        "code": "DELAYED",
+        "name": "Delayed",
+        "localized": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/ProcessStatus('DELAYED')/localized"
+            }
+        }
+    }
+]

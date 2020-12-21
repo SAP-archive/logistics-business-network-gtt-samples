@@ -18,7 +18,7 @@ import static org.springframework.http.HttpMethod.POST;
 public class SOFCloudSecurityConfig extends AbstractCloudSecurityConfiguration {
 	private static final Logger logger = LoggerFactory.getLogger(SOFCloudSecurityConfig.class);
 	
-	private static final String SALES_ORDER_TRACKING_DISPLAY = "r";
+	private static final String SALES_ORDER_TRACKING_DISPLAY = "sof.r";
 
 	@Override
 	public ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry setProtectedExpressionInterceptUrlRegistry(

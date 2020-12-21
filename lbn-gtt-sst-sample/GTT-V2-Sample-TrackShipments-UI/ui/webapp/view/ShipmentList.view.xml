@@ -1,0 +1,211 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sst.controller.ShipmentList"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:uxap="sap.uxap"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="pageVariant"
+						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="true"/>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"/>
+				</f:snappedContent>
+				<f:actions>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<smartFilterBar:SmartFilterBar id="smartFilterBar"
+						smartVariant="pageVariant" useToolbar="false" useDateRangeType="true" entitySet="Shipment"
+						considerSelectionVariants="true" persistencyKey="listReportFilterBar"
+						initialise=".onInitSmartFilterBar"
+						assignedFiltersChanged=".onAssignedFiltersChanged"
+						beforeVariantSave=".onBeforeVariantSave"
+						beforeVariantFetch=".onBeforeVariantFetch"
+						afterVariantLoad=".onAfterVariantLoad"
+						showClearButton="false">
+						<smartFilterBar:controlConfiguration>
+							<core:Fragment id="customFilterFragment" fragmentName="com.sap.gtt.app.sample.sst.view.fragments.CustomFilters" type="XML"/>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<smartTable:SmartTable
+				id="smartTable"
+				smartFilterId="smartFilterBar"
+				smartVariant="pageVariant"
+				persistencyKey="listReportTable"
+				tableType="ResponsiveTable"
+				demandPopin="true"
+				editable="false"
+				entitySet="Shipment"
+				ignoredFields="deliveryId"
+				requestAtLeastFields="id,processStatus_code"
+				useVariantManagement="true"
+				useTablePersonalisation="true"
+				header="{i18n>shipmentList}"
+				showRowCount="true"
+				useExportToExcel="false"
+				enableAutoBinding="true"
+				beforeRebindTable=".onBeforeRebindTable">
+				<smartTable:customData>
+					<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
+					<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+				</smartTable:customData>
+				<Table id="innerTable" class="sstShipmentsTable" growing="true">
+					<columns>
+						<Column>
+							<Text text="{parts: [{'value': 'shipmentNo'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "shipmentNo,transportationMode_code", "leadingProperty": "shipmentNo, transportationMode_code", "sortProperty": "shipmentNo", "columnIndex": 0}'/>
+							</customData>
+						</Column>
+						<Column>
+							<Text text="{i18n>carrier}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "serviceAgentLbnId", "leadingProperty": "serviceAgentLbnId", "sortProperty": "serviceAgentLbnId", "columnIndex": 1}'/>
+							</customData>
+						</Column>
+						<Column>
+							<Text text="{i18n>departureAndDatetime}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "departureLocationId,plannedDepartureDateTime", "leadingProperty": "departureLocationId, departureLocation, plannedDepartureDateTime", "navigationProperty": "departureLocation", "columnIndex": "2"}'/>
+							</customData>
+						</Column>
+						<Column>
+							<Text text="{i18n>arrivalAndDatetime}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "arrivalLocationId,plannedArrivalDateTime", "leadingProperty": "arrivalLocationId, arrivalLocation, plannedArrivalDateTime", "navigationProperty": "arrivalLocation", "columnIndex": "3"}' />
+							</customData>
+						</Column>
+						<Column>
+							<Text text="{parts: [{'value': 'executionStatus_code'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code, executionStatus/name, executionStatus/localized/name", "navigationProperty": "executionStatus/localized", "sortProperty": "executionStatus_code", "columnIndex": 4}'/>
+							</customData>
+						</Column>
+						<Column>
+							<Text text="{parts: [{'value': 'processStatus_code'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code, processStatus/name, processStatus/localized/name", "navigationProperty": "processStatus/localized", "sortProperty": "processStatus_code", "columnIndex": 5}'/>
+							</customData>
+						</Column>
+						<!-- customized columns which are not visible initially -->
+						<Column visible="false" hAlign="Right">
+							<Text text="{parts: [{'value': 'cargoVolumn'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "cargoVolumn,volumnUoM", "leadingProperty": "cargoVolumn, volumnUoM", "sortProperty": "cargoVolumn", "columnIndex": 10000}'/>
+							</customData>
+						</Column>
+						<Column visible="false" hAlign="Right">
+							<Text text="{parts: [{'value': 'cargoWeight'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "cargoWeight,weightUoM", "leadingProperty": "cargoWeight, weightUoM", "sortProperty": "cargoWeight", "columnIndex": 10001}'/>
+							</customData>
+						</Column>
+						<Column visible="false" hAlign="Right">
+							<Text text="{parts: [{'value': 'cargoQuantity'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "cargoQuantity,quantityUoM", "leadingProperty": "cargoQuantity, quantityUoM", "sortProperty": "cargoQuantity", "columnIndex": 10002}'/>
+							</customData>
+						</Column>
+						<Column visible="false" hAlign="Right">
+							<Text text="{parts: [{'value': 'plannedTotalDistance'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "plannedTotalDistance", "leadingProperty": "plannedTotalDistance", "sortProperty": "plannedTotalDistance", "columnIndex": 10003}'/>
+							</customData>
+						</Column>
+						<Column visible="false">
+							<Text text="{parts: [{'value': 'plannedGrossDuration'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "plannedGrossDuration", "leadingProperty": "plannedGrossDuration", "sortProperty": "plannedGrossDuration", "columnIndex": 10004}'/>
+							</customData>
+						</Column>
+						<Column visible="false">
+							<Text text="{parts: [{'value': 'plannedNetDuration'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<customData>
+								<core:CustomData key="p13nData" value='{"columnKey": "plannedNetDuration", "leadingProperty": "plannedNetDuration", "sortProperty": "plannedNetDuration", "columnIndex": 10005}'/>
+							</customData>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem class="sapUiTinyMarginTop" vAlign="Top" type="Navigation" highlight="{path: 'processStatus_code', formatter: '.formatter.processStatus.getListRowState' }" press=".onShipmentPressed">
+							<cells>
+								<VBox>
+									<items>
+										<ObjectIdentifier title="{shipmentNo}"/>
+										<core:Icon class="sapUiTinyMarginTop" src="{path: 'transportationMode_code', formatter: '.formatter.transportationMode.getIcon'}"/>
+									</items>
+								</VBox>
+								<Text text="{serviceAgentLbnId}"/>
+								<ObjectIdentifier class="sstDepartureLocation"
+									titleActive="{= !!${departureLocation} }"
+									titlePress=".openLocationQuickView"
+									title="{= ${departureLocation} ? ${departureLocation/locationDescription} : (${departureLocationId} ? ${departureLocationId} : ${i18n>locationUndefined})}"
+									text="{path: 'plannedDepartureDateTime', type: 'sap.ui.model.odata.type.DateTime'}">
+									<customData>
+										<core:CustomData key="propertyName" value="departureLocation"/>
+									</customData>
+								</ObjectIdentifier>
+								<ObjectIdentifier class="sstArrivalLocation"
+									titleActive="{= !!${arrivalLocation} }"
+									titlePress=".openLocationQuickView"
+									title="{= ${arrivalLocation} ? ${arrivalLocation/locationDescription} : (${arrivalLocationId} ? ${arrivalLocationId} : ${i18n>locationUndefined})}"
+									text="{path: 'plannedArrivalDateTime', type: 'sap.ui.model.odata.type.DateTime'}">
+									<customData>
+										<core:CustomData key="propertyName" value="arrivalLocation"/>
+									</customData>
+								</ObjectIdentifier>
+								<ObjectStatus
+									text="{
+										parts: [
+											'executionStatus/localized/name',
+											'executionStatus/name',
+											'executionStatus_code'
+										],
+										formatter: '.formatter.codeListDescription'
+									}"
+									icon="{path: 'executionStatus_code', formatter: '.formatter.executionStatus.getIcon'}"
+									state="{path: 'executionStatus_code', formatter: '.formatter.executionStatus.getState'}"/>
+								<ObjectStatus
+									text="{
+										parts: [
+											'processStatus/localized/name',
+											'processStatus/name',
+											'processStatus_code'
+										],
+										formatter: '.formatter.codeListDescription'
+									}"
+									state="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"/>
+								<!-- customized cell items which are not visible initially -->
+								<Text text="{parts: ['cargoVolumn', 'volumnUoM', {value: true}], formatter: '.formatter.formatQuantityToTwoDecimalWithUom'}"/>
+								<Text text="{parts: ['cargoWeight', 'weightUoM', {value: true}], formatter: '.formatter.formatQuantityToTwoDecimalWithUom'}"/>
+								<Text text="{parts: ['cargoQuantity', 'quantityUoM', {value: true}], formatter: '.formatter.formatQuantityToTwoDecimalWithUom'}"/>
+								<Text text="{parts: ['plannedTotalDistance', {value: ''}, {value: true}], formatter: '.formatter.formatQuantityToTwoDecimalWithUom'}"/>
+								<Text id="plannedGrossDuration" text="{parts: ['plannedGrossDuration', {value: true}], formatter: '.formatter.formatGrossNetDuration'}"/>
+								<Text id="plannedNetDuration" text="{parts: ['plannedNetDuration', {value: true}], formatter: '.formatter.formatGrossNetDuration'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</smartTable:SmartTable>
+		</f:content>
+		<f:dependents>
+			<core:Fragment fragmentName="com.sap.gtt.app.sample.sst.view.fragments.LocationQuickView" type="XML"/>
+		</f:dependents>
+	</f:DynamicPage>
+</mvc:View>

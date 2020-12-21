@@ -1,0 +1,15 @@
+{
+  "location": {
+    "locationDescription": "New York Harbor",
+    "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK",
+    "sourceSystem": "QM7CLNT910",
+    "externalId": "NEWYORK",
+    "objectTypeDescription": "Logistic Location",
+    "formattedAddress": "New York Harbor$70 Hamilton Ave$New York New York 11231$United States",
+    "locationId": "QM7CLNT910:NEWYORK",
+    "longitude": -74.20532840,
+    "latitude": 40.64396630
+  },
+  "estimatedArrivalTime": "2020-07-03T08:09:24.119Z",
+  "plannedBusinessTimestamp": "2020-07-03T03:09:24.119Z"
+}

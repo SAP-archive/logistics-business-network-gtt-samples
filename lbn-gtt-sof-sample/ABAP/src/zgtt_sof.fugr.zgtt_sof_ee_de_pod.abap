@@ -122,7 +122,7 @@ FUNCTION ZGTT_SOF_EE_DE_POD.
 *   Counter for Event
     ls_trackingheader-evtcnt  = ls_events-eventid.
 *   Event ID
-    ls_trackingheader-evtid   = 'POD'.
+    ls_trackingheader-evtid   = 'DLV_POD'.
 *   Event Date
     ls_trackingheader-evtdat  = sy-datum.
 *   Event Time

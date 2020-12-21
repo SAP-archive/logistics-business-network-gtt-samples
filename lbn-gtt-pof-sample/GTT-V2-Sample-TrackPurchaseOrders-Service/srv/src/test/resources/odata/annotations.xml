@@ -1,0 +1,2059 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="com.lbngttsamples.gtt.app.pof.pofService">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/confirmedQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ConfirmBySupplier_confirmedQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ConfirmBySupplier/uom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ConfirmBySupplier_uom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Event/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/refPlannedEventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTDelayedEvent_refPlannedEventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/refPlannedEventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTDelayedEvent_refPlannedEventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDelayedEvent/refPlannedEventLocationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTDelayedEvent_refPlannedEventLocationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTDeletionEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/refPlannedEventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTOnTimeEvent_refPlannedEventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/refPlannedEventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTOnTimeEvent_refPlannedEventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOnTimeEvent/refPlannedEventLocationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BaseGTTOnTimeEvent_refPlannedEventLocationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTOverdueEvent/refPlannedEventUUID">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_GTTOverdueEvent_refPlannedEventUUID_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GTTUpdatePlanEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/quantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_GoodsReceived_quantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.GoodsReceived/uomForQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_GoodsReceived_uomForQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/trackedProcessType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackedProcessType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/processStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/trackingIds">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIds_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/processEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/lifeCycleStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/lastChangedAtBusinessTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedAtBusinessTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/lastChangedByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/lastChangeDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangeDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/version">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_version_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/inboudDeliveryNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_inboudDeliveryNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/totalWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_totalWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/weightUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_weightUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/doorForWarehouse">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_doorForWarehouse_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/doorText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_doorText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/warehouseNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_warehouseNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/warehouseDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDelivery_warehouseDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/processStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery/lifeCycleStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEvent_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/inboudDeliveryNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_inboudDeliveryNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/totalWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_totalWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/weightUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_weightUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/doorForWarehouse">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_doorForWarehouse_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/doorText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_doorText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/warehouseNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_warehouseNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryEvent/warehouseDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryEvent_warehouseDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/trackedProcessType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackedProcessType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/processStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/trackingIds">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIds_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/processEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/lifeCycleStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/lastChangedAtBusinessTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedAtBusinessTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/lastChangedByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/lastChangeDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangeDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/version">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_version_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/inboundDeliveryNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_inboundDeliveryNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/inboundDeliveryItemNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_inboundDeliveryItemNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/materialNumber">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_materialNumber_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/materialDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_materialDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/deliveryQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_deliveryQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/uom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItem_uom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/processStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/lifeCycleStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEvent_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/inboundDeliveryNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_inboundDeliveryNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/inboundDeliveryItemNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_inboundDeliveryItemNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/materialNumber">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_materialNumber_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/materialDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_materialDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/deliveryQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_deliveryQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemEvent/uom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_InboundDeliveryItemEvent_uom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.IncotermsCode/code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_IncotermsCode_code_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.IncotermsCode/name">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_IncotermsCode_name_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.IncotermsCode_texts/code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_IncotermsCode_code_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.IncotermsCode_texts/name">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_IncotermsCode_name_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/isFinalPlannedEvent">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_isFinalPlannedEvent_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedTechTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedTechTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedBizTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedBizTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/plannedBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/process_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_process_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/process">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_process_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/eventStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_eventStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/payloadSequence">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_payloadSequence_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/lastProcessEventDirectory">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_lastProcessEventDirectory_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/nextOverdueDetection">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_nextOverdueDetection_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/overdueDetectionCounter">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_overdueDetectionCounter_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/eventStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_eventStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEvent/lastProcessEventDirectory_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEvent_lastProcessEventDirectory_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/isFinalPlannedEvent">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_isFinalPlannedEvent_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedTechTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedTechTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedBizTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedBizTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/plannedBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForEvent_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/event_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForEvent_event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForEvent/event">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForEvent_event_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/isFinalPlannedEvent">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_isFinalPlannedEvent_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedTechTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedTechTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedTechTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedBizTsEarliest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsEarliest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedBizTsLatest">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBizTsLatest_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/plannedBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_BasePlan_plannedBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForUpdatePlanEvent_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/event_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForUpdatePlanEvent_event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/action">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForUpdatePlanEvent_action_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PlannedEventForUpdatePlanEvent/action_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PlannedEventForUpdatePlanEvent_action_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/process_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_process_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/process">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_process_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/plannedEvent_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_plannedEvent_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/plannedEvent">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_plannedEvent_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/event_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/event">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_event_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/correlationType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_correlationType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.ProcessEventDirectory/correlationType_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEventDirectory_correlationType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/trackedProcessType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackedProcessType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/processStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/trackingIds">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIds_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/processEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/lifeCycleStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/lastChangedAtBusinessTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedAtBusinessTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/lastChangedByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/lastChangeDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangeDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/version">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_version_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/procurementOrderNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_procurementOrderNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/supplierId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_supplierId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/netValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_netValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/currency">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_currency_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/incotermsVersion">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_incotermsVersion_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/incoterms">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/incotermsLocation1">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_incotermsLocation1_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/incotermsLocation2">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_incotermsLocation2_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/totalDeliveredByValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_totalDeliveredByValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/totalDelayedByValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_totalDelayedByValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/receivingLocationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_receivingLocationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/processStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/lifeCycleStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder/incoterms_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrder_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEvent_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/procurementOrderNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_procurementOrderNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/supplierId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_supplierId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/netValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_netValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/currency">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_currency_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/incotermsVersion">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_incotermsVersion_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/incoterms">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/incotermsLocation1">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_incotermsLocation1_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/incotermsLocation2">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_incotermsLocation2_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/totalDeliveredByValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_totalDeliveredByValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/totalDelayedByValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_totalDelayedByValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/receivingLocationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_receivingLocationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderEvent/incoterms_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderEvent_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/trackedProcessType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackedProcessType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/processStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/trackingIds">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIds_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/processEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/lifeCycleStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/lastChangedAtBusinessTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedAtBusinessTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/lastChangedByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/lastChangeDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangeDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/version">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_version_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/procurementOrderNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_procurementOrderNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/procurementOrderItem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_procurementOrderItem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/materialId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_materialId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/supplierId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_supplierId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/receivingLocationId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_receivingLocationId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/nextETA">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_nextETA_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/orderQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_orderQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/OrderItemUOM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_OrderItemUOM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/materialDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_materialDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/netWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_netWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/weightUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_weightUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/grossWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_grossWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/volume">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_volume_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/volumeUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_volumeUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/netValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_netValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/currency">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_currency_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/completedQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_completedQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/incoterms">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/incotermsVersion">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_incotermsVersion_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/incotermsLocation">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_incotermsLocation_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/processStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/lifeCycleStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/incoterms_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItem_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_ProcessEvent_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/procurementOrderNo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_procurementOrderNo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/procurementOrderItem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_procurementOrderItem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/materialId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_materialId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/supplierId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_supplierId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/receivingLocationId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_receivingLocationId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/plannedDeliveryDate">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_plannedDeliveryDate_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/nextETA">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_nextETA_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/orderQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_orderQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/OrderItemUOM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_OrderItemUOM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/materialDescription">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_materialDescription_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/netWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_netWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/weightUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_weightUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/grossWeight">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_grossWeight_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/volume">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_volume_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/volumeUoM">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_volumeUoM_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/netValue">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_netValue_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/currency">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_currency_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/completedQuantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_completedQuantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/incoterms">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/incotermsVersion">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_incotermsVersion_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/incotermsLocation">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_incotermsLocation_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemEvent/incoterms_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_PurchaseOrderItemEvent_incoterms_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/modelNamespace">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_modelNamespace_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/eventType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/eventReasonText">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonText_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/eventReasonCode">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventReasonCode_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/senderPartyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_senderPartyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/reportedBy">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_reportedBy_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/priority">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_priority_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/actualTechnicalTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualTechnicalTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/actualBusinessTimestamp">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimestamp_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/actualBusinessTimeZone">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_actualBusinessTimeZone_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/locationAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_locationAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/eventMatchKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventMatchKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/longitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_longitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/latitude">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_latitude_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/references">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_references_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/eventProcesses">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_eventProcesses_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/messageSourceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_messageSourceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Event_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/quantity">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Putaway_quantity_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Putaway/uom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Putaway_uom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/process_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_process_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/process">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_process_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/observedProcess">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_observedProcess_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/observedProcessAltKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_observedProcessAltKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/validFrom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_validFrom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/validTo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_validTo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.QualifiedTrackingId/observedProcess_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_QualifiedTrackingId_observedProcess_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/event_id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_event_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/event">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_event_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/referenceType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_referenceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/validFrom">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_validFrom_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/validTo">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_validTo_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/action">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_action_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/referenceType_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_referenceType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.Reference/action_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_Reference_action_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/id">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_id_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/subaccountId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_subaccountId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/cloneInstanceId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_cloneInstanceId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/trackedProcessType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackedProcessType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/altKey">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_altKey_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/scheme">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_scheme_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/partyId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_partyId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/logicalSystem">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_logicalSystem_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/trackingIdType">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIdType_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/trackingId">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingId_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/processStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/trackingIds">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_trackingIds_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/plannedEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_plannedEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/processEvents">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processEvents_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/lifeCycleStatus">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/lastChangedAtBusinessTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedAtBusinessTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/createdByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_createdByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/creationDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_creationDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/lastChangedByUser">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangedByUser_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/lastChangeDateTime">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lastChangeDateTime_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/version">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_version_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/processStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_processStatus_LABEL}"/>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.pof.pofService.TrackedProcess/lifeCycleStatus_code">
+                <Annotation Term="Common.Label" String="{@i18n&gt;EL_TrackedProcess_lifeCycleStatus_LABEL}"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

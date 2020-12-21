@@ -1,0 +1,15 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.pof.controller.NotFound"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<MessagePage
+    id="messagePageId"
+		title="{i18n>notFoundViewTitle}"
+		text="{i18n>notFoundViewTitle}"
+		showHeader="false"
+		description="">
+		<customDescription>
+			<Link id="link" text="{i18n>backToPurchaseOrderListText}" tooltip="{i18n>backToPurchaseOrderListText}" press=".onLinkPressed"/>
+		</customDescription>
+	</MessagePage>
+</mvc:View> 

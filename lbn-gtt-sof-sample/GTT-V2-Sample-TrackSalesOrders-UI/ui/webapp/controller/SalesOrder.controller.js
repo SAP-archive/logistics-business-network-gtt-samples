@@ -2,15 +2,11 @@ sap.ui.define(
   [
     "./BaseDetailController",
     "sap/ui/core/Fragment",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
     "sap/ui/model/Sorter",
   ],
   function (
     BaseDetailController,
     Fragment,
-    Filter,
-    FilterOperator,
     Sorter
   ) {
     "use strict";
@@ -38,7 +34,6 @@ sap.ui.define(
 
       routePatternMatched: function (oEvent) {
         var model = this.getModel(this.routeName);
-        model.setProperty("/salesOrderNo", null);
 
         var args = oEvent.getParameter("arguments");
         var id = args.id;
@@ -65,37 +60,19 @@ sap.ui.define(
        * update sales order items and document flow
        */
       updateView: function () {
-        this.updateSalesOrderItems();
-
         // refresh subsections
         this.refreshSubSection("documentFlowView");
       },
 
       onBeforeRebindSalesOrderItemsTable: function (oEvent) {
-        var salesOrderNo = this.getModel(this.routeName).getProperty("/salesOrderNo");
         var params = oEvent.getParameter("bindingParams");
-        if (salesOrderNo) {
-          var salesOrderNoFilter = new Filter("salesOrderNo", FilterOperator.EQ, salesOrderNo);
-          params.filters.push(salesOrderNoFilter);
-          this.addCustomSorters(params.sorter);
-        } else {
-          params.preventTableBind = true;
-        }
+        this.addCustomSorters(params.sorter);
       },
 
       addCustomSorters: function (sorters) {
         if (sorters.length === 0) {
-          sorters.push(new Sorter("itemNo", false));
+          sorters.push(new Sorter("salesOrderItem/itemNo", false));
         }
-      },
-
-      updateSalesOrderItems: function () {
-        var bindingContext = this.getView().getBindingContext();
-        var salesOrderNo = bindingContext.getProperty("salesOrderNo");
-        this.getModel(this.routeName).setProperty("/salesOrderNo", salesOrderNo);
-
-        var smartTable = Fragment.byId(this.createId("salesOrderItemsView"), "smartTable");
-        smartTable.rebindTable();
       },
 
 
@@ -108,7 +85,7 @@ sap.ui.define(
         var bindingContext = source.getBindingContext();
 
         this.getRouter().navTo("salesOrderItem", {
-          id: bindingContext.getProperty("id"),
+          id: bindingContext.getProperty("salesOrderItem/id"),
           params: {
             salesOrderId: this.getModel(this.routeName).getProperty("/salesOrderId"),
           },

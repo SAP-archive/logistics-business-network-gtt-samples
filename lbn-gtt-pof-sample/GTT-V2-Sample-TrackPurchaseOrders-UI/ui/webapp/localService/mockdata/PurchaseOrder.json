@@ -1,0 +1,781 @@
+{
+  "d": {
+    "__count": "21",
+    "results": [{
+      "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+      },
+      "id": "18a332e1-140a-5c44-994c-deeafeeeb2b6",
+      "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+      "purchaseOrderNo": "4500055266",
+      "supplierId": "VEN_CO",
+      "plannedDeliveryDate": "/Date(1603065600000)/",
+      "netValue": "0.00",
+      "currency": "INR",
+      "incotermsVersion": null,
+      "incotermsLocation": "Test location 1",
+      "logicalSystem": "QW9CLNT170",
+      "totalDeliveredValue": null,
+      "totalDelayedValue": null,
+      "receivingLocationId": "0001",
+      "receivingLocationDescription": null,
+      "completionValue": null,
+      "trackingIdType": "PURCHASE_ORDER",
+      "partyId": "LBN#10010001006",
+      "incoterms_code": "CFR",
+      "receivingLocationType_code": "Plant",
+      "processStatus_code": "AS_PLANNED",
+      "supplierDescription": null,
+      "supplierLocationType": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/supplierLocationType"
+          }
+      },
+      "incoterms": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/incoterms"
+          }
+      },
+      "receivingLocationType": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/receivingLocationType"
+          }
+      },
+      "processStatus": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/processStatus"
+          }
+      },
+      "purchaseOrderItemTPs": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/purchaseOrderItemTPs"
+          }
+      },
+      "toReceivingLocation": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toReceivingLocation"
+          }
+      },
+      "toSupplierLocation": {
+          "__deferred": {
+              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toSupplierLocation"
+          }
+      }
+  }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "a3419caf-3597-52b9-89d9-13d63a573767",
+        "purchaseOrderNo": "4500055229",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "supplierId": "VEN_CO",
+        "plannedDeliveryDate": "\/Date(1603152000000)\/",
+        "netValue": "1020.04",
+        "currency": "INR",
+        "incotermsVersion": "",
+        "incotermsLocation": "Test location",
+        "logicalSystem": "QW9CLNT170",
+        "totalDeliveredValue": null,
+        "totalDelayedValue": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "0001",
+        "completionValue": "600",
+        "trackingIdType": "PURCHASE_ORDER",
+        "incoterms_code": "CFR",
+        "processStatus_code": "AS_PLANNED",
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')/incoterms"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')/receivingLocationType"
+          }
+        },
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')/processStatus"
+          }
+        },
+        "purchaseOrderItemTPs": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')/purchaseOrderItemTPs"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "bfcdad3f-9058-5d3a-9e6c-023b1162772d",
+        "purchaseOrderNo": "4500055223",
+        "supplierId": "VEN_CO",
+        "plannedDeliveryDate": "/Date(1603065600000)/",
+        "netValue": "110002.20",
+        "currency": "INR",
+        "incotermsVersion": "",
+        "incotermsLocation": "Test location",
+        "logicalSystem": "QW9CLNT170",
+        "totalDeliveredValue": null,
+        "totalDelayedValue": null,
+        "receivingLocationId": "0001",
+        "completionValue": null,
+        "trackingIdType": "PURCHASE_ORDER",
+        "incoterms_code": "CFR",
+        "receivingLocationType_code": null,
+        "processStatus_code": "AS_PLANNED",
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/incoterms"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/receivingLocationType"
+          }
+        },
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/processStatus"
+          }
+        },
+        "purchaseOrderItemTPs": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/purchaseOrderItemTPs"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'49da27aa-ff25-584e-972d-7b036504fc85')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'49da27aa-ff25-584e-972d-7b036504fc85')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "49da27aa-ff25-584e-972d-7b036504fc85",
+        "purchaseOrderNo": "129034",
+        "supplierId": "5555",
+        "plannedDeliveryDate": "\/Date(1602115200000)\/",
+        "netValue": "100.00",
+        "completionValue": "25.56",
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "location",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'0d086474-ca1d-5f98-b036-8adb9041b0d9')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'0d086474-ca1d-5f98-b036-8adb9041b0d9')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "0d086474-ca1d-5f98-b036-8adb9041b0d9",
+        "purchaseOrderNo": "string",
+        "supplierId": "string",
+        "plannedDeliveryDate": "\/Date(1602115200000)\/",
+        "netValue": "235.20",
+        "completionValue": "98.00",
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "string",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'c215afb7-70a6-5f1b-8304-906ec3839bf2')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'c215afb7-70a6-5f1b-8304-906ec3839bf2')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "c215afb7-70a6-5f1b-8304-906ec3839bf2",
+        "purchaseOrderNo": "432141325",
+        "supplierId": "53214321",
+        "plannedDeliveryDate": "\/Date(1602115200000)\/",
+        "netValue": "12342.10",
+        "completionValue": "123.00",
+        "currency": "USD",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "receivingLocation",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'0589fca9-88e8-5d9d-a7a0-69acc9219d2d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'0589fca9-88e8-5d9d-a7a0-69acc9219d2d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "0589fca9-88e8-5d9d-a7a0-69acc9219d2d",
+        "purchaseOrderNo": "54314312",
+        "supplierId": "531354314",
+        "plannedDeliveryDate": "\/Date(1602115200000)\/",
+        "netValue": "125.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "receivingLocation",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a4c1f568-a92c-5896-abc3-0d843dcc24c9')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a4c1f568-a92c-5896-abc3-0d843dcc24c9')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "a4c1f568-a92c-5896-abc3-0d843dcc24c9",
+        "purchaseOrderNo": "4500021986",
+        "supplierId": "PCS-V201",
+        "plannedDeliveryDate": "\/Date(1487116800000)\/",
+        "netValue": "58.36",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "M001",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'66d9eb4c-26cb-52c1-9dd1-c35bd555b2bd')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'66d9eb4c-26cb-52c1-9dd1-c35bd555b2bd')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "66d9eb4c-26cb-52c1-9dd1-c35bd555b2bd",
+        "purchaseOrderNo": "4500055205",
+        "supplierId": "PCS-V201",
+        "plannedDeliveryDate": "\/Date(1602633600000)\/",
+        "netValue": "6.23",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "M001",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'882e0ab9-ba97-5f12-b785-e2219637283d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'882e0ab9-ba97-5f12-b785-e2219637283d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "882e0ab9-ba97-5f12-b785-e2219637283d",
+        "purchaseOrderNo": "4500001720",
+        "supplierId": "F1V1",
+        "plannedDeliveryDate": "\/Date(1429488000000)\/",
+        "netValue": "9000.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "P001",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'1a45401e-6cf0-53d1-a64d-39cf31cc086a')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'1a45401e-6cf0-53d1-a64d-39cf31cc086a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "1a45401e-6cf0-53d1-a64d-39cf31cc086a",
+        "purchaseOrderNo": "4500021987",
+        "supplierId": "L0001DID",
+        "plannedDeliveryDate": "\/Date(1486684800000)\/",
+        "netValue": "3776.30",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "DI57",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a2ca8150-bb99-556d-b602-a5b95849fa14')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a2ca8150-bb99-556d-b602-a5b95849fa14')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "a2ca8150-bb99-556d-b602-a5b95849fa14",
+        "purchaseOrderNo": "4500021989",
+        "supplierId": "PCS-V111",
+        "plannedDeliveryDate": "\/Date(1487721600000)\/",
+        "netValue": "700.70",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "F051",
+        "incoterms_code": "FH",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('FH')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('FH')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "FH",
+          "name": "Free House",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('FH')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'c1b1366a-f01f-5d7c-93d7-4112e9274008')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'c1b1366a-f01f-5d7c-93d7-4112e9274008')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "c1b1366a-f01f-5d7c-93d7-4112e9274008",
+        "purchaseOrderNo": "4500022013",
+        "supplierId": "FDC1",
+        "plannedDeliveryDate": "\/Date(1487030400000)\/",
+        "netValue": "0.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "FDC1",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'b4f183e3-9a90-521b-acc6-14ef14d8f49d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'b4f183e3-9a90-521b-acc6-14ef14d8f49d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "b4f183e3-9a90-521b-acc6-14ef14d8f49d",
+        "purchaseOrderNo": "4500023168",
+        "supplierId": "F051",
+        "plannedDeliveryDate": "\/Date(1603065600000)\/",
+        "netValue": "0.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'ed610f6d-2f7d-5eb5-b927-0a0de5f64270')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'ed610f6d-2f7d-5eb5-b927-0a0de5f64270')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "ed610f6d-2f7d-5eb5-b927-0a0de5f64270",
+        "purchaseOrderNo": "4500025094",
+        "supplierId": "MRPAPPSV02",
+        "plannedDeliveryDate": "\/Date(1495670400000)\/",
+        "netValue": "1001.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "P001",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'ae9a55fb-28f9-5599-ba4f-f6210c6982a6')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'ae9a55fb-28f9-5599-ba4f-f6210c6982a6')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "ae9a55fb-28f9-5599-ba4f-f6210c6982a6",
+        "purchaseOrderNo": "4500025103",
+        "supplierId": "DAN9_EUR",
+        "plannedDeliveryDate": "\/Date(1494460800000)\/",
+        "netValue": "2338800.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "DAN9",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'63c9f942-c458-57c1-a199-fd19402227f2')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'63c9f942-c458-57c1-a199-fd19402227f2')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "63c9f942-c458-57c1-a199-fd19402227f2",
+        "purchaseOrderNo": "4500020111",
+        "supplierId": "VENDOR01",
+        "plannedDeliveryDate": "\/Date(1476316800000)\/",
+        "netValue": "15.00",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "0001",
+        "incoterms_code": "CFR",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderNo": "4500020092",
+        "supplierId": "VEND001",
+        "plannedDeliveryDate": null,
+        "netValue": "544.99",
+        "completionValue": null,
+        "currency": "EUR",
+        "incotermsVersion": "0001",
+        "logicalSystem": "QW9CLNT170",
+        "totalDeliveredValue": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": "LWC1",
+        "incoterms_code": "CFR",
+        "incotermsLocation": "Test location",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "completionValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CIF",
+          "name": "Costs, Insurance & Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "completionValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CIF",
+          "name": "Costs, Insurance & Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "7242306e-15b2-5b94-a71d-7a6ab03d62ba",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "completionValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CIF",
+          "name": "Costs, Insurance & Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "725a4853-a5de-5ee2-9b17-c3b0bd845f8a",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "completionValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CIF",
+          "name": "Costs, Insurance & Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')/localized"
+            }
+          }
+        }
+      }, {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'7241c038-0070-5aad-8968-da0b749e0068')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'7241c038-0070-5aad-8968-da0b749e0068')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "7241c038-0070-5aad-8968-da0b749e0068",
+        "purchaseOrderNo": "20",
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "completionValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "receivingLocationType_code": "Supplier",
+        "receivingLocationId": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CIF",
+          "name": "Costs, Insurance & Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CIF')/localized"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.ShipmentCarrierRefDocuments"
+        },
+        "docId": "123455TrackingID",
+        "docType_code": "T50",
+        "shipment_id": "17be68d1-1217-572f-bbb8-05a5dab2bf93",
+        "docType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')/docType"
+          }
+        },
+        "shipment": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')/shipment"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='Test123',docType_code='Test1',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='Test123',docType_code='Test1',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.ShipmentCarrierRefDocuments"
+        },
+        "docId": "Test123",
+        "docType_code": "Test1",
+        "shipment_id": "17be68d1-1217-572f-bbb8-05a5dab2bf93",
+        "docType": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')/docType"
+          }
+        },
+        "shipment": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ShipmentCarrierRefDocuments(docId='123455TrackingID',docType_code='T50',shipment_id=guid'17be68d1-1217-572f-bbb8-05a5dab2bf93')/shipment"
+          }
+        }
+      }
+    ]
+  }
+}

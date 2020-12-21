@@ -1,0 +1,160 @@
+<mvc:View controllerName="com.sap.gtt.app.sample.pof.controller.order.PurchaseOrderDetails"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:uxap="sap.uxap"
+  xmlns="sap.m"
+  xmlns:mc="sap.suite.ui.microchart"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+  xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <uxap:ObjectPageLayout
+    id="objectPageLayout" 
+    class="purchaseOrderDetail"
+    showTitleInHeaderContent="true" 
+    alwaysShowContentHeader="false" 
+    preserveHeaderStateOnScroll="false" 
+    headerContentPinnable="true" 
+    isChildPage="true" 
+    enableLazyLoading="false" 
+    upperCaseAnchorBar="false" 
+    busy="{PurchaseOrderDetails>/busy}" 
+    busyIndicatorDelay="{PurchaseOrderDetails>/delay}">
+    <uxap:headerTitle>
+      <uxap:ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="lbnTfoDynamicPageTitle" areaShrinkRatio="1:1.6:1.6">
+        <uxap:heading>
+          <Title id="purchaseOrderHeaderTitle" text="{purchaseOrderNo}"/>
+        </uxap:heading>
+        <uxap:content>
+        </uxap:content>
+        <uxap:actions>
+        </uxap:actions>
+      </uxap:ObjectPageDynamicHeaderTitle>
+    </uxap:headerTitle>
+    <uxap:headerContent>
+      <HBox wrap="Wrap" fitContainer="true" width="100%">
+        <VBox class="sapUiLargeMarginEnd">
+          <HBox>
+            <Label class="pofHeaderContentPropertyLabel sapUiTinyMarginEnd" text="{@i18n>EL_PurchaseOrder_supplierId_LABEL}"/>
+            <ctrl:link.LinkPopover
+              placement="Right"
+              contentHeight="15rem"
+              title="{i18n>locationDetailsPopoverTitle}"
+              text="{supplierId}"
+              linkText="{toSupplierLocation/locationDescription}"
+              relatedObject="toSupplierLocation">
+              <ctrl:content>
+                <VBox>
+                  <Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
+                  <Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                  <Text id="supplierLocationObjectType" text="{toSupplierLocation/objectTypeDescription}" />
+                  <Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                  <Text id="supplierLocationSourceSystemId" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
+                  <Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                  <HBox justifyContent="SpaceBetween">
+                    <Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                    <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                      tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                  </HBox>   
+                </VBox>
+              </ctrl:content>
+            </ctrl:link.LinkPopover>
+          </HBox>
+          <HBox class="sapUiTinyMarginTop">
+            <Label class="pofHeaderContentPropertyLabel sapUiTinyMarginEnd" text="{@i18n>EL_PurchaseOrder_receivingLocationId_LABEL}"/>
+            <ctrl:link.LinkPopover
+              placement="Right"
+              contentHeight="15rem"
+              title="{i18n>locationDetailsPopoverTitle}"
+              text="{receivingLocationId}"
+              linkText="{toReceivingLocation/locationDescription}"
+              relatedObject="toReceivingLocation">
+              <ctrl:content>
+                <VBox>
+                  <Title class="pofLocationPopoverTitle" text="{toReceivingLocation/locationDescription}"/>
+                  <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                  <Text id="receivingLocationObjectType" text="{toReceivingLocation/objectTypeDescription}" />
+                  <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                  <Text id="receivingLocationSourceSystemId" text="{toReceivingLocation/sourceSystem} / {toReceivingLocation/externalId}"/>
+                  <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                  <HBox justifyContent="SpaceBetween">
+                    <Text id="receivingLocationAddress" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                    <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                      tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                  </HBox>  
+                </VBox>
+              </ctrl:content>
+            </ctrl:link.LinkPopover>
+          </HBox>
+          <ObjectAttribute class="sapUiTinyMarginTop" title="{@i18n>EL_PurchaseOrder_plannedDeliveryDate_LABEL}" text="{
+            path:'plannedDeliveryDate', 
+            type: 'sap.ui.model.type.DateTime',
+            formatOptions: { 
+              pattern: 'MMM dd, yyyy',
+              UTC: true
+            }}"/>
+        </VBox>
+        <VBox width="19rem"
+          class="sapUiSmallMarginBottom">
+          <Title id="completionRateTitle"
+            text="{i18n>completionRate}"
+            level="H4"
+            class="sapUiTinyMarginBottom" />
+          <mc:HarveyBallMicroChart id="headerCompletionRate"
+            size="L"
+            width="100%"
+            total="{= parseFloat(${netValue}) || 0 }"
+            totalScale="{currency}"
+            colorPalette="sapUiChartPaletteQualitativeHue1"
+            tooltip="{i18n>completionRate}">
+            <mc:items>
+              <mc:HarveyBallMicroChartItem fraction="{= parseFloat(${completionValue}) || 0 }"
+                fractionScale="{currency}" />
+            </mc:items>
+          </mc:HarveyBallMicroChart>
+        </VBox>
+          <VBox alignContent="Start">
+          <Title 
+              text="{@i18n>EL_PurchaseOrder_netValue_LABEL}"
+              level="H4"/>
+            <ObjectNumber
+              emphasized="false"
+              class="pofObjectNumber"
+              number="{
+                path: 'netValue',
+                type: 'sap.ui.model.type.Float',
+                formatOptions: {
+                  showMeasure: false,
+                  decimals: 2
+                }
+              }"
+              unit="{currency}"/>
+            </VBox>
+      </HBox>
+    </uxap:headerContent>
+    <uxap:sections>
+      <uxap:ObjectPageSection id="purchaseOrderItemsSection" class="purchaseOrderDetailItemsSection" title="{i18n>purchaseOrderItemListTitle}" titleUppercase="false">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <ScrollContainer
+                class="purchaseOrderDetailItemsTableContainer"
+                width="100%"
+                horizontal="false"
+                vertical="true">
+                <core:Fragment id="purchaseOrderDetailsItemsTable" fragmentName="com.sap.gtt.app.sample.pof.view.order.fragments.POItemsTable" type="XML" />
+              </ScrollContainer>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+      <uxap:ObjectPageSection id="documentFlowSection" title="{i18n>documentFlowTitle}" titleUppercase="false">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <mvc:XMLView id="documentFlowView" viewName="com.sap.gtt.app.sample.pof.view.DocumentFlow"/>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+    </uxap:sections>
+  </uxap:ObjectPageLayout>
+</mvc:View>

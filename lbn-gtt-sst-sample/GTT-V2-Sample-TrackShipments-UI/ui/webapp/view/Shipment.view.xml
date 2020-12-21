@@ -1,0 +1,120 @@
+<mvc:View controllerName="com.sap.gtt.app.sample.sst.controller.Shipment"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core">
+	<ObjectPageLayout id="objectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		enableLazyLoading="false"
+		upperCaseAnchorBar="false"
+		busy="{shipment>/busy}"
+		busyIndicatorDelay="{shipment>/delay}">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="sstDynamicPageTitle"
+				areaShrinkRatio="1:1.6:1.6">
+				<expandedHeading>
+					<m:Title id="expandedHeadingTitle"
+						text="{shipmentNo}"
+						wrapping="true" />
+				</expandedHeading>
+				<snappedHeading>
+					<m:Title id="snappedHeadingTitle"
+						text="{shipmentNo}"
+						wrapping="true" />
+				</snappedHeading>
+				<content>
+					<m:OverflowToolbar>
+						<m:GenericTag id="executionStatusGenericTag"
+							class="sstGenericTag"
+							design="StatusIconHidden"
+							status="{path: 'executionStatus_code', formatter: '.formatter.executionStatus.getState'}"
+							text="{executionStatus/name}">
+							<m:layoutData>
+								<m:OverflowToolbarLayoutData priority="{shipment>/genericTagPriority}" />
+							</m:layoutData>
+						</m:GenericTag>
+						<m:GenericTag id="processStatusGenericTag"
+							class="sstGenericTag"
+							design="StatusIconHidden"
+							status="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"
+							text="{processStatus/name}">
+							<m:layoutData>
+								<m:OverflowToolbarLayoutData priority="{shipment>/genericTagPriority}" />
+							</m:layoutData>
+						</m:GenericTag>
+					</m:OverflowToolbar>
+				</content>
+
+				<actions>
+					<m:Label id="lastUpdatedAtTime"
+						text="{view>/lastUpdatedAtTime}"
+						labelFor="refreshActionButton" />
+					<ObjectPageHeaderActionButton
+						id="refreshActionButton"
+						type="Transparent"
+						icon="sap-icon://refresh"
+						text="{i18n>refresh}"
+						tooltip="{i18n>refresh}"
+						press=".onRefreshPressed" />
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<core:Fragment id="headerContentFragment"
+				fragmentName="com.sap.gtt.app.sample.sst.view.fragments.ShipmentHeaderContent"
+				type="XML" />
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection id="informationSection"
+				title="{i18n>generalInformationView}"
+				titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="generalInfoFragment"
+								fragmentName="com.sap.gtt.app.sample.sst.view.fragments.ShipmentGeneralInfo"
+								type="XML" />
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection id="referenceDocumentsSection"
+				title="{i18n>referenceDocumentsView}"
+				titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<core:Fragment id="referenceDocumentsFragment"
+								fragmentName="com.sap.gtt.app.sample.sst.view.fragments.ReferenceDocuments"
+								type="XML" />
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection id="trackingTimelineSection"
+				title="{i18n>trackingTimelineView}"
+				titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<mvc:XMLView id="trackingTimelineView" viewName="com.sap.gtt.app.sample.sst.view.TrackingTimeline"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<core:ExtensionPoint name="sectionAfterTrackingTimeline"></core:ExtensionPoint>
+		</sections>
+		<dependents>
+			<core:Fragment fragmentName="com.sap.gtt.app.sample.sst.view.fragments.LocationQuickView" type="XML"/>
+		</dependents>
+	</ObjectPageLayout>
+</mvc:View>

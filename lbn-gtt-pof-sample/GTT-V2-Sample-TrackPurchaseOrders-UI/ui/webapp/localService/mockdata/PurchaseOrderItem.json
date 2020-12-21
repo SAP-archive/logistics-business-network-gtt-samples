@@ -1,0 +1,1038 @@
+{
+  "d": {
+    "__count": "67",
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "1f0be436-6646-5713-95e3-bcdc95a14c9f",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005526600010",
+        "purchaseOrderNo": "4500055266",
+        "itemNo": "10",
+        "materialId": "DH_TM_MAT1",
+        "logicalSystem": "QW9CLNT170",
+        "partyId": "LBN#10010001006",
+        "supplierId": "VEN_CO",
+        "receivingLocationId": "0001",
+        "receivingLocationDescription": null,
+        "plannedDeliveryDate": "/Date(1603065600000)/",
+        "nextETA": null,
+        "orderQuantity": "22.000",
+        "orderQuantityUoM": "KG",
+        "materialDescription": "DH_TM_MAT1 desc.",
+        "netWeight": "0.900",
+        "weightUoM": "KG",
+        "grossWeight": "1.000",
+        "volume": "0.010",
+        "volumeUoM": "M3",
+        "netValue": "0",
+        "currency": "INR",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": "1.000",
+        "completionValue": "0",
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "incotermsVersion": null,
+        "incotermsLocation": "Test location 1",
+        "processStatus_code": "LATE",
+        "incoterms_code": "CFR",
+        "purchaseOrder_id": "18a332e1-140a-5c44-994c-deeafeeeb2b6",
+        "supplierDescription": null,
+        "lastReportedEvent": "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.GoodsReceipt",
+        "processStatus": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/processStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/incoterms"
+          }
+        },
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/purchaseOrder"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/receivingLocationType"
+          }
+        },
+        "supplierLocationType": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/supplierLocationType"
+          }
+        },
+        "inboundDeliveryItems": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/inboundDeliveryItems"
+          }
+        },
+        "scheduleLines": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/scheduleLines"
+          }
+        },
+        "toReceivingLocation": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/toReceivingLocation"
+          }
+        },
+        "toSupplierLocation": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/toSupplierLocation"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "cd509b27-e9b6-548a-a868-a18cfb3ca28e",
+        "purchaseOrderNo": "4500055229",
+        "itemNo": "10",
+        "materialId": "DH_TM_MAT1",
+        "supplierId": "VEN_CO",
+        "receivingLocationId": "0001",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "plannedDeliveryDate": "/Date(1603152000000)/",
+        "nextETA": null,
+        "orderQuantity": "22.000",
+        "orderQuantityUoM": "KG",
+        "materialDescription": "DH_TM_MAT1 desc.",
+        "netWeight": "0.900",
+        "weightUoM": "KG",
+        "grossWeight": "1.000",
+        "volume": "0.010",
+        "volumeUoM": "M3",
+        "netValue": "30800.44",
+        "currency": "INR",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": null,
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "incotermsVersion": "",
+        "completionValue": "140.00",
+        "incotermsLocation": "Test location",
+        "processStatus_code": "OVERDUE",
+        "incoterms_code": "CFR",
+        "purchaseOrder_id": "a3419caf-3597-52b9-89d9-13d63a573767",
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/processStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/incoterms"
+          }
+        },
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/purchaseOrder"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/receivingLocationType"
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "767640ff-2ba0-568d-b158-6c6291e10c94",
+        "purchaseOrderNo": "4500055223",
+        "itemNo": "00020",
+        "materialId": "DH_TM_MAT2",
+        "supplierId": "VEN_CO",
+        "receivingLocationId": "0001",
+        "plannedDeliveryDate": "/Date(1603065600000)/",
+        "nextETA": null,
+        "orderQuantity": "33.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "DH_TM_MAT2 desc.",
+        "netWeight": "90.000",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "weightUoM": "KG",
+        "grossWeight": "100.000",
+        "volume": "1.000",
+        "volumeUoM": "M3",
+        "netValue": "79201.32",
+        "currency": "INR",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": null,
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "incotermsVersion": "",
+        "incotermsLocation": "Test location",
+        "processStatus_code": "OVERDUE",
+        "incoterms_code": "CFR",
+        "completionValue": "140.00",
+        "purchaseOrder_id": "bfcdad3f-9058-5d3a-9e6c-023b1162772d",
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/processStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/incoterms"
+          }
+        },
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/purchaseOrder"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/receivingLocationType"
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'7f56a489-682a-5772-8088-68fa9483f2e8')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'7f56a489-682a-5772-8088-68fa9483f2e8')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "7f56a489-682a-5772-8088-68fa9483f2e8",
+        "purchaseOrderNo": "123",
+        "itemNo": null,
+        "materialId": "134513294",
+        "supplierId": "Automotive Supplier",
+        "receivingLocationId": "Str. 2D, 65183 Wiesbaden",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "plannedDeliveryDate": "/Date(1607904000000)/",
+        "orderQuantity": "200.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LONG:BOENG:637",
+        "netWeight": "100.000",
+        "weightUoM": "EA",
+        "grossWeight": "50.000",
+        "volume": "95.000",
+        "volumeUoM": "EA",
+        "netValue": "265.00",
+        "currency": "EUR",
+        "incotermsVersion": "01",
+        "incotermsLocation": "2134021",
+        "incoterms_code": "CFR",
+        "receivingLocationType_code": "Plant",
+        "completionValue": "140.00",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incoterms": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "cd509b27-e9b6-548a-a868-a18cfb3ca28e",
+        "purchaseOrderNo": "4500055229",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "itemNo": "10",
+        "materialId": "DH_TM_MAT1",
+        "supplierId": "VEN_CO",
+        "receivingLocationId": "0001",
+        "plannedDeliveryDate": "/Date(1603152000000)/",
+        "nextETA": null,
+        "orderQuantity": "22.000",
+        "orderQuantityUoM": "KG",
+        "materialDescription": "DH_TM_MAT1 desc.",
+        "netWeight": "0.900",
+        "weightUoM": "KG",
+        "grossWeight": "1.000",
+        "volume": "0.010",
+        "volumeUoM": "M3",
+        "netValue": "30800.44",
+        "completionValue": "3000",
+        "currency": "INR",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": null,
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "incotermsVersion": "",
+        "incotermsLocation": "Test location",
+        "processStatus_code": "OVERDUE",
+        "incoterms_code": "CFR",
+        "purchaseOrder_id": "a3419caf-3597-52b9-89d9-13d63a573767",
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/processStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/incoterms"
+          }
+        },
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/purchaseOrder"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/receivingLocationType"
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "767640ff-2ba0-568d-b158-6c6291e10c94",
+        "purchaseOrderNo": "4500055223",
+        "itemNo": "00020",
+        "materialId": "DH_TM_MAT2",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "supplierId": "VEN_CO",
+        "receivingLocationId": "0001",
+        "plannedDeliveryDate": "/Date(1603065600000)/",
+        "nextETA": null,
+        "orderQuantity": "33.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "DH_TM_MAT2 desc.",
+        "netWeight": "90.000",
+        "weightUoM": "KG",
+        "grossWeight": "100.000",
+        "volume": "1.000",
+        "volumeUoM": "M3",
+        "netValue": "79201.352",
+        "completionValue": "67000.321",
+        "currency": "INR",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": null,
+        "trackingIdType": "PURCHASE_ORDER_ITEM",
+        "incotermsVersion": "",
+        "incotermsLocation": "Test location",
+        "processStatus_code": "OVERDUE",
+        "incoterms_code": "CFR",
+        "purchaseOrder_id": "bfcdad3f-9058-5d3a-9e6c-023b1162772d",
+        "processStatus": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/processStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/incoterms"
+          }
+        },
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/purchaseOrder"
+          }
+        },
+        "receivingLocationType": {
+          "__deferred": {
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/receivingLocationType"
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'7f56a489-682a-5772-8088-68fa9483f2e8')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'7f56a489-682a-5772-8088-68fa9483f2e8')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "7f56a489-682a-5772-8088-68fa9483f2e8",
+        "purchaseOrderNo": "123",
+        "itemNo": null,
+        "materialId": "134513294",
+        "supplierId": "Automotive Supplier",
+        "receivingLocationId": "Str. 2D, 65183 Wiesbaden",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "plannedDeliveryDate": "/Date(1607904000000)/",
+        "orderQuantity": "200.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LONG:BOENG:637",
+        "netWeight": "100.000",
+        "weightUoM": "EA",
+        "grossWeight": "50.000",
+        "volume": "95.000",
+        "volumeUoM": "EA",
+        "netValue": "265.00",
+        "currency": "EUR",
+        "completionValue": "140.00",
+        "incotermsVersion": "01",
+        "incotermsLocation": "2134021",
+        "incoterms_code": "CFR",
+        "receivingLocationType_code": "Plant",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incoterms": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'192d453b-f2b4-5cec-a95f-0114863f844a')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'192d453b-f2b4-5cec-a95f-0114863f844a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "192d453b-f2b4-5cec-a95f-0114863f844a",
+        "purchaseOrderNo": "4500018204",
+        "itemNo": null,
+        "materialId": "134513294",
+        "supplierId": "Automotive Supplier",
+        "receivingLocationId": "Str. 2D, 65183 Wiesbaden",
+        "plannedDeliveryDate": "/Date(1607904000000)/",
+        "orderQuantity": "200.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LONG:BOENG:637",
+        "netWeight": "100.000",
+        "weightUoM": "EA",
+        "grossWeight": "50.000",
+        "volume": "95.000",
+        "volumeUoM": "EA",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "netValue": "265.00",
+        "currency": "EUR",
+        "completionValue": "140.00",
+        "incotermsVersion": "01",
+        "receivingLocationType_code": "Plant",
+        "incotermsLocation": "2134021",
+        "incoterms_code": "CFR",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incoterms": {
+          "__metadata": {
+            "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and Freight",
+          "localized": {
+            "__deferred": {
+              "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        },
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'640218c7-2b35-5e3d-b6bd-ec9709430ed0')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'640218c7-2b35-5e3d-b6bd-ec9709430ed0')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "640218c7-2b35-5e3d-b6bd-ec9709430ed0",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "receivingLocationType_code": "Plant",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "6.000",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "orderQuantityUoM": "PAL",
+        "materialDescription": "LWC Part 01",
+        "netWeight": "0.800",
+        "weightUoM": "KG",
+        "grossWeight": "119.000",
+        "volume": "829.440",
+        "volumeUoM": "CDM",
+        "netValue": "6.12",
+        "currency": "EUR",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'3cdc4a23-a7cf-5068-a9e7-40bd82c9bf08')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'3cdc4a23-a7cf-5068-a9e7-40bd82c9bf08')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "3cdc4a23-a7cf-5068-a9e7-40bd82c9bf08",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "receivingLocationType_code": "Plant",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "21.000",
+        "orderQuantityUoM": "PAL",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "materialDescription": "LWC Part 05",
+        "netWeight": "0.800",
+        "weightUoM": "KG",
+        "grossWeight": "119.000",
+        "volume": "829.440",
+        "volumeUoM": "CDM",
+        "netValue": "210.21",
+        "currency": "EUR",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'8d31db5a-d75b-5827-aac5-fe56dcda0352')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'8d31db5a-d75b-5827-aac5-fe56dcda0352')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "8d31db5a-d75b-5827-aac5-fe56dcda0352",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "9.000",
+        "orderQuantityUoM": "EA",
+        "receivingLocationType_code": "Plant",
+        "materialDescription": "LWC Part 04",
+        "netWeight": "0.100",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "volume": "0.500",
+        "volumeUoM": "CDM",
+        "netValue": "1.14",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'22f282b8-fccb-554e-b0cf-5e98fc35b726')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'22f282b8-fccb-554e-b0cf-5e98fc35b726')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "22f282b8-fccb-554e-b0cf-5e98fc35b726",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationType_code": "Plant",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476057600000)/",
+        "orderQuantity": "6.000",
+        "orderQuantityUoM": "PAL",
+        "materialDescription": "LWC Part 01",
+        "netWeight": "0.800",
+        "weightUoM": "KG",
+        "grossWeight": "119.000",
+        "volume": "829.440",
+        "volumeUoM": "CDM",
+        "netValue": "6.06",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f2e964d8-7a00-5e67-9a7d-fcacd4e41bb4')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f2e964d8-7a00-5e67-9a7d-fcacd4e41bb4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "f2e964d8-7a00-5e67-9a7d-fcacd4e41bb4",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "receivingLocationType_code": "Plant",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "7.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LWC Part 01",
+        "netWeight": "0.100",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "volume": "0.500",
+        "volumeUoM": "CDM",
+        "netValue": "3.64",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f4f18744-5caa-557f-a547-f39e91f61dc9')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f4f18744-5caa-557f-a547-f39e91f61dc9')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "f4f18744-5caa-557f-a547-f39e91f61dc9",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationType_code": "Plant",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "8.000",
+        "orderQuantityUoM": "PAL",
+        "materialDescription": "LWC Part 03",
+        "netWeight": "0.800",
+        "weightUoM": "KG",
+        "grossWeight": "119.000",
+        "volume": "829.440",
+        "volumeUoM": "CDM",
+        "netValue": "80.08",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f06beeb5-7ba3-56ce-b7f9-da01c3bd0dad')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'f06beeb5-7ba3-56ce-b7f9-da01c3bd0dad')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "f06beeb5-7ba3-56ce-b7f9-da01c3bd0dad",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationType_code": "Plant",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "3.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LWC Part 01 (Charge)",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "netWeight": "0.100",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "volume": "0.500",
+        "volumeUoM": "CDM",
+        "netValue": "0.39",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'88994174-075b-5145-bc25-752940ab53db')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'88994174-075b-5145-bc25-752940ab53db')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "88994174-075b-5145-bc25-752940ab53db",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "2.000",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "LWC Part 01 (Charge)",
+        "netWeight": "0.100",
+        "receivingLocationType_code": "Plant",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "volume": "0.500",
+        "volumeUoM": "CDM",
+        "netValue": "1.04",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'fafc44e4-71f9-540b-92dd-0a6f2410eecb')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'fafc44e4-71f9-540b-92dd-0a6f2410eecb')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "fafc44e4-71f9-540b-92dd-0a6f2410eecb",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "orderQuantity": "23.000",
+        "orderQuantityUoM": "PAL",
+        "materialDescription": "LWC Part 06",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "netWeight": "0.800",
+        "receivingLocationType_code": "Plant",
+        "weightUoM": "KG",
+        "grossWeight": "119.000",
+        "volume": "829.440",
+        "volumeUoM": "CDM",
+        "netValue": "230.23",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'e073aa4c-b4c6-5dfc-8d1d-0bf2e15f123c')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'e073aa4c-b4c6-5dfc-8d1d-0bf2e15f123c')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "e073aa4c-b4c6-5dfc-8d1d-0bf2e15f123c",
+        "purchaseOrderNo": "4500020092",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VEND001",
+        "receivingLocationId": "LWC1",
+        "plannedDeliveryDate": "/Date(1476144000000)/",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "orderQuantity": "4.000",
+        "orderQuantityUoM": "EA",
+        "receivingLocationType_code": "Plant",
+        "materialDescription": "LWC Part 01",
+        "netWeight": "0.100",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "volume": "0.500",
+        "volumeUoM": "CDM",
+        "netValue": "6.08",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'b4065bbd-4fcb-5511-92c7-0d4d864e37d8')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'b4065bbd-4fcb-5511-92c7-0d4d864e37d8')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "b4065bbd-4fcb-5511-92c7-0d4d864e37d8",
+        "purchaseOrderNo": "4500020111",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VENDOR01",
+        "receivingLocationId": "0001",
+        "plannedDeliveryDate": "/Date(1476316800000)/",
+        "orderQuantity": "5.000",
+        "receivingLocationType_code": "Plant",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "DIMIS_LONGMATERIALNUMBERFORTESTING",
+        "netWeight": "1.000",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "weightUoM": "KG",
+        "grossWeight": "1.000",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "5.00",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'324fe692-b818-53c8-8280-61987714e5b0')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'324fe692-b818-53c8-8280-61987714e5b0')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "324fe692-b818-53c8-8280-61987714e5b0",
+        "purchaseOrderNo": "4500020111",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "VENDOR01",
+        "receivingLocationId": "0001",
+        "receivingLocationType_code": "Plant",
+        "plannedDeliveryDate": "/Date(1476316800000)/",
+        "orderQuantity": "10.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "DIMIS_LONGMATERIALNUMBERFORTESTING",
+        "netWeight": "1.000",
+        "weightUoM": "KG",
+        "grossWeight": "1.000",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "10.00",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'df4bd6ec-ab4f-5ce7-ae18-0a321e961d69')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'df4bd6ec-ab4f-5ce7-ae18-0a321e961d69')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "df4bd6ec-ab4f-5ce7-ae18-0a321e961d69",
+        "purchaseOrderNo": "4500021986",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "PCS-V201",
+        "receivingLocationId": "M001",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "1.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "REF02",
+        "netWeight": "0.000",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "weightUoM": "KG",
+        "receivingLocationType_code": "Plant",
+        "grossWeight": "0.000",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "0.73",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'21b463c3-5214-5dee-a3c5-d9826b88f97e')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'21b463c3-5214-5dee-a3c5-d9826b88f97e')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "21b463c3-5214-5dee-a3c5-d9826b88f97e",
+        "purchaseOrderNo": "4500021986",
+        "itemNo": null,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "materialId": null,
+        "supplierId": "PCS-V201",
+        "receivingLocationId": "M001",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "20.000",
+        "receivingLocationType_code": "Plant",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "REF02",
+        "netWeight": "0.000",
+        "weightUoM": "KG",
+        "grossWeight": "0.000",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "5.00",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'ff1b47ee-3768-54d7-8a35-5972941e37aa')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'ff1b47ee-3768-54d7-8a35-5972941e37aa')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "ff1b47ee-3768-54d7-8a35-5972941e37aa",
+        "purchaseOrderNo": "4500021986",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "PCS-V201",
+        "receivingLocationId": "M001",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "1.000",
+        "orderQuantityUoM": "CS",
+        "receivingLocationType_code": "Plant",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "materialDescription": "REF02",
+        "netWeight": "3.000",
+        "weightUoM": "KG",
+        "grossWeight": "3.500",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "28.60",
+        "currency": "EUR",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'2b15bca5-7287-558a-984a-79c482a71d93')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'2b15bca5-7287-558a-984a-79c482a71d93')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "2b15bca5-7287-558a-984a-79c482a71d93",
+        "purchaseOrderNo": "4500021986",
+        "itemNo": null,
+        "materialId": null,
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "supplierId": "PCS-V201",
+        "receivingLocationId": "M001",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "1.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "REF02",
+        "netWeight": "2.000",
+        "weightUoM": "KG",
+        "grossWeight": "2.200",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "receivingLocationType_code": "Plant",
+        "netValue": "0.18",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'0ad4c47e-60a4-5ca4-895c-a40de291c6f0')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'0ad4c47e-60a4-5ca4-895c-a40de291c6f0')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "0ad4c47e-60a4-5ca4-895c-a40de291c6f0",
+        "purchaseOrderNo": "4500021987",
+        "itemNo": null,
+        "materialId": null,
+        "supplierId": "L0001DID",
+        "receivingLocationId": "DI57",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "20.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "SDO empty crate DO NOT TOUCH",
+        "netWeight": "0.500",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "weightUoM": "KG",
+        "grossWeight": "0.500",
+        "receivingLocationType_code": "Plant",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "60.20",
+        "currency": "EUR",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'10245368-7227-558f-aaeb-d33c2a99c67e')",
+          "uri": "https://lbn-gtt-samples-acc-pof.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'10245368-7227-558f-aaeb-d33c2a99c67e')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
+        },
+        "id": "10245368-7227-558f-aaeb-d33c2a99c67e",
+        "purchaseOrderNo": "4500021987",
+        "itemNo": "1",
+        "materialId": null,
+        "nextETA": "/Date(1486684800000)/",
+        "receivingLocationType_code": "Plant",
+        "completedQuantity": 234,
+        "trackingIdType": "trackingType",
+        "processStatus_code": "123",
+        "supplierId": "L0001DID",
+        "receivingLocationId": "DI57",
+        "plannedDeliveryDate": "/Date(1486684800000)/",
+        "orderQuantity": "240.000",
+        "orderQuantityUoM": "EA",
+        "materialDescription": "SDO empty bottle DO NOT TOUCH",
+        "netWeight": "0.100",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "weightUoM": "KG",
+        "grossWeight": "0.100",
+        "volume": "0.000",
+        "volumeUoM": "",
+        "netValue": "38.40",
+        "currency": "EUR",
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "incoterms_code": null,
+        "incoterms": null,
+        "completionValue": null,
+        "lastReportedEvent": null
+      }
+    ]
+  }
+}

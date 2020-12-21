@@ -1,0 +1,46 @@
+[
+  {
+    "code": "EXW",
+    "name": "EX works"
+  },
+  {
+    "code": "FCA",
+    "name": "Free Carrier"
+  },
+  {
+    "code": "FAS",
+    "name": "Free AlongSide Ship"
+  },
+  {
+    "code": "FOB",
+    "name": "Free On Board"
+  },
+  {
+    "code": "CFR",
+    "name": "Costs and freight"
+  },
+  {
+    "code": "CIF",
+    "name": "Cost,Insurance and Freight"
+  },
+  {
+    "code": "CPT",
+    "name": "Carriage Paid to"
+  },
+  {
+    "code": "CIP",
+    "name": "Carriage and lnsurance Paid to"
+  },
+  {
+    "code": "DAT",
+    "name": "Delivered At Terminal"
+  },
+  {
+    "code": "DAP",
+    "name": "Delivered At Place"
+  },
+  {
+    "code": "DDP",
+    "name": "Delivered Duty Paid"
+  }
+]

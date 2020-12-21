@@ -1,0 +1,13 @@
+<mvc:View
+	controllerName="com.sap.gtt.app.sample.sst.controller.NotFound"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<MessagePage
+		text="{i18n>notFoundText}"
+		showHeader="false"
+		description="">
+		<customDescription>
+			<Link id="link" text="{i18n>backToShipmentListText}" tooltip="{i18n>backToShipmentListTooltip}" press=".onLinkPressed"/>
+		</customDescription>
+	</MessagePage>
+</mvc:View>

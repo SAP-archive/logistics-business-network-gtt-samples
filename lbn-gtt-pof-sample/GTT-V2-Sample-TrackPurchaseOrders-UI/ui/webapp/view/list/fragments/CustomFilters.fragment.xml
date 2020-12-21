@@ -1,0 +1,9 @@
+<core:FragmentDefinition
+	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+	xmlns:core="sap.ui.core">
+	<smartfilterbar:ControlConfiguration 
+		key="plannedDeliveryDate"
+		controlType="date"
+		label="{@i18n>EL_PurchaseOrderItem_plannedDeliveryDate_LABEL}" 
+		index="3"/>
+</core:FragmentDefinition>

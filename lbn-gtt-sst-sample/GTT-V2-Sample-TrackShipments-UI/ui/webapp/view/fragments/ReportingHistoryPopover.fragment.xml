@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover id="reportingHistoryPopover"
+		title="{i18n>reportingHistory} ({props>/eventsCount})"
+		showCloseButton="{device>/system/phone}"
+		contentWidth="22rem"
+		contentHeight="12rem"
+		placement="VerticalPreferredBottom">
+		<List id="historicalEventsList"
+			growing="true"
+			growingThreshold="5"
+			items="{props>/historicalEvents}">
+			<CustomListItem class="sstCustomListItemPadding">
+				<ObjectAttribute class="sapUiTinyMarginBottom"
+					title="{i18n>actualAt}"
+					text="{
+						path: 'props>actualBusinessTimestamp',
+						type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
+					}"
+					active="false" />
+
+				<ObjectAttribute class="sapUiTinyMarginBottom"
+					title="{i18n>reportedBy}"
+					text="{props>reportedBy}"
+					active="false" />
+
+				<ObjectAttribute class="sapUiTinyMarginBottom"
+					title="{i18n>senderParty}"
+					text="{props>senderPartyId}"
+					active="false" />
+
+				<ObjectAttribute
+					title="{i18n>reportedAt}"
+					text="{
+						path: 'props>actualTechnicalTimestamp',
+						type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
+					}"
+					active="false" />
+			</CustomListItem>
+		</List>
+	</ResponsivePopover>
+</core:FragmentDefinition>

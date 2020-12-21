@@ -38,10 +38,10 @@ public class SalesOrderODataHandler extends SOFDefaultODataHandler {
 
     private void setLocations(ODataResultList<SalesOrder> entityList) {
         Set<String> locationAltKeys = new HashSet<>();
-        entityList.getResults().forEach(salesOrder -> locationAltKeys.add(SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(),"Customer",salesOrder.getShipToPartyId())));
+        entityList.getResults().forEach(salesOrder -> locationAltKeys.add(SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(), Constants.CUSTOMER,salesOrder.getShipToPartyId())));
         Map<String, LocationDTO> map = locationDTOOdataHandler.getLocationDTOs(locationAltKeys);
         entityList.getResults().forEach(salesOrder -> {
-            String locationAltKey = SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(),"Customer",salesOrder.getShipToPartyId());
+            String locationAltKey = SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(), Constants.CUSTOMER,salesOrder.getShipToPartyId());
             salesOrder.setLocationDTO(map.get(locationAltKey));
         });
     }
@@ -61,7 +61,7 @@ public class SalesOrderODataHandler extends SOFDefaultODataHandler {
     }
 
     private void setLocation(SalesOrder salesOrder) {
-        String locationAltKey = SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(),"Customer",salesOrder.getShipToPartyId());
+        String locationAltKey = SOFUtils.generateLocationAltKey(salesOrder.getPartyId(),salesOrder.getLogicalSystem(), Constants.CUSTOMER,salesOrder.getShipToPartyId());
         salesOrder.setLocationDTO(locationDTOOdataHandler.getLocationDTO(locationAltKey));
     }
 

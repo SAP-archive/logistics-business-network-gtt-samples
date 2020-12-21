@@ -1,13 +1,14 @@
 package com.sap.gtt.v2.sample.sof.rest.controller.domain.map;
 
 import com.sap.gtt.v2.sample.sof.odata.model.LocationDTO;
+import com.sap.gtt.v2.sample.sof.utils.SOFUtils;
 
 import java.util.UUID;
 
 public class SideContent {
 
     private String eventType;
-    private String eventStatusCode;;
+    private String eventStatusCode;
     private String plannedBusinessTimestamp;
     private String locationAltKey;
     private LocationDTO location;
@@ -112,5 +113,7 @@ public class SideContent {
     public void setActualBusinessTimestamp(String actualBusinessTimestamp) {
         this.actualBusinessTimestamp = actualBusinessTimestamp;
     }
-
+    public void setActualBusinessTimestamp(Long actualBusinessTimestamp) {
+        this.actualBusinessTimestamp = SOFUtils.getTimeStr(actualBusinessTimestamp);
+    }
 }

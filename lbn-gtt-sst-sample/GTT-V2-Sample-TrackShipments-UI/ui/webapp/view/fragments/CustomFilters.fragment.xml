@@ -1,0 +1,7 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+	xmlns:core="sap.ui.core">
+	<smartfilterbar:ControlConfiguration key="serviceAgentLbnId" label="{i18n>carrier}" visibleInAdvancedArea="true" index="1"/>
+	<smartfilterbar:ControlConfiguration key="deliveryId" label="{parts: [{value: 'deliveryNo'}, {value: 'Delivery'}], formatter: '.getPropertyLabelText'}"/>
+</core:FragmentDefinition>

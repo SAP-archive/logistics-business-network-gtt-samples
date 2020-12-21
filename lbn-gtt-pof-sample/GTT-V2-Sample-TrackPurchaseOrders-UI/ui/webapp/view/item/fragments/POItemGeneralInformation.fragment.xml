@@ -1,0 +1,74 @@
+<core:FragmentDefinition
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout"
+	xmlns="sap.ui.comp.smartform"
+	xmlns:m="sap.m"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+	xmlns:smartField="sap.ui.comp.smartfield"
+  xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <SmartForm id="smartForm"
+    data:defaultCheckBoxDisplayBehaviour="OnOff"
+    data:defaultDropDownDisplayBehaviour="idAndDescription">
+    <layout>
+      <Layout columnsM="2" columnsL="3" columnsXL="3" labelSpanS="12" labelSpanM="12" labelSpanL="12" labelSpanXL="12"/>
+    </layout>
+    <Group label="{i18n>orderDetailsTitle}">
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_supplierId_LABEL}">
+        <ctrl:link.LinkPopover
+          placement="Right"
+          contentHeight="15rem"
+          title="{i18n>locationDetailsPopoverTitle}"
+          text="{supplierId}"
+          linkText="{toSupplierLocation/locationDescription}"
+          relatedObject="toSupplierLocation">
+          <ctrl:content>
+            <m:VBox>
+            <m:Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
+					  <m:Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+            <m:Text id="supplierLocationObjectType" text="{toSupplierLocation/objectTypeDescription}" />
+            <m:Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+            <m:Text id="supplierLocationSourceSystemId" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
+            <m:Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+            <m:HBox justifyContent="SpaceBetween">
+              <m:Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+              <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+            </m:HBox>  
+            </m:VBox>
+          </ctrl:content>
+        </ctrl:link.LinkPopover>
+      </GroupElement>
+      <GroupElement>
+        <smartField:SmartField value="{materialId}" />
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_netValue_LABEL}" >
+        <smartField:SmartField value="{netValue}"/>
+      </GroupElement>
+    </Group>
+    <Group label=" ">
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_netWeight_LABEL}">
+        <smartField:SmartField value="{netWeight}" />
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_grossWeight_LABEL}">
+        <smartField:SmartField value="{grossWeight}" />
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_volume_LABEL}">
+        <smartField:SmartField value="{volume}"/>
+      </GroupElement>
+    </Group>
+    <Group label="{i18n>incotermsTitle}">
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_incoterms_LABEL}">
+        <smartField:SmartField value="{incoterms/name}" />
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_incotermsLocation_LABEL}">
+        <smartField:SmartField value="{incotermsLocation}" />
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_incotermsVersion_LABEL}">
+        <smartField:SmartField value="{incotermsVersion}"/>
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_lastReportedEvent_LABEL}">
+        <m:Text text="{path:'lastReportedEvent', formatter:'.formatter.lastReportedEventStatusText'}"/>
+      </GroupElement>
+    </Group>
+  </SmartForm>
+</core:FragmentDefinition>

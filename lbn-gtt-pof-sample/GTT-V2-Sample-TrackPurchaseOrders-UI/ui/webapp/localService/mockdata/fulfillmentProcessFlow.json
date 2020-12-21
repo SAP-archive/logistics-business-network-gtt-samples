@@ -1,0 +1,21 @@
+{
+  "lanes": [{
+    "id": "0",
+    "name": "purchaseOrderItemCreated",
+    "count": 22.000,
+    "total": 22.000,
+    "position": 0
+  }, {
+    "id": "1",
+    "name": "purchaseOrderItemConfirmed",
+    "count": 22.00,
+    "total": 22.000,
+    "position": 1
+  }, {
+    "id": "2",
+    "name": "purchaseOrderItemReceipt",
+    "count": 0,
+    "total": 22.000,
+    "position": 2
+  }]
+}

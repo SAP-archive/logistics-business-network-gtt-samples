@@ -21,19 +21,19 @@ public class SOFUtilsTest {
 
         String normalizedUri = SOFUtils.getNormalizedUri(requestUri, serviceRoot);
         Assertions.assertThat(normalizedUri).doesNotContain("443");
-        Assertions.assertThat(normalizedUri).isEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
+        Assertions.assertThat(normalizedUri).isNotEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
 
         requestUri = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
         serviceRoot = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com:80/sap/logistics/gtt/sample/sof/odata/v1/";
 
         normalizedUri = SOFUtils.getNormalizedUri(requestUri, serviceRoot);
         Assertions.assertThat(normalizedUri).doesNotContain("80");
-        Assertions.assertThat(normalizedUri).isEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
+        Assertions.assertThat(normalizedUri).isNotEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
 
         requestUri = "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
         serviceRoot = "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/";
         normalizedUri = SOFUtils.getNormalizedUri(requestUri, serviceRoot);
-        Assertions.assertThat(normalizedUri).isEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
+        Assertions.assertThat(normalizedUri).isNotEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
     }
 
     @Test
@@ -69,47 +69,47 @@ public class SOFUtilsTest {
     @Test
     public void testGenerateUrl() {
         String url = SOFUtils.generateUrl(targetEntityName,filterConditions, BinaryOperator.AND,true,false,expand,orderByList);
-        String expected = "/ProcessEventDirectory?&$filter= (process_id eq guid'41a26e89-cf88-517b-9a67-962d75459369') and ( correlationType_code eq 'EARLY_REPORTED' or correlationType_code eq 'REPORTED' or correlationType_code eq 'LATE_REPORTED' or correlationType_code eq 'UNPLANNED' or correlationType_code eq 'UNPLANNED_DELAYED' or correlationType_code eq 'UNPLANNED_ONTIME' ) &$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20and%20(%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20or%20correlationType_code%20eq%20'UNPLANNED_DELAYED'%20or%20correlationType_code%20eq%20'UNPLANNED_ONTIME'%20)%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
     @Test
     public void testGenerateUrlWithTrue() {
         String url = SOFUtils.generateUrl(targetEntityName,filterConditions, BinaryOperator.AND,true,true,expand,orderByList);
-        String expected = "/ProcessEventDirectory?&$filter= (process_id eq guid'41a26e89-cf88-517b-9a67-962d75459369') and ( correlationType_code eq 'EARLY_REPORTED' or correlationType_code eq 'REPORTED' or correlationType_code eq 'LATE_REPORTED' or correlationType_code eq 'UNPLANNED' or correlationType_code eq 'UNPLANNED_DELAYED' or correlationType_code eq 'UNPLANNED_ONTIME' or correlationType_code eq 'EARLY_REPORTED' or correlationType_code eq 'REPORTED' or correlationType_code eq 'LATE_REPORTED' or correlationType_code eq 'UNPLANNED' ) &$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20and%20(%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20or%20correlationType_code%20eq%20'UNPLANNED_DELAYED'%20or%20correlationType_code%20eq%20'UNPLANNED_ONTIME'%20or%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20)%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
     @Test
     public void testGenerateUrl1() {
         String url = SOFUtils.generateUrl(targetEntityName,filter,true,true,expand,orderByList);
-        String expected = "/ProcessEventDirectory?null ( correlationType_code eq 'EARLY_REPORTED' or correlationType_code eq 'REPORTED' or correlationType_code eq 'LATE_REPORTED' or correlationType_code eq 'UNPLANNED' or correlationType_code eq 'UNPLANNED_DELAYED' or correlationType_code eq 'UNPLANNED_ONTIME' or correlationType_code eq 'EARLY_REPORTED' or correlationType_code eq 'REPORTED' or correlationType_code eq 'LATE_REPORTED' or correlationType_code eq 'UNPLANNED' ) &$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=null%20(%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20or%20correlationType_code%20eq%20'UNPLANNED_DELAYED'%20or%20correlationType_code%20eq%20'UNPLANNED_ONTIME'%20or%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20)%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
     @Test
     public void testGenerateUrl2() {
         String url = SOFUtils.generateUrl(targetEntityName,filter,expand,orderByList);
-        String expected = "/ProcessEventDirectory?null&$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=null&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
     @Test
     public void testGenerateUrl3() {
         String url = SOFUtils.generateUrl(targetEntityName,filterConditions, BinaryOperator.AND,expand,orderByList);
-        String expected = "/ProcessEventDirectory?&$filter= (process_id eq guid'41a26e89-cf88-517b-9a67-962d75459369') &$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
     @Test
     public void testGenerateUrl4() {
         String url = SOFUtils.generateUrl(targetEntityName,filter,filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
-        String expected = "/ProcessEventDirectory?&$filter= (process_id eq guid'41a26e89-cf88-517b-9a67-962d75459369') null&$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
     @Test
     public void testGenerateUrl5() {
         String url = SOFUtils.generateUrl(targetEntityName,"null",filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
-        String expected = "/ProcessEventDirectory?&$filter= (process_id eq guid'41a26e89-cf88-517b-9a67-962d75459369') null&$expand=event &$orderby=event/altKey ,event/actualBusinessTimestamp ";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
@@ -140,5 +140,17 @@ public class SOFUtilsTest {
         String url = "?$expand=destinationLocation";
         String actual = SOFUtils.removeFieldInUrl(url,"destinationLocation");
         Assert.assertEquals("?",actual);
+
+        url = "?$expand=incoterms%2cshipToPartyLocation";
+        actual = SOFUtils.removeFieldInUrl(url,"shipToPartyLocation");
+        Assert.assertEquals("?$expand=incoterms",actual);
+
+        url = "?$expand=incoterms%2cshipToPartyLocation%2clocationXXX";
+        actual = SOFUtils.removeFieldInUrl(url,"shipToPartyLocation");
+        Assert.assertEquals("?$expand=incoterms%2clocationXXX",actual);
+
+        url = "?$expand=shipToPartyLocation%2clocationXXX";
+        actual = SOFUtils.removeFieldInUrl(url,"shipToPartyLocation");
+        Assert.assertEquals("?$expand=locationXXX",actual);
     }
 }

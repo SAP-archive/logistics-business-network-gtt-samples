@@ -145,12 +145,20 @@ FUNCTION zgtt_sof_ote_de_hd.
 
 *Document date (LIKP-BLDAT)
     ls_control_data-paramname = gc_cp_yn_doc_date.
-    ls_control_data-value     = <ls_xlikp>-bldat.
+    IF <ls_xlikp>-bldat IS NOT INITIAL.
+      ls_control_data-value     = <ls_xlikp>-bldat.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
     APPEND ls_control_data TO e_control_data.
 
 *Planned delivery date (LIKP-LFDAT)
     ls_control_data-paramname = gc_cp_yn_de_plndelivery_date.
-    ls_control_data-value     = <ls_xlikp>-lfdat.
+    IF <ls_xlikp>-lfdat IS NOT INITIAL.
+      ls_control_data-value     = <ls_xlikp>-lfdat.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
     APPEND ls_control_data TO e_control_data.
 
 *Total Weight (LIKP-BTGEW)

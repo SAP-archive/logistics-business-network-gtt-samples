@@ -1,0 +1,36 @@
+[
+  {
+    "code": "01",
+    "name": "Sea",
+    "locale": "en"
+  },
+  {
+    "code": "02",
+    "name": "Rail",
+    "locale": "en"
+  },
+  {
+    "code": "03",
+    "name": "Road",
+    "locale": "en"
+  },
+  {
+    "code": "04",
+    "name": "Air"
+  },
+  {
+    "code": "05",
+    "name": "Mail",
+    "locale": "en"
+  },
+  {
+    "code": "00",
+    "name": "Not Specified",
+    "locale": "en"
+  },
+  {
+    "code": "09",
+    "name": "Not Applicable",
+    "locale": "en"
+  }
+]

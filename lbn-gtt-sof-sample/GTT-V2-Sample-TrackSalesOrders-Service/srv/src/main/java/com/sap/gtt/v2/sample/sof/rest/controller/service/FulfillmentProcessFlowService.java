@@ -16,15 +16,23 @@ import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.sap.gtt.v2.sample.sof.constant.Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
+import static com.sap.gtt.v2.sample.sof.constant.Constants.URL_SPLITTER;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.EXPAND;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.FILTER;
+import static java.lang.String.format;
+
 @Service
 public class FulfillmentProcessFlowService {
 
     private static final String REJECTION_STATUS_COMPLETE_REJECT_CODE = "C";
+    private static final String PROCESS = "process";
 
     @Autowired
     private GTTCoreServiceClient gttCoreServiceClient;
@@ -42,7 +50,9 @@ public class FulfillmentProcessFlowService {
     }
 
     private SalesOrderItem querySalesOrderItem(UUID salesOrderItemId) {
-        String query = String.format("/SalesOrderItem(guid'%s')?$expand=scheduleLines,deliveryItemTPs/deliveryItem", salesOrderItemId);
+        String query = UriComponentsBuilder.fromUriString(format("/SalesOrderItem(guid'%s')", salesOrderItemId))
+                .queryParam(EXPAND, "scheduleLines,deliveryItemTPs/deliveryItem")
+                .build().encode().toUriString();
         return gttCoreServiceClient.readEntity(query, SalesOrderItem.class);
     }
 
@@ -107,6 +117,7 @@ public class FulfillmentProcessFlowService {
                 break;
             case SALES_ORDER_ITEM_REJECTED:
                 updateMilestoneOfSalesOrderItemRejected(lane, salesOrderItem);
+                break;
             default:
         }
     }
@@ -188,7 +199,10 @@ public class FulfillmentProcessFlowService {
                 filter = FilterExpressionBuilder.createFilterExpression(filter, expressions.get(index), BinaryOperator.OR);
             }
 
-            String query = Constants.URL_SPLITTER + "ProcessEventDirectory?$expand=process&$filter=" + filter.getExpressionString();
+            String query = UriComponentsBuilder.fromUriString(URL_SPLITTER + PROCESS_EVENT_DIRECTORY_ENTITY_NAME)
+                    .queryParam(EXPAND, PROCESS)
+                    .queryParam(FILTER, filter.getExpressionString())
+                    .build().encode().toUriString();
             List<ProcessEventDirectory> processEventDirectories = gttCoreServiceClient.readEntitySetAll(query, ProcessEventDirectory.class).getResults();
 
             Set<String> reportedTrackingIds = processEventDirectories.stream()

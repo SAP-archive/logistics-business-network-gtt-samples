@@ -1,0 +1,21 @@
+[{
+  "docId": "123455TrackingID",
+  "shipmentNo": "1100063505",
+  "shipmentId": "cb0bca38-4a0c-56b3-8491-8a65d8e774cc",
+  "docType_code": "T50"
+}, {
+  "docId": null,
+  "shipmentNo": "1100063505",
+  "shipmentId": "cb0bca38-4a0c-56b3-8491-8a65d8e774cc",
+  "docType_code": "VP"
+}, {
+  "docId": "123455TrackingID",
+  "shipmentNo": "1200058314",
+  "shipmentId": "4492d164-9a91-51c3-8d37-1fb5b0348d17",
+  "docType_code": "BN"
+}, {
+  "docId": null,
+  "shipmentNo": "1200058314",
+  "shipmentId": "4492d164-9a91-51c3-8d37-1fb5b0348d17",
+  "docType_code": "VP"
+}]

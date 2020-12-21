@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZSST_GTT_CL_SEND_TOR_DATA</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Class for BAdI Impl.: /SCMTMS/SPLIT_TOR_DATA_BY_TYPE</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZSST_GTT_CL_SEND_TOR_DATA</CLSNAME>
+     <CMPNAME>CALL_EVENT_MANAGER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Fill Application Table and Event Manager Communication</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZSST_GTT_CL_SEND_TOR_DATA</CLSNAME>
+     <CMPNAME>GET_TOR_ROOT_FOR_DELETION</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get TOR ROOT for Deletion</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZSST_GTT_CL_SEND_TOR_DATA</CLSNAME>
+     <CMPNAME>SEND_DELETION_IDOC</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Send Deletion IDoc</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

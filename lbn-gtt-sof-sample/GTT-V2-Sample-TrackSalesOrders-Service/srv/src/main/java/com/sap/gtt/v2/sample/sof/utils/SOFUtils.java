@@ -9,6 +9,7 @@ import com.sap.gtt.v2.sample.sof.exception.InternalErrorException;
 import com.sap.gtt.v2.sample.sof.exception.SOFServiceException;
 import com.sap.gtt.v2.sample.sof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.sof.odata.filter.FilterExpressionBuilder;
+import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.olingo.odata2.api.edm.EdmException;
@@ -19,6 +20,7 @@ import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
@@ -27,8 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import static com.sap.gtt.v2.sample.sof.constant.Constants.*;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
 
 public class SOFUtils {
 
@@ -38,6 +42,7 @@ public class SOFUtils {
     public static final String BLANK = "";
     public static final String ALT_KEY_HEADER = "xri://sap.com/id:";
     public static final String LOCATION = "Location";
+    public static final String EQ = " eq '";
 
     private SOFUtils() {
 
@@ -147,7 +152,7 @@ public class SOFUtils {
     static String getNormalizedUri(String requestUri, String serviceRoot) {
         requestUri = requestUri.replaceAll(PORT_NUM, BLANK);
         serviceRoot = serviceRoot.replaceAll(PORT_NUM, BLANK);
-        String uri = UriUtils.decode(requestUri.replace(serviceRoot, SEPARATOR), "UTF-8");
+        String uri =requestUri.replace(serviceRoot, SEPARATOR);
         uri = uri.replaceAll(SELECT, BLANK);
         return uri;
     }
@@ -173,7 +178,7 @@ public class SOFUtils {
     }
 
     public static String generateFilter(List<FilterCondition> conditions, BinaryOperator andOr, boolean isAdmissableCorrelationTypeCode, boolean isAdmissableCorrelationTypeWithoutGeoEvent) {
-        String filterEx = "&$filter=";
+        String filterEx = "";
         FilterExpression filterExpression = FilterExpressionBuilder.createFilterExpression(conditions, andOr);
         String filterStr = filterExpression.getExpressionString();
         if (StringUtils.isNotBlank(filterStr)) {
@@ -190,27 +195,34 @@ public class SOFUtils {
         }
         return filterEx;
     }
+
+    public static final String EARLY_REPORTED = "EARLY_REPORTED";
+    public static final String REPORTED = "REPORTED";
+    public static final String LATE_REPORTED = "LATE_REPORTED";
+    public static final String UNPLANNED = "UNPLANNED";
+    public static final String UNPLANNED_DELAYED = "UNPLANNED_DELAYED";
+    public static final String UNPLANNED_ONTIME = "UNPLANNED_ONTIME";
     private static final String[] admissableCorrelationTypeCode = {
-            "EARLY_REPORTED",
-            "REPORTED",
-            "LATE_REPORTED",
-            "UNPLANNED",
-            "UNPLANNED_DELAYED",
-            "UNPLANNED_ONTIME"
+            EARLY_REPORTED,
+            REPORTED,
+            LATE_REPORTED,
+            UNPLANNED,
+            UNPLANNED_DELAYED,
+            UNPLANNED_ONTIME
     };
     private static final String[] admissableCorrelationTypeCodeWithoutGeo = {
-            "EARLY_REPORTED",
-            "REPORTED",
-            "LATE_REPORTED",
-            "UNPLANNED"
+            EARLY_REPORTED,
+            REPORTED,
+            LATE_REPORTED,
+            UNPLANNED
     };
     public static String getCorrelationTypeCodeFilterString(boolean isAdmissableCorrelationTypeCode, boolean isAdmissableCorrelationTypeWithoutGeoEvent) {
         String filterCorrelationTypeCode = "";
         for (int i = 0; isAdmissableCorrelationTypeCode && i < admissableCorrelationTypeCode.length; i++) {
-            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + " eq '" + admissableCorrelationTypeCode[i] + "' or";
+            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + EQ + admissableCorrelationTypeCode[i] + "' or";
         }
         for (int i = 0; isAdmissableCorrelationTypeWithoutGeoEvent && i < admissableCorrelationTypeCodeWithoutGeo.length; i++) {
-            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + " eq '" + admissableCorrelationTypeCodeWithoutGeo[i] + "' or";
+            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + EQ + admissableCorrelationTypeCodeWithoutGeo[i] + "' or";
         }
         if (StringUtils.isNotBlank(filterCorrelationTypeCode)) {
             filterCorrelationTypeCode = filterCorrelationTypeCode.substring(0, filterCorrelationTypeCode.lastIndexOf("or"));
@@ -219,14 +231,14 @@ public class SOFUtils {
         return filterCorrelationTypeCode;
     }
     private static final String[] reportedCorrelationTypeCode = {
-            "EARLY_REPORTED",
-            "REPORTED",
-            "LATE_REPORTED",
+            EARLY_REPORTED,
+            REPORTED,
+            LATE_REPORTED,
     };
     public static String getReportedCorrelationTypeCode() {
         String filterCorrelationTypeCode = "";
         for (int i = 0;  i < reportedCorrelationTypeCode.length; i++) {
-            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + " eq '" + reportedCorrelationTypeCode[i] + "' or";
+            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + EQ + reportedCorrelationTypeCode[i] + "' or";
         }
         filterCorrelationTypeCode = filterCorrelationTypeCode.substring(0, filterCorrelationTypeCode.lastIndexOf("or"));
         filterCorrelationTypeCode = " (".concat(filterCorrelationTypeCode).concat(") ");
@@ -248,11 +260,15 @@ public class SOFUtils {
         String filterStr = generateFilter(filterConditions, andOr, isAdmissableCorrelatrionType, isAdmissableCorrelationTypeWithoutGeoEvent);
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
-        String url = "";
-        if (StringUtils.isNotBlank(targetEntityName)) {
-            url += URL_SPLITTER.concat(targetEntityName);
-        }
-        url = url.concat("?").concat(filterStr).concat(filter).concat(expandStr).concat(orderbyStr);
+        UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));
+        if(StringUtils.isNotBlank(filterStr))
+            re = re.queryParam(FILTER,filterStr);
+        if(StringUtils.isNotBlank(expandStr))
+            re = re.queryParam(EXPAND,expandStr);
+        if(StringUtils.isNotBlank(orderbyStr))
+            re = re .queryParam(ORDERBY,orderbyStr);
+        String url = re
+                .build().encode().toUriString();
         return url;
     }
 
@@ -260,22 +276,30 @@ public class SOFUtils {
         String filterStr = generateFilter(filterConditions, andOr, isAdmissableCorrelatrionType, isAdmissableCorrelationTypeWithoutGeoEvent);
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
-        String url = "";
-        if (StringUtils.isNotBlank(targetEntityName)) {
-            url += URL_SPLITTER.concat(targetEntityName);
-        }
-        url = url.concat("?").concat(filterStr).concat(expandStr).concat(orderbyStr);
+        UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));
+        if(StringUtils.isNotBlank(filterStr))
+            re = re.queryParam(FILTER,filterStr);
+        if(StringUtils.isNotBlank(expandStr))
+            re = re.queryParam(EXPAND,expandStr);
+        if(StringUtils.isNotBlank(orderbyStr))
+            re = re .queryParam(ORDERBY,orderbyStr);
+        String url = re
+                .build().encode().toUriString();
         return url;
     }
 
     public static String generateUrl(String targetEntityName, String filter, List<String> expand, List<OrderBy> orderby) {
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
-        String url = "";
-        if (StringUtils.isNotBlank(targetEntityName)) {
-            url += URL_SPLITTER.concat(targetEntityName);
-        }
-        url = url.concat("?").concat(filter).concat(expandStr).concat(orderbyStr);
+        UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));
+        if(StringUtils.isNotBlank(filter))
+            re = re.queryParam(FILTER,filter);
+        if(StringUtils.isNotBlank(expandStr))
+            re = re.queryParam(EXPAND,expandStr);
+        if(StringUtils.isNotBlank(orderbyStr))
+            re = re .queryParam(ORDERBY,orderbyStr);
+        String url = re
+                .build().encode().toUriString();
         return url;
     }
 
@@ -283,11 +307,15 @@ public class SOFUtils {
         String correlationTypeCodeFilterString = getCorrelationTypeCodeFilterString(isAdmissableCorrelationType, isAdmissableCorrelationTypeWithoutGeoEvent);
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
-        String url = "";
-        if (StringUtils.isNotBlank(targetEntityName)) {
-            url += URL_SPLITTER.concat(targetEntityName);
-        }
-        url = url.concat("?").concat(filter).concat(correlationTypeCodeFilterString).concat(expandStr).concat(orderbyStr);
+        UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));
+        if(StringUtils.isNotBlank(filter.concat(correlationTypeCodeFilterString)))
+            re = re.queryParam(FILTER,filter.concat(correlationTypeCodeFilterString));
+        if(StringUtils.isNotBlank(expandStr))
+            re = re.queryParam(EXPAND,expandStr);
+        if(StringUtils.isNotBlank(orderbyStr))
+            re = re .queryParam(ORDERBY,orderbyStr);
+        String url = re
+                .build().encode().toUriString();
         return url;
     }
 
@@ -295,7 +323,7 @@ public class SOFUtils {
         if (CollectionUtils.isEmpty(expands)) {
             return "";
         }
-        String expandsEx = "&$expand=";
+        String expandsEx = "";
         for (String expand : expands) {
             expandsEx = expandsEx.concat(expand).concat(" , ");
         }
@@ -307,7 +335,7 @@ public class SOFUtils {
         if (CollectionUtils.isEmpty(orderBy)) {
             return "";
         }
-        String orderbyStr = "&$orderby=";
+        String orderbyStr = "";
         for (OrderBy order : orderBy) {
             orderbyStr = orderbyStr.concat(order.getOrderField()).concat(Constants.BLANK).concat(order.getSequence()).concat(",");
         }
@@ -324,12 +352,13 @@ public class SOFUtils {
             return null;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date data = new Date(timeLong);
         return formatter.format(data);
     }
 
     public static String removeFieldInUrl(String uri,String removeField) {
-        String regex_destinationLocation = "((\\s){0,}((\\$expand=)|(\\$orderby=))(\\s){0,}("+removeField+")(\\s)*(&|$))|(,{1}(\\s){0,}("+removeField+"))|((\\s){0,}("+removeField+")(\\s)*,{1})";
+        String regex_destinationLocation = "((\\s){0,}((\\$expand=)|(\\" + GTTCoreServiceClient.ORDERBY + "=))(\\s){0,}(" +removeField+")(\\s)*(&|$))|(%2c{1}(\\s){0,}("+removeField+"))|((\\s){0,}("+removeField+")(\\s)*%2c{1})";
         uri = uri.replaceAll(regex_destinationLocation, "");
         return uri;
     }

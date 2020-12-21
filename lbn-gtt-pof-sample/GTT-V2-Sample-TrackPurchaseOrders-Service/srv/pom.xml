@@ -1,0 +1,355 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sap.gtt.v2</groupId>
+        <artifactId>gtt-v2-sample-track-purchaseorders</artifactId>
+        <version>2.2.0</version>
+    </parent>
+
+    <properties>
+        <sonar.exclusions>
+            src/main/java/com/sap/gtt/v2/sample/pof/constant/**/*,
+            src/main/java/com/sap/gtt/v2/sample/pof/exception/**/*,
+            src/main/java/com/sap/gtt/v2/sample/pof/configuration/**/*,
+            src/main/java/com/sap/gtt/v2/sample/pof/domain/**/*,
+            src/main/java/com/sap/gtt/v2/sample/pof/odata/model/**/*,
+            src/main/java/com/sap/gtt/v2/sample/pof/rest/controller/domain/**/*
+        </sonar.exclusions>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <whitesource.projectName>gtt-v2-sample-track-purchaseorders-service</whitesource.projectName>
+        <olingo.version>2.0.11</olingo.version>
+        <spring-boot-starter.version>2.4.0</spring-boot-starter.version>
+        <spring-security.version>5.5.0-M1</spring-security.version>
+        <tomcat-embed-core.version>9.0.37</tomcat-embed-core.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <gson.version>2.8.6</gson.version>
+        <powermock.version>2.0.7</powermock.version>
+        <mockito-core.version>3.5.7</mockito-core.version>
+        <assertj.version>3.13.2</assertj.version>
+        <spring-xsuaa.version>2.7.6</spring-xsuaa.version>
+        <sapjwt.version>1.5.27.5</sapjwt.version>
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+        <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
+        <xsuaa-spring-boot-starter.version>2.7.5</xsuaa-spring-boot-starter.version>
+    </properties>
+    <artifactId>gtt-v2-sample-track-purchaseorders-service</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>xsuaa-spring-boot-starter</artifactId>
+            <version>${xsuaa-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${spring-security-oauth2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${spring-security-jwt.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sap.cloud.security.xsuaa/spring-xsuaa -->
+        <dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>spring-xsuaa</artifactId>
+            <version>${spring-xsuaa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.security</groupId>
+            <artifactId>sapjwt</artifactId>
+            <version>${sapjwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-api</artifactId>
+            <version>${olingo.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>olingo-odata2-api-annotation</artifactId>
+            <groupId>org.apache.olingo</groupId>
+            <type>jar</type>
+            <version>${olingo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-core</artifactId>
+            <version>${olingo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-annotation-processor-api</artifactId>
+            <version>${olingo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.olingo</groupId>
+            <artifactId>olingo-odata2-annotation-processor-core</artifactId>
+            <version>${olingo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat-embed-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>${tomcat-embed-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot-starter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.4</version>
+                    <executions>
+                        <!-- UNIT TESTS -->
+                        <!-- Prepares the property pointing to the JaCoCo runtime agent which
+                             is passed as VM argument when Maven the Surefire plugin is executed. -->
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <destFile>${project.build.directory}/jacoco.exec</destFile>
+                                <!-- Sets the name of the property containing the settings for JaCoCo
+                                     runtime agent. -->
+                                <propertyName>argLine</propertyName>
+                            </configuration>
+                        </execution>
+                        <!-- Ensures that the code coverage report for unit tests is created
+                             after unit tests have been run. -->
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                                <!-- Sets the output directory for the code coverage report. -->
+                                <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- WhiteSource Scan -->
+            <plugin>
+                <groupId>org.whitesource</groupId>
+                <artifactId>whitesource-maven-plugin</artifactId>
+                <version>19.5.1</version>
+                <configuration>
+                        <!--<productVersion>Oct 2019</productVersion>-->
+                        <projectToken></projectToken> <!-- use empty token to allow projectName-->
+                        <aggregateModules>true</aggregateModules> <!-- hack: enable setting projectName via aggregateProjectName -->
+                        <aggregateProjectName>${whitesource.projectName}</aggregateProjectName>
+                        <checkPolicies>true</checkPolicies>
+                        <failOnError>true</failOnError>
+                        <ignorePomModules>false</ignorePomModules>
+                        <autoDetectProxySettings>true</autoDetectProxySettings>
+                        <forceCheckAllDependencies>true</forceCheckAllDependencies>
+                        <forceUpdate>true</forceUpdate>                         
+                        <product>SHC - GTT SAMPLE</product>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>vulas</id>
+            <activation>
+                <property>
+                    <name>vulas</name>
+                </property>
+            </activation>
+            <properties>
+                <vulas.version>3.0.19</vulas.version>
+                <vulas.shared.backend.serviceUrl>https://vulas.tools.sap/backend/</vulas.shared.backend.serviceUrl>
+                <vulas.core.space.token>9663BFCE09A39E4BC3521D5D8325A554</vulas.core.space.token>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- The Vulas plugin itself -->
+                    <plugin>
+                        <groupId>com.sap.research.security.vulas</groupId>
+                        <artifactId>plugin-maven</artifactId>
+                        <version>${vulas.version}</version>
+                        <configuration>
+                            <layeredConfiguration>
+                                <vulas.shared.backend.serviceUrl>${vulas.shared.backend.serviceUrl}</vulas.shared.backend.serviceUrl>
+                                <vulas.core.space.token>${vulas.core.space.token}</vulas.core.space.token>
+                                <vulas.core.appContext.group>${project.groupId}</vulas.core.appContext.group>
+                                <vulas.core.appContext.artifact>${project.artifactId}</vulas.core.appContext.artifact>
+                                <vulas.core.appContext.version>${project.version}</vulas.core.appContext.version>
+                                <vulas.shared.tmpDir>${project.build.directory}/vulas/tmp</vulas.shared.tmpDir>
+                                <vulas.core.uploadDir>${project.build.directory}/vulas/upload</vulas.core.uploadDir>
+                                <vulas.core.app.sourceDir>${project.build.directory}/classes,${project.basedir}/src/main/java,${project.basedir}/src/main/python</vulas.core.app.sourceDir>
+                                <vulas.core.clean.purgeVersions>true</vulas.core.clean.purgeVersions>
+                                <vulas.core.clean.purgeVersions.keepLast>1</vulas.core.clean.purgeVersions.keepLast>
+                                <!-- vulas:instr : Instruments JAR/WAR files found in source dir,
+                                     and writes to target dir. Files in include dir are put into /WEB-INF/lib
+                                     of output WARs. Files in lib dir are part of the class path when instrumenting. -->
+                                <vulas.core.instr.sourceDir>${project.build.directory}</vulas.core.instr.sourceDir>
+                                <vulas.core.instr.targetDir>${project.build.directory}/vulas/target</vulas.core.instr.targetDir>
+                                <vulas.core.instr.includeDir>${project.build.directory}/vulas/include</vulas.core.instr.includeDir>
+                                <vulas.core.instr.libDir>${project.build.directory}/vulas/lib</vulas.core.instr.libDir>
+                                <vulas.core.instr.writeCode>false</vulas.core.instr.writeCode>
+                                <vulas.core.instr.instrumentorsChoosen>com.sap.psr.vulas.monitor.trace.SingleTraceInstrumentor</vulas.core.instr.instrumentorsChoosen>
+                                <vulas.core.instr.searchRecursive>false</vulas.core.instr.searchRecursive>
+                                <vulas.core.monitor.periodicUpload.enabled>false</vulas.core.monitor.periodicUpload.enabled>
+                                <vulas.core.instr.maxStacktraces>10</vulas.core.instr.maxStacktraces>
+                                <!-- vulas:a2c/t2c : Performs static call graph analysis -->
+                                <vulas.reach.wala.callgraph.reflection>NO_FLOW_TO_CASTS_NO_METHOD_INVOKE</vulas.reach.wala.callgraph.reflection>
+                                <vulas.reach.timeout>60</vulas.reach.timeout>
+                                <!-- vulas:report -->
+                                <vulas.report.exceptionExcludeBugs></vulas.report.exceptionExcludeBugs>
+                                <vulas.report.reportDir>${project.build.directory}/vulas/report</vulas.report.reportDir>
+                                <vulas.report.sap.pv>73554900100900004231</vulas.report.sap.pv>
+                                <vulas.report.sap.scv>${vulas.ppms.objno.scv}</vulas.report.sap.scv>
+                            </layeredConfiguration>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+	
+	<repositories>
+        <repository>
+            <id>SpringFramework</id>
+            <name>Spring Framework</name>
+            <url>https://maven.springframework.org/milestone/</url>
+        </repository>
+    </repositories>
+</project>

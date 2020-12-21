@@ -1,0 +1,139 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
+  xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <smartForm:SmartForm id="smartForm"
+		data:defaultCheckBoxDisplayBehaviour="OnOff"
+		data:defaultDropDownDisplayBehaviour="idAndDescription">
+		<smartForm:layout>
+			<smartForm:Layout columnsM="2" columnsL="4" columnsXL="4" labelSpanS="12" labelSpanM="12" labelSpanL="12" labelSpanXL="12"/>
+		</smartForm:layout>
+		<smartForm:Group label="{i18n>departureDetailsTitle}">
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_departure_LABEL}">
+				<ctrl:link.LinkPopover
+					placement="Right"
+					contentHeight="15rem"
+					title="{i18n>locationDetailsPopoverTitle}"
+          text="{supplier}"
+					linkText="{toSupplierLocation/locationDescription}"
+					relatedObject="toSupplierLocation">
+					<ctrl:content>
+						<VBox>
+						<Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
+						<Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+						<Text id="supplierLocationObjectType" text="{toSupplierLocation/objectTypeDescription}" />
+						<Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+						<Text id="supplierLocationSourceSystemId" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
+						<Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+						<HBox justifyContent="SpaceBetween">
+						<Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+							<core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+								tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+						</HBox>
+						</VBox>
+					</ctrl:content>
+				</ctrl:link.LinkPopover>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_departureAddress_LABEL}" >
+				<Text renderWhitespace="true" text="{path:'departureAddress', formatter:'.formatter.formatLineBreaks'}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{departureEmail}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{departureTelephone}"/>
+			</smartForm:GroupElement>
+		</smartForm:Group>
+		<smartForm:Group label="{i18n>destinationDetailsTitle}">
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_destination_LABEL}">
+				<ctrl:link.LinkPopover
+				placement="Right"
+				contentHeight="15rem"
+				title="{i18n>locationDetailsPopoverTitle}"
+				text="{plant}"
+				linkText="{toPlantLocation/locationDescription}"
+				relatedObject="toPlantLocation">
+					<ctrl:content>
+						<VBox>
+							<Title class="pofLocationPopoverTitle" text="{toPlantLocation/locationDescription}"/>
+							<Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+							<Text id="receivingLocationObjectType" text="{toPlantLocation/objectTypeDescription}" />
+							<Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+							<Text id="receivingLocationSourceSystemId" text="{toPlantLocation/sourceSystem} / {toPlantLocation/externalId}"/>
+							<Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+							<HBox justifyContent="SpaceBetween">
+								<Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+								<core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+									tooltip="{= ${toPlantLocation/latitude} !== null ? ${toPlantLocation/latitude} + ', ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+							</HBox>
+						</VBox>
+					</ctrl:content>
+				</ctrl:link.LinkPopover>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_destinationAddress_LABEL}">					
+				<Text renderWhitespace="true" text="{path:'destinationAddress', formatter:'.formatter.formatLineBreaks'}" />
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{warehouseNo}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{doorForWarehouse}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{warehouseDescription}"/>
+			</smartForm:GroupElement>
+		</smartForm:Group>
+		<smartForm:Group label=" ">
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_plannedDeliveryDate_LABEL}">
+				<Text text="{
+					path:'plannedDeliveryDate', 
+					type: 'sap.ui.model.type.DateTime',
+					formatOptions: {
+						pattern: 'MMM dd, yyyy',
+						UTC: true
+					}}" />
+			</smartForm:GroupElement>
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_documentDate_LABEL}">					
+				<Text text="{
+					path:'documentDate', 
+					type: 'sap.ui.model.type.DateTime',
+					formatOptions: {
+						pattern: 'MMM dd, yyyy',
+						UTC: true
+					}}" />
+			</smartForm:GroupElement>
+			<smartForm:GroupElement >
+				<smartField:SmartField value="{grossWeight}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{netWeight}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement  >
+				<smartField:SmartField value="{volume}"/>
+			</smartForm:GroupElement>
+		</smartForm:Group>
+		<smartForm:Group label=" ">
+			<smartForm:GroupElement>
+				<smartField:SmartField value="{billOfLading}" />
+			</smartForm:GroupElement>
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_dangerousGoods_LABEL}">
+				<Text id="deliveryItemDangerousGoodsId" text="{path:'dangerousGoods', formatter:'.formatter.formatBooleanFields'}"/>					
+			</smartForm:GroupElement>
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_incoterms_LABEL}">
+				<smartField:SmartField value="{incoterms/name}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement>
+				<smartField:SmartField value="{incotermsVersion}"/>
+			</smartForm:GroupElement>
+			<smartForm:GroupElement>
+				<smartField:SmartField value="{incotermsLocation}"/>
+			</smartForm:GroupElement>
+      <smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_lastReportedEvent_LABEL}">
+        <Text text="{path:'lastReportedEvent', formatter:'.formatter.lastReportedEventStatusText'}"/>
+      </smartForm:GroupElement>
+		</smartForm:Group>
+	</smartForm:SmartForm>
+</core:FragmentDefinition>

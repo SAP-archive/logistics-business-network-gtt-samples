@@ -30,7 +30,7 @@
 
 		<smartForm:Group label="{i18n>administrativeInformation}">
 			<smartForm:GroupElement label="{parts: [{'value': 'documentDate'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}">
-				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 		</smartForm:Group>
 	</smartForm:SmartForm>

@@ -1,0 +1,18 @@
+[
+  {
+    "eventStatus_code": "DELAYED",
+    "count": 0
+  },
+  {
+    "eventStatus_code": "REPORTED",
+    "count": 1
+  },
+  {
+    "eventStatus_code": "PLANNED",
+    "count": 7
+  },
+  {
+    "eventStatus_code": "OVERDUE",
+    "count": 0
+  }
+]

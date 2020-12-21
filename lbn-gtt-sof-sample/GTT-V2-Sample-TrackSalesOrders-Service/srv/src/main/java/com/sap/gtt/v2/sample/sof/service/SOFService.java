@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -31,6 +33,8 @@ import java.math.RoundingMode;
 import java.util.*;
 
 import static com.sap.gtt.v2.sample.sof.constant.Constants.*;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
+import static org.springframework.util.CollectionUtils.*;
 
 @Service
 public class SOFService {
@@ -52,10 +56,12 @@ public class SOFService {
     public static final String ALT_KEY = "altKey";
     public static final String DELIVERY_NO = "deliveryNo";
     public static final String ITEM_NO = "itemNo";
+    public static final String OVERDUE = "CoreModel.GTTOverdueEvent";
 
     @Autowired
     private GTTCoreServiceClient gttCoreServiceClient;
-
+    //event type: 'com.sap.gtt.core.CoreModel.GTTOverdueEvent'
+    //event status: OVERDUE
     public void executeTasks(String requestBodyFromForwarding) {
         logger.info("entering executeTasks...");
         JsonObject jsonObject = JsonParser.parseString(requestBodyFromForwarding).getAsJsonObject();
@@ -67,16 +73,35 @@ public class SOFService {
 
         JsonObject actualEvent = jsonObject.getAsJsonObject(ACTUAL_EVENT);
         String  eventType = actualEvent.get(EVENT_TYPE).getAsString();
-
-        if (SHIPMENT_DELAY.equals(eventType) || SHIPMENT_LOCATION_UPDATE.equals(eventType) || SOFUtils.isEventTypeInWhiteList(eventType)) {
-            updateCompletionAndDelayedQuantities(salesOrderItemId);
+        SalesOrder salesOrder = getSalesOrderWithSalesOrderItemId(salesOrderItemId);
+        logger.info("salesOrder payload read {}", SOFUtils.getGson().toJson(salesOrder));
+        if (SHIPMENT_DELAY.equals(eventType) || SHIPMENT_LOCATION_UPDATE.equals(eventType) || SOFUtils.isEventTypeInWhiteList(eventType) || eventType.endsWith(OVERDUE)) {
+            salesOrder = fillCalValInSalesOrder(salesOrder,salesOrderItemId);
+            logger.info("salesOrder payload after fillCalValInSalesOrder {}", SOFUtils.getGson().toJson(salesOrder));
+        }
+        if(eventType.endsWith(OVERDUE)||SOFUtils.isEventTypeInWhiteList(eventType)) {
+            salesOrder = updateCompletedAndLateValueOfSalesOrder(salesOrder,salesOrderItemId);
+            logger.info("salesOrder payload after updateCompletedAndLateValueOfSalesOrder {}", SOFUtils.getGson().toJson(salesOrder));
         }
 
+        write(salesOrderItemId, salesOrder);
+
         if (SOFUtils.isEventTypeInWhiteList(eventType)) {
-            updateCompletedAndLateValues(salesOrderItemId);
             updateLastActivityOfDeliveryItem(trackedProcess);
         }
         logger.info("leaving executeTasks... salesOrderItemId:{}", salesOrderItemId);
+    }
+
+    public void write(String salesOrderItemId, SalesOrder salesOrder) {
+        if(salesOrder==null) return;
+        for(SalesOrderItemTP tp : salesOrder.getSalesOrderItemTPs()) {
+            if(tp.getSalesOrderItem()==null)
+                continue;
+            if(StringUtils.equals(tp.getSalesOrderItemId().toString(),salesOrderItemId)) {
+                writeToSalesOrderItem(tp.getSalesOrderItem());
+            }
+        }
+        writeToSalesOrder(salesOrder);
     }
 
 
@@ -86,11 +111,15 @@ public class SOFService {
         if (StringUtils.isEmpty(lastCorrelatedEventId) || StringUtils.isEmpty(tpId)) {
             return;
         }
-        String query = "/Event(guid'" + lastCorrelatedEventId + "')";
+
+        String query = UriComponentsBuilder.fromUriString("/Event(guid'" + lastCorrelatedEventId + "')")
+                .build().encode().toUriString();
+
         Event event = gttCoreServiceClient.readEntity(query, Event.class);
         String eventType = event.getEventType().substring(event.getEventType().lastIndexOf(".")+1);
-        query = "/" + eventType + "(guid'" + lastCorrelatedEventId +
-                "')?$expand=eventProcesses/plannedEvent";
+        query = UriComponentsBuilder.fromUriString("/" + eventType + "(guid'" + lastCorrelatedEventId + "')")
+                .queryParam(EXPAND, "eventProcesses/plannedEvent")
+                .build().encode().toUriString();
 
         EventEx actualEvent = gttCoreServiceClient.readEntity(query, EventEx.class);
         PlannedEvent plannedEvent = null;
@@ -140,37 +169,35 @@ public class SOFService {
         return deliveryItemEvent;
     }
 
-    public void updateCompletionAndDelayedQuantities(String salesOrderItemId) {
-        String salesOrderId = updateQuantitiesInSalesOrderItem(salesOrderItemId);
-        updateQuantitiesInSalesOrder(salesOrderId);
-    }
-
-    private String updateQuantitiesInSalesOrderItem(String salesOrderItemId) {
-        String uri = "/SalesOrderItem(guid'" + salesOrderItemId + "')?$expand=deliveryItemTPs/deliveryItem";
-        SalesOrderItem salesOrderItem = gttCoreServiceClient.readEntity(uri, SalesOrderItem.class);
-        fillCalValInSalesOrderItem(salesOrderItem);
-        SalesOrderItemEvent salesOrderItemEvent = generateSalesOrderItemEvent(salesOrderItem);
-        String body = new Gson().toJson(salesOrderItemEvent);
-        String writeUrl = "/SalesOrderItemEvent";
-        gttCoreServiceClient.write(body, writeUrl);
-        return salesOrderItem.getSalesOrderId();
-    }
-
-    private String updateQuantitiesInSalesOrder(String salesOrderId) {
-        String uri = "/SalesOrder(guid'" + salesOrderId + "')?$expand=salesOrderItemTPs/salesOrderItem";
-        SalesOrder salesOrder = gttCoreServiceClient.readEntity(uri, SalesOrder.class);
-        fillCalValInSalesOrder(salesOrder);
+    public void writeToSalesOrder(SalesOrder salesOrder) {
         SalesOrderEvent salesOrderEvent = generateSalesOrderEvent(salesOrder);
         String body = new Gson().toJson(salesOrderEvent);
         String writeUrl = "/SalesOrderEvent";
         gttCoreServiceClient.write(body, writeUrl);
-        return salesOrder.getId().toString();
     }
+
+    private SalesOrder getSalesOrderWithSalesOrderItemId(String salesOrderItemId) {
+        String uri = UriComponentsBuilder.fromUriString("/SalesOrder")
+                .queryParam(FILTER, "salesOrderItemTPs/salesOrderItem_id eq guid'" + salesOrderItemId + "'")
+                .queryParam(EXPAND, "salesOrderItemTPs/salesOrderItem/deliveryItemTPs/deliveryItem")
+                .build().encode().toUriString();
+
+        ODataResultList<SalesOrder> salesOrders = gttCoreServiceClient.readEntitySetAll(uri, SalesOrder.class);
+        if (isEmpty(salesOrders.getResults())) return null;
+        SalesOrder salesOrder = salesOrders.getResults().get(0);
+        if (isEmpty(salesOrder.getSalesOrderItemTPs())) return null;
+        return salesOrder;
+    }
+
     private SalesOrderItemEvent generateSalesOrderItemEvent(SalesOrderItem salesOrderItem) {
         SalesOrderItemEvent salesOrderItemEvent = new SalesOrderItemEvent();
         salesOrderItemEvent.setAltKey(salesOrderItem.getAltKey());
+
         salesOrderItemEvent.setDelayedQuantity(salesOrderItem.getDelayedQuantity());
         salesOrderItemEvent.setCompletionQuantity(salesOrderItem.getCompletionQuantity());
+        salesOrderItemEvent.setCompletedAndLateQuantity(salesOrderItem.getCompletedAndLateQuantity());
+        salesOrderItemEvent.setCompleted(salesOrderItem.getCompleted());
+
         String time = SOFUtils.getTimeStr();
         salesOrderItemEvent.setActualBusinessTimestamp(time);
         salesOrderItemEvent.setActualBusinessTimeZone("UTC");
@@ -183,8 +210,12 @@ public class SOFService {
     private SalesOrderEvent generateSalesOrderEvent(SalesOrder salesOrder) {
         SalesOrderEvent salesOrderEvent = new SalesOrderEvent();
         salesOrderEvent.setAltKey(salesOrder.getAltKey());
+
         salesOrderEvent.setDelayedValue(salesOrder.getDelayedValue());
         salesOrderEvent.setCompletionValue(salesOrder.getCompletionValue());
+        salesOrderEvent.setCompletedAndLateValue(salesOrder.getCompletedAndLateValue());
+        salesOrderEvent.setCompleted(salesOrder.getCompleted());
+
         String time = SOFUtils.getTimeStr();
         salesOrderEvent.setActualBusinessTimestamp(time);
         salesOrderEvent.setActualBusinessTimeZone("UTC");
@@ -212,7 +243,9 @@ public class SOFService {
         salesOrderItem.setDelayed(sumDelayedQuantity.compareTo(BigDecimal.ZERO) > 0);
     }
 
-    private void fillCalValInSalesOrder(SalesOrder salesOrder) {
+    private SalesOrder fillCalValInSalesOrder(SalesOrder salesOrder,String salesOrderItemId) {
+        if(salesOrder == null) return salesOrder;
+
         BigDecimal singlecv;
         BigDecimal singledv;
         BigDecimal unitPrice;
@@ -225,6 +258,7 @@ public class SOFService {
             if (salesOrderItem == null) {
                 continue;
             }
+            fillCalValInSalesOrderItem(tp.getSalesOrderItem());
             unitPrice = BigDecimal.ZERO.compareTo(salesOrderItem.getOrderQuantity()) == 0 ?
                     BigDecimal.ZERO : salesOrderItem.getNetValue().divide(salesOrderItem.getOrderQuantity(), MathContext.DECIMAL64);
 
@@ -244,6 +278,8 @@ public class SOFService {
         salesOrder.setCompletionValue(sumcv);
         salesOrder.setDelayedValue(sumdv);
         salesOrder.setDelayed(sumdv.compareTo(BigDecimal.ZERO) > 0);
+
+        return salesOrder;
     }
 
     private BigDecimal delayedQuantityInDeliveryItem(DeliveryItem deliveryItem) {
@@ -266,14 +302,11 @@ public class SOFService {
         return completionQuantity;
     }
 
-    public void updateCompletedAndLateValues(String salesOrderItemId) {
-        String uri = "/SalesOrderItem(guid'" + salesOrderItemId + "')?$expand=deliveryItemTPs/deliveryItem";
-        SalesOrderItem salesOrderItem = gttCoreServiceClient.readEntity(uri, SalesOrderItem.class);
-
-        updateCompletedAndLateQuantityOfSalesOrderItem(salesOrderItem);
-
-        SalesOrder salesOrder = getSalesOrder(salesOrderItem);
-        updateCompletedAndLateValueOfSalesOrder(salesOrder);
+    public void writeToSalesOrderItem(SalesOrderItem salesOrderItem) {
+        SalesOrderItemEvent salesOrderItemEvent = generateSalesOrderItemEvent(salesOrderItem);
+        String body = new Gson().toJson(salesOrderItemEvent);
+        String writeUrl = "/SalesOrderItemEvent";
+        gttCoreServiceClient.write(body, writeUrl);
     }
 
     private boolean updateCompletedAndLateQuantityOfSalesOrderItem(SalesOrderItem salesOrderItem) {
@@ -299,19 +332,18 @@ public class SOFService {
         salesOrderItem.setCompletedAndLateQuantity(sumQty);
         salesOrderItem.setCompleted(isAllCompleted);
 
-        SalesOrderItemEvent salesOrderItemEvent = generateSalesOrderItemEventForCompletedAndLateQuantity(salesOrderItem);
-        String body = new Gson().toJson(salesOrderItemEvent);
-        String writeUrl = "/SalesOrderItemEvent";
-        gttCoreServiceClient.write(body, writeUrl);
         return isAllCompleted;
     }
 
-    private void updateCompletedAndLateValueOfSalesOrder(SalesOrder salesOrder) {
+    private SalesOrder updateCompletedAndLateValueOfSalesOrder(SalesOrder salesOrder,String salesOrderItemId) {
+        if(salesOrder==null) return salesOrder;
         BigDecimal sumValue = new BigDecimal(0);
         boolean isAllCompleted = true;
         for (SalesOrderItemTP salesOrderItemTP : salesOrder.getSalesOrderItemTPs()) {
             SalesOrderItem salesOrderItem = salesOrderItemTP.getSalesOrderItem();
-            if (salesOrderItem == null) continue;
+            if (salesOrderItemTP.getSalesOrderItem() == null) continue;
+            updateCompletedAndLateQuantityOfSalesOrderItem(salesOrderItem);
+            logger.info("salesOrder payload after updateCompletedAndLateQuantityOfSalesOrderItem {}", SOFUtils.getGson().toJson(salesOrder));
             if (salesOrderItem.getNetValue() != null && salesOrderItem.getOrderQuantity() != null
                     && salesOrderItem.getCompletedAndLateQuantity() != null) {
                 BigDecimal unitPrice = BigDecimal.ZERO.compareTo(salesOrderItem.getOrderQuantity()) == 0 ?
@@ -319,6 +351,7 @@ public class SOFService {
 
                 sumValue = sumValue.add(salesOrderItem.getCompletedAndLateQuantity().multiply(unitPrice));
             }
+            logger.info("updateCompletedAndLateValueOfSalesOrder salesOrderItem: {}", SOFUtils.getGson().toJson(salesOrderItem));
             if (!Objects.equals(salesOrderItem.getCompleted(), true)) {
                 isAllCompleted = false;
             }
@@ -328,46 +361,10 @@ public class SOFService {
 
         sumValue = sumValue.setScale(2, RoundingMode.HALF_UP);
         salesOrder.setCompletedAndLateValue(sumValue);
-        SalesOrderEvent salesOrderEvent = generateSalesOrderEventForCompletedAndLateValue(salesOrder);
-        String body = new Gson().toJson(salesOrderEvent);
-        String writeUrl = "/SalesOrderEvent";
-        gttCoreServiceClient.write(body, writeUrl);
+
+        return salesOrder;
     }
 
-    private SalesOrder getSalesOrder(SalesOrderItem salesOrderItem) {
-        String uri;
-        uri = "/SalesOrder(guid'" + salesOrderItem.getSalesOrderId() + "')?$expand=salesOrderItemTPs/salesOrderItem";
-        return gttCoreServiceClient.readEntity(uri, SalesOrder.class);
-    }
-
-    private SalesOrderItemEvent generateSalesOrderItemEventForCompletedAndLateQuantity(SalesOrderItem salesOrderItem) {
-        SalesOrderItemEvent salesOrderItemEvent = new SalesOrderItemEvent();
-        salesOrderItemEvent.setAltKey(salesOrderItem.getAltKey());
-        salesOrderItemEvent.setCompletedAndLateQuantity(salesOrderItem.getCompletedAndLateQuantity());
-        salesOrderItemEvent.setCompleted(salesOrderItem.getCompleted());
-
-        String time = SOFUtils.getTimeStr();
-        salesOrderItemEvent.setActualBusinessTimestamp(time);
-
-        salesOrderItemEvent.setActualBusinessTimeZone("UTC");
-        salesOrderItemEvent.setSalesOrderNo(salesOrderItem.getSalesOrderNo());
-        salesOrderItemEvent.setItemNo(salesOrderItem.getItemNo());
-        return salesOrderItemEvent;
-    }
-
-    private SalesOrderEvent generateSalesOrderEventForCompletedAndLateValue(SalesOrder salesOrder) {
-        SalesOrderEvent salesOrderEvent = new SalesOrderEvent();
-        salesOrderEvent.setAltKey(salesOrder.getAltKey());
-        salesOrderEvent.setCompletedAndLateValue(salesOrder.getCompletedAndLateValue());
-        salesOrderEvent.setCompleted(salesOrder.getCompleted());
-
-        String time = SOFUtils.getTimeStr();
-        salesOrderEvent.setActualBusinessTimestamp(time);
-
-        salesOrderEvent.setActualBusinessTimeZone("UTC");
-        salesOrderEvent.setSalesOrderNo(salesOrder.getSalesOrderNo());
-        return salesOrderEvent;
-    }
 
     public List<CarrierRefDocumentForDeliveryItem> getCarrierRefDocuments(UUID deliveryItemId) {
         String query = "/DeliveryItem(guid'{placeholder}')?$expand=delivery/shipmentTPs/shipment/carrierRefDocuments";
@@ -385,16 +382,16 @@ public class SOFService {
                         doc.setDocId(carrierRefDocument.getDocId());
                         doc.setDocTypeCode(carrierRefDocument.getDocTypeCode());
                         doc.setShipmentNo(shipment.getShipmentNo());
+                        doc.setShipmentId(shipment.getId());
                         res.add(doc);
                     }
 
-                    if (!StringUtils.isEmpty(shipment.getTrackID())) {
-                        CarrierRefDocumentForDeliveryItem doc = new CarrierRefDocumentForDeliveryItem();
-                        doc.setDocTypeCode(VP);
-                        doc.setDocId(shipment.getTrackID());
-                        doc.setShipmentNo(shipment.getShipmentNo());
-                        res.add(doc);
-                    }
+                    CarrierRefDocumentForDeliveryItem doc = new CarrierRefDocumentForDeliveryItem();
+                    doc.setDocTypeCode(VP);
+                    doc.setDocId(shipment.getTrackId());
+                    doc.setShipmentNo(shipment.getShipmentNo());
+                    doc.setShipmentId(shipment.getId());
+                    res.add(doc);
                 }
             }
         }
@@ -403,13 +400,21 @@ public class SOFService {
     }
 
     public List<PlannedEvent> getPlannedEvents4TP(UUID tpId) {
-        String query = "/PlannedEvent?$filter=process_id eq guid'" + tpId + "'";
+        String query = UriComponentsBuilder.fromUriString("/PlannedEvent")
+                .queryParam(FILTER, "process_id eq guid'" + tpId + "'")
+                .queryParam(EXPAND, "lastProcessEventDirectory")
+                .build().encode().toUriString();
+
         ODataResultList<PlannedEvent> result = gttCoreServiceClient.readEntitySetAll(query, PlannedEvent.class);
         return result.getResults();
     }
 
     public List<FulfillmentStatus> getFulfillmentStatus(UUID deliveryItemId) {
-        ODataResultList<EventStatus> eventStatusList = gttCoreServiceClient.readEntitySetAll("/EventStatus?$inlinecount=allpages", EventStatus.class);
+        String query = UriComponentsBuilder.fromUriString("/EventStatus")
+                .queryParam(INLINECOUNT, "allpages")
+                .build().encode().toUriString();
+
+        ODataResultList<EventStatus> eventStatusList = gttCoreServiceClient.readEntitySetAll(query, EventStatus.class);
         Map<String, Integer> map = new HashMap<>();
         for (EventStatus eventStatus : eventStatusList.getResults()) {
             String eventStatusCode = eventStatus.getCode();
@@ -457,7 +462,10 @@ public class SOFService {
                 List<Field> navigationFields = FieldUtils.getFieldsListWithAnnotation(codeListClazz, EdmNavigationProperty.class);
                 Class<?> codeListTextClazz = navigationFields.get(0).getDeclaredAnnotation(EdmNavigationProperty.class).toType();
 
-                String query = URL_SPLITTER + codeListName + "?$expand=localized";
+                String query = UriComponentsBuilder.fromUriString(URL_SPLITTER + codeListName)
+                        .queryParam(EXPAND, "localized")
+                        .build().encode().toUriString();
+
                 List<?> list = gttCoreServiceClient.readEntitySetAll(query, codeListClazz, headers).getResults();
 
                 list.forEach(entity -> {

@@ -329,4 +329,38 @@ public class SalesOrder {
     public void setProcessStatus(ProcessStatus processStatus) {
         this.processStatus = processStatus;
     }
+
+    @Override
+    public String toString() {
+        return "SalesOrder{" +
+                "id=" + id +
+                ", salesOrderNo='" + salesOrderNo + '\'' +
+                ", shipToPartyId='" + shipToPartyId + '\'' +
+                ", netValue=" + netValue +
+                ", currency='" + currency + '\'' +
+                ", logicalSystem='" + logicalSystem + '\'' +
+                ", customerReference='" + customerReference + '\'' +
+                ", documentDate=" + documentDate +
+                ", incotermsCode='" + incotermsCode + '\'' +
+                ", incotermsLocation='" + incotermsLocation + '\'' +
+                ", incotermsVersion='" + incotermsVersion + '\'' +
+                ", lastChangeDateTime=" + lastChangeDateTime +
+                ", completionValue=" + completionValue +
+                ", delayedValue=" + delayedValue +
+                ", processStatusCode='" + processStatusCode + '\'' +
+                ", vMaterialNo='" + vMaterialNo + '\'' +
+                ", vMaterialDescription='" + vMaterialDescription + '\'' +
+                ", vShipmentNo='" + vShipmentNo + '\'' +
+                ", salesOrderItemTPs=" + salesOrderItemTPs +
+                ", incoterms=" + incoterms +
+                ", processStatus=" + processStatus +
+                ", altKey='" + altKey + '\'' +
+                ", completedAndLateValue=" + completedAndLateValue +
+                ", isCompleted=" + isCompleted +
+                ", isDelayed=" + isDelayed +
+                ", trackingIdType='" + trackingIdType + '\'' +
+                ", partyId='" + partyId + '\'' +
+                ", locationDTO=" + locationDTO +
+                '}';
+    }
 }

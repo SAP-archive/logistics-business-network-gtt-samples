@@ -669,4 +669,6 @@ public class DeliveryItem {
     public void setLastLocationDescription(String lastLocationDescription) {
         this.lastLocationDescription = lastLocationDescription;
     }
+
+
 }

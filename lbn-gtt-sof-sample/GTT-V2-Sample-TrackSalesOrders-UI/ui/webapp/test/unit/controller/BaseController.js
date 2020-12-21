@@ -264,4 +264,41 @@ sap.ui.define([
     // Assert
     assert.ok(fakeModel.setProperty.calledWith("/", {}), "The location data is updated");
   });
+
+  QUnit.test("navToShipmentApplication", function (assert) {
+    var controller = this.controller;
+
+    // Arrange
+    var fakeService = {};
+    var fakePromise = {};
+    stub(fakePromise, "done");
+    stub(fakeService, "isNavigationSupported").returns(fakePromise);
+    stub(fakeService, "hrefForExternal");
+    stub(sap.m.URLHelper, "redirect");
+    stub(controller, "getText");
+    stub(sap.m.MessageBox, "error");
+    sap.ushell = {
+      Container: {
+        getService: function () {
+          return fakeService;
+        },
+      },
+    };
+
+    // Act
+    controller.navToShipmentApplication("id");
+
+    fakePromise.done.firstCall.args[0]([{
+      supported: true,
+    }]);
+
+    // Assert
+    assert.ok(sap.m.URLHelper.redirect.calledOnce, "The navigation is triggered");
+
+    fakePromise.done.firstCall.args[0]([{
+      supported: false,
+    }]);
+
+    assert.ok(sap.m.MessageBox.error, "The navigation is not supported");
+  });
 });

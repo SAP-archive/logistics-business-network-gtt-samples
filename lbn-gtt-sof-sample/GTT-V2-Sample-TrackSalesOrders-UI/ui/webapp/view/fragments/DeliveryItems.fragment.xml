@@ -92,16 +92,24 @@
 				<ColumnListItem vAlign="Top" type="Navigation" press=".onDeliveryItemPressed">
 					<cells>
 						<ObjectIdentifier id="deliveryNoItemNo" title="{deliveryNo}" text="{itemNo}"/>
-						<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
-						<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+						<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
+						<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 						<ObjectStatus id="processStatus"
-							text="{path: 'processStatus', formatter: '.formatter.codeListDescription'}"
+							text="{
+								parts: [
+									'processStatus/localized/name',
+									'processStatus/name',
+									'processStatus_code'
+								],
+								formatter: '.formatter.codeListDescription'}"
 							icon="{path: 'processStatus_code', formatter: '.formatter.processStatus.getIcon'}"
 							state="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"/>
 						<ObjectStatus id="executionStatus"
 							text="{
 								parts: [
-									'executionStatus',
+									'executionStatus/localized/name',
+									'executionStatus/name',
+									'executionStatus_code',
 									'lastEventName',
 									'lastLocationDescription',
 									'lastVPLocationType/localized/name'
@@ -175,7 +183,7 @@
 								</mc:thresholds>
 							</mc:BulletMicroChart>
 						</VBox>
-						<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+						<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 					</cells>
 				</ColumnListItem>
 			</items>

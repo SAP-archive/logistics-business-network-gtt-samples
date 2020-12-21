@@ -46,7 +46,6 @@
 					<suite:Timeline id="timeline"
 						showHeaderBar="false"
 						showIcons="true"
-						enableDoubleSided="true"
 						groupBy="Date"
 						growingThreshold="10"
 						filterTitle=""

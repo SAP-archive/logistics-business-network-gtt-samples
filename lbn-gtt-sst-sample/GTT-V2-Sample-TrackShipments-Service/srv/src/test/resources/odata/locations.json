@@ -1,0 +1,177 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "138def1d-9523-4cb0-962a-0a6050ad2c94",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QM7CLNT910:NL-HARBOR",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NL-HARBOR",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "NL-HARBOR",
+        "longitude": "4.15848700",
+        "latitude": "52.20936580",
+        "locationTypeCode": null,
+        "locationDescription": "NL Harbor",
+        "objectTypeCode": "LogisticLocation",
+        "objectTypeDescription": "Logistic Location",
+        "locationTypeDescription": null,
+        "postalCode": "466555",
+        "houseNumber": null,
+        "streetName": null,
+        "cityName": "Leiden",
+        "regionCode": null,
+        "regionName": null,
+        "countryCode": "NL",
+        "countryName": "Netherlands (the)",
+        "addressTimeZone": null,
+        "timeZoneId": "",
+        "timeZoneDisplayName": null,
+        "addressDetail": " , 466555 Leiden  Netherlands (the)",
+        "formattedAddress": "NL Harbor$466555 Leiden$Niederlande",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": "",
+        "to_Gln": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Gln"
+          }
+        },
+        "to_Duns": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Duns"
+          }
+        },
+        "to_Unlocode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_Unlocode"
+          }
+        },
+        "to_IataAirportCode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')/to_IataAirportCode"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "181f8f2a-5f92-47c2-ad8d-5f483c8aea17",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "ACC_TEST_CORE_ENGINE:20200826_060244.4444",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:ACC_TEST_CORE_ENGINE:Location:LogisticLocation:20200826_060244.4444",
+        "sourceSystem": "ACC_TEST_CORE_ENGINE",
+        "externalId": "20200826_060244.4444",
+        "longitude": "12.12345000",
+        "latitude": "21.12345000",
+        "locationTypeCode": null,
+        "locationDescription": "Created by CoreEngine: 20200826_060244.4444",
+        "objectTypeCode": "LogisticLocation",
+        "objectTypeDescription": "Logistic Location",
+        "locationTypeDescription": null,
+        "postalCode": "100000",
+        "houseNumber": "No.10",
+        "streetName": "TIanze road",
+        "cityName": "Des Moines",
+        "regionCode": "IA",
+        "regionName": "Iowa",
+        "countryCode": "US",
+        "countryName": "United States (the)",
+        "addressTimeZone": "ABC",
+        "timeZoneId": "",
+        "timeZoneDisplayName": "ABC",
+        "addressDetail": "No.10 TIanze road, 100000 Des Moines Iowa United States (the)",
+        "formattedAddress": "Created by CoreEngine: 20200826_060244.4444$No.10 TIanze road$Des Moines Iowa 100000$United States",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": "",
+        "to_Gln": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')/to_Gln"
+          }
+        },
+        "to_Duns": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')/to_Duns"
+          }
+        },
+        "to_Unlocode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')/to_Unlocode"
+          }
+        },
+        "to_IataAirportCode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'181f8f2a-5f92-47c2-ad8d-5f483c8aea17')/to_IataAirportCode"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "1a31cf0b-8b3f-4704-921c-11f1ebf4b26f",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QM7CLNT910:P_SHANGHAI",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:P_SHANGHAI",
+        "sourceSystem": "QM7CLNT910",
+        "externalId": "P_SHANGHAI",
+        "longitude": "-94.59540000",
+        "latitude": "39.12130000",
+        "locationTypeCode": null,
+        "locationDescription": "Shanghai Port",
+        "objectTypeCode": "LogisticLocation",
+        "objectTypeDescription": "Logistic Location",
+        "locationTypeDescription": null,
+        "postalCode": "48207",
+        "houseNumber": null,
+        "streetName": "320 E Crane St",
+        "cityName": "Topeka",
+        "regionCode": "KS",
+        "regionName": "Kansas",
+        "countryCode": "US",
+        "countryName": "United States (the)",
+        "addressTimeZone": null,
+        "timeZoneId": "",
+        "timeZoneDisplayName": null,
+        "addressDetail": " 320 E Crane St, 48207 Topeka Kansas United States (the)",
+        "formattedAddress": "Shanghai Port$320 E Crane St$Topeka Kansas 48207$United States",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": "",
+        "to_Gln": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')/to_Gln"
+          }
+        },
+        "to_Duns": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')/to_Duns"
+          }
+        },
+        "to_Unlocode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')/to_Unlocode"
+          }
+        },
+        "to_IataAirportCode": {
+          "__deferred": {
+            "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'1a31cf0b-8b3f-4704-921c-11f1ebf4b26f')/to_IataAirportCode"
+          }
+        }
+      }
+    ]
+  }
+}

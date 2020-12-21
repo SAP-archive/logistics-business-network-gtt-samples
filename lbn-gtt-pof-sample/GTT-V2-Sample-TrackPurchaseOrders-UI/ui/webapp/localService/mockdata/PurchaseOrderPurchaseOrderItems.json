@@ -1,0 +1,404 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP"
+        },
+        "lineNo": 1,
+        "purchaseOrder_id": "a3419caf-3597-52b9-89d9-13d63a573767",
+        "purchaseOrderItem_id": "cd509b27-e9b6-548a-a868-a18cfb3ca28e",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005522900010",
+        "purchaseOrder": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')/purchaseOrderItem"
+          }
+        }
+        },
+        {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP"
+        },
+        "lineNo": 2,
+        "purchaseOrder_id": "a3419caf-3597-52b9-89d9-13d63a573767",
+        "purchaseOrderItem_id": "84fd0732-ead6-519a-a70b-bba92fe28dab",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005522900020",
+        "purchaseOrder": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'a3419caf-3597-52b9-89d9-13d63a573767')/purchaseOrderItem"
+          }
+        }
+        },
+        {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP"
+        },
+        "lineNo": 1,
+        "purchaseOrder_id": "bfcdad3f-9058-5d3a-9e6c-023b1162772d",
+        "purchaseOrderItem_id": "d70927b5-103f-5fdf-8fb1-d0d07c48cbc6",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005522300010",
+        "purchaseOrder": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=1,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/purchaseOrderItem"
+          }
+        }
+      },
+        {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP"
+        },
+        "lineNo": 2,
+        "purchaseOrder_id": "bfcdad3f-9058-5d3a-9e6c-023b1162772d",
+        "purchaseOrderItem_id": "767640ff-2ba0-568d-b158-6c6291e10c94",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450005522300020",
+        "purchaseOrder": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItemTPs(lineNo=2,purchaseOrder_id=guid'bfcdad3f-9058-5d3a-9e6c-023b1162772d')/purchaseOrderItem"
+          }
+        }
+        }, {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=1,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=1,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 1,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "9f7b9ba3-78f1-54c0-b37c-04c442c008c4",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200010",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=1,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=1,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=2,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=2,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 2,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "56f06a33-08af-5294-9e92-a2c13778b2d9",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200020",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=2,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=2,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=3,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=3,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 3,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "927d515a-300a-5e13-add1-459ca980d579",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200030",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=3,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=3,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=4,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=4,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 4,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "2e326404-4b3e-597b-b54a-532bf2b6cfb9",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200040",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=4,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=4,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=5,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=5,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 5,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "006c892f-d391-5321-af2b-6f4d3c9732c8",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200050",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=5,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=5,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=6,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=6,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 6,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "84ec6da3-0725-503b-b968-99265637d9ea",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200060",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=6,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=6,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=7,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=7,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 7,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "b289c8a0-458f-503b-a632-61e520af076d",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200070",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=7,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=7,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=8,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=8,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 8,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "bcfbcf80-5646-5a96-9344-ea6fe5eadc64",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200080",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=8,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=8,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=9,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=9,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 9,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "f6b0bd85-bc33-5e44-a43d-d4dd624e2fbf",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200090",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=9,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=9,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=10,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=10,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 10,
+        "purchaseOrder_id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+        "purchaseOrderItem_id": "6438cf77-20b2-5b77-a533-2d07f5f128fc",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER_ITEM:450002009200100",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=10,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=10,purchaseOrder_id=guid'8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 0,
+        "purchaseOrder_id": "48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1",
+        "purchaseOrderItem_id": "2a1e934f-2afc-559b-8ab8-10a734b6367e",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QM9CLNT910:PURCHASE_ORDER_ITEM:{{PURCHASE_ORDER_ITEM}}",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'48f10ea1-a4ae-5ef3-9004-9dce3d23a0e1')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 0,
+        "purchaseOrder_id": "8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a",
+        "purchaseOrderItem_id": "5e37e1d8-8e79-5b3a-a8c1-3c416b006ef3",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QM9CLNT910:PURCHASE_ORDER_ITEM:1677019",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'8d9bc32d-1dd0-512a-9ff5-49911fa7ec2a')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 0,
+        "purchaseOrder_id": "7242306e-15b2-5b94-a71d-7a6ab03d62ba",
+        "purchaseOrderItem_id": "1e9bbb0d-f1ed-5b9c-9e9e-a9c9686c30f4",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QM9CLNT910:PURCHASE_ORDER_ITEM:1117611",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7242306e-15b2-5b94-a71d-7a6ab03d62ba')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 0,
+        "purchaseOrder_id": "725a4853-a5de-5ee2-9b17-c3b0bd845f8a",
+        "purchaseOrderItem_id": "1182a1e8-e0e5-519a-a47e-a08dd7e6d659",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QM9CLNT910:PURCHASE_ORDER_ITEM:0001111112",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'725a4853-a5de-5ee2-9b17-c3b0bd845f8a')/purchaseOrderItem"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7241c038-0070-5aad-8968-da0b749e0068')",
+          "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7241c038-0070-5aad-8968-da0b749e0068')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderPurchaseOrderItems"
+        },
+        "lineNo": 0,
+        "purchaseOrder_id": "7241c038-0070-5aad-8968-da0b749e0068",
+        "purchaseOrderItem_id": "b9e02554-de38-5ddd-ad4e-0961c84ca77a",
+        "purchaseOrderItemAltKey": "xri://sap.com/id:LBN#10010001006:QM9CLNT910:PURCHASE_ORDER_ITEM:0001111113",
+        "purchaseOrder": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7241c038-0070-5aad-8968-da0b749e0068')/purchaseOrder"
+          }
+        },
+        "purchaseOrderItem": {
+          "__deferred": {
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderPurchaseOrderItems(lineNo=0,purchaseOrder_id=guid'7241c038-0070-5aad-8968-da0b749e0068')/purchaseOrderItem"
+          }
+        }
+      }
+    ]
+  }
+}

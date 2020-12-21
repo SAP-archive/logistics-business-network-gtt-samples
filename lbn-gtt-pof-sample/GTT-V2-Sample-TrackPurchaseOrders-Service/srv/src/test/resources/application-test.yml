@@ -1,0 +1,15 @@
+
+security:
+  basic:
+    enabled: false
+
+server:
+  port: 9098
+
+GTT_CORE_ENGINE_TECHNICAL_USER: dummy
+GTT_CORE_ENGINE_TECHNICAL_PWD: dummy
+GTT_CORE_ENGINE_API_URL_FLP_BASED: https://dummy/api
+
+DESTINATION_GTT: dummy
+
+HERE_MAP_KEY: dummy

@@ -39,13 +39,13 @@
 
 		<smartForm:Group label=" ">
 			<smartForm:GroupElement label="{parts: [{'value': 'revisedPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
-				<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+				<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement label="{parts: [{'value': 'initialPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
-				<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+				<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement label="{parts: [{'value': 'documentDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
-				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.Date', formatOptions: {UTC: true}}"/>
+				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement>
 				<smartField:SmartField id="grossWeight" value="{grossWeight}"/>

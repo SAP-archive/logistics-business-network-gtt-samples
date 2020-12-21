@@ -40,7 +40,8 @@
 				<actionLinks>
 				</actionLinks>
 				<actionButtons>
-					<ActionButton enabled="{= ${graph>group} === 2 || ${graph>group} === 3 }" icon="sap-icon://attachment" press=".navToDetailPage"/>
+					<ActionButton icon="sap-icon://attachment" press=".navToDetailPage"
+						enabled="{= ${graph>group} === 2 || ${graph>group} === 3 || ${graph>group} === 5 }"/>
 				</actionButtons>
 			</Node>
 		</nodes>

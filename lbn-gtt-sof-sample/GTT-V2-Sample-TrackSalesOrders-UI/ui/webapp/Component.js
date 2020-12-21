@@ -46,6 +46,7 @@ sap.ui.define(
         sap.ui.getCore().attachThemeChanged(function () {
           this.resetStylesheets();
         }.bind(this));
+        this.resetStylesheets();
 
         var metaModel = this.getModel().getMetaModel();
         metaModel.loaded().then(function () {

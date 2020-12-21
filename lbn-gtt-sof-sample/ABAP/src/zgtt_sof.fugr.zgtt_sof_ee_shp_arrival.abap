@@ -1,4 +1,4 @@
-FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL .
+FUNCTION zgtt_sof_ee_shp_arrival .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -104,7 +104,7 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL .
 * <3> Loop at application objects for geting shipment item data
   LOOP AT i_events INTO ls_events.
 *   Check if Main table is Shipment Header or not.
-     IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
+    IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
       PERFORM create_logtable_et
           TABLES ct_logtable
           USING  ls_events-maintabdef
@@ -120,11 +120,11 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL .
 
     IF lt_stops IS INITIAL.
       CALL FUNCTION 'ZGTT_GET_STOPS_FROM_SHIPMENT'
-      EXPORTING
-        iv_tknum    = <ls_xvttk>-tknum
-        it_vtts_new = lt_xvtts
-      IMPORTING
-        et_stops    = lt_stops.
+        EXPORTING
+          iv_tknum    = <ls_xvttk>-tknum
+          it_vtts_new = lt_xvtts
+        IMPORTING
+          et_stops    = lt_stops.
       SORT lt_stops BY tknum tsnum loccat.
     ENDIF.
 
@@ -145,7 +145,7 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL .
           IF <ls_xvtts>-daten IS NOT INITIAL
             AND ( <ls_xvtts>-daten <> <ls_yvtts>-daten
                   OR <ls_xvtts>-uaten <> <ls_yvtts>-uaten ).
-             lv_relevance = gc_true.
+            lv_relevance = gc_true.
           ENDIF.
         ENDIF.
       ENDIF.
@@ -177,7 +177,7 @@ FUNCTION ZGTT_SOF_EE_SHP_ARRIVAL .
 
           ls_trackingheader-evtcnt  = lv_cnt.
 *         Event ID
-          ls_trackingheader-evtid     = 'SHP_ARRIVAL'.
+          ls_trackingheader-evtid     = 'ARRIV_DEST'.
 *         Event Date
           ls_trackingheader-evtdat  = <ls_xvtts>-daten.
 *         Event Time

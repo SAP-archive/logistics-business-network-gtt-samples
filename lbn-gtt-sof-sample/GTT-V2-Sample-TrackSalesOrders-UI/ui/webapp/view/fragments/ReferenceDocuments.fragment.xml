@@ -19,7 +19,8 @@
 		<items>
 			<ColumnListItem>
 				<cells>
-					<Text text="{deliveryItem>shipmentNo}"/>
+					<Link text="{deliveryItem>shipmentNo}"
+						press=".navToShipmentApplication(${deliveryItem>shipmentId})" />
 					<Text text="{
 						path: 'deliveryItem>docType_code',
 						formatter: '.formatter.carrierRefDocumentTypeText'

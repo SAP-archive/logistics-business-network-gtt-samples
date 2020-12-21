@@ -1,0 +1,461 @@
+{
+  "nodes": [
+    {
+      "id": "8ec2f15d-e7a4-5f48-b7b5-da19e853bcf4",
+      "key": 1,
+      "title": "4500020092",
+      "group": 1,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 1
+        },
+        {
+          "propertyName": "netValue",
+          "value": "544.99",
+          "group": 1,
+          "uom": "EUR"
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER"
+    },
+    {
+      "id": "9f7b9ba3-78f1-54c0-b37c-04c442c008c4",
+      "key": 2,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "6.06",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "6.000",
+          "group": 2,
+          "uom": "PAL"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "56f06a33-08af-5294-9e92-a2c13778b2d9",
+      "key": 3,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "1.04",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "2.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01 (Charge)",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "927d515a-300a-5e13-add1-459ca980d579",
+      "key": 4,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "0.39",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "3.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01 (Charge)",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "2e326404-4b3e-597b-b54a-532bf2b6cfb9",
+      "key": 5,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "6.08",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "4.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "006c892f-d391-5321-af2b-6f4d3c9732c8",
+      "key": 6,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "3.64",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "7.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "84ec6da3-0725-503b-b968-99265637d9ea",
+      "key": 7,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "6.12",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "6.000",
+          "group": 2,
+          "uom": "PAL"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 01",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "b289c8a0-458f-503b-a632-61e520af076d",
+      "key": 8,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "80.08",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "8.000",
+          "group": 2,
+          "uom": "PAL"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 03",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "bcfbcf80-5646-5a96-9344-ea6fe5eadc64",
+      "key": 9,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "1.14",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "9.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 04",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "f6b0bd85-bc33-5e44-a43d-d4dd624e2fbf",
+      "key": 10,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "210.21",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "21.000",
+          "group": 2,
+          "uom": "PAL"
+        },
+        {
+          "propertyName": "materialId",
+          "value": null,
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "LWC Part 05",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "LWC1",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    },
+    {
+      "id": "6438cf77-20b2-5b77-a533-2d07f5f128fc",
+      "key": 11,
+      "title": "",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "netValue",
+          "value": "0.00",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "0.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "materialId",
+          "value": "string",
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "string",
+          "group": 2
+        },
+        {
+          "propertyName": "receivingLocationId",
+          "value": "string",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "PURCHASE_ORDER_ITEM"
+    }
+  ],
+  "lines": [
+    {
+      "from": 1,
+      "to": 2,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 4,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 5,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 6,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 7,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 9,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 10,
+      "status": "Information"
+    },
+    {
+      "from": 1,
+      "to": 11,
+      "status": "Information"
+    }
+  ],
+  "groups": [
+    {
+      "key": 1,
+      "title": "purchaseOrder",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 2,
+      "title": "purchaseOrderItem",
+      "status": "Information",
+      "icon": "sap-icon://lead"
+    }
+  ]
+}

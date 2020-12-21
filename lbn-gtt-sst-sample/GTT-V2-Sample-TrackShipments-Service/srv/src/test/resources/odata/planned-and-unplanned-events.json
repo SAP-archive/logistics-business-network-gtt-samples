@@ -1,0 +1,271 @@
+{
+  "admissiblePlannedEvents": [
+    {
+      "eventType": {
+        "target": "Shipment.CheckIn"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.LoadingStart"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.POD"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Departure"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Arrival"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 1,
+      "matchLocation": false,
+      "maxOverdueDetection": 10,
+      "periodicOverdueDetection": 1,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 1,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.LoadingEnd"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.UnloadingStart"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.UnloadingEnd"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Coupling"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Decoupling"
+      },
+      "businessToleranceUnit": "M",
+      "businessToleranceValue": 10,
+      "matchLocation": false,
+      "maxOverdueDetection": 3,
+      "periodicOverdueDetection": 10,
+      "periodicOverdueDetectionUnit": "M",
+      "technicalToleranceUnit": "M",
+      "technicalToleranceValue": 10,
+      "matchExtensionFields": []
+    }
+  ],
+  "admissibleUnplannedEvents": [
+    {
+      "eventType": {
+        "target": "Shipment.GateInStart"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.GateInEnd"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.GateOutStart"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.GateOutEnd"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.UnloadingStart"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.UnloadingEnd"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.LocationUpdate"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Delay"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Stuffing"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Return"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.POPU"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.POD"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Departure"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Arrival"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.LoadingEnd"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.LoadingStart"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.CheckIn"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Decoupling"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Coupling"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Receive"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Unstuffing"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.Delivered"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.OutForDelivery"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.OtherEvent"
+      }
+    },
+    {
+      "eventType": {
+        "target": "Shipment.ExceptionalEvent"
+      }
+    }
+  ]
+}

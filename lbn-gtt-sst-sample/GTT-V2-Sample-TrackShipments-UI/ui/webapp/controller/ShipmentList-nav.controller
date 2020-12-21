@@ -1,0 +1,349 @@
+sap.ui.define(
+  [
+    "./BaseController",
+    "sap/base/util/isEmptyObject",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/model/Sorter",
+    "sap/m/Token",
+    "sap/ui/model/odata/type/String",
+    "sap/ui/core/Fragment",
+    "sap/ui/generic/app/library",
+    "sap/ui/generic/app/navigation/service/NavigationHandler",
+  ],
+  function (
+    BaseController,
+    isEmptyObject,
+    JSONModel,
+    Filter,
+    FilterOperator,
+    Sorter,
+    Token,
+    StringType,
+    Fragment,
+    GenericAppLibrary,
+    NavigationHandler
+  ) {
+    "use strict";
+
+    return BaseController.extend("com.sap.gtt.app.sample.sst.controller.ShipmentList", {
+      routeName: "shipmentList",
+
+      initModel: function () {
+        var model = new JSONModel({
+          customFilters: {
+            "deliveryTPs.delivery.deliveryNo": {
+              value: null,
+              ranges: [],
+              items: [],
+            },
+          },
+        });
+        this.setModel(model, this.routeName);
+      },
+
+      routePatternMatched: function () {
+        var navigationHandler = new NavigationHandler(this);
+        var parseNavigationPromise = navigationHandler.parseNavigation();
+        parseNavigationPromise.done(function (appData, startupParameters, navType) {
+          if (navType === GenericAppLibrary.navigation.service.NavType.URLParams) {
+            var selectionVariant = appData.oSelectionVariant;
+            if (isEmptyObject(startupParameters)) {
+              return;
+            }
+            var uiState = this.uiState = new sap.ui.comp.state.UIState({});
+            uiState.setSelectionVariant(selectionVariant.toJSONObject());
+            this.navigationHandled = false;
+          }
+        }.bind(this));
+
+        // var uiState = new sap.ui.comp.state.UIState();
+        // var sv = new sap.ui.generic.app.navigation.service.SelectionVariant();
+        // sv.addSelectOption("shipmentNo", "I", "BT", "10", "20");
+        // uiState.setSelectionVariant(sv);
+        // this.byId("smartFilterBar").setUiState(uiState, {replace: true, strictMode: true});
+
+        // Set the filter values. 'true' ensures that existing filters are overwritten
+        // setDataSuiteFormat is deprecated from 1.48
+        // this.byId("smartFilterBar").setDataSuiteFormat(selectionVariant.toJSONString(), true);
+
+        var startupParams = this.getStartupParameters(); // get Startup params from Owner Component
+        if (startupParams.id && startupParams.id[0]) {
+          this.getRouter().navTo("shipment", {
+            id: startupParams.id[0],
+          }, true);
+        }
+      },
+
+      onShipmentPressed: function (oEvent) {
+        var source = oEvent.getSource();
+        var bindingContext = source.getBindingContext();
+
+        this.getRouter().navTo("shipment", {
+          id: bindingContext.getProperty("id"),
+        });
+      },
+
+      onBeforeRebindTable: function (oEvent) {
+        var params = oEvent.getParameter("bindingParams");
+        if (!this.navigationHandled) {
+          this.navigationHandled = true;
+          this.byId("smartFilterBar").setUiState(this.uiState, {replace: true, strictMode: true});
+          this.byId("smartTable").rebindTable();
+          params.preventTableBind = true;
+        } else {
+          this.addDefaultSorters(params.sorter);
+          this.updateFilters(params.filters);
+        }
+      },
+
+      /**
+       * Add the default sorter
+       * @param {object[]} sorter The sorter of the odata service
+       */
+      addDefaultSorters: function (sorter) {
+        if (sorter.length === 0) {
+          var defaultSorter = new Sorter("lastChangeDateTime", true);
+          sorter.push(defaultSorter);
+        }
+      },
+
+      updateFilters: function (filters) {
+        this.refineLocationFilters(filters);
+        this.addCustomFilters(filters);
+      },
+
+      refineLocationFilters: function (filters) {
+        var departureLocationControl = this.byId("smartFilterBar").getControlByKey("departureLocationId");
+        var arrivalLocationControl = this.byId("smartFilterBar").getControlByKey("departureLocationId");
+
+        if (departureLocationControl.getTokens().length
+          && arrivalLocationControl.getTokens().length) {
+          filters.forEach(function (filter, index, list) {
+            if (filter.aFilters) {
+              this.refineLocationFilters(filter.aFilters);
+            } else if (filter.sPath === "departureLocationId" || filter.sPath === "arrivalLocationId") {
+              var locationFilter = this.createLocationFilter(filter.sPath, filter.oValue1);
+              list.splice(index, 1, locationFilter);
+            }
+          }.bind(this));
+        }
+      },
+
+      /**
+       * Create a combined filter for location
+       * Location Alternative Key: xri://sap.com/id:LBN#10010001006:QM7CLNT910:Location:Customer:0000010105
+       * The new filter is a combined one by 3 filters
+       * sourceSystem eq 'QM7CLNT910'
+       * departureLocationType eq 'Customer' or arrivalLocationType eq 'Customer'
+       * departureLocationId eq '0000010105' or arrivalLocationId eq '0000010105'
+       * @param {string} filterKey The filter key `departureLocationId` or `arrivalLocationId`
+       * @param {string} locationAltKey The location alternative key
+       * @returns {sap.ui.model.Filter} One combined filter
+       */
+      createLocationFilter: function (filterKey, locationAltKey) {
+        var items = locationAltKey.split(":").slice(-4);
+        var locationIdFilter = new Filter(filterKey, FilterOperator.EQ, items.pop());
+        var locationTypeFilter = new Filter(filterKey.replace("Id", "Type_code"), FilterOperator.EQ, items.pop());
+        var sourceSystemFilter = new Filter("logicalSystem", FilterOperator.EQ, items.shift());
+
+        return new Filter([locationIdFilter, locationTypeFilter, sourceSystemFilter], true);
+      },
+
+      addCustomFilters: function (filters) {
+        var customFilters = this.getModel(this.routeName).getProperty("/customFilters");
+        var filterList = [];
+        Object.keys(customFilters).forEach(function (key) {
+          var filter = this.createCustomFilter(customFilters[key], key);
+          if (filter) {
+            filterList.push(filter);
+          }
+        }.bind(this));
+
+        if (filterList.length) {
+          filters.push(new Filter(filterList, true));
+        }
+      },
+
+      createCustomFilter: function (customFilterData, key) {
+        var filter = null;
+        var smartFilterBar = this.byId("smartFilterBar");
+        if (smartFilterBar.getControlByKey(key)) {
+          var ranges = customFilterData.ranges;
+          var includeRanges = ranges.filter(function (range) {
+            return !range.exclude;
+          });
+          var excludeRanges = ranges.filter(function (range) {
+            return range.exclude;
+          });
+
+          var includeFilter = this.createFilter(includeRanges, false);
+          var excludeFilter = this.createFilter(excludeRanges, true);
+          if (includeFilter && excludeFilter) {
+            filter = new Filter([includeFilter, excludeFilter], true);
+          } else {
+            filter = includeFilter || excludeFilter;
+          }
+
+        }
+
+        return filter;
+      },
+
+      createFilter: function (ranges, exclude) {
+        var filter = null;
+        var filters = ranges.map(function (range) {
+          return new Filter(range.keyField.replace(/\./g, "/"), range.operation, range.value1, range.value2);
+        });
+
+        if (filters.length) {
+          filter = new Filter(filters, exclude);
+        }
+
+        return filter;
+      },
+
+
+      // ======================================================================
+      // Events
+      // ======================================================================
+
+      onInitSmartFilterBar: function () {
+        var smartFilterBar = this.byId("smartFilterBar");
+        smartFilterBar.getControlByKey("departureLocationId").setValueHelpOnly(true);
+        smartFilterBar.getControlByKey("arrivalLocationId").setValueHelpOnly(true);
+      },
+
+      /**
+       * Update the filters text when filters are changed
+       */
+      onAssignedFiltersChanged: function () {
+        var statusText = this.byId("statusText");
+        var text = this.byId("smartFilterBar").retrieveFiltersWithValuesAsText();
+        statusText.setText(text);
+      },
+
+
+      // ======================================================================
+      // Events
+      // ======================================================================
+
+      onValueHelpRequested: function () {
+        Fragment.load({
+          id: this.createId("dialog"),
+          name: "com.sap.gtt.app.sample.sst.view.fragments.ValueHelpDialog",
+          controller: this,
+        }).then(this.updateDialogSettings.bind(this));
+      },
+
+      updateDialogSettings: function (dialog) {
+        this.valueHelpDialog = dialog;
+        this.getView().addDependent(this.valueHelpDialog);
+
+        // Enable enhanced exclude operations
+        this.valueHelpDialog.setProperty("_enhancedExcludeOperations", true);
+        this.valueHelpDialog.setRangeKeyFields([{
+          label: this.getPropertyLabelText("deliveryNo", "Delivery"),
+          key: "deliveryTPs.delivery.deliveryNo",
+          type: "string",
+          maxLength: 7,
+          typeInstance: new StringType({}, {
+            maxLength: 7,
+          }),
+        }]);
+
+        this.valueHelpDialog.setTokens(this.deliveryNoMultiInput.getTokens());
+        this.valueHelpDialog.open();
+      },
+
+      onValueHelpOkPress: function (oEvent) {
+        var aTokens = oEvent.getParameter("tokens");
+        this.deliveryNoMultiInput.setTokens(aTokens);
+        this.deliveryNoMultiInput.fireTokenUpdate();
+        this.valueHelpDialog.close();
+      },
+
+      onValueHelpCancelPress: function () {
+        this.valueHelpDialog.close();
+        this.valueHelpDialog.destroy();
+      },
+
+      onValueHelpAfterClose: function () {
+        this.valueHelpDialog.destroy();
+      },
+
+      onTokenUpdated: function (oEvent) {
+        var keyField = this.deliveryNoMultiInput.data("keyField");
+        var tokens = this.deliveryNoMultiInput.getTokens();
+        var ranges = [];
+        if (tokens.length !== 1 || oEvent.getParameter("type") !== "removed") {
+          tokens.forEach(function (token) {
+            token.data("range").tokenText = token.getText();
+            ranges.push(token.data("range"));
+          });
+        }
+
+        var model = this.getModel(this.routeName);
+        model.setProperty("/customFilters/".concat(keyField).concat("/ranges"), ranges);
+
+        setTimeout(function () {
+          this.byId("smartFilterBar").fireFilterChange();
+        }.bind(this), 0);
+      },
+
+
+      // ========================================================================
+      // Variant Management
+      // ========================================================================
+
+      onAfterVariantLoad: function () {
+        var model = this.getModel(this.routeName);
+        var smartFilterBar = this.byId("smartFilterBar");
+        var data = smartFilterBar.getFilterData();
+        model.setProperty("/customFilters", data._CUSTOM);
+        this.updateMultiInputTokens(data._CUSTOM);
+      },
+
+      onBeforeVariantSave: function (event) {
+        if (event.getParameter("context") === "STANDARD") {
+          this.updateCustomFilter();
+        }
+      },
+
+      onBeforeVariantFetch: function () {
+        this.updateCustomFilter();
+      },
+
+      updateCustomFilter: function () {
+        var model = this.getModel(this.routeName);
+        var customFilters = model.getProperty("/customFilters");
+
+        var smartFilterBar = this.byId("smartFilterBar");
+        smartFilterBar.setFilterData({
+          _CUSTOM: customFilters,
+        });
+      },
+
+      updateMultiInputTokens: function (customData) {
+        var smartFilterBar = this.byId("smartFilterBar");
+        Object.keys(customData).forEach(function (key) {
+          var inputControl = smartFilterBar.getControlByKey(key);
+          if (inputControl) {
+            var tokens = this.getMultiInputTokens(customData[key].ranges);
+            inputControl.setTokens(tokens);
+            inputControl.setValue();
+          }
+        }.bind(this));
+      },
+
+      getMultiInputTokens: function (ranges) {
+        return ranges.map(function (range) {
+          return new Token({
+            text: range.tokenText,
+          }).data("range", range);
+        });
+      },
+    });
+  }
+);

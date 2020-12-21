@@ -51,7 +51,7 @@ public class ExecutionFlowServiceTest {
         String packingEventJson = SOFUtils.getStringFromResource("/odata/execution-flow-packing-event.json");
         String locationJson = SOFUtils.getStringFromResource("/odata/execution-flow-location.json");
 
-        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$filter=process_id eq"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class));
+        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$filter=process_id%20eq"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class));
         Mockito.when(client.readEntitySetAll(contains("/Departure"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(departureEventJson, EventEx.class));
         Mockito.when(client.readEntitySetAll(contains("/Arrival"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(arrivalEventJson, EventEx.class));
         Mockito.when(client.readEntitySetAll(contains("/Packing"), eq(EventEx.class))).thenReturn(ODataUtils.readEntitySet(packingEventJson, EventEx.class));
@@ -72,7 +72,7 @@ public class ExecutionFlowServiceTest {
         Assert.assertEquals("2020-09-10T01:40:06Z", node1.getActualAt());
         Assert.assertNull(node1.getEventStatus());
         Assert.assertEquals("LATE_REPORTED", node2.getEventStatus());
-        Assert.assertEquals("2020-08-12T22:00:00Z", node2.getPlannedAt());
+        Assert.assertEquals("2020-08-09T22:00:00Z", node2.getPlannedAt());
         Assert.assertEquals("PLANNED", node3.getEventStatus());
         Assert.assertNull(node3.getPlannedAt());
 
@@ -85,8 +85,8 @@ public class ExecutionFlowServiceTest {
 
         Assert.assertEquals("Packing", lane1.getEventType());
         Assert.assertEquals(new Integer(0), lane1.getPosition());
-        Assert.assertEquals("Arrival", lane2.getEventType());
-        Assert.assertEquals("C&M Company", lane2.getLocationDescription());
+        Assert.assertEquals("Departure", lane2.getEventType());
+        Assert.assertEquals("Wancura Hyderabad - Shipping Point", lane2.getLocationDescription());
         Assert.assertEquals(new Integer(2), lane2.getPosition());
         Assert.assertEquals("DeliveryItemPOD", lane3.getEventType());
         Assert.assertEquals("C&M Company", lane3.getLocationDescription());

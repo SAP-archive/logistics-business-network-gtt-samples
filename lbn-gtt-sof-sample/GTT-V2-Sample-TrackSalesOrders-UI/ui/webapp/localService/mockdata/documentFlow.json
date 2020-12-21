@@ -1,135 +1,334 @@
 {
   "nodes": [
     {
-      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
-      "key": 0,
-      "title": "No.123",
-      "group": 1,
-      "status": "Warning",
-      "attributes": [
-        {
-          "propertyName": "shipToPartyId",
-          "value": "Möller Maersk",
-          "group": 1
-        },
-        {
-          "propertyName": "netValue",
-          "value": "29400.0000",
-          "uom": "EUR",
-          "group": 1
-        }, {
-          "propertyName": "isDelayed",
-          "value": "true",
-          "valueStatus": "ValueStatusError",
-          "group": 1
-        }
-      ]
-    },
-    {
-      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
+      "id": "1d65e5a8-b1a5-5148-9a5b-35a3e7bcc643",
       "key": 1,
-      "title": "LBN_M01 (LBN_M01 LBN_M01 LBN_M01 LBN_M01 LBN_M01 )",
-      "group": 2,
+      "title": "9900064714",
+      "group": 1,
       "status": "Error",
       "attributes": [
         {
-          "propertyName": "orderQuantity",
-          "value": "400.000",
-          "uom": "EA",
+          "propertyName": "shipToPartyId",
+          "value": "0000010105",
+          "group": 1
+        },
+        {
+          "propertyName": "netValue",
+          "value": "265.00",
+          "group": 1,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "isDelayed",
+          "value": "true",
+          "group": 1,
+          "valueStatus": "ValueStatusError"
+        }
+      ],
+      "trackingIdType": "SALES_ORDER"
+    },
+    {
+      "id": "74461cdd-746b-598b-896c-2e9259b572c6",
+      "key": 2,
+      "title": "9900064714/20",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "materialNo",
+          "value": "HST_F1",
+          "group": 2
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "Laptop",
           "group": 2
         },
         {
           "propertyName": "netValue",
-          "value": null,
-          "uom": "EUR",
+          "value": "121.00",
+          "group": 2,
+          "uom": "EUR"
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "11.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "isDelayed",
+          "value": "false",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "SALES_ORDER_ITEM"
+    },
+    {
+      "id": "281f0c7b-7442-547f-9152-b6a9929f93b1",
+      "key": 3,
+      "title": "9900064714/40",
+      "group": 2,
+      "status": "Information",
+      "attributes": [
+        {
+          "propertyName": "materialNo",
+          "value": "HST1_R1",
           "group": 2
         },
         {
-          "propertyName": "processStatus",
-          "value": "DELAYED",
-          "valueStatus": "ValueStatusError",
+          "propertyName": "materialDescription",
+          "value": "Monitor",
           "group": 2
-        }, {
-          "propertyName": "isDelayed",
-          "value": "no",
-          "group": 2
-        }
-      ]
-    },
-    {
-      "id": "1781028f-e85a-584f-9e95-b878cbf6e92c",
-      "key": 2,
-      "title": "item no",
-      "group": 3,
-      "status": "Success",
-      "attributes": [
+        },
+        {
+          "propertyName": "netValue",
+          "value": "144.00",
+          "group": 2,
+          "uom": "EUR"
+        },
         {
           "propertyName": "orderQuantity",
-          "value": "400",
-          "uom": "pcs",
+          "value": "12.000",
+          "group": 2,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "isDelayed",
+          "value": "false",
+          "group": 2
+        }
+      ],
+      "trackingIdType": "SALES_ORDER_ITEM"
+    },
+    {
+      "id": "3076d136-7a71-5e09-9a13-83c79ceccd95",
+      "key": 4,
+      "title": "9980090707/20",
+      "group": 3,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "materialNo",
+          "value": "HST_F1",
           "group": 3
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "Laptop",
+          "group": 3
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "1.000",
+          "group": 3,
+          "uom": "EA"
         },
         {
           "propertyName": "processStatus",
           "value": "OVERDUE",
-          "valueStatus": "ValueStatusWarning",
+          "group": 3,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
           "group": 3
         }
-      ]
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY_IT"
     },
     {
-      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
-      "key": 3,
-      "title": "item no",
+      "id": "ef34579a-181a-5f62-9ffd-fb391b74d9ff",
+      "key": 5,
+      "title": "9980096041/20",
       "group": 3,
-      "status": "Information",
+      "status": "Error",
       "attributes": [
         {
-          "propertyName": "orderQuantity",
-          "value": "400",
-          "uom": "pcs",
+          "propertyName": "materialNo",
+          "value": "HST_F1",
           "group": 3
         },
         {
-          "propertyName": "processStatus",
-          "value": "DELAYED",
-          "valueStatus": "ValueStatusError",
-          "group": 3
-        }
-      ]
-    },
-    {
-      "id": "8781028f-e85a-584f-9e95-b878cbf6e92c",
-      "key": 4,
-      "title": "item no",
-      "group": 3,
-      "status": "Standard",
-      "attributes": [
-        {
-          "propertyName": "orderQuantity",
-          "value": "400",
-          "uom": "pcs",
+          "propertyName": "materialDescription",
+          "value": "Laptop",
           "group": 3
         },
         {
+          "propertyName": "orderQuantity",
+          "value": "10.000",
+          "group": 3,
+          "uom": "EA"
+        },
+        {
           "propertyName": "processStatus",
-          "value": "DELAYED",
-          "valueStatus": "ValueStatusWarning",
+          "value": "OVERDUE",
+          "group": 3,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
           "group": 3
         }
-      ]
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY_IT"
+    },
+    {
+      "id": "3bb99f54-5a17-595e-9c92-fda11bc0098c",
+      "key": 6,
+      "title": "9980090707/40",
+      "group": 3,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "materialNo",
+          "value": "HST1_R1",
+          "group": 3
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "Monitor",
+          "group": 3
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "2.000",
+          "group": 3,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 3,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
+          "group": 3
+        }
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY_IT"
+    },
+    {
+      "id": "e24ad509-ab37-54ea-bdb1-cba75f798092",
+      "key": 7,
+      "title": "9980096041/40",
+      "group": 3,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "materialNo",
+          "value": "HST1_R1",
+          "group": 3
+        },
+        {
+          "propertyName": "materialDescription",
+          "value": "Monitor",
+          "group": 3
+        },
+        {
+          "propertyName": "orderQuantity",
+          "value": "10.000",
+          "group": 3,
+          "uom": "EA"
+        },
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 3,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
+          "group": 3
+        }
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY_IT"
+    },
+    {
+      "id": "d423337e-62cc-51de-8918-17fbf954309d",
+      "key": 8,
+      "title": "9980090707",
+      "group": 4,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 4,
+          "valueStatus": "ValueStatusError"
+        }
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY"
+    },
+    {
+      "id": "d022b7cc-a534-5aa5-93c4-0d2ca6bed10e",
+      "key": 9,
+      "title": "9980096041",
+      "group": 4,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 4,
+          "valueStatus": "ValueStatusError"
+        }
+      ],
+      "trackingIdType": "OUTBOUND_DELIVERY"
+    },
+    {
+      "id": "62c131b3-e1eb-54b8-bcda-9095369f55a1",
+      "key": 10,
+      "title": "1100026045",
+      "group": 5,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 5,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
+          "group": 5
+        }
+      ],
+      "trackingIdType": "SHIPMENT_ORDER"
+    },
+    {
+      "id": "5d67279a-d9bc-57a9-bb86-8c0f76e50546",
+      "key": 11,
+      "title": "1100014396",
+      "group": 5,
+      "status": "Error",
+      "attributes": [
+        {
+          "propertyName": "processStatus",
+          "value": "OVERDUE",
+          "group": 5,
+          "valueStatus": "ValueStatusError"
+        },
+        {
+          "propertyName": "executionStatus",
+          "value": "NOT_STARTED",
+          "group": 5
+        }
+      ],
+      "trackingIdType": "SHIPMENT_ORDER"
     }
   ],
   "lines": [
     {
-      "from": 0,
-      "to": 1,
-      "status": "Warning"
-    },
-    {
       "from": 1,
       "to": 2,
-      "status": "Error"
+      "status": "Information"
     },
     {
       "from": 1,
@@ -137,33 +336,91 @@
       "status": "Information"
     },
     {
-      "from": 1,
+      "from": 2,
       "to": 4,
-      "status": "Warning"
+      "status": "Error"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "status": "Error"
+    },
+    {
+      "from": 3,
+      "to": 6,
+      "status": "Error"
+    },
+    {
+      "from": 3,
+      "to": 7,
+      "status": "Error"
     },
     {
       "from": 4,
-      "to": 0,
-      "status": "Success"
+      "to": 8,
+      "status": "Error"
+    },
+    {
+      "from": 5,
+      "to": 9,
+      "status": "Error"
+    },
+    {
+      "from": 6,
+      "to": 8,
+      "status": "Error"
+    },
+    {
+      "from": 7,
+      "to": 9,
+      "status": "Error"
+    },
+    {
+      "from": 8,
+      "to": 10,
+      "status": "Error"
+    },
+    {
+      "from": 9,
+      "to": 11,
+      "status": "Error"
     }
   ],
   "groups": [
     {
       "key": 1,
       "title": "salesOrder",
-      "status": "Warning",
+      "status": "Error",
       "icon": "sap-icon://lead"
     },
     {
       "key": 2,
       "title": "salesOrderItem",
-      "status": "Error",
+      "status": "Information",
       "icon": "sap-icon://lead"
     },
     {
       "key": 3,
       "title": "deliveryItem",
-      "status": "Warning",
+      "status": "Error",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 4,
+      "title": "delivery",
+      "status": "Error",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 5,
+      "title": "shipment",
+      "status": "Error",
+      "icon": "sap-icon://lead"
+    },
+    {
+      "key": 6,
+      "title": "resource",
+      "status": "Information",
       "icon": "sap-icon://lead"
     }
   ]

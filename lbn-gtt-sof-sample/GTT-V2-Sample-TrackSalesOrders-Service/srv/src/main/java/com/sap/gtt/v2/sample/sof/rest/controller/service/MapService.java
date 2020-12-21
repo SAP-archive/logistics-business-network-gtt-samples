@@ -19,24 +19,51 @@ import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.FILTER;
+import static java.lang.String.format;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.nullsFirst;
+import static java.util.Objects.isNull;
+
 @Service
 public class MapService {
     public static final String ACTUAL_SPOT = "ActualSpot";
     public static final String PLANNED_LOCATION = "PlannedLocation";
-    private static final String replacement = "$1";
-    private final static String regex_getTrackingIdTypes = ".+:([^:].+):[^:].+$";
-    private final static String regex_getPartyIds = "(.+):[^:].+:[^:].+$";
-    private final static String regex_getTPId = ".+:([^:].+)$";
+    private static final String REGEX_FIRST_REPLACEMENT = "$1";
+    private final static String REGEX_GET_SECOND = ".+:([^:].+):[^:].+$";
+    private final static String REGEX_GET_FIRSTPART = "(.+):[^:].+:[^:].+$";
+    private final static String REGEX_GET_LAST_PART = ".+:([^:].+)$";
     private static final int SHIPMENT_ID_LENGTH = 10;
     @Autowired
     private GTTCoreServiceClient gttCoreServiceClient;
     @Autowired
     private SOFService sofService;
+
+    /**
+     *
+     * @param deliveryItemId
+     * @return routes list of the delivery item.
+     * get all the actual routes of the delivery item.
+     * set location in actual spots with the locationAltKey.
+     * get currentLocations, that is to say, get the last actual spot as the currentLocation.
+     * get next stops, that is to say, get the ref planned event of the current location.
+     * get all planned routes of the delivery item.(key: groupId)
+     * merge the planned routes and actual routes. get the result.
+     * set transportationMode and stops in routes.(transportation mode and stops only will be shown in shipment)
+     * set eta.
+     * set destination of the route.(generate the locationAltKey field from delivery item and then get location from location master)
+     * remove the reported planned event in the route with the event status white list.
+     * fill coordinates of the actual spots with the actual spot'location master. if the actual spots coordinates is not valid and its event match key is not blank
+     * remove the invalid coordinates including the actual spot and planned spot. and as the same time, add the invalid or missing information in the route.
+     * set location type in the actual spot.(get the location type from user defined event )
+     *
+     */
 
     public List<Route> getRoutes(String deliveryItemId) {
         Set<String> trackingIdTypes = new HashSet<>();
@@ -47,6 +74,7 @@ public class MapService {
         getNextStops(actualRoutes, deliveryItemId);
         Map<String, Route> plannedRoutes = getPlannedRoutes(deliveryItemId);
         List<Route> result = mergeRoutes(trackingIdTypes, partyIds, actualRoutes, plannedRoutes);
+
         getTransPortationModeAndStops(result);
         setETA(result);
         setDestination(result, deliveryItemId);
@@ -78,7 +106,9 @@ public class MapService {
             );
             FilterExpression filter = FilterExpressionBuilder.createFilterExpression(filterConditions, BinaryOperator.OR);
             if (filter != null) {
-                String url = Constants.URL_SPLITTER + k + "?$filter=" + filter.getExpressionString();
+                String url = UriComponentsBuilder.fromUriString(Constants.URL_SPLITTER+k)
+                        .queryParam(FILTER,filter.getExpressionString())
+                        .build().encode().toUriString();
                 List<EventEx> events = gttCoreServiceClient.readEntitySetAll(url, EventEx.class).getResults();
                 events.forEach(eventEx -> eventExMap.put(eventEx.getId(), eventEx));
             }
@@ -120,8 +150,9 @@ public class MapService {
         });
     }
 
+
     private void setDestination(List<Route> result, String deliveryItemId) {
-        String url = "/DeliveryItem(guid'" + deliveryItemId + "')";
+        String url = UriComponentsBuilder.fromUriString(format("/DeliveryItem(guid'%s')",deliveryItemId)).build().encode().toUriString();
         DeliveryItem deliveryItem = gttCoreServiceClient.readEntity(url, DeliveryItem.class);
         String destinationAltKey = SOFUtils.generateLocationAltKey(deliveryItem.getPartyId(), deliveryItem.getLogicalSystem(), deliveryItem.getDestinationLocationTypeCode(), deliveryItem.getDestination());
         Location location = gttCoreServiceClient.getLocation(destinationAltKey);
@@ -149,7 +180,11 @@ public class MapService {
 
     }
 
-
+    /**
+     *
+     * set location in actual spots with the locationAltKey.
+     *
+     */
     private void setLocationInActualSpot(Map<String, Route> actualRoutes) {
         List<Route> routes = new ArrayList<>(actualRoutes.values());
         Set<String> locationAltKeys = new HashSet<>();
@@ -169,6 +204,14 @@ public class MapService {
         });
     }
 
+    /**
+     * @expectResult: eta need to be set in the route
+     * @param: the entire routes
+     * get the etas from currentLocation of route.
+     * set the eta to planned spot with two condition:
+     * condition 1: event type of the planned event should be shipment.arrival
+     * condition 2: the planned spot's event match key(groupId) needs to be same as the eta's stop.
+     */
     private void setETA(List<Route> result) {
         if (CollectionUtils.isEmpty(result)) {
             return;
@@ -329,6 +372,15 @@ public class MapService {
         return SOFUtils.generateUrl(targetEntityName, filterConditions, BinaryOperator.AND, expand, null);
     }
 
+    /**
+     *
+     * @param trackingIdTypes
+     * @param partyIds
+     * @param actualRoutes
+     * @param plannedRoutes
+     * @return the entire routes with planned route and actual route
+     *
+     */
     public List<Route> mergeRoutes(Set<String> trackingIdTypes, Set<String> partyIds, Map<String, Route> actualRoutes, Map<String, Route> plannedRoutes) {
         if (actualRoutes.isEmpty()) {
             return new ArrayList<>(plannedRoutes.values());
@@ -349,6 +401,22 @@ public class MapService {
         routes.addAll(plannedR);
         return routes;
     }
+
+    /**
+     *
+     * @param actualRoutes
+     * @param plannedR
+     * @param k   groupId of the planned route
+     * @param plannedRoute
+     * @param partyId
+     * @param trackingIdType
+     * group events with groupId
+     * two group condition:
+     * condition 1: the altKey in actual evnet contains the groupId of the planned event.
+     * condition 2.1 : the next planned event of the actual event group is in the planned event groups.
+     * condition 2.2 : the planned event of the current location's event reported on in the actual event group is in the planned event groups.
+     *
+     */
 
     public void groupEventsWithGroupId(Map<String, Route> actualRoutes, List<Route> plannedR, String k, Route plannedRoute, String partyId, String trackingIdType) {
         String altKey = partyId.concat(":").concat(trackingIdType).concat(":").concat(k);
@@ -371,6 +439,14 @@ public class MapService {
             plannedR.remove(plannedRoute);
         }
     }
+
+    /**
+     *
+     * @param plannedEventId
+     * @param plannedSpots
+     * @param contains true means the returned result need to contain the planned event id.
+     * @return all the unreported planned spots.
+     */
 
     private List<PlannedSpot> getUnReportedPlannedSpots(UUID plannedEventId, List<PlannedSpot> plannedSpots, boolean contains) {
         if (plannedEventId == null) {
@@ -428,12 +504,20 @@ public class MapService {
         filterConditions.add(propertyCondition);
         propertyCondition = new FilterCondition("eventType", FilterCondition.EDM_TYPE_STRING, eventType, BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
-        propertyCondition = new FilterCondition("process_id", FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
+        propertyCondition = new FilterCondition(Constants.PROCESS_ID, FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
         String targetEntityName = Constants.PLANNED_EVENT_ENTITY_NAME;
         return SOFUtils.generateUrl(targetEntityName, filterConditions, BinaryOperator.AND, null, null);
     }
 
+    /**
+     *
+     * @param trackingIdTypes
+     * @param partyIds
+     * @return the actual routes of the delivery item. (key: altKey of actual route, value: actual route.)
+     * get the actual event and corresponding planned event of the delivery item order by actual business time.
+     * get the actual spots order by actual time from these events.
+     */
     public Map<String, Route> getActualRoute(Set<String> trackingIdTypes, Set<String> partyIds, String deliveryItemId) {
         String url = getActualRouteUrl(deliveryItemId);
         ODataResultList<ProcessEventDirectory> entityList = gttCoreServiceClient.readEntitySetAll(url, ProcessEventDirectory.class);
@@ -444,16 +528,17 @@ public class MapService {
     private String getActualRouteUrl(String deliveryItemId) {
         List<FilterCondition> filterConditions = new ArrayList<>();
         FilterCondition propertyCondition = null;
-        propertyCondition = new FilterCondition("process_id", FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
+        propertyCondition = new FilterCondition(Constants.PROCESS_ID, FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
         List<OrderBy> orderbys = new ArrayList<>();
-        orderbys.add(new OrderBy("event/actualBusinessTimestamp", ""));
+        orderbys.add(new OrderBy(Constants.EVENT_ACTUAL_BUSINESS_TIMESTAMP, ""));
         String targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
         List<String> expand = new ArrayList<>();
         expand.add(Constants.EVENT_EXPAND);
         expand.add(Constants.PLANNED_EVENT_EXPAND);
         return SOFUtils.generateUrlWithCorrelationType(targetEntityName, filterConditions, BinaryOperator.AND, expand, orderbys);
     }
+
 
     public Map<String, Route> getRoutesFromEvents(Set<String> trackingIdTypes, Set<String> partyIds, List<ProcessEventDirectory> processEventDirectories) {
         Map<String, Route> map = new HashMap<>();
@@ -470,14 +555,14 @@ public class MapService {
                 route = map.get(altKey);
             } else {
                 route = new Route();
-                trackingIdTypes.add(altKey.replaceAll(regex_getTrackingIdTypes, replacement));
-                partyIds.add(altKey.replaceAll(regex_getPartyIds, replacement));
+                trackingIdTypes.add(altKey.replaceAll(REGEX_GET_SECOND, REGEX_FIRST_REPLACEMENT));
+                partyIds.add(altKey.replaceAll(REGEX_GET_FIRSTPART, REGEX_FIRST_REPLACEMENT));
             }
             ActualSpot actualSpot = generateActualSpotWithPED(processEventDirectory);
             route.addLocationAltKey(actualSpot.getLocationAltKey());
             route.addActualSpot(actualSpot);
             route.setAltKey(altKey);
-            route.setGroupId(altKey.replaceAll(regex_getTPId, replacement));
+            route.setGroupId(altKey.replaceAll(REGEX_GET_LAST_PART, REGEX_FIRST_REPLACEMENT));
             map.put(altKey, route);
 
         }
@@ -510,6 +595,7 @@ public class MapService {
                 case ACTUAL_SPOT:
                     route.setActualSpotsMissing();
                     break;
+                default: break;
             }
             return false;
         }
@@ -521,6 +607,7 @@ public class MapService {
                 case ACTUAL_SPOT:
                     route.setActualSpotsInvalid();
                     break;
+                default: break;
             }
             return false;
         }
@@ -534,6 +621,16 @@ public class MapService {
      * @param eventMatchKey  the eventMatchKey of plannedSpots in this route
      * @param plannedEventId the first planned event's Id of this route
      * @return the side contents of this route
+     * get the all actual event with deliveryItemId and altKey. and then assemble them into side content been.
+     * get the all planned event with delivery item id and eventMatch key, and then remove the not needed planned event with the first planned event id.
+     * set the event reason text (if the planned event's event status is delayed, then find the lasted reported delay event's event reason text)
+     * set the location in side content with side content's locationAltKey.
+     *
+     * note:
+     * isPlannedEvent=true & isAcutalEvent=true means: it's planned event which has been correlated to actual event
+     * isPlannedEvent=true & isActualEvent=false means: it's planned event which has no actual event correlated
+     * isPlannedEvent=false & isActualEvent=true means: it's actual event which has no planned event correlated.
+     *
      */
     public List<SideContent> getSideContents(String deliveryItemId, String altKey, String eventMatchKey, String plannedEventId) {
         List<SideContent> actualEventInsideContents = new ArrayList<>();
@@ -545,12 +642,52 @@ public class MapService {
             sideContents = getSideContentsInPlannedEvents(deliveryItemId, eventMatchKey, plannedEventId);
         }
         sideContents.addAll(actualEventInsideContents);
-        setEventResonText(sideContents);
+        setEventReasonText(sideContents);
         setLocationInSideContent(sideContents);
+        if(!CollectionUtils.isEmpty(actualEventInsideContents)) {
+            setActualBisTimeOfReportedPlannedEvent(actualEventInsideContents,deliveryItemId);
+        }
         return sideContents;
     }
 
-    public void setEventResonText(List<SideContent> sideContents) {
+    private void setActualBisTimeOfReportedPlannedEvent(List<SideContent> actualEventInsideContents,String deliveryItemId) {
+        List<PlannedEvent> plannedEvents = getAllPlannedEvent(deliveryItemId);
+        Map<UUID,List<PlannedEvent>> plannedEventMap = plannedEvents
+                .stream()
+                .collect(Collectors.groupingBy(PlannedEvent::getId));
+        actualEventInsideContents.stream()
+                .filter(actualEventInsideContent->!isNull(actualEventInsideContent.getPlannedEventId())&&actualEventInsideContent.getIsPlannedEvent()&&actualEventInsideContent.getIsActualEvent())
+                .forEach(
+                        actualEventInsideContent->writeActualTimeToReportedPlannedEvent(plannedEventMap, actualEventInsideContent)
+                );
+    }
+
+    private void writeActualTimeToReportedPlannedEvent(Map<UUID, List<PlannedEvent>> plannedEventMap, SideContent actualEventInsideContent) {
+        if(CollectionUtils.isEmpty(plannedEventMap)) return;
+        PlannedEvent plannedEvent = plannedEventMap.get(actualEventInsideContent.getPlannedEventId()).get(0);
+        if(!isNull(plannedEvent.getLastProcessEventDirectory())&&!isNull(plannedEvent.getLastProcessEventDirectory().getEvent())) {
+            Event event = plannedEvent.getLastProcessEventDirectory().getEvent();
+            actualEventInsideContent.setActualBusinessTimestamp(event.getActualBusinessTimestamp());
+        }
+
+    }
+
+    public List<PlannedEvent> getAllPlannedEvent(String deliveryItemId) {
+        String url = getAllPlannedEventUrl(deliveryItemId);
+        ODataResultList<PlannedEvent> oDataResultList = gttCoreServiceClient.readEntitySetAll(url, PlannedEvent.class);
+        return oDataResultList.getResults();
+    }
+    public String getAllPlannedEventUrl(String deliveryItemId) {
+        List<FilterCondition> filterConditions = new ArrayList<>();
+        FilterCondition propertyCondition = null;
+        propertyCondition = new FilterCondition(Constants.PROCESS_ID, FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
+        filterConditions.add(propertyCondition);
+        String targetEntityName = Constants.PLANNED_EVENT_ENTITY_NAME;
+        List<String> expand = new ArrayList<>();
+        expand.add(Constants.LAST_PROCESS_EVENT_DIRECTORY_EVENT);
+        return SOFUtils.generateUrl(targetEntityName, filterConditions, BinaryOperator.AND, false, false, expand, null);
+    }
+    public void setEventReasonText(List<SideContent> sideContents) {
         sideContents.stream().filter(sideContent -> sideContent.getIsPlannedEvent()&&sideContent.getEventStatusCode().contains("DELAYED")).forEach(sideContent -> {
             UUID plannedEventId = sideContent.getPlannedEventId();
             String url = getLastestReportedDelayEvent(plannedEventId);
@@ -568,7 +705,7 @@ public class MapService {
         propertyCondition = new FilterCondition("plannedEvent_id", FilterCondition.EDM_TYPE_GUID, plannedEventId.toString(), BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
         List<OrderBy> orderbys = new ArrayList<>();
-        orderbys.add(new OrderBy("event/actualBusinessTimestamp", "desc"));
+        orderbys.add(new OrderBy(Constants.EVENT_ACTUAL_BUSINESS_TIMESTAMP, "desc"));
         String targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
         String filter = "and (substringof('Delay',event/eventType)) ";
         List<String> expand = new ArrayList<>();
@@ -652,7 +789,7 @@ public class MapService {
     public String generatePlannedEventUrl(String deliveryItemId, String eventMatchKey) {
         List<FilterCondition> filterConditions = new ArrayList<>();
         FilterCondition propertyCondition = null;
-        propertyCondition = new FilterCondition("process_id", FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
+        propertyCondition = new FilterCondition(Constants.PROCESS_ID, FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
         List<OrderBy> orderbys = new ArrayList<>();
         orderbys.add(new OrderBy("eventMatchKey", "desc"));
@@ -666,10 +803,10 @@ public class MapService {
     public String generateContentSideUrl(String deliveryItemId, String altKey) {
         List<FilterCondition> filterConditions = new ArrayList<>();
         FilterCondition propertyCondition = null;
-        propertyCondition = new FilterCondition("process_id", FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
+        propertyCondition = new FilterCondition(Constants.PROCESS_ID, FilterCondition.EDM_TYPE_GUID, deliveryItemId, BinaryOperator.EQ);
         filterConditions.add(propertyCondition);
         List<OrderBy> orderbys = new ArrayList<>();
-        orderbys.add(new OrderBy("event/actualBusinessTimestamp", "desc"));
+        orderbys.add(new OrderBy(Constants.EVENT_ACTUAL_BUSINESS_TIMESTAMP, "desc"));
         String targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
         List<String> expand = new ArrayList<>();
         expand.add(Constants.EVENT_EXPAND);
@@ -763,7 +900,10 @@ public class MapService {
     /***
      * Get planned routes for delivery item
      * @param deliveryItemId Id of delivery item
-     * @return Routes for different shipments
+     * @return Routes for different shipments (key: groupId,as the same as first 10 characters of eventMatchKey)
+     * get the planned events of the delivery item
+     * group the planned events by shipment id(first 10 characters of event match key)
+     *
      */
     public Map<String, Route> getPlannedRoutes(String deliveryItemId) {
         Map<String, Route> plannedRouteMap = new HashMap<>();
@@ -773,11 +913,11 @@ public class MapService {
         Map<String, List<PlannedEvent>> eventMap = plannedEvents.stream()
                 .filter(plannedEvent -> StringUtils.isNotEmpty(plannedEvent.getEventMatchKey()))
                 .collect(Collectors.groupingBy(plannedEvent -> StringUtils.substring(plannedEvent.getEventMatchKey(), 0, SHIPMENT_ID_LENGTH)));
-
+        //get all the locations from location master.
         Set<String> locationAltKeys = plannedEvents.stream().map(PlannedEvent::getLocationAltKey).collect(Collectors.toSet());
         List<Location> locations = gttCoreServiceClient.getLocations(locationAltKeys);
         Map<String, Location> locationMap = createLocationMap(locations);
-
+        //get the sorted planned route with location.
         eventMap.forEach((eventMatchKey, plnEvents) -> {
             Route plannedRoute = generatePlannedRoute(plnEvents, locationMap);
             String shipmentId = eventMatchKey.substring(0, SHIPMENT_ID_LENGTH);
@@ -798,23 +938,25 @@ public class MapService {
         return locationMap;
     }
 
+    /**
+     *
+     * @param plannedEvents
+     * @param locationMap
+     * @return sorted planned route with location
+     * Group the planned events by eventMatchKey (shipment id + stop id), then sort by eventMatchKey
+     * sort the each group with planned business timestamp and payloadSequence
+     * set all location of the planned spot.
+     */
     private Route generatePlannedRoute(List<PlannedEvent> plannedEvents, Map<String, Location> locationMap) {
         Route route = new Route();
         List<PlannedSpot> spots = new LinkedList<>();
         // Group the planned events by eventMatchKey (shipment id + stop id), then sort by eventMatchKey
-        plannedEvents.stream().collect(Collectors.groupingBy(PlannedEvent::getEventMatchKey))
+        plannedEvents.stream()
+                .collect(Collectors.groupingBy(PlannedEvent::getEventMatchKey))
                 .entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .forEach(map -> {
-                    List<PlannedEvent> events = map.getValue();
-                    events.stream().sorted((p1, p2) -> {
-                                Long p1ts = p1.getPlannedBusinessTimestamp() == null ? Long.MIN_VALUE : p1.getPlannedBusinessTimestamp();
-                                Long p2ts = p2.getPlannedBusinessTimestamp() == null ? Long.MIN_VALUE : p2.getPlannedBusinessTimestamp();
-                                if (p1ts.compareTo(p2ts) != 0) {
-                                    return p1.getPlannedBusinessTimestamp().compareTo(p2.getPlannedBusinessTimestamp());
-                                }
-                                return p1.getPayloadSequence().compareTo(p2.getPayloadSequence());
-                            }
-                    ).forEach(event -> {
+                    List<PlannedEvent> events   = map.getValue();
+                    events.stream().sorted(getPlannedEventComparator()).forEach(event -> {
                         Optional<Location> location = Optional.ofNullable(locationMap.get(event.getLocationAltKey()));
                         location.ifPresent(l -> {
                             BigDecimal longitude = l.getLongitude();
@@ -848,5 +990,8 @@ public class MapService {
         route.setPlannedSpots(spots);
         return route;
     }
-
+    public Comparator<PlannedEvent> getPlannedEventComparator() {
+        return comparing(PlannedEvent::getPlannedBusinessTimestamp, nullsFirst(Long::compareTo))
+                .thenComparing(PlannedEvent::getPayloadSequence, nullsFirst(Integer::compareTo));
+    }
 }

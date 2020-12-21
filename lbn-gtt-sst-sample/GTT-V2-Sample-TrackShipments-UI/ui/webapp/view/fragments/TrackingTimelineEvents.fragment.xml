@@ -1,0 +1,105 @@
+<core:FragmentDefinition xmlns="sap.suite.ui.commons"
+	xmlns:m="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<m:VBox>
+		<m:layoutData>
+			<layout:SplitterLayoutData
+				size="425px"
+				minSize="225" />
+		</m:layoutData>
+
+		<m:OverflowToolbar class="sapSuiteUiCommonsTimelineHeaderBar">
+			<m:ToolbarSpacer />
+
+			<m:Button id="reportEventsButton"
+				text="{i18n>report}"
+				press=".openReportEventsActionSheet" />
+		</m:OverflowToolbar>
+
+		<Timeline id="trackingTimeline"
+			class="sstTrackingTimeline"
+			busy="{= !${timeline>/isTimelineEventsLoaded} }"
+			growingThreshold="20"
+			showHeaderBar="false"
+			content="{timeline>/timelineEvents}"
+			sortOldestFirst="true"
+			select=".revealLocationOnMap(${$parameters>/selectedItem})">
+			<TimelineItem id="trackingTimelineItem"
+				class="sstTrackingTimelineItem"
+				icon="{:= ${
+					path: 'timeline>eventStatusCode',
+					formatter: '.formatter.eventStatus.isActual'
+				} ? 'sap-icon://sys-enter-2' : '' }"
+				userName="{
+					parts: [
+						'timeline>eventType',
+						'timeline>location/locationDescription',
+						'timeline>locationType/name'
+					],
+					formatter: '.formatter.eventSummary'
+				}"
+				dateTime="{
+					path: 'timeline>timestampForSorting',
+					formatter: '.formatter.dateTime'
+				}">
+				<customData>
+					<core:CustomData key="is-actual-event"
+						value="{:= ${
+							path: 'timeline>eventStatusCode',
+							formatter: '.formatter.eventStatus.isActual'
+						}.toString() }"
+						writeToDom="true" />
+				</customData>
+				<m:VBox>
+					<m:HBox wrap="Wrap"
+						class="sapUiTinyMarginBottom"
+						justifyContent="SpaceBetween">
+						<m:ObjectAttribute class="sapUiTinyMarginTop"
+							visible="{:= ${timeline>plannedBusinessTimestamp} !== null }"
+							title="{i18n>plannedAt}"
+							text="{
+								path: 'timeline>plannedBusinessTimestamp',
+								type: 'sap.ui.model.odata.type.DateTimeOffset'
+							}" />
+
+						<m:ObjectAttribute class="sapUiTinyMarginTop"
+							visible="{:= !${timeline>plannedBusinessTimestamp} }" />
+
+						<m:ObjectStatus class="sapUiTinyMarginTop"
+							text="{
+								path: 'timeline>eventStatusCode',
+								formatter: '.formatter.eventStatusText'
+							}"
+							state="{
+								path: 'timeline>eventStatusCode',
+								formatter: '.formatter.eventStatus.getState'
+							}"
+							inverted="{:= ${timeline>eventStatusCode} === 'DELAYED' }" />
+					</m:HBox>
+
+					<m:HBox wrap="Wrap">
+						<!-- <m:Link id="viewDeliveryItemsLink"
+							class="sapUiTinyMarginTop sapUiSmallMarginEnd"
+							text="{i18n>deliveryItems}"
+							press=".openDeliveryItemsPopover(${$source>})" /> -->
+
+						<m:Link id="viewReportingHistoryLink"
+							visible="{:= ${
+								path: 'timeline>eventStatusCode',
+								formatter: '.formatter.eventStatus.isActual'
+							} &amp;&amp; !!${timeline>historicalEvents}
+								&amp;&amp; ${timeline>historicalEvents}.length > 0
+							}"
+							class="sapUiTinyMarginTop sapUiSmallMarginEnd"
+							text="{i18n>reportingHistory} ({= ${timeline>historicalEvents}.length })"
+							press=".openReportingHistoryPopover(
+								${$source>},
+								${timeline>historicalEvents}
+							)" />
+					</m:HBox>
+				</m:VBox>
+			</TimelineItem>
+		</Timeline>
+	</m:VBox>
+</core:FragmentDefinition>

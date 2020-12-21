@@ -1,0 +1,18 @@
+[
+  {
+    "code": "18",
+    "name": "FTL (Full Truck Load)"
+  },
+  {
+    "code": "17",
+    "name": "LTL (Less Than Truck Load)"
+  },
+  {
+    "code": "2",
+    "name": "LCL (Less Than Container Load)"
+  },
+  {
+    "code": "3",
+    "name": "FCL (Full Container Load)"
+  }
+]

@@ -10,15 +10,16 @@
 		tableType="ResponsiveTable"
 		demandPopin="true"
 		editable="false"
-		entitySet="SalesOrderItem"
-		tableBindingPath=""
+		entitySet="SalesOrderItemTP"
+		tableBindingPath="salesOrderItemTPs"
 		useTablePersonalisation="true"
 		header="{i18n>listItems}"
 		showRowCount="true"
 		useExportToExcel="false"
 		enableAutoBinding="true"
 		beforeRebindTable=".onBeforeRebindSalesOrderItemsTable"
-		requestAtLeastFields="id,processStatus_code">
+		ignoredFields="lineNo,salesOrder_id,salesOrderItem_id,salesOrderItemAltKey"
+		requestAtLeastFields="salesOrderItem/id">
 		<smartTable:customData>
 			<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
 			<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
@@ -28,27 +29,83 @@
 				<Column hAlign="Right">
 					<Text text="{i18n>delayRate}"/>
 					<customData>
-						<core:CustomData key="p13nData" value='{"columnKey": "delayedQuantity", "leadingProperty": "delayedQuantity, orderQuantity, uom", "sortProperty": "delayedQuantity", "columnIndex": "4"}'/>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/delayedQuantity", "leadingProperty": "salesOrderItem/delayedQuantity, salesOrderItem/orderQuantity, salesOrderItem/uom", "sortProperty": "salesOrderItem/delayedQuantity", "navigationProperty": "salesOrderItem", "columnIndex": 4}'/>
 					</customData>
 				</Column>
 				<Column>
 					<Text text="{i18n>completionRate}"/>
 					<customData>
-						<core:CustomData key="p13nData" value='{"columnKey": "completionQuantity", "leadingProperty": "completionQuantity, orderQuantity, currency", "sortProperty": "completionQuantity", "columnIndex": "5"}'/>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/completionQuantity", "leadingProperty": "salesOrderItem/completionQuantity, salesOrderItem/orderQuantity, salesOrderItem/currency", "sortProperty": "salesOrderItem/completionQuantity", "columnIndex": 5}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'altKey'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/altKey", "leadingProperty": "salesOrderItem/altKey", "sortProperty": "salesOrderItem/altKey", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'completedAndLateQuantity'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/completedAndLateQuantity", "leadingProperty": "salesOrderItem/completedAndLateQuantity, salesOrderItem/uom", "sortProperty": "salesOrderItem/completedAndLateQuantity", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Left" visible="false">
+					<Text text="{parts: [{value: 'isCompleted'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/isCompleted", "leadingProperty": "salesOrderItem/isCompleted", "sortProperty": "salesOrderItem/isCompleted", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Left" visible="false">
+					<Text text="{parts: [{value: 'isDelayed'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/isDelayed", "leadingProperty": "salesOrderItem/isDelayed", "sortProperty": "salesOrderItem/isDelayed", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'materialNo'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/materialNo", "leadingProperty": "salesOrderItem/materialNo", "sortProperty": "salesOrderItem/materialNo", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'plant'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/plant", "leadingProperty": "salesOrderItem/plant", "sortProperty": "salesOrderItem/plant", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'trackingIdType'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/trackingIdType", "leadingProperty": "salesOrderItem/trackingIdType", "sortProperty": "salesOrderItem/trackingIdType", "columnIndex": 1000}'/>
+					</customData>
+				</Column>
+				<Column hAlign="Right" visible="false">
+					<Text text="{parts: [{value: 'rejectionStatus_code'}, {value: 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+					<customData>
+						<core:CustomData key="p13nData" value='{"columnKey": "salesOrderItem/rejectionStatus_code", "leadingProperty": "salesOrderItem/rejectionStatus_code", "sortProperty": "salesOrderItem/rejectionStatus_code", "columnIndex": 1000}'/>
 					</customData>
 				</Column>
 			</columns>
 			<items>
-				<ColumnListItem type="Navigation" press=".onSalesOrderItemPressed">
+				<ColumnListItem id="columnListItem" type="Navigation" press=".onSalesOrderItemPressed">
 					<cells>
-						<ObjectStatus id="delayQuantity" text="{parts: ['delayedQuantity', 'orderQuantity', 'uom'], formatter: '.formatter.formattedRateWithQuantityAndUnit'}" state="{path: 'delayedQuantity', formatter: '.formatter.delayStatus'}"/>
+						<ObjectStatus id="delayQuantity" text="{parts: ['salesOrderItem/delayedQuantity', 'salesOrderItem/orderQuantity', 'salesOrderItem/uom'], formatter: '.formatter.formattedRateWithQuantityAndUnit'}" state="{path: 'salesOrderItem/delayedQuantity', formatter: '.formatter.delayStatus'}"/>
 						<mc:HarveyBallMicroChart id="harveyBallChart" size="XS" isResponsive="false"
-							visible="{parts: ['completionQuantity', 'orderQuantity'], formatter: '.formatter.listCompletionRateVisibility'}"
+							visible="{parts: ['salesOrderItem/completionQuantity', 'salesOrderItem/orderQuantity'], formatter: '.formatter.listCompletionRateVisibility'}"
 							total="100" totalScale="%" tooltip="{i18n>completionRate}">
 							<mc:items>
-								<mc:HarveyBallMicroChartItem fraction="{parts: ['completionQuantity', 'orderQuantity'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
+								<mc:HarveyBallMicroChartItem fraction="{parts: ['salesOrderItem/completionQuantity', 'salesOrderItem/orderQuantity'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
 							</mc:items>
 						</mc:HarveyBallMicroChart>
+						<Text id="altKey" text="{salesOrderItem/altKey}"/>
+						<Text id="completedAndLateQuantity" text="{= ${salesOrderItem/uom} ? (${salesOrderItem/completedAndLateQuantity} + ' ' + ${salesOrderItem/uom}) : ${salesOrderItem/completedAndLateQuantity} }"/>
+						<Text id="isCompleted" text="{= ${salesOrderItem/isCompleted} ? ${i18n>yes} : (${salesOrderItem/isCompleted} === false ? ${i18n>no} : '' ) }"/>
+						<Text id="isDelayed" text="{= ${salesOrderItem/isDelayed} ? ${i18n>yes} : (${salesOrderItem/isDelayed} === false ? ${i18n>no} : '' ) }"/>
+						<Text id="materialNo" text="{salesOrderItem/materialNo}"/>
+						<Text id="plant" text="{salesOrderItem/plant}"/>
+						<Text id="trackingIdType" text="{salesOrderItem/trackingIdType}"/>
+						<Text id="rejectionStatus_code" text="{salesOrderItem/rejectionStatus_code}"/>
 					</cells>
 				</ColumnListItem>
 			</items>

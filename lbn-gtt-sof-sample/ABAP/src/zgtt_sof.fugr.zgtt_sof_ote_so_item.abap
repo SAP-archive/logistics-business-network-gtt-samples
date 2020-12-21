@@ -24,6 +24,9 @@ FUNCTION zgtt_sof_ote_so_item.
   DATA:
     ls_app_objects  TYPE trxas_appobj_ctab_wa,
     ls_control_data TYPE /saptrx/control_data,
+*   net value conversion
+    rv_external     TYPE netwr_ak,
+    lv_external     TYPE bapicurr_d,
     lv_tzone        TYPE timezone.
 
   FIELD-SYMBOLS:
@@ -128,7 +131,17 @@ FUNCTION zgtt_sof_ote_so_item.
 
 *   Net value
     ls_control_data-paramname = gc_cp_yn_net_value.
-    ls_control_data-value     = <ls_xvbap>-netwr.
+    CLEAR rv_external.
+    IF <ls_xvbap>-netwr IS NOT INITIAL.
+      CALL FUNCTION 'BAPI_CURRENCY_CONV_TO_EXTERNAL'
+        EXPORTING
+          currency        = <ls_xvbap>-waerk
+          amount_internal = <ls_xvbap>-netwr
+        IMPORTING
+          amount_external = lv_external.
+      rv_external   = round( val = lv_external dec = 2 ).
+    ENDIF.
+    ls_control_data-value     = rv_external.
     SHIFT ls_control_data-value LEFT  DELETING LEADING space.
     APPEND ls_control_data TO e_control_data.
 
@@ -178,7 +191,11 @@ FUNCTION zgtt_sof_ote_so_item.
       APPEND ls_control_data TO e_control_data.
 
       ls_control_data-paramname = gc_cp_yn_so_schedule_dlv_date.
-      ls_control_data-value     = ls_xvbep-edatu.
+      IF ls_xvbep-edatu IS NOT INITIAL.
+        ls_control_data-value     = ls_xvbep-edatu.
+      ELSE.
+        CLEAR ls_control_data-value.
+      ENDIF.
       APPEND ls_control_data TO e_control_data.
 
       ls_control_data-paramname = gc_cp_yn_so_schedule_conf_qty.

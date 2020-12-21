@@ -210,6 +210,6 @@ sap.ui.define(
         || status === Event.Status.Type.DELAYED;
     };
 
-    return Event;
+    return Object.freeze(Event);
   }
 );

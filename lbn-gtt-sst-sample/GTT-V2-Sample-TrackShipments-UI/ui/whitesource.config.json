@@ -1,0 +1,8 @@
+{
+  "productName": "SHC - GTT SAMPLE",
+  "productVer": "current",
+  "projectName": "gtt-v2-ui-sample-track-shipments",
+  "devDep": "false",
+  "forceUpdate": true,
+  "checkPolicies": true
+}

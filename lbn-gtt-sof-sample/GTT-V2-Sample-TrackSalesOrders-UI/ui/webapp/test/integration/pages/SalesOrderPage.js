@@ -157,7 +157,7 @@ sap.ui.define(
             return this.waitFor({
               controlType: "sap.m.ColumnListItem",
               matchers: new BindingPath({
-                path: "/SalesOrderItem(guid'8781028f-e85a-584f-9e95-b878cbf6e92c')",
+                path: "/SalesOrderItemTP(lineNo=1,salesOrder_id=guid'8781028f-e85a-584f-9e95-b878cbf6e92b')",
               }),
               actions: new Press(),
               errorMessage: "Cannot find this sales order item",

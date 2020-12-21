@@ -1,0 +1,80 @@
+[
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'3a4a8eb2-5fd3-555a-a3c0-a294ea937f23')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'3a4a8eb2-5fd3-555a-a3c0-a294ea937f23')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "3a4a8eb2-5fd3-555a-a3c0-a294ea937f23",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "logicalSystem": "QM9CLNT910",
+        "totalDeliveredByValue": null,
+        "totalDelayedByValue": null,
+        "receivingLocationId": null,
+        "completionValue": null,
+        "incoterms_code": null,
+        "incoterms": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'3a4a8eb2-5fd3-555a-a3c0-a294ea937f23')/incoterms"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'49da27aa-ff25-584e-972d-7b036504fc85')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'49da27aa-ff25-584e-972d-7b036504fc85')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "49da27aa-ff25-584e-972d-7b036504fc85",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "logicalSystem": "QM9CLNT910",
+        "totalDeliveredByValue": null,
+        "totalDelayedByValue": null,
+        "receivingLocationId": null,
+        "completionValue": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'49da27aa-ff25-584e-972d-7b036504fc85')/incoterms"
+            }
+        }
+    },
+    {
+        "__metadata": {
+            "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'984569ba-59e3-5153-8bf1-6773b136498a')",
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'984569ba-59e3-5153-8bf1-6773b136498a')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "984569ba-59e3-5153-8bf1-6773b136498a",
+        "purchaseOrderNo": null,
+        "supplierId": null,
+        "plannedDeliveryDate": null,
+        "netValue": null,
+        "currency": null,
+        "incotermsVersion": null,
+        "incotermsLocation": null,
+        "logicalSystem": "QM9CLNT910",
+        "totalDeliveredByValue": null,
+        "totalDelayedByValue": null,
+        "receivingLocationId": null,
+        "completionValue": null,
+        "incoterms_code": "CIF",
+        "incoterms": {
+            "__deferred": {
+                "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'984569ba-59e3-5153-8bf1-6773b136498a')/incoterms"
+            }
+        }
+    }
+]

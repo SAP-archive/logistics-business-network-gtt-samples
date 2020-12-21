@@ -1,0 +1,121 @@
+{
+  "d": {
+    "__count": "2",
+    "results": [
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "0ec4a6a4-7da7-4484-89b9-16592caa1759",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QW9CLNT170:VEN_CO",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Supplier:VEN_CO",
+        "sourceSystem": "QW9CLNT170",
+        "externalId": "VEN_CO",
+        "longitude": "72.87742600",
+        "latitude": "19.07609000",
+        "locationTypeCode": null,
+        "locationDescription": "Tanaya Milk",
+        "objectTypeCode": "Supplier",
+        "objectTypeDescription": "Supplier",
+        "locationTypeDescription": null,
+        "postalCode": "191229",
+        "houseNumber": "22-55-99",
+        "streetName": "mumbai",
+        "cityName": "Mumbai",
+        "regionCode": "TN",
+        "regionName": "Tamil Nadu",
+        "countryCode": "IN",
+        "countryName": "India",
+        "addressTimeZone": null,
+        "timeZoneId": "",
+        "timeZoneDisplayName": null,
+        "addressDetail": "22-55-99 mumbai, 191229 Mumbai Tamil Nadu India",
+        "formattedAddress": "Tanaya Milk$mumbai 22-55-99$191229 Mumbai$Indien",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": "",
+        "to_Gln": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')/to_Gln"
+          }
+        },
+        "to_Duns": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')/to_Duns"
+          }
+        },
+        "to_Unlocode": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')/to_Unlocode"
+          }
+        },
+        "to_IataAirportCode": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'0ec4a6a4-7da7-4484-89b9-16592caa1759')/to_IataAirportCode"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')",
+          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')",
+          "type": "LocationService.LocationForTfo"
+        },
+        "id": "7fdb1e6b-93f3-4486-b8a7-420585716e85",
+        "tenantId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "locationId": "QW9CLNT170:0001",
+        "locationAltKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:Location:Plant:0001",
+        "sourceSystem": "QW9CLNT170",
+        "externalId": "0001",
+        "longitude": "77.21690000",
+        "latitude": "28.63410000",
+        "locationTypeCode": null,
+        "locationDescription": "Plant 0001",
+        "objectTypeCode": "Plant",
+        "objectTypeDescription": "Plant",
+        "locationTypeDescription": null,
+        "postalCode": "19745",
+        "houseNumber": "124",
+        "streetName": "Teststreet",
+        "cityName": "Delhi",
+        "regionCode": "DL",
+        "regionName": "Delhi",
+        "countryCode": "IN",
+        "countryName": "India",
+        "addressTimeZone": null,
+        "timeZoneId": "",
+        "timeZoneDisplayName": null,
+        "addressDetail": "124 Teststreet, 19745 Delhi Delhi India",
+        "formattedAddress": "Plant 0001$Teststreet 124$19745 Delhi$Indien",
+        "gln": "",
+        "duns": "",
+        "unlocode": "",
+        "iataAirportCode": "",
+        "to_Gln": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')/to_Gln"
+          }
+        },
+        "to_Duns": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')/to_Duns"
+          }
+        },
+        "to_Unlocode": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')/to_Unlocode"
+          }
+        },
+        "to_IataAirportCode": {
+          "__deferred": {
+            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'7fdb1e6b-93f3-4486-b8a7-420585716e85')/to_IataAirportCode"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -16,12 +16,14 @@ import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static com.sap.gtt.v2.sample.sof.constant.Constants.ID;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
 
 @Service
 public class ImpactAnalysisService extends DocumentFlowServiceBase {
@@ -33,11 +35,12 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
     private GTTCoreServiceClient gttCoreServiceClient;
 
     public DocumentFlow getInitialNodes(UUID deliveryItemId, UUID plannedEventId) {
-        String query = "/Delay?$expand=eventProcesses/process&$top=1&$orderby=actualBusinessTimestamp desc" +
-                "&$filter=eventProcesses/process_id eq guid'{deliveryItemId}' " +
-                "and eventProcesses/plannedEvent_id eq guid'{plannedEventId}'";
-        query = query.replace("{deliveryItemId}", deliveryItemId.toString())
-                .replace("{plannedEventId}", plannedEventId.toString());
+        String query = UriComponentsBuilder.fromUriString("/Delay")
+                .queryParam(FILTER, String.format("eventProcesses/process_id eq guid'%s' and eventProcesses/plannedEvent_id eq guid'%s'", deliveryItemId, plannedEventId))
+                .queryParam(EXPAND, "eventProcesses/process")
+                .queryParam(TOP, 1)
+                .queryParam(ORDERBY, "actualBusinessTimestamp desc")
+                .build().encode().toUriString();
 
         ODataResultList<DelayEvent> res = gttCoreServiceClient.readEntitySet(query, DelayEvent.class);
         if (res.getResults().size() != 1) {
@@ -50,7 +53,9 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
         for (ProcessEventDirectory processEventDirectory : delayEvent.getEventProcesses()) {
             TrackedProcess trackedProcess = processEventDirectory.getProcess();
             if (trackedProcess.getTrackingIdType().equals("SHIPMENT_ORDER")) {
-                shipment = gttCoreServiceClient.readEntity("/Shipment(guid'" + trackedProcess.getId() + "')", Shipment.class);
+                query = UriComponentsBuilder.fromUriString("/Shipment(guid'" + trackedProcess.getId() + "')")
+                        .build().encode().toUriString();
+                shipment = gttCoreServiceClient.readEntity(query, Shipment.class);
             } else if (trackedProcess.getTrackingIdType().equals(OUTBOUND_DELIVERY)) {
                 deliveryIds.add(trackedProcess.getId());
             }
@@ -63,7 +68,9 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
 
         List<Delivery> deliveries = new ArrayList<>();
         if (filter != null) {
-            query = "/Delivery?$filter=" + filter.getExpressionString();
+            query = UriComponentsBuilder.fromUriString("/Delivery")
+                    .queryParam(FILTER, filter.getExpressionString())
+                    .build().encode().toUriString();
             ODataResultList<Delivery> deliveryResults = gttCoreServiceClient.readEntitySetAll(query, Delivery.class);
             deliveries = deliveryResults.getResults();
         }
@@ -118,7 +125,9 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
     }
 
     private DocumentFlow generateDocumentFlowStartsFromDeliveryItem(UUID deliveryItemId) {
-        DeliveryItem deliveryItem = gttCoreServiceClient.readEntity("/DeliveryItem(guid'" + deliveryItemId + "')", DeliveryItem.class);;
+        String query = UriComponentsBuilder.fromUriString("/DeliveryItem(guid'" + deliveryItemId + "')")
+                .build().encode().toUriString();
+        DeliveryItem deliveryItem = gttCoreServiceClient.readEntity(query, DeliveryItem.class);
         List<Node> nodes = new ArrayList<>();
         List<Line> lines = new ArrayList<>();
         int key = 0;
@@ -173,7 +182,10 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
 
     private List<Node> generateNextNodesForDelivery(UUID tpId) {
         List<Node> res = new ArrayList<>();
-        String query = "/Delivery(guid'" + tpId + "')?$expand=deliveryItemTPs/deliveryItem";
+        String query = UriComponentsBuilder.fromUriString("/Delivery(guid'" + tpId + "')")
+                .queryParam(EXPAND, "deliveryItemTPs/deliveryItem")
+                .build().encode().toUriString();
+
         Delivery delivery = gttCoreServiceClient.readEntity(query, Delivery.class);
         for (DeliveryDeliveryItemTP deliveryItemTP: delivery.getDeliveryItemTPs()) {
             DeliveryItem deliveryItem = deliveryItemTP.getDeliveryItem();
@@ -187,7 +199,10 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
 
     private List<Node> generateNextNodesForDeliveryItem(UUID tpId) {
         List<Node> res = new ArrayList<>();
-        String query = "/DeliveryItem(guid'" + tpId + "')?$expand=salesOrderItem";
+        String query = UriComponentsBuilder.fromUriString("/DeliveryItem(guid'" + tpId + "')")
+                .queryParam(EXPAND, "salesOrderItem")
+                .build().encode().toUriString();
+
         DeliveryItem deliveryItem = gttCoreServiceClient.readEntity(query, DeliveryItem.class);
         Node node = generateSalesOrderItemNode(deliveryItem.getSalesOrderItem());
         res.add(node);
@@ -197,7 +212,10 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
 
     private List<Node> generateNextNodesForSalesOrderItem(UUID tpId) {
         List<Node> res = new ArrayList<>();
-        String query = "/SalesOrderItem(guid'" + tpId + "')?$expand=salesOrder";
+        String query = UriComponentsBuilder.fromUriString("/SalesOrderItem(guid'" + tpId + "')")
+                .queryParam(EXPAND, "salesOrder")
+                .build().encode().toUriString();
+
         SalesOrderItem salesOrderItem = gttCoreServiceClient.readEntity(query, SalesOrderItem.class);
         Node node = generateSalesOrderNode(salesOrderItem.getSalesOrder());
         res.add(node);

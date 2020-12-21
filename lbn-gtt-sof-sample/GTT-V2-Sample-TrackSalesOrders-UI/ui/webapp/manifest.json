@@ -8,7 +8,7 @@
       "version": "1.0.0"
     },
     "title": "{{appTitle}}",
-    "subTitle": "",
+    "subTitle": "{{appSubTitle}}",
     "shortTitle": "",
     "info": "",
     "description": "{{appDescription}}",
@@ -256,6 +256,8 @@
     "archeType": "transactional"
   },
   "sap.platform.cf": {
-    "oAuthScopes": []
+    "oAuthScopes": [
+      "$XSAPPNAME.sof.r"
+    ]
   }
 }

@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0"
+	xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/462030211/Analytics.xml?api=v2">
+		<edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema Namespace="com.lbngttsamples.gtt.app.sof.sofService" Alias="com.lbngttsamples.gtt.app.sof.sofService"
+			xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>shipmentNo</PropertyPath>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>shipmentNo</PropertyPath>
+						<PropertyPath>serviceAgentLbnId</PropertyPath>
+						<PropertyPath>processStatus_code</PropertyPath>
+						<PropertyPath>executionStatus_code</PropertyPath>
+						<PropertyPath>transportationMode_code</PropertyPath>
+						<PropertyPath>shippingType_code</PropertyPath>
+						<PropertyPath>vehicle</PropertyPath>
+						<!-- <PropertyPath>plannedDepartureDateTime</PropertyPath>
+						<PropertyPath>plannedArrivalDateTime</PropertyPath> -->
+						<PropertyPath>departureLocationId</PropertyPath>
+						<PropertyPath>arrivalLocationId</PropertyPath>
+						<PropertyPath>deliveryId</PropertyPath>
+					</Collection>
+				</Annotation>
+				<!-- <Annotation Term="UI.FilterFacets"/> -->
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="shipmentNo"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="itemSearch">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n>EL_DeliveryItem_deliveryNo_LABEL}"/>
+									<PropertyValue Property="Value" Path="deliveryId"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label" String="{@i18n>deliveryItems}"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.EntityContainer/Shipment"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.FilterRestrictions">
+					<Record Type="Capabilities.FilterRestrictionsType">
+						<PropertyValue Property="NonFilterableProperties">
+							<Collection>
+								<PropertyPath>shippingType</PropertyPath>
+								<PropertyPath>transportationMode</PropertyPath>
+								<PropertyPath>processStatus</PropertyPath>
+								<PropertyPath>trackedResourceType</PropertyPath>
+								<PropertyPath>executionStatus</PropertyPath>
+								<PropertyPath>dangerousGoods</PropertyPath>
+								<PropertyPath>forwardingAgentTrackingId</PropertyPath>
+								<PropertyPath>id</PropertyPath>
+								<PropertyPath>lastChangeDateTime</PropertyPath>
+								<PropertyPath>logicalSystem</PropertyPath>
+								<PropertyPath>partyId</PropertyPath>
+								<PropertyPath>trackId</PropertyPath>
+								<PropertyPath>trackingIdType</PropertyPath>
+								<PropertyPath>departureLocation</PropertyPath>
+								<PropertyPath>arrivalLocation</PropertyPath>
+								<PropertyPath>trafficDirection</PropertyPath>
+								<PropertyPath>eventStatus</PropertyPath>
+								<PropertyPath>incoterms</PropertyPath>
+								<PropertyPath>transportMeans</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.FilterExpressionRestrictions">
+					<Collection>
+						<Record Type="Common.FilterExpressionRestrictionType">
+							<PropertyValue Property="Property" PropertyPath="departureLocationId"/>
+							<PropertyValue Property="AllowedExpressions" EnumMember="Common.FilterExpressionType/MultiValue"/>
+						</Record>
+						<Record Type="Common.FilterExpressionRestrictionType">
+							<PropertyValue Property="Property" PropertyPath="arrivalLocationId"/>
+							<PropertyValue Property="AllowedExpressions" EnumMember="Common.FilterExpressionType/MultiValue"/>
+						</Record>
+						<!-- <Record Type="Common.FilterExpressionRestrictionType">
+							<PropertyValue Property="Property" PropertyPath="plannedDepartureDateTime"/>
+							<PropertyValue Property="AllowedExpressions" EnumMember="Common.FilterExpressionType/SingleInterval"/>
+						</Record>
+						<Record Type="Common.FilterExpressionRestrictionType">
+							<PropertyValue Property="Property" PropertyPath="plannedArrivalDateTime"/>
+							<PropertyValue Property="AllowedExpressions" EnumMember="Common.FilterExpressionType/SingleInterval"/>
+						</Record> -->
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/processStatus_code">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ProcessStatus"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="processStatus_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localize/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/executionStatus_code">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ExecutionStatus"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="executionStatus_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/shippingType_code">
+				<Annotation Term="Common.Text" Path="shippingType/localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ShippingType"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="shippingType_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/transportationMode_code">
+				<Annotation Term="Common.Text" Path="transportationMode/localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="TransportationMode"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="transportationMode_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/transportMeans_code">
+				<Annotation Term="Common.Text" Path="transportMeans/localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="TransportMeansStandardCode"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="transportMeans_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/trafficDirection_code">
+				<Annotation Term="Common.Text" Path="trafficDirection/localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="TrafficDirection"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="trafficDirection_code"/>
+									<PropertyValue Property="ValueListProperty" String="code"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/incoterms_code">
+				<Annotation Term="Common.Text" Path="incoterms/localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/departureLocationId">
+				<Annotation Term="Common.Text" Path="departureLocation/locationDescription">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.Label" String="{@i18n&gt;plannedDepartureLocation}"/>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="Location"/>
+						<PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="departureLocationId"/>
+									<PropertyValue Property="ValueListProperty" String="locationAltKey"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="externalId"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="locationDescription"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="sourceSystem"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="objectTypeDescription"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Shipment/arrivalLocationId">
+				<Annotation Term="Common.Label" String="{@i18n&gt;plannedArrivalLocation}"/>
+				<Annotation Term="Common.Text" Path="arrivalLocation/locationDescription">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="Location"/>
+						<PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="arrivalLocationId"/>
+									<PropertyValue Property="ValueListProperty" String="locationAltKey"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="externalId"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="locationDescription"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="sourceSystem"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="objectTypeDescription"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.ProcessStatus/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.ShippingType/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.TransportationMode/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.TransportMeansStandardCode/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.TrafficDirection/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="com.lbngttsamples.gtt.app.sof.sofService.Incoterms/code">
+				<Annotation Term="Common.Text" Path="localized/name">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location">
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>externalId</PropertyPath>
+						<PropertyPath>locationDescription</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location/locationAltKey" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;locationAltKey}"/>
+				<Annotation Term="Common.Text" Path="locationDescription">
+					<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location/locationDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;locationDescription}"/>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location/sourceSystem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;sourceSystem}"/>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location/externalId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;externalId}"/>
+				<Annotation Term="Common.Text" Path="locationDescription"/>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.Location/objectTypeDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;locationObjectType}"/>
+			</Annotations>
+			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.EntityContainer/Location">
+				<Annotation Term="Capabilities.FilterRestrictions">
+					<Record Type="Capabilities.FilterRestrictionsType">
+						<PropertyValue Property="NonFilterableProperties">
+							<Collection>
+								<PropertyPath>id</PropertyPath>
+								<PropertyPath>locationId</PropertyPath>
+								<PropertyPath>tenantId</PropertyPath>
+								<PropertyPath>locationTypeCode</PropertyPath>
+								<PropertyPath>locationTypeDescription</PropertyPath>
+								<PropertyPath>postalCode</PropertyPath>
+								<PropertyPath>houseNumber</PropertyPath>
+								<PropertyPath>streetName</PropertyPath>
+								<PropertyPath>cityName</PropertyPath>
+								<PropertyPath>regionCode</PropertyPath>
+								<PropertyPath>regionName</PropertyPath>
+								<PropertyPath>countryCode</PropertyPath>
+								<PropertyPath>countryName</PropertyPath>
+								<PropertyPath>addressTimeZone</PropertyPath>
+								<PropertyPath>timeZoneId</PropertyPath>
+								<PropertyPath>timeZoneDisplayName</PropertyPath>
+								<PropertyPath>addressDetail</PropertyPath>
+								<PropertyPath>locationAltKey</PropertyPath>
+								<PropertyPath>longitude</PropertyPath>
+								<PropertyPath>latitude</PropertyPath>
+								<PropertyPath>objectTypeCode</PropertyPath>
+								<PropertyPath>locationTypeDescription</PropertyPath>
+								<PropertyPath>formattedAddress</PropertyPath>
+								<PropertyPath>sourceSystem</PropertyPath>
+								<PropertyPath>objectTypeDescription</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

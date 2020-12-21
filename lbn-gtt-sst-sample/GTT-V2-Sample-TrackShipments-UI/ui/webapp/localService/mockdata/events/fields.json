@@ -1,0 +1,119 @@
+{
+  "parent": {
+    "target": "CoreModel.GTTOnTimeEvent"
+  },
+  "elements": [
+    {
+      "name": "altKey",
+      "i18nKey": "EL_Event_altKey_LABEL",
+      "type": "String",
+      "readable": true,
+      "writable": true,
+      "dpp": [],
+      "authScopes": [],
+      "length": 255,
+      "isFromCoreModel": true
+    },
+    {
+      "name": "currency",
+      "i18nKey": "EL_SalesOrder_currency_LABEL",
+      "type": "string",
+      "length": 5,
+      "isFromCoreModel": false
+    },
+    {
+      "name": "lineNo",
+      "i18nKey": "EL_DeliveryTP_lineNo_LABEL",
+      "type": "integer",
+      "isFromCoreModel": false
+    },
+    {
+      "name": "cargoQuantity",
+      "i18nKey": "EL_ShipmentEvent_cargoQuantity_LABEL",
+      "type": "decimal",
+      "precision": 4,
+      "scale": 2,
+      "isFromCoreModel": false
+    },
+    {
+      "name": "isDelayed",
+      "i18nKey": "EL_SalesOrder_isDelayed_LABEL",
+      "type": "boolean",
+      "isFromCoreModel": false
+    },
+    {
+      "name": "actualTechnicalTimestamp",
+      "i18nKey": "EL_Event_actualTechnicalTimestamp_LABEL",
+      "type": "timestamp",
+      "isFromCoreModel": false
+    },
+    {
+      "name": "plannedArrivalDate",
+      "i18nKey": "EL_Shipment_plannedArrivalDateTime_LABEL",
+      "type": "date",
+      "isFromCoreModel": false
+    },
+    {
+      "name": "estimatedArrival",
+      "i18nKey": "EL_EstimatedArrival_estimatedArrivalTime_LABEL",
+      "type": "composition",
+      "isFromCoreModel": false,
+      "fields": [
+        {
+          "name": "estimatedArrivalTimestamp",
+          "i18nKey": "",
+          "type": "timestamp"
+        },
+        {
+          "name": "estimatedArrivalTimeZone",
+          "i18nKey": "",
+          "type": "string",
+          "length": 50
+        },
+        {
+          "name": "stopId",
+          "i18nKey": "",
+          "type": "string",
+          "length": 255
+        },
+        {
+          "name": "locationId",
+          "i18nKey": "",
+          "type": "string",
+          "length": 255
+        },
+        {
+          "name": "anotherComposition",
+          "i18nKey": "",
+          "type": "composition",
+          "fields": [
+            {
+              "name": "estimatedArrivalTimestamp",
+              "i18nKey": "",
+              "type": "timestamp"
+            },
+            {
+              "name": "estimatedArrivalTimeZone",
+              "i18nKey": "",
+              "type": "string",
+              "length": 50
+            },
+            {
+              "name": "stopId",
+              "i18nKey": "",
+              "type": "string",
+              "length": 255
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "locationType",
+      "i18nKey": "EL_StopForVPIntegration_locationType_LABEL",
+      "type": "codelist",
+      "target": "GTTCodeList.VPLocationType",
+      "isFromCoreModel": false
+    }
+  ]
+}
