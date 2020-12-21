@@ -9,7 +9,7 @@ You can find the template code for [SAP Logistics Business Network, global track
 * ERP extractor to send out the tracked process to global track and trace option (ABAP) 
 * Tracked process model that needs to be imported into global track and trace option (model file) 
 * Backend and frontend codes to build Fiori application on global track and trace option (Java and JavaScript)
-
+ 
 ## Requirements
 * An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
 * To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented
