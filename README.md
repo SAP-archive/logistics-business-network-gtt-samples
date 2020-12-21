@@ -17,11 +17,11 @@ You can find the template code for [SAP Logistics Business Network, global track
 
 ## Download and Installation
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
-* Track Sales Order app
+* Track Sales Order app </br>
 [01_Implementation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf) </br>
 [02_Extractor_Creation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-SOF.pdf) </br>
 
-* Track Shipments app
+* Track Shipments app </br>
 [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/01_Application_Introduction-TS.pdf) </br>
 [02_Implementation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/02_Implementation_Guide-TS.pdf) </br>
 [03_Synchronize_Actual_Events_To_TM-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/03_Synchronize_Actual_Events_To_TM-TS.pdf) </br>
