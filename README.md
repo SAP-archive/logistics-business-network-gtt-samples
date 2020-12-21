@@ -1,8 +1,9 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/logistics-business-network-gtt-samples)](https://api.reuse.software/info/github.com/SAP-samples/logistics-business-network-gtt-samples) 
 # Template Apps for SAP Logistics Business Network, Global Track and Trace Option
 
-## Announcement (2020.10.22):
-To adapt to the newest change of GTT October release, please upgrade your SOF model to version: [sof-model-2020101501.json](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Model/sof-model-2020101501.json)
+## Announcement (2020.12.21):
+In this release, we have two new template apps: Track Shipments and Track Purchase Orders app, you can find the code and documents in relevant folder.  </br>
+We also upgrade Track Sales Orders app model, to adapt to the newest change, please upgrade your SOF model to the newest version.
 
 ## Description
 You can find the template code for [SAP Logistics Business Network, global track and trace option]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the option. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes: 
