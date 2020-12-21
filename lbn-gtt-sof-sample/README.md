@@ -1,10 +1,11 @@
 # Sales Order Fulfillment Template App
 
-## What's new in December Release (Dec.21)
-* Enhance sales order and sales order item update logic to adpat to core engine async change. 
-* Fix the issue for sales order delay value calculation when delivery turns to Overdue.
-* Implement sendTrackingRequest function in Event-to-Action script.
-* Rename event code in ERP extractor
+## What's New in Track Sales Orders app (Micro Delivery 2020.Dec.18)
+*	Enhance sales order and sales order item update logic to adapt to core engine asynchronous change. 
+*	Fix the issue for sales order delay value calculation when delivery process status turns to Overdue.
+*	Implement sendTrackingRequest function in Event-to-Action script.
+*	Rename the event code in the ERP extractor, for example SHP_ARRIVAL>>ARRIV_DEST.
+
 
 ## Description
 Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
