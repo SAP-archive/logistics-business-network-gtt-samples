@@ -1,9 +1,0 @@
-{
-  "uaa": {
-    "clientid": "sb-tt_sof_acc!t12255",
-    "xsappname": "tt_sof_acc!t12255",
-    "clientsecret": "61v/Ud7hrMhQlvJbvNSCWrVcR1Q=",
-    "url": "https://lbn-gtt-samples.authentication.sap.hana.ondemand.com",
-    "identityzone": "lbn-gtt-samples"
-  }
-}

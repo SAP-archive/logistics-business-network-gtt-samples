@@ -1,9 +1,0 @@
-{
-  "destinations": [
-    {
-      "name": "lbn-gtt-pof-api",
-      "url": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com",
-      "forwardAuthToken": true
-    }
-  ]
-}
