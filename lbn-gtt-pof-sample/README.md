@@ -16,7 +16,7 @@ Track Purchase Orders template app is designed for purchase representatives to m
 ## Download and Installation
 * TBD
 
-## Notes for ERP Extractor Implementation
+## Limitations
 * The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence.</br>
 * The eventMatchKey of the purchase order item and delivery item's planned event is null.</br>
 * To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Track Purchase Orders template model – Purchase Order fulfillment:</br>
