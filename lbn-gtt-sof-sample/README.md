@@ -22,8 +22,8 @@ Sales Order Fulfillment template app is designed for internal sales representati
 * To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [01_Implementation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-SOF.pdf)
-* [02_Extractor_Creation_Guide-SOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-SOF.pdf)
+* [01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-TSO.pdf)
+* [02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-TSO.pdf)
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
