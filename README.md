@@ -26,7 +26,7 @@ Click the link below to find the detailed installation guide for each tracking s
 [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/01_Application_Introduction-TS.pdf) </br>
 [02_Implementation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/02_Implementation_Guide-TS.pdf) </br>
 [03_Synchronize_Actual_Events_To_TM-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/03_Synchronize_Actual_Events_To_TM-TS.pdf) </br>
-[04_Extractor_Creation_Guide-SST.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/04_Extractor_Creation_Guide-SST.pdf) </br>
+[04_Extractor_Creation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/04_Extractor_Creation_Guide-TS.pdf) </br>
 
 * Track Purchase Orders app </br>
 [01_Implementation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-pof-sample/Documents/01_Implementation_Guide-TPO.pdf) </br>
