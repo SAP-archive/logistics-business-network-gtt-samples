@@ -16,7 +16,7 @@ More details, please refer to [01_Application_Introduction-TS.pdf](https://githu
 ## Download and Installation
 * [02_Implementation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/02_Implementation_Guide-TS.pdf)
 * [03_Synchronize_Actual_Events_To_TM-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/03_Synchronize_Actual_Events_To_TM-TS.pdf)
-* [04_Extractor_Creation_Guide-SST.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/04_Extractor_Creation_Guide-SST.pdf)
+* [04_Extractor_Creation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sst-sample/Documents/04_Extractor_Creation_Guide-TS.pdf)
 
 ## Limitations
 1.	To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Track Sales Orders template model: </br>
