@@ -14,7 +14,8 @@ Track Purchase Orders template app is for purchase representatives to monitor th
 * To integrate with visibility providers, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”</br>
 
 ## Download and Installation
-* 01_Implementation_Guide-TPO
+* 01_Implementation_Guide-TPO </br>
+* 02_Extractor_Creation_Guide-TPO </br>
 
 ## Limitations
 * The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence.</br>
