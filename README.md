@@ -18,7 +18,7 @@ You can find the template code for [SAP Logistics Business Network, global track
 
 ## Download and Installation
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
-* Track Sales Order app </br>
+* Track Sales Orders app </br>
 [01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-TSO.pdf)  </br>
 [02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-TSO.pdf)  </br>
 
