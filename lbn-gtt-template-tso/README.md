@@ -1,4 +1,4 @@
-# Sales Order Fulfillment Template App
+# Track Sales Order Template App
 
 ## What's New in Track Sales Orders app (Micro Delivery 2020.Dec.18)
 *	Enhance sales order and sales order item update logic to adapt to core engine asynchronous change. 
