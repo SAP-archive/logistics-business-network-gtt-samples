@@ -5,6 +5,7 @@
 *	Fix the issue for sales order delay value calculation when delivery process status turns to Overdue.
 *	Implement sendTrackingRequest function in Event-to-Action script.
 *	Rename the event code in the ERP extractor, for example SHP_ARRIVAL>>ARRIV_DEST.
+* Rename the app from Sales Order Fulfillment to Track Sales Orders.
 
 
 ## Description
