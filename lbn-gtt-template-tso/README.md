@@ -15,7 +15,7 @@ Sales Order Fulfillment template app is designed for internal sales representati
 * Where are my sales orders?
 * What is the ETA of my sales orders?
 * ……
-![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/screenshot.png)
+![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/screenshot.png)
 
 ## Requirements
 * An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
@@ -23,8 +23,8 @@ Sales Order Fulfillment template app is designed for internal sales representati
 * To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/01_Implementation_Guide-TSO.pdf)
-* [02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-sof-sample/Documents/02_Extractor_Creation_Guide-TSO.pdf)
+* [01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Implementation_Guide-TSO.pdf) 
+* [02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Extractor_Creation_Guide-TSO.pdf) 
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
