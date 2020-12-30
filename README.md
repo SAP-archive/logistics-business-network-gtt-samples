@@ -2,8 +2,8 @@
 # Template Apps for SAP Logistics Business Network, Global Track and Trace Option
 
 ## Announcement (2020.12.21):
-In this release, we have two new template apps: [Track Shipments app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-template-ts) and [Track Purchase Orders app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-tpo-sample), you can find the code and documents in relevant folder.  </br>
-We also upgrade Track Sales Orders app model, to adapt to the newest change, please upgrade your SOF model to the [newest SOF model version](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/Model/sof-model-2020122101.json).
+In this release, we have two new template apps: [Track Shipments app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-template-ts) and [Track Purchase Orders app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-template-tpo), you can find the code and documents in relevant folder.  </br>
+We also upgrade Track Sales Orders app model, to adapt to the newest change, please upgrade your SOF model to the [newest SOF model version](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Model/sof-model-2020122101.json).
 
 ## Description
 You can find the template code for [SAP Logistics Business Network, global track and trace option]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the option. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes: 
@@ -19,8 +19,8 @@ You can find the template code for [SAP Logistics Business Network, global track
 ## Download and Installation
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
 * Track Sales Orders app </br>
-[01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/Documents/01_Implementation_Guide-TSO.pdf)  </br>
-[02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/Documents/02_Extractor_Creation_Guide-TSO.pdf)  </br>
+[01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Implementation_Guide-TSO.pdf)  </br>
+[02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Extractor_Creation_Guide-TSO.pdf)  </br>
 
 * Track Shipments app </br>
 [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/01_Application_Introduction-TS.pdf) </br>
@@ -29,28 +29,28 @@ Click the link below to find the detailed installation guide for each tracking s
 [04_Extractor_Creation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts
 
 * Track Purchase Orders app </br>
-[01_Implementation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tpo-sample/Documents/01_Implementation_Guide-TPO.pdf) </br>
-[02_Extractor_Creation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tpo-sample/Documents/02_Extractor_Creation_Guide-TPO.pdf) </br>
+[01_Implementation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/01_Implementation_Guide-TPO.pdf) </br>
+[02_Extractor_Creation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/02_Extractor_Creation_Guide-TPO.pdf) </br>
 
 
 ## Limitations
 Click the link below to check the limitations of each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/README.md#limitations)
+* [Track Sales Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#limitations)
 * [Track Shipments – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/README.md#limitations)
-* [Track Purchase Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tpo-sample/README.md#limitations)
+* [Track Purchase Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#limitations)
 
 ## Known Issues
 Click the link below to check known issues for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/README.md#known-issue)
-* [Track Purchase Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tpo-sample/README.md#known-issue)
+* [Track Sales Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#known-issue)
+* [Track Purchase Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#known-issue)
 
 
 
 ## FAQs
 Click the link below to check FAQs for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tso-sample/README.md#faqs)
+* [Track Sales Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#faqs)
 * [Track Shipments – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/README.md#faqs)
-* [Track Purchase Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-tpo-sample/README.md#faqs)
+* [Track Purchase Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#faqs)
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
