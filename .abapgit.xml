@@ -15,6 +15,24 @@
     <item>/abaplint.json</item>
     <item>/azure-pipelines.yml</item>
     <item>/.devcontainer.json</item>
+    <item>/lbn-gtt-template-tpo/Documents</item>
+    <item>/lbn-gtt-template-tpo/GTT-V2-Sample-App-FLP</item>
+    <item>/lbn-gtt-template-tpo/GTT-V2-Sample-TrackPurchaseOrders-Service</item>
+    <item>/lbn-gtt-template-tpo/GTT-V2-Sample-TrackPurchaseOrders-UI</item>
+    <item>/lbn-gtt-template-tpo/Model</item>
+    <item>/lbn-gtt-template-tpo/README.md</item>
+    <item>/lbn-gtt-template-ts/Documents</item>
+    <item>/lbn-gtt-template-ts/GTT-V2-Sample-App-FLP</item>
+    <item>/lbn-gtt-template-ts/GTT-V2-Sample-TrackShipments-Service</item>
+    <item>/lbn-gtt-template-ts/GTT-V2-Sample-TrackShipments-UI</item>
+    <item>/lbn-gtt-template-ts/Model</item>
+    <item>/lbn-gtt-template-ts/README.md</item>
+    <item>/lbn-gtt-template-tso/Documents</item>
+    <item>/lbn-gtt-template-tso/GTT-V2-Sample-App-FLP</item>
+    <item>/lbn-gtt-template-tso/GTT-V2-Sample-TrackSalesOrders-Service</item>
+    <item>/lbn-gtt-template-tso/GTT-V2-Sample-TrackSalesOrders-UI</item>
+    <item>/lbn-gtt-template-tso/Model</item>
+    <item>/lbn-gtt-template-tso/README.md</item>    
    </IGNORE>
   </DATA>
  </asx:values>
