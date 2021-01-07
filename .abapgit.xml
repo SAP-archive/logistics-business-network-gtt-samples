@@ -4,6 +4,7 @@
   <DATA>
    <MASTER_LANGUAGE>E</MASTER_LANGUAGE>
    <FOLDER_LOGIC>FULL</FOLDER_LOGIC>
+   <STARTING_FOLDER>FULL</STARTING_FOLDER>
    <IGNORE>
     <item>/.gitignore</item>    
     <item>/LICENSE</item>
