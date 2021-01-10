@@ -15,7 +15,7 @@
     <item>/abaplint.json</item>
     <item>/azure-pipelines.yml</item>
     <item>/.devcontainer.json</item>
-    <item>/.reuse/*.*</item>
+    <item>/.reuse/*</item>
     <item>/LICENSES/*.*</item>
     <item>/lbn-gtt-template-tpo/Documents/*.*</item>
     <item>/lbn-gtt-template-tpo/GTT-V2-Sample-App-FLP/*.*</item>
