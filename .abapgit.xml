@@ -7,7 +7,6 @@
    <STARTING_FOLDER>/</STARTING_FOLDER>
    <IGNORE>
     <item>/.gitignore</item>    
-    <item>/LICENSE</item>
     <item>/README.md</item>
     <item>/package.json</item>
     <item>/.travis.yml</item>
