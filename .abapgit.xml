@@ -18,7 +18,7 @@
     <item>/.devcontainer.json</item>
     <item>/.reuse/*</item>
     <item>/LICENSES/*.*</item>
-    <item>FAQs_for_Template_Code_Implementation.pdf</item>
+    <item>/FAQs_for_Template_Code_Implementation.pdf</item>
     <item>/lbn-gtt-template-tpo/Documents/*.*</item>
     <item>/lbn-gtt-template-tpo/GTT-V2-Sample-App-FLP/*.*</item>
     <item>/lbn-gtt-template-tpo/GTT-V2-Sample-TrackPurchaseOrders-Service/*.*</item>
