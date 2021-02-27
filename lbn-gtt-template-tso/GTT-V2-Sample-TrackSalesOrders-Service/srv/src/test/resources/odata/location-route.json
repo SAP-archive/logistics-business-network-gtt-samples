@@ -4,8 +4,8 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'8708084a-0ea5-4ba6-a7ef-42918a363bdd')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "8708084a-0ea5-4ba6-a7ef-42918a363bdd",

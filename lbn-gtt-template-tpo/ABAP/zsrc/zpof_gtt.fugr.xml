@@ -18,41 +18,6 @@
    </INCLUDES>
    <FUNCTIONS>
     <item>
-     <FUNCNAME>ZPOF_GTT_CTP_DL_TO_PO</FUNCNAME>
-     <SHORT_TEXT>Cross TP Update from Delivery to Purchase Order</SHORT_TEXT>
-     <IMPORT>
-      <RSIMP>
-       <PARAMETER>IT_LIKP_NEW</PARAMETER>
-       <REFERENCE>X</REFERENCE>
-       <TYP>SHP_LIKP_T</TYP>
-      </RSIMP>
-      <RSIMP>
-       <PARAMETER>IT_LIPS_NEW</PARAMETER>
-       <REFERENCE>X</REFERENCE>
-       <TYP>SHP_LIPS_T</TYP>
-      </RSIMP>
-      <RSIMP>
-       <PARAMETER>IT_LIPS_OLD</PARAMETER>
-       <REFERENCE>X</REFERENCE>
-       <TYP>SHP_LIPS_T</TYP>
-      </RSIMP>
-     </IMPORT>
-     <DOCUMENTATION>
-      <RSFDO>
-       <PARAMETER>IT_LIKP_NEW</PARAMETER>
-       <KIND>P</KIND>
-      </RSFDO>
-      <RSFDO>
-       <PARAMETER>IT_LIPS_NEW</PARAMETER>
-       <KIND>P</KIND>
-      </RSFDO>
-      <RSFDO>
-       <PARAMETER>IT_LIPS_OLD</PARAMETER>
-       <KIND>P</KIND>
-      </RSFDO>
-     </DOCUMENTATION>
-    </item>
-    <item>
      <FUNCNAME>ZPOF_GTT_CTP_SH_TO_DL</FUNCNAME>
      <SHORT_TEXT>Cross TP Update from Shipment to Delivery</SHORT_TEXT>
      <IMPORT>
@@ -71,8 +36,8 @@
      </DOCUMENTATION>
     </item>
     <item>
-     <FUNCNAME>ZPOF_GTT_EE_DL_ITEM</FUNCNAME>
-     <SHORT_TEXT>Selection of EEs for Inbound Deliv. Item - Procurement Visibility Process</SHORT_TEXT>
+     <FUNCNAME>ZPOF_GTT_EE_DL_HDR</FUNCNAME>
+     <SHORT_TEXT>Selection of EEs for Inbound DLV Header - Procurement Visibility Process</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
        <PARAMETER>I_APPSYS</PARAMETER>
@@ -204,8 +169,8 @@
      </DOCUMENTATION>
     </item>
     <item>
-     <FUNCNAME>ZPOF_GTT_EE_DL_ITEM_GR</FUNCNAME>
-     <SHORT_TEXT>Actual Event of DLV Item Goods Receipt</SHORT_TEXT>
+     <FUNCNAME>ZPOF_GTT_EE_DL_HDR_GR</FUNCNAME>
+     <SHORT_TEXT>Actual Event of DLV Header Goods Receipt</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
        <PARAMETER>I_APPSYS</PARAMETER>
@@ -526,8 +491,8 @@
      </DOCUMENTATION>
     </item>
     <item>
-     <FUNCNAME>ZPOF_GTT_EE_DL_ITEM_GR_REL</FUNCNAME>
-     <SHORT_TEXT>Extractor for relevance determination for DLV Item Goods Reciept Event</SHORT_TEXT>
+     <FUNCNAME>ZPOF_GTT_EE_DL_HDR_GR_REL</FUNCNAME>
+     <SHORT_TEXT>Extractor for relevance determination for DLV Header Goods Reciept Event</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
        <PARAMETER>I_APPSYS</PARAMETER>
@@ -619,6 +584,139 @@
       <RSFDO>
        <PARAMETER>STOP_PROCESSING</PARAMETER>
        <KIND>X</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZPOF_GTT_EE_DL_ITEM</FUNCNAME>
+     <SHORT_TEXT>Selection of EEs for Inbound Deliv. Item - Procurement Visibility Process</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/APPLSYSTEM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>/SAPTRX/AOTYPES</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_TABCONTAINER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPTYPE_TABS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>TRXAS_APPOBJ_CTABS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/EXP_EVENTS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/MEASR_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <DBSTRUCT>/SAPTRX/INFO_DATA</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PARAMETER_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>EXP_EVENT_DETERM_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_DETERMINATION_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>STOP_PROCESSING</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPSYS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Logical system ID of an application system</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJ_TYPES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Application object type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ALL_APPL_TABLES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Container with references to all tables passed by the application</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_TYPE_CNTL_TABS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control tables and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_APP_OBJECTS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Control WA and nametabs for all appl. object types</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_EXPEVENTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Expected events for application objects</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MEASRMNTDATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Measurement data of application object</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_INFODATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Infodata for tracking object characterization</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_LOGTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETER_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error in Parameters</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXP_EVENT_DETERM_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Expected events could not be determined</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_DETERMINATION_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A required datatable could not be found</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STOP_PROCESSING</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Stop Processing</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>

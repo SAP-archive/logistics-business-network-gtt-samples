@@ -21,7 +21,6 @@ import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,8 +30,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import static com.sap.gtt.v2.sample.sof.constant.Constants.*;
+import static com.sap.gtt.v2.sample.sof.constant.Constants.URL_SPLITTER;
 import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
+import static java.util.Objects.isNull;
 
 public class SOFUtils {
 
@@ -258,6 +258,7 @@ public class SOFUtils {
 
     public static String generateUrl(String targetEntityName, String filter, List<FilterCondition> filterConditions, BinaryOperator andOr, boolean isAdmissableCorrelatrionType, boolean isAdmissableCorrelationTypeWithoutGeoEvent, List<String> expand, List<OrderBy> orderby) {
         String filterStr = generateFilter(filterConditions, andOr, isAdmissableCorrelatrionType, isAdmissableCorrelationTypeWithoutGeoEvent);
+        filterStr = isNull(filter) ? filterStr : filterStr.concat(filter);
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
         UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));

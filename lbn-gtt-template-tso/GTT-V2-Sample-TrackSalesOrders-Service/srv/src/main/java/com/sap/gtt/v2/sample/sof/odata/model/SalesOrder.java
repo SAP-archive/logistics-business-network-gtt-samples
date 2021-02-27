@@ -75,8 +75,9 @@ public class SalesOrder {
     @EdmProperty(name = "vShipmentNo", facets = @EdmFacets(maxLength = 10))
     private String vShipmentNo;
 
-    @EdmNavigationProperty(name = "salesOrderItemTPs", toType = SalesOrderItemTP.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
-    private List<SalesOrderItemTP> salesOrderItemTPs;
+    @EdmNavigationProperty(name = "salesOrderItems", toType = SalesOrderItem.class,
+            toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
+    private List<SalesOrderItem> salesOrderItems;
 
     @EdmNavigationProperty(name = "incoterms", toType = Incoterms.class, toMultiplicity =
             EdmNavigationProperty.Multiplicity.ONE)
@@ -298,12 +299,12 @@ public class SalesOrder {
         this.vShipmentNo = vShipmentNo;
     }
 
-    public List<SalesOrderItemTP> getSalesOrderItemTPs() {
-        return salesOrderItemTPs;
+    public List<SalesOrderItem> getSalesOrderItems() {
+        return salesOrderItems;
     }
 
-    public void setSalesOrderItemTPs(List<SalesOrderItemTP> salesOrderItemTPs) {
-        this.salesOrderItemTPs = salesOrderItemTPs;
+    public void setSalesOrderItems(List<SalesOrderItem> salesOrderItems) {
+        this.salesOrderItems = salesOrderItems;
     }
 
     public Incoterms getIncoterms() {
@@ -351,7 +352,7 @@ public class SalesOrder {
                 ", vMaterialNo='" + vMaterialNo + '\'' +
                 ", vMaterialDescription='" + vMaterialDescription + '\'' +
                 ", vShipmentNo='" + vShipmentNo + '\'' +
-                ", salesOrderItemTPs=" + salesOrderItemTPs +
+                ", salesOrderItems=" + salesOrderItems +
                 ", incoterms=" + incoterms +
                 ", processStatus=" + processStatus +
                 ", altKey='" + altKey + '\'' +

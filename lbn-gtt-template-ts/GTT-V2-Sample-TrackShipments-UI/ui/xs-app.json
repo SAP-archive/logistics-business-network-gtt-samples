@@ -6,9 +6,24 @@
   },
   "routes": [
     {
-      "source": "^/trackshipments/(.*)$",
-      "target": "$1",
-      "destination": "lbn-gtt-sst-api"
+      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/odata/v1/(.*)$",
+      "target": "sap/logistics/gtt/sample/sst/odata/v1/$1",
+      "destination": "lbn-gtt-sst-api",
+      "scope": ["$XSAPPNAME.sst.r"]
+    },
+    {
+      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/rest/v1/(.*)$",
+      "target": "sap/logistics/gtt/sample/sst/rest/v1/$1",
+      "httpMethods": ["GET"],
+      "destination": "lbn-gtt-sst-api",
+      "scope": ["$XSAPPNAME.sst.r"]
+    },
+    {
+      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/rest/v1/(.*)$",
+      "target": "sap/logistics/gtt/sample/sst/rest/v1/$1",
+      "httpMethods": ["POST"],
+      "destination": "lbn-gtt-sst-api",
+      "scope": ["$XSAPPNAME.sst.w"]
     },
     {
       "source": "^(.*)$",

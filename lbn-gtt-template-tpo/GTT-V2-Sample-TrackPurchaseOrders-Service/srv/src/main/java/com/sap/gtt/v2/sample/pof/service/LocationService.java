@@ -1,24 +1,28 @@
 package com.sap.gtt.v2.sample.pof.service;
 
 import com.sap.gtt.v2.sample.pof.odata.handler.POFLocationODataHandler;
-import com.sap.gtt.v2.sample.pof.odata.model.*;
+import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
+import com.sap.gtt.v2.sample.pof.odata.model.LocationDTO;
+import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrder;
+import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
 public class LocationService {
-    private final POFLocationODataHandler pofLocationODataHandler;
-    private final MapService mapService;
 
-    public LocationService(POFLocationODataHandler pofLocationODataHandler, MapService mapService) {
-        this.pofLocationODataHandler = pofLocationODataHandler;
-        this.mapService = mapService;
-    }
+    @Autowired
+    private POFLocationODataHandler pofLocationODataHandler;
+
+    @Autowired
+    private MapService mapService;
 
     public Map<String, LocationDTO> getLocationsForPurchaseOrderItems(List<PurchaseOrderItem> purchaseOrderItems) {
         Set<String> locationAltKeys = new HashSet<>();
@@ -37,22 +41,21 @@ public class LocationService {
         return pofLocationODataHandler.getLocations(locationAltKeys);
     }
 
-    public Map<String, LocationDTO> getLocationsForPurchaseOrderTP(List<PurchaseOrderItemTP> purchaseOrders) {
+    public Map<String, LocationDTO> getLocationsForPurchaseOrderTP(List<PurchaseOrderItem> purchaseOrders) {
         Set<String> locationAltKeys = new HashSet<>();
         purchaseOrders.stream()
-                .filter(x -> x.getPurchaseOrderItem() != null)
-                .forEach(purchaseOrderTP -> {
-            PurchaseOrderItem purchaseOrderItem = purchaseOrderTP.getPurchaseOrderItem();
-            if (purchaseOrderItem.getReceivingLocationType() != null && purchaseOrderItem.getReceivingLocationId() != null) {
-                locationAltKeys.add(POFUtils.generateLocationAltKey(purchaseOrderItem.getPartyId(), purchaseOrderItem.getLogicalSystem(),
-                        purchaseOrderItem.getReceivingLocationType().getCode(), purchaseOrderItem.getReceivingLocationId()));
-            }
+                .filter(Objects::nonNull)
+                .forEach(purchaseOrderItem -> {
+                    if (purchaseOrderItem.getReceivingLocationType() != null && purchaseOrderItem.getReceivingLocationId() != null) {
+                        locationAltKeys.add(POFUtils.generateLocationAltKey(purchaseOrderItem.getPartyId(), purchaseOrderItem.getLogicalSystem(),
+                                purchaseOrderItem.getReceivingLocationType().getCode(), purchaseOrderItem.getReceivingLocationId()));
+                    }
 
-            if (purchaseOrderItem.getSupplierLocationType() != null && purchaseOrderItem.getSupplierId() != null) {
-                locationAltKeys.add(POFUtils.generateLocationAltKey(purchaseOrderItem.getPartyId(), purchaseOrderItem.getLogicalSystem(),
-                        purchaseOrderItem.getSupplierLocationType().getCode(), purchaseOrderItem.getSupplierId()));
-            }
-        });
+                    if (purchaseOrderItem.getSupplierLocationType() != null && purchaseOrderItem.getSupplierId() != null) {
+                        locationAltKeys.add(POFUtils.generateLocationAltKey(purchaseOrderItem.getPartyId(), purchaseOrderItem.getLogicalSystem(),
+                                purchaseOrderItem.getSupplierLocationType().getCode(), purchaseOrderItem.getSupplierId()));
+                    }
+                });
 
         return pofLocationODataHandler.getLocations(locationAltKeys);
     }
@@ -74,22 +77,21 @@ public class LocationService {
         return pofLocationODataHandler.getLocations(locationAltKeys);
     }
 
-    public Map<String, LocationDTO> getLocationsForPurchaseOrderItemInboundDeliveryItem(List<PurchaseOrderItemInboundDeliveryItemTP> inboundDeliveryItemsTP) {
+    public Map<String, LocationDTO> getLocationsForPurchaseOrderItemInboundDeliveryItem(List<InboundDeliveryItem> inboundDeliveryItemsTP) {
         Set<String> locationAltKeys = new HashSet<>();
         inboundDeliveryItemsTP.stream()
-                .filter(x -> x.getInboundDeliveryItem() != null)
-                .forEach(inboundDeliveryItemTP -> {
-            InboundDeliveryItem inboundDeliveryItem = inboundDeliveryItemTP.getInboundDeliveryItem();
-            if (inboundDeliveryItem.getPlantLocationType() != null && inboundDeliveryItem.getPlant() != null) {
-                locationAltKeys.add(POFUtils.generateLocationAltKey(inboundDeliveryItem.getPartyId(), inboundDeliveryItem.getLogicalSystem(),
-                        inboundDeliveryItem.getPlantLocationType().getCode(), inboundDeliveryItem.getPlant()));
-            }
+                .filter(Objects::nonNull)
+                .forEach(inboundDeliveryItem -> {
+                    if (inboundDeliveryItem.getPlantLocationType() != null && inboundDeliveryItem.getPlant() != null) {
+                        locationAltKeys.add(POFUtils.generateLocationAltKey(inboundDeliveryItem.getPartyId(), inboundDeliveryItem.getLogicalSystem(),
+                                inboundDeliveryItem.getPlantLocationType().getCode(), inboundDeliveryItem.getPlant()));
+                    }
 
-            if (inboundDeliveryItem.getSupplierLocationType() != null && inboundDeliveryItem.getSupplier() != null) {
-                locationAltKeys.add(POFUtils.generateLocationAltKey(inboundDeliveryItem.getPartyId(), inboundDeliveryItem.getLogicalSystem(),
-                        inboundDeliveryItem.getSupplierLocationType().getCode(), inboundDeliveryItem.getSupplier()));
-            }
-        });
+                    if (inboundDeliveryItem.getSupplierLocationType() != null && inboundDeliveryItem.getSupplier() != null) {
+                        locationAltKeys.add(POFUtils.generateLocationAltKey(inboundDeliveryItem.getPartyId(), inboundDeliveryItem.getLogicalSystem(),
+                                inboundDeliveryItem.getSupplierLocationType().getCode(), inboundDeliveryItem.getSupplier()));
+                    }
+                });
 
         return pofLocationODataHandler.getLocations(locationAltKeys);
     }

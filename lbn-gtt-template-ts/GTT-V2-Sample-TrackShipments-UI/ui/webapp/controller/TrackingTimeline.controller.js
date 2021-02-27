@@ -25,6 +25,7 @@ sap.ui.define(
     var CONSTANTS = Object.freeze({
       SLASH: "/",
       TIMEZONES: "timezones",
+      IS_FREIGHT_UNIT: "isFreightUnit",
     });
 
     return BaseController.extend("com.sap.gtt.app.sample.sst.controller.TrackingTimeline", {
@@ -38,6 +39,7 @@ sap.ui.define(
 
       initModel: function () {
         var timelineModel = new JSONModel({
+          hasWritePrivilege: false,
           hasPlannedEvents: false,
           hasUnplannedEvents: false,
         });
@@ -48,6 +50,13 @@ sap.ui.define(
 
         this.setModel(timelineModel, "timeline");
         this.setModel(mapModel, "map");
+      },
+
+      onBeforeRendering: function () {
+        if (!this.getModel("parentView")) {
+          var parentModel = this.getParentModel();
+          this.setModel(parentModel, "parentView");
+        }
       },
 
       subscribeEvents: function () {
@@ -76,9 +85,34 @@ sap.ui.define(
        */
       refresh: function () {
         this.updateTrackingTimelineEvents();
-        this.fetchUnplannedEvents();
-        this.fetchTimeZones();
+        this.checkUserWritePrivilege().then(function (hasWritePrivilege) {
+          this.getModel("timeline").setProperty("/hasWritePrivilege", hasWritePrivilege);
+          this.fetchUnplannedEvents();
+          this.fetchTimeZones();
+        }.bind(this));
+
         this.updateMap();
+      },
+
+      checkUserWritePrivilege: function () {
+        if (this.userWritePrivilegeChecked) {
+          return Promise.reject();
+        }
+
+        return new Promise(function (resolve, reject) {
+          var restUri = ServiceUtils.getDataSource("restService").uri;
+          RestClient.post(ServiceUtils.getUrl(restUri.concat("/")), {})
+            .then(function () {
+              resolve(true);
+            }, function (error) {
+              if (error.response.status === 403) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          this.userWritePrivilegeChecked = true;
+        }.bind(this));
       },
 
 
@@ -87,13 +121,13 @@ sap.ui.define(
       // ======================================================================
 
       updateTrackingTimelineEvents: function () {
-        var shipmentModel = this.getModel("shipment");
+        var parentModel = this.getModel("parentView");
         var model = this.getModel("timeline");
         model.setProperty("/isTimelineEventsLoaded", false);
 
-        var request = this.createGetRequestWithShipmentId("timelineEvents");
+        var request = this.createGetRequestWithId("timelineEvents", parentModel.getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT));
         request.then(function (data) {
-          shipmentModel.setProperty("/deliveryInformation", data.filter(function (event) {
+          parentModel.setProperty("/deliveryInformation", data.filter(function (event) {
             return event.eventType === "POD";
           })[0]);
           model.setProperty("/timelineEvents", data.map(function (event) {
@@ -124,9 +158,11 @@ sap.ui.define(
         }
 
         var jsonService = ServiceUtils.getDataSource("restService");
-        var url = ServiceUtils.getUrl(
-          jsonService.uri.concat("/model/Shipment/unplannedEvents")
-        );
+        var path = jsonService.uri.concat("/models/Shipment/unplannedEvents");
+        if (this.getModel("parentView").getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT)) {
+          path = jsonService.uri.concat("/models/FreightUnit/unplannedEvents");
+        }
+        var url = ServiceUtils.getUrl(path);
 
         RestClient.get(url).then(function (unplannedEvents) {
           if (unplannedEvents && unplannedEvents.length) {
@@ -205,6 +241,7 @@ sap.ui.define(
           unplannedEvents: unplannedEvents,
           refPlannedEvents: refPlannedEvents,
           timeZones: this.getModel("globalJson").getProperty(CONSTANTS.SLASH + CONSTANTS.TIMEZONES),
+          disableDeliveryItemsReporting: this.getModel("parentView").getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT),
         });
       },
 
@@ -228,6 +265,36 @@ sap.ui.define(
       },
 
       /**
+       * Open a delivery itmes popover
+       *
+       * @param {sap.ui.base.EventProvider} source Event source
+       * @param {object[]} deliveryItems Delivery items
+       */
+      openDeliveryItemsPopover: function (source, deliveryItems) {
+        var props = {
+          deliveryItems: deliveryItems,
+          count: deliveryItems.length,
+        };
+
+        if (!this.deliveryItemsPopover) {
+          Fragment.load({
+            id: this.createId("deliveryItemsPopover"),
+            name: "com.sap.gtt.app.sample.sst.view.fragments.DeliveryItemsPopover",
+            controller: this,
+          }).then(function (popover) {
+            this.deliveryItemsPopover = popover;
+            this.getView().addDependent(this.deliveryItemsPopover);
+            this.deliveryItemsPopover.setModel(new JSONModel(props), "props");
+            this.deliveryItemsPopover.openBy(source);
+          }.bind(this));
+        } else {
+          this.deliveryItemsPopover.close();
+          this.deliveryItemsPopover.getModel("props").setData(props);
+          this.deliveryItemsPopover.openBy(source);
+        }
+      },
+
+      /**
        * Open a reporting history popover
        *
        * @param {sap.ui.base.EventProvider} source Event source
@@ -243,7 +310,7 @@ sap.ui.define(
 
         if (!this.reportingHistoryPopover) {
           Fragment.load({
-            id: "reportingHistoryPopover",
+            id: this.createId("reportingHistoryPopover"),
             name: "com.sap.gtt.app.sample.sst.view.fragments.ReportingHistoryPopover",
             controller: this,
           }).then(function (popover) {
@@ -259,6 +326,25 @@ sap.ui.define(
         }
       },
 
+      /**
+       * Navigate to delivery item detail page after clicking the delivery item.
+       * If the delivery item is NOT in a freight unit, then navigate to "Track Sales Orders" App.
+       *
+       * @param {object} deliveryItem Delivery item
+       */
+      handleDeliveryItemPress: function (deliveryItem) {
+        if (deliveryItem.isInFreightUnit) {
+          this.getRouter().navTo("freightUnit", {
+            id: deliveryItem.id,
+            params: {
+              itemNo: deliveryItem.itemNo,
+            },
+          });
+        } else {
+          this.navToExternalDeliveryItemDetailPage(deliveryItem.id);
+        }
+      },
+
       // ======================================================================
       // Map
       // ======================================================================
@@ -270,7 +356,7 @@ sap.ui.define(
         model.setProperty("/isStopsRoutesLoaded", false);
 
         var dataName = "routes";
-        var request = this.mapRequest = this.createGetRequestWithShipmentId(dataName);
+        var request = this.mapRequest = this.createGetRequestWithId(dataName, this.getModel("parentView").getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT));
         request.then(function (data) {
           this.processMapData(request, data);
         }.bind(this));
@@ -305,7 +391,7 @@ sap.ui.define(
           return;
         }
 
-        var isCompleted = this.getModel("shipment").getProperty("/isCompleted");
+        var isCompleted = this.getModel("parentView").getProperty("/isCompleted");
         var positionList = []; // for zooming map
         data.plannedActualRoutes = [];
         data.currentLocations = [];
@@ -396,21 +482,21 @@ sap.ui.define(
 
       getRouteTooltip: function () {
         var bindingContext = this.getView().getBindingContext();
-        var shipment = bindingContext.getObject({expand: "departureLocation,arrivalLocation"});
-        var departureLocation = shipment.departureLocation;
-        var arrivalLocation = shipment.arrivalLocation;
+        var trackedProcess = bindingContext.getObject({expand: "departureLocation,arrivalLocation"});
+        var departureLocation = trackedProcess.departureLocation;
+        var arrivalLocation = trackedProcess.arrivalLocation;
 
         var fromText;
         var toText;
         if (departureLocation) {
           fromText = departureLocation.locationDescription;
         } else {
-          fromText = shipment.departureLocationId || this.getText("locationUndefined");
+          fromText = trackedProcess.departureLocationId || this.getText("locationUndefined");
         }
         if (arrivalLocation) {
           toText = arrivalLocation.locationDescription;
         } else {
-          toText = shipment.arrivalLocationId || this.getText("locationUndefined");
+          toText = trackedProcess.arrivalLocationId || this.getText("locationUndefined");
         }
 
         return this.getText("routeTooltip", [fromText, toText]);
@@ -422,6 +508,10 @@ sap.ui.define(
           var map = this.getControlByFragment("trackingTimelineMap", "geoMap");
           map.zoomToAreas(positionList, factor);
         }
+      },
+
+      getParentModel: function () {
+        return this.getView().getParent().getModel("view");
       },
     });
   }

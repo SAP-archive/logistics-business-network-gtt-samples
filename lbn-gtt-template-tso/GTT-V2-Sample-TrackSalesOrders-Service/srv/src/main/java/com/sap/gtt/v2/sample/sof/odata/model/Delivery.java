@@ -143,9 +143,9 @@ public class Delivery {
             EdmNavigationProperty.Multiplicity.ONE)
     private OperationStatus transportationStatus;
 
-    @EdmNavigationProperty(name = "deliveryItemTPs", toType = DeliveryDeliveryItemTP.class, toMultiplicity =
+    @EdmNavigationProperty(name = "deliveryItems", toType = DeliveryItem.class, toMultiplicity =
             EdmNavigationProperty.Multiplicity.MANY)
-    private List<DeliveryDeliveryItemTP> deliveryItemTPs;
+    private List<DeliveryItem> deliveryItems;
 
     @EdmNavigationProperty(name = "incoterms", toType = Incoterms.class, toMultiplicity =
             EdmNavigationProperty.Multiplicity.ONE)
@@ -458,12 +458,12 @@ public class Delivery {
         this.transportationStatus = transportationStatus;
     }
 
-    public List<DeliveryDeliveryItemTP> getDeliveryItemTPs() {
-        return deliveryItemTPs;
+    public List<DeliveryItem> getDeliveryItems() {
+        return deliveryItems;
     }
 
-    public void setDeliveryItemTPs(List<DeliveryDeliveryItemTP> deliveryItemTPs) {
-        this.deliveryItemTPs = deliveryItemTPs;
+    public void setDeliveryItems(List<DeliveryItem> deliveryItems) {
+        this.deliveryItems = deliveryItems;
     }
 
     public Incoterms getIncoterms() {

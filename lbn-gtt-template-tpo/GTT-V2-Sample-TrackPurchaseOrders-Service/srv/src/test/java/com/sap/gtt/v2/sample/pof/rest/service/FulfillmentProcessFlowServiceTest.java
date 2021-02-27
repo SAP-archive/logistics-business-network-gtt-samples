@@ -15,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -46,7 +45,7 @@ public class FulfillmentProcessFlowServiceTest {
         mockRestTemplateResponse("/ProcessEventDirectory", "odata/empty_response.json");
         mockRestTemplateResponse("/ConfirmationEvent", "odata/fulfillment-process-confirmation-events.json");
         mockRestTemplateResponse("/GoodsReceipt", "odata/fulfillment-process-goods-receipt.json");
-        mockRestTemplateResponse("/PlannedEvents", "odata/fulfillment-process-item-planned-events.json");
+        mockRestTemplateResponse("/PlannedEvent", "odata/fulfillment-process-item-planned-events.json");
 
         FulfillmentProcessFlow flow = fulfillmentProcessFlowService.generateFulfillmentProcessFlow(PURCHASE_ORDER_ITEM_ID);
 
@@ -82,7 +81,6 @@ public class FulfillmentProcessFlowServiceTest {
 
         assertEquals(5, flow.getLanes().size());
         assertTrue(flow.getLanes().stream().allMatch(lane -> lane.getTotal().intValue() == 200));
-        assertEquals(BigDecimal.valueOf(173), flow.getLanes().get(4).getCount().stripTrailingZeros());
     }
 
     @Test

@@ -1,4 +1,4 @@
-FUNCTION ZSST_GTT_EE_FO_HDR .
+FUNCTION zsst_gtt_ee_fo_hdr .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -22,42 +22,29 @@ FUNCTION ZSST_GTT_EE_FO_HDR .
         ls_bapiret     TYPE bapiret2.
 
   CLEAR e_logtable[].
-  LOOP AT i_app_objects ASSIGNING FIELD-SYMBOL(<ls_app_objects>) WHERE maindbtabdef IS NOT INITIAL.
-
-    TRY.
-        lcl_ef_performer=>get_planned_events(
-          EXPORTING
-            is_definition         = VALUE #( maintab   = lif_sst_constants=>cs_tabledef-fo_header_new )
-            io_factory            = NEW lcl_tor_factory( )
-            iv_appsys             = i_appsys
-            is_app_obj_types      = i_app_obj_types
-            it_all_appl_tables    = i_all_appl_tables
-            it_app_type_cntl_tabs = i_app_type_cntl_tabs
-            it_app_objects        = i_app_objects
-          CHANGING
-            ct_expeventdata       = e_expeventdata[]
-            ct_measrmntdata       = e_measrmntdata[]
-            ct_infodata           = e_infodata[]
-        ).
-      CATCH cx_udm_message INTO lo_udm_message.
-        lcl_tools=>get_errors_log(
-          EXPORTING
-            io_umd_message = lo_udm_message
-            iv_appsys      = i_appsys
-          IMPORTING
-            es_bapiret     = ls_bapiret ).
-
-        " add error message
-        APPEND ls_bapiret TO e_logtable.
-
-        " throw corresponding exception
-        CASE lo_udm_message->textid.
-          WHEN lif_ef_constants=>cs_errors-stop_processing.
-            RAISE stop_processing.
-          WHEN lif_ef_constants=>cs_errors-table_determination.
-            RAISE table_determination_error.
-        ENDCASE.
-    ENDTRY.
-  ENDLOOP.
+  TRY.
+      lcl_ef_performer=>get_planned_events(
+        EXPORTING
+          is_definition         = VALUE #( maintab = lif_sst_constants=>cs_tabledef-fo_header_new )
+          io_factory            = NEW lcl_tor_factory( )
+          iv_appsys             = i_appsys
+          is_app_obj_types      = i_app_obj_types
+          it_all_appl_tables    = i_all_appl_tables
+          it_app_type_cntl_tabs = i_app_type_cntl_tabs
+          it_app_objects        = i_app_objects
+        CHANGING
+          ct_expeventdata       = e_expeventdata[]
+          ct_measrmntdata       = e_measrmntdata[]
+          ct_infodata           = e_infodata[] ).
+    CATCH cx_udm_message INTO lo_udm_message.
+      lcl_tools=>get_errors_log(
+        EXPORTING
+          io_umd_message = lo_udm_message
+          iv_appsys      = i_appsys
+        IMPORTING
+          es_bapiret     = ls_bapiret ).
+      APPEND ls_bapiret TO e_logtable.
+      RETURN.
+  ENDTRY.
 
 ENDFUNCTION.

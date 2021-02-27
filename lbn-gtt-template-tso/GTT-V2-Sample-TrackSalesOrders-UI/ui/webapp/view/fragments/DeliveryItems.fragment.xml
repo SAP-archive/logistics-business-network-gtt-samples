@@ -11,13 +11,12 @@
 		demandPopin="true"
 		editable="false"
 		entitySet="DeliveryItem"
-		tableBindingPath=""
+		tableBindingPath="deliveryItems"
 		useTablePersonalisation="true"
 		header="{i18n>listItems}"
 		showRowCount="true"
 		useExportToExcel="false"
 		enableAutoBinding="true"
-		beforeRebindTable=".onBeforeRebindDeliveryItemsTable"
 		requestAtLeastFields="id">
 		<smartTable:customData>
 			<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
@@ -26,38 +25,31 @@
 		<Table id="deliveryItemsTable" class="sofDeliveryItemsTable">
 			<columns>
 				<Column id="deliveryNoItemNoColumn">
-					<Text id="deliveryNoItemNoTitle" text="{parts: [{'value': 'deliveryNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'} / {parts: [{'value': 'itemNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="deliveryNoItemNoTitle" text="{label>/DeliveryItem/deliveryNo} / {label>/DeliveryItem/itemNo}" />
 					<customData>
 						<core:CustomData key="p13nData" value='{"columnKey": "deliveryNoItemNo", "leadingProperty": "deliveryNo, itemNo", "sortProperty": "deliveryNo", columnIndex: 0}'/>
 					</customData>
 				</Column>
 				<Column id="initialPlannedDateColumn" hAlign="Right">
-					<Text text="{parts: [{'value': 'initialPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text text="{label>/DeliveryItem/initialPlannedDate}" />
 					<customData>
 						<core:CustomData key="p13nData" value='{"columnKey": "initialPlannedDate", "leadingProperty": "initialPlannedDate", "sortProperty": "initialPlannedDate", columnIndex: 1}'/>
 					</customData>
 				</Column>
 				<Column id="revisedPlannedDateColumn" hAlign="Right">
-					<Text text="{parts: [{'value': 'revisedPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text text="{label>/DeliveryItem/revisedPlannedDate}" />
 					<customData>
 						<core:CustomData key="p13nData" value='{"columnKey": "revisedPlannedDate", "leadingProperty": "revisedPlannedDate", "sortProperty": "revisedPlannedDate", columnIndex: 2}'/>
 					</customData>
 				</Column>
 				<Column id="processStatusColumn">
-					<Text id="processStatusTitle" text="{parts: [{'value': 'processStatus_code'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text id="processStatusTitle" text="{label>/DeliveryItem/processStatus_code}" />
 					<customData>
 						<core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code, processStatus/name, processStatus/localized/name", "navigationProperty": "processStatus/localized", "sortProperty": "", columnIndex: 4}'/>
 					</customData>
 				</Column>
 				<Column id="executionStatusColumn">
-					<Text id="executionStatusTitle"
-						text="{
-							parts: [
-								{'value': 'executionStatus_code'},
-								{'value': 'DeliveryItem'}
-							],
-							formatter: '.getPropertyLabelText'
-						}" />
+					<Text id="executionStatusTitle" text="{label>/DeliveryItem/executionStatus_code}" />
 					<customData>
 						<core:CustomData key="p13nData"
 							value='{
@@ -82,7 +74,7 @@
 					</customData>
 				</Column>
 				<Column id="documentDateColumn" hAlign="Right" visible="false">
-					<Text text="{parts: [{'value': 'documentDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+					<Text text="{label>/DeliveryItem/documentDate}" />
 					<customData>
 						<core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "sortProperty": "documentDate", columnIndex: 10000}'/>
 					</customData>

@@ -30,7 +30,7 @@ sap.ui.define([
             id: sPOId,
           });
           this.bindView(sEntitySetKey,{
-            expand: "toSupplierLocation,toReceivingLocation,purchaseOrderItemTPs/purchaseOrderItem/incoterms,purchaseOrderItemTPs/purchaseOrderItem/receivingLocationType,receivingLocationType,purchaseOrderItemTPs/purchaseOrderItem/supplierLocationType,purchaseOrderItemTPs/purchaseOrderItem/toSupplierLocation,purchaseOrderItemTPs/purchaseOrderItem/toReceivingLocation,supplierLocationType",
+            expand: "toSupplierLocation,toReceivingLocation,purchaseOrderItemTPs/incoterms,purchaseOrderItemTPs/receivingLocationType,receivingLocationType,purchaseOrderItemTPs/supplierLocationType,purchaseOrderItemTPs/toSupplierLocation,purchaseOrderItemTPs/toReceivingLocation,supplierLocationType",
           });
         }.bind(this));
     },
@@ -49,7 +49,7 @@ sap.ui.define([
     initControls: function () {
       var oHeaderCompletionRate = this.byId("headerCompletionRate");
       var oItemCompletionRate = Fragment.byId(this.createId("purchaseOrderDetailsItemsTable"), "itemCompletionRate");
-      this.initCompletionRate([oHeaderCompletionRate,oItemCompletionRate]);
+      this.initCompletionRate([oHeaderCompletionRate, oItemCompletionRate], Constants.TWO_DECIMALS_AFTER_DOT);
     },
 
     // ======================================================================
@@ -58,7 +58,7 @@ sap.ui.define([
 
     onBeforeRebindTable: function (oEvent) {
       var oBindingParams = oEvent.getParameter("bindingParams");
-      this.addDefaultSorters(oBindingParams.sorter, ["lineNo"]);
+      this.addDefaultSorters(oBindingParams.sorter, ["itemNo"]);
     },
 
     /**
@@ -69,7 +69,7 @@ sap.ui.define([
       var oContext = oEvent.getSource().getBindingContext();
       var sPath = oContext.getPath();
       var oModel = oContext.getModel();
-      var sId = oModel.getProperty(sPath + "/purchaseOrderItem/id");
+      var sId = oModel.getProperty(sPath + "/id");
 
       this.getRouter().navTo("PurchaseOrderItemDetails", {
         id: sId,

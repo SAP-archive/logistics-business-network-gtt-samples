@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZSST_GTT_CL_SEND_DELETION_IDOC</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Delivery Data updater for Purchase Order Item</DESCRIPT>
+    <DESCRIPT>Send IDOC for Deleted Freight Unit</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

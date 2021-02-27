@@ -96,7 +96,7 @@ public class ImpactAnalysisServiceTest {
                 ResponseEntity.ok().body(json));
 
         json = SOFUtils.getStringFromResource("/odata/delay-single-delivery.json");
-        Mockito.when(restTemplate.exchange(contains("/Delivery(guid'f3c9722e-0bef-5b99-bfbb-42cd4210d13e')?$expand=deliveryItemTPs/deliveryItem"), eq(HttpMethod.GET),
+        Mockito.when(restTemplate.exchange(contains("/Delivery(guid'f3c9722e-0bef-5b99-bfbb-42cd4210d13e')?$expand=deliveryItems"), eq(HttpMethod.GET),
                 any(HttpEntity.class), eq(String.class))).thenReturn(
                 ResponseEntity.ok().body(json));
 

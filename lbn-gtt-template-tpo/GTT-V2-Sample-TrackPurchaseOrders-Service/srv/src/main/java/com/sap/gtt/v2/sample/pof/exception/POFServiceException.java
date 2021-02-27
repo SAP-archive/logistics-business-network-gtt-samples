@@ -26,7 +26,6 @@ public class POFServiceException extends BaseRuntimeException {
     public static final String MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED = POFServiceException.class.getName() + ".CallLocationServiceFailed";
     public static final String MESSAGE_CODE_DESTINATION_SERVICE_BINDING_NOT_FOUND = POFServiceException.class.getName() + ".DestinationServiceBindingNotFound";
 
-
     public POFServiceException(String internalMessage, Throwable cause, String messageCode) {
         super(internalMessage, cause, messageCode, new Object[]{});
     }

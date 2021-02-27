@@ -6,10 +6,8 @@ sap.ui.define(
     "sap/base/strings/formatMessage",
     "sap/base/util/isPlainObject",
     "sap/m/MessageBox",
-    "sap/ui/base/BindingParser",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
-    "../util/AnnotationUtil",
     "../util/ServiceUtils",
     "../util/RestClient",
     "../util/AsyncUtils",
@@ -21,10 +19,8 @@ sap.ui.define(
     formatMessage,
     isPlainObject,
     MessageBox,
-    BindingParser,
     JSONModel,
     formatter,
-    AnnotationUtil,
     ServiceUtils,
     RestClient,
     AsyncUtils
@@ -215,16 +211,6 @@ sap.ui.define(
       getText: function (key, params, i18nModel) {
         var resourceBundle = this.getResourceBundle(i18nModel);
         return resourceBundle.getText(key, params);
-      },
-
-      getPropertyLabelText: function (propertyName, entitySet) {
-        var label = AnnotationUtil.getPropertyLabel(propertyName, entitySet);
-        var bindingInfo = BindingParser.simpleParser(label);
-        if (!bindingInfo) {
-          return label;
-        }
-
-        return this.getText(bindingInfo.path, null, bindingInfo.model);
       },
 
       /**

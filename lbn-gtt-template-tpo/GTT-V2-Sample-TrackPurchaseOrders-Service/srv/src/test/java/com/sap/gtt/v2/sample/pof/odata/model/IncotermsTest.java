@@ -3,8 +3,6 @@ package com.sap.gtt.v2.sample.pof.odata.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.UUID;
-
 public class IncotermsTest {
 
     private static final String CODE = "code";

@@ -6,6 +6,8 @@ class ZSST_GTT_CL_SEND_DELETION_IDOC definition
 public section.
 
   class-methods GET_INSTANCE
+    importing
+      !IT_TOR_ROOT type /SCMTMS/T_EM_BO_TOR_ROOT
     returning
       value(RO_UPDATER) type ref to ZSST_GTT_CL_SEND_DELETION_IDOC
     raising
@@ -23,7 +25,7 @@ private section.
 
   types:
     BEGIN OF ts_aotype,
-             obj_type    TYPE /saptrx/trk_obj_type,
+             tor_type    TYPE /scmtms/tor_type,
              aot_type    TYPE /saptrx/aotype,
              server_name TYPE /saptrx/trxservername,
            END OF ts_aotype .
@@ -117,6 +119,8 @@ private section.
     changing
       !CS_IDOC_DATA type TS_IDOC_DATA .
   methods INITIATE
+    importing
+      !IT_TOR_ROOT type /SCMTMS/T_EM_BO_TOR_ROOT
     raising
       CX_UDM_MESSAGE .
   class-methods IS_GTT_ENABLED
@@ -161,7 +165,7 @@ CLASS ZSST_GTT_CL_SEND_DELETION_IDOC IMPLEMENTATION.
   METHOD get_instance.
     IF is_gtt_enabled( ) = abap_true.
       ro_updater  = NEW #( ).
-      ro_updater->initiate( ).
+      ro_updater->initiate( it_tor_root ).
     ELSE.
       MESSAGE e006(zsst_gtt) INTO DATA(lv_dummy).
       throw_exception( ).
@@ -193,19 +197,21 @@ CLASS ZSST_GTT_CL_SEND_DELETION_IDOC IMPLEMENTATION.
       throw_exception( ).
     ENDIF.
 
-    " Prepare AOT list
-    SELECT trk_obj_type  AS obj_type
-           aotype        AS aot_type
-           trxservername AS server_name
-      INTO TABLE mt_aotype
-      FROM /saptrx/aotypes
-      WHERE trk_obj_type = cs_obj_type-tms_tor
-        AND aotype       LIKE cv_aotype_mask
-        AND torelevant   = abap_true.
+    SELECT /scmtms/c_torty~type          AS tor_type,
+           /scmtms/c_torty~aotype        AS aot_type,
+           /saptrx/aotypes~trxservername AS server_name
+      INTO TABLE @mt_aotype
+      FROM /scmtms/c_torty
+      JOIN /saptrx/aotypes ON /scmtms/c_torty~aotype = /saptrx/aotypes~aotype
+      FOR ALL ENTRIES IN @it_tor_root
+      WHERE /scmtms/c_torty~type         = @it_tor_root-tor_type AND
+            /saptrx/aotypes~trk_obj_type = @cs_obj_type-tms_tor  AND
+            /saptrx/aotypes~torelevant   = @abap_true.
     IF sy-subrc <> 0.
       MESSAGE e008(zsst_gtt) INTO lv_dummy.
       throw_exception( ).
     ENDIF.
+
   ENDMETHOD.
 
 
@@ -259,10 +265,12 @@ CLASS ZSST_GTT_CL_SEND_DELETION_IDOC IMPLEMENTATION.
 
     DATA ls_idoc_data TYPE ts_idoc_data.
 
-    LOOP AT mt_aotype ASSIGNING FIELD-SYMBOL(<ls_aotype>).
-      CLEAR: ls_idoc_data.
 
+    LOOP AT it_tor_root ASSIGNING FIELD-SYMBOL(<ls_tor_root>).
+      CLEAR: ls_idoc_data.
       ls_idoc_data-appsys = mv_appsys.
+
+      ASSIGN mt_aotype[ tor_type = <ls_tor_root>-tor_type ] TO FIELD-SYMBOL(<ls_aotype>).
 
       fill_idoc_trxserv(
         EXPORTING
@@ -270,19 +278,19 @@ CLASS ZSST_GTT_CL_SEND_DELETION_IDOC IMPLEMENTATION.
         CHANGING
           cs_idoc_data = ls_idoc_data ).
 
-      LOOP AT it_tor_root ASSIGNING FIELD-SYMBOL(<ls_tor_root>).
-        fill_idoc_appobj_dtabs(
-          EXPORTING
-            is_aotype    = <ls_aotype>
-            is_tor_root  = <ls_tor_root>
-          CHANGING
-            cs_idoc_data = ls_idoc_data ).
-      ENDLOOP.
+      fill_idoc_appobj_dtabs(
+        EXPORTING
+          is_aotype    = <ls_aotype>
+          is_tor_root  = <ls_tor_root>
+        CHANGING
+          cs_idoc_data = ls_idoc_data ).
 
       IF ls_idoc_data-appobj_dtabs[] IS NOT INITIAL.
         APPEND ls_idoc_data TO mt_idoc_data.
       ENDIF.
+
     ENDLOOP.
+
   ENDMETHOD.
 
 

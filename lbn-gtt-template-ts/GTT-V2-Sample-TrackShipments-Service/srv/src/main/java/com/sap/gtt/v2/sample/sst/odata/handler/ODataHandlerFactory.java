@@ -1,18 +1,20 @@
 package com.sap.gtt.v2.sample.sst.odata.handler;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.Constants.MODEL_NAMESPACE;
-
 import com.sap.gtt.v2.sample.sst.common.utils.SSTUtils;
+import com.sap.gtt.v2.sample.sst.odata.model.FreightUnit;
 import com.sap.gtt.v2.sample.sst.odata.model.Location;
 import com.sap.gtt.v2.sample.sst.odata.model.Shipment;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.apache.olingo.odata2.api.edm.EdmType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static com.sap.gtt.v2.sample.sst.common.constant.Constants.MODEL_NAMESPACE;
 
 /**
  * {@link ODataHandlerFactory} is a factory which registers required class as OData handler.
@@ -30,6 +32,7 @@ public class ODataHandlerFactory {
 
     static {
         map.put(MODEL_NAMESPACE + "." + Shipment.ENTITY_SET_NAME, ShipmentODataHandler.class);
+        map.put(MODEL_NAMESPACE + "." + FreightUnit.ENTITY_SET_NAME, FreightUnitODataHandler.class);
         map.put(MODEL_NAMESPACE + "." + Location.ENTITY_SET_NAME, LocationODataHandler.class);
     }
 

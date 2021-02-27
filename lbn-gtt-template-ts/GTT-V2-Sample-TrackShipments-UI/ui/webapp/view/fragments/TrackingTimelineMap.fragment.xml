@@ -82,8 +82,14 @@
 													path: 'map>estimatedArrival/estimatedArrivalTime',
 													type: 'com.sap.gtt.app.sample.sst.model.type.ISODateTime'
 												}"
-												labelType="None"
-												labelBorderColor="rgb(9, 97, 185)"
+												labelType="{
+													path: 'map>estimatedArrival/eventStatusCode',
+													formatter: '.formatter.stopWithETALabelType'
+												}"
+												labelBorderColor="{
+													path: 'map>estimatedArrival/eventStatusCode',
+													formatter: '.formatter.stopWithETALabelBorderColor'
+												}"
 												labelArrow="true"
 												labelPos="3"
 												tooltip="{

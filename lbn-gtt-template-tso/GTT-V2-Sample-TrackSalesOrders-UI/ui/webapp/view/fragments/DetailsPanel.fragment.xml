@@ -61,6 +61,13 @@
 								title="{i18n>senderParty}"
 								text="{map>senderPartyId}"
 								active="false"/>
+							<ObjectAttribute
+								visible="{=
+									${map>eventType} === 'POD' &amp;&amp; !!${map>quantity}
+								}"
+								title="{i18n>quantity}"
+								text="{map>quantity}"
+								active="false"/>
 						</items>
 					</VBox>
 				</CustomListItem>

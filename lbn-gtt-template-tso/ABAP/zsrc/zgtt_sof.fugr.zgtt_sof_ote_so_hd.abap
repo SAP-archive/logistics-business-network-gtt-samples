@@ -184,23 +184,32 @@ FUNCTION zgtt_sof_ote_so_hd.
     CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
     APPEND ls_control_data TO e_control_data.
 
-*  Sales Order Item table
-    LOOP AT lt_xvbap ASSIGNING <ls_xvbap> WHERE updkz <> 'D'.
-      ls_control_data-paramindex = sy-tabix.
-      ls_control_data-paramname = gc_cp_yn_so_header_item_cnt.
-      ls_control_data-value = sy-tabix.
-      SHIFT ls_control_data-value LEFT  DELETING LEADING space.
-      APPEND ls_control_data TO e_control_data.
+*   Actual Technical Datetime & Time zone
+    ls_control_data-paramname = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_control_data-value     = lv_tzone.
+    APPEND ls_control_data TO e_control_data.
 
-      ls_control_data-paramname = gc_cp_yn_so_header_item_no.
-      CONCATENATE <ls_xvbap>-vbeln <ls_xvbap>-posnr INTO ls_control_data-value.
-      APPEND ls_control_data TO e_control_data.
-    ENDLOOP.
-    IF sy-subrc NE 0.
-      ls_control_data-paramindex = '1'.
-      ls_control_data-paramname = gc_cp_yn_so_header_item_cnt.
-      ls_control_data-value = ''.
-      APPEND ls_control_data TO e_control_data.
-    ENDIF.
+    ls_control_data-paramname = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
+    APPEND ls_control_data TO e_control_data.
+
+*  Sales Order Item table - deleted by enabling 1 vs Many association - 20210105
+*    LOOP AT lt_xvbap ASSIGNING <ls_xvbap> WHERE updkz <> 'D'.
+*      ls_control_data-paramindex = sy-tabix.
+*      ls_control_data-paramname = gc_cp_yn_so_header_item_cnt.
+*      ls_control_data-value = sy-tabix.
+*      SHIFT ls_control_data-value LEFT  DELETING LEADING space.
+*      APPEND ls_control_data TO e_control_data.
+*
+*      ls_control_data-paramname = gc_cp_yn_so_header_item_no.
+*      CONCATENATE <ls_xvbap>-vbeln <ls_xvbap>-posnr INTO ls_control_data-value.
+*      APPEND ls_control_data TO e_control_data.
+*    ENDLOOP.
+*    IF sy-subrc NE 0.
+*      ls_control_data-paramindex = '1'.
+*      ls_control_data-paramname = gc_cp_yn_so_header_item_cnt.
+*      ls_control_data-value = ''.
+*      APPEND ls_control_data TO e_control_data.
+*    ENDIF.
   ENDLOOP.
 ENDFUNCTION.

@@ -15,6 +15,7 @@ import com.sap.gtt.v2.sample.sst.common.service.ProcessEventDirectoryService;
 import com.sap.gtt.v2.sample.sst.common.utils.ODataUtils;
 import com.sap.gtt.v2.sample.sst.common.utils.SSTUtils;
 import com.sap.gtt.v2.sample.sst.common.validator.CoordinatesValidator;
+import com.sap.gtt.v2.sample.sst.rest.helper.ActualSpotHelper;
 import com.sap.gtt.v2.sample.sst.rest.model.ActualSpot;
 import com.sap.gtt.v2.sample.sst.rest.model.CurrentLocation;
 import com.sap.gtt.v2.sample.sst.rest.model.converter.CurrentLocationConverter;
@@ -36,7 +37,7 @@ class CurrentLocationServiceImplTest {
     @Mock
     private CurrentLocationConverter currentLocationConverter;
     @Mock
-    private ActualSpotService actualSpotService;
+    private ActualSpotHelper actualSpotHelper;
     @InjectMocks
     private CurrentLocationServiceImpl currentLocationService;
 
@@ -48,16 +49,16 @@ class CurrentLocationServiceImplTest {
         final List<ProcessEventDirectory> processEventDirectories =
                 ODataUtils.readEntitySet(processEventDirectoriesJson, ProcessEventDirectory.class).getResults();
 
-        when(processEventDirectoryService.getByShipmentId(shipmentId)).thenReturn(processEventDirectories);
+        when(processEventDirectoryService.getByTrackedProcessId(shipmentId)).thenReturn(processEventDirectories);
         when(coordinatesValidator.isValid(any(), any())).thenReturn(false);
-        when(actualSpotService.getAllAscending(any())).thenReturn(singletonList(new ActualSpot()));
+        when(actualSpotHelper.getAllAscending(any())).thenReturn(singletonList(new ActualSpot()));
 
         // when
-        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByShipmentId(shipmentId);
+        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByTrackedProcessId(shipmentId);
 
         // then
         assertThat(currentLocationOpt).isNotPresent();
-        verify(actualSpotService, times(1)).getAllAscending(any());
+        verify(actualSpotHelper, times(1)).getAllAscending(any());
         verify(coordinatesValidator, times(1)).isValid(any(), any());
         verifyNoInteractions(currentLocationConverter);
     }
@@ -73,17 +74,17 @@ class CurrentLocationServiceImplTest {
         actualSpot.setLongitude(ONE);
         actualSpot.setLatitude(ONE);
 
-        when(processEventDirectoryService.getByShipmentId(shipmentId)).thenReturn(processEventDirectories);
+        when(processEventDirectoryService.getByTrackedProcessId(shipmentId)).thenReturn(processEventDirectories);
         when(coordinatesValidator.isValid(any(), any())).thenReturn(true);
-        when(actualSpotService.getAllAscending(any())).thenReturn(singletonList(actualSpot));
+        when(actualSpotHelper.getAllAscending(any())).thenReturn(singletonList(actualSpot));
         when(currentLocationConverter.fromActualSpot(any())).thenReturn(new CurrentLocation());
 
         // when
-        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByShipmentId(shipmentId);
+        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByTrackedProcessId(shipmentId);
 
         // then
         assertThat(currentLocationOpt).isPresent();
-        verify(actualSpotService, times(1)).getAllAscending(any());
+        verify(actualSpotHelper, times(1)).getAllAscending(any());
         verify(coordinatesValidator, times(1)).isValid(any(), any());
         verify(currentLocationConverter, times(1)).fromActualSpot(any());
     }

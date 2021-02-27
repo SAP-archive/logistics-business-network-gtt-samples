@@ -11,11 +11,12 @@
     noDataText="{i18n>noData}"
     showIcons="false"
     showSort="false"
-    showSearch="true"
+    showSearch="false"
     showTimeFilter="false"
     sort="false"
     growingThreshold="0"
     filterTitle="{i18n>eventStatusLabel}"
+    select="onTimelineItemSelect"
     content="{
       path: 'trackingTimeline>/timelineEvents',
       templateShareable: false
@@ -72,11 +73,11 @@
             }"
             inverted="{= ${trackingTimeline>eventStatusCode} === 'DELAYED' || ${trackingTimeline>eventStatusCode} === 'LATE' }"/>
         </HBox>
-        <ObjectAttribute
+        <!-- <ObjectAttribute
           class="sapUiTinyMarginTop"
           visible="{= ${trackingTimeline>eventStatusCode} !== 'UNPLANNED' }"
           title="{i18n>eventMatchKeyLabel}"
-          text="{trackingTimeline>eventMatchKey}" />
+          text="{trackingTimeline>eventMatchKey}" /> -->
         <ctrl:link.LinkPopover
           id="reporting"
           class="sapUiTinyMarginTop sapUiSmallMarginEnd"

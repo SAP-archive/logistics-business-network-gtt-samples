@@ -56,7 +56,7 @@ sap.ui.define(
        * If binding context is null, show 'Not Found' page.
        */
       onBindingChange: function () {
-        this.setViewFree(this.getModel(this.routeName));
+        this.setViewFree();
 
         var bindingContext = this.getView().getBindingContext();
         if (!bindingContext) {
@@ -69,7 +69,7 @@ sap.ui.define(
       },
 
       onDataRequested: function () {
-        this.setViewBusy(this.getModel(this.routeName));
+        this.setViewBusy();
         this.updateLastUpdatedAtTime();
       },
 
@@ -106,20 +106,20 @@ sap.ui.define(
 
       /**
        * Add loading indicator for the view - busy state
-       * @param {sap.ui.model.json.JSONModel} model The json model
        */
-      setViewBusy: function (model) {
+      setViewBusy: function () {
         var originalBusyDelay = this.getView().getBusyIndicatorDelay();
+        var model = this.getModel("view");
         model.setProperty("/busy", true);
         model.setProperty("/delay", originalBusyDelay);
       },
 
       /**
        * Remove loading indicator for the view - not busy state
-       * @param {sap.ui.model.json.JSONModel} model The json model
        */
-      setViewFree: function (model) {
+      setViewFree: function () {
         var originalBusyDelay = this.getView().getBusyIndicatorDelay();
+        var model = this.getModel("view");
         model.setProperty("/busy", false);
         model.setProperty("/delay", originalBusyDelay);
       },
@@ -164,10 +164,10 @@ sap.ui.define(
       },
 
       /**
-       * @param {string} routeName Route name of controller
+       * Attach size change events
        */
-      registerEvents: function (routeName) {
-        var model = this.getModel(routeName);
+      registerEvents: function () {
+        var model = this.getModel("view");
         function _sizeChanged(mParams) {
           switch (mParams.name) {
             case "Phone":

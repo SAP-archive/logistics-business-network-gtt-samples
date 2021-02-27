@@ -1,13 +1,13 @@
 package com.sap.gtt.v2.sample.sst.common.config;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * {@link SSTCloudSecurityConfig} is a security config for cloud environment.
@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 public class SSTCloudSecurityConfig extends AbstractCloudSecurityConfig {
 
     private static final String SHIPMENT_TRACKING_DISPLAY = "sst.r";
+    private static final String SHIPMENT_TRACKING_PROCESS = "sst.w";
 
     @Override
     public ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry setProtectedExpressionInterceptUrlRegistry(
@@ -30,7 +31,7 @@ public class SSTCloudSecurityConfig extends AbstractCloudSecurityConfig {
         registry.antMatchers(GET, "/sap/logistics/gtt/sample/sst/odata/v1/**").access(getScopeCheckExpress(SHIPMENT_TRACKING_DISPLAY));
         registry.antMatchers(POST, "/sap/logistics/gtt/sample/sst/odata/v1/**").access(getScopeCheckExpress(SHIPMENT_TRACKING_DISPLAY));
         registry.antMatchers(GET, "/sap/logistics/gtt/sample/sst/rest/v1/**").access(getScopeCheckExpress(SHIPMENT_TRACKING_DISPLAY));
-        registry.antMatchers(POST, "/sap/logistics/gtt/sample/sst/rest/v1/**").access(getScopeCheckExpress(SHIPMENT_TRACKING_DISPLAY));
+        registry.antMatchers(POST, "/sap/logistics/gtt/sample/sst/rest/v1/**").access(getScopeCheckExpress(SHIPMENT_TRACKING_PROCESS));
 
         return registry;
     }

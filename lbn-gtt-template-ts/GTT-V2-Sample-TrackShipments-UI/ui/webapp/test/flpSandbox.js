@@ -44,6 +44,15 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
                       targetURL: "#Shipment-track",
                     },
                   },
+                  {
+                    tileType: "sap.ushell.ui.tile.StaticTile",
+                    properties: {
+                      title: "Track SO Fulfillment",
+                      subTitle: "Template",
+                      icon: "sap-icon://document",
+                      targetURL: "#SalesOrder-track",
+                    },
+                  },
                 ],
               },
             ],
@@ -68,6 +77,20 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
                   applicationType: "SAPUI5",
                   additionalInformation: "SAPUI5.Component=com.sap.gtt.app.sample.sst",
                   url: sap.ui.require.toUrl("com/sap/gtt/app/sample/sst"),
+                },
+              },
+              "SalesOrder-track": {
+                semanticObject: "SalesOrder",
+                action: "track",
+                title: "Track SO Fulfillment",
+                signature: {
+                  parameters: {},
+                  additionalParameters: "allowed",
+                },
+                resolutionResult: {
+                  applicationType: "SAPUI5",
+                  additionalInformation: "SAPUI5.Component=com.sap.gtt.app.sample.sof",
+                  url: sap.ui.require.toUrl("com/sap/gtt/app/sample/sof"),
                 },
               },
             },

@@ -3,7 +3,6 @@ package com.sap.gtt.v2.sample.pof.rest.service.fulfillmentProcessFlow;
 import com.sap.gtt.v2.sample.pof.constant.FulfillmentProcessMilestoneEnum;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemInboundDeliveryItemTP;
 import com.sap.gtt.v2.sample.pof.rest.domain.fulfillmentprocessflow.Lane;
 
 import java.math.BigDecimal;
@@ -14,7 +13,6 @@ public class PopulateInboundDeliveryItemCreatedCommand implements MilestonePopul
     @Override
     public void populateMilestone(Lane lane, PurchaseOrderItem item) {
         BigDecimal quantity = item.getInboundDeliveryItems().stream()
-                .map(PurchaseOrderItemInboundDeliveryItemTP::getInboundDeliveryItem)
                 .filter(Objects::nonNull)
                 .map(InboundDeliveryItem::getOrderQuantity)
                 .filter(Objects::nonNull)

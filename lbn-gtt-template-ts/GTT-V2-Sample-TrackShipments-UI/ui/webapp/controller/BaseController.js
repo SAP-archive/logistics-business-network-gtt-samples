@@ -32,7 +32,7 @@ sap.ui.define(
     });
 
     function delegateComponentMethods(classInfo) {
-      var methodNames = ["getRouter", "getEventBus", "getText", "getPropertyLabelText"];
+      var methodNames = ["getRouter", "getEventBus", "getText"];
 
       methodNames.forEach(function (methodName) {
         classInfo[methodName] = function () {
@@ -59,6 +59,7 @@ sap.ui.define(
         this.initRoute();
         this.initPromises();
         this.initControls();
+        this.initNavigationHandler();
       },
 
       onExit: function () {
@@ -87,14 +88,12 @@ sap.ui.define(
       /**
        * @abstract
        */
-      initModel: function () {
-      },
+      initModel: function () {},
 
       /**
        * @abstract
        */
-      subscribeEvents: function () {
-      },
+      subscribeEvents: function () {},
 
       /**
        * @abstract
@@ -119,14 +118,17 @@ sap.ui.define(
       /**
        * @abstract
        */
-      unsubscribeEvents: function () {
-      },
+      initNavigationHandler: function () {},
 
       /**
        * @abstract
        */
-      routePatternMatched: function () {
-      },
+      unsubscribeEvents: function () {},
+
+      /**
+       * @abstract
+       */
+      routePatternMatched: function () {},
 
       /**
        * Convenience method for getting the view model by name.
@@ -246,25 +248,61 @@ sap.ui.define(
       // Rest Service Utilities
       // ============================================================
 
-      createGetRequestWithShipmentId: function (name) {
+      createGetRequestWithId: function (name, isFreightUnit) {
         var jsonService = ServiceUtils.getDataSource("restService");
         var bindingContext = this.getView().getBindingContext();
-        var shipmentId = bindingContext.getProperty("id");
-        var url = ServiceUtils.getUrl(jsonService.uri.concat("/").concat(name));
-        var request = RestClient.get(url, {
-          params: {
-            shipmentId: shipmentId,
-          },
-        });
+        var id = bindingContext.getProperty("id");
+        var path = isFreightUnit ? "/freightUnits/" : "/shipments/";
+        var url = ServiceUtils.getUrl(jsonService.uri.concat(path).concat(name));
+        var params = {};
+        if (isFreightUnit) {
+          params.freightUnitId = id;
+        } else {
+          params.shipmentId = id;
+        }
 
-        request.then(function (data) {
+        return RestClient.get(url, {
+          params: params,
+        }).then(function (data) {
           return data;
         }, function (error) {
           this.handleServerError(error);
           Log.error(error.data);
         }.bind(this));
+      },
 
-        return request;
+      // ============================================================
+      // Navigation methods
+      // ============================================================
+
+      navToExternalDeliveryItemDetailPage: function (id) {
+        var navObj = {
+          target: {
+            semanticObject: "SalesOrder",
+            action: "track",
+          },
+        };
+
+        if (sap.ushell && sap.ushell.Container) {
+          sap.ushell.Container.getServiceAsync(
+            "CrossApplicationNavigation"
+          ).then(function (
+            /** @type {sap.ushell.services.CrossApplicationNavigation} */
+            crossAppNav
+          ) {
+            crossAppNav.isNavigationSupported([
+              navObj,
+            ]).done(function (results) {
+              if (results[0].supported) {
+                var href = crossAppNav.hrefForExternal(navObj);
+                var url = window.location.href.split("#")[0] + href + "&/DeliveryItem(guid'" + id + "')";
+                sap.m.URLHelper.redirect(url, true);
+              } else {
+                MessageBox.error(this.getText("crossNavigationNotSupportedMsg"));
+              }
+            }.bind(this));
+          }.bind(this));
+        }
       },
 
       // ============================================================

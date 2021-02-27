@@ -68,6 +68,12 @@
      <MSGNR>010</MSGNR>
      <TEXT>Planned events are not implemented for &amp;1</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Stop ID &amp;1 is not found for Shipment &amp;2</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

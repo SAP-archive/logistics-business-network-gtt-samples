@@ -39,9 +39,9 @@ INTERFACE lif_ef_types.
   TYPES: tv_condition       TYPE sy-binpt.
 
   TYPES: BEGIN OF ts_stop_points,
-           stop_id       TYPE string,
-           log_locid     TYPE /scmtms/location_id,
-           seq_num       TYPE /scmtms/seq_num,
+           stop_id   TYPE string,
+           log_locid TYPE /scmtms/location_id,
+           seq_num   TYPE /scmtms/seq_num,
          END OF ts_stop_points.
   TYPES: tt_stop_points TYPE STANDARD TABLE OF ts_stop_points .
 ENDINTERFACE.
@@ -49,8 +49,10 @@ ENDINTERFACE.
 "!Extractor Function Constants
 INTERFACE lif_ef_constants.
   CONSTANTS: BEGIN OF cs_system_fields,
-               actual_bisiness_timezone TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_TIMEZONE',
-               actual_bisiness_datetime TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_DATETIME',
+               actual_bisiness_timezone  TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_TIMEZONE',
+               actual_bisiness_datetime  TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_DATETIME',
+               actual_technical_timezone TYPE /saptrx/paramname VALUE 'ACTUAL_TECHNICAL_TIMEZONE',
+               actual_technical_datetime TYPE /saptrx/paramname VALUE 'ACTUAL_TECHNICAL_DATETIME',
              END OF cs_system_fields.
 
   CONSTANTS: BEGIN OF cs_errors,
@@ -154,6 +156,8 @@ INTERFACE lif_ef_processor.
       cx_udm_message.
 
   METHODS get_planned_events
+    IMPORTING
+      io_factory      TYPE REF TO lif_factory
     CHANGING
       ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
       ct_measrmntdata TYPE lif_ef_types=>tt_measrmntdata
@@ -173,13 +177,6 @@ ENDINTERFACE.
 
 "!Planned Event Filler
 INTERFACE lif_pe_filler.
-  METHODS check_relevance
-    IMPORTING
-      is_app_objects   TYPE trxas_appobj_ctab_wa
-    RETURNING
-      VALUE(rv_result) TYPE lif_ef_types=>tv_condition
-    RAISING
-      cx_udm_message.
 
   METHODS get_planed_events
     IMPORTING
@@ -226,8 +223,11 @@ INTERFACE lif_factory.
 
   METHODS get_pe_filler
     IMPORTING
+      is_appl_object      TYPE trxas_appobj_ctab_wa
       io_ef_parameters    TYPE REF TO lif_ef_parameters
-      io_bo_reader        TYPE REF TO lif_bo_reader
     RETURNING
-      VALUE(ro_pe_filler) TYPE REF TO lif_pe_filler.
+      VALUE(ro_pe_filler) TYPE REF TO lif_pe_filler
+    RAISING
+      cx_udm_message.
+
 ENDINTERFACE.

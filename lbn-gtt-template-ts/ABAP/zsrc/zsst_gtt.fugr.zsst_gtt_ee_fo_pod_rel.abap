@@ -1,5 +1,5 @@
 FUNCTION zsst_gtt_ee_fo_pod_rel.
-*"--------------------------------------------------------------------
+*"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
 *"     REFERENCE(I_APPSYS) TYPE  /SAPTRX/APPLSYSTEM
@@ -15,7 +15,9 @@ FUNCTION zsst_gtt_ee_fo_pod_rel.
 *"      PARAMETER_ERROR
 *"      RELEVANCE_DETERM_ERROR
 *"      STOP_PROCESSING
-*"--------------------------------------------------------------------
+*"----------------------------------------------------------------------
+  FIELD-SYMBOLS <ls_tor_root> TYPE /scmtms/s_em_bo_tor_root.
+
   TRY.
       lcl_actual_event=>get_tor_actual_event_class( i_event )->check_event_relevance(
         EXPORTING
@@ -36,6 +38,28 @@ FUNCTION zsst_gtt_ee_fo_pod_rel.
   ENDTRY.
 
   IF e_result = lif_ef_constants=>cs_condition-false.
+    RETURN.
+  ENDIF.
+
+  ASSIGN i_event-maintabref->* TO <ls_tor_root>.
+  IF sy-subrc = 0 AND <ls_tor_root>-tor_cat = /scmtms/if_tor_const=>sc_tor_category-freight_unit.
+    IF i_event_types-mainobjtab <> /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-root.
+      RAISE stop_processing.
+    ENDIF.
+    IF e_result IS INITIAL.
+      /scmtms/cl_em_tm_helper=>check_event_relevance(
+         EXPORTING
+           iv_event_code       = /scmtms/if_tor_const=>sc_tor_event-pod
+           i_all_appl_tables   = i_all_appl_tables
+           is_tor_root         = <ls_tor_root>
+         CHANGING
+           cv_result           = e_result
+         EXCEPTIONS
+          stop_processing   = 3 ).
+      IF sy-subrc = 3.
+        RAISE stop_processing.
+      ENDIF.
+    ENDIF.
     RETURN.
   ENDIF.
 

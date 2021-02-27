@@ -8,7 +8,7 @@
 				expand: 'docType/localized'
 			}
 		}"
-		updateFinished=".addVpRowInRefDocumentsTable(${$source>}, ${trackId})">
+		updateFinished=".addVpRowInRefDocumentsTable(${view>/isFreightUnit}, ${$source>}, ${trackId})">
 		<columns>
 			<Column>
 				<Text id="documentTypeColumn"

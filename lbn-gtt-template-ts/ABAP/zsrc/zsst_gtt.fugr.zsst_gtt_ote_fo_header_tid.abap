@@ -1,4 +1,4 @@
-FUNCTION ZSST_GTT_OTE_FO_HEADER_TID .
+FUNCTION zsst_gtt_ote_fo_header_tid .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -16,14 +16,13 @@ FUNCTION ZSST_GTT_OTE_FO_HEADER_TID .
 *"      TABLE_DETERMINATION_ERROR
 *"      STOP_PROCESSING
 *"----------------------------------------------------------------------
-  DATA: lo_udm_message    TYPE REF TO cx_udm_message,
-        ls_bapiret        TYPE bapiret2.
+  DATA: lo_udm_message TYPE REF TO cx_udm_message,
+        ls_bapiret     TYPE bapiret2.
 
   TRY.
       lcl_ef_performer=>get_track_id_data(
         EXPORTING
-          is_definition         = VALUE #(
-                                    maintab   = lif_sst_constants=>cs_tabledef-fo_header_new )
+          is_definition         = VALUE #( maintab   = lif_sst_constants=>cs_tabledef-fo_header_new )
           io_bo_factory         = NEW lcl_tor_factory( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types
@@ -31,8 +30,7 @@ FUNCTION ZSST_GTT_OTE_FO_HEADER_TID .
           it_app_type_cntl_tabs = i_app_type_cntl_tabs
           it_app_objects        = i_app_objects
         IMPORTING
-          et_track_id_data      = e_trackiddata[]
-      ).
+          et_track_id_data      = e_trackiddata[] ).
 
     CATCH cx_udm_message INTO lo_udm_message.
       lcl_tools=>get_errors_log(
@@ -42,10 +40,8 @@ FUNCTION ZSST_GTT_OTE_FO_HEADER_TID .
         IMPORTING
           es_bapiret     = ls_bapiret ).
 
-      " add error message
       APPEND ls_bapiret TO e_logtable.
 
-      " throw corresponding exception
       CASE lo_udm_message->textid.
         WHEN lif_ef_constants=>cs_errors-stop_processing.
           RAISE stop_processing.

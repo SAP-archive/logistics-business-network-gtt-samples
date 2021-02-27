@@ -33,14 +33,21 @@ sap.ui.define([
         }.bind(this));
     },
 
+    /**
+     * Remove data from 'milestoneProcess' model.
+     */
     _clearMilestoneProcessModel: function () {
       this._oMilestoneProcessModel.setProperty("/", {});
     },
 
+    /**
+     * Return promise request to 'fulfillmentProcessFlow'.
+     * @returns {Promise} promise object
+     */
     getMilestoneProcessRequest: function () {
       var oRestService = ServiceUtils.getDataSource("restService"),
         oBindingContext = this.getView().getBindingContext(),
-        sFulfillmentProcessUrl = ServiceUtils.getUrl(oRestService.uri.concat("/fulfillmentProcessFlow"));
+        sFulfillmentProcessUrl = ServiceUtils.getUrl(oRestService.uri + "/fulfillmentProcessFlow");
 
       var oMilestoneProcessRequest = RestClient.get(sFulfillmentProcessUrl, {
         params: {
@@ -60,6 +67,11 @@ sap.ui.define([
       return oMilestoneProcessRequest;
     },
 
+    /**
+     * Return icon based on the lane name.
+     * @param {object} oLane lane data
+     * @returns {sap.ui.core.URI} sap icon src
+     */
     getProcessLaneIcon: function (oLane) {
       switch (oLane.name) {
         case Constants.MILESTONE_PROCESS_NAME.CREATED:
@@ -80,6 +92,11 @@ sap.ui.define([
       }
     },
 
+    /**
+     * Return process flow state.
+     * @param {object} oLane lane data
+     * @returns {sap.suite.ui.commons.ProcessFlowLaneState.state} process flow state string
+     */
     getProcessLaneState: function (oLane) {
       if (oLane.name === Constants.MILESTONE_PROCESS_NAME.CREATED) {
         return [{
@@ -102,6 +119,11 @@ sap.ui.define([
       }
     },
 
+    /**
+     * Return label for milestone.
+     * @param {object} oLane lane data
+     * @returns {string} milestone label
+     */
     getMilestoneProcessLabel: function (oLane) {
       return this.getText(oLane.name, [oLane.count, oLane.total]);
     },

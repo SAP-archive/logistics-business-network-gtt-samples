@@ -4,10 +4,8 @@ import com.sap.gtt.v2.sample.pof.constant.FulfillmentProcessMilestoneEnum;
 import com.sap.gtt.v2.sample.pof.domain.ConfirmationEvent;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemInboundDeliveryItemTP;
 import com.sap.gtt.v2.sample.pof.rest.domain.fulfillmentprocessflow.Lane;
 import com.sap.gtt.v2.sample.pof.rest.service.AbstractEventService;
-import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,10 +15,6 @@ import java.util.Objects;
 public class PopulateOrderItemConfirmedCommand extends AbstractEventService implements MilestonePopulateCommand {
 
     private static final String CONFIRMATION_TYPE = "AB";
-
-    public PopulateOrderItemConfirmedCommand(GTTCoreServiceClient gttCoreServiceClient) {
-        super(gttCoreServiceClient);
-    }
 
     @Override
     public void populateMilestone(Lane lane, PurchaseOrderItem item) {
@@ -33,7 +27,6 @@ public class PopulateOrderItemConfirmedCommand extends AbstractEventService impl
 
     private void populateBasedOnDeliveryItems(Lane lane, PurchaseOrderItem item) {
         BigDecimal quantity = item.getInboundDeliveryItems().stream()
-                .map(PurchaseOrderItemInboundDeliveryItemTP::getInboundDeliveryItem)
                 .filter(Objects::nonNull)
                 .map(InboundDeliveryItem::getOrderQuantity)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

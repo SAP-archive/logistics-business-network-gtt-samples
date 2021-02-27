@@ -144,6 +144,12 @@
           ]
         }
       },
+      "label": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "defaultBindingMode": "OneTime"
+        }
+      },
       "": {
         "dataSource": "mainService",
         "settings": {
@@ -181,13 +187,18 @@
       "routes": [
         {
           "name": "shipmentList",
-          "pattern": "",
+          "pattern": ":?sap-iapp-state:",
           "target": "shipmentList"
         },
         {
           "name": "shipment",
           "pattern": "Shipment(guid'{id}')",
           "target": "shipment"
+        },
+        {
+          "name": "freightUnit",
+          "pattern": "FreightUnit(guid'{id}'):?params:",
+          "target": "freightUnit"
         }
       ],
       "targets": {
@@ -204,6 +215,13 @@
           "viewName": "Shipment",
           "viewLevel": 1,
           "title": "{{shipmentViewTitle}}"
+        },
+        "freightUnit": {
+          "viewId": "freightUnit",
+          "viewType": "XML",
+          "viewName": "FreightUnit",
+          "viewLevel": 1,
+          "title": "{{freightUnitViewTitle}}"
         },
         "notFound": {
           "viewId": "notFound",

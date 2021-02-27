@@ -1,4 +1,4 @@
-FUNCTION ZPOF_GTT_OTE_SH_HDR_REL.
+FUNCTION zpof_gtt_ote_sh_hdr_rel.
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -24,7 +24,7 @@ FUNCTION ZPOF_GTT_OTE_SH_HDR_REL.
 
   TRY.
       e_result  = lcl_ef_performer=>check_relevance(
-                    is_definition         = VALUE #( maintab = lif_pof_constants=>cs_tabledef-sh_header_new )
+                    is_definition         = VALUE #( maintab = lif_app_constants=>cs_tabledef-sh_header_new )
                     io_bo_factory         = NEW lcl_factory_sh_header( )
                     iv_appsys             = i_appsys
                     is_app_obj_types      = i_app_obj_types

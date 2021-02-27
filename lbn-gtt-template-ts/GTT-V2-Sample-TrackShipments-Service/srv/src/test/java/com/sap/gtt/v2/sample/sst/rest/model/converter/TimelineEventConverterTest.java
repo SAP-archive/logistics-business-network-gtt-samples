@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import com.sap.gtt.v2.sample.sst.common.service.EventService;
+import com.sap.gtt.v2.sample.sst.common.service.ProcessEventDirectoryService;
 import com.sap.gtt.v2.sample.sst.common.utils.ODataUtils;
 import com.sap.gtt.v2.sample.sst.common.utils.SSTUtils;
 import com.sap.gtt.v2.sample.sst.odata.model.Location;
@@ -13,7 +14,6 @@ import com.sap.gtt.v2.sample.sst.odata.model.PlannedEvent;
 import com.sap.gtt.v2.sample.sst.odata.service.LocationService;
 import com.sap.gtt.v2.sample.sst.rest.model.EventHistory;
 import com.sap.gtt.v2.sample.sst.rest.model.TimelineEvent;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +30,8 @@ class TimelineEventConverterTest {
     private LocationService locationService;
     @Mock
     private EventService eventService;
+    @Mock
+    private ProcessEventDirectoryService processEventDirectoryService;
     @InjectMocks
     private TimelineEventConverter timelineEventConverter;
 

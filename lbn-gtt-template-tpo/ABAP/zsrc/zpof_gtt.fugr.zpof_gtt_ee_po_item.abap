@@ -27,8 +27,8 @@ FUNCTION zpof_gtt_ee_po_item.
       lcl_ef_performer=>get_planned_events(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_pof_constants=>cs_tabledef-po_item_new
-                                    mastertab = lif_pof_constants=>cs_tabledef-po_header_new )
+                                    maintab   = lif_app_constants=>cs_tabledef-po_item_new
+                                    mastertab = lif_app_constants=>cs_tabledef-po_header_new )
           io_factory            = NEW lcl_factory_po_item( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types

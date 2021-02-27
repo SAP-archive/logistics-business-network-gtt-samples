@@ -1,6 +1,7 @@
 [
   {
     "id": "1781028f-e85a-584f-9e95-b878cbf6e92c",
+    "lastLocationAltKey": "",
     "lastEventName": "GoodsIssued",
     "lastLocationDescription": null,
     "lastVPLocationType_code": null,
@@ -49,10 +50,13 @@
     "trackingId": "trackingId",
     "trackingIdType": "DELIVERY_ITEM",
     "partyId": "partyId",
-    "logicalSystem": "logicalSystem"
+    "logicalSystem": "logicalSystem",
+    "plannedArrivalTimestamp": "/Date(0)/",
+    "actualArrivalTimestamp": "/Date(0)/"
   },
   {
     "id": "1781028f-e85a-584f-9e95-b878cbf6e92g",
+    "lastLocationAltKey": "",
     "lastEventName": "GoodsIssued",
     "lastLocationDescription": "ABC Company",
     "lastVPLocationType_code": "1001",
@@ -101,10 +105,13 @@
     "trackingId": "trackingId",
     "trackingIdType": "DELIVERY_ITEM",
     "partyId": "partyId",
-    "logicalSystem": "logicalSystem"
+    "logicalSystem": "logicalSystem",
+    "plannedArrivalTimestamp": "/Date(0)/",
+    "actualArrivalTimestamp": "/Date(0)/"
   },
   {
     "id": "1781028f-e85a-584f-9e95-b878cbf6e92f",
+    "lastLocationAltKey": "",
     "lastEventName": "Departure",
     "lastLocationDescription": "ABC Company",
     "lastVPLocationType_code": null,
@@ -153,10 +160,13 @@
     "trackingId": "trackingId",
     "trackingIdType": "DELIVERY_ITEM",
     "partyId": "partyId",
-    "logicalSystem": "logicalSystem"
+    "logicalSystem": "logicalSystem",
+    "plannedArrivalTimestamp": "/Date(0)/",
+    "actualArrivalTimestamp": "/Date(0)/"
   },
   {
     "id": "1781028f-e85a-584f-9e95-b878cbf6e92e",
+    "lastLocationAltKey": "",
     "lastEventName": "Arrival",
     "lastLocationDescription": null,
     "lastVPLocationType_code": "1001",
@@ -205,10 +215,13 @@
     "trackingId": "trackingId",
     "trackingIdType": "DELIVERY_ITEM",
     "partyId": "partyId",
-    "logicalSystem": "logicalSystem"
+    "logicalSystem": "logicalSystem",
+    "plannedArrivalTimestamp": "/Date(0)/",
+    "actualArrivalTimestamp": "/Date(0)/"
   },
   {
     "id": "1781028f-e85a-584f-9e95-b878cbf6e92d",
+    "lastLocationAltKey": "",
     "lastEventName": "POD",
     "lastLocationDescription": null,
     "lastVPLocationType_code": null,
@@ -257,6 +270,8 @@
     "trackingId": "trackingId",
     "trackingIdType": "DELIVERY_ITEM",
     "partyId": "partyId",
-    "logicalSystem": "logicalSystem"
+    "logicalSystem": "logicalSystem",
+    "plannedArrivalTimestamp": "/Date(0)/",
+    "actualArrivalTimestamp": "/Date(0)/"
   }
 ]

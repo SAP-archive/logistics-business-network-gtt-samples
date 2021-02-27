@@ -60,11 +60,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public String getEventTypesMetadata(@NotNull final String eventType) {
-        return gttCoreServiceClient.getEventTypesMetadata(eventType);
-    }
-
-    @Override
     public List<CodeListValue> getCodeList(@NotNull final String codeListName, @NotNull final Locale locale) {
         return gttCoreServiceClient.getCodeList(codeListName, locale);
     }

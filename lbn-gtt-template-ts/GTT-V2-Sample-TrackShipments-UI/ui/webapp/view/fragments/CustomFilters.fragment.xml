@@ -1,7 +1,16 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
-	xmlns:core="sap.ui.core">
+	xmlns:core="sap.ui.core"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<smartfilterbar:ControlConfiguration key="serviceAgentLbnId" label="{i18n>carrier}" visibleInAdvancedArea="true" index="1"/>
-	<smartfilterbar:ControlConfiguration key="deliveryId" label="{parts: [{value: 'deliveryNo'}, {value: 'Delivery'}], formatter: '.getPropertyLabelText'}"/>
+	<smartfilterbar:ControlConfiguration key="deliveryId" label="{label>/DeliveryItem/deliveryNo}"/>
+	<!-- <smartfilterbar:ControlConfiguration key="deliveryNo" label="Custom Delivery No">
+		<smartfilterbar:customControl>
+			<Input id="deliveryNoInput"
+				value="{view>/customFilters/deliveryNo/inputValue}"
+				customData:key="deliveryNo"
+				liveChange=".onItemChanged"/>
+		</smartfilterbar:customControl>
+	</smartfilterbar:ControlConfiguration> -->
 </core:FragmentDefinition>

@@ -38,10 +38,10 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
                   {
                     tileType: "sap.ushell.ui.tile.StaticTile",
                     properties: {
-                      title: "Sales Orders Fulfillment",
-                      subTitle: "Sales Orders Fulfillment",
+                      title: "Track SO Fulfillment",
+                      subTitle: "Track SO Fulfillment",
                       icon: "sap-icon://document",
-                      targetURL: "#SalesOrders-track",
+                      targetURL: "#SalesOrder-track",
                     },
                   },
                 ],
@@ -54,10 +54,10 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
         adapter: {
           config: {
             inbounds: {
-              "SalesOrders-track": {
-                semanticObject: "SalesOrders",
+              "SalesOrder-track": {
+                semanticObject: "SalesOrder",
                 action: "track",
-                title: "Sales Orders Fulfillment",
+                title: "Track SO Fulfillment",
                 signature: {
                   parameters: {},
                   additionalParameters: "allowed",

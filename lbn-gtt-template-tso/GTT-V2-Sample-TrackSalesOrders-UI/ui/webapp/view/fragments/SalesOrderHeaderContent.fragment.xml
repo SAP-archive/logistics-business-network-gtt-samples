@@ -10,7 +10,7 @@
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="shipToPartyLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="shipToParty"
-						text="{parts: [{'value': 'shipToPartyId'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/SalesOrder/shipToPartyId}" />
 					<Link id="shipToParty"
 						class="sofHeaderContentPropertyText"
 						text="{shipToPartyLocation/locationDescription}"
@@ -26,7 +26,7 @@
 		<VBox id="netValueVBox"
 			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
 			<Title id="netValueTitle"
-				text="{parts: [{'value': 'netValue'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"
+				text="{label>/SalesOrder/netValue}"
 				level="H4"
 				class="sapUiTinyMarginBottom" />
 			<ObjectNumber id="netValue"

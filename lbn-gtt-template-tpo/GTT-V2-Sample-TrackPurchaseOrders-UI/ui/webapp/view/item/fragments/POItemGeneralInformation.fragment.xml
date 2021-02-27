@@ -32,7 +32,7 @@
             <m:HBox justifyContent="SpaceBetween">
               <m:Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
               <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
             </m:HBox>  
             </m:VBox>
           </ctrl:content>

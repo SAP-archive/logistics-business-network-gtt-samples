@@ -111,6 +111,8 @@ FUNCTION zgtt_sof_ote_de_hd.
 *Incoterms version (LIKP-INCOV)
 * Actual Business Time
 * Actual Business Time zone
+* Actual Technical Datetime
+* Actual Technical Time zone
 * Delivery Order Item table
 
   LOOP AT i_app_objects INTO ls_app_objects.
@@ -397,26 +399,35 @@ FUNCTION zgtt_sof_ote_de_hd.
     CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
     APPEND ls_control_data TO e_control_data.
 
-*  Delivery Order Item table
-    LOOP AT lt_xlips ASSIGNING <ls_xlips> WHERE updkz <> 'D'.
-      lv_tabix = sy-tabix.
-      ls_control_data-paramindex = lv_tabix.
-      ls_control_data-paramname = gc_cp_yn_de_header_item_cnt.
-      ls_control_data-value = lv_tabix.
-      SHIFT ls_control_data-value LEFT  DELETING LEADING space.
-      APPEND ls_control_data TO e_control_data.
+*   Actual Technical Datetime & Time zone
+    ls_control_data-paramname = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_control_data-value     = lv_tzone.
+    APPEND ls_control_data TO e_control_data.
 
-      ls_control_data-paramindex = lv_tabix.
-      ls_control_data-paramname = gc_cp_yn_de_header_item_no.
-      CONCATENATE <ls_xlips>-vbeln <ls_xlips>-posnr INTO ls_control_data-value.
-      APPEND ls_control_data TO e_control_data.
-    ENDLOOP.
-    IF sy-subrc NE 0.
-      ls_control_data-paramindex = '1'.
-      ls_control_data-paramname = gc_cp_yn_de_header_item_cnt.
-      ls_control_data-value = ''.
-      APPEND ls_control_data TO e_control_data.
-    ENDIF.
+    ls_control_data-paramname = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
+    APPEND ls_control_data TO e_control_data.
+
+*  Delivery Order Item table - deleted by enabling One to many association: delivery - delivery items - 20210115
+*    LOOP AT lt_xlips ASSIGNING <ls_xlips> WHERE updkz <> 'D'.
+*      lv_tabix = sy-tabix.
+*      ls_control_data-paramindex = lv_tabix.
+*      ls_control_data-paramname = gc_cp_yn_de_header_item_cnt.
+*      ls_control_data-value = lv_tabix.
+*      SHIFT ls_control_data-value LEFT  DELETING LEADING space.
+*      APPEND ls_control_data TO e_control_data.
+*
+*      ls_control_data-paramindex = lv_tabix.
+*      ls_control_data-paramname = gc_cp_yn_de_header_item_no.
+*      CONCATENATE <ls_xlips>-vbeln <ls_xlips>-posnr INTO ls_control_data-value.
+*      APPEND ls_control_data TO e_control_data.
+*    ENDLOOP.
+*    IF sy-subrc NE 0.
+*      ls_control_data-paramindex = '1'.
+*      ls_control_data-paramname = gc_cp_yn_de_header_item_cnt.
+*      ls_control_data-value = ''.
+*      APPEND ls_control_data TO e_control_data.
+*    ENDIF.
     CLEAR ls_control_data-paramindex.
   ENDLOOP.
 

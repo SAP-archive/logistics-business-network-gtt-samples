@@ -362,6 +362,14 @@ METHOD if_ex_badi_le_shipment~before_update.
         CONCATENATE '0' sy-datum sy-uzeit INTO ls_control-value.
         APPEND ls_control TO lt_control.
 
+*       Actual Technical Datetime & Time zone
+        ls_control-paramname = 'ACTUAL_TECHNICAL_TIMEZONE'.
+        ls_control-value     = lv_tzone.
+        APPEND ls_control TO lt_control.
+        ls_control-paramname = 'ACTUAL_TECHNICAL_DATETIME'.
+        CONCATENATE '0' sy-datum sy-uzeit INTO ls_control-value.
+        APPEND ls_control TO lt_control.
+
         CLEAR: lv_count.
         LOOP AT lt_vbfa_new INTO ls_vbfa_new WHERE vbelv = ls_likp_new-vbeln.
           lv_count = lv_count + 1.
@@ -559,6 +567,14 @@ METHOD if_ex_badi_le_shipment~before_update.
         CONCATENATE '0' sy-datum sy-uzeit INTO ls_control-value.
         APPEND ls_control TO lt_control.
 
+*       Actual Technical Datetime & Time zone
+        ls_control-paramname = 'ACTUAL_TECHNICAL_TIMEZONE'.
+        ls_control-value     = lv_tzone.
+        APPEND ls_control TO lt_control.
+        ls_control-paramname = 'ACTUAL_TECHNICAL_DATETIME'.
+        CONCATENATE '0' sy-datum sy-uzeit INTO ls_control-value.
+        APPEND ls_control TO lt_control.
+
         CLEAR: ls_tracking_id.
         ls_tracking_id-appsys = lv_appsys.
         ls_tracking_id-appobjtype = ls_aotype-aot_type.
@@ -619,7 +635,7 @@ METHOD if_ex_badi_le_shipment~before_update.
 
         IF ls_eerel-z_pdstk = 'X'.
           CLEAR ls_expeventdata-evt_exp_datetime.
-          ls_expeventdata-milestone     = 'POD'.
+          ls_expeventdata-milestone     = 'DLV_POD'.
           ls_expeventdata-loctype = 'Customer'.
           ls_expeventdata-locid1 = ls_likp_tmp-kunnr.
           ls_expeventdata-locid2 = ''.

@@ -45,7 +45,7 @@ public class SalesOrderODataHandlerTest {
     public void testReadSalesOrderSet() throws IOException {
         String querySalesOrderSet = "/sap/logistics/gtt/sample/sof/odata/v1" +
                 "/SalesOrder?$format=json&$inlinecount=allpages" +
-                "&$expand=salesOrderItemTPs, salesOrderItemTPs/salesOrderItem, incoterms";
+                "&$expand=salesOrderItems, incoterms";
 
         String json = IOUtils.toString(new ClassPathResource("/odata/sales-orders.json").getInputStream());
         ODataResultList<SalesOrder> entityList = ODataUtils.readEntitySet(json, SalesOrder.class);
@@ -62,7 +62,7 @@ public class SalesOrderODataHandlerTest {
     public void testReadSalesOrderEntity() throws IOException {
         String querySalesOrderEntity = "/sap/logistics/gtt/sample/sof/odata/v1" +
                 "/SalesOrder(guid'to-be-replaced')?$format=json" +
-                "&$expand=salesOrderItemTPs, salesOrderItemTPs/salesOrderItem, incoterms";
+                "&$expand=salesOrderItems, incoterms";
 
         String json = IOUtils.toString(new ClassPathResource("/odata/sales-orders.json").getInputStream());
         ODataResultList<SalesOrder> entityList = ODataUtils.readEntitySet(json, SalesOrder.class);

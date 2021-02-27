@@ -60,7 +60,7 @@ class ProcessEventDirectoryServiceImplTest {
                 .thenReturn(ResponseEntity.ok().body(processEventDirectoriesJson));
 
         // when
-        final List<ProcessEventDirectory> processEventDirectories = processEventDirectoryService.getByShipmentId(shipmentId);
+        final List<ProcessEventDirectory> processEventDirectories = processEventDirectoryService.getByTrackedProcessId(shipmentId);
 
         // then
         assertThat(processEventDirectories).isNotEmpty();

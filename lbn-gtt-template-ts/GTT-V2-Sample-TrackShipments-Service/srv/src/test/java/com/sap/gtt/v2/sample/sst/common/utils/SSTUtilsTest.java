@@ -15,8 +15,8 @@ class SSTUtilsTest {
     @Test
     void getNormalizedUri_givenRequestUri_shouldReturnNormalizedUri() {
         // given
-        final String requestUri = "https://gtt-sample-track-shipments-service-acc.cfapps.sap.hana.ondemand.com/sap/logistics/gtt/sample/sst/odata/v1/Shipment(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
-        final String serviceRoot = "https://gtt-sample-track-shipments-service-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/sst/odata/v1/";
+        final String requestUri = "https://dummy/sap/logistics/gtt/sample/sst/odata/v1/Shipment(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
+        final String serviceRoot = "https://dummy/sap/logistics/gtt/sample/sst/odata/v1/";
 
         // when
         final String normalizedUri = SSTUtils.getNormalizedUri(requestUri, serviceRoot);

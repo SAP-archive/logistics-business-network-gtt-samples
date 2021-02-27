@@ -22,28 +22,15 @@
 
 			<smartForm:GroupElement>
 				<smartField:SmartField id="shippingType"
-					textLabel="{
-						parts: [
-							{ value: 'shippingType_code' },
-							{ value: 'Shipment' }
-						],
-						formatter: '.getPropertyLabelText'
-					}"
+					textLabel="{label>/Shipment/shippingType_code}"
 					value="{=
 						!!${shippingType/localized/name} ? ${shippingType/localized/name} : ${shippingType/name}
 					}" />
 			</smartForm:GroupElement>
 
-			<smartForm:GroupElement
-				>
+			<smartForm:GroupElement>
 				<smartField:SmartField id="trafficDirection"
-					textLabel="{
-						parts: [
-							{ value: 'trafficDirection_code' },
-							{ value: 'Shipment' }
-						],
-						formatter: '.getPropertyLabelText'
-					}"
+					textLabel="{label>/Shipment/trafficDirection_code}"
 					value="{=
 						!!${trafficDirection/localized/name} ? ${trafficDirection/localized/name} : ${trafficDirection/name}
 					}" />
@@ -51,13 +38,7 @@
 
 			<smartForm:GroupElement>
 				<smartField:SmartField id="incoterms"
-					textLabel="{
-						parts: [
-							{ value: 'incoterms_code' },
-							{ value: 'Shipment' }
-						],
-						formatter: '.getPropertyLabelText'
-					}"
+					textLabel="{label>/Shipment/incoterms_code}"
 					value="{=
 						!!${incoterms/localized/name} ? ${incoterms/localized/name} : ${incoterms/name}
 					}" />
@@ -76,13 +57,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'plannedTotalDistance' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/plannedTotalDistance}">
 				<Text text="{
 					parts: ['plannedTotalDistance'],
 					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
@@ -90,13 +65,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'plannedGrossDuration' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/plannedGrossDuration}">
 				<Text id="plannedGrossDuration"
 					text="{
 						path: 'plannedGrossDuration',
@@ -105,13 +74,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'plannedNetDuration' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/plannedNetDuration}">
 				<Text id="plannedNetDuration"
 					text="{
 						path: 'plannedNetDuration',
@@ -121,13 +84,7 @@
 
 			<smartForm:GroupElement>
 				<smartField:SmartField id="transportMeans"
-					textLabel="{
-						parts: [
-							{ value: 'transportMeans_code' },
-							{ value: 'Shipment' }
-						],
-						formatter: '.getPropertyLabelText'
-					}"
+					textLabel="{label>/Shipment/transportMeans_code}"
 					value="{=
 						!!${transportMeans/localized/name} ? ${transportMeans/localized/name} : ${transportMeans/name}
 					}" />
@@ -135,7 +92,8 @@
 		</smartForm:Group>
 
 		<smartForm:Group>
-			<smartForm:GroupElement label="{i18n>registrationCountryRegionAndNumber}">
+			<smartForm:GroupElement
+				label="{i18n>registrationCountryRegionAndNumber}">
 				<Text id="registrationCountryRegionAndNumber"
 					text="{
 						parts: ['registrationCountry', 'registrationNumber'],
@@ -149,13 +107,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'cargoWeight' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/cargoWeight}">
 				<Text text="{
 					parts: ['cargoWeight', 'weightUoM'],
 					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
@@ -163,13 +115,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'cargoVolumn' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/cargoVolumn}">
 				<Text text="{
 					parts: ['cargoVolumn', 'volumnUoM'],
 					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'
@@ -177,13 +123,7 @@
 			</smartForm:GroupElement>
 
 			<smartForm:GroupElement
-				label="{
-					parts: [
-						{ value: 'cargoQuantity' },
-						{ value: 'Shipment' }
-					],
-					formatter: '.getPropertyLabelText'
-				}">
+				label="{label>/Shipment/cargoQuantity}">
 				<Text text="{
 					parts: ['cargoQuantity', 'quantityUoM'],
 					formatter: '.formatter.formatQuantityToTwoDecimalWithUom'

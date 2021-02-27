@@ -14,7 +14,6 @@ public class Constants {
     public static final String MODEL_NAMESPACE = GTT_MODEL_NAMESPACE + ".sofService";
     public static final String ENTITY_CONTAINER_NAME = "EntityContainer";
     public static final String COMBINED_MODEL_PATH_SEGMENT = "combined-model";
-    public static final String SHIPMENT_MODEL_NAME = "Shipment";
     public static final String ELEMENTS_PATH_SEGMENT = "elements";
     public static final String REST_ROOT_URL = "/sap/logistics/gtt/sample/sst/rest/v1";
     public static final String ODATA_ROOT_URL = "/sap/logistics/gtt/sample/sst/odata/v1";

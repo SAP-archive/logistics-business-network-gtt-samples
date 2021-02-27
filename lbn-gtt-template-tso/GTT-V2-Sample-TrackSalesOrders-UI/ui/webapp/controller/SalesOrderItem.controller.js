@@ -40,7 +40,6 @@ sap.ui.define(
         var args = oEvent.getParameter("arguments");
         var id = args.id;
         var urlParams = args["?params"];
-        model.setProperty("/salesOrderItemId", id);
         model.setProperty("/urlParams", urlParams);
 
         // Bind the view with an entry
@@ -55,7 +54,7 @@ sap.ui.define(
 
       getExpandList: function () {
         return [
-          "deliveryItemTPs/deliveryItem",
+          "deliveryItems",
         ];
       },
 
@@ -68,18 +67,6 @@ sap.ui.define(
 
         // refresh subsections
         this.refreshSubSection("milestoneView");
-      },
-
-      onBeforeRebindDeliveryItemsTable: function (oEvent) {
-        var salesOrderItemId = this.getModel(this.routeName).getProperty("/salesOrderItemId");
-        var params = oEvent.getParameter("bindingParams");
-        if (salesOrderItemId) {
-          var salesOrderNoFilter = new Filter("salesOrderItem_id", FilterOperator.EQ, salesOrderItemId);
-          params.filters.push(salesOrderNoFilter);
-          this.addCustomSorters(params.sorter);
-        } else {
-          params.preventTableBind = true;
-        }
       },
 
       addCustomSorters: function (sorters) {
@@ -101,17 +88,11 @@ sap.ui.define(
 
       updateSalesOrderItemFulFillmentStatus: function () {
         var bindingContext = this.getView().getBindingContext();
-        var salesOrderItem = bindingContext.getObject({expand: "deliveryItemTPs/deliveryItem"});
-        var deliveryItems = [];
-        salesOrderItem.deliveryItemTPs.forEach(function (deliveryItemTP) {
-          if (deliveryItemTP.deliveryItem) {
-            deliveryItems.push(deliveryItemTP.deliveryItem);
-          }
-        });
-
+        var salesOrderItem = bindingContext.getObject({expand: "deliveryItems"});
+        var deliveryItems = salesOrderItem.deliveryItems;
         var fulFillmentStatusSet = this.getFulfillmentStatusSet(deliveryItems);
         var model = this.getModel(this.routeName);
-        model.setProperty("/deliveryItemsCount", salesOrderItem.deliveryItemTPs.length);
+        model.setProperty("/deliveryItemsCount", deliveryItems.length);
         model.setProperty("/fulFillmentStatusSet", fulFillmentStatusSet);
       },
 

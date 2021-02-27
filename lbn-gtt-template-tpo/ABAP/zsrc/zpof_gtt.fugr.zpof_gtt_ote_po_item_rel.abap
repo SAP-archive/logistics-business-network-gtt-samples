@@ -25,8 +25,8 @@ FUNCTION zpof_gtt_ote_po_item_rel.
   TRY.
       e_result  = lcl_ef_performer=>check_relevance(
                     is_definition         = VALUE #(
-                                              maintab   = lif_pof_constants=>cs_tabledef-po_item_new
-                                              mastertab = lif_pof_constants=>cs_tabledef-po_header_new )
+                                              maintab   = lif_app_constants=>cs_tabledef-po_item_new
+                                              mastertab = lif_app_constants=>cs_tabledef-po_header_new )
                     io_bo_factory         = NEW lcl_factory_po_item( )
                     iv_appsys             = i_appsys
                     is_app_obj_types      = i_app_obj_types

@@ -13,7 +13,7 @@
 			<f:DynamicPageTitle>
 				<f:heading>
 					<sv:SmartVariantManagement id="pageVariant"
-						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="true"/>
+						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="false"/>
 				</f:heading>
 				<f:snappedContent>
 					<Text id="statusText"/>
@@ -35,8 +35,7 @@
 						beforeVariantSave=".onBeforeVariantSave"
 						beforeVariantFetch=".onBeforeVariantFetch"
 						afterVariantLoad=".onAfterVariantLoad"
-						showClearButton="false"
-						search=".onSearch">
+						showClearButton="false">
 						<smartFilterBar:controlConfiguration>
 							<core:Fragment id="customFilterFragment" fragmentName="com.sap.gtt.app.sample.sof.view.fragments.CustomFilters" type="XML"/>
 						</smartFilterBar:controlConfiguration>
@@ -62,7 +61,7 @@
 				showRowCount="true"
 				useExportToExcel="false"
 				enableAutoBinding="true"
-				beforeRebindTable="onBeforeRebindTable">
+				beforeRebindTable=".onBeforeRebindTable">
 				<smartTable:customData>
 					<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
 					<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
@@ -70,7 +69,7 @@
 				<Table id="innerTable" class="sofSalesOrderListTable" growing="true">
 					<columns>
 						<Column>
-							<Text text="{parts: [{'value': 'shipToPartyId'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/SalesOrder/shipToPartyId}" />
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "shipToPartyId", "leadingProperty": "shipToPartyId, shipToPartyLocation", "navigationProperty": "shipToPartyLocation", columnIndex: 1}'/>
 							</customData>
@@ -88,13 +87,13 @@
 							</customData>
 						</Column>
 						<Column id="documentDateColumn" hAlign="Right" visible="false">
-							<Text text="{parts: [{'value': 'documentDate'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/SalesOrder/documentDate}" />
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "sortProperty": "documentDate", columnIndex: 10000}'/>
 							</customData>
 						</Column>
 						<Column id="incotermsColumn" visible="visible">
-							<Text text="{parts: [{'value': 'incoterms_code'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/SalesOrder/incoterms_code}" />
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code, incoterms/name, incoterms/localized/name", "navigationProperty": "incoterms/localized", columnIndex: 10001}'/>
 							</customData>

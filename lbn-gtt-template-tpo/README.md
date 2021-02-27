@@ -1,34 +1,67 @@
-# Track Purchase Orders Template App
+# Track PO Fulfillment Template App
+
+## What's New in the Track PO Fulfillment Template App (Micro Delivery 2021.02.26)
+*	Refactor the folder path ‘/lbn-gtt-template-tpo/ABAP/src/’ to '/lbn-gtt-template-tpo/abap/zsrc/' to adapt to the newest version of ABAPGIT tool.
+*	Rename the template app Track Purchase Orders to Track PO Fulfillment.
+*	Adapt extract & model logic for the Visibility Provider integration technical change.
+*	Add actual technical timestamp and actual technical time zone for all AOT and event extractors to minimize IDOC sequencing issues.
+* Enable correlation period to be controlled by the Event-to-Action script to manage event correlating to delivery based on events at the stop level of shipment.
+* Enhance UI consistency.
+* Fix issues of variant management on the List page.
+* Improve the performance for asynchronous processing mode of core engine.
+* Enhance the calculation part, such as Last Reported Event & Execution Status & Completion Rate.
+* Enable milestones and map interaction on the Delivery Item page.
+* Enable new filters of 'Delivery number' & 'Shipment number' on the List page.
+* Enable tracking for Goods Receipt at the delivery header level instead of item level.
+* Enable features for new model field type of one-to-many association: purchase order – purchase order items, purchase order item – delivery items, delivery – delivery items.
+* Enable error logging on Cross TP Update BADI.
+* Minor enhancement for the Delivery Item page.
+*	Add the requirement “To implement the extractor code, your SAP ERP system version should be S4 1909 SP03 or higher”.
+* Include combined IDOC implementation guide into the document 02_Extractor_Creation_Guide-TPOF.pdf.
+* Include sample extractor configuration list into the document 02_Extractor_Creation_Guide-TPOF.pdf.
+* Include new introduction material [03_Introduction_Material_for_TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/03_Introduction_Material_for_TPOF.pdf).
+* Include new FAQ material [05_FAQs_for_Template_Code_Implementation.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/05_FAQs_for_Template_Code_Implementation.pdf).</br>
+
+If you choose not to upgrade to the latest version, here are some mandatory steps for you to adapt to GTT V2 February 2021 Delivery.</br>
+*	[Mandatory for VP integration] Add LBN# as the prefix for Service Agent LBN ID for the shipment extractor.
+*	[Mandatory for receiving actual events from data contributor] Grant report and read authorization to Service Agent LBN ID in the shipment and resource process type of the model 'Purchase Order Fulfillment'.</br>
+
+For more information, refer to What’s New in the relevant document folder [04_What's_New_TPOF_Feb2021.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/04_What's_New_TPOF_Feb2021.pdf) </br>
+
 
 ## Description
-Track Purchase Orders template app is for purchase representatives to monitor the purchase order fulfillment status when the procuring party manages the delivery transportation. The template app answers the following questions: </br>
+Track PO Fulfillment template app is designed for purchase representatives to monitor the purchase order fulfillment status when the procuring party manages the delivery transportation. The app answers the following questions:
 * How many deliveries in my purchase order are delayed?
 * How many deliveries in my purchase order are completed?
 * Where are my purchase orders?
-* ……  
+* What is the ETA of my purchase orders?
+* ……
+![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/screenshot.png)
 
 ## Requirements
-* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
-* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented
-* The ABAP codes to support sample applications for GTT v2 can be implemented in S4 HANA 2101 on premise, which is not validated in lower release
-* To integrate with visibility providers, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”</br>
+* A SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
+* To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.
+* To integrate with Visibility Providers, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”.
 
 ## Download and Installation
-* 01_Implementation_Guide-TPO </br>
-* 02_Extractor_Creation_Guide-TPO </br>
+* [01_Implementation_Guide-TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/01_Implementation_Guide-TPOF.pdf) 
+* [02_Extractor_Creation_Guide-TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/02_Extractor_Creation_Guide-TPOF.pdf)
 
 ## Limitations
-* The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence.</br>
-* The eventMatchKey of the purchase order item's and delivery item's planned event is null.</br>
-* To integrate with visibility providers, the following code list sent out from ERP system should be consistent with the code list in the template model of Track Purchase Orders – "Purchase Order fulfillment":</br>
-Transportation mode code </br>
-Shipping type code </br>
-Tracked resource code </br>
-Carrier reference document type code </br>
+* Notes for ERP Extractor Implementation:</br>
+The eventMatchKey of the shipment’s planned event at the stage level = shipmentNo + stopId. "stopId" is set by the stage’s sequence.</br>
+The eventMatchKey of the purchase order item's and delivery item's planned event is null.</br>
+To integrate with the Manage Locations app on the platform of SAP Logistics Business Network, the following code list sent out from ERP system should be consistent with the code list in the template model of Track PO Fulfillment – "Purchase Order fulfillment":</br>
+  -- Location type code</br>
+To integrate with Visibility Providers, the following code list sent out from ERP system should be consistent with the code list in the template model of Track PO Fulfillment – "Purchase Order fulfillment":</br>
+  -- Transportation mode code</br>
+  -- Shipping type code</br>
+  -- Tracked resource type code</br>
+  -- Carrier reference document type code</br>
 
 ## Known Issue
-* If multiple IDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the GTT system in disorder. This will cause update failure in some situations. The situation has been improved by asynchronous processing of core engine within the GTT system. But it still might happen when the IDOCs fall into different processing queues.</br>
-* For ERP, the EXTENSION segment of processing IDOC is not enabled for planned events. This means that you cannot set up user-defined fields for planned events in the Manage Models app. But you can use Control Parameter’s segment in IDOC and do the field mapping on the tracked process level in the Manage Models app.</br>
+* If multiple IDOC payloads are generated at the same time or in a very short time in ERP, these payloads will enter the GTT system in an incorrect order. This will cause update failure in some situations. The situation has been improved by asynchronous processing of core engine within the GTT system. But it still might happen when the IDOCs fall into different processing queues.
+* For ERP, the EXTENSION segment of processing IDOC is not enabled for planned events. This means that you cannot set up user-defined fields for planned events in the Manage Models app. But you can use Control Parameter’s segment in the tracked process IDOC and do the field mapping at the tracked process level in the Manage Models app.
 
 ## FAQs
 * Why couldn’t my shipment events be correlated with the delivery and then with the delivery item?</br>
@@ -37,10 +70,10 @@ Only during the correlation period can the shipment events be correlated with th
 You can set your own correlation period in Event-to-Action by updating “validFrom” and “validTo” logic.</br>
 
 * Why can’t I find any stops and any planned routes on the map?</br>
-Check if you have assigned the delivery to any shipment stages.</br>
+Check if you have assigned the delivery to any shipment's stages.</br>
 
 * Why are some stops missing on the map?</br>
-Check if you have updated the right geocoordinates for those locations in the Manage Locations application.</br>
+Check if you have updated the right geocoordinates for those locations in the Manage Locations app.</br>
 
 * Why are some actual events missing on the map?</br>
 Only events with valid geocoordinates are shown on the map.</br>
@@ -54,11 +87,11 @@ You can set your own execution status logic in Event-to-Action.</br>
 
 * How is the delivery’s execution status changed?</br>
 By default, the delivery item’ execution status is “Not Started”.</br>
-If the delivery item’s planned event or the delivery-assigned shipments’ Check-in, Load Begin, or Load End event is reported, the execution status will be changed to “In Transit”.</br>
+If the delivery item’s planned event or the delivery-assigned shipments’ Departure, Arrival, POD is reported, the execution status will be changed to “In Transit”.</br>
 If the delivery item’s all planned PODs from the delivery-assigned shipments are reported when the item is POD relevant, or the delivery item’s planned goods receipt quantity are fully reported when the item is not POD relevant, the execution status will be changed to “Completed”. </br>
 Once the execution status is set as “Completed”, it cannot be changed any more. </br>
 You can set your own execution status logic in Event-to-Action. </br>
-
+ 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with the global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”.</br>
+If your issue is concerned with the global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-APP”.</br>

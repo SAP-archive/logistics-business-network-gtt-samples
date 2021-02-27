@@ -7,8 +7,6 @@ import com.sap.gtt.v2.sample.pof.odata.model.InboundDelivery;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrder;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemInboundDeliveryItemTP;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemTP;
 import com.sap.gtt.v2.sample.pof.odata.model.Resource;
 import com.sap.gtt.v2.sample.pof.odata.model.ResourceTP;
 import com.sap.gtt.v2.sample.pof.odata.model.Shipment;
@@ -21,6 +19,7 @@ import com.sap.gtt.v2.sample.pof.rest.domain.documentflow.TPRelation;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -50,17 +49,15 @@ import static com.sap.gtt.v2.sample.pof.constant.TrackingIdTypeEnum.SHIPMENT;
 @Service
 public class DocumentFlowService {
 
-    private static final String EXPAND_VALUE = "purchaseOrderItemTPs/purchaseOrderItem/inboundDeliveryItems/inboundDeliveryItem/inboundDelivery" +
+    private static final String EXPAND_VALUE = "purchaseOrderItemTPs/inboundDeliveryItems/inboundDelivery" +
             "/shipmentTPs/shipment/resourceTPs/resource";
     private static final String PURCHASE_ORDER_URL_TEMPLATE = "/PurchaseOrder(guid'%s')";
 
-    private final GTTCoreServiceClient gttCoreServiceClient;
-    private final DocumentFlowConverter converter;
+    @Autowired
+    private GTTCoreServiceClient gttCoreServiceClient;
 
-    public DocumentFlowService(GTTCoreServiceClient gttCoreServiceClient, DocumentFlowConverter converter) {
-        this.gttCoreServiceClient = gttCoreServiceClient;
-        this.converter = converter;
-    }
+    @Autowired
+    private DocumentFlowConverter converter;
 
     public DocumentFlow generateDocumentItemFlow(UUID purchaseOrderId, UUID purchaseOrderItemId) {
         PurchaseOrder purchaseOrder = queryPurchaseOrder(purchaseOrderId, purchaseOrderItemId);
@@ -74,8 +71,10 @@ public class DocumentFlowService {
 
     private PurchaseOrder queryPurchaseOrder(UUID purchaseOrderId, UUID purchaseOrderItemId) {
         PurchaseOrder purchaseOrder = queryPurchaseOrder(purchaseOrderId);
-        List<PurchaseOrderItemTP> items = purchaseOrder.getPurchaseOrderItemTPs().stream()
-                .filter(poi -> poi.getPurchaseOrderItemId().equals(purchaseOrderItemId))
+        List<PurchaseOrderItem> items = purchaseOrder.getPurchaseOrderItemTPs()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(poi -> poi.getId().equals(purchaseOrderItemId))
                 .collect(Collectors.toList());
         purchaseOrder.setPurchaseOrderItemTPs(items);
         return purchaseOrder;
@@ -92,7 +91,7 @@ public class DocumentFlowService {
 
         List<Node> nodes = converter.convertNodes(bfsResult.getLeft());
         List<TPRelation> tpRelations = bfsResult.getRight();
-        updateNodesStatuses(tpRelations, nodes);
+        updateStatuses(tpRelations, nodes);
 
         DocumentFlow flow = new DocumentFlow();
 
@@ -103,7 +102,7 @@ public class DocumentFlowService {
         return flow;
     }
 
-    private void updateNodesStatuses(List<TPRelation> tpRelations, List<Node> nodes) {
+    private void updateStatuses(List<TPRelation> tpRelations, List<Node> nodes) {
         Map<UUID, Node> idNodeMap = nodes.stream().collect(Collectors.toMap(Node::getId, Function.identity()));
         Map<UUID, List<TPRelation>> toTrackedProcessRelationMap = tpRelations.stream().collect(Collectors.groupingBy(TPRelation::getToTrackedProcessUUID));
 
@@ -113,6 +112,7 @@ public class DocumentFlowService {
             List<TPRelation> tpRelationsByToTrackedProcess = toTrackedProcessRelationMap.getOrDefault(toNode.getId(), Collections.emptyList());
             for (TPRelation tpRelation : tpRelationsByToTrackedProcess) {
                 Node fromNode = idNodeMap.get(tpRelation.getFromTrackedProcessUUID());
+                tpRelation.setToTrackedProcessStatus(toNode.getStatus());
                 if (DocumentFlowGeneralStatusEnum.compareByStatuses(fromNode.getStatus(), toNode.getStatus()) < 0) {
                     fromNode.setStatus(toNode.getStatus());
                 }
@@ -152,29 +152,23 @@ public class DocumentFlowService {
 
         if (PURCHASE_ORDER.getTrackingIdType().equals(tpDefinition.getTrackingIdType())) {
             PurchaseOrder purchaseOrder = (PurchaseOrder) tpDefinition.getTp();
-            List<PurchaseOrderItemTP> purchaseOrderTPs = purchaseOrder.getPurchaseOrderItemTPs();
-            List<PurchaseOrderItem> purchaseOrderItems = purchaseOrderTPs.stream()
-                    .map(PurchaseOrderItemTP::getPurchaseOrderItem)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+            List<PurchaseOrderItem> purchaseOrderItems = purchaseOrder.getPurchaseOrderItemTPs();
 
             tps.addAll(purchaseOrderItems.stream().map(TpDefinition::new).collect(Collectors.toList()));
-            purchaseOrderItems.forEach(item -> tpRelations.add(new TPRelation(purchaseOrder.getId(), item.getId(), purchaseOrder.getProcessStatusCode())));
+            purchaseOrderItems.forEach(item -> tpRelations.add(new TPRelation(purchaseOrder.getId(), item.getId(), item.getProcessStatusCode())));
         } else if (PURCHASE_ORDER_ITEM.getTrackingIdType().equals(tpDefinition.getTrackingIdType())) {
             PurchaseOrderItem purchaseOrderItem = (PurchaseOrderItem) tpDefinition.getTp();
-            List<InboundDeliveryItem> inboundDeliveryItems = purchaseOrderItem.getInboundDeliveryItems().stream()
-                    .map(PurchaseOrderItemInboundDeliveryItemTP::getInboundDeliveryItem)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+            List<InboundDeliveryItem> inboundDeliveryItems = purchaseOrderItem.getInboundDeliveryItems();
 
             tps.addAll(inboundDeliveryItems.stream().map(TpDefinition::new).collect(Collectors.toList()));
-            inboundDeliveryItems
-                    .forEach(item -> tpRelations.add(new TPRelation(purchaseOrderItem.getId(), item.getId(), purchaseOrderItem.getProcessStatusCode())));
+            inboundDeliveryItems.forEach(item ->
+                    tpRelations.add(new TPRelation(purchaseOrderItem.getId(), item.getId(), item.getProcessStatusCode())));
         } else if (INBOUND_DELIVERY_ITEM.getTrackingIdType().equals(tpDefinition.getTrackingIdType())) {
             InboundDeliveryItem inboundDeliveryItem = (InboundDeliveryItem) tpDefinition.getTp();
             InboundDelivery delivery = inboundDeliveryItem.getInboundDelivery();
+
             tps.add(new TpDefinition(delivery));
-            tpRelations.add(new TPRelation(inboundDeliveryItem.getId(), delivery.getId(), inboundDeliveryItem.getProcessStatusCode()));
+            tpRelations.add(new TPRelation(inboundDeliveryItem.getId(), delivery.getId(), delivery.getProcessStatusCode()));
         } else if (INBOUND_DELIVERY.getTrackingIdType().equals(tpDefinition.getTrackingIdType())) {
             InboundDelivery inboundDelivery = (InboundDelivery) tpDefinition.getTp();
             List<Shipment> shipments = inboundDelivery.getShipmentTPs().stream()
@@ -183,15 +177,16 @@ public class DocumentFlowService {
                     .collect(Collectors.toList());
 
             tps.addAll(shipments.stream().map(TpDefinition::new).collect(Collectors.toList()));
-            shipments.forEach(item -> tpRelations.add(new TPRelation(inboundDelivery.getId(), item.getId(), inboundDelivery.getProcessStatusCode())));
+            shipments.forEach(item -> tpRelations.add(new TPRelation(inboundDelivery.getId(), item.getId(), item.getProcessStatusCode())));
         } else if (SHIPMENT.getTrackingIdType().equals(tpDefinition.getTrackingIdType())) {
             Shipment shipment = (Shipment) tpDefinition.getTp();
             List<Resource> resources = shipment.getResourceTPs().stream()
                     .map(ResourceTP::getResource)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
+
             tps.addAll(resources.stream().map(TpDefinition::new).collect(Collectors.toList()));
-            resources.forEach(item -> tpRelations.add(new TPRelation(shipment.getId(), item.getId(), shipment.getProcessStatusCode())));
+            resources.forEach(item -> tpRelations.add(new TPRelation(shipment.getId(), item.getId(), item.getProcessStatusCode())));
         }
 
         return new ImmutablePair<>(tps, tpRelations);
@@ -216,7 +211,7 @@ public class DocumentFlowService {
         UUID toNodeUUID = tpRelation.getToTrackedProcessUUID();
         line.setFrom(nodeKeyMap.get(fromNodeUUID));
         line.setTo(nodeKeyMap.get(toNodeUUID));
-        line.setStatus(converter.convertProcessStatus(tpRelation.getToTrackedProcessStatus()).getStatus());
+        line.setStatus(tpRelation.getToTrackedProcessStatus());
         return line;
     }
 

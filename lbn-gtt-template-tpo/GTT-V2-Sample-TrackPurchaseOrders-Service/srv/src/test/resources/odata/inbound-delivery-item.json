@@ -46,6 +46,7 @@
         "trackingIdType": "INBOUND_DELIVERY_IT",
         "processStatus_code": "OVERDUE",
         "executionStatus_code": "IN_TRANSIT",
+        "lastLocationAltKey": "some:key:id",
         "lastReportedEvent": "com.lbngttsamples.gtt.app.pof.Shipment.LoadingStart",
         "supplierLocationType": {
           "__metadata": {

@@ -284,11 +284,12 @@
     "key": 10,
     "title": "187020020",
     "group": 4,
-    "status": "Information",
+    "status": "Success",
     "attributes": [{
       "propertyName": "processStatus_code",
       "value": "AS_PLANNED",
-      "group": 4
+      "group": 4,      
+      "valueStatus": "ValueStatusSuccess"
     }],
     "trackingIdType": "INBOUND_DELIVERY"
   }, {

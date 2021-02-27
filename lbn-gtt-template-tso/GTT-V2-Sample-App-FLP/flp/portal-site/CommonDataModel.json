@@ -18,7 +18,15 @@
           "viz": [
             {
               "id": "com.sap.gtt.app.sample.sof",
-              "vizId": "SalesOrders-track"
+              "vizId": "SalesOrder-track"
+            },
+            {
+              "id": "com.sap.gtt.app.sample.sst",
+              "vizId": "Shipment-track"
+            },
+            {
+              "id": "com.sap.gtt.app.sample.pof",
+              "vizId": "PurchaseOrder-track"
             }
           ]
         }
@@ -28,17 +36,53 @@
       {
         "_version": "3.0.0",
         "identification": {
-          "id": "sample-apps",
+          "id": "salesOrder",
           "title": "{{title}}",
           "entityType": "group",
-          "i18n": "i18n/sampleApps.properties"
+          "i18n": "i18n/salesOrder.properties"
         },
         "payload": {
           "viz": [
             {
               "id": "com.sap.gtt.app.sample.sof",
               "appId": "com.sap.gtt.app.sample.sof",
-              "vizId": "SalesOrders-track"
+              "vizId": "SalesOrder-track"
+            }
+          ]
+        }
+      },
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "shipment",
+          "title": "{{title}}",
+          "entityType": "group",
+          "i18n": "i18n/shipment.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.sst",
+              "appId": "com.sap.gtt.app.sample.sst",
+              "vizId": "Shipment-track"
+            }
+          ]
+        }
+      },
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "purchaseOrder",
+          "title": "{{title}}",
+          "entityType": "group",
+          "i18n": "i18n/purchaseOrder.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.pof",
+              "appId": "com.sap.gtt.app.sample.pof",
+              "vizId": "PurchaseOrder-track"
             }
           ]
         }
@@ -65,9 +109,8 @@
                       },
                       "enableHelp": false,
                       "enableSearch": false,
-                      "enablePersonalization": true,
-                      "enableSetTheme": true,
-                      "enableSetLanguage": true
+                      "sessionTimeoutIntervalInMinutes": 19,
+                      "sessionTimeoutReminderInMinutes": 3
                     }
                   }
                 }
@@ -75,7 +118,9 @@
             }
           },
           "groupsOrder": [
-            "sample-apps"
+            "salesOrder",
+            "shipment",
+            "purchaseOrder"
           ],
           "sap.cloud.portal": {
             "config": {
@@ -85,7 +130,7 @@
                 "sap_belize_hcb",
                 "sap_belize_hcw"
               ],
-              "ui5VersionNumber": "1.75.0",
+              "ui5VersionNumber": "1.78.19",
               "InAppHelp": {
                 "config": {
                   "enabled": false,

@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +38,19 @@ public class DocumentFlowServiceTest {
     @Mock
     private RestTemplate restTemplate;
 
+    @Mock
+    private POFPurchaseOrderItemODataHandler pofPurchaseOrderItemODataHandler;
+
+    @Mock
+    private POFLocationODataHandler locationODataHandler;
+
     @InjectMocks
     private GTTCoreServiceClient gttCoreServiceClient;
 
+    @InjectMocks
+    private DocumentFlowConverter converter;
+
+    @InjectMocks
     private DocumentFlowService documentFlowService;
 
     @Before
@@ -50,14 +59,12 @@ public class DocumentFlowServiceTest {
         ReflectionTestUtils.setField(gttCoreServiceClient, "criticalInfo", "");
         ReflectionTestUtils.setField(gttCoreServiceClient, "gttBaseUrl", "https://dummy");
 
+        ReflectionTestUtils.setField(documentFlowService, "gttCoreServiceClient", gttCoreServiceClient);
+        ReflectionTestUtils.setField(documentFlowService, "converter", converter);
+
         String stringFromResource = POFUtils.getStringFromResource("odata/purchaseOrder-purchaseOrderItems.json");
         when(restTemplate.exchange(contains("/PurchaseOrder"), eq(HttpMethod.GET),
                 any(HttpEntity.class), eq(String.class))).thenReturn(ResponseEntity.ok(stringFromResource));
-
-        POFLocationODataHandler locationODataHandler = Mockito.mock(POFLocationODataHandler.class);
-        POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler = Mockito.mock(POFPurchaseOrderItemODataHandler.class);
-        DocumentFlowConverter converter = new DocumentFlowConverter(locationODataHandler, purchaseOrderItemODataHandler);
-        documentFlowService = Mockito.spy(new DocumentFlowService(gttCoreServiceClient, converter));
 
         when(locationODataHandler.getLocation(any(String.class))).thenReturn(null);
     }

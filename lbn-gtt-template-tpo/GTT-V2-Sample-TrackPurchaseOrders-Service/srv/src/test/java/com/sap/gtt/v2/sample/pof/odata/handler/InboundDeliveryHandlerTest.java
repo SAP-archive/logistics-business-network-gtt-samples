@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.service.LocationService;
+import com.sap.gtt.v2.sample.pof.service.MapService;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 import com.sap.gtt.v2.sample.pof.utils.ODataUtils;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
@@ -40,6 +41,9 @@ public class InboundDeliveryHandlerTest {
 
     @Mock
     private LocationService locationService;
+
+    @Mock
+    private MapService mapService;
 
     @Before
     public void setUp() {

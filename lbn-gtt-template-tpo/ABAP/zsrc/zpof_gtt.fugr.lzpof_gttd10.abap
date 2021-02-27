@@ -124,6 +124,13 @@ CLASS lcl_tools DEFINITION.
       RETURNING
         VALUE(rv_result) TYPE abap_bool.
 
+    CLASS-METHODS log_exception
+      IMPORTING
+        io_udm_message TYPE REF TO cx_udm_message
+        iv_log_name    TYPE balnrext OPTIONAL
+        iv_object      TYPE balobj_d
+        iv_subobject   TYPE balsubobj.
+
     CLASS-METHODS throw_exception
       IMPORTING
         iv_textid TYPE sotr_conc DEFAULT ''
@@ -493,6 +500,83 @@ CLASS lcl_tools IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
+  METHOD log_exception.
+    DATA: ls_log    TYPE bal_s_log,
+          lv_handle TYPE balloghndl,
+          ls_msg    TYPE bal_s_msg,
+          lt_handle TYPE bal_t_logh.
+
+    TRY.
+        cl_reca_guid=>guid_create(
+          IMPORTING
+            ed_guid_22 = DATA(lv_guid) ).
+
+        " open application log
+        ls_log-object    = iv_object.
+        ls_log-subobject = iv_subobject.
+        ls_log-extnumber = lv_handle.
+        ls_log-aldate    = sy-datum.
+        ls_log-altime    = sy-uzeit.
+        ls_log-aluser    = sy-uname.
+        ls_log-altcode   = sy-tcode.
+        CALL FUNCTION 'BAL_LOG_CREATE'
+          EXPORTING
+            i_s_log                 = ls_log
+          IMPORTING
+            e_log_handle            = lv_handle
+          EXCEPTIONS
+            log_header_inconsistent = 1
+            OTHERS                  = 2.
+        IF sy-subrc <> 0.
+          RETURN.
+        ENDIF.
+
+        " add message to application log
+        ls_msg    = VALUE #(
+          msgty  = io_udm_message->m_msgty
+          msgid  = io_udm_message->m_msgid
+          msgno  = io_udm_message->m_msgno
+          msgv1  = io_udm_message->m_msgv1
+          msgv2  = io_udm_message->m_msgv2
+          msgv3  = io_udm_message->m_msgv3
+          msgv4  = io_udm_message->m_msgv4
+        ).
+
+        GET TIME STAMP FIELD ls_msg-time_stmp.
+
+        CALL FUNCTION 'BAL_LOG_MSG_ADD'
+          EXPORTING
+            i_log_handle     = lv_handle
+            i_s_msg          = ls_msg
+          EXCEPTIONS
+            log_not_found    = 1
+            msg_inconsistent = 2
+            log_is_full      = 3
+            OTHERS           = 4.
+        IF sy-subrc <> 0.
+          RETURN.
+        ENDIF.
+
+        " save application log
+        CLEAR lt_handle[].
+        INSERT lv_handle INTO TABLE lt_handle.
+
+        CALL FUNCTION 'BAL_DB_SAVE'
+          EXPORTING
+            i_in_update_task = ' '
+            i_t_log_handle   = lt_handle
+          EXCEPTIONS
+            log_not_found    = 1
+            save_not_allowed = 2
+            numbering_error  = 3
+            OTHERS           = 4.
+        IF sy-subrc <> 0.
+          RETURN.
+        ENDIF.
+      CATCH cx_cacs_bal_ex.
+    ENDTRY.
+  ENDMETHOD.
+
   METHOD throw_exception.
     RAISE EXCEPTION TYPE cx_udm_message
       EXPORTING
@@ -827,6 +911,14 @@ CLASS lcl_ef_processor IMPLEMENTATION.
     APPEND ls_control_data TO ct_control_data.
 
     ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_bisiness_datetime.
+    ls_control_data-value       = lcl_tools=>get_system_date_time( ).
+    APPEND ls_control_data TO ct_control_data.
+
+    ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_technical_timezone.
+    ls_control_data-value       = lcl_tools=>get_system_time_zone( ).
+    APPEND ls_control_data TO ct_control_data.
+
+    ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_technical_datetime.
     ls_control_data-value       = lcl_tools=>get_system_date_time( ).
     APPEND ls_control_data TO ct_control_data.
   ENDMETHOD.

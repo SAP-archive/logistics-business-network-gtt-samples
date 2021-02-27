@@ -22,14 +22,18 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.sap.gtt.v2.sample.sof.constant.Constants.SHIPMENT_ARRIVAL;
 import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.FILTER;
 import static java.lang.String.format;
+import static java.util.Collections.emptyList;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.nullsFirst;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @Service
 public class MapService {
@@ -226,7 +230,7 @@ public class MapService {
             }
             Map<String, EstimatedArrival> estimatedArrivalMap = createEstimatedArrivalMap(estimatedArrivals);
             route.getPlannedSpots().forEach(plannedSpot -> {
-                if (plannedSpot.getEventTypeOrign().contains(Constants.SHIPMENT_ARRIVAL)) {
+                if (plannedSpot.getEventTypeOrign().contains(SHIPMENT_ARRIVAL)) {
                     plannedSpot.setEstimatedArrival(estimatedArrivalMap.get(plannedSpot.getEventMatchKey()));
                 }
             });
@@ -634,6 +638,7 @@ public class MapService {
      */
     public List<SideContent> getSideContents(String deliveryItemId, String altKey, String eventMatchKey, String plannedEventId) {
         List<SideContent> actualEventInsideContents = new ArrayList<>();
+        CurrentLocation currentLocation = null;
         if (StringUtils.isNotBlank(altKey)) {
             actualEventInsideContents = getSideContentsInActualEvent(deliveryItemId, altKey);
         }
@@ -647,7 +652,47 @@ public class MapService {
         if(!CollectionUtils.isEmpty(actualEventInsideContents)) {
             setActualBisTimeOfReportedPlannedEvent(actualEventInsideContents,deliveryItemId);
         }
+
+        currentLocation = getCurrentLocationByActualRoute(deliveryItemId, altKey);
+        if (nonNull(currentLocation)) {
+            List<EstimatedArrival> estimatedArrivals = getEstimatedArrivalOfCurrentLocation(currentLocation);
+            sideContents.forEach(sideContent -> updateEstimatedArrivalForSideContent(sideContent, estimatedArrivals));
+        }
+
         return sideContents;
+    }
+
+    private CurrentLocation getCurrentLocationByActualRoute(String deliveryItemId, String altKey) {
+        CurrentLocation currentLocation = null;
+        if (nonNull(altKey)) {
+            Map<String, Route> actualRoutes = getActualRoute(new HashSet<>(), new HashSet<>(), deliveryItemId);
+            getCurrentLocations(actualRoutes);
+            Route actualRoute = actualRoutes.get(altKey);
+            currentLocation = actualRoute.getCurrentLocation();
+        }
+        return currentLocation;
+    }
+
+    private List<EstimatedArrival> getEstimatedArrivalOfCurrentLocation(CurrentLocation currentLocation) {
+        return isNull(currentLocation.getEstimatedArrival())
+                ? emptyList()
+                : currentLocation.getEstimatedArrival();
+    }
+
+    private void updateEstimatedArrivalForSideContent(SideContent sideContent, List<EstimatedArrival> estimatedArrivals) {
+        String eventTypeFullName = sideContent.getEventTypeFullName();
+        String eventMatchKey = sideContent.getEventMatchKey();
+
+        if (eventTypeFullName.contains(SHIPMENT_ARRIVAL) && nonNull(eventMatchKey)) {
+            Optional<EstimatedArrival> estimatedArrival = estimatedArrivals.stream()
+                    .filter(eta -> StringUtils.equals(eventMatchKey, eta.getStopId()))
+                    .findFirst();
+            estimatedArrival.ifPresent(eta -> {
+                String timestamp = isNull(eta.getEstimatedArrivalTime()) ?
+                        null : Instant.ofEpochMilli(eta.getEstimatedArrivalTime()).toString();
+                sideContent.setEstimatedArrivalTime(timestamp);
+            });
+        }
     }
 
     private void setActualBisTimeOfReportedPlannedEvent(List<SideContent> actualEventInsideContents,String deliveryItemId) {
@@ -842,10 +887,12 @@ public class MapService {
         Event event = processEventDirectory.getEvent();
         PlannedEvent plannedEvent = processEventDirectory.getPlannedEvent();
         SideContent sideContent = new SideContent();
+        sideContent.setEventId(event.getId());
         String actualTime = SOFUtils.getTimeStr(event.getActualBusinessTimestamp());
         sideContent.setActualBusinessTimestamp(actualTime);
         sideContent.setLocationAltKey(event.getLocationAltKey());
         String eventType = event.getEventType();
+        sideContent.setEventTypeFullName(eventType);
         if (StringUtils.isNotBlank(eventType)) {
             eventType = eventType.substring(eventType.lastIndexOf(".") + 1);
         }

@@ -25,13 +25,13 @@ INTERFACE lif_ef_types.
            mastertab TYPE /saptrx/strucdatadef,
          END OF ts_definition.
 
-  TYPES: tv_parameter_id     TYPE i,
-         tv_parameter_value  TYPE char50.
+  TYPES: tv_parameter_id    TYPE i,
+         tv_parameter_value TYPE char50.
 
   TYPES: tv_condition       TYPE sy-binpt.
 
-  TYPES: tv_field_name      TYPE char20,
-         tt_field_name      TYPE STANDARD TABLE OF tv_field_name
+  TYPES: tv_field_name TYPE char20,
+         tt_field_name TYPE STANDARD TABLE OF tv_field_name
                               WITH EMPTY KEY.
 
   TYPES: tv_currency_amnt   TYPE bapicurr_d.
@@ -47,8 +47,10 @@ INTERFACE lif_ef_constants.
              END OF cs_trk_obj_type.
 
   CONSTANTS: BEGIN OF cs_system_fields,
-               actual_bisiness_timezone TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_TIMEZONE',
-               actual_bisiness_datetime TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_DATETIME',
+               actual_bisiness_timezone  TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_TIMEZONE',
+               actual_bisiness_datetime  TYPE /saptrx/paramname VALUE 'ACTUAL_BUSINESS_DATETIME',
+               actual_technical_timezone TYPE /saptrx/paramname VALUE 'ACTUAL_TECHNICAL_TIMEZONE',
+               actual_technical_datetime TYPE /saptrx/paramname VALUE 'ACTUAL_TECHNICAL_DATETIME',
              END OF cs_system_fields.
 
   CONSTANTS: BEGIN OF cs_errors,
@@ -91,8 +93,20 @@ INTERFACE lif_ef_constants.
              END OF cs_loc_types.
 
   CONSTANTS: BEGIN OF cs_date_types,
-              timestamp TYPE char20 VALUE 'TIMESTAMP',
+               timestamp TYPE char20 VALUE 'TIMESTAMP',
              END OF cs_date_types.
+
+  CONSTANTS: BEGIN OF cs_logs,
+*               log_name TYPE balnrext VALUE '',
+               BEGIN OF object,
+                 shipment_ctp TYPE balobj_d VALUE 'SAPTRX',
+                 delivery_ctp TYPE balobj_d VALUE 'SAPTRX',
+               END OF object,
+               BEGIN OF subobject,
+                 shipment_ctp TYPE balsubobj VALUE 'APPSYS',
+                 delivery_ctp TYPE balsubobj VALUE 'APPSYS',
+               END OF subobject,
+             END OF cs_logs.
 
 ENDINTERFACE.
 

@@ -23,7 +23,7 @@ import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getGson;
 @Component
 @Profile({"cloud", "local"})
 public class VcapParser {
-    private Logger logger = LoggerFactory.getLogger(VcapParser.class);
+    private final Logger logger = LoggerFactory.getLogger(VcapParser.class);
 
     public static final String OAUTH_TOKEN_CLIENT_CREDENTIALS_PATH = "/oauth/token?grant_type=client_credentials";
     private static final String SUBACCOUNT_DEST_PATH = "/destination-configuration/v1/subaccountDestinations/";

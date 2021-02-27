@@ -2,12 +2,14 @@ package com.sap.gtt.v2.sample.pof.constant;
 
 import java.util.Arrays;
 
+import static com.sap.gtt.v2.sample.pof.constant.Constants.CONFIRMATION_EVENT;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.GOODS_RECEIPT_EVENT;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public enum FulfillmentProcessMilestoneEnum {
     PURCHASE_ORDER_ITEM_CREATED("purchaseOrderItemCreated", 0),
-    PURCHASE_ORDER_ITEM_CONFIRMED("purchaseOrderItemConfirmed", 1, "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.ConfirmationEvent"),
-    PURCHASE_ORDER_ITEM_RECEIPT("purchaseOrderItemReceipt", 2, "com.lbngttsamples.gtt.app.pof.PurchaseOrderItem.GoodsReceipt"),
+    PURCHASE_ORDER_ITEM_CONFIRMED("purchaseOrderItemConfirmed", 1, CONFIRMATION_EVENT),
+    PURCHASE_ORDER_ITEM_RECEIPT("purchaseOrderItemReceipt", 2, GOODS_RECEIPT_EVENT),
     PURCHASE_ORDER_ITEM_DELETED("purchaseOrderItemDeleted", 3),
     INBOUND_DELIVERY_ITEM_CREATED("inboundDeliveryItemCreated", 4),
     INBOUND_DELIVERY_ITEM_RECEIPT("inboundDeliveryItemReceipt", 5),

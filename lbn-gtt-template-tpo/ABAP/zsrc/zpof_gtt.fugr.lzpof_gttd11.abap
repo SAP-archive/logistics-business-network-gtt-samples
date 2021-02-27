@@ -97,9 +97,40 @@ CLASS lcl_ae_processor DEFINITION.
     DATA: ms_definition    TYPE lif_ef_types=>ts_definition,
           mo_ae_parameters TYPE REF TO lif_ae_parameters,
           mo_ae_filler     TYPE REF TO lif_ae_filler.
+
+    METHODS add_technical_records
+      IMPORTING it_eventid_map     TYPE trxas_evtid_evtcnt_map
+      CHANGING  ct_trackparameters TYPE lif_ae_types=>tt_trackparameters
+      RAISING   cx_udm_message.
+
+
 ENDCLASS.
 
 CLASS lcl_ae_processor IMPLEMENTATION.
+  METHOD add_technical_records.
+    DATA: lt_eventid    TYPE STANDARD TABLE OF /saptrx/evtcnt.
+
+    lt_eventid  = VALUE #( FOR ls_eventid_map IN it_eventid_map
+                           ( ls_eventid_map-evtcnt ) ).
+
+    SORT lt_eventid.
+    DELETE ADJACENT DUPLICATES FROM lt_eventid.
+
+    LOOP AT lt_eventid ASSIGNING FIELD-SYMBOL(<lv_eventid>).
+      ct_trackparameters    = VALUE #( BASE ct_trackparameters
+        (
+          evtcnt      = <lv_eventid>
+          param_name  = lif_ef_constants=>cs_system_fields-actual_technical_timezone
+          param_value = lcl_tools=>get_system_time_zone( )
+        )
+        (
+          evtcnt      = <lv_eventid>
+          param_name  = lif_ef_constants=>cs_system_fields-actual_technical_datetime
+          param_value = lcl_tools=>get_system_date_time( )
+        ) ).
+    ENDLOOP.
+  ENDMETHOD.
+
   METHOD constructor.
     ms_definition    = is_definition.
     mo_ae_parameters = io_ae_parameters.
@@ -188,6 +219,12 @@ CLASS lcl_ae_processor IMPLEMENTATION.
           ct_trackparameters = lt_trackparameters
       ).
     ENDLOOP.
+
+    add_technical_records(
+      EXPORTING
+        it_eventid_map     = lt_eventid_map
+      CHANGING
+        ct_trackparameters = lt_trackparameters ).
 
     " Add all the changes to result tables in the end of the method,
     " so that in case of exceptions there will be no inconsistent data in them

@@ -7,8 +7,8 @@ sap.ui.define([
     ENTITY_TYPES: {
       PURCHASE_ORDER        : "PurchaseOrder",
       PURCHASE_ORDER_ITEM   : "PurchaseOrderItem",
-      INDOUND_DELIVERY_ITEM : "InboundDeliveryItem",
-      INDOUND_DELIVERY      : "InboundDelivery",
+      INBOUND_DELIVERY_ITEM : "InboundDeliveryItem",
+      INBOUND_DELIVERY      : "InboundDelivery",
       SHIPMENT              : "Shipment",
       RESOURCE              : "Resource",
     },
@@ -16,10 +16,10 @@ sap.ui.define([
     TRACKING_ID_TYPE: {
       PURCHASE_ORDER        : "PURCHASE_ORDER",
       PURCHASE_ORDER_ITEM   : "PURCHASE_ORDER_ITEM",
-      INDOUND_DELIVERY_ITEM : "INBOUND_DELIVERY_IT",
-      INDOUND_DELIVERY      : "INBOUND_DELIVERY",
+      INBOUND_DELIVERY_ITEM : "INBOUND_DELIVERY_IT",
+      INBOUND_DELIVERY      : "INBOUND_DELIVERY",
       INBOUND_SHIPMENT      : "INBOUND_SHIPMENT",
-      RESOURCE              : "RESOURCE",
+      INBOUND_RESOURCE      : "INBOUND_RESOURCE",
     },
 
     PO_ITEM_MATERIAL_ID_PROP  : "materialId",
@@ -27,10 +27,15 @@ sap.ui.define([
     PLANNED_DELIVERY_DATE_PROP: "plannedDeliveryDate",
     PROCESS_STATUS_CODE_PROP  : "processStatus_code",
     EXECUTION_STATUS_CODE_PROP: "executionStatus_code",
-    PO_TO_PO_ITEM_NAV_PATH    : "purchaseOrderItemTPs/purchaseOrderItem",
+    PO_TO_PO_ITEM_NAV_PATH    : "purchaseOrderItemTPs",
     LAST_UPDATE_PATH          : "/lastUpdatedOn",
     FOCUS_GROUP_PATH          : "/focusGroup",
     PURCHASE_ORDER_ID_PATH    : "/purchaseOrderId",
+    PO_DELIVERY_NO            : "purchaseOrderItemTPs/inboundDeliveryItems/inboundDelivery/inboundDeliveryNo",
+    PO_ITEM_DELIVERY_NO       : "inboundDeliveryItems/inboundDelivery/inboundDeliveryNo",
+    PO_SHIPMENT_NO            : "purchaseOrderItemTPs/inboundDeliveryItems/inboundDelivery/shipmentTPs/shipment/shipmentNo",
+    PO_ITEM_SHIPMENT_NO       : "inboundDeliveryItems/inboundDelivery/shipmentTPs/shipment/shipmentNo",
+    CUSTOM_FILTERTS_PATH      : "/customFilters",
 
     PROCESS_STATUS_CODE: {
       AS_PLANNED  : "AS_PLANNED",
@@ -49,8 +54,8 @@ sap.ui.define([
     DOCUMENT_FLOW_GROUP: {
       PURCHASE_ORDER        : 1,
       PURCHASE_ORDER_ITEM   : 2,
-      INDOUND_DELIVERY_ITEM : 3,
-      INDOUND_DELIVERY      : 4,
+      INBOUND_DELIVERY_ITEM : 3,
+      INBOUND_DELIVERY      : 4,
       SHIPMENT              : 5,
       RESOURCE              : 6,
     },
@@ -58,7 +63,7 @@ sap.ui.define([
     ROUTES_NAME: {
       PURCHASE_ORDER        : "PurchaseOrderDetails",
       PURCHASE_ORDER_ITEM   : "PurchaseOrderItemDetails",
-      INDOUND_DELIVERY_ITEM : "DeliveryItemDetails",
+      INBOUND_DELIVERY_ITEM : "DeliveryItemDetails",
     },
 
     MILESTONE_PROCESS_NAME: {
@@ -120,5 +125,12 @@ sap.ui.define([
       VP: "VP",
     },
 
+    TWO_DECIMALS_AFTER_DOT: 2,
+
+    COLORS: {
+      DELAYED_OVERDUE: "rgb(255, 255, 255)",
+      CURRENT_LOCATION: "rgb(92, 186, 230)",
+      STANDARD: "rgb(9, 97, 185)",
+    },
   });
 });

@@ -48,14 +48,12 @@
   font-size: 10px;
 }
 
-.sstTrackingTimelineItem[data-is-actual-event="false"] .sapSuiteUiCommonsTimelineItemShellDateTime {
+.sstTrackingTimelineItem .sapSuiteUiCommonsTimelineItemShellDateTime {
   display: none;
 }
 
 .sstTrackingTimelineItem .sapMObjStatusInverted .sapMObjStatusText {
-  padding: 0.4rem 0.6rem;
   font-size: 0.9rem;
-  border-radius: 0.3rem;
 }
 
 .sapMSelectListRow[data-is-planned-event-selection="true"] {

@@ -100,9 +100,9 @@ public class PurchaseOrder {
     @EdmNavigationProperty(name = "processStatus", toType = ProcessStatus.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private ProcessStatus processStatus;
 
-    @EdmNavigationProperty(name = "purchaseOrderItemTPs", toType = PurchaseOrderItemTP.class,
+    @EdmNavigationProperty(name = "purchaseOrderItemTPs", toType = PurchaseOrderItem.class,
             toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
-    private List<PurchaseOrderItemTP> purchaseOrderItemTPs;
+    private List<PurchaseOrderItem> purchaseOrderItemTPs;
 
     @EdmNavigationProperty(name = Constants.RECEIVING_LOCATION, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE, toType = LocationDTO.class)
     private LocationDTO receivingLocation;
@@ -310,11 +310,11 @@ public class PurchaseOrder {
         this.processStatus = processStatus;
     }
 
-    public List<PurchaseOrderItemTP> getPurchaseOrderItemTPs() {
+    public List<PurchaseOrderItem> getPurchaseOrderItemTPs() {
         return purchaseOrderItemTPs;
     }
 
-    public void setPurchaseOrderItemTPs(List<PurchaseOrderItemTP> purchaseOrderItemTPs) {
+    public void setPurchaseOrderItemTPs(List<PurchaseOrderItem> purchaseOrderItemTPs) {
         this.purchaseOrderItemTPs = purchaseOrderItemTPs;
     }
 

@@ -38,11 +38,17 @@
 							text="{executionFlow>senderPartyId}"
 							active="false">
 						</ObjectAttribute>
+						<ObjectAttribute
+							visible="{=
+								${executionFlow>eventType} === 'POD' &amp;&amp; !!${executionFlow>quantity}
+							}"
+							title="{i18n>quantity}"
+							text="{executionFlow>quantity}"
+							active="false">
+						</ObjectAttribute>
 					</items>
 				</VBox>
 			</CustomListItem>
 		</List>
 	</ResponsivePopover>
 </core:FragmentDefinition>
-
-

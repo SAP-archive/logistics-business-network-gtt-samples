@@ -71,7 +71,7 @@ sap.ui.define(
 
       addCustomSorters: function (sorters) {
         if (sorters.length === 0) {
-          sorters.push(new Sorter("salesOrderItem/itemNo", false));
+          sorters.push(new Sorter("itemNo", false));
         }
       },
 
@@ -85,7 +85,7 @@ sap.ui.define(
         var bindingContext = source.getBindingContext();
 
         this.getRouter().navTo("salesOrderItem", {
-          id: bindingContext.getProperty("salesOrderItem/id"),
+          id: bindingContext.getProperty("id"),
           params: {
             salesOrderId: this.getModel(this.routeName).getProperty("/salesOrderId"),
           },

@@ -11,15 +11,11 @@ import com.sap.gtt.v2.sample.sst.rest.model.CurrentLocation;
 import com.sap.gtt.v2.sample.sst.rest.model.EstimatedArrival;
 import com.sap.gtt.v2.sample.sst.rest.model.NextStop;
 import com.sap.gtt.v2.sample.sst.rest.model.converter.NextStopConverter;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.UUID;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,11 +37,11 @@ class NextStopServiceImplTest {
         estimatedArrival.setStopId("1");
         currentLocation.setEstimatedArrival(singletonList(estimatedArrival));
 
-        when(currentLocationService.getByShipmentId(shipmentId)).thenReturn(Optional.of(currentLocation));
+        when(currentLocationService.getByTrackedProcessId(shipmentId)).thenReturn(Optional.of(currentLocation));
         when(nextStopConverter.fromEstimatedArrival(any(), any())).thenReturn(new NextStop());
 
         // when
-        final Optional<NextStop> nextStopOpt = nextStopService.getByShipmentId(shipmentId);
+        final Optional<NextStop> nextStopOpt = nextStopService.getByTrackedProcessId(shipmentId);
 
         // then
         assertThat(nextStopOpt).isPresent();
@@ -58,10 +54,10 @@ class NextStopServiceImplTest {
         final CurrentLocation currentLocation = new CurrentLocation();
         currentLocation.setEstimatedArrival(emptyList());
 
-        when(currentLocationService.getByShipmentId(shipmentId)).thenReturn(Optional.of(currentLocation));
+        when(currentLocationService.getByTrackedProcessId(shipmentId)).thenReturn(Optional.of(currentLocation));
 
         // when
-        final Optional<NextStop> nextStopOpt = nextStopService.getByShipmentId(shipmentId);
+        final Optional<NextStop> nextStopOpt = nextStopService.getByTrackedProcessId(shipmentId);
 
         // then
         assertThat(nextStopOpt).isNotPresent();

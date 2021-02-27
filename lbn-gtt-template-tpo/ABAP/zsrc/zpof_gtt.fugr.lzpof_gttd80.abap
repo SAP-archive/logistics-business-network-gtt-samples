@@ -208,580 +208,6 @@ ENDCLASS.
 **********************************************************************
 **********************************************************************
 **********************************************************************
-CLASS lcl_ctp_sender_dl_to_po_item DEFINITION
-  INHERITING FROM lcl_ctp_sender
-  CREATE PRIVATE.
-
-  PUBLIC SECTION.
-    CLASS-METHODS get_instance
-      RETURNING
-        VALUE(ro_updater) TYPE REF TO lcl_ctp_sender_dl_to_po_item
-      RAISING
-        cx_udm_message.
-
-    METHODS prepare_idoc_data
-      IMPORTING
-        it_likp_new TYPE shp_likp_t
-        it_lips_new TYPE shp_lips_t
-        it_lips_old TYPE shp_lips_t
-      RAISING
-        cx_udm_message.
-
-  PROTECTED SECTION.
-    METHODS get_aotype_restrictions
-        REDEFINITION.
-
-    METHODS get_object_type
-        REDEFINITION.
-
-  PRIVATE SECTION.
-    TYPES: BEGIN OF ts_lips_ex,
-             vbeln TYPE lips-vbeln,
-             posnr TYPE lips-posnr,
-           END OF ts_lips_ex,
-           tt_lips_ex TYPE STANDARD TABLE OF ts_lips_ex
-                        WITH EMPTY KEY.
-
-    TYPES: BEGIN OF ts_ekpo_ex,
-             ebeln TYPE ekpo-ebeln,
-             ebelp TYPE ekpo-ebelp,
-             ekko  TYPE lif_pof_types=>ts_ekko,
-             ekpo  TYPE lif_pof_types=>ts_uekpo,
-             eket  TYPE STANDARD TABLE OF lif_pof_types=>ts_ueket WITH EMPTY KEY,
-             ekes  TYPE STANDARD TABLE OF lif_pof_types=>ts_uekes WITH EMPTY KEY,
-*             lips  TYPE tt_lips_ex,
-           END OF ts_ekpo_ex,
-           tt_ekpo_ex TYPE SORTED TABLE OF ts_ekpo_ex
-                        WITH UNIQUE KEY ebeln ebelp.
-
-    TYPES: BEGIN OF ts_lips_upd,
-             vbeln TYPE lipsvb-vbeln,
-             posnr TYPE lipsvb-posnr,
-             vgbel TYPE lipsvb-vgbel,
-             vgpos TYPE lipsvb-vgpos,
-             updkz TYPE lipsvb-updkz,
-           END OF ts_lips_upd,
-           tt_lips_upd TYPE STANDARD TABLE OF ts_lips_upd.
-
-    TYPES: ts_likp TYPE likpvb,
-           ts_lips TYPE lipsvb.
-
-    CONSTANTS: BEGIN OF cs_mapping,
-                 ebeln      TYPE /saptrx/paramname VALUE 'YN_PO_NUMBER',
-                 ebelp      TYPE /saptrx/paramname VALUE 'YN_PO_ITEM',
-                 deliv_num  TYPE /saptrx/paramname VALUE 'YN_DL_HDR_ITM_LINE_COUNT',
-                 deliv_item TYPE /saptrx/paramname VALUE 'YN_DL_HDR_ITM_NO',
-               END OF cs_mapping.
-
-    DATA: mt_ekpo_ex   TYPE tt_ekpo_ex.
-
-    METHODS fill_idoc_appobj_ctabs
-      IMPORTING
-        is_aotype    TYPE ts_aotype
-        is_ekpo_ex   TYPE ts_ekpo_ex
-      CHANGING
-        cs_idoc_data TYPE ts_idoc_data
-      RAISING
-        cx_udm_message.
-
-    METHODS fill_idoc_control_data
-      IMPORTING
-        is_aotype    TYPE ts_aotype
-        is_ekpo_ex   TYPE ts_ekpo_ex
-      CHANGING
-        cs_idoc_data TYPE ts_idoc_data
-      RAISING
-        cx_udm_message.
-
-    METHODS fill_idoc_exp_event
-      IMPORTING
-        is_aotype    TYPE ts_aotype
-        is_ekpo_ex   TYPE ts_ekpo_ex
-      CHANGING
-        cs_idoc_data TYPE ts_idoc_data
-      RAISING
-        cx_udm_message.
-
-    METHODS fill_idoc_tracking_id
-      IMPORTING
-        is_aotype    TYPE ts_aotype
-        is_ekpo_ex   TYPE ts_ekpo_ex
-        it_lips_new  TYPE shp_lips_t
-        it_lips_old  TYPE shp_lips_t
-      CHANGING
-        cs_idoc_data TYPE ts_idoc_data
-      RAISING
-        cx_udm_message.
-
-    METHODS fill_purchase_order_data
-      RAISING
-        cx_udm_message.
-
-    METHODS get_updated_dlv_items
-      IMPORTING
-        it_likp_new TYPE shp_likp_t
-        it_lips_new TYPE shp_lips_t
-      EXPORTING
-        et_lips_upd TYPE tt_lips_upd
-      RAISING
-        cx_udm_message.
-
-    METHODS prepare_po_item_data
-      IMPORTING
-        it_likp_new TYPE shp_likp_t
-        it_lips_new TYPE shp_lips_t
-      RAISING
-        cx_udm_message.
-
-ENDCLASS.
-
-CLASS lcl_ctp_sender_dl_to_po_item IMPLEMENTATION.
-  METHOD get_aotype_restrictions.
-    et_aotype = VALUE #( (
-      low     = 'ZPOF_GTT_*_ITEM'
-      option  = 'CP'
-      sign    = 'I'
-    ) ).
-  ENDMETHOD.
-
-  METHOD get_instance.
-    DATA(lt_trk_obj_type) = VALUE tt_trk_obj_type(
-       ( lif_ef_constants=>cs_trk_obj_type-esc_deliv )
-       ( lif_ef_constants=>cs_trk_obj_type-esc_purord )
-    ).
-
-    IF is_gtt_enabled( it_trk_obj_type = lt_trk_obj_type ) = abap_true.
-      ro_updater  = NEW #( ).
-
-      ro_updater->initiate( ).
-    ELSE.
-      MESSAGE e006(zpof_gtt) INTO DATA(lv_dummy).
-      lcl_tools=>throw_exception( ).
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD get_object_type.
-    rv_objtype  = lif_ef_constants=>cs_trk_obj_type-esc_purord.
-  ENDMETHOD.
-
-  METHOD fill_idoc_appobj_ctabs.
-    cs_idoc_data-appobj_ctabs = VALUE #( BASE cs_idoc_data-appobj_ctabs (
-      trxservername = cs_idoc_data-trxserv-trx_server_id
-      appobjtype    = is_aotype-aot_type
-      appobjid      = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|
-    ) ).
-  ENDMETHOD.
-
-  METHOD fill_idoc_control_data.
-    DATA: lt_control    TYPE /saptrx/bapi_trk_control_tab .
-
-    " PO Item key data (obligatory)
-    lt_control  = VALUE #(
-      (
-        paramname = cs_mapping-ebeln
-        value     = is_ekpo_ex-ebeln
-      )
-      (
-        paramname = cs_mapping-ebelp
-        value     = is_ekpo_ex-ebelp
-      )
-      (
-        paramname = lif_ef_constants=>cs_system_fields-actual_bisiness_timezone
-        value     = lcl_tools=>get_system_time_zone( )
-      )
-      (
-        paramname = lif_ef_constants=>cs_system_fields-actual_bisiness_datetime
-        value     = |0{ sy-datum }{ sy-uzeit }|
-      )
-    ).
-
-    " Delivery Item data in PO Item
-    LOOP AT is_ekpo_ex-ekes ASSIGNING FIELD-SYMBOL(<ls_ekes>).
-      lt_control  = VALUE #( BASE lt_control
-        (
-          paramname   = cs_mapping-deliv_num
-          paramindex  = sy-tabix
-          value       = |{ sy-tabix }|
-        )
-        (
-          paramname   = cs_mapping-deliv_item
-          paramindex  = sy-tabix
-          value       = |{ <ls_ekes>-vbeln }{ <ls_ekes>-vbelp }|
-        )
-      ).
-    ENDLOOP.
-
-    " add deletion record when PO Item has no DLV Items
-    IF sy-subrc <> 0.
-      lt_control  = VALUE #( BASE lt_control (
-          paramname   = cs_mapping-deliv_num
-          paramindex  = '1'
-          value       = ''
-      ) ).
-    ENDIF.
-
-    " fill technical data into all control data records
-    LOOP AT lt_control ASSIGNING FIELD-SYMBOL(<ls_control>).
-      <ls_control>-appsys     = mv_appsys.
-      <ls_control>-appobjtype = is_aotype-aot_type.
-      <ls_control>-appobjid   = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|.
-    ENDLOOP.
-
-    cs_idoc_data-control  = VALUE #( BASE cs_idoc_data-control
-                                     ( LINES OF lt_control ) ).
-  ENDMETHOD.
-
-  METHOD fill_idoc_exp_event.
-    DATA: lt_exp_event          TYPE /saptrx/bapi_trk_ee_tab,
-          ls_app_obj_types      TYPE /saptrx/aotypes,
-          lt_all_appl_tables    TYPE trxas_tabcontainer,
-          lt_app_type_cntl_tabs TYPE trxas_apptype_tabs,
-          ls_app_objects        TYPE trxas_appobj_ctab_wa,
-          lt_app_objects        TYPE trxas_appobj_ctabs.
-
-    ls_app_obj_types              = CORRESPONDING #( is_aotype ).
-
-    ls_app_objects                = CORRESPONDING #( ls_app_obj_types ).
-    ls_app_objects-appobjtype     = is_aotype-aot_type.
-    ls_app_objects-appobjid       = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|.
-    ls_app_objects-maintabref     = REF #( is_ekpo_ex-ekpo ).
-    ls_app_objects-maintabdef     = lif_pof_constants=>cs_tabledef-po_item_new.
-    ls_app_objects-mastertabref   = REF #( is_ekpo_ex-ekko ).
-    ls_app_objects-mastertabdef   = lif_pof_constants=>cs_tabledef-po_header_new.
-
-    lt_app_objects                = VALUE #( ( ls_app_objects ) ).
-
-    lt_all_appl_tables            = VALUE #(
-      (
-        tabledef  = lif_pof_constants=>cs_tabledef-po_sched_new
-        tableref  = REF #( is_ekpo_ex-eket )
-      )
-      (
-        tabledef  = lif_pof_constants=>cs_tabledef-po_vend_conf_new
-        tableref  = REF #( is_ekpo_ex-ekes )
-      )
-    ).
-
-    CALL FUNCTION 'ZPOF_GTT_EE_PO_ITEM'
-      EXPORTING
-        i_appsys                  = mv_appsys
-        i_app_obj_types           = CORRESPONDING /saptrx/aotypes( is_aotype )
-        i_all_appl_tables         = lt_all_appl_tables
-        i_app_type_cntl_tabs      = lt_app_type_cntl_tabs
-        i_app_objects             = lt_app_objects
-      TABLES
-        e_expeventdata            = lt_exp_event
-      EXCEPTIONS
-        parameter_error           = 1
-        exp_event_determ_error    = 2
-        table_determination_error = 3
-        stop_processing           = 4
-        OTHERS                    = 5.
-
-    IF sy-subrc <> 0.
-      lcl_tools=>throw_exception( ).
-    ENDIF.
-
-    IF lt_exp_event[] IS INITIAL.
-      lt_exp_event = VALUE #( (
-          milestone         = ''
-          locid2            = ''
-          loctype           = ''
-          locid1            = ''
-          evt_exp_datetime  = '000000000000000'
-          evt_exp_tzone     = ''
-      ) ).
-    ENDIF.
-
-    LOOP AT lt_exp_event ASSIGNING FIELD-SYMBOL(<ls_exp_event>).
-      <ls_exp_event>-appsys         = mv_appsys.
-      <ls_exp_event>-appobjtype     = is_aotype-aot_type.
-      <ls_exp_event>-appobjid       = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|.
-      <ls_exp_event>-language       = sy-langu.
-      <ls_exp_event>-evt_exp_tzone  = lcl_tools=>get_system_time_zone(  ).
-    ENDLOOP.
-
-    cs_idoc_data-exp_event = VALUE #( BASE cs_idoc_data-exp_event
-                                      ( LINES OF lt_exp_event ) ).
-  ENDMETHOD.
-
-  METHOD fill_idoc_tracking_id.
-    LOOP AT it_lips_new ASSIGNING FIELD-SYMBOL(<ls_lips_new>)
-      WHERE updkz = lif_ef_constants=>cs_change_mode-insert
-        AND vgbel = is_ekpo_ex-ebeln
-        AND vgpos = is_ekpo_ex-ebelp.
-
-      cs_idoc_data-tracking_id  = VALUE #( BASE cs_idoc_data-tracking_id (
-        appsys          = mv_appsys
-        appobjtype      = is_aotype-aot_type
-        appobjid        = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|
-        trxcod          = lif_pof_constants=>cs_trxcod-dl_position
-        trxid           = |{ <ls_lips_new>-vbeln }{ <ls_lips_new>-posnr }|
-        start_date      = |{ sy-datum }{ sy-uzeit }|
-        end_date        = lif_ef_constants=>cv_max_end_date
-        timzon          = lcl_tools=>get_system_time_zone( )
-        msrid           = space
-      ) ).
-    ENDLOOP.
-
-    LOOP AT it_lips_old ASSIGNING FIELD-SYMBOL(<ls_lips_old>)
-      WHERE updkz = lif_ef_constants=>cs_change_mode-delete
-        AND vgbel = is_ekpo_ex-ebeln
-        AND vgpos = is_ekpo_ex-ebelp.
-
-      cs_idoc_data-tracking_id  = VALUE #( BASE cs_idoc_data-tracking_id (
-        appsys          = mv_appsys
-        appobjtype      = is_aotype-aot_type
-        appobjid        = |{ is_ekpo_ex-ebeln }{ is_ekpo_ex-ebelp }|
-        trxcod          = lif_pof_constants=>cs_trxcod-dl_position
-        trxid           = |{ <ls_lips_old>-vbeln }{ <ls_lips_old>-posnr }|
-        action          = lif_ef_constants=>cs_change_mode-delete
-      ) ).
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD fill_purchase_order_data.
-    DATA: lt_ebeln TYPE SORTED TABLE OF ekko-ebeln
-                        WITH UNIQUE KEY table_line,
-          lt_ekko  TYPE HASHED TABLE OF ekko
-                        WITH UNIQUE KEY ebeln,
-          lt_ekpo  TYPE HASHED TABLE OF ekpo
-                        WITH UNIQUE KEY ebeln ebelp,
-          lt_eket  TYPE SORTED TABLE OF eket
-                        WITH NON-UNIQUE KEY ebeln ebelp.
-
-    LOOP AT mt_ekpo_ex ASSIGNING FIELD-SYMBOL(<ls_ekpo_ex>).
-      COLLECT <ls_ekpo_ex>-ebeln INTO lt_ebeln.
-    ENDLOOP.
-
-    IF lt_ebeln[] IS NOT INITIAL.
-      SELECT *
-        INTO TABLE lt_ekko
-        FROM ekko
-        FOR ALL ENTRIES IN lt_ebeln
-        WHERE ebeln = lt_ebeln-table_line.
-    ENDIF.
-
-    IF mt_ekpo_ex[] IS NOT INITIAL.
-      SELECT *
-        INTO TABLE lt_ekpo
-        FROM ekpo
-        FOR ALL ENTRIES IN mt_ekpo_ex
-        WHERE ebeln = mt_ekpo_ex-ebeln
-          AND ebelp = mt_ekpo_ex-ebelp.
-
-      SELECT *
-        INTO TABLE lt_eket
-        FROM eket
-        FOR ALL ENTRIES IN mt_ekpo_ex
-        WHERE ebeln = mt_ekpo_ex-ebeln
-          AND ebelp = mt_ekpo_ex-ebelp.
-    ENDIF.
-
-    LOOP AT mt_ekpo_ex ASSIGNING <ls_ekpo_ex>.
-      READ TABLE lt_ekko ASSIGNING FIELD-SYMBOL(<ls_ekko>)
-        WITH TABLE KEY ebeln = <ls_ekpo_ex>-ebeln.
-
-      IF sy-subrc = 0.
-        <ls_ekpo_ex>-ekko   = CORRESPONDING #( <ls_ekko> ).
-      ELSE.
-        MESSAGE e005(zpof_gtt) WITH |{ <ls_ekpo_ex>-ebeln }| 'EKKO' INTO DATA(lv_dummy).
-        lcl_tools=>throw_exception( ).
-      ENDIF.
-
-      READ TABLE lt_ekpo ASSIGNING FIELD-SYMBOL(<ls_ekpo>)
-        WITH TABLE KEY ebeln = <ls_ekpo_ex>-ebeln
-                       ebelp = <ls_ekpo_ex>-ebelp.
-
-      IF sy-subrc = 0.
-        <ls_ekpo_ex>-ekpo   = CORRESPONDING #( <ls_ekpo> ).
-      ELSE.
-        MESSAGE e005(zpof_gtt)
-          WITH |{ <ls_ekpo_ex>-ebeln }{ <ls_ekpo_ex>-ebelp }| 'EKPO' INTO lv_dummy.
-        lcl_tools=>throw_exception( ).
-      ENDIF.
-
-      CLEAR: <ls_ekpo_ex>-eket[].
-
-      LOOP AT lt_eket ASSIGNING FIELD-SYMBOL(<ls_eket>)
-        USING KEY primary_key
-        WHERE ebeln = <ls_ekpo_ex>-ebeln
-          AND ebelp = <ls_ekpo_ex>-ebelp.
-
-        <ls_ekpo_ex>-eket   = VALUE #( BASE <ls_ekpo_ex>-eket
-                                       ( CORRESPONDING #( <ls_eket> ) ) ).
-      ENDLOOP.
-
-      SORT <ls_ekpo_ex>-eket BY etenr.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD get_updated_dlv_items.
-    DATA: lv_updkz    TYPE lipsvb-updkz.
-
-    CLEAR: et_lips_upd[].
-
-    LOOP AT it_lips_new ASSIGNING FIELD-SYMBOL(<ls_lips_new>)
-      WHERE updkz IS NOT INITIAL.
-
-      READ TABLE it_likp_new ASSIGNING FIELD-SYMBOL(<ls_likp>)
-        WITH KEY vbeln  = <ls_lips_new>-vbeln.
-
-      IF sy-subrc = 0 AND
-         lcl_dl_tools=>is_appropriate_dl_type(
-                         ir_struct = REF #( <ls_likp> ) ) = abap_true AND
-         lcl_dl_tools=>is_appropriate_dl_item(
-                         ir_struct = REF #( <ls_lips_new> ) ) = abap_true.
-
-        IF ( <ls_lips_new>-updkz  = lif_ef_constants=>cs_change_mode-insert OR
-             <ls_lips_new>-updkz  = lif_ef_constants=>cs_change_mode-delete ).
-          et_lips_upd   = VALUE #( BASE et_lips_upd
-                                  ( CORRESPONDING #( <ls_lips_new> ) ) ).
-        ENDIF.
-      ENDIF.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD prepare_idoc_data.
-    DATA: ls_idoc_data    TYPE ts_idoc_data.
-
-    prepare_po_item_data(
-      EXPORTING
-        it_likp_new = it_likp_new
-        it_lips_new = it_lips_new ).
-
-    LOOP AT mt_aotype ASSIGNING FIELD-SYMBOL(<ls_aotype>).
-      CLEAR: ls_idoc_data.
-
-      ls_idoc_data-appsys   = mv_appsys.
-
-      fill_idoc_trxserv(
-        EXPORTING
-          is_aotype    = <ls_aotype>
-        CHANGING
-          cs_idoc_data = ls_idoc_data ).
-
-      LOOP AT mt_ekpo_ex ASSIGNING FIELD-SYMBOL(<ls_ekpo_ex>).
-        fill_idoc_appobj_ctabs(
-          EXPORTING
-            is_aotype    = <ls_aotype>
-            is_ekpo_ex   = <ls_ekpo_ex>
-          CHANGING
-            cs_idoc_data = ls_idoc_data ).
-
-        fill_idoc_control_data(
-          EXPORTING
-            is_aotype    = <ls_aotype>
-            is_ekpo_ex   = <ls_ekpo_ex>
-          CHANGING
-            cs_idoc_data = ls_idoc_data ).
-
-        fill_idoc_exp_event(
-          EXPORTING
-            is_aotype    = <ls_aotype>
-            is_ekpo_ex   = <ls_ekpo_ex>
-          CHANGING
-            cs_idoc_data = ls_idoc_data ).
-
-        fill_idoc_tracking_id(
-          EXPORTING
-            is_aotype    = <ls_aotype>
-            is_ekpo_ex   = <ls_ekpo_ex>
-            it_lips_new  = it_lips_new
-            it_lips_old  = it_lips_old
-          CHANGING
-            cs_idoc_data = ls_idoc_data ).
-      ENDLOOP.
-
-      IF ls_idoc_data-appobj_ctabs[] IS NOT INITIAL AND
-         ls_idoc_data-control[] IS NOT INITIAL AND
-         ls_idoc_data-tracking_id[] IS NOT INITIAL.
-        APPEND ls_idoc_data TO mt_idoc_data.
-      ENDIF.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD prepare_po_item_data.
-    DATA: ls_ekpo_ex  TYPE ts_ekpo_ex,
-          lt_lips_upd TYPE tt_lips_upd,
-          lt_ekes     TYPE STANDARD TABLE OF ekes.
-
-    CLEAR: mt_ekpo_ex[].
-
-    get_updated_dlv_items(
-      EXPORTING
-        it_likp_new = it_likp_new
-        it_lips_new = it_lips_new
-      IMPORTING
-        et_lips_upd = lt_lips_upd ).
-
-
-    " prepare list of PO Items, which should be updated
-    LOOP AT lt_lips_upd ASSIGNING FIELD-SYMBOL(<ls_lips>).
-      READ TABLE mt_ekpo_ex TRANSPORTING NO FIELDS
-        WITH TABLE KEY ebeln = <ls_lips>-vgbel
-                       ebelp = <ls_lips>-vgpos.
-
-      IF sy-subrc <> 0.
-        ls_ekpo_ex-ebeln  = <ls_lips>-vgbel.
-        ls_ekpo_ex-ebelp  = <ls_lips>-vgpos.
-        INSERT ls_ekpo_ex INTO TABLE mt_ekpo_ex.
-      ENDIF.
-    ENDLOOP.
-
-    " get all the DLV items for PO items
-    LOOP AT mt_ekpo_ex ASSIGNING FIELD-SYMBOL(<ls_ekpo_ex>).
-      CALL FUNCTION 'ME_EKES_SINGLE_READ_ITEM'
-        EXPORTING
-          pi_ebeln            = <ls_ekpo_ex>-ebeln
-          pi_ebelp            = <ls_ekpo_ex>-ebelp
-        TABLES
-          pto_ekes            = lt_ekes
-        EXCEPTIONS
-          err_no_record_found = 1
-          OTHERS              = 2.
-
-      IF sy-subrc = 0.
-*        <ls_ekpo_ex>-lips = CORRESPONDING #( lt_ekes MAPPING posnr = vbelp ).
-        <ls_ekpo_ex>-ekes = CORRESPONDING #( lt_ekes ).
-      ENDIF.
-    ENDLOOP.
-
-    " implement DLV Item changes to PO Item Data
-    LOOP AT lt_lips_upd ASSIGNING <ls_lips>.
-
-      READ TABLE mt_ekpo_ex ASSIGNING <ls_ekpo_ex>
-        WITH TABLE KEY ebeln = <ls_lips>-vgbel
-                       ebelp = <ls_lips>-vgpos.
-
-      IF sy-subrc = 0.
-        IF <ls_lips>-updkz = lif_ef_constants=>cs_change_mode-insert.
-          <ls_ekpo_ex>-ekes   = VALUE #( BASE <ls_ekpo_ex>-ekes
-                                         ( CORRESPONDING #( <ls_lips>
-                                              MAPPING vbelp = posnr ) ) ).
-
-        ELSEIF <ls_lips>-updkz = lif_ef_constants=>cs_change_mode-delete.
-          DELETE <ls_ekpo_ex>-ekes
-            WHERE vbeln = <ls_lips>-vbeln
-              AND vbelp = <ls_lips>-posnr.
-        ENDIF.
-      ENDIF.
-    ENDLOOP.
-
-    " sort DLV Items in PO Item
-    LOOP AT mt_ekpo_ex ASSIGNING <ls_ekpo_ex>.
-      SORT <ls_ekpo_ex>-ekes BY vbeln vbelp.
-    ENDLOOP.
-
-    " fill with data necessary for PO Item Planned Events
-    fill_purchase_order_data( ).
-
-  ENDMETHOD.
-ENDCLASS.
-
-**********************************************************************
-**********************************************************************
-**********************************************************************
 CLASS lcl_ctp_shipment_data DEFINITION.
 
   PUBLIC SECTION.
@@ -803,8 +229,8 @@ CLASS lcl_ctp_shipment_data DEFINITION.
 
     TYPES: BEGIN OF ts_stops,
              tknum    TYPE vttk-tknum,
-             stops    TYPE lif_pof_types=>tt_stops,
-             watching TYPE lif_pof_types=>tt_dlv_watch_stops,
+             stops    TYPE lif_app_types=>tt_stops,
+             watching TYPE lif_app_types=>tt_dlv_watch_stops,
            END OF ts_stops.
 
     TYPES: ts_vttkvb TYPE vttkvb,
@@ -816,7 +242,7 @@ CLASS lcl_ctp_shipment_data DEFINITION.
            tt_vttpvb_srt TYPE SORTED TABLE OF vttpvb
                            WITH NON-UNIQUE KEY tknum tpnum,
            tt_vttsvb_srt TYPE SORTED TABLE OF vttsvb
-                           WITH UNIQUE KEY tknum tsnum,
+                           WITH NON-UNIQUE KEY tknum tsnum,
            tt_vtspvb_srt TYPE SORTED TABLE OF vtspvb
                            WITH UNIQUE KEY tknum tsnum tpnum
                            WITH NON-UNIQUE SORTED KEY vtts
@@ -1248,21 +674,21 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
 
       IF sy-subrc = 0.
         LOOP AT lt_vbfas ASSIGNING FIELD-SYMBOL(<ls_vbfas>)
-          WHERE vbtyp_n = lif_pof_constants=>cs_vbtyp-shipment
-            AND vbtyp_v = lif_pof_constants=>cs_vbtyp-delivery.
+          WHERE vbtyp_n = lif_app_constants=>cs_vbtyp-shipment
+            AND vbtyp_v = lif_app_constants=>cs_vbtyp-delivery.
 
           SELECT SINGLE tknum
             INTO lv_tknum
             FROM vttk
             WHERE tknum = <ls_vbfas>-vbeln
-              AND shtyp = lif_pof_constants=>cs_relevance-shtyp.
+              AND shtyp = lif_app_constants=>cs_relevance-shtyp.
 
           IF sy-subrc = 0.
             SELECT SINGLE *
               INTO CORRESPONDING FIELDS OF ls_likp
               FROM likp
               WHERE vbeln = <ls_vbfas>-vbelv
-                AND lfart = lif_pof_constants=>cs_relevance-lfart.
+                AND lfart = lif_app_constants=>cs_relevance-lfart.
 
             IF sy-subrc = 0.
               ls_vbfa       = CORRESPONDING #( <ls_vbfas> ).
@@ -1300,7 +726,7 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
           INTO CORRESPONDING FIELDS OF ls_likp
           FROM likp
           WHERE vbeln = <ls_vttp_dlt>-vbeln
-            AND lfart = lif_pof_constants=>cs_relevance-lfart.
+            AND lfart = lif_app_constants=>cs_relevance-lfart.
 
         IF sy-subrc = 0.
           ls_vbfa-tknum = <ls_vttp_dlt>-tknum.
@@ -1359,8 +785,8 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD init_stops_data.
-    DATA: lt_stops    TYPE lif_pof_types=>tt_stops,
-          lt_watching TYPE lif_pof_types=>tt_dlv_watch_stops.
+    DATA: lt_stops    TYPE lif_app_types=>tt_stops,
+          lt_watching TYPE lif_app_types=>tt_dlv_watch_stops.
 
     FIELD-SYMBOLS: <ls_stops> TYPE ts_stops.
 
@@ -1484,11 +910,14 @@ CLASS lcl_ctp_sender_sh_to_dl_head DEFINITION
 
   PRIVATE SECTION.
     CONSTANTS: BEGIN OF cs_mapping,
-                 vbeln     TYPE /saptrx/paramname VALUE 'YN_DLV_NO',
-                 shp_count TYPE /saptrx/paramname VALUE 'YN_SHP_LINE_COUNT',
-                 shp_tknum TYPE /saptrx/paramname VALUE 'YN_SHP_NO',
-                 shp_fstop TYPE /saptrx/paramname VALUE 'YN_SHP_FIRST_STOP',
-                 shp_lstop TYPE /saptrx/paramname VALUE 'YN_SHP_LAST_STOP',
+                 vbeln                 TYPE /saptrx/paramname VALUE 'YN_DLV_NO',
+                 shp_count             TYPE /saptrx/paramname VALUE 'YN_SHP_LINE_COUNT',
+                 shp_tknum             TYPE /saptrx/paramname VALUE 'YN_SHP_NO',
+                 shp_fstop             TYPE /saptrx/paramname VALUE 'YN_SHP_FIRST_STOP',
+                 shp_lstop             TYPE /saptrx/paramname VALUE 'YN_SHP_LAST_STOP',
+                 shp_lstop_rec_loc     TYPE /saptrx/paramname VALUE 'YN_SHP_LAST_STOP_REC_LOC',
+                 shp_lstop_rec_loc_typ TYPE /saptrx/paramname VALUE 'YN_SHP_LAST_STOP_REC_LOC_TYP',
+                 pod_relevant          TYPE /saptrx/paramname VALUE 'YN_DL_POD_RELEVANT',
                END OF cs_mapping.
 
     METHODS fill_idoc_appobj_ctabs
@@ -1530,19 +959,47 @@ CLASS lcl_ctp_sender_sh_to_dl_head DEFINITION
       RAISING
         cx_udm_message.
 
+    METHODS get_delivery_head_planned_evt
+      IMPORTING
+        is_aotype    TYPE ts_aotype
+        is_likp      TYPE lif_app_types=>ts_likpvb
+        it_lips      TYPE lif_app_types=>tt_lipsvb
+      EXPORTING
+        et_exp_event TYPE /saptrx/bapi_trk_ee_tab
+      RAISING
+        cx_udm_message.
+
+    METHODS get_delivery_head_tracking_id
+      IMPORTING
+        is_likp               TYPE lif_app_types=>ts_likpvb
+      RETURNING
+        VALUE(rv_tracking_id) TYPE /saptrx/trxid.
+
     METHODS get_shipment_stop
       IMPORTING
-        is_stops       TYPE lcl_ctp_shipment_data=>ts_stops
-        is_vbfa        TYPE lcl_ctp_shipment_data=>ts_vbfaex
-        iv_arrival     TYPE abap_bool
+        is_stops         TYPE lcl_ctp_shipment_data=>ts_stops
+        is_vbfa          TYPE lcl_ctp_shipment_data=>ts_vbfaex
+        iv_arrival       TYPE abap_bool
+      EXPORTING
+        es_stop          TYPE lif_app_types=>ts_stops
       RETURNING
-        VALUE(rv_stop) TYPE lif_pof_types=>tv_stopid.
+        VALUE(rv_stopid) TYPE lif_app_types=>tv_stopid
+      RAISING
+        cx_udm_message.
 
-    METHODS is_pod_relevant
+    METHODS is_pod_relevant_delivery
       IMPORTING
         is_ship          TYPE lcl_ctp_shipment_data=>ts_shipment_merge
         is_likp          TYPE lcl_ctp_shipment_data=>ts_likpex
-        is_stops         TYPE lif_pof_types=>ts_stops
+        it_stops         TYPE lif_app_types=>tt_stops
+      RETURNING
+        VALUE(rv_result) TYPE lif_ef_types=>tv_condition.
+
+    METHODS is_pod_relevant_stop
+      IMPORTING
+        is_ship          TYPE lcl_ctp_shipment_data=>ts_shipment_merge
+        is_likp          TYPE lcl_ctp_shipment_data=>ts_likpex
+        is_stops         TYPE lif_app_types=>ts_stops
       RETURNING
         VALUE(rv_result) TYPE abap_bool.
 
@@ -1581,12 +1038,26 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
     LOOP AT is_stops-watching ASSIGNING FIELD-SYMBOL(<ls_watching>)
       WHERE vbeln       = is_vbfa-vbelv
         AND stopid(10)  = is_vbfa-vbeln.
-      rv_stop   = <ls_watching>-stopid.
+      rv_stopid   = <ls_watching>-stopid.
 
       IF iv_arrival = abap_false.
         EXIT.
       ENDIF.
     ENDLOOP.
+
+    IF rv_stopid IS NOT INITIAL AND
+       es_stop IS REQUESTED.
+      READ TABLE is_stops-stops
+        INTO es_stop
+        WITH KEY stopid = rv_stopid
+                 loccat = COND #( WHEN iv_arrival = abap_true
+                                    THEN lif_app_constants=>cs_loccat-arrival
+                                    ELSE lif_app_constants=>cs_loccat-departure ).
+      IF sy-subrc <> 0.
+        MESSAGE e011(zpof_gtt) WITH rv_stopid is_stops-tknum INTO DATA(lv_dummy).
+        lcl_tools=>throw_exception( ).
+      ENDIF.
+    ENDIF.
   ENDMETHOD.
 
   METHOD fill_idoc_appobj_ctabs.
@@ -1608,6 +1079,13 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
         value     = is_likp-vbeln
       )
       (
+        paramname = cs_mapping-pod_relevant
+        value     = is_pod_relevant_delivery(
+                      is_ship  = is_ship
+                      is_likp  = is_likp
+                      it_stops = is_stops-stops )
+      )
+      (
         paramname = lif_ef_constants=>cs_system_fields-actual_bisiness_timezone
         value     = lcl_tools=>get_system_time_zone( )
       )
@@ -1615,10 +1093,26 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
         paramname = lif_ef_constants=>cs_system_fields-actual_bisiness_datetime
         value     = |0{ sy-datum }{ sy-uzeit }|
       )
+      (
+        paramname = lif_ef_constants=>cs_system_fields-actual_technical_timezone
+        value     = lcl_tools=>get_system_time_zone( )
+      )
+      (
+        paramname = lif_ef_constants=>cs_system_fields-actual_technical_datetime
+        value     = |0{ sy-datum }{ sy-uzeit }|
+      )
     ).
 
     LOOP AT is_ship-likp\vbfa[ is_likp ] ASSIGNING FIELD-SYMBOL(<ls_vbfa>).
       ADD 1 TO lv_count.
+
+      get_shipment_stop(
+        EXPORTING
+          is_stops   = is_stops
+          is_vbfa    = <ls_vbfa>
+          iv_arrival = abap_true
+        IMPORTING
+          es_stop    = DATA(ls_lstop) ).
 
       lt_control  = VALUE #( BASE lt_control
         (
@@ -1635,17 +1129,25 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
           paramindex = lv_count
           paramname  = cs_mapping-shp_fstop
           value      = get_shipment_stop(
-                         is_stops   = is_stops
-                         is_vbfa    = <ls_vbfa>
-                         iv_arrival = abap_false )
+                         EXPORTING
+                           is_stops   = is_stops
+                           is_vbfa    = <ls_vbfa>
+                           iv_arrival = abap_false )
         )
         (
           paramindex = lv_count
           paramname  = cs_mapping-shp_lstop
-          value      = get_shipment_stop(
-                         is_stops   = is_stops
-                         is_vbfa    = <ls_vbfa>
-                         iv_arrival = abap_true )
+          value      = ls_lstop-stopid
+        )
+        (
+          paramindex = lv_count
+          paramname  = cs_mapping-shp_lstop_rec_loc
+          value      = ls_lstop-locid
+        )
+        (
+          paramindex = lv_count
+          paramname  = cs_mapping-shp_lstop_rec_loc_typ
+          value      = ls_lstop-loctype
         )
       ).
     ENDLOOP.
@@ -1672,6 +1174,15 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
   METHOD fill_idoc_exp_event.
     DATA: lt_exp_event TYPE /saptrx/bapi_trk_ee_tab.
 
+    get_delivery_head_planned_evt(
+      EXPORTING
+        is_aotype    = is_aotype
+        is_likp      = CORRESPONDING #( is_likp )
+        it_lips      = CORRESPONDING #( is_ship-lips )
+      IMPORTING
+        et_exp_event = lt_exp_event ).
+
+
     LOOP AT is_stops-watching ASSIGNING FIELD-SYMBOL(<ls_watching>)
       WHERE vbeln = is_likp-vbeln.
 
@@ -1682,9 +1193,9 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
       IF sy-subrc = 0.
         " Departure / Arrival
         lt_exp_event = VALUE #( BASE lt_exp_event (
-            milestone         = COND #( WHEN <ls_watching>-loccat = lif_pof_constants=>cs_loccat-departure
-                                          THEN lif_pof_constants=>cs_milestone-sh_departure
-                                          ELSE lif_pof_constants=>cs_milestone-sh_arrival )
+            milestone         = COND #( WHEN <ls_watching>-loccat = lif_app_constants=>cs_loccat-departure
+                                          THEN lif_app_constants=>cs_milestone-sh_departure
+                                          ELSE lif_app_constants=>cs_milestone-sh_arrival )
             locid2            = <ls_stops>-stopid
             loctype           = <ls_stops>-loctype
             locid1            = <ls_stops>-locid
@@ -1693,14 +1204,14 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
         ) ).
 
         " POD
-        IF <ls_stops>-loccat  = lif_pof_constants=>cs_loccat-arrival AND
+        IF <ls_stops>-loccat  = lif_app_constants=>cs_loccat-arrival AND
            <ls_stops>-loctype = lif_ef_constants=>cs_loc_types-plant AND
-           is_pod_relevant( is_ship  = is_ship
-                            is_likp  = is_likp
-                            is_stops = <ls_stops> ) = abap_true.
+           is_pod_relevant_stop( is_ship  = is_ship
+                                 is_likp  = is_likp
+                                 is_stops = <ls_stops> ) = abap_true.
 
           lt_exp_event = VALUE #( BASE lt_exp_event (
-              milestone         = lif_pof_constants=>cs_milestone-sh_pod
+              milestone         = lif_app_constants=>cs_milestone-sh_pod
               locid2            = <ls_stops>-stopid
               loctype           = <ls_stops>-loctype
               locid1            = <ls_stops>-locid
@@ -1747,7 +1258,7 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
 
     " Delivery Header
     lt_tracking_id    = VALUE #( (
-      trxcod      = lif_pof_constants=>cs_trxcod-dl_number
+      trxcod      = lif_app_constants=>cs_trxcod-dl_number
       trxid       = is_likp-vbeln
       start_date  = lcl_tools=>get_local_timestamp( )
       end_date    = lif_ef_constants=>cv_max_end_date
@@ -1759,7 +1270,7 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
       IF <ls_likp_dlt>-updkz = lif_ef_constants=>cs_change_mode-insert OR
          <ls_likp_dlt>-updkz = lif_ef_constants=>cs_change_mode-delete.
         lt_tracking_id    = VALUE #( BASE lt_tracking_id (
-          trxcod      = lif_pof_constants=>cs_trxcod-sh_number
+          trxcod      = lif_app_constants=>cs_trxcod-sh_number
           trxid       = <ls_likp_dlt>-tknum
           action      = COND #( WHEN <ls_likp_dlt>-updkz = lif_ef_constants=>cs_change_mode-delete
                                   THEN lif_ef_constants=>cs_change_mode-delete )
@@ -1778,11 +1289,108 @@ CLASS lcl_ctp_sender_sh_to_dl_head IMPLEMENTATION.
                                         ( LINES OF lt_tracking_id ) ).
   ENDMETHOD.
 
-  METHOD is_pod_relevant.
+  METHOD get_delivery_head_planned_evt.
+    DATA: ls_app_obj_types      TYPE /saptrx/aotypes,
+          lt_all_appl_tables    TYPE trxas_tabcontainer,
+          lt_app_type_cntl_tabs TYPE trxas_apptype_tabs,
+          ls_app_objects        TYPE trxas_appobj_ctab_wa,
+          lt_app_objects        TYPE trxas_appobj_ctabs.
+
+    CLEAR: et_exp_event[].
+
+    ls_app_obj_types              = CORRESPONDING #( is_aotype ).
+
+    ls_app_objects                = CORRESPONDING #( ls_app_obj_types ).
+    ls_app_objects-appobjtype     = is_aotype-aot_type.
+    ls_app_objects-appobjid       = get_delivery_head_tracking_id(
+                                      is_likp = CORRESPONDING #( is_likp ) ).
+    ls_app_objects-maintabref     = REF #( is_likp ).
+    ls_app_objects-maintabdef     = lif_app_constants=>cs_tabledef-dl_header_new.
+
+    lt_app_objects                = VALUE #( ( ls_app_objects ) ).
+
+    lt_all_appl_tables            = VALUE #( (
+      tabledef    = lif_app_constants=>cs_tabledef-dl_item_new
+      tableref    = REF #( it_lips )
+     ) ).
+
+    CALL FUNCTION 'ZPOF_GTT_EE_DL_HDR'
+      EXPORTING
+        i_appsys                  = mv_appsys
+        i_app_obj_types           = CORRESPONDING /saptrx/aotypes( is_aotype )
+        i_all_appl_tables         = lt_all_appl_tables
+        i_app_type_cntl_tabs      = lt_app_type_cntl_tabs
+        i_app_objects             = lt_app_objects
+      TABLES
+        e_expeventdata            = et_exp_event
+      EXCEPTIONS
+        parameter_error           = 1
+        exp_event_determ_error    = 2
+        table_determination_error = 3
+        stop_processing           = 4
+        OTHERS                    = 5.
+
+    IF sy-subrc <> 0.
+      lcl_tools=>throw_exception( ).
+    ELSE.
+      LOOP AT et_exp_event TRANSPORTING NO FIELDS
+        WHERE ( milestone = lif_app_constants=>cs_milestone-sh_arrival OR
+                milestone = lif_app_constants=>cs_milestone-sh_departure OR
+                milestone = lif_app_constants=>cs_milestone-sh_pod ).
+        DELETE et_exp_event.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD get_delivery_head_tracking_id.
+    rv_tracking_id  = |{ is_likp-vbeln }|.
+  ENDMETHOD.
+
+  METHOD is_pod_relevant_delivery.
+    DATA: lt_werks TYPE RANGE OF lips-werks.
+
+    rv_result   = lif_ef_constants=>cs_condition-false.
+
+    " prepare list of POD relevant plants
+    LOOP AT is_ship-likp\lips[ is_likp ] ASSIGNING FIELD-SYMBOL(<ls_lips>).
+      IF lt_werks IS INITIAL OR
+         <ls_lips>-werks NOT IN lt_werks.
+
+        READ TABLE is_ship-ee_rel ASSIGNING FIELD-SYMBOL(<ls_ee_rel>)
+          WITH TABLE KEY appobjid = |{ <ls_lips>-vbeln }{ <ls_lips>-posnr }|.
+
+        IF sy-subrc = 0 AND
+           <ls_ee_rel>-z_pdstk = abap_true.
+
+          lt_werks  = VALUE #( BASE lt_werks (
+            low       = <ls_lips>-werks
+            option    = 'EQ'
+            sign      = 'I'
+          ) ).
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+
+    " check whether shipment has any stops with POD Relevant plant
+    IF lt_werks[] IS NOT INITIAL.
+      LOOP AT it_stops ASSIGNING FIELD-SYMBOL(<ls_stops>)
+        WHERE locid    IN lt_werks
+          AND loccat   = lif_app_constants=>cs_loccat-arrival
+          AND loctype  = lif_ef_constants=>cs_loc_types-plant.
+
+        rv_result   = lif_ef_constants=>cs_condition-true.
+        EXIT.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD is_pod_relevant_stop.
     CLEAR: rv_result.
 
     LOOP AT is_ship-likp\lips[ is_likp ] ASSIGNING FIELD-SYMBOL(<ls_lips>).
-      IF <ls_lips>-werks = is_stops-locid.
+      IF is_stops-locid   = <ls_lips>-werks AND
+         is_stops-loccat  = lif_app_constants=>cs_loccat-arrival AND
+         is_stops-loctype = lif_ef_constants=>cs_loc_types-plant.
 
         READ TABLE is_ship-ee_rel ASSIGNING FIELD-SYMBOL(<ls_ee_rel>)
           WITH TABLE KEY appobjid = |{ <ls_lips>-vbeln }{ <ls_lips>-posnr }|.
@@ -1970,8 +1578,8 @@ CLASS lcl_ctp_sender_sh_to_dl_item DEFINITION
     METHODS get_delivery_item_planned_evt
       IMPORTING
         is_aotype    TYPE ts_aotype
-        is_likp      TYPE lif_pof_types=>ts_likpvb
-        is_lips      TYPE lif_pof_types=>ts_lipsvb
+        is_likp      TYPE lif_app_types=>ts_likpvb
+        is_lips      TYPE lif_app_types=>ts_lipsvb
       EXPORTING
         et_exp_event TYPE /saptrx/bapi_trk_ee_tab
       RAISING
@@ -1989,13 +1597,13 @@ CLASS lcl_ctp_sender_sh_to_dl_item DEFINITION
         is_vbfa        TYPE lcl_ctp_shipment_data=>ts_vbfaex
         iv_arrival     TYPE abap_bool
       RETURNING
-        VALUE(rv_stop) TYPE lif_pof_types=>tv_stopid.
+        VALUE(rv_stop) TYPE lif_app_types=>tv_stopid.
 
     METHODS is_pod_relevant
       IMPORTING
         is_ship          TYPE lcl_ctp_shipment_data=>ts_shipment_merge
         is_lips          TYPE lcl_ctp_shipment_data=>ts_lips
-        is_stops         TYPE lif_pof_types=>ts_stops
+        is_stops         TYPE lif_app_types=>ts_stops
       RETURNING
         VALUE(rv_result) TYPE abap_bool.
 ENDCLASS.
@@ -2034,7 +1642,8 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
           lt_all_appl_tables    TYPE trxas_tabcontainer,
           lt_app_type_cntl_tabs TYPE trxas_apptype_tabs,
           ls_app_objects        TYPE trxas_appobj_ctab_wa,
-          lt_app_objects        TYPE trxas_appobj_ctabs.
+          lt_app_objects        TYPE trxas_appobj_ctabs,
+          lt_lips               TYPE lif_app_types=>tt_lipsvb.
 
     CLEAR: et_exp_event[].
 
@@ -2045,11 +1654,18 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
     ls_app_objects-appobjid       = get_delivery_item_tracking_id(
                                       is_lips = CORRESPONDING #( is_lips ) ).
     ls_app_objects-maintabref     = REF #( is_lips ).
-    ls_app_objects-maintabdef     = lif_pof_constants=>cs_tabledef-dl_item_new.
+    ls_app_objects-maintabdef     = lif_app_constants=>cs_tabledef-dl_item_new.
     ls_app_objects-mastertabref   = REF #( is_likp ).
-    ls_app_objects-mastertabdef   = lif_pof_constants=>cs_tabledef-dl_header_new.
+    ls_app_objects-mastertabdef   = lif_app_constants=>cs_tabledef-dl_header_new.
 
     lt_app_objects                = VALUE #( ( ls_app_objects ) ).
+
+    lt_lips                       = VALUE #( ( CORRESPONDING #( is_lips ) ) ).
+
+    lt_all_appl_tables            = VALUE #( (
+      tabledef    = lif_app_constants=>cs_tabledef-dl_item_new
+      tableref    = REF #( lt_lips )
+     ) ).
 
     CALL FUNCTION 'ZPOF_GTT_EE_DL_ITEM'
       EXPORTING
@@ -2069,6 +1685,13 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
 
     IF sy-subrc <> 0.
       lcl_tools=>throw_exception( ).
+    ELSE.
+      LOOP AT et_exp_event TRANSPORTING NO FIELDS
+        WHERE ( milestone = lif_app_constants=>cs_milestone-sh_arrival OR
+                milestone = lif_app_constants=>cs_milestone-sh_departure OR
+                milestone = lif_app_constants=>cs_milestone-sh_pod ).
+        DELETE et_exp_event.
+      ENDLOOP.
     ENDIF.
   ENDMETHOD.
 
@@ -2117,6 +1740,14 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
         paramname = lif_ef_constants=>cs_system_fields-actual_bisiness_datetime
         value     = |0{ sy-datum }{ sy-uzeit }|
       )
+      (
+        paramname = lif_ef_constants=>cs_system_fields-actual_technical_timezone
+        value     = lcl_tools=>get_system_time_zone( )
+      )
+      (
+        paramname = lif_ef_constants=>cs_system_fields-actual_technical_datetime
+        value     = |0{ sy-datum }{ sy-uzeit }|
+      )
     ).
 
     " fill technical data into all control data records
@@ -2150,9 +1781,9 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
       IF sy-subrc = 0.
         " Departure / Arrival
         lt_exp_event = VALUE #( BASE lt_exp_event (
-            milestone         = COND #( WHEN <ls_watching>-loccat = lif_pof_constants=>cs_loccat-departure
-                                          THEN lif_pof_constants=>cs_milestone-sh_departure
-                                          ELSE lif_pof_constants=>cs_milestone-sh_arrival )
+            milestone         = COND #( WHEN <ls_watching>-loccat = lif_app_constants=>cs_loccat-departure
+                                          THEN lif_app_constants=>cs_milestone-sh_departure
+                                          ELSE lif_app_constants=>cs_milestone-sh_arrival )
             locid2            = <ls_stops>-stopid
             loctype           = <ls_stops>-loctype
             locid1            = <ls_stops>-locid
@@ -2160,15 +1791,15 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
             evt_exp_tzone     = <ls_stops>-pln_evt_timezone
         ) ).
 
-        " POF
-        IF <ls_stops>-loccat  = lif_pof_constants=>cs_loccat-arrival AND
+        " POD
+        IF <ls_stops>-loccat  = lif_app_constants=>cs_loccat-arrival AND
            <ls_stops>-loctype = lif_ef_constants=>cs_loc_types-plant AND
            is_pod_relevant( is_ship  = is_ship
                             is_lips  = is_lips
                             is_stops = <ls_stops> ) = abap_true.
 
           lt_exp_event = VALUE #( BASE lt_exp_event (
-              milestone         = lif_pof_constants=>cs_milestone-sh_pod
+              milestone         = lif_app_constants=>cs_milestone-sh_pod
               locid2            = <ls_stops>-stopid
               loctype           = <ls_stops>-loctype
               locid1            = <ls_stops>-locid
@@ -2217,7 +1848,7 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
       appsys      = mv_appsys
       appobjtype  = is_aotype-aot_type
       appobjid    = get_delivery_item_tracking_id( is_lips = is_lips )
-      trxcod      = lif_pof_constants=>cs_trxcod-dl_position
+      trxcod      = lif_app_constants=>cs_trxcod-dl_position
       trxid       = get_delivery_item_tracking_id( is_lips = is_lips )
       start_date  = lcl_tools=>get_local_timestamp( )
       end_date    = lif_ef_constants=>cv_max_end_date
@@ -2228,7 +1859,9 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
   METHOD is_pod_relevant.
     CLEAR: rv_result.
 
-    IF is_lips-werks = is_stops-locid.
+    IF is_stops-locid   = is_lips-werks AND
+       is_stops-loctype = lif_ef_constants=>cs_loc_types-plant.
+
       READ TABLE is_ship-ee_rel ASSIGNING FIELD-SYMBOL(<ls_ee_rel>)
         WITH TABLE KEY appobjid = |{ is_lips-vbeln }{ is_lips-posnr }|.
 

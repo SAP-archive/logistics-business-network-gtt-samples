@@ -1,18 +1,18 @@
 package com.sap.gtt.v2.sample.pof.rest.service.trackingTimeline.impl;
 
+import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
+import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
+import static java.lang.String.format;
+
 import com.sap.gtt.v2.sample.pof.domain.PlannedEvent;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.rest.service.trackingTimeline.PlannedEventService;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
+import java.util.List;
+import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
-import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
-import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
-import static java.lang.String.format;
 
 @Service
 public class PlannedEventServiceImpl implements PlannedEventService {
@@ -20,11 +20,9 @@ public class PlannedEventServiceImpl implements PlannedEventService {
     private static final String PROCESS_ID_PARAM = "process_id";
     public static final String LAST_PROCESS_EVENT_DIRECTORY_EVENT = "lastProcessEventDirectory/event";
 
-    private final GTTCoreServiceClient gttCoreServiceClient;
+    @Autowired
+    private GTTCoreServiceClient gttCoreServiceClient;
 
-    public PlannedEventServiceImpl(final GTTCoreServiceClient gttCoreServiceClient) {
-        this.gttCoreServiceClient = gttCoreServiceClient;
-    }
     @Override
     public List<PlannedEvent> getAllByDeliveryItemId(@NotNull final String deliveryItemId) {
         String url = buildUriWithDeliveryItemId(deliveryItemId);

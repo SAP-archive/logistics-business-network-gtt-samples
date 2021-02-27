@@ -12,11 +12,10 @@ import javax.validation.constraints.NotNull;
 public interface PlannedEventService {
 
     /**
-     * Retrieves all {@link PlannedEvent} entities by provided UUID of
-     * {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity.
+     * Retrieves all {@link PlannedEvent} entities by provided UUID of tracked process.
      *
-     * @param shipmentId - UUID of {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity
+     * @param trackedProcessId - UUID of tracked process
      * @return list of {@link PlannedEvent} entities.
      */
-    List<PlannedEvent> getAllByShipmentId(@NotNull final String shipmentId);
+    List<PlannedEvent> getAllByTrackedProcessId(@NotNull final String trackedProcessId);
 }

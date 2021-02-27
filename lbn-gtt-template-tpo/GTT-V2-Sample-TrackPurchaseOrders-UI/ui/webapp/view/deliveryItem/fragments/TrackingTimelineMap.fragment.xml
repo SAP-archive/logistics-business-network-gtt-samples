@@ -3,6 +3,7 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:vbm="sap.ui.vbm"
 	xmlns:vk="sap.ui.vk"
+	xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
 	xmlns:core="sap.ui.core">
   <m:VBox height="100%">
     <m:layoutData>
@@ -27,12 +28,7 @@
 									<vk:LegendItem title="{i18n>supplier}" icon="sap-icon://factory"/>
 									<vk:LegendItem title="{i18n>plant}" icon="sap-icon://BusinessSuiteInAppSymbols/icon-warehouse"/>
 									<vk:LegendItem title="{i18n>logisticLocation}" icon="sap-icon://functional-location"/>
-
-									<!-- <vk:LegendItem title="{i18n>currentLocationLegend}" icon="sap-icon://circle-task-2"/> -->
-
-									<m:GroupHeaderListItem title="{i18n>currentLocationLegend}"/>
-									<vk:LegendItem title="{i18n>truck}" icon="sap-icon://shipping-status"/>
-									<vk:LegendItem title="{i18n>container}" icon="sap-icon://BusinessSuiteInAppSymbols/icon-vessel"/>
+									<vk:LegendItem title="{i18n>currentLocation}" icon="sap-icon://overlay"/>
 
 									<m:GroupHeaderListItem title="{i18n>route}"/>
 									<vk:LegendItem title="{i18n>actual}" icon="sap-icon://less"/>
@@ -57,6 +53,15 @@
             </vbm:resources>
 
             <vbm:vos>
+              <vbm:Containers items="{trackingMap>/currentLocations}">
+                <vbm:items>
+                  <vbm:Container position="{trackingMap>longitude};{trackingMap>latitude};0">
+                    <vbm:item>
+                      <ctrl:currentlocation.CurrentLocation id="currentLocation" color="rgb(92, 186, 230)" tooltip="{i18n>currentLocation}"/>
+                    </vbm:item>
+                  </vbm:Container>
+                </vbm:items>
+              </vbm:Containers>
               <vbm:Routes
                 id="plannedRoutes"
                 items="{trackingMap>/plannedRoutes}">
@@ -128,18 +133,6 @@
                 </vbm:items>
               </vbm:Spots>
               <vbm:Spots 
-                id="currentLocations"
-                items="{trackingMap>/currentLocations}">
-                <vbm:items>
-                  <vbm:Spot
-                    id="current"
-                    click="onSpotFakeClick"
-                    position="{trackingMap>longitude};{trackingMap>latitude};0"
-                    tooltip="{i18n>currentLocation}" type="Default"
-                    icon="{= ${trackingMap>transportationModeCode} === '01' ? 'sap-icon://BusinessSuiteInAppSymbols/icon-vessel' : 'sap-icon://shipping-status' }"/>
-                </vbm:items>
-              </vbm:Spots>
-              <vbm:Spots 
                 id="stopsWithETA"
                 items="{trackingMap>/stopsWithETA}">
                 <vbm:items>
@@ -156,7 +149,7 @@
                       path: 'trackingMap>eventStatusCode',
                       formatter: '.getSpotLabelBorderColor'}"
                     labelArrow="true" labelPos="3"
-                    labelText="{i18n>estimatedArrivalTime}: {path: 'trackingMap>estimatedArrival/estimatedArrivalTime', formatter: '.formatTimestamp'}"
+                    labelText="{i18n>estimatedArrivalTime} {path: 'trackingMap>estimatedArrival/estimatedArrivalTime', formatter: '.formatTimestamp'}"
                     labelType="{
                       path: 'trackingMap>eventStatusCode',
                       formatter: '.getSpotType'

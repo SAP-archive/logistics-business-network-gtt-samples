@@ -123,7 +123,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/routes(.*)/,
+                  path: /(.*)\/routes(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "routes.json"
@@ -134,7 +134,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/timelineEvents(.*)/,
+                  path: /(.*)\/timelineEvents(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "timelineEvents.json"
@@ -145,7 +145,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/nextStop(.*)/,
+                  path: /(.*)\/nextStop(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "nextStop.json"
@@ -156,7 +156,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/eventsByStatus(.*)/,
+                  path: /(.*)\/eventsByStatus(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "eventsByStatus.json"
@@ -167,7 +167,7 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/carrierRefDocuments(.*)/,
+                  path: /(.*)\/carrierRefDocuments(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "carrierRefDocuments.json"
@@ -178,10 +178,10 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/events\/(.*?)\/fields(.*)/,
+                  path: /\/models\/Shipment\/eventTypes\/(.*?)\/fields(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
-                      _sAppModulePath + oJsonDataSource.settings.localUri + "events/fields.json"
+                      _sAppModulePath + oJsonDataSource.settings.localUri + "models/Shipment/eventTypes/fields.json"
                     );
                     oXhr.respondFile(200, {}, mockdataFileUrl);
                     return true;
@@ -200,10 +200,10 @@ sap.ui.define(
                 },
                 {
                   method: "GET",
-                  path: /\/model\/Shipment\/unplannedEvents(.*)/,
+                  path: /\/models\/(Shipment|FreightUnit)\/unplannedEvents(.*)/,
                   response: function (oXhr) {
                     var mockdataFileUrl = sap.ui.require.toUrl(
-                      _sAppModulePath + oJsonDataSource.settings.localUri + "model/Shipment/unplannedEvents.json"
+                      _sAppModulePath + oJsonDataSource.settings.localUri + "models/Shipment/unplannedEvents.json"
                     );
                     oXhr.respondFile(200, {}, mockdataFileUrl);
                     return true;
@@ -217,6 +217,14 @@ sap.ui.define(
                       _sAppModulePath + oJsonDataSource.settings.localUri + "timezones.json"
                     );
                     oXhr.respondFile(200, {}, mockdataFileUrl);
+                    return true;
+                  },
+                },
+                {
+                  method: "POST",
+                  path: /\/$/,
+                  response: function (oXhr) {
+                    oXhr.respond(404);
                     return true;
                   },
                 },

@@ -8,6 +8,7 @@ sap.ui.define(
     "../constant/ExecutionStatus",
     "../constant/NetworkGraph",
     "../constant/Event",
+    "../constant/TransportationMode",
     "./type/ISODateTime",
   ],
   function (
@@ -19,6 +20,7 @@ sap.ui.define(
     ExecutionStatus,
     NetworkGraph,
     Event,
+    TransportationMode,
     ISODateTime
   ) {
     "use strict";
@@ -28,6 +30,7 @@ sap.ui.define(
       executionStatus: ExecutionStatus,
       eventStatus: Event.Status,
       eventType: Event.Type,
+      transportationMode: TransportationMode,
       isoDateTimeFormatter: new ISODateTime(),
 
       floatNumberFormat: NumberFormat.getFloatInstance({
@@ -317,14 +320,21 @@ sap.ui.define(
       /**
        * Get the time duration from start to end
        *
-       * @param {Date} start Start date
-       * @param {Date} end End date
+       * @param {Date|string} start Start date, date object or timestamp
+       * @param {Date|string} end End date, date object or timestamp
        * @param {"complete"|"short"} [mode=complete] Time duration format mode
        * @returns {string} The time duration
+       *
+       * @example "+3D 6H" | "-1H 23M"
        */
       timeDuration: function (start, end, mode) {
+        if (!start || !end) {
+          return "";
+        }
+
         var duration, seconds, minutes, hours, days, unit;
-        var interval = Math.abs(end - start);
+        var interval = Math.abs(new Date(end) - new Date(start));
+        var sign = "";
 
         seconds = Math.floor(interval / 1000);
         minutes = Math.floor(seconds / 60);
@@ -333,6 +343,7 @@ sap.ui.define(
 
         switch (mode) {
           case "short":
+            sign = (new Date(end) >= new Date(start)) ? "+" : "-";
             unit = {
               seconds: "secondsWithUnit",
               minutes: "minutesWithUnit",
@@ -368,24 +379,25 @@ sap.ui.define(
             duration = duration.concat(" ", this.getText(unit.hours, [hours % 24]));
           }
         }
-        return duration;
+
+        return sign + duration;
       },
 
       /**
-       * Get the destination duration time tooltip string
+       * Get the ETA delta tooltip string
        *
-       * @param {Date} earliestETA Earliest ETA
-       * @param {Date} plannedArrivalTime Planned arrival time
-       * @returns {string} The destination duration
+       * @param {string|number|Date} planned Planned arrival time
+       * @param {string|number|Date} eta ETA
+       * @returns {string} ETA delta tooltip string
        */
-      destinationDurationTooltip: function (earliestETA, plannedArrivalTime) {
-        if (!earliestETA || !plannedArrivalTime) {
+      etaDeltaTooltip: function (planned, eta) {
+        if (!eta || !planned) {
           return "";
         }
 
         return this.getText(
-          (plannedArrivalTime < earliestETA) ? "lateEstimatedArrival" : "earlyEstimatedArrival",
-          [formatter.timeDuration.call(this, earliestETA, plannedArrivalTime)]
+          (planned < eta) ? "lateEstimatedArrival" : "earlyEstimatedArrival",
+          [formatter.timeDuration.call(this, planned, eta)]
         );
       },
 
@@ -557,7 +569,7 @@ sap.ui.define(
             break;
         }
 
-        return this.getPropertyLabelText(propertyName, entitySet);
+        return this.getModel("label").getData()[entitySet][propertyName];
       },
 
       networkGraphNodeAttributeValue: function (attribute) {
@@ -641,6 +653,12 @@ sap.ui.define(
         return "rgb(9, 97, 185)"; // informative
       },
 
+      geoCoordinatesTooltip: function (lon, lat) {
+        if (lon !== null && lat !== null) {
+          return this.getText("geoCoordinatesTooltip", [lon, lat]);
+        }
+        return this.getText("geoCoordinatesMissing");
+      },
     };
 
     return formatter;

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class FulfillmentStatusServiceTest {
     @InjectMocks
     private GTTCoreServiceClient gttCoreServiceClient;
 
+    @Spy
     private FulfillmentStatusService fulfillmentStatusService;
 
     @Before
@@ -43,7 +45,7 @@ public class FulfillmentStatusServiceTest {
         ReflectionTestUtils.setField(gttCoreServiceClient, "criticalInfo", "");
         ReflectionTestUtils.setField(gttCoreServiceClient, "gttBaseUrl", "https://dummy");
 
-        fulfillmentStatusService = new FulfillmentStatusService(gttCoreServiceClient);
+        ReflectionTestUtils.setField(fulfillmentStatusService, "gttCoreServiceClient", gttCoreServiceClient);
 
         mockRestTemplateResponse("/EventStatus", "odata/event-status.json");
         mockRestTemplateResponse("/PlannedEvent", "odata/fulfillment-status-planned-events.json");

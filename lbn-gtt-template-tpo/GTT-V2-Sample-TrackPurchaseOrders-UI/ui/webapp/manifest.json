@@ -196,7 +196,7 @@
           "viewName": "PurchaseOrderList",
           "viewLevel": 0,
           "viewPath": "com.sap.gtt.app.sample.pof.view.list",
-          "title": "{{purchaseOrderListViewTitle}}"
+          "title": "{{appTitle}}"
         },
         "PurchaseOrderDetails": {
           "viewId": "PurchaseOrderDetails",

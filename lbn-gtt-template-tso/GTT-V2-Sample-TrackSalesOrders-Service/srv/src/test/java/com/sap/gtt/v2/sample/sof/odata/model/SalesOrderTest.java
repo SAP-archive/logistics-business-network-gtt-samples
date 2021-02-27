@@ -47,8 +47,8 @@ public class SalesOrderTest {
         salesOrder.setId(id);
         Incoterms incoterms = new Incoterms();
         salesOrder.setIncoterms(incoterms);
-        List<SalesOrderItemTP> tps = new ArrayList<>();
-        salesOrder.setSalesOrderItemTPs(tps);
+        List<SalesOrderItem> tps = new ArrayList<>();
+        salesOrder.setSalesOrderItems(tps);
 
         Assert.assertEquals(SALES_ORDER_NO, salesOrder.getSalesOrderNo());
         Assert.assertEquals(SHIP_TO_PARTY_ID, salesOrder.getShipToPartyId());
@@ -67,7 +67,7 @@ public class SalesOrderTest {
         Assert.assertEquals(VIRTUAL_MATERIAL_DESCRIPTION, salesOrder.getvMaterialDescription());
         Assert.assertEquals(id, salesOrder.getId());
         Assert.assertEquals(incoterms, salesOrder.getIncoterms());
-        Assert.assertEquals(tps, salesOrder.getSalesOrderItemTPs());
+        Assert.assertEquals(tps, salesOrder.getSalesOrderItems());
 
     }
 }

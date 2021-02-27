@@ -29,16 +29,35 @@
 				<uxap:content>
         <OverflowToolbar>
 						<content>
-              <GenericTag visible="{= !!${executionStatus_code}}" id="executionStatusGenericTag" class="pofGenericTag" design="StatusIconHidden"
-                  status="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
-                  text="{path:'executionStatus_code', formatter:'.formatter.getExecutionStatusText'}">
+              <GenericTag 
+                visible="{= !!${executionStatus_code} || !!${lastEventName}}" 
+                id="executionStatusGenericTag" 
+                class="sapUiTinyMarginEnd"
+                design="StatusIconHidden"
+                tooltip="{
+                  parts:[
+                    {path:'executionStatus_code'},
+                    {path:'lastEventName'},
+                    {path:'lastLocationDescription'},
+                    {path:'lastVPLocationType_code'}], 
+                  formatter:'.formatter.getHeaderExecutionStatusTooltip'}"
+                status="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
+                text="{
+                  parts:[
+                    {path:'executionStatus_code'},
+                    {path:'lastEventName'}], 
+                  formatter:'.formatter.getHeaderExecutionStatusText'}">
                 <layoutData>
                     <OverflowToolbarLayoutData priority="{DeliveryItemDetails>/genericTagPriority}"/>
                   </layoutData>
               </GenericTag>  
-							<GenericTag visible="{= !!${processStatus_code}}" id="processStatusGenericTag" class="pofGenericTag" design="StatusIconHidden"
+							<GenericTag 
+                visible="{= !!${processStatus_code}}" 
+                id="processStatusGenericTag" 
+                design="StatusIconHidden"
 								status="{path: 'processStatus_code', formatter: '.formatter.getProcessStatusState'}"
-								text="{path:'processStatus_code', formatter:'.formatter.getProcessStatusText'}">
+								text="{path:'processStatus_code', formatter:'.formatter.getProcessStatusText'}"
+                tooltip="{path:'processStatus_code', formatter:'.formatter.getProcessStatusText'}">
 								<layoutData>
 									<OverflowToolbarLayoutData priority="{DeliveryItemDetails>/genericTagPriority}"/>
 								</layoutData>
@@ -87,6 +106,7 @@
             </mc:segments>
           </mc:InteractiveDonutChart>
         </VBox>
+          <VBox>
           <VBox alignContent="Start">
 					<Title 
               text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"
@@ -110,11 +130,24 @@
                     <HBox justifyContent="SpaceBetween">
                       <Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                       <core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                        tooltip="{= ${toPlantLocation/latitude} !== null ? ${toPlantLocation/latitude} + ', ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                        tooltip="{= ${toPlantLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toPlantLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                     </HBox>  
                   </VBox>
                 </ctrl:content>
               </ctrl:link.LinkPopover>
+            </VBox>
+            <VBox
+              visible="{= !!${plannedArrivalTimestamp}}"
+              class="sapUiTinyMarginTop">
+                <Title 
+                  text="{i18n>plannedArrivalAt}"
+                  level="H4"/>
+              <Text id="plannedArrivalTime"
+                  text="{
+                    path: 'plannedArrivalTimestamp',
+                    type: 'sap.ui.model.odata.type.DateTimeOffset'
+                  }"/>
+            </VBox>
             </VBox>
 			</HBox>
 		</uxap:headerContent>

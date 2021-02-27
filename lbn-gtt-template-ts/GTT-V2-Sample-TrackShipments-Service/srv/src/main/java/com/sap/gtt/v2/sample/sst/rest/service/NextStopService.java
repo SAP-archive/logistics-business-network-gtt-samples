@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 public interface NextStopService {
 
     /**
-     * Retrieves {@link NextStop} by provided UUID of {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity.
+     * Retrieves {@link NextStop} by provided UUID of tracked process.
      *
-     * @param shipmentId - UUID of {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity
+     * @param trackedProcessId - UUID of tracked process
      * @return {@link NextStop} entity wrapped in {@link Optional}
      */
-    Optional<NextStop> getByShipmentId(@NotNull final String shipmentId);
+    Optional<NextStop> getByTrackedProcessId(@NotNull final String trackedProcessId);
 }

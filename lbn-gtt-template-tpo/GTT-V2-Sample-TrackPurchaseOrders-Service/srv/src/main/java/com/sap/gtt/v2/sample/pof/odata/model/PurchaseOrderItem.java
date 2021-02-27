@@ -138,8 +138,8 @@ public class PurchaseOrderItem {
     @EdmNavigationProperty(name = "supplierLocationType", toType = LocationType.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private LocationType supplierLocationType;
 
-    @EdmNavigationProperty(name = "inboundDeliveryItems", toType = PurchaseOrderItemInboundDeliveryItemTP.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
-    private List<PurchaseOrderItemInboundDeliveryItemTP> inboundDeliveryItems;
+    @EdmNavigationProperty(name = "inboundDeliveryItems", toType = InboundDeliveryItem.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
+    private List<InboundDeliveryItem> inboundDeliveryItems;
 
     @EdmNavigationProperty(name = "scheduleLines", toType = ScheduleLine.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
     private List<ScheduleLine> scheduleLines;
@@ -454,11 +454,11 @@ public class PurchaseOrderItem {
         this.supplierLocationType = supplierLocationType;
     }
 
-    public List<PurchaseOrderItemInboundDeliveryItemTP> getInboundDeliveryItems() {
+    public List<InboundDeliveryItem> getInboundDeliveryItems() {
         return inboundDeliveryItems;
     }
 
-    public void setInboundDeliveryItems(List<PurchaseOrderItemInboundDeliveryItemTP> inboundDeliveryItems) {
+    public void setInboundDeliveryItems(List<InboundDeliveryItem> inboundDeliveryItems) {
         this.inboundDeliveryItems = inboundDeliveryItems;
     }
 

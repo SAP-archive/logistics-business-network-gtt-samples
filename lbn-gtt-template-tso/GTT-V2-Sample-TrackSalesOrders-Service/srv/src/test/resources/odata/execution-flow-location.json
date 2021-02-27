@@ -4,8 +4,8 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'138def1d-9523-4cb0-962a-0a6050ad2c94')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "138def1d-9523-4cb0-962a-0a6050ad2c94",
@@ -35,8 +35,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'51722d47-9480-4742-a348-566ec3625409')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'51722d47-9480-4742-a348-566ec3625409')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'51722d47-9480-4742-a348-566ec3625409')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'51722d47-9480-4742-a348-566ec3625409')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "51722d47-9480-4742-a348-566ec3625409",
@@ -66,8 +66,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'74508d70-9209-4902-bd6a-5156b0506d74')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'74508d70-9209-4902-bd6a-5156b0506d74')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'74508d70-9209-4902-bd6a-5156b0506d74')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'74508d70-9209-4902-bd6a-5156b0506d74')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "74508d70-9209-4902-bd6a-5156b0506d74",
@@ -97,8 +97,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'ac2e2afa-4952-4dd4-9b2c-43f4920c092c')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'ac2e2afa-4952-4dd4-9b2c-43f4920c092c')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'ac2e2afa-4952-4dd4-9b2c-43f4920c092c')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'ac2e2afa-4952-4dd4-9b2c-43f4920c092c')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "ac2e2afa-4952-4dd4-9b2c-43f4920c092c",
@@ -128,8 +128,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'c6b7b9f8-0016-4a80-a552-0d0e6d2ecf7f')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'c6b7b9f8-0016-4a80-a552-0d0e6d2ecf7f')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'c6b7b9f8-0016-4a80-a552-0d0e6d2ecf7f')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'c6b7b9f8-0016-4a80-a552-0d0e6d2ecf7f')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "c6b7b9f8-0016-4a80-a552-0d0e6d2ecf7f",
@@ -159,8 +159,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'd0d301f0-8c8b-43d3-b9de-1da3b9dc9461')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'd0d301f0-8c8b-43d3-b9de-1da3b9dc9461')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'd0d301f0-8c8b-43d3-b9de-1da3b9dc9461')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'd0d301f0-8c8b-43d3-b9de-1da3b9dc9461')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "d0d301f0-8c8b-43d3-b9de-1da3b9dc9461",
@@ -190,8 +190,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'f269f04c-6397-461c-9f69-4cebc48798be')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'f269f04c-6397-461c-9f69-4cebc48798be')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'f269f04c-6397-461c-9f69-4cebc48798be')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'f269f04c-6397-461c-9f69-4cebc48798be')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "f269f04c-6397-461c-9f69-4cebc48798be",
@@ -221,8 +221,8 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'ffb3d6b7-4c5c-40ae-a037-0b8e68301031')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/odata/v2/LocationService/LocationForTfo(guid'ffb3d6b7-4c5c-40ae-a037-0b8e68301031')",
+          "id": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'ffb3d6b7-4c5c-40ae-a037-0b8e68301031')",
+          "uri": "https://dummy/odata/v2/LocationService/LocationForTfo(guid'ffb3d6b7-4c5c-40ae-a037-0b8e68301031')",
           "type": "LocationService.LocationForTfo"
         },
         "id": "ffb3d6b7-4c5c-40ae-a037-0b8e68301031",

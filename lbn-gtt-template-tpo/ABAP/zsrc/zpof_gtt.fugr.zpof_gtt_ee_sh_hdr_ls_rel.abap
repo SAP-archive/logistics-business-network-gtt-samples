@@ -22,7 +22,7 @@ FUNCTION zpof_gtt_ee_sh_hdr_ls_rel.
   TRY.
       e_result  = lcl_ae_performer=>check_relevance(
         EXPORTING
-          is_definition       = VALUE #( maintab = lif_pof_constants=>cs_tabledef-sh_header_new )
+          is_definition       = VALUE #( maintab = lif_app_constants=>cs_tabledef-sh_header_new )
           io_ae_factory       = NEW lcl_ae_factory_sh_header_ls( )
           iv_appsys           = i_appsys
           is_event_type       = i_event_types

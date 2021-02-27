@@ -31,12 +31,8 @@ public class POFService {
     public static final String ID = "id";
     public static final String VP = "VP";
 
-    private final GTTCoreServiceClient gttCoreServiceClient;
-
     @Autowired
-    public POFService(GTTCoreServiceClient gttCoreServiceClient) {
-        this.gttCoreServiceClient = gttCoreServiceClient;
-    }
+    private GTTCoreServiceClient gttCoreServiceClient;
 
     public String getUiAnnotation() {
         logger.info("Get UiAnnotation");
@@ -129,8 +125,8 @@ public class POFService {
     }
 
     public List<CarrierRefDocumentForDeliveryItem> getCarrierRefDocuments(UUID deliveryItemId) {
-        String query = "/InboundDeliveryItem(guid'{placeholder}')?$expand=inboundDelivery/shipmentTPs/shipment/carrierRefDocuments";
-        query = query.replace("{placeholder}", deliveryItemId.toString());
+        String query = String.format("/InboundDeliveryItem(guid'%s')?$expand=inboundDelivery/shipmentTPs/shipment/carrierRefDocuments",
+                deliveryItemId.toString());
         InboundDeliveryItem inboundDeliveryItem = gttCoreServiceClient.readEntity(query, InboundDeliveryItem.class);
 
         List<CarrierRefDocumentForDeliveryItem> res = new ArrayList<>();

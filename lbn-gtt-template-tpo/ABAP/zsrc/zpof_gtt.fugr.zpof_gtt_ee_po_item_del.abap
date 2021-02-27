@@ -1,4 +1,4 @@
-FUNCTION ZPOF_GTT_EE_PO_ITEM_DEL .
+FUNCTION zpof_gtt_ee_po_item_del.
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -63,8 +63,8 @@ FUNCTION ZPOF_GTT_EE_PO_ITEM_DEL .
       lcl_ae_performer=>get_event_data(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_pof_constants=>cs_tabledef-po_item_new
-                                    mastertab = lif_pof_constants=>cs_tabledef-po_header_new )
+                                    maintab   = lif_app_constants=>cs_tabledef-po_item_new
+                                    mastertab = lif_app_constants=>cs_tabledef-po_header_new )
           io_ae_factory           = NEW lcl_ae_factory_po_item_del( )
           iv_appsys               = i_appsys
           is_event_type           = i_event_type

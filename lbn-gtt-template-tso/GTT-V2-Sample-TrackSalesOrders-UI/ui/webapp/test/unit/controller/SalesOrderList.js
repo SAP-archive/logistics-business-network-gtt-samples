@@ -51,6 +51,7 @@ sap.ui.define([
         },
       },
     });
+    stub(fakeSmartFilterBar, "search");
 
     // Act
     controller.onAfterVariantLoad();

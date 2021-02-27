@@ -39,25 +39,26 @@ public class DocumentFlowServiceTest {
     @Test
     public void testGenerateDocumentFlow() {
         String json = SOFUtils.getStringFromResource("/odata/document-flow.json");
-        Mockito.when(client.readEntity(contains("/SalesOrder(guid'73ab07bb-ab6a-5c7f-9da0-4c975a0656e9')"), eq(SalesOrder.class))).thenReturn(ODataUtils.readEntity(json, SalesOrder.class));
-        DocumentFlow flow = documentFlowService.generateDocumentFlow(UUID.fromString("73ab07bb-ab6a-5c7f-9da0-4c975a0656e9"));
+        Mockito.when(client.readEntity(contains("/SalesOrder(guid'3adc3dc4-bcf3-5ce2-ac15-48da0e7b821f')"), eq(SalesOrder.class)))
+                .thenReturn(ODataUtils.readEntity(json, SalesOrder.class));
+        DocumentFlow flow = documentFlowService.generateDocumentFlow(UUID.fromString("3adc3dc4-bcf3-5ce2-ac15-48da0e7b821f"));
 
         List<Node> nodes = flow.getNodes();
         Node node = nodes.get(0);
-        Assert.assertEquals(12, nodes.size());
+        Assert.assertEquals(10, nodes.size());
         Assert.assertEquals(1, node.getKey().intValue());
-        Assert.assertEquals(DocumentFlowGeneralStatusEnum.ERROR.getStatus(), node.getStatus());
+        Assert.assertEquals(DocumentFlowGeneralStatusEnum.INFORMATION.getStatus(), node.getStatus());
         Assert.assertEquals(3, node.getAttributes().size());
 
         List<Line> lines = flow.getLines();
-        Assert.assertEquals(12, lines.size());
+        Assert.assertEquals(10, lines.size());
 
         List<Group> groups = flow.getGroups();
         Group firstGroup = groups.get(0);
         Group lastGroup = groups.get(groups.size() - 1);
         Assert.assertEquals(6, groups.size());
         Assert.assertEquals(DocumentFlowGroupEnum.SALES_ORDER.getGroupTitle(), firstGroup.getTitle());
-        Assert.assertEquals(DocumentFlowGeneralStatusEnum.ERROR.getStatus(), firstGroup.getStatus());
+        Assert.assertEquals(DocumentFlowGeneralStatusEnum.INFORMATION.getStatus(), firstGroup.getStatus());
         Assert.assertEquals(DocumentFlowGroupEnum.RESOURCE.getGroupTitle(), lastGroup.getTitle());
         Assert.assertEquals(DocumentFlowGeneralStatusEnum.ERROR.getStatus(), lastGroup.getStatus());
         Assert.assertEquals(Constants.SAP_ICON_LEAD, lastGroup.getIcon());

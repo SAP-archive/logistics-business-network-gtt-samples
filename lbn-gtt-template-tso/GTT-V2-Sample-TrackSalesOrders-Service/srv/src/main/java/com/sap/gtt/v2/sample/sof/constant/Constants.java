@@ -36,12 +36,17 @@ public class Constants {
     public static final String RESOURCE = "RESOURCE";
     public static final String SHIPMENT_ARRIVAL = "Shipment.Arrival";
     public static final String SHIPMENT_DELAY = "Shipment.Delay";
+    public static final String EVENT_TYPE_SHIPMENT_POD = "Shipment.POD";
     public static final String SHIP_TO_PARTY_LOCATION = "shipToPartyLocation";
     public static final String CUSTOMER = "Customer";
     public static final String PROCESS_ID = "process_id";
     public static final String EVENT_ACTUAL_BUSINESS_TIMESTAMP = "event/actualBusinessTimestamp";
     public static final String LAST_PROCESS_EVENT_DIRECTORY_EVENT = "lastProcessEventDirectory/event";
 
+    public static final String EXECUTION_STATUS = "ExecutionStatus";
+    public static final String CARRIER_REF_DOCUMENT_TYPE = "CarrierRefDocumentType";
+    public static final String VP_LOCATION_TYPE = "VPLocationType";
+    public static final String TRANSPORTATION_MODE = "TransportationMode";
 
     private Constants() {
         // Constant class, mark it private

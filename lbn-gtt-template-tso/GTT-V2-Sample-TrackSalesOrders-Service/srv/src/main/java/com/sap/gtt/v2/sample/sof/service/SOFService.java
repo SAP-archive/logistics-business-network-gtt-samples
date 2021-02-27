@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Field;
@@ -34,7 +33,7 @@ import java.util.*;
 
 import static com.sap.gtt.v2.sample.sof.constant.Constants.*;
 import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
-import static org.springframework.util.CollectionUtils.*;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 public class SOFService {
@@ -50,9 +49,6 @@ public class SOFService {
     public static final String VP = "VP";
     public static final String LAST_CORRELATED_EVENT_ID = "lastCorrelatedEventId";
     public static final String ID = "id";
-    public static final String ET = "ET_";
-    public static final String DESCR = "_DESCR=";
-    public static final String LINE_ENDING = "\\r?\\n";
     public static final String ALT_KEY = "altKey";
     public static final String DELIVERY_NO = "deliveryNo";
     public static final String ITEM_NO = "itemNo";
@@ -94,11 +90,11 @@ public class SOFService {
 
     public void write(String salesOrderItemId, SalesOrder salesOrder) {
         if(salesOrder==null) return;
-        for(SalesOrderItemTP tp : salesOrder.getSalesOrderItemTPs()) {
-            if(tp.getSalesOrderItem()==null)
+        for(SalesOrderItem salesOrderItem : salesOrder.getSalesOrderItems()) {
+            if(salesOrderItem == null)
                 continue;
-            if(StringUtils.equals(tp.getSalesOrderItemId().toString(),salesOrderItemId)) {
-                writeToSalesOrderItem(tp.getSalesOrderItem());
+            if(StringUtils.equals(salesOrderItem.getId().toString(), salesOrderItemId)) {
+                writeToSalesOrderItem(salesOrderItem);
             }
         }
         writeToSalesOrder(salesOrder);
@@ -178,14 +174,14 @@ public class SOFService {
 
     private SalesOrder getSalesOrderWithSalesOrderItemId(String salesOrderItemId) {
         String uri = UriComponentsBuilder.fromUriString("/SalesOrder")
-                .queryParam(FILTER, "salesOrderItemTPs/salesOrderItem_id eq guid'" + salesOrderItemId + "'")
-                .queryParam(EXPAND, "salesOrderItemTPs/salesOrderItem/deliveryItemTPs/deliveryItem")
+                .queryParam(FILTER, "salesOrderItems/id eq guid'" + salesOrderItemId + "'")
+                .queryParam(EXPAND, "salesOrderItems/deliveryItems")
                 .build().encode().toUriString();
 
         ODataResultList<SalesOrder> salesOrders = gttCoreServiceClient.readEntitySetAll(uri, SalesOrder.class);
         if (isEmpty(salesOrders.getResults())) return null;
         SalesOrder salesOrder = salesOrders.getResults().get(0);
-        if (isEmpty(salesOrder.getSalesOrderItemTPs())) return null;
+        if (isEmpty(salesOrder.getSalesOrderItems())) return null;
         return salesOrder;
     }
 
@@ -227,9 +223,7 @@ public class SOFService {
     private void fillCalValInSalesOrderItem(SalesOrderItem salesOrderItem) {
         BigDecimal sumCompletionQuantity = BigDecimal.ZERO;
         BigDecimal sumDelayedQuantity = BigDecimal.ZERO;
-        DeliveryItem deliveryItem;
-        for (SalesOrderItemDeliveryItemTP deliveryItemTP : salesOrderItem.getDeliveryItemTPs()) {
-            deliveryItem = deliveryItemTP.getDeliveryItem();
+        for (DeliveryItem deliveryItem : salesOrderItem.getDeliveryItems()) {
             if(deliveryItem == null) {
                 continue;
             }
@@ -249,16 +243,14 @@ public class SOFService {
         BigDecimal singlecv;
         BigDecimal singledv;
         BigDecimal unitPrice;
-        SalesOrderItem salesOrderItem;
         BigDecimal sumcv = new BigDecimal(0);
         BigDecimal sumdv = new BigDecimal(0);
 
-        for (SalesOrderItemTP tp : salesOrder.getSalesOrderItemTPs()) {
-            salesOrderItem = tp.getSalesOrderItem();
+        for (SalesOrderItem salesOrderItem : salesOrder.getSalesOrderItems()) {
             if (salesOrderItem == null) {
                 continue;
             }
-            fillCalValInSalesOrderItem(tp.getSalesOrderItem());
+            fillCalValInSalesOrderItem(salesOrderItem);
             unitPrice = BigDecimal.ZERO.compareTo(salesOrderItem.getOrderQuantity()) == 0 ?
                     BigDecimal.ZERO : salesOrderItem.getNetValue().divide(salesOrderItem.getOrderQuantity(), MathContext.DECIMAL64);
 
@@ -312,8 +304,7 @@ public class SOFService {
     private boolean updateCompletedAndLateQuantityOfSalesOrderItem(SalesOrderItem salesOrderItem) {
         boolean isAllCompleted = true;
         BigDecimal sumQty = new BigDecimal(0);
-        for (SalesOrderItemDeliveryItemTP deliveryItemTP : salesOrderItem.getDeliveryItemTPs()) {
-            DeliveryItem deliveryItem = deliveryItemTP.getDeliveryItem();
+        for (DeliveryItem deliveryItem : salesOrderItem.getDeliveryItems()) {
             if (deliveryItem == null) {
                 continue;
             }
@@ -339,9 +330,8 @@ public class SOFService {
         if(salesOrder==null) return salesOrder;
         BigDecimal sumValue = new BigDecimal(0);
         boolean isAllCompleted = true;
-        for (SalesOrderItemTP salesOrderItemTP : salesOrder.getSalesOrderItemTPs()) {
-            SalesOrderItem salesOrderItem = salesOrderItemTP.getSalesOrderItem();
-            if (salesOrderItemTP.getSalesOrderItem() == null) continue;
+        for (SalesOrderItem salesOrderItem : salesOrder.getSalesOrderItems()) {
+            if (salesOrderItem == null) continue;
             updateCompletedAndLateQuantityOfSalesOrderItem(salesOrderItem);
             logger.info("salesOrder payload after updateCompletedAndLateQuantityOfSalesOrderItem {}", SOFUtils.getGson().toJson(salesOrder));
             if (salesOrderItem.getNetValue() != null && salesOrderItem.getOrderQuantity() != null
@@ -445,7 +435,8 @@ public class SOFService {
 
     public String getI18n(String properties) {
         String rawI18n = gttCoreServiceClient.getI18n(properties);
-        List<String> codeListsToAppend = Arrays.asList("ExecutionStatus", "CarrierRefDocumentType", "VPLocationType");
+        List<String> codeListsToAppend = Arrays.asList(EXECUTION_STATUS, CARRIER_REF_DOCUMENT_TYPE,
+                VP_LOCATION_TYPE, TRANSPORTATION_MODE);
         Locale locale = getLocaleFromProperties(properties);
         return appendCodeListI18n(rawI18n, codeListsToAppend, locale);
     }

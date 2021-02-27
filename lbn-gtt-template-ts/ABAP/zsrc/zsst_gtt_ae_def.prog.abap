@@ -13,8 +13,11 @@ INTERFACE lif_actual_event.
       logistic TYPE string VALUE 'LogisticLocation',
     END OF cs_location_type,
 
+    cv_tor_trk_obj_typ TYPE /saptrx/trk_obj_type VALUE 'TMS_TOR',
+
     BEGIN OF cs_trxcode,
       shipment_order TYPE /saptrx/trxcod VALUE 'SHIPMENT_ORDER',
+      freight_unit   TYPE /saptrx/trxcod VALUE 'FREIGHT_UNIT',
     END OF cs_trxcode,
 
     BEGIN OF cs_tabledef,
@@ -36,6 +39,7 @@ INTERFACE lif_actual_event.
         decoupling   TYPE /saptrx/ev_evtid VALUE 'DECOUPLING',
         unload_begin TYPE /saptrx/ev_evtid VALUE 'UNLOAD_BEGIN',
         unload_end   TYPE /saptrx/ev_evtid VALUE 'UNLOAD_END',
+        delay        TYPE /saptrx/ev_evtid VALUE 'DELAYED',
       END OF standard,
       BEGIN OF model,
         shp_departure TYPE /saptrx/ev_evtid VALUE 'DEPARTURE',
@@ -48,17 +52,21 @@ INTERFACE lif_actual_event.
         decoupling    TYPE /saptrx/ev_evtid VALUE 'DECOUPLING',
         unload_begin  TYPE /saptrx/ev_evtid VALUE 'UNLOAD_BEGIN',
         unload_end    TYPE /saptrx/ev_evtid VALUE 'UNLOAD_END',
+        delay         TYPE /saptrx/ev_evtid VALUE 'DELAYED',
       END OF model,
     END OF cs_event_id.
 
   METHODS adjust_ae_location_data
     IMPORTING
-      i_all_appl_tables       TYPE trxas_tabcontainer
-      iv_clear_standard_param TYPE abap_bool DEFAULT abap_true
+      i_all_appl_tables  TYPE trxas_tabcontainer
+      i_event            TYPE trxas_evt_ctab_wa OPTIONAL
+      iv_event_code      TYPE /scmtms/tor_event
     CHANGING
-      ct_trackingheader       TYPE tt_trackingheader
-      ct_tracklocation        TYPE tt_tracklocation
-      ct_trackparameters      TYPE tt_trackparameters.
+      ct_trackingheader  TYPE tt_trackingheader
+      ct_tracklocation   TYPE tt_tracklocation
+      ct_trackparameters TYPE tt_trackparameters
+    RAISING
+      cx_udm_message.
 
   METHODS check_event_relevance
     IMPORTING
@@ -66,7 +74,7 @@ INTERFACE lif_actual_event.
       iv_event_code     TYPE /scmtms/tor_event
       i_event           TYPE  trxas_evt_ctab_wa
     EXPORTING
-      VALUE(e_result)   LIKE  sy-binpt.
+      e_result          LIKE  sy-binpt.
 
   METHODS check_application_event_source
     IMPORTING
@@ -74,7 +82,13 @@ INTERFACE lif_actual_event.
       iv_event_code     TYPE /scmtms/tor_event
       i_event           TYPE  trxas_evt_ctab_wa
     EXPORTING
-      VALUE(e_result)   LIKE  sy-binpt.
+      e_result          LIKE  sy-binpt.
+
+  METHODS check_trxservername
+    IMPORTING
+      i_event  TYPE  trxas_evt_ctab_wa
+    EXPORTING
+      e_result LIKE  sy-binpt.
 
   METHODS check_tor_type_specific_events
     IMPORTING
@@ -96,7 +110,6 @@ CLASS lcl_actual_event DEFINITION.
       RAISING
         cx_udm_message.
 
-  PRIVATE SECTION.
     METHODS get_stop
       IMPORTING
         i_all_appl_tables TYPE trxas_tabcontainer
@@ -104,6 +117,18 @@ CLASS lcl_actual_event DEFINITION.
         VALUE(rt_stop)    TYPE /scmtms/t_em_bo_tor_stop.
 
     METHODS get_root
+      IMPORTING
+        i_all_appl_tables TYPE trxas_tabcontainer
+      RETURNING
+        VALUE(rt_root)    TYPE /scmtms/t_em_bo_tor_root.
+
+    METHODS get_capa_stop
+      IMPORTING
+        i_all_appl_tables TYPE trxas_tabcontainer
+      RETURNING
+        VALUE(rt_stop)    TYPE /scmtms/t_em_bo_tor_stop.
+
+    METHODS get_capa_root
       IMPORTING
         i_all_appl_tables TYPE trxas_tabcontainer
       RETURNING
@@ -123,6 +148,8 @@ CLASS lcl_actual_event DEFINITION.
       EXPORTING
         VALUE(et_execution) TYPE /scmtms/t_em_bo_tor_execinfo.
 
+  PROTECTED SECTION.
+
     METHODS get_model_event_id
       IMPORTING
         iv_standard_event_id     TYPE /saptrx/ev_evtid
@@ -139,4 +166,10 @@ ENDCLASS.
 CLASS lcl_fb_actual_event DEFINITION INHERITING FROM lcl_actual_event.
   PUBLIC SECTION.
     METHODS lif_actual_event~check_tor_type_specific_events REDEFINITION.
+ENDCLASS.
+
+CLASS lcl_fu_actual_event DEFINITION INHERITING FROM lcl_actual_event.
+  PUBLIC SECTION.
+    METHODS lif_actual_event~check_tor_type_specific_events REDEFINITION.
+    METHODS lif_actual_event~adjust_ae_location_data REDEFINITION.
 ENDCLASS.

@@ -3,11 +3,10 @@ package com.sap.gtt.v2.sample.pof.rest.service.fulfillmentProcessFlow;
 import com.sap.gtt.v2.sample.pof.constant.FulfillmentProcessMilestoneEnum;
 import com.sap.gtt.v2.sample.pof.domain.PlannedEvent;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemInboundDeliveryItemTP;
 import com.sap.gtt.v2.sample.pof.rest.domain.fulfillmentprocessflow.FulfillmentProcessFlow;
 import com.sap.gtt.v2.sample.pof.rest.domain.fulfillmentprocessflow.Lane;
 import com.sap.gtt.v2.sample.pof.rest.service.AbstractEventService;
-import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -33,15 +32,11 @@ import static java.lang.String.format;
 @Service
 public class FulfillmentProcessFlowService extends AbstractEventService {
 
-    private static final String EXPAND_VALUE = "inboundDeliveryItems/inboundDeliveryItem,plannedEvents";
+    private static final String EXPAND_VALUE = "inboundDeliveryItems,plannedEvents";
     private static final String PURCHASE_ORDER_ITEM_URI_TEMPLATE = "/PurchaseOrderItem(guid'%s')";
 
-    private final MilestonePopulateExecutor executor;
-
-    public FulfillmentProcessFlowService(GTTCoreServiceClient gttCoreServiceClient, MilestonePopulateExecutor executor) {
-        super(gttCoreServiceClient);
-        this.executor = executor;
-    }
+    @Autowired
+    private MilestonePopulateExecutor executor;
 
     public FulfillmentProcessFlow generateFulfillmentProcessFlow(UUID purchaseOrderItemId) {
         FulfillmentProcessFlow result = new FulfillmentProcessFlow();
@@ -93,7 +88,6 @@ public class FulfillmentProcessFlowService extends AbstractEventService {
 
     private boolean isDeliveryItemsPresent(PurchaseOrderItem purchaseOrderItem) {
         return purchaseOrderItem.getInboundDeliveryItems().stream()
-                .map(PurchaseOrderItemInboundDeliveryItemTP::getInboundDeliveryItem)
                 .anyMatch(Objects::nonNull);
     }
 
@@ -101,6 +95,7 @@ public class FulfillmentProcessFlowService extends AbstractEventService {
         List<PlannedEvent> plannedEvents = queryAllEvents(PLANNED_EVENTS_URL_TEMPLATE, purchaseOrderItemId, PlannedEvent.class);
         return plannedEvents.stream()
                 .map(PlannedEvent::getEventType)
+                .map(eventType -> eventType.substring(eventType.lastIndexOf('.') + 1))
                 .collect(Collectors.toSet());
     }
 }

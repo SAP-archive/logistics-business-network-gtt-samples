@@ -11,10 +11,58 @@ sap.ui.define([
   var sMapFragmentId            = "trackingTimelineMap";
   var sTimelineFragmentId       = "trackingTimelineEvents";
   var sTrackingTimelineViewName = "TrackingTimeline";
+  var sFilterBtnId              = /(.*)trackingTimelineEvents--trackingTimeline-filterIcon$/;
+  var sFilterDialogId           = /(.*)trackingTimelineEvents--trackingTimeline-filterContent-dialog$/;
+  var sAcceptFilterBtnId        = /(.*)trackingTimelineEvents--trackingTimeline-filterContent-acceptbutton$/;
+  var sTimelineEventId          = /(.*)trackingTimelineEvents--trackingTimeline$/;
 
   Opa5.createPageObjects({
     onTheTrackingTimeline: {
       actions: {
+        iPressFilterBtn: function () {
+          return this.waitFor({
+            id: sFilterBtnId,
+            controlType: "sap.m.OverflowToolbarButton",
+            actions: new Press(),
+            errorMessage: "There is no filter button",
+          });
+        },
+        iPressFilterItem: function () {
+          return this.waitFor({
+            controlType: "sap.m.StandardListItem",
+            matchers: new Properties({
+              title: "Event Status",
+            }),
+            actions: new Press(),
+            errorMessage: "There is no filter items",
+          });
+        },
+        iPressFilterByEventStatus: function () {
+          return this.waitFor({
+            id: sAcceptFilterBtnId,
+            controlType: "sap.m.Button",
+            matchers: new Properties({
+              text: "OK",
+            }),
+            actions: new Press(),
+            errorMessage: "There is no filter items",
+          });
+        },
+        iPressEventStatus: function (sEventStatusName) {
+          return this.waitFor({
+            controlType: "sap.m.StandardListItem",
+            matchers: new Properties({
+              title: sEventStatusName,
+            }),
+            actions: new Press(),
+            success: function (oControl) {
+              var oCheckBox = sap.ui.getCore().byId(oControl[0].getId() + "-selectMulti");
+              oCheckBox.setSelected(true);
+              Opa5.assert.ok(true, "CheckBox is selected");
+            },
+            errorMessage: "There is no " + sEventStatusName + " filter.",
+          });
+        },
         iPressLegend: function () {
           return this.waitFor({
             id: /listPanelLegend/,
@@ -56,10 +104,7 @@ sap.ui.define([
       assertions: {
         theTimelineShouldHaveEvents: function (iTimelinesNumber) {
           return this.waitFor({
-            id: "trackingTimeline",
-            fragmentId: sTimelineFragmentId,
-            viewName: sTrackingTimelineViewName,
-            viewNamespace: "com.sap.gtt.app.sample.pof.view.deliveryItem",
+            id: sTimelineEventId,
             matchers: [
               new AggregationFilled({
                 name: "content",
@@ -81,10 +126,20 @@ sap.ui.define([
             fragmentId: sMapFragmentId,
             viewName: sTrackingTimelineViewName,
             viewNamespace: "com.sap.gtt.app.sample.pof.view.deliveryItem",
-            success: function (oControl) {
+            success: function () {
               Opa5.assert.ok(true, "The Map has legend.");
             },
             errorMessage: "The Map doesn't have legend.",
+          });
+        },
+        theFilterDialogOpens: function () {
+          return this.waitFor({
+            id: sFilterDialogId,
+            controlType: "sap.m.Dialog",
+            success: function () {
+              Opa5.assert.ok(true, "The Dialog is opened.");
+            },
+            errorMessage: "The Dialog isn't opened.",
           });
         },
         theLegendShouldBeExpanded: function (bExpanded) {

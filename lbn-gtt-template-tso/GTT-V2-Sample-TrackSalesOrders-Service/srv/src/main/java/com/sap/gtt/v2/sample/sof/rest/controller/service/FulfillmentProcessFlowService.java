@@ -8,7 +8,6 @@ import com.sap.gtt.v2.sample.sof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.sof.odata.filter.FilterExpressionBuilder;
 import com.sap.gtt.v2.sample.sof.odata.model.DeliveryItem;
 import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItem;
-import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItemDeliveryItemTP;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.fulfillmentprocessflow.FulfillmentProcessFlow;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.fulfillmentprocessflow.Lane;
 import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
@@ -51,7 +50,7 @@ public class FulfillmentProcessFlowService {
 
     private SalesOrderItem querySalesOrderItem(UUID salesOrderItemId) {
         String query = UriComponentsBuilder.fromUriString(format("/SalesOrderItem(guid'%s')", salesOrderItemId))
-                .queryParam(EXPAND, "scheduleLines,deliveryItemTPs/deliveryItem")
+                .queryParam(EXPAND, "scheduleLines,deliveryItems")
                 .build().encode().toUriString();
         return gttCoreServiceClient.readEntity(query, SalesOrderItem.class);
     }
@@ -59,10 +58,7 @@ public class FulfillmentProcessFlowService {
     private List<Lane> initLanes(SalesOrderItem salesOrderItem) {
         List<Lane> lanes = new ArrayList<>();
         String rejectionStatusCode = salesOrderItem.getRejectionStatusCode();
-        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItemTPs().stream()
-                .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItems();
 
         if (REJECTION_STATUS_COMPLETE_REJECT_CODE.equals(rejectionStatusCode) && deliveryItems.isEmpty()) {
             EnumSet.allOf(FulfillmentProcessMilestoneEnum.class).stream()
@@ -131,10 +127,7 @@ public class FulfillmentProcessFlowService {
     private void updateMilestoneOfSalesOrderItemConfirmed(Lane lane, SalesOrderItem salesOrderItem) {
         String rejectionStatusCode = salesOrderItem.getRejectionStatusCode();
         BigDecimal saleOrderItemOrderQuantity = Optional.ofNullable(salesOrderItem.getOrderQuantity()).orElse(BigDecimal.ZERO);
-        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItemTPs().stream()
-                .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItems();
 
         BigDecimal count = REJECTION_STATUS_COMPLETE_REJECT_CODE.equals(rejectionStatusCode) && !deliveryItems.isEmpty() ?
                 deliveryItems.stream()
@@ -153,10 +146,7 @@ public class FulfillmentProcessFlowService {
 
     private void updateMilestoneOfDeliveryCreated(Lane lane, SalesOrderItem salesOrderItem) {
         String rejectionStatusCode = salesOrderItem.getRejectionStatusCode();
-        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItemTPs().stream()
-                .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItems();
 
         BigDecimal count = deliveryItems.stream()
                 .map(deliveryItem -> Optional.ofNullable(deliveryItem.getOrderQuantity()).orElse(BigDecimal.ZERO))
@@ -171,10 +161,7 @@ public class FulfillmentProcessFlowService {
 
     private void updateMilestoneOfDeliveryGoodsIssued(Lane lane, SalesOrderItem salesOrderItem) {
         String rejectionStatusCode = salesOrderItem.getRejectionStatusCode();
-        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItemTPs().stream()
-                .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItems();
 
         BigDecimal orderQuantity = REJECTION_STATUS_COMPLETE_REJECT_CODE.equals(rejectionStatusCode) && !deliveryItems.isEmpty() ?
                 deliveryItems.stream()
@@ -221,10 +208,7 @@ public class FulfillmentProcessFlowService {
     private void updateMilestoneOfDeliveryCompleted(Lane lane, SalesOrderItem salesOrderItem) {
         String rejectionStatusCode = salesOrderItem.getRejectionStatusCode();
 
-        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItemTPs().stream()
-                .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<DeliveryItem> deliveryItems = salesOrderItem.getDeliveryItems();
         List<DeliveryItem> completedDeliveryItems = deliveryItems.stream()
                 .filter(deliveryItem -> Constants.EXECUTION_STATUS_COMPLETED.equals(deliveryItem.getExecutionStatusCode()))
                 .collect(Collectors.toList());

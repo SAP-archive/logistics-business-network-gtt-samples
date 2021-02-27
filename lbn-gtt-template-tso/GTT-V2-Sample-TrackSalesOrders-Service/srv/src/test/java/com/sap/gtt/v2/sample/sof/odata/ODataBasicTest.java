@@ -1,7 +1,7 @@
 package com.sap.gtt.v2.sample.sof.odata;
 
 import com.sap.gtt.v2.sample.sof.App;
-import com.sap.gtt.v2.sample.sof.configuration.VcapParser;
+import com.sap.gtt.v2.sample.sof.exception.SOFServiceException;
 import com.sap.gtt.v2.sample.sof.odata.handler.ODataHandlerFactory;
 import com.sap.gtt.v2.sample.sof.odata.handler.PlannedEventHandler;
 import com.sap.gtt.v2.sample.sof.odata.handler.TrackedProcessHandler;
@@ -226,8 +226,12 @@ public class ODataBasicTest {
 
         ResponseEntity<String> response = restTemplate.getForEntity(query, String.class);
         System.out.println(response);
+
+        SOFServiceException e = new SOFServiceException(SOFServiceException.MESSAGE_CODE_UNSUPPORTED_TRACKING_ID_TYPE,
+                new Object[]{"SHIPMENT_ORDER"});
+        String localizedMessage = e.getLocalizedMessage();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-        Assertions.assertThat(response.getBody()).contains("Unsupported tracking id type: SHIPMENT_ORDER");
+        Assertions.assertThat(response.getBody()).contains(localizedMessage);
     }
 
 }

@@ -10,6 +10,7 @@
     "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
     "reportedBy": null,
     "senderPartyId": "LBN#10010001016",
+    "quantity": 15.00,
     "eventMatchKey": null,
     "locationType": null,
     "eta": null,

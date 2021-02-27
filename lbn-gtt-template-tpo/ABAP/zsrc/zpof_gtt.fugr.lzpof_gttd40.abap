@@ -74,7 +74,7 @@ CLASS lcl_ae_filler_po_item_conf IMPLEMENTATION.
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-po_item_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-po_item_new AND
        lcl_po_tools=>is_appropriate_po_type( ir_ekko = is_events-mastertabref ) = abap_true AND
        lcl_po_tools=>is_appropriate_po_item( ir_ekpo = is_events-maintabref ) = abap_true.
 
@@ -103,9 +103,9 @@ CLASS lcl_ae_filler_po_item_conf IMPLEMENTATION.
       language    = sy-langu
       trxid       = lcl_po_tools=>get_tracking_id_po_item(
                       ir_ekpo = is_events-maintabref )
-      trxcod      = lif_pof_constants=>cs_trxcod-po_position
+      trxcod      = lif_app_constants=>cs_trxcod-po_position
       evtcnt      = is_events-eventid
-      evtid       = lif_pof_constants=>cs_milestone-po_confirmation
+      evtid       = lif_app_constants=>cs_milestone-po_confirmation
       evtdat      = sy-datum
       evttim      = sy-uzeit
       evtzon      = lcl_tools=>get_system_time_zone( )
@@ -127,15 +127,15 @@ CLASS lcl_ae_filler_po_item_conf IMPLEMENTATION.
     " QUANTITY
     ct_trackparameters  = VALUE #( BASE ct_trackparameters (
       evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-quantity
+      param_name  = lif_app_constants=>cs_event_param-quantity
       param_value = lcl_tools=>get_pretty_value( iv_value = lv_difference )
     ) ).
 
     " CONFIRMATION TYPE
     ct_trackparameters  = VALUE #( BASE ct_trackparameters (
       evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-confirm_type
-      param_value = lif_pof_constants=>cs_relevance-ebtyp
+      param_name  = lif_app_constants=>cs_event_param-confirm_type
+      param_value = lif_app_constants=>cs_relevance-ebtyp
     ) ).
   ENDMETHOD.
 
@@ -189,25 +189,25 @@ CLASS lcl_ae_filler_po_item_conf IMPLEMENTATION.
       lv_mng_old  = get_confirmation_quantity(
                       ir_ekpo = is_events-mainoldtabref
                       ir_ekes = mo_ae_parameters->get_appl_table(
-                                  iv_tabledef = lif_pof_constants=>cs_tabledef-po_vend_conf_old ) ).
+                                  iv_tabledef = lif_app_constants=>cs_tabledef-po_vend_conf_old ) ).
     ENDIF.
 
     lv_mng_new  = get_confirmation_quantity(
                     ir_ekpo = is_events-maintabref
                     ir_ekes = mo_ae_parameters->get_appl_table(
-                                iv_tabledef = lif_pof_constants=>cs_tabledef-po_vend_conf_new ) ).
+                                iv_tabledef = lif_app_constants=>cs_tabledef-po_vend_conf_new ) ).
 
     rv_difference = lv_mng_new - lv_mng_old.
 
   ENDMETHOD.
 
   METHOD is_appropriate_conf_control.
-    rv_result = boolc( iv_bstae = lif_pof_constants=>cs_bstae-confirm OR
-                       iv_bstae = lif_pof_constants=>cs_bstae-delivery ).
+    rv_result = boolc( iv_bstae = lif_app_constants=>cs_bstae-confirm OR
+                       iv_bstae = lif_app_constants=>cs_bstae-delivery ).
   ENDMETHOD.
 
   METHOD is_appropriate_conf_type.
-    rv_result = boolc( iv_ebtyp = lif_pof_constants=>cs_relevance-ebtyp ).
+    rv_result = boolc( iv_ebtyp = lif_app_constants=>cs_relevance-ebtyp ).
   ENDMETHOD.
 
 ENDCLASS.
@@ -324,20 +324,8 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_goods_receipt_quantity_dif.
-*    DATA: lv_mng_old TYPE menge_d,
-*          lv_mng_new TYPE menge_d.
-*
-*    lv_mng_old  = get_goods_receipt_quantity(
-*                    ir_goods_receipt = is_events-mainoldtabref ).
-*
-*    lv_mng_new  = get_goods_receipt_quantity(
-*                    ir_goods_receipt = is_events-maintabref ).
-*
-*    rv_difference = lv_mng_new - lv_mng_old.
-
     rv_difference = get_goods_receipt_quantity(
                       ir_goods_receipt = is_events-maintabref ).
-
   ENDMETHOD.
 
   METHOD lif_ae_filler~check_relevance.
@@ -351,7 +339,7 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
     " update_indicator  = insert
     IF is_appropriate_definition( is_events = is_events ) = abap_true AND
        is_appropriate_md_type( ir_md_head = is_events-mastertabref ) = abap_true AND
-       is_creation_for_po_item( ir_md_pos = is_events-maintabref )   = abap_true AND
+*       is_creation_for_po_item( ir_md_pos = is_events-maintabref )   = abap_true AND
        is_appropriate_po_type( ir_md_pos  = is_events-maintabref )   = abap_true AND
        is_appropriate_po_item( ir_md_pos  = is_events-maintabref )   = abap_true AND
        is_creation_mode( is_events = is_events ) = abap_true.
@@ -366,7 +354,7 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD is_appropriate_definition.
-    rv_result = boolc( is_events-maintabdef = lif_pof_constants=>cs_tabledef-md_material_segment ).
+    rv_result = boolc( is_events-maintabdef = lif_app_constants=>cs_tabledef-md_material_segment ).
   ENDMETHOD.
 
   METHOD is_appropriate_md_type.
@@ -376,7 +364,7 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
                     ir_struct_data = ir_md_head
                     iv_field_name  = 'BLART' ).
 
-    rv_result   = boolc( lv_md_type = lif_pof_constants=>cs_md_type-goods_receipt ).
+    rv_result   = boolc( lv_md_type = lif_app_constants=>cs_md_type-goods_receipt ).
   ENDMETHOD.
 
   METHOD is_appropriate_po_item.
@@ -480,9 +468,9 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
       language    = sy-langu
       trxid       = lcl_po_tools=>get_tracking_id_po_item(
                       ir_ekpo = is_events-maintabref )      "MSEG contains EBELN/EBELP
-      trxcod      = lif_pof_constants=>cs_trxcod-po_position
+      trxcod      = lif_app_constants=>cs_trxcod-po_position
       evtcnt      = is_events-eventid
-      evtid       = lif_pof_constants=>cs_milestone-po_goods_receipt
+      evtid       = lif_app_constants=>cs_milestone-po_goods_receipt
       evtdat      = sy-datum
       evttim      = sy-uzeit
       evtzon      = lcl_tools=>get_system_time_zone( )
@@ -503,7 +491,7 @@ CLASS lcl_ae_filler_po_item_gr IMPLEMENTATION.
 
     ct_trackparameters  = VALUE #( BASE ct_trackparameters (
       evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-quantity
+      param_name  = lif_app_constants=>cs_event_param-quantity
       param_value = lcl_tools=>get_pretty_value( iv_value = lv_difference )
     ) ).
   ENDMETHOD.
@@ -542,7 +530,7 @@ CLASS lcl_ae_filler_po_item_del IMPLEMENTATION.
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-po_item_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-po_item_new AND
        lcl_po_tools=>is_appropriate_po_type( ir_ekko = is_events-mastertabref ) = abap_true AND
        lcl_po_tools=>is_appropriate_po_item( ir_ekpo = is_events-maintabref ) = abap_true AND
        is_appropriate_mode( is_events = is_events ) = abap_true.
@@ -556,8 +544,8 @@ CLASS lcl_ae_filler_po_item_del IMPLEMENTATION.
                         iv_field_name  = 'LOEKZ' ).
 
       rv_result = COND #( WHEN lv_loekz_new <> lv_loekz_old AND
-                             ( lv_loekz_old = lif_pof_constants=>cs_loekz-deleted OR
-                               lv_loekz_new = lif_pof_constants=>cs_loekz-deleted )
+                             ( lv_loekz_old = lif_app_constants=>cs_loekz-deleted OR
+                               lv_loekz_new = lif_app_constants=>cs_loekz-deleted )
                             THEN lif_ef_constants=>cs_condition-true
                             ELSE lif_ef_constants=>cs_condition-false ).
     ENDIF.
@@ -572,11 +560,11 @@ CLASS lcl_ae_filler_po_item_del IMPLEMENTATION.
       language    = sy-langu
       trxid       = lcl_po_tools=>get_tracking_id_po_item(
                       ir_ekpo = is_events-maintabref )
-      trxcod      = lif_pof_constants=>cs_trxcod-po_position
+      trxcod      = lif_app_constants=>cs_trxcod-po_position
       evtcnt      = is_events-eventid
-      evtid       = COND #( WHEN lv_loekz = lif_pof_constants=>cs_loekz-deleted
-                              THEN lif_pof_constants=>cs_milestone-po_deletion
-                              ELSE lif_pof_constants=>cs_milestone-po_undeletion )
+      evtid       = COND #( WHEN lv_loekz = lif_app_constants=>cs_loekz-deleted
+                              THEN lif_app_constants=>cs_milestone-po_deletion
+                              ELSE lif_app_constants=>cs_milestone-po_undeletion )
       evtdat      = sy-datum
       evttim      = sy-uzeit
       evtzon      = lcl_tools=>get_system_time_zone( )
@@ -594,6 +582,293 @@ CLASS lcl_ae_filler_po_item_del IMPLEMENTATION.
       is_events-update_indicator  = lif_ef_constants=>cs_change_mode-update OR
       is_events-update_indicator  = lif_ef_constants=>cs_change_mode-undefined ).
   ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
+*** Inbound Delivery Header Goods Receipt Event **********************
+**********************************************************************
+CLASS lcl_ae_filler_dl_header_gr DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_ae_filler.
+
+    METHODS constructor
+      IMPORTING
+        io_ae_parameters TYPE REF TO lif_ae_parameters.
+
+  PRIVATE SECTION.
+    TYPES: BEGIN OF ts_dl_item_id,
+             vbeln TYPE vbeln_vl,
+             posnr TYPE posnr_vl,
+           END OF ts_dl_item_id.
+    TYPES: tt_vbeln    TYPE STANDARD TABLE OF vbeln_vl.
+
+    DATA: mo_ae_parameters    TYPE REF TO lif_ae_parameters.
+
+    METHODS get_delivery_ids
+      IMPORTING
+        ir_md_pos TYPE REF TO data
+      EXPORTING
+        et_vbeln  TYPE tt_vbeln
+      RAISING
+        cx_udm_message.
+
+    METHODS is_appropriate_definition
+      IMPORTING
+        is_events        TYPE trxas_evt_ctab_wa
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+
+    METHODS is_appropriate_md_type
+      IMPORTING
+        ir_md_head       TYPE REF TO data
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+
+    METHODS is_appropriate_dl_item
+      IMPORTING
+        ir_md_pos        TYPE REF TO data
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+
+    METHODS is_appropriate_dl_type
+      IMPORTING
+        ir_md_pos        TYPE REF TO data
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+
+    METHODS is_creation_mode
+      IMPORTING
+        is_events        TYPE trxas_evt_ctab_wa
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+
+    METHODS is_reveral_document
+      IMPORTING
+        ir_md_pos        TYPE REF TO data
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+ENDCLASS.
+
+CLASS lcl_ae_filler_dl_header_gr IMPLEMENTATION.
+  METHOD constructor.
+    mo_ae_parameters  = io_ae_parameters.
+  ENDMETHOD.
+
+  METHOD get_delivery_ids.
+    DATA: lv_vbeln    TYPE vbeln_vl.
+
+    FIELD-SYMBOLS: <lt_mseg>    TYPE lif_app_types=>tt_mseg.
+
+    CLEAR: et_vbeln[].
+
+    ASSIGN ir_md_pos->* TO <lt_mseg>.
+
+    IF <lt_mseg> IS ASSIGNED.
+      LOOP AT <lt_mseg> ASSIGNING FIELD-SYMBOL(<ls_mseg>)
+        WHERE vbeln_im IS NOT INITIAL.
+
+        IF NOT line_exists( et_vbeln[ table_line = <ls_mseg>-vbeln_im ] ).
+          APPEND <ls_mseg>-vbeln_im TO et_vbeln.
+        ENDIF.
+      ENDLOOP.
+    ELSE.
+      MESSAGE e002(zpof_gtt) WITH 'MSEG' INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD is_appropriate_definition.
+    rv_result = boolc( is_events-maintabdef = lif_app_constants=>cs_tabledef-md_material_header ).
+  ENDMETHOD.
+
+  METHOD is_appropriate_md_type.
+    DATA: lv_md_type  TYPE mkpf-blart.
+
+    lv_md_type  = lcl_tools=>get_field_of_structure(
+                    ir_struct_data = ir_md_head
+                    iv_field_name  = 'BLART' ).
+
+    rv_result   = boolc( lv_md_type = lif_app_constants=>cs_md_type-goods_receipt ).
+  ENDMETHOD.
+
+  METHOD is_appropriate_dl_item.
+    DATA: lt_vbeln TYPE tt_vbeln,
+          lt_lips  TYPE STANDARD TABLE OF lips.
+
+    rv_result   = abap_false.
+
+    get_delivery_ids(
+      EXPORTING
+        ir_md_pos = ir_md_pos
+      IMPORTING
+        et_vbeln  = lt_vbeln ).
+
+    IF lt_vbeln[] IS NOT INITIAL.
+      SELECT *
+        INTO TABLE lt_lips
+        FROM lips
+        FOR ALL ENTRIES IN lt_vbeln
+        WHERE vbeln = lt_vbeln-table_line.
+
+      LOOP AT lt_lips ASSIGNING FIELD-SYMBOL(<ls_lips>).
+        rv_result   = boolc( sy-subrc = 0 AND
+                             lcl_dl_tools=>is_appropriate_dl_item(
+                               ir_struct = REF #( <ls_lips> ) ) = abap_true ).
+        IF rv_result = abap_true.
+          EXIT.
+        ENDIF.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD is_appropriate_dl_type.
+    DATA: lt_vbeln TYPE tt_vbeln,
+          lt_likp  TYPE STANDARD TABLE OF likp.
+
+    rv_result   = abap_false.
+
+    get_delivery_ids(
+      EXPORTING
+        ir_md_pos = ir_md_pos
+      IMPORTING
+        et_vbeln  = lt_vbeln ).
+
+    IF lt_vbeln[] IS NOT INITIAL.
+      SELECT *
+        INTO TABLE lt_likp
+        FROM likp
+        FOR ALL ENTRIES IN lt_vbeln
+        WHERE vbeln = lt_vbeln-table_line.
+
+      LOOP AT lt_likp ASSIGNING FIELD-SYMBOL(<ls_likp>).
+        rv_result   = boolc( sy-subrc = 0 AND
+                             lcl_dl_tools=>is_appropriate_dl_type(
+                               ir_struct = REF #( <ls_likp> ) ) = abap_true ).
+        IF rv_result = abap_true.
+          EXIT.
+        ENDIF.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD is_creation_mode.
+    DATA: lv_mblnr TYPE mkpf-mblnr,
+          lv_mjahr TYPE mkpf-mjahr.
+
+    IF is_events-update_indicator = lif_ef_constants=>cs_change_mode-insert.
+      rv_result = abap_true.
+    ELSEIF is_events-update_indicator = lif_ef_constants=>cs_change_mode-undefined.
+      lv_mblnr  = lcl_tools=>get_field_of_structure(
+                      ir_struct_data = is_events-maintabref
+                      iv_field_name  = 'MBLNR' ).
+
+      lv_mjahr  = lcl_tools=>get_field_of_structure(
+                      ir_struct_data = is_events-maintabref
+                      iv_field_name  = 'MJAHR' ).
+
+      SELECT SINGLE mblnr INTO lv_mblnr
+        FROM mkpf
+        WHERE mblnr = lv_mblnr
+          AND mjahr = lv_mjahr.
+
+      rv_result = boolc( sy-subrc <> 0 ).
+    ELSE.
+      rv_result = abap_false.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD is_reveral_document.
+    DATA: lv_vbeln    TYPE vbeln_vl.
+
+    FIELD-SYMBOLS: <lt_mseg>    TYPE lif_app_types=>tt_mseg.
+
+    ASSIGN ir_md_pos->* TO <lt_mseg>.
+
+    IF <lt_mseg> IS ASSIGNED.
+      READ TABLE <lt_mseg> ASSIGNING FIELD-SYMBOL(<ls_mseg>) INDEX 1.
+
+      rv_result = boolc( sy-subrc = 0 AND <ls_mseg>-smbln IS NOT INITIAL ).
+
+    ELSE.
+      MESSAGE e002(zpof_gtt) WITH 'MSEG' INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD lif_ae_filler~check_relevance.
+    DATA: lv_mng_new    TYPE menge_d.
+
+    DATA(lr_md_pos) = mo_ae_parameters->get_appl_table(
+                        iv_tabledef = lif_app_constants=>cs_tabledef-md_material_segment ).
+
+    rv_result       = lif_ef_constants=>cs_condition-false.
+
+    " mkpf-blart        = 'WE'
+    " update_indicator  = insert
+    IF is_appropriate_definition( is_events = is_events ) = abap_true AND
+       is_appropriate_md_type( ir_md_head = is_events-maintabref ) = abap_true AND
+       is_appropriate_dl_type( ir_md_pos  = lr_md_pos ) = abap_true AND
+       is_appropriate_dl_item( ir_md_pos  = lr_md_pos ) = abap_true AND
+       is_creation_mode( is_events = is_events ) = abap_true.
+
+      rv_result   = lif_ef_constants=>cs_condition-true.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD lif_ae_filler~get_event_data.
+    DATA: lt_vbeln    TYPE tt_vbeln.
+
+    DATA(lr_md_pos)   = mo_ae_parameters->get_appl_table(
+                          iv_tabledef = lif_app_constants=>cs_tabledef-md_material_segment ).
+
+    DATA(lv_reversal) = is_reveral_document( ir_md_pos = lr_md_pos ).
+
+    get_delivery_ids(
+      EXPORTING
+        ir_md_pos = lr_md_pos
+      IMPORTING
+        et_vbeln  = lt_vbeln ).
+
+    LOOP AT lt_vbeln ASSIGNING FIELD-SYMBOL(<lv_vbeln>).
+      DATA(lv_evtcnt) = lcl_sh_tools=>get_next_event_counter( ).
+
+      ct_trackingheader = VALUE #( BASE ct_trackingheader (
+        language    = sy-langu
+        trxid       = <lv_vbeln>
+        trxcod      = lif_app_constants=>cs_trxcod-dl_number
+        evtcnt      = lv_evtcnt
+        evtid       = lif_app_constants=>cs_milestone-dl_goods_receipt
+        evtdat      = sy-datum
+        evttim      = sy-uzeit
+        evtzon      = lcl_tools=>get_system_time_zone( )
+      ) ).
+
+      ct_eventid_map  = VALUE #( BASE ct_eventid_map (
+        eventid     = is_events-eventid
+        evtcnt      = lv_evtcnt
+      ) ).
+
+      ct_trackparameters  = VALUE #( BASE ct_trackparameters (
+        evtcnt      = lv_evtcnt
+        param_name  = lif_app_constants=>cs_event_param-reversal
+        param_value = lv_reversal
+      ) ).
+    ENDLOOP.
+
+  ENDMETHOD.
+
 ENDCLASS.
 
 **********************************************************************
@@ -658,7 +933,7 @@ CLASS lcl_ae_filler_dl_item_pa IMPLEMENTATION.
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-dl_item_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-dl_item_new AND
        lcl_dl_tools=>is_appropriate_dl_type( ir_struct = is_events-mastertabref ) = abap_true AND
        lcl_dl_tools=>is_appropriate_dl_item( ir_struct = is_events-maintabref ) = abap_true.
 
@@ -684,9 +959,9 @@ CLASS lcl_ae_filler_dl_item_pa IMPLEMENTATION.
       language    = sy-langu
       trxid       = lcl_dl_tools=>get_tracking_id_dl_item(
                       ir_lips = is_events-maintabref )
-      trxcod      = lif_pof_constants=>cs_trxcod-dl_position
+      trxcod      = lif_app_constants=>cs_trxcod-dl_position
       evtcnt      = is_events-eventid
-      evtid       = lif_pof_constants=>cs_milestone-dl_put_away
+      evtid       = lif_app_constants=>cs_milestone-dl_put_away
       evtdat      = sy-datum
       evttim      = sy-uzeit
       evtzon      = lcl_tools=>get_system_time_zone( )
@@ -707,7 +982,7 @@ CLASS lcl_ae_filler_dl_item_pa IMPLEMENTATION.
 
     ct_trackparameters  = VALUE #( BASE ct_trackparameters (
       evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-quantity
+      param_name  = lif_app_constants=>cs_event_param-quantity
       param_value = lcl_tools=>get_pretty_value( iv_value = lv_difference )
     ) ).
   ENDMETHOD.
@@ -781,7 +1056,7 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
                     iv_quantity_uom = lv_vemng_flo
                     ir_lips         = ir_lips ).
     ELSE.
-      MESSAGE E002(ZPOF_GTT) WITH 'VEPO' INTO DATA(lv_dummy).
+      MESSAGE e002(zpof_gtt) WITH 'VEPO' INTO DATA(lv_dummy).
       lcl_tools=>throw_exception( ).
     ENDIF.
   ENDMETHOD.
@@ -794,7 +1069,7 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
       DATA(lv_quantity) = get_packing_quantity(
                             ir_lips = is_events-maintabref
                             ir_vepo = mo_ae_parameters->get_appl_table(
-                                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_hu_item_new ) ).
+                                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_hu_item_new ) ).
 
       rv_changed        = COND #( WHEN lv_quantity > 0
                                     THEN lif_ef_constants=>cs_condition-true
@@ -810,9 +1085,9 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
                                          iv_field_name  = 'POSNR' ) ).
 
       DATA(lr_vepo_old) = mo_ae_parameters->get_appl_table(
-                            iv_tabledef = lif_pof_constants=>cs_tabledef-dl_hu_item_old ).
+                            iv_tabledef = lif_app_constants=>cs_tabledef-dl_hu_item_old ).
       DATA(lr_vepo_new) = mo_ae_parameters->get_appl_table(
-                            iv_tabledef = lif_pof_constants=>cs_tabledef-dl_hu_item_new ).
+                            iv_tabledef = lif_app_constants=>cs_tabledef-dl_hu_item_new ).
 
       ASSIGN lr_vepo_old->* TO <lt_vepo_old>.
       ASSIGN lr_vepo_new->* TO <lt_vepo_new>.
@@ -855,7 +1130,7 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
                                 THEN lif_ef_constants=>cs_condition-true
                                 ELSE lif_ef_constants=>cs_condition-false ).
       ELSE.
-        MESSAGE E002(ZPOF_GTT) WITH 'VEPO' INTO DATA(lv_dummy).
+        MESSAGE e002(zpof_gtt) WITH 'VEPO' INTO DATA(lv_dummy).
         lcl_tools=>throw_exception( ).
       ENDIF.
     ENDIF.
@@ -866,7 +1141,7 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-dl_item_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-dl_item_new AND
        lcl_dl_tools=>is_appropriate_dl_type( ir_struct = is_events-mastertabref ) = abap_true AND
        lcl_dl_tools=>is_appropriate_dl_item( ir_struct = is_events-maintabref ) = abap_true.
 
@@ -884,15 +1159,15 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
     DATA(lv_quantity)   = get_packing_quantity(
                             ir_lips = is_events-maintabref
                             ir_vepo = mo_ae_parameters->get_appl_table(
-                                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_hu_item_new ) ).
+                                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_hu_item_new ) ).
 
     ct_trackingheader = VALUE #( BASE ct_trackingheader (
       language    = sy-langu
       trxid       = lcl_dl_tools=>get_tracking_id_dl_item(
                       ir_lips = is_events-maintabref )
-      trxcod      = lif_pof_constants=>cs_trxcod-dl_position
+      trxcod      = lif_app_constants=>cs_trxcod-dl_position
       evtcnt      = is_events-eventid
-      evtid       = lif_pof_constants=>cs_milestone-dl_packing
+      evtid       = lif_app_constants=>cs_milestone-dl_packing
       evtdat      = sy-datum
       evttim      = sy-uzeit
       evtzon      = lcl_tools=>get_system_time_zone( )
@@ -915,318 +1190,13 @@ CLASS lcl_ae_filler_dl_item_pkng IMPLEMENTATION.
     " because of quantity conversion
     ct_trackparameters  = VALUE #( BASE ct_trackparameters (
       evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-quantity
+      param_name  = lif_app_constants=>cs_event_param-quantity
       param_value = lcl_tools=>get_pretty_value( iv_value = lv_quantity )
     ) ).
   ENDMETHOD.
 
 ENDCLASS.
 
-**********************************************************************
-*** Inbound Delivery Item Goods Receipt Event *****************************
-**********************************************************************
-CLASS lcl_ae_filler_dl_item_gr DEFINITION.
-  PUBLIC SECTION.
-    INTERFACES lif_ae_filler.
-
-    METHODS constructor
-      IMPORTING
-        io_ae_parameters TYPE REF TO lif_ae_parameters.
-
-  PRIVATE SECTION.
-    TYPES: BEGIN OF ts_dl_item_id,
-             vbeln TYPE vbeln_vl,
-             posnr TYPE posnr_vl,
-           END OF ts_dl_item_id.
-
-    DATA: mo_ae_parameters    TYPE REF TO lif_ae_parameters.
-
-    METHODS get_goods_receipt_quantity
-      IMPORTING
-        ir_goods_receipt TYPE REF TO data
-      RETURNING
-        VALUE(rv_menge)  TYPE menge_d
-      RAISING
-        cx_udm_message.
-
-    METHODS get_goods_receipt_quantity_dif
-      IMPORTING
-        is_events            TYPE trxas_evt_ctab_wa
-      RETURNING
-        VALUE(rv_difference) TYPE menge_d
-      RAISING
-        cx_udm_message.
-
-    METHODS get_delivery_item_id
-      IMPORTING
-        ir_matdoc         TYPE REF TO data
-      RETURNING
-        VALUE(rv_item_id) TYPE ts_dl_item_id
-      RAISING
-        cx_udm_message.
-
-    METHODS get_tracking_id_dl_item
-      IMPORTING
-        ir_md_pos         TYPE REF TO data
-      RETURNING
-        VALUE(rv_trackid) TYPE /saptrx/trxid
-      RAISING
-        cx_udm_message.
-
-    METHODS is_appropriate_definition
-      IMPORTING
-        is_events        TYPE trxas_evt_ctab_wa
-      RETURNING
-        VALUE(rv_result) TYPE abap_bool
-      RAISING
-        cx_udm_message.
-
-    METHODS is_appropriate_md_type
-      IMPORTING
-        ir_md_head       TYPE REF TO data
-      RETURNING
-        VALUE(rv_result) TYPE abap_bool
-      RAISING
-        cx_udm_message.
-
-    METHODS is_appropriate_dl_item
-      IMPORTING
-        ir_md_pos        TYPE REF TO data
-      RETURNING
-        VALUE(rv_result) TYPE abap_bool
-      RAISING
-        cx_udm_message.
-
-    METHODS is_appropriate_dl_type
-      IMPORTING
-        ir_md_pos        TYPE REF TO data
-      RETURNING
-        VALUE(rv_result) TYPE abap_bool
-      RAISING
-        cx_udm_message.
-
-    METHODS is_creation_mode
-      IMPORTING
-        is_events        TYPE trxas_evt_ctab_wa
-      RETURNING
-        VALUE(rv_result) TYPE abap_bool
-      RAISING
-        cx_udm_message.
-ENDCLASS.
-
-CLASS lcl_ae_filler_dl_item_gr IMPLEMENTATION.
-  METHOD constructor.
-    mo_ae_parameters  = io_ae_parameters.
-  ENDMETHOD.
-
-  METHOD get_goods_receipt_quantity.
-    DATA: lv_dummy    TYPE char100.
-
-    FIELD-SYMBOLS: <ls_goods_receipt> TYPE any,
-                   <lv_quantity>      TYPE any,
-                   <lv_sign>          TYPE any.
-
-    ASSIGN ir_goods_receipt->* TO <ls_goods_receipt>.
-
-    IF <ls_goods_receipt> IS ASSIGNED.
-      ASSIGN COMPONENT 'ERFMG' OF STRUCTURE <ls_goods_receipt> TO <lv_quantity>.
-      ASSIGN COMPONENT 'SHKZG' OF STRUCTURE <ls_goods_receipt> TO <lv_sign>.
-
-      IF <lv_quantity> IS ASSIGNED.
-        rv_menge    = COND #( WHEN <lv_sign> = 'H'
-                                THEN - <lv_quantity>
-                                ELSE <lv_quantity> ).
-      ELSE.
-        MESSAGE e001(zpof_gtt) WITH 'ERFMG' 'Goods Receipt' INTO lv_dummy ##NO_TEXT.
-        lcl_tools=>throw_exception( ).
-      ENDIF.
-    ELSE.
-      MESSAGE e002(zpof_gtt) WITH 'Goods Receipt' INTO lv_dummy ##NO_TEXT.
-      lcl_tools=>throw_exception( ).
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD get_goods_receipt_quantity_dif.
-
-    rv_difference = get_goods_receipt_quantity(
-                      ir_goods_receipt = is_events-maintabref ).
-
-  ENDMETHOD.
-
-  METHOD get_delivery_item_id.
-    rv_item_id-vbeln    = lcl_tools=>get_field_of_structure(
-                            ir_struct_data = ir_matdoc
-                            iv_field_name  = 'VBELN_IM' ).
-
-    rv_item_id-posnr    = lcl_tools=>get_field_of_structure(
-                            ir_struct_data = ir_matdoc
-                            iv_field_name  = 'VBELP_IM' ).
-  ENDMETHOD.
-
-  METHOD get_tracking_id_dl_item.
-    DATA(ls_dl_item)  = get_delivery_item_id(
-                          ir_matdoc = ir_md_pos ).
-
-    rv_trackid        = lcl_dl_tools=>get_tracking_id_dl_item(
-                          ir_lips = REF #( ls_dl_item ) ).
-  ENDMETHOD.
-
-  METHOD is_appropriate_definition.
-    rv_result = boolc( is_events-maintabdef = lif_pof_constants=>cs_tabledef-md_material_segment ).
-  ENDMETHOD.
-
-  METHOD is_appropriate_md_type.
-    DATA: lv_md_type  TYPE mkpf-blart.
-
-    lv_md_type  = lcl_tools=>get_field_of_structure(
-                    ir_struct_data = ir_md_head
-                    iv_field_name  = 'BLART' ).
-
-    rv_result   = boolc( lv_md_type = lif_pof_constants=>cs_md_type-goods_receipt ).
-  ENDMETHOD.
-
-  METHOD is_appropriate_dl_item.
-    DATA: ls_lips     TYPE lips.
-
-    DATA(ls_dl_item)  = get_delivery_item_id(
-                          ir_matdoc = ir_md_pos ).
-
-    IF ls_dl_item-vbeln IS NOT INITIAL AND
-       ls_dl_item-posnr IS NOT INITIAL.
-      CALL FUNCTION 'CBGL_LB71_BUFFER_READ'
-        EXPORTING
-          i_rfc_destination  = 'NONE'
-          i_vbeln            = ls_dl_item-vbeln
-          i_posnr            = ls_dl_item-posnr
-        IMPORTING
-          e_position         = ls_lips
-        EXCEPTIONS
-          rfc_error          = 1
-          delivery_not_found = 2
-          wrong_posnr        = 3
-          OTHERS             = 4.
-
-      rv_result   = boolc( sy-subrc = 0 AND
-                           lcl_dl_tools=>is_appropriate_dl_item(
-                             ir_struct = REF #( ls_lips ) ) ).
-    ELSE.
-      rv_result   = abap_false.
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD is_appropriate_dl_type.
-    DATA: ls_likp     TYPE likp.
-
-    DATA(ls_dl_item)  = get_delivery_item_id(
-                          ir_matdoc = ir_md_pos ).
-
-    IF ls_dl_item-vbeln IS NOT INITIAL.
-      CALL FUNCTION 'CBGL_LB71_BUFFER_READ'
-        EXPORTING
-          i_rfc_destination  = 'NONE'
-          i_vbeln            = ls_dl_item-vbeln
-          i_posnr            = ls_dl_item-posnr
-        IMPORTING
-          e_header           = ls_likp
-        EXCEPTIONS
-          rfc_error          = 1
-          delivery_not_found = 2
-          wrong_posnr        = 3
-          OTHERS             = 4.
-
-      rv_result   = boolc( sy-subrc = 0 AND
-                           lcl_dl_tools=>is_appropriate_dl_type(
-                             ir_struct = REF #( ls_likp ) ) = abap_true ).
-    ELSE.
-      rv_result   = abap_true.
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD is_creation_mode.
-    DATA: lv_mblnr TYPE mkpf-mblnr,
-          lv_mjahr TYPE mkpf-mjahr.
-
-    IF is_events-update_indicator = lif_ef_constants=>cs_change_mode-insert.
-      rv_result = abap_true.
-    ELSEIF is_events-update_indicator = lif_ef_constants=>cs_change_mode-undefined.
-      lv_mblnr  = lcl_tools=>get_field_of_structure(
-                      ir_struct_data = is_events-maintabref
-                      iv_field_name  = 'MBLNR' ).
-
-      lv_mjahr  = lcl_tools=>get_field_of_structure(
-                      ir_struct_data = is_events-maintabref
-                      iv_field_name  = 'MJAHR' ).
-
-      SELECT SINGLE mblnr INTO lv_mblnr
-        FROM mkpf
-        WHERE mblnr = lv_mblnr
-          AND mjahr = lv_mjahr.
-
-      rv_result = boolc( sy-subrc <> 0 ).
-    ELSE.
-      rv_result = abap_false.
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD lif_ae_filler~check_relevance.
-    DATA: lv_mng_new    TYPE menge_d.
-
-    rv_result   = lif_ef_constants=>cs_condition-false.
-
-    " mkpf-blart        = 'WE'
-    " update_indicator  = insert
-    IF is_appropriate_definition( is_events = is_events ) = abap_true AND
-       is_appropriate_md_type( ir_md_head = is_events-mastertabref ) = abap_true AND
-       is_appropriate_dl_type( ir_md_pos  = is_events-maintabref )   = abap_true AND
-       is_appropriate_dl_item( ir_md_pos  = is_events-maintabref )   = abap_true AND
-       is_creation_mode( is_events = is_events ) = abap_true.
-
-      lv_mng_new  = get_goods_receipt_quantity(
-                      ir_goods_receipt = is_events-maintabref ).
-
-      rv_result   = COND #( WHEN lv_mng_new <> 0
-                              THEN lif_ef_constants=>cs_condition-true
-                              ELSE lif_ef_constants=>cs_condition-false ).
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD lif_ae_filler~get_event_data.
-    DATA(lv_difference)   =  get_goods_receipt_quantity_dif(
-                               is_events = is_events ).
-
-    ct_trackingheader = VALUE #( BASE ct_trackingheader (
-      language    = sy-langu
-      trxid       = get_tracking_id_dl_item(
-                      ir_md_pos = is_events-maintabref )
-      trxcod      = lif_pof_constants=>cs_trxcod-dl_position
-      evtcnt      = is_events-eventid
-      evtid       = lif_pof_constants=>cs_milestone-dl_goods_receipt
-      evtdat      = sy-datum
-      evttim      = sy-uzeit
-      evtzon      = lcl_tools=>get_system_time_zone( )
-    ) ).
-
-    ct_eventid_map  = VALUE #( BASE ct_eventid_map (
-      eventid     = is_events-eventid
-      evtcnt      = is_events-eventid
-    ) ).
-
-    ct_tracklocation  = VALUE #( BASE ct_tracklocation (
-      evtcnt      = is_events-eventid
-      loccod      = lif_ef_constants=>cs_loc_types-plant
-      locid1      = lcl_tools=>get_field_of_structure(
-                      ir_struct_data = is_events-maintabref
-                      iv_field_name  = 'WERKS' )
-    ) ).
-
-    ct_trackparameters  = VALUE #( BASE ct_trackparameters (
-      evtcnt      = is_events-eventid
-      param_name  = lif_pof_constants=>cs_event_param-quantity
-      param_value = lcl_tools=>get_pretty_value( iv_value = lv_difference )
-    ) ).
-  ENDMETHOD.
-
-ENDCLASS.
 
 **********************************************************************
 *** Shipment Header - Header Based Events ****************************
@@ -1272,7 +1242,7 @@ CLASS lcl_ae_filler_sh_header_bh IMPLEMENTATION.
           lv_date     TYPE d.
 
     DATA(lr_vttp) = mo_ae_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
 
     lv_date       = lcl_tools=>get_field_of_structure(
                       ir_struct_data = is_events-maintabref
@@ -1280,7 +1250,7 @@ CLASS lcl_ae_filler_sh_header_bh IMPLEMENTATION.
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-sh_header_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-sh_header_new AND
        lcl_sh_tools=>is_appropriate_type( ir_vttk = is_events-maintabref ) = abap_true AND
        lcl_sh_tools=>is_delivery_assigned( ir_vttp = lr_vttp ) = abap_true AND
        lv_date IS NOT INITIAL.
@@ -1305,7 +1275,7 @@ CLASS lcl_ae_filler_sh_header_bh IMPLEMENTATION.
       trxid       = lcl_tools=>get_field_of_structure(
                         ir_struct_data = is_events-maintabref
                         iv_field_name  = 'TKNUM' )
-      trxcod      = lif_pof_constants=>cs_trxcod-sh_number
+      trxcod      = lif_app_constants=>cs_trxcod-sh_number
       evtcnt      = lv_evtcnt
       evtid       = get_eventid( )
       evtdat      = lcl_tools=>get_field_of_structure(
@@ -1340,7 +1310,7 @@ ENDCLASS.
 
 CLASS lcl_ae_filler_sh_header_ci IMPLEMENTATION.
   METHOD get_eventid.
-    rv_eventid  = lif_pof_constants=>cs_milestone-sh_check_in.
+    rv_eventid  = lif_app_constants=>cs_milestone-sh_check_in.
   ENDMETHOD.
 
   METHOD get_date_field.
@@ -1368,7 +1338,7 @@ ENDCLASS.
 
 CLASS lcl_ae_filler_sh_header_ls IMPLEMENTATION.
   METHOD get_eventid.
-    rv_eventid  = lif_pof_constants=>cs_milestone-sh_load_start.
+    rv_eventid  = lif_app_constants=>cs_milestone-sh_load_start.
   ENDMETHOD.
 
   METHOD get_date_field.
@@ -1396,7 +1366,7 @@ ENDCLASS.
 
 CLASS lcl_ae_filler_sh_header_le IMPLEMENTATION.
   METHOD get_eventid.
-    rv_eventid  = lif_pof_constants=>cs_milestone-sh_load_end.
+    rv_eventid  = lif_app_constants=>cs_milestone-sh_load_end.
   ENDMETHOD.
 
   METHOD get_date_field.
@@ -1432,11 +1402,16 @@ CLASS lcl_ae_filler_sh_header_bs DEFINITION ABSTRACT.
 
     METHODS get_location_category ABSTRACT
       RETURNING
-        VALUE(rv_loccat) TYPE lif_pof_types=>tv_loccat.
+        VALUE(rv_loccat) TYPE lif_app_types=>tv_loccat.
 
     METHODS get_time_field ABSTRACT
       RETURNING
         VALUE(rv_field) TYPE lif_ef_types=>tv_field_name.
+
+    METHODS is_location_required ABSTRACT
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool.
+
 
   PRIVATE SECTION.
     TYPES: tt_vttsvb  TYPE vttsvb_tab.
@@ -1460,7 +1435,7 @@ CLASS lcl_ae_filler_sh_header_bs DEFINITION ABSTRACT.
       IMPORTING
         is_events TYPE trxas_evt_ctab_wa
       EXPORTING
-        et_stops  TYPE lif_pof_types=>tt_stops
+        et_stops  TYPE lif_app_types=>tt_stops
       RAISING
         cx_udm_message.
 
@@ -1482,14 +1457,14 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
     get_copy_of_vtts_table(
       EXPORTING
         ir_vtts = mo_ae_parameters->get_appl_table(
-                    iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new )
+                    iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new )
       IMPORTING
         et_vtts = mt_vtts_new ).
 
     get_copy_of_vtts_table(
       EXPORTING
         ir_vtts = mo_ae_parameters->get_appl_table(
-                    iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_old )
+                    iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_old )
       IMPORTING
         et_vtts = mt_vtts_old ).
 
@@ -1517,11 +1492,11 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
                                    ir_struct_data = is_events-maintabref
                                    iv_field_name  = 'TKNUM' ) ).
     DATA(lr_vttp)  = mo_ae_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
     DATA(lr_vtts)  = mo_ae_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new ).
     DATA(lr_vtsp)  = mo_ae_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_stage_new ).
 
     FIELD-SYMBOLS: <lt_vttp> TYPE vttpvb_tab,
                    <lt_vtts> TYPE vttsvb_tab,
@@ -1547,7 +1522,7 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
         IMPORTING
           et_stops  = et_stops ).
     ELSE.
-      MESSAGE E002(ZPOF_GTT) WITH 'VTTS' INTO DATA(lv_dummy).
+      MESSAGE e002(zpof_gtt) WITH 'VTTS' INTO DATA(lv_dummy).
       lcl_tools=>throw_exception( ).
     ENDIF.
   ENDMETHOD.
@@ -1574,7 +1549,7 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
                                     THEN lif_ef_constants=>cs_condition-true
                                     ELSE lif_ef_constants=>cs_condition-false ).
           ELSE.
-            MESSAGE E001(ZPOF_GTT) WITH get_date_field(  ) 'VTTS'
+            MESSAGE e001(zpof_gtt) WITH get_date_field(  ) 'VTTS'
               INTO DATA(lv_dummy).
             lcl_tools=>throw_exception( ).
           ENDIF.
@@ -1586,7 +1561,7 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
             TO <lv_edate>.
 
           IF <lv_edate> IS ASSIGNED AND
-             <lv_edate> is NOT INITIAL.
+             <lv_edate> IS NOT INITIAL.
 
             READ TABLE mt_vtts_old ASSIGNING FIELD-SYMBOL(<ls_vtts_old>)
               WITH KEY tknum = <ls_vtts_new>-tknum
@@ -1603,7 +1578,7 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
           ENDIF.
       ENDCASE.
     ELSE.
-      MESSAGE E005(ZPOF_GTT) WITH |{ iv_tknum }{ iv_tsnum }| 'VTTS' INTO lv_dummy.
+      MESSAGE e005(zpof_gtt) WITH |{ iv_tknum }{ iv_tsnum }| 'VTTS' INTO lv_dummy.
       lcl_tools=>throw_exception( ).
     ENDIF.
   ENDMETHOD.
@@ -1611,19 +1586,19 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
   METHOD lif_ae_filler~check_relevance.
     DATA: lv_date     TYPE d.
 
-    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_pof_types=>tt_vttsvb,
-                   <lt_vtts_old> TYPE lif_pof_types=>tt_vttsvb.
+    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_app_types=>tt_vttsvb,
+                   <lt_vtts_old> TYPE lif_app_types=>tt_vttsvb.
 
     DATA(lt_fields)   = VALUE lif_ef_types=>tt_field_name( ( get_date_field( ) )
                                                            ( get_time_field( ) ) ).
     DATA(lr_vttp)     = mo_ae_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
     DATA(lr_vtts_new) = mo_ae_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new ).
 
     rv_result   = lif_ef_constants=>cs_condition-false.
 
-    IF is_events-maintabdef = lif_pof_constants=>cs_tabledef-sh_header_new AND
+    IF is_events-maintabdef = lif_app_constants=>cs_tabledef-sh_header_new AND
        lcl_sh_tools=>is_appropriate_type( ir_vttk = is_events-maintabref ) = abap_true AND
        lcl_sh_tools=>is_delivery_assigned( ir_vttp = lr_vttp ) = abap_true.
 
@@ -1642,14 +1617,14 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
           ENDIF.
         ENDLOOP.
       ELSE.
-        MESSAGE E002(ZPOF_GTT) WITH 'VTTS' INTO DATA(lv_dummy).
+        MESSAGE e002(zpof_gtt) WITH 'VTTS' INTO DATA(lv_dummy).
         lcl_tools=>throw_exception( ).
       ENDIF.
     ENDIF.
   ENDMETHOD.
 
   METHOD lif_ae_filler~get_event_data.
-    DATA: lt_stops  TYPE lif_pof_types=>tt_stops.
+    DATA: lt_stops  TYPE lif_app_types=>tt_stops.
 
     get_stops_from_shipment(
       EXPORTING
@@ -1672,7 +1647,7 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
         IF sy-subrc = 0.
           ct_trackingheader = VALUE #( BASE ct_trackingheader (
             language    = sy-langu
-            trxcod      = lif_pof_constants=>cs_trxcod-sh_number
+            trxcod      = lif_app_constants=>cs_trxcod-sh_number
             trxid       = <ls_stops>-tknum
             evtcnt      = lv_evtcnt
             evtid       = get_eventid( )
@@ -1696,8 +1671,24 @@ CLASS lcl_ae_filler_sh_header_bs IMPLEMENTATION.
             locid1      = <ls_stops>-locid
             locid2      = <ls_stops>-stopid
           ) ).
+
+          IF is_location_required( ) = abap_true.
+            ct_trackparameters = VALUE #( BASE ct_trackparameters
+              (
+                evtcnt      = lv_evtcnt
+                param_name  = lif_app_constants=>cs_event_param-location_id
+                param_value = <ls_stops>-locid
+              )
+              (
+                evtcnt      = lv_evtcnt
+                param_name  = lif_app_constants=>cs_event_param-location_type
+                param_value = <ls_stops>-loctype
+              )
+            ).
+          ENDIF.
+
         ELSE.
-          MESSAGE E005(ZPOF_GTT)
+          MESSAGE e005(zpof_gtt)
             WITH |{ <ls_stops>-tknum }{ <ls_stops>-tsnum }| 'VTTK'
             INTO DATA(lv_dummy).
           lcl_tools=>throw_exception( ).
@@ -1721,23 +1712,29 @@ CLASS lcl_ae_filler_sh_header_dep DEFINITION
     METHODS get_location_category REDEFINITION.
 
     METHODS get_time_field REDEFINITION.
+
+    METHODS is_location_required REDEFINITION.
 ENDCLASS.
 
 CLASS lcl_ae_filler_sh_header_dep IMPLEMENTATION.
   METHOD get_date_field.
-    rv_field  = 'DATBG'.
+    rv_field    = 'DATBG'.
   ENDMETHOD.
 
   METHOD get_eventid.
-    rv_eventid  = lif_pof_constants=>cs_milestone-sh_departure.
+    rv_eventid  = lif_app_constants=>cs_milestone-sh_departure.
   ENDMETHOD.
 
   METHOD get_location_category.
-    rv_loccat   = lif_pof_constants=>cs_loccat-departure.
+    rv_loccat   = lif_app_constants=>cs_loccat-departure.
   ENDMETHOD.
 
   METHOD get_time_field.
-    rv_field  = 'UATBG'.
+    rv_field    = 'UATBG'.
+  ENDMETHOD.
+
+  METHOD is_location_required.
+    rv_result   = abap_false.
   ENDMETHOD.
 ENDCLASS.
 
@@ -1755,22 +1752,29 @@ CLASS lcl_ae_filler_sh_header_arr DEFINITION
     METHODS get_location_category REDEFINITION.
 
     METHODS get_time_field REDEFINITION.
+
+    METHODS is_location_required REDEFINITION.
+
 ENDCLASS.
 
 CLASS lcl_ae_filler_sh_header_arr IMPLEMENTATION.
   METHOD get_date_field.
-    rv_field  = 'DATEN'.
+    rv_field    = 'DATEN'.
   ENDMETHOD.
 
   METHOD get_eventid.
-    rv_eventid  = lif_pof_constants=>cs_milestone-sh_arrival.
+    rv_eventid  = lif_app_constants=>cs_milestone-sh_arrival.
   ENDMETHOD.
 
   METHOD get_location_category.
-    rv_loccat   = lif_pof_constants=>cs_loccat-arrival.
+    rv_loccat   = lif_app_constants=>cs_loccat-arrival.
   ENDMETHOD.
 
   METHOD get_time_field.
-    rv_field  = 'UATEN'.
+    rv_field    = 'UATEN'.
+  ENDMETHOD.
+
+  METHOD is_location_required.
+    rv_result   = abap_true.
   ENDMETHOD.
 ENDCLASS.

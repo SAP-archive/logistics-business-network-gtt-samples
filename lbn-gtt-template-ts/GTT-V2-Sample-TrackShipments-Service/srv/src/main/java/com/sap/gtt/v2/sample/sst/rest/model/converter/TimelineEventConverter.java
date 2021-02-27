@@ -1,10 +1,12 @@
 package com.sap.gtt.v2.sample.sst.rest.model.converter;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventStatus.UNPLANNED;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.CHECK_IN;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.EXCEPTIONAL_EVENT;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.OTHER_EVENT;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.OUT_FOR_DELIVERY;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventStatus.DELAYED;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventStatus.UNPLANNED;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.CHECK_IN;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.EXCEPTIONAL_EVENT;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.OTHER_EVENT;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.OUT_FOR_DELIVERY;
+import static com.sap.gtt.v2.sample.sst.common.utils.ProcessEventDirectoryUtils.retrieveLastProcessEventDirectory;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getDateTimeString;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getEventTypeShortName;
 import static com.sap.gtt.v2.sample.sst.odata.utils.LocationUtils.retrieveLocationByAltKey;
@@ -17,6 +19,7 @@ import static java.util.stream.Collectors.toList;
 import com.sap.gtt.v2.sample.sst.common.model.Event;
 import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import com.sap.gtt.v2.sample.sst.common.service.EventService;
+import com.sap.gtt.v2.sample.sst.common.service.ProcessEventDirectoryService;
 import com.sap.gtt.v2.sample.sst.odata.model.Location;
 import com.sap.gtt.v2.sample.sst.odata.model.LocationType;
 import com.sap.gtt.v2.sample.sst.odata.model.PlannedEvent;
@@ -25,6 +28,7 @@ import com.sap.gtt.v2.sample.sst.rest.model.EventHistory;
 import com.sap.gtt.v2.sample.sst.rest.model.TimelineEvent;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import javax.validation.constraints.NotNull;
@@ -47,6 +51,9 @@ public class TimelineEventConverter {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private ProcessEventDirectoryService processEventDirectoryService;
+
     /**
      * Converts provided {@link PlannedEvent} entities to {@link TimelineEvent} entities.
      *
@@ -54,8 +61,9 @@ public class TimelineEventConverter {
      * @return list of {@link TimelineEvent} entities
      */
     public List<TimelineEvent> fromPlannedEvents(@NotNull final List<PlannedEvent> plannedEvents) {
+        final List<ProcessEventDirectory> lastProcessEventDirectories = getLastProcessEventDirectoriesIfNeeded(plannedEvents);
         final List<TimelineEvent> convertedPlannedEvents = plannedEvents.stream()
-                .map(this::convertPlannedEvent)
+                .map(plannedEvent -> convertPlannedEvent(plannedEvent, lastProcessEventDirectories))
                 .collect(toList());
         fillLocationInformationForPlannedEvents(convertedPlannedEvents);
         return convertedPlannedEvents;
@@ -83,7 +91,8 @@ public class TimelineEventConverter {
                 : toActualEventWithPlannedEvent(processEventDirectory, eventHistory);
     }
 
-    private TimelineEvent convertPlannedEvent(final PlannedEvent plannedEvent) {
+    private TimelineEvent convertPlannedEvent(
+            final PlannedEvent plannedEvent, final List<ProcessEventDirectory> lastProcessEventDirectories) {
         final TimelineEvent timelineEvent = new TimelineEvent();
         timelineEvent.setEventTypeFullName(plannedEvent.getEventType());
         timelineEvent.setEventType(getEventTypeShortName(plannedEvent.getEventType()));
@@ -92,6 +101,8 @@ public class TimelineEventConverter {
         timelineEvent.setPlannedEventLocationAltKey(plannedEvent.getLocationAltKey());
         timelineEvent.setPlannedEventId(plannedEvent.getId());
         timelineEvent.setEventMatchKey(plannedEvent.getEventMatchKey());
+        timelineEvent.setPlannedEvent(plannedEvent);
+        setEventReasonTextIfNeeded(timelineEvent, plannedEvent, lastProcessEventDirectories);
         return timelineEvent;
     }
 
@@ -126,7 +137,40 @@ public class TimelineEventConverter {
         timelineEvent.setEventHistory(eventHistory);
         timelineEvent.setActualBusinessTimestamp(getDateTimeString(event.getActualBusinessTimestamp()));
         timelineEvent.setActualTechnicalTimestamp(getDateTimeString(event.getActualTechnicalTimestamp()));
+        timelineEvent.setPlannedEvent(plannedEvent);
         return timelineEvent;
+    }
+
+    private List<ProcessEventDirectory> getLastProcessEventDirectoriesIfNeeded(final List<PlannedEvent> plannedEvents) {
+        final List<UUID> lastProcessEventDirectoriesIds = getLastProcessEventDirectoriesIds(plannedEvents);
+        return lastProcessEventDirectoriesIds.isEmpty()
+                ? emptyList()
+                : processEventDirectoryService.getByIds(lastProcessEventDirectoriesIds);
+    }
+
+    private List<UUID> getLastProcessEventDirectoriesIds(final List<PlannedEvent> plannedEvents) {
+        return plannedEvents.stream()
+                .filter(plannedEvent -> DELAYED.name().equals(plannedEvent.getEventStatusCode()))
+                .map(PlannedEvent::getLastProcessEventDirectoryId)
+                .filter(Objects::nonNull)
+                .collect(toList());
+    }
+
+    private void setEventReasonTextIfNeeded(
+            final TimelineEvent timelineEvent,
+            final PlannedEvent plannedEvent,
+            final List<ProcessEventDirectory> lastProcessEventDirectories) {
+        final String plannedEventStatusCode = plannedEvent.getEventStatusCode();
+        if (DELAYED.name().equals(plannedEventStatusCode)) {
+            final UUID lastProcessEventDirectoryId = plannedEvent.getLastProcessEventDirectoryId();
+            final Optional<ProcessEventDirectory> lastProcessEventDirectoryOpt =
+                    retrieveLastProcessEventDirectory(lastProcessEventDirectoryId, lastProcessEventDirectories);
+            lastProcessEventDirectoryOpt.ifPresent(lastProcessEventDirectory -> {
+                final Event event = lastProcessEventDirectory.getEvent();
+                timelineEvent.setEventReasonCode(event.getEventReasonCode());
+                timelineEvent.setEventReasonText(event.getEventReasonText());
+            });
+        }
     }
 
     private void fillLocationInformationForPlannedEvents(final List<TimelineEvent> timelineEvents) {

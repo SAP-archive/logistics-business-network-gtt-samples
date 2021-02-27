@@ -11,5 +11,32 @@ GTT_CORE_ENGINE_TECHNICAL_PWD: dummy
 GTT_CORE_ENGINE_API_URL_FLP_BASED: https://dummy/api
 
 DESTINATION_GTT: dummy
-
 HERE_MAP_KEY: dummy
+
+VCAP_SERVICES: '{
+  "destination": [
+  			{
+  				"label": "destination",
+  				"provider": null,
+  				"plan": "lite",
+  				"name": "test-destination-pof",
+  				"instance_name": "test-destination-pof",
+  				"binding_name": null,
+  				"credentials": {
+  					"uaadomain": "authentication.sap.hana.ondemand.com",
+  					"tenantmode": "dedicated",
+  					"clientid": "MOCK_CLIENT_ID",
+  					"instanceid": "MOCK_INSTANCE_ID",
+  					"verificationkey": "MOCK_VERIFICATION_KEY",
+  					"xsappname": "MOCK_XSAPPNAME",
+  					"identityzone": "lbn-gtt-samples",
+  					"clientsecret": "MOCK_CLIENT_SECRET",
+  					"tenantid": "MOCK_TENANT_ID",
+  					"uri": "https://destination-configuration.cfapps.sap.hana.ondemand.com",
+  					"url": "https://authentication.sap.hana.ondemand.com"
+  				},
+  				"syslog_drain_url": null,
+  				"volume_mounts": []
+  			}
+  		]
+}'

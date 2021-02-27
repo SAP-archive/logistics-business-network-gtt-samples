@@ -291,6 +291,12 @@ public class ExecutionFlowService {
         // Update actualAt according to actualBusinessTimestamp
         Long actualBusinessTimestamp = event.getActualBusinessTimestamp();
         event.setActualAt(Instant.ofEpochMilli(actualBusinessTimestamp).toString());
+
+        // Update quantity (user model field) for POD event
+        if (eventTypeFull.contains(EVENT_TYPE_SHIPMENT_POD)) {
+            EventEx e = gttCoreServiceClient.readEntity(format("/POD(guid'%s')", event.getId()), EventEx.class);
+            event.setQuantity(e.getQuantity());
+        }
     }
 
     private Map<String, Long> createETAMap(UUID deliveryItemId) {

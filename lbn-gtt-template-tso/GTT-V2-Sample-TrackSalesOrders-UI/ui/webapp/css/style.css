@@ -83,8 +83,7 @@
   font-size: 0.8rem;
 }
 
-.sofProcessFlowNodeETA .sapMObjStatusTitle,
-.sofProcessFlowNodeEventReason .sapMObjStatusTitle {
+.sofProcessFlowNodeETA .sapMObjStatusTitle {
   display: block;
 }
 
@@ -102,8 +101,7 @@
   line-height: 1.2rem;
 }
 
-.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeETA .sapMObjStatusTitle,
-.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeEventReason .sapMObjStatusTitle {
+.sapSuiteUiCommonsPFZoomLevel1 .sofProcessFlowNodeETA .sapMObjStatusTitle {
   font-size: 0.875rem;
   line-height: 1.2rem;
 }

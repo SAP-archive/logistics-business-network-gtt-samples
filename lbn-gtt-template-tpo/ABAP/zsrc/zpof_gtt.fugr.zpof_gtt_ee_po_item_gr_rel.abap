@@ -24,8 +24,8 @@ FUNCTION zpof_gtt_ee_po_item_gr_rel.
       e_result  = lcl_ae_performer=>check_relevance(
         EXPORTING
           is_definition       = VALUE #(
-                                  maintab   = lif_pof_constants=>cs_tabledef-md_material_segment
-                                  mastertab = lif_pof_constants=>cs_tabledef-md_material_header )
+                                  maintab   = lif_app_constants=>cs_tabledef-md_material_segment
+                                  mastertab = lif_app_constants=>cs_tabledef-md_material_header )
           io_ae_factory       = NEW lcl_ae_factory_po_item_gr( )
           iv_appsys           = i_appsys
           is_event_type       = i_event_types

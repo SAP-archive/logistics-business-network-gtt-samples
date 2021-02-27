@@ -153,4 +153,30 @@ sap.ui.define([
     // Assert
     assert.ok(MessageBox.error.calledWith(fakeError.error.message), "The error is shown");
   });
+
+  QUnit.test("handleLocationQuickViewAfterOpen", function (assert) {
+    var controller = this.controller;
+
+    // Arrange
+    controller.selectedLocation = {};
+    controller.locationQuickView = {};
+    stub(controller.selectedLocation, "data")
+      .withArgs("modelName").returns("model")
+      .withArgs("propertyName").returns("prop");
+    stub(controller.selectedLocation, "getModel");
+    var fakeBindingContext = {};
+    stub(fakeBindingContext, "getProperty").withArgs("prop").returns({});
+    stub(controller.selectedLocation, "getBindingContext")
+      .withArgs("model").returns(fakeBindingContext);
+
+    var fakeModel = {};
+    stub(fakeModel, "setProperty");
+    stub(controller.locationQuickView, "getModel").returns(fakeModel);
+
+    // Act
+    controller.handleLocationQuickViewAfterOpen();
+
+    // Assert
+    assert.ok(fakeModel.setProperty.calledWith("/", {}), "The location is updated");
+  });
 });

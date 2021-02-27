@@ -34,6 +34,7 @@
         "createdByUser": "gtt_sof_tech02@163.com",
         "creationDateTime": "/Date(1604043114081)/",
         "quantity": "10.00",
+        "reversal": "X",
         "references": {
           "__deferred": {
             "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/GoodsReceipt(guid'fbb26df3-1a81-11eb-b5f4-9561ca468fff')/references"

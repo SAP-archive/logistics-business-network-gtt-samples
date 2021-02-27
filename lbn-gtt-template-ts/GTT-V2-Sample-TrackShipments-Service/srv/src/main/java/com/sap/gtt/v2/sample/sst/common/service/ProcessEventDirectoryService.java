@@ -14,13 +14,12 @@ import javax.validation.constraints.NotNull;
 public interface ProcessEventDirectoryService {
 
     /**
-     * Retrieves {@link ProcessEventDirectory} entities by provided
-     * {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} UUID.
+     * Retrieves {@link ProcessEventDirectory} entities by provided UUID of tracked process.
      *
-     * @param shipmentId - UUID of {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity
+     * @param trackedProcessId - UUID of tracked process
      * @return list of {@link ProcessEventDirectory} entities
      */
-    List<ProcessEventDirectory> getByShipmentId(@NotNull final String shipmentId);
+    List<ProcessEventDirectory> getByTrackedProcessId(@NotNull final String trackedProcessId);
 
     /**
      * Retrieves {@link ProcessEventDirectory} entities by provided UUIDs.

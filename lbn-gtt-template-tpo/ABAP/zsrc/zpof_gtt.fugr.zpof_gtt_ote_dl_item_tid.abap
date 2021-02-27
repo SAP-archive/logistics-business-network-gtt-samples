@@ -23,8 +23,8 @@ FUNCTION zpof_gtt_ote_dl_item_tid.
       lcl_ef_performer=>get_track_id_data(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_pof_constants=>cs_tabledef-dl_item_new
-                                    mastertab = lif_pof_constants=>cs_tabledef-dl_header_new )
+                                    maintab   = lif_app_constants=>cs_tabledef-dl_item_new
+                                    mastertab = lif_app_constants=>cs_tabledef-dl_header_new )
           io_bo_factory         = NEW lcl_factory_dl_item( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types

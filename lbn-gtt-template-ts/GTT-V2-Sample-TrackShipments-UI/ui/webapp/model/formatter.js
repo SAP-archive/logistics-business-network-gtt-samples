@@ -1,6 +1,9 @@
 sap.ui.define(
   [
     "sap/ui/core/format/NumberFormat",
+    "sap/ui/vbm/library",
+    "../util/i18n",
+    "../util/dateDiff",
     "../constant/ProcessStatus",
     "../constant/ExecutionStatus",
     "../constant/Event",
@@ -9,6 +12,9 @@ sap.ui.define(
   ],
   function (
     NumberFormat,
+    VBMLibrary,
+    i18n,
+    dateDiff,
     ProcessStatus,
     ExecutionStatus,
     Event,
@@ -93,7 +99,7 @@ sap.ui.define(
         }
 
         var key = "ET_" + type + "_DESCR";
-        var text = this.getText(key, null, "@i18n");
+        var text = i18n(key);
 
         return text === key ? type : text;
       },
@@ -117,60 +123,45 @@ sap.ui.define(
       },
 
       /**
-       * Get the time duration from start to end
+       * Get delta between two dates
        *
-       * @param {string|number|Date} start Start date
-       * @param {string|number|Date} end End date
-       * @param {"complete"|"short"} [mode=complete] Time duration format mode
-       * @returns {string} The time duration
+       * @param {string|number|Date} forecast Forecast date
+       * @param {string|number|Date} actual Actual date
+       * @returns {string} Date delta
+       *
+       * @example "+3D6H" | "-1H23M"
        */
-      timeDuration: function (start, end, mode) {
-        var duration, seconds, minutes, hours, days, unit;
-        var interval = Math.abs(new Date(end) - new Date(start));
+      dateDelta: function (forecast, actual) {
+        var forecastDate = new Date(forecast);
+        var actualDate = new Date(actual);
+        var sign = (actualDate >= forecastDate) ? "+" : "-";
+        var diff = dateDiff(forecastDate, actualDate);
 
-        seconds = Math.floor(interval / 1000);
-        minutes = Math.floor(seconds / 60);
-        hours = Math.floor(minutes / 60);
-        days = Math.floor(hours / 24);
-
-        switch (mode) {
-          case "short":
-            unit = {
-              seconds: "secondsWithUnit",
-              minutes: "minutesWithUnit",
-              hours: "hoursWithUnit",
-              days: "daysWithUnit",
-            };
-            break;
-          case "complete":
-          default:
-            unit = {
-              seconds: "seconds",
-              minutes: "minutes",
-              hours: "hours",
-              days: "days",
-            };
+        if (!diff) {
+          return "";
         }
 
-        if (seconds < 60) {
-          duration = this.getText(unit.seconds, [seconds]);
-        } else if (minutes < 60) {
-          duration = this.getText(unit.minutes, [minutes]);
-          if (seconds % 60 !== 0) {
-            duration = duration.concat(" ", this.getText(unit.seconds, [seconds % 60]));
+        var detla = "";
+        if (diff.seconds < 60) {
+          detla = this.getText("unit.s", [diff.seconds]);
+        } else if (diff.minutes < 60) {
+          detla = this.getText("unit.m", [diff.minutes]);
+          if (diff.seconds % 60 !== 0) {
+            detla += this.getText("unit.s", [diff.seconds % 60]);
           }
-        } else if (minutes < 1440) {
-          duration = this.getText(unit.hours, [hours]);
-          if (minutes % 60 !== 0) {
-            duration = duration.concat(" ", this.getText(unit.minutes, [minutes % 60]));
+        } else if (diff.hours < 24) {
+          detla = this.getText("unit.h", [diff.hours]);
+          if (diff.minutes % 60 !== 0) {
+            detla += this.getText("unit.m", [diff.minutes % 60]);
           }
         } else {
-          duration = this.getText(unit.days, [days]);
-          if (hours % 24 !== 0) {
-            duration = duration.concat(" ", this.getText(unit.hours, [hours % 24]));
+          detla = this.getText("unit.d", [diff.days]);
+          if (diff.hours % 24 !== 0) {
+            detla += this.getText("unit.h", [diff.hours % 24]);
           }
         }
-        return duration;
+
+        return sign + detla;
       },
 
       /**
@@ -179,15 +170,40 @@ sap.ui.define(
        * @param {string|number|Date} eta ETA
        * @param {string|number|Date} planned Planned arrival time
        * @returns {string} ETA delta tooltip string
+       *
+       * @example "6 days 23 hours later than planned arrival time"
        */
-      etaDetlaTooltip: function (eta, planned) {
+      etaDeltaTooltip: function (eta, planned) {
         var etaDate = new Date(eta);
         var plannedDate = new Date(planned);
+        var i18nPattern = (plannedDate < etaDate) ? "lateEstimatedArrival" : "earlyEstimatedArrival";
+        var diff = dateDiff(plannedDate, etaDate);
 
-        return this.getText(
-          (plannedDate < etaDate) ? "lateEstimatedArrival" : "earlyEstimatedArrival",
-          [formatter.timeDuration.call(this, etaDate, plannedDate)]
-        );
+        if (!diff) {
+          return "";
+        }
+
+        var delta = "";
+        if (diff.seconds < 60) {
+          delta = this.getText("unit.seconds", [diff.seconds]);
+        } else if (diff.minutes < 60) {
+          delta = this.getText("unit.minutes", [diff.minutes]);
+          if (diff.seconds % 60 !== 0) {
+            delta = delta + " " + this.getText("unit.seconds", [diff.seconds % 60]);
+          }
+        } else if (diff.hours < 24) {
+          delta = this.getText("unit.hours", [diff.hours]);
+          if (diff.minutes % 60 !== 0) {
+            delta = delta + " " + this.getText("unit.minutes", [diff.minutes % 60]);
+          }
+        } else {
+          delta = this.getText("unit.days", [diff.days]);
+          if (diff.hours % 24 !== 0) {
+            delta = delta + " " + this.getText("unit.hours", [diff.hours % 24]);
+          }
+        }
+
+        return this.getText(i18nPattern, [delta]);
       },
 
       shipmentEventsByStatusTooltip: function (data) {
@@ -257,11 +273,39 @@ sap.ui.define(
         return label.concat(": ").concat(locationDescription);
       },
 
+      stopWithETALabelType: function (eventStatusCode) {
+        switch (eventStatusCode) {
+          case formatter.eventStatus.Type.DELAYED:
+            return VBMLibrary.SemanticType.Error;
+          case formatter.eventStatus.Type.OVERDUE:
+            return VBMLibrary.SemanticType.Warning;
+        }
+
+        return VBMLibrary.SemanticType.None;
+      },
+
+      stopWithETALabelBorderColor: function (eventStatusCode) {
+        switch (eventStatusCode) {
+          case formatter.eventStatus.Type.DELAYED:
+          case formatter.eventStatus.Type.OVERDUE:
+            return "rgb(255, 255, 255)";
+        }
+
+        return "rgb(9, 97, 185)"; // informative
+      },
+
       stopWithETATooltip: function (item) {
         var text = this.getText("stop", [item.location.locationDescription]);
         text += "\n" + this.getText("eta").concat(": ").concat(formatter.isoDateTimeFormatter.formatValue(item.estimatedArrival.estimatedArrivalTime, "string"));
 
         return text;
+      },
+
+      geoCoordinatesTooltip: function (lon, lat) {
+        if (lon !== null && lat !== null) {
+          return this.getText("geoCoordinatesTooltip", [lon, lat]);
+        }
+        return this.getText("geoCoordinatesMissing");
       },
     };
 

@@ -1,6 +1,6 @@
 package com.sap.gtt.v2.sample.sst.rest.model.converter;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.ARRIVAL;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.ARRIVAL;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getDateTimeString;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getEventTypeShortName;
 
@@ -36,14 +36,14 @@ public class NextStopConverter {
      * Converts provided {@link EstimatedArrival} entity to {@link NextStop} entity.
      *
      * @param estimatedArrival - {@link EstimatedArrival} entity to be converted
-     * @param shipmentId       - UUID of {@link com.sap.gtt.v2.sample.sst.odata.model.Shipment} entity
+     * @param trackedProcessId - UUID of tracked process.
      * @return {@link NextStop} entity
      */
     public NextStop fromEstimatedArrival(
-            @NotNull final EstimatedArrival estimatedArrival, @NotNull final String shipmentId) {
+            @NotNull final EstimatedArrival estimatedArrival, @NotNull final String trackedProcessId) {
         final NextStop nextStop = new NextStop();
         final String stopId = estimatedArrival.getStopId();
-        final Optional<PlannedEvent> plannedEventOpt = getRelatedPlannedEvent(shipmentId, stopId);
+        final Optional<PlannedEvent> plannedEventOpt = getRelatedPlannedEvent(trackedProcessId, stopId);
         nextStop.setEstimatedArrivalTime(getDateTimeString(estimatedArrival.getEstimatedArrivalTime()));
         plannedEventOpt.ifPresent(plannedEvent -> fillPlannedBusinessTimestamp(nextStop, plannedEvent));
         plannedEventOpt.ifPresent(plannedEvent -> fillLocation(nextStop, plannedEvent));
@@ -61,8 +61,8 @@ public class NextStopConverter {
         nextStop.setPlannedBusinessTimestamp(getDateTimeString(plannedBusinessTimestamp));
     }
 
-    private Optional<PlannedEvent> getRelatedPlannedEvent(final String shipmentId, final String stopId) {
-        final List<PlannedEvent> plannedEvents = plannedEventService.getAllByShipmentId(shipmentId);
+    private Optional<PlannedEvent> getRelatedPlannedEvent(final String trackedProcessId, final String stopId) {
+        final List<PlannedEvent> plannedEvents = plannedEventService.getAllByTrackedProcessId(trackedProcessId);
         return plannedEvents.stream()
                 .filter(plannedEvent -> isArrivalEventType(plannedEvent.getEventType()))
                 .filter(plannedEvent -> plannedEvent.getEventMatchKey().equals(stopId))

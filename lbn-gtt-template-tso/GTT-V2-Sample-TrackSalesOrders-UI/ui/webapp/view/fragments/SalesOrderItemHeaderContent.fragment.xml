@@ -14,14 +14,14 @@
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="plantLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="plant"
-						text="{parts: [{'value': 'plant'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/SalesOrderItem/plant}" />
 					<Text id="plant" class="sofHeaderContentPropertyText" text="{plant}"/>
 				</items>
 			</HBox>
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="quantityLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="quantity"
-						text="{parts: [{'value': 'orderQuantity'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/SalesOrderItem/orderQuantity}" />
 					<Text id="quantity" class="sofHeaderContentPropertyText" text="{orderQuantity} {uom}"/>
 				</items>
 			</HBox>
@@ -30,7 +30,7 @@
 		<VBox id="netValueVBox"
 			class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
 			<Title id="netValueTitle"
-				text="{parts: [{'value': 'netValue'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}"
+				text="{label>/SalesOrder/netValue}"
 				level="H4"
 				class="sapUiTinyMarginBottom" />
 			<ObjectNumber id="netValue"

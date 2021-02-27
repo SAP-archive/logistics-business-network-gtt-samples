@@ -24,4 +24,4 @@ HERE_MAP_KEY: {here-map-license-key}
 
 GTT_CORE_ENGINE_TECHNICAL_USER: {techincal-user-name}
 GTT_CORE_ENGINE_TECHNICAL_PWD: {techincal-user-pwd}
-GTT_CORE_ENGINE_API_URL_FLP_BASED: {here-map-license-key}
+GTT_CORE_ENGINE_API_URL_FLP_BASED: https://{lbn-gtt-flp-base-url}/api

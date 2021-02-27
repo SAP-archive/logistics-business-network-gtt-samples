@@ -195,11 +195,14 @@ public class Delivery {
     @EdmNavigationProperty(name = "incoterms", toType = Incoterm.class, toMultiplicity = ONE)
     private Incoterm incoterms;
 
+    @EdmNavigationProperty(name = "processStatus", toType = ProcessStatus.class, toMultiplicity = ONE)
+    private ProcessStatus processStatus;
+
     @EdmNavigationProperty(name = "shipmentTPs", toType = ShipmentTp.class, toMultiplicity = MANY)
     private List<ShipmentTp> shipmentTps;
 
-    @EdmNavigationProperty(name = "processStatus", toType = ProcessStatus.class, toMultiplicity = ONE)
-    private ProcessStatus processStatus;
+    @EdmNavigationProperty(name = "deliveryItems", toType = DeliveryItem.class, toMultiplicity = MANY)
+    private List<DeliveryItem> deliveryItems;
 
     public UUID getId() {
         return id;
@@ -639,5 +642,13 @@ public class Delivery {
 
     public void setProcessStatus(ProcessStatus processStatus) {
         this.processStatus = processStatus;
+    }
+
+    public List<DeliveryItem> getDeliveryItems() {
+        return deliveryItems;
+    }
+
+    public void setDeliveryItems(List<DeliveryItem> deliveryItems) {
+        this.deliveryItems = deliveryItems;
     }
 }

@@ -52,7 +52,7 @@
                   <HBox justifyContent="SpaceBetween">
                     <Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                     <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                      tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                      tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                   </HBox>   
                 </VBox>
               </ctrl:content>
@@ -78,12 +78,13 @@
                   <HBox justifyContent="SpaceBetween">
                     <Text id="receivingLocationAddress" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                     <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                      tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                      tooltip="{= ${toReceivingLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toReceivingLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                   </HBox>  
                 </VBox>
               </ctrl:content>
             </ctrl:link.LinkPopover>
           </HBox>
+          
           <ObjectAttribute class="sapUiTinyMarginTop" title="{@i18n>EL_PurchaseOrder_plannedDeliveryDate_LABEL}" text="{
             path:'plannedDeliveryDate', 
             type: 'sap.ui.model.type.DateTime',
@@ -99,6 +100,7 @@
             level="H4"
             class="sapUiTinyMarginBottom" />
           <mc:HarveyBallMicroChart id="headerCompletionRate"
+            class="pofCompletionRate"
             size="L"
             width="100%"
             total="{= parseFloat(${netValue}) || 0 }"

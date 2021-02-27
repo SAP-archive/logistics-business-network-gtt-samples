@@ -9,8 +9,9 @@ import java.util.Arrays;
  */
 public enum DocumentFlowGeneralStatusEnum {
     INFORMATION("Information", 1),
-    WARNING("Warning", 2),
-    ERROR("Error", 3);
+    SUCCESS("Success", 2),
+    WARNING("Warning", 3),
+    ERROR("Error", 4);
 
     private final String status;
     private final int weight;

@@ -20,7 +20,12 @@ FUNCTION zpof_gtt_ctp_sh_to_dl.
 
       lo_item->send_idoc_data(  ).
 
-    CATCH cx_udm_message.
+    CATCH cx_udm_message INTO DATA(lo_udm_message).
+      lcl_tools=>log_exception(
+        EXPORTING
+          io_udm_message = lo_udm_message
+          iv_object      = lif_ef_constants=>cs_logs-object-shipment_ctp
+          iv_subobject   = lif_ef_constants=>cs_logs-subobject-shipment_ctp ).
   ENDTRY.
 
 ENDFUNCTION.

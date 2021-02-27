@@ -8,6 +8,13 @@ public class InboundDeliveryItemEvent extends EventForWrite {
     @SerializedName("executionStatus_code")
     private String executionStatusCode;
 
+    private String lastEventName;
+
+    private String lastLocationAltKey;
+
+    @SerializedName("lastVPLocationType_code")
+    private String lastVPLocationTypeCode;
+
     public String getInboundDeliveryNo() {
         return inboundDeliveryNo;
     }
@@ -30,5 +37,29 @@ public class InboundDeliveryItemEvent extends EventForWrite {
 
     public void setExecutionStatusCode(String executionStatusCode) {
         this.executionStatusCode = executionStatusCode;
+    }
+
+    public String getLastEventName() {
+        return lastEventName;
+    }
+
+    public void setLastEventName(String lastEventName) {
+        this.lastEventName = lastEventName;
+    }
+
+    public String getLastLocationAltKey() {
+        return lastLocationAltKey;
+    }
+
+    public void setLastLocationAltKey(String lastLocationAltKey) {
+        this.lastLocationAltKey = lastLocationAltKey;
+    }
+
+    public String getLastVPLocationTypeCode() {
+        return lastVPLocationTypeCode;
+    }
+
+    public void setLastVPLocationTypeCode(String lastVPLocationTypeCode) {
+        this.lastVPLocationTypeCode = lastVPLocationTypeCode;
     }
 }

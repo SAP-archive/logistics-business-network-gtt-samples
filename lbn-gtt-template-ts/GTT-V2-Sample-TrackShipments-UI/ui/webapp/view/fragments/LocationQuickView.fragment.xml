@@ -57,10 +57,9 @@
 					<core:Icon id="globeIcon"
 						src="sap-icon://globe"
 						color="{= ${/latitude} !== null ? 'Default' : 'Neutral' }"
-						tooltip="{=
-							${/latitude} !== null
-								? ${/latitude} + ', ' + ${/longitude}
-								: ${i18n>geoCoordinatesMissing}
+						tooltip="{
+							parts: ['/longitude', '/latitude'],
+							formatter: '.formatter.geoCoordinatesTooltip'
 						}"
 						press=".onCoordinatePressed">
 						<core:layoutData>
@@ -71,11 +70,10 @@
 			</form:SimpleForm>
 
 			<core:InvisibleText id="cooridateDescription"
-				text="{=
-					${/latitude} !== null
-						? ${/latitude} + ', ' + ${/longitude}
-						: ${i18n>geoCoordinatesMissing}
-				}" />
+				text="{
+					parts: ['/longitude', '/latitude'],
+					formatter: '.formatter.geoCoordinatesTooltip'
+				}"/>
 		</content>
 	</ResponsivePopover>
 </core:FragmentDefinition>

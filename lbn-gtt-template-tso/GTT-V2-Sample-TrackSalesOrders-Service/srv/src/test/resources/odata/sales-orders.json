@@ -1,223 +1,507 @@
 {
-  "d":{
+  "d": {
     "__count":"5",
-    "results":[
+    "results": [
       {
-        "__metadata":{
-          "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-          "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-          "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrder"
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrder"
         },
-        "id":"ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f",
-        "salesOrderNo":"0000071660",
-        "shipToPartyId":"0000010105",
-        "netValue":"50000.00",
-        "currency":"EUR",
-        "logicalSystem":"QM7CLNT910",
-        "customerReference":"TEST01",
-        "documentDate":"\/Date(1590537600000)\/",
-        "incoterms_code":"CIF",
-        "incotermsLocation":"SHANGHAI",
-        "incotermsVersion":"0001",
-        "completionValue":null,
-        "delayedValue":null,
-        "salesOrderItemTPs":{
-          "results":[
+        "id": "bd653812-9411-511d-be57-fc61acbd6f51",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrder.SalesOrder",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900040892",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001006",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SALES_ORDER",
+        "trackingId": "9900040892",
+        "lastChangedAtBusinessTime": "/Date(1605668089000)/",
+        "createdByUser": "gtt_sof_tech02@163.com",
+        "creationDateTime": "/Date(1605667462052)/",
+        "lastChangedByUser": "gtt_sof_tech02@163.com",
+        "lastChangeDateTime": "/Date(1605668105793)/",
+        "version": 2,
+        "salesOrderNo": "9900040892",
+        "shipToPartyId": "0000010105",
+        "netValue": "265.00",
+        "currency": "EUR",
+        "customerReference": "TEST01",
+        "documentDate": "/Date(1605657600000)/",
+        "incotermsLocation": "SHANGHAI",
+        "incotermsVersion": "0001",
+        "completionValue": "0.00",
+        "delayedValue": "0.00",
+        "completedAndLateValue": "0.00",
+        "isCompleted": false,
+        "isDelayed": false,
+        "processStatus_code": "AS_PLANNED",
+        "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+        "incoterms_code": "CIF",
+        "rejectionStatus_code": null,
+        "processStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/processStatus"
+          }
+        },
+        "trackingIds": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/trackingIds"
+          }
+        },
+        "plannedEvents": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/plannedEvents"
+          }
+        },
+        "processEvents": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/processEvents"
+          }
+        },
+        "lifeCycleStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/lifeCycleStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/incoterms"
+          }
+        },
+        "rejectionStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'bd653812-9411-511d-be57-fc61acbd6f51')/rejectionStatus"
+          }
+        },
+        "salesOrderItems": {
+          "results": [
             {
-              "__metadata":{
-                "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000071660000020',salesOrder_id=guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-                "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000071660000020',salesOrder_id=guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-                "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP"
+              "__metadata": {
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')",
+                "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
               },
-              "salesOrderItemAltKey":"xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:0000071660000020",
-              "salesOrder_id":"ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f",
-              "salesOrderItem_id":"c1038487-3fba-5e04-a629-207290418538",
-              "salesOrderItem":{
-                "__metadata":{
-                  "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'c1038487-3fba-5e04-a629-207290418538')",
-                  "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'c1038487-3fba-5e04-a629-207290418538')",
-                  "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
-                },
-                "id":"c1038487-3fba-5e04-a629-207290418538",
-                "salesOrderNo":"0000071660",
-                "itemNo":"000020",
-                "materialNo":"HST_F1",
-                "materialDescription":" MATNR HST_F1",
-                "plant":"0001",
-                "orderQuantity":"100.000",
-                "uom":"EA",
-                "netValue":"10000.00",
-                "delayedQuantity":"10.000",
-                "completionQuantity":"50.000",
-                "processStatus_code":"AS_PLANNED",
-                "currency":"EUR",
-                "processStatus":{
-                  "__deferred":{
-                    "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'c1038487-3fba-5e04-a629-207290418538')/processStatus"
-                  }
-                },
-                "deliveryItemTPs": {
-                  "__deferred": {
-                    "uri": "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'c0f7a21a-dd36-5397-bf07-76ed4135f139')/deliveryItemTPs"
-                  }
+              "id": "a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017",
+              "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+              "cloneInstanceId": null,
+              "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrderItem.SalesOrderItem",
+              "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:9900040892000020",
+              "scheme": "xri://sap.com/id",
+              "partyId": "LBN#10010001006",
+              "logicalSystem": "QM7CLNT910",
+              "trackingIdType": "SALES_ORDER_ITEM",
+              "trackingId": "9900040892000020",
+              "lastChangedAtBusinessTime": "/Date(1605780483000)/",
+              "createdByUser": "gtt_sof_tech02@163.com",
+              "creationDateTime": "/Date(1605667464281)/",
+              "lastChangedByUser": "gtt_sof_tech02@163.com",
+              "lastChangeDateTime": "/Date(1605784111472)/",
+              "version": 3,
+              "salesOrderNo": "9900040892",
+              "itemNo": "000020",
+              "materialNo": "HST_F1",
+              "materialDescription": "Laptop",
+              "orderQuantity": "11.000",
+              "uom": "EA",
+              "netValue": "121.00",
+              "delayedQuantity": "0.000",
+              "completionQuantity": "0.000",
+              "plant": "0001",
+              "currency": "EUR",
+              "salesOrderAltKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900040892",
+              "completedAndLateQuantity": "0.000",
+              "isCompleted": false,
+              "isDelayed": false,
+              "processStatus_code": "AS_PLANNED",
+              "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+              "rejectionStatus_code": null,
+              "processStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/processStatus"
+                }
+              },
+              "trackingIds": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/trackingIds"
+                }
+              },
+              "plannedEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/plannedEvents"
+                }
+              },
+              "processEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/processEvents"
+                }
+              },
+              "lifeCycleStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/lifeCycleStatus"
+                }
+              },
+              "salesOrder": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/salesOrder"
+                }
+              },
+              "deliveryItemTPs": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/deliveryItemTPs"
+                }
+              },
+              "scheduleLines": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/scheduleLines"
+                }
+              },
+              "rejectionStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'a2e8bfd1-f78c-56f1-95a2-5e8f50ceb017')/rejectionStatus"
                 }
               }
             },
             {
-              "__metadata":{
-                "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000071660000040',salesOrder_id=guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-                "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000071660000040',salesOrder_id=guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')",
-                "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP"
+              "__metadata": {
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')",
+                "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
               },
-              "salesOrderItemAltKey":"xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:0000071660000040",
-              "salesOrder_id":"ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f",
-              "salesOrderItem_id":"38f4efff-7fa5-5831-b193-b1e14358d238",
-              "salesOrderItem":{
-                "__metadata":{
-                  "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'38f4efff-7fa5-5831-b193-b1e14358d238')",
-                  "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'38f4efff-7fa5-5831-b193-b1e14358d238')",
-                  "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
-                },
-                "id":"38f4efff-7fa5-5831-b193-b1e14358d238",
-                "salesOrderNo":"0000071660",
-                "itemNo":"000040",
-                "materialNo":"HST1_R1",
-                "materialDescription":" MATNR HST1_R1",
-                "plant":"0001",
-                "orderQuantity":"200.000",
-                "uom":"EA",
-                "netValue":"40000.00",
-                "delayedQuantity":null,
-                "completionQuantity":null,
-                "processStatus_code":"AS_PLANNED",
-                "currency":"EUR",
-                "processStatus":{
-                  "__deferred":{
-                    "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'38f4efff-7fa5-5831-b193-b1e14358d238')/processStatus"
-                  }
-                },
-                "deliveryItemTPs": {
-                  "__deferred": {
-                    "uri": "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'c0f7a21a-dd36-5397-bf07-76ed4135f139')/deliveryItemTPs"
-                  }
+              "id": "4bd04c8b-3088-564f-87b5-667ea0b999b0",
+              "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+              "cloneInstanceId": null,
+              "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrderItem.SalesOrderItem",
+              "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:9900040892000040",
+              "scheme": "xri://sap.com/id",
+              "partyId": "LBN#10010001006",
+              "logicalSystem": "QM7CLNT910",
+              "trackingIdType": "SALES_ORDER_ITEM",
+              "trackingId": "9900040892000040",
+              "lastChangedAtBusinessTime": "/Date(1605780483000)/",
+              "createdByUser": "gtt_sof_tech02@163.com",
+              "creationDateTime": "/Date(1605667466029)/",
+              "lastChangedByUser": "gtt_sof_tech02@163.com",
+              "lastChangeDateTime": "/Date(1605784113408)/",
+              "version": 3,
+              "salesOrderNo": "9900040892",
+              "itemNo": "000040",
+              "materialNo": "HST1_R1",
+              "materialDescription": "Monitor",
+              "orderQuantity": "12.000",
+              "uom": "EA",
+              "netValue": "144.00",
+              "delayedQuantity": "0.000",
+              "completionQuantity": "0.000",
+              "plant": "0001",
+              "currency": "EUR",
+              "salesOrderAltKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900040892",
+              "completedAndLateQuantity": "0.000",
+              "isCompleted": true,
+              "isDelayed": false,
+              "processStatus_code": "AS_PLANNED",
+              "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+              "rejectionStatus_code": null,
+              "processStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/processStatus"
+                }
+              },
+              "trackingIds": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/trackingIds"
+                }
+              },
+              "plannedEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/plannedEvents"
+                }
+              },
+              "processEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/processEvents"
+                }
+              },
+              "lifeCycleStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/lifeCycleStatus"
+                }
+              },
+              "salesOrder": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/salesOrder"
+                }
+              },
+              "deliveryItemTPs": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/deliveryItemTPs"
+                }
+              },
+              "scheduleLines": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/scheduleLines"
+                }
+              },
+              "rejectionStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'4bd04c8b-3088-564f-87b5-667ea0b999b0')/rejectionStatus"
                 }
               }
             }
           ]
-        },
-        "incoterms":{
-          "__deferred":{
-            "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'ffde2cf6-e6f7-5383-b9f7-b6db96f9ab5f')/incoterms"
-          }
         }
       },
       {
-        "__metadata":{
-          "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-          "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-          "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrder"
+        "__metadata": {
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')",
+          "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrder"
         },
-        "id":"cd5478c8-0cc3-53b4-95c9-53e2ea273098",
-        "salesOrderNo":"0000042087",
-        "shipToPartyId":"0000010105",
-        "netValue":"50000.00",
-        "currency":"EUR",
-        "logicalSystem":"QM7CLNT910",
-        "customerReference":"14343455",
-        "documentDate":"\/Date(1590537600000)\/",
-        "incoterms_code":"CIF",
-        "incotermsLocation":"SHANGHAI",
-        "incotermsVersion":"0001",
-        "completionValue":null,
-        "delayedValue":null,
-        "salesOrderItemTPs":{
-          "results":[
+        "id": "27ae7396-d5cb-5214-9471-9c3276f7e8c6",
+        "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+        "cloneInstanceId": null,
+        "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrder.SalesOrder",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900016944",
+        "scheme": "xri://sap.com/id",
+        "partyId": "LBN#10010001006",
+        "logicalSystem": "QM7CLNT910",
+        "trackingIdType": "SALES_ORDER",
+        "trackingId": "9900016944",
+        "lastChangedAtBusinessTime": "/Date(1605837904000)/",
+        "createdByUser": "gtt_sof_tech02@163.com",
+        "creationDateTime": "/Date(1605841529561)/",
+        "lastChangedByUser": "gtt_sof_tech02@163.com",
+        "lastChangeDateTime": "/Date(1605841529561)/",
+        "version": 0,
+        "salesOrderNo": "9900016944",
+        "shipToPartyId": "0000010105",
+        "netValue": "265.00",
+        "currency": "EUR",
+        "customerReference": "TEST01",
+        "documentDate": "/Date(1605830400000)/",
+        "incotermsLocation": "SHANGHAI",
+        "incotermsVersion": "0001",
+        "completionValue": null,
+        "delayedValue": null,
+        "completedAndLateValue": null,
+        "isCompleted": null,
+        "isDelayed": false,
+        "processStatus_code": "AS_PLANNED",
+        "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+        "incoterms_code": "CIF",
+        "rejectionStatus_code": null,
+        "processStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/processStatus"
+          }
+        },
+        "trackingIds": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/trackingIds"
+          }
+        },
+        "plannedEvents": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/plannedEvents"
+          }
+        },
+        "processEvents": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/processEvents"
+          }
+        },
+        "lifeCycleStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/lifeCycleStatus"
+          }
+        },
+        "incoterms": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/incoterms"
+          }
+        },
+        "rejectionStatus": {
+          "__deferred": {
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrder(guid'27ae7396-d5cb-5214-9471-9c3276f7e8c6')/rejectionStatus"
+          }
+        },
+        "salesOrderItems": {
+          "results": [
             {
-              "__metadata":{
-                "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000042087000020',salesOrder_id=guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-                "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000042087000020',salesOrder_id=guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-                "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP"
+              "__metadata": {
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')",
+                "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
               },
-              "salesOrderItemAltKey":"xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:0000042087000020",
-              "salesOrder_id":"cd5478c8-0cc3-53b4-95c9-53e2ea273098",
-              "salesOrderItem_id":"d8be7b0e-6368-585f-98aa-3822efcc7bcb",
-              "salesOrderItem":{
-                "__metadata":{
-                  "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'd8be7b0e-6368-585f-98aa-3822efcc7bcb')",
-                  "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'd8be7b0e-6368-585f-98aa-3822efcc7bcb')",
-                  "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
-                },
-                "id":"d8be7b0e-6368-585f-98aa-3822efcc7bcb",
-                "salesOrderNo":"0000042087",
-                "itemNo":"000020",
-                "materialNo":"HST_F1",
-                "materialDescription":" MATNR HST_F1",
-                "plant":"0001",
-                "orderQuantity":"100.000",
-                "uom":"EA",
-                "netValue":"10000.00",
-                "delayedQuantity":null,
-                "completionQuantity":null,
-                "processStatus_code":"AS_PLANNED",
-                "currency":"EUR",
-                "processStatus":{
-                  "__deferred":{
-                    "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'd8be7b0e-6368-585f-98aa-3822efcc7bcb')/processStatus"
-                  }
-                },
-                "deliveryItemTPs": {
-                  "__deferred": {
-                    "uri": "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'47b8fcbb-6b58-566a-b010-b351bd295510')/deliveryItemTPs"
-                  }
+              "id": "8aaf7537-02b0-5578-bb4b-948484820b12",
+              "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+              "cloneInstanceId": null,
+              "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrderItem.SalesOrderItem",
+              "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:9900016944000020",
+              "scheme": "xri://sap.com/id",
+              "partyId": "LBN#10010001006",
+              "logicalSystem": "QM7CLNT910",
+              "trackingIdType": "SALES_ORDER_ITEM",
+              "trackingId": "9900016944000020",
+              "lastChangedAtBusinessTime": "/Date(1605837904000)/",
+              "createdByUser": "gtt_sof_tech02@163.com",
+              "creationDateTime": "/Date(1605841531558)/",
+              "lastChangedByUser": "gtt_sof_tech02@163.com",
+              "lastChangeDateTime": "/Date(1605841531558)/",
+              "version": 0,
+              "salesOrderNo": "9900016944",
+              "itemNo": "000020",
+              "materialNo": "HST_F1",
+              "materialDescription": "Laptop",
+              "orderQuantity": "11.000",
+              "uom": "EA",
+              "netValue": "121.00",
+              "delayedQuantity": null,
+              "completionQuantity": null,
+              "plant": "0001",
+              "currency": "EUR",
+              "salesOrderAltKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900016944",
+              "completedAndLateQuantity": null,
+              "isCompleted": null,
+              "isDelayed": false,
+              "processStatus_code": "AS_PLANNED",
+              "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+              "rejectionStatus_code": null,
+              "processStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/processStatus"
+                }
+              },
+              "trackingIds": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/trackingIds"
+                }
+              },
+              "plannedEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/plannedEvents"
+                }
+              },
+              "processEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/processEvents"
+                }
+              },
+              "lifeCycleStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/lifeCycleStatus"
+                }
+              },
+              "salesOrder": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/salesOrder"
+                }
+              },
+              "deliveryItemTPs": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/deliveryItemTPs"
+                }
+              },
+              "scheduleLines": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/scheduleLines"
+                }
+              },
+              "rejectionStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'8aaf7537-02b0-5578-bb4b-948484820b12')/rejectionStatus"
                 }
               }
             },
             {
-              "__metadata":{
-                "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000042087000040',salesOrder_id=guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-                "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItemTP(salesOrderItemAltKey='xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001006%3AQM7CLNT910%3ASALES_ORDER_ITEM%3A0000042087000040',salesOrder_id=guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')",
-                "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP"
+              "__metadata": {
+                "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')",
+                "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')",
+                "type": "com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
               },
-              "salesOrderItemAltKey":"xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:0000042087000040",
-              "salesOrder_id":"cd5478c8-0cc3-53b4-95c9-53e2ea273098",
-              "salesOrderItem_id":"36b44e55-91de-54ef-b89e-45e4251775d1",
-              "salesOrderItem":{
-                "__metadata":{
-                  "id":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'36b44e55-91de-54ef-b89e-45e4251775d1')",
-                  "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'36b44e55-91de-54ef-b89e-45e4251775d1')",
-                  "type":"com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem"
-                },
-                "id":"36b44e55-91de-54ef-b89e-45e4251775d1",
-                "salesOrderNo":"0000042087",
-                "itemNo":"000040",
-                "materialNo":"HST1_R1",
-                "materialDescription":" MATNR HST1_R1",
-                "plant":"0001",
-                "orderQuantity":"200.000",
-                "uom":"EA",
-                "netValue":"40000.00",
-                "delayedQuantity":null,
-                "completionQuantity":null,
-                "processStatus_code":"AS_PLANNED",
-                "currency":"EUR",
-                "processStatus":{
-                  "__deferred":{
-                    "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'36b44e55-91de-54ef-b89e-45e4251775d1')/processStatus"
-                  }
-                },
-                "deliveryItemTPs": {
-                  "__deferred": {
-                    "uri": "http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrderItem(guid'47b8fcbb-6b58-566a-b010-b351bd295510')/deliveryItemTPs"
-                  }
+              "id": "0804c40d-609f-5d99-a6eb-e6cb514797f9",
+              "subaccountId": "6a0ea665-88e5-45de-83ec-ddc813e5ba51",
+              "cloneInstanceId": null,
+              "trackedProcessType": "com.lbngttsamples.gtt.app.sof.SalesOrderItem.SalesOrderItem",
+              "altKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER_ITEM:9900016944000040",
+              "scheme": "xri://sap.com/id",
+              "partyId": "LBN#10010001006",
+              "logicalSystem": "QM7CLNT910",
+              "trackingIdType": "SALES_ORDER_ITEM",
+              "trackingId": "9900016944000040",
+              "lastChangedAtBusinessTime": "/Date(1605837904000)/",
+              "createdByUser": "gtt_sof_tech02@163.com",
+              "creationDateTime": "/Date(1605841533366)/",
+              "lastChangedByUser": "gtt_sof_tech02@163.com",
+              "lastChangeDateTime": "/Date(1605841533366)/",
+              "version": 0,
+              "salesOrderNo": "9900016944",
+              "itemNo": "000040",
+              "materialNo": "HST1_R1",
+              "materialDescription": "Monitor",
+              "orderQuantity": "12.000",
+              "uom": "EA",
+              "netValue": "144.00",
+              "delayedQuantity": null,
+              "completionQuantity": null,
+              "plant": "0001",
+              "currency": "EUR",
+              "salesOrderAltKey": "xri://sap.com/id:LBN#10010001006:QM7CLNT910:SALES_ORDER:9900016944",
+              "completedAndLateQuantity": null,
+              "isCompleted": null,
+              "isDelayed": false,
+              "processStatus_code": "AS_PLANNED",
+              "lifeCycleStatus_code": "BUSINESS_ACTIVE",
+              "rejectionStatus_code": null,
+              "processStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/processStatus"
+                }
+              },
+              "trackingIds": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/trackingIds"
+                }
+              },
+              "plannedEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/plannedEvents"
+                }
+              },
+              "processEvents": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/processEvents"
+                }
+              },
+              "lifeCycleStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/lifeCycleStatus"
+                }
+              },
+              "salesOrder": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/salesOrder"
+                }
+              },
+              "deliveryItemTPs": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/deliveryItemTPs"
+                }
+              },
+              "scheduleLines": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/scheduleLines"
+                }
+              },
+              "rejectionStatus": {
+                "__deferred": {
+                  "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/SalesOrderItem(guid'0804c40d-609f-5d99-a6eb-e6cb514797f9')/rejectionStatus"
                 }
               }
             }
           ]
-        },
-        "incoterms":{
-          "__deferred":{
-            "uri":"http://localhost:9098/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid'cd5478c8-0cc3-53b4-95c9-53e2ea273098')/incoterms"
-          }
         }
       }
     ]

@@ -1,8 +1,8 @@
 {
   "d": {
     "__metadata": {
-      "id": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')",
-      "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')",
+      "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')",
+      "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')",
       "type": "com.lbngttsamples.gtt.app.sof.sofService.Shipment"
     },
     "id": "006b296e-10e1-5d4d-b700-f6f748a06fb8",
@@ -32,67 +32,67 @@
     "shippingType_code": "18",
     "processStatus": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/processStatus"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/processStatus"
       }
     },
     "trackingIds": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/trackingIds"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/trackingIds"
       }
     },
     "plannedEvents": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/plannedEvents"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/plannedEvents"
       }
     },
     "processEvents": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/processEvents"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/processEvents"
       }
     },
     "lifeCycleStatus": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/lifeCycleStatus"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/lifeCycleStatus"
       }
     },
     "transportationMode": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/transportationMode"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/transportationMode"
       }
     },
     "stops": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/stops"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/stops"
       }
     },
     "shippingType": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/shippingType"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/shippingType"
       }
     },
     "resourceTPs": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/resourceTPs"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/resourceTPs"
       }
     },
     "deliveryTPs": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/deliveryTPs"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/deliveryTPs"
       }
     },
     "carrierRefDocuments": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/carrierRefDocuments"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/carrierRefDocuments"
       }
     },
     "trackedObjects": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/trackedObjects"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/trackedObjects"
       }
     },
     "stopsForVP": {
       "__deferred": {
-        "uri": "https://gtt-core-outbound-readservice-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/stopsForVP"
+        "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/Shipment(guid'006b296e-10e1-5d4d-b700-f6f748a06fb8')/stopsForVP"
       }
     }
   }

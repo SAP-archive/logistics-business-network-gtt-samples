@@ -95,6 +95,7 @@
     "eventType": "Departure",
     "eventStatusCode": "DELAYED",
     "plannedBusinessTimestamp": "2020-08-17T14:00:00Z",
+    "estimatedArrivalTime": "2020-08-18T15:10:10Z",
     "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:ShippingPoint:0001",
     "location": {
       "locationDescription": "ABC Company",

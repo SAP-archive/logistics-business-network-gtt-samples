@@ -2,8 +2,9 @@ sap.ui.define([
   "sap/ui/test/Opa5",
   "sap/ui/test/matchers/Properties",
   "sap/ui/test/matchers/AggregationFilled",
+  "sap/ui/test/matchers/AggregationLengthEquals",
 ],
-function (Opa5, Properties, AggregationFilled) {
+function (Opa5, Properties, AggregationFilled, AggregationLengthEquals) {
   "use strict";
 
   var sViewName = "DeliveryItemDetails";
@@ -93,6 +94,22 @@ function (Opa5, Properties, AggregationFilled) {
             }),
             success: function () {
               Opa5.assert.ok(true, "The Reference Document Items exist.");
+            },
+            errorMessage: "The Delivery Item doesn't have reference documents items",
+          });
+        },
+        theRefDocsTableHasItemsNum: function (iExpectedNum) {
+          return this.waitFor({
+            fragmentId: "referenceBusinessDocumentsTable",
+            id: "innerTable",
+            viewName: sViewName,
+            viewNamespace: "com.sap.gtt.app.sample.pof.view.deliveryItem",
+            matchers: new AggregationLengthEquals({
+              name: "items",
+              length: iExpectedNum,
+            }),
+            success: function () {
+              Opa5.assert.ok(true, "The Reference Document Items has " + iExpectedNum + " items.");
             },
             errorMessage: "The Delivery Item doesn't have reference documents items",
           });

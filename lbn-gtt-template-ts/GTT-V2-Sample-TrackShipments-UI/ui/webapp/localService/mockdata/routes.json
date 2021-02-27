@@ -17,7 +17,8 @@
         "latitude": 49.29337810
       },
       "estimatedArrival": {
-        "estimatedArrivalTime": "2020-08-14T20:00:00Z"
+        "estimatedArrivalTime": "2020-08-14T20:00:00Z",
+        "eventStatusCode": "PLANNED"
       }
     },
     {
@@ -37,7 +38,8 @@
         "latitude": -19.29337810
       },
       "estimatedArrival": {
-        "estimatedArrivalTime": "2020-08-18T20:00:00Z"
+        "estimatedArrivalTime": "2020-08-18T20:00:00Z",
+        "eventStatusCode": "OVERDUE"
       }
     },
     {
@@ -57,7 +59,8 @@
         "latitude": 59.29337810
       },
       "estimatedArrival": {
-        "estimatedArrivalTime": "2020-08-22T20:00:00Z"
+        "estimatedArrivalTime": "2020-08-22T20:00:00Z",
+        "eventStatusCode": "DELAYED"
       }
     }
   ],

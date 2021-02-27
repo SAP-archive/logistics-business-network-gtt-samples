@@ -2,7 +2,7 @@
 *& Local class definition - Business Object Readers
 *&---------------------------------------------------------------------*
 
-INTERFACE lif_pof_types.
+INTERFACE lif_app_types.
   TYPES: ts_ekko TYPE /saptrx/mm_po_hdr,
          tt_ekko TYPE STANDARD TABLE OF ts_ekko.
 
@@ -32,6 +32,9 @@ INTERFACE lif_pof_types.
 
   TYPES: ts_vtspvb TYPE vtspvb,
          tt_vtspvb TYPE STANDARD TABLE OF ts_vtspvb.
+
+  TYPES: ts_mseg TYPE mseg,
+         tt_mseg TYPE STANDARD TABLE OF ts_mseg.
 
   TYPES: tv_ship_type        TYPE char2,
          tv_trans_mode       TYPE char2,
@@ -93,7 +96,7 @@ INTERFACE lif_pof_types.
 
 ENDINTERFACE.
 
-INTERFACE lif_pof_constants.
+INTERFACE lif_app_constants.
 
   CONSTANTS: BEGIN OF cs_tabledef,
                po_header_new       TYPE /saptrx/strucdatadef VALUE 'PURCHASE_ORDER_HEADER_NEW',
@@ -109,6 +112,8 @@ INTERFACE lif_pof_constants.
                md_update_control   TYPE /saptrx/strucdatadef VALUE 'UPDATE_CONTROL',
                dl_header_new       TYPE /saptrx/strucdatadef VALUE 'DELIVERY_HEADER_NEW',
                dl_header_old       TYPE /saptrx/strucdatadef VALUE 'DELIVERY_HEADER_OLD',
+               dl_hdr_status_new   TYPE /saptrx/strucdatadef VALUE 'DELIVERY_HDR_STATUS_NEW',
+               dl_hdr_status_old   TYPE /saptrx/strucdatadef VALUE 'DELIVERY_HDR_STATUS_OLD',
                dl_item_new         TYPE /saptrx/strucdatadef VALUE 'DELIVERY_ITEM_NEW',
                dl_item_old         TYPE /saptrx/strucdatadef VALUE 'DELIVERY_ITEM_OLD',
                dl_partners_new     TYPE /saptrx/strucdatadef VALUE 'PARTNERS_NEW',
@@ -169,8 +174,11 @@ INTERFACE lif_pof_constants.
              END OF cs_milestone.
 
   CONSTANTS: BEGIN OF cs_event_param,
-               quantity     TYPE /saptrx/paramname VALUE 'QUANTITY',
-               confirm_type TYPE /saptrx/paramname VALUE 'CONFIRM_TYPE',
+               quantity      TYPE /saptrx/paramname VALUE 'QUANTITY',
+               confirm_type  TYPE /saptrx/paramname VALUE 'CONFIRM_TYPE',
+               reversal      TYPE /saptrx/paramname VALUE 'REVERSAL_INDICATOR',
+               location_id   TYPE /saptrx/paramname VALUE 'LOCATION_ID',
+               location_type TYPE /saptrx/paramname VALUE 'LOCATION_TYPE',
              END OF cs_event_param.
 
   CONSTANTS: BEGIN OF cs_bstae,
@@ -203,8 +211,8 @@ INTERFACE lif_pof_constants.
              END OF cs_adrtype.
 
   CONSTANTS: BEGIN OF cs_loccat,
-               departure TYPE lif_pof_types=>tv_loccat VALUE 'S',
-               arrival   TYPE lif_pof_types=>tv_loccat VALUE 'D',
+               departure TYPE lif_app_types=>tv_loccat VALUE 'S',
+               arrival   TYPE lif_app_types=>tv_loccat VALUE 'D',
              END OF cs_loccat.
 
   CONSTANTS: BEGIN OF cs_vbtyp,
@@ -212,7 +220,14 @@ INTERFACE lif_pof_constants.
                delivery TYPE vbtyp VALUE '7',
              END OF cs_vbtyp.
 
-  CONSTANTS: cv_start_evtcnt TYPE i VALUE 1000000000.
+  CONSTANTS: BEGIN OF cs_start_evtcnt,
+               shipment TYPE i VALUE 1000000000,
+               delivery TYPE i VALUE 1100000000,
+             END OF cs_start_evtcnt.
+
+  CONSTANTS: cv_agent_id_type   TYPE bu_id_type VALUE 'LBN001',
+             cv_agent_id_prefix TYPE c LENGTH 4 VALUE 'LBN#' .
+
 ENDINTERFACE.
 
 
@@ -268,7 +283,7 @@ CLASS lcl_po_tools IMPLEMENTATION.
                         ir_struct_data = ir_ekko
                         iv_field_name  = 'BSART' ).
 
-    rv_result = boolc( lv_bsart = lif_pof_constants=>cs_relevance-bsart ).
+    rv_result = boolc( lv_bsart = lif_app_constants=>cs_relevance-bsart ).
   ENDMETHOD.
 
   METHOD is_appropriate_po_item.
@@ -297,7 +312,7 @@ CLASS lcl_dl_tools DEFINITION.
 
     CLASS-METHODS get_addres_info
       IMPORTING
-        iv_addr_type TYPE ad_adrtype DEFAULT lif_pof_constants=>cs_adrtype-organization
+        iv_addr_type TYPE ad_adrtype DEFAULT lif_app_constants=>cs_adrtype-organization
         iv_addr_numb TYPE ad_addrnum
       EXPORTING
         ev_address   TYPE clike
@@ -314,6 +329,18 @@ CLASS lcl_dl_tools DEFINITION.
         VALUE(rv_descr) TYPE /saptrx/paramval200
       RAISING
         cx_udm_message.
+
+    CLASS-METHODS get_delivery_date
+      IMPORTING
+        ir_data        TYPE REF TO data
+      RETURNING
+        VALUE(rv_date) TYPE /saptrx/event_exp_datetime
+      RAISING
+        cx_udm_message.
+
+    CLASS-METHODS get_next_event_counter
+      RETURNING
+        VALUE(rv_evtcnt) TYPE /saptrx/evtcnt.
 
     CLASS-METHODS get_plant_address_number
       IMPORTING
@@ -347,8 +374,8 @@ CLASS lcl_dl_tools DEFINITION.
       RAISING
         cx_udm_message.
 
-
-
+  PRIVATE SECTION.
+    CLASS-DATA: mv_evtcnt   TYPE /saptrx/evtcnt VALUE lif_app_constants=>cs_start_evtcnt-delivery.
 ENDCLASS.
 
 CLASS lcl_dl_tools IMPLEMENTATION.
@@ -477,6 +504,22 @@ CLASS lcl_dl_tools IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
+  METHOD get_delivery_date.
+    rv_date = lcl_tools=>get_local_timestamp(
+                iv_date = lcl_tools=>get_field_of_structure(
+                            ir_struct_data = ir_data
+                            iv_field_name  = 'LFDAT' )
+                iv_time = lcl_tools=>get_field_of_structure(
+                            ir_struct_data = ir_data
+                            iv_field_name  = 'LFUHR' ) ).
+  ENDMETHOD.
+
+  METHOD get_next_event_counter.
+    ADD 1 TO mv_evtcnt.
+
+    rv_evtcnt = mv_evtcnt.
+  ENDMETHOD.
+
   METHOD get_plant_address_number.
     DATA: ls_t001w TYPE T001w.
 
@@ -516,7 +559,7 @@ CLASS lcl_dl_tools IMPLEMENTATION.
                         ir_struct_data = ir_struct
                         iv_field_name  = 'PSTYV' ).
 
-    rv_result = boolc( lv_pstyv = lif_pof_constants=>cs_relevance-pstyv ).
+    rv_result = boolc( lv_pstyv = lif_app_constants=>cs_relevance-pstyv ).
   ENDMETHOD.
 
   METHOD is_appropriate_dl_type.
@@ -524,7 +567,7 @@ CLASS lcl_dl_tools IMPLEMENTATION.
                         ir_struct_data = ir_struct
                         iv_field_name  = 'LFART' ).
 
-    rv_result = boolc( lv_lfart = lif_pof_constants=>cs_relevance-lfart ).
+    rv_result = boolc( lv_lfart = lif_app_constants=>cs_relevance-lfart ).
   ENDMETHOD.
 
 ENDCLASS.
@@ -542,15 +585,15 @@ CLASS lcl_sh_tools DEFINITION.
         it_vtsp               TYPE vtspvb_tab OPTIONAL
         it_vttp               TYPE vttpvb_tab OPTIONAL
       EXPORTING
-        et_stops              TYPE lif_pof_types=>tt_stops
-        et_dlv_watching_stops TYPE lif_pof_types=>tt_dlv_watch_stops.
+        et_stops              TYPE lif_app_types=>tt_stops
+        et_dlv_watching_stops TYPE lif_app_types=>tt_dlv_watch_stops.
 
     CLASS-METHODS get_carrier_reference_document
       IMPORTING
         is_vttk    TYPE vttkvb
       EXPORTING
-        ev_ref_typ TYPE lif_pof_types=>tv_crdoc_ref_typ
-        ev_ref_val TYPE lif_pof_types=>tv_crdoc_ref_val.
+        ev_ref_typ TYPE lif_app_types=>tv_crdoc_ref_typ
+        ev_ref_val TYPE lif_app_types=>tv_crdoc_ref_val.
 
     CLASS-METHODS is_appropriate_type
       IMPORTING
@@ -579,7 +622,7 @@ CLASS lcl_sh_tools DEFINITION.
         VALUE(rv_evtcnt) TYPE /saptrx/evtcnt.
 
   PRIVATE SECTION.
-    CLASS-DATA: mv_evtcnt   TYPE /saptrx/evtcnt VALUE lif_pof_constants=>cv_start_evtcnt.
+    CLASS-DATA: mv_evtcnt   TYPE /saptrx/evtcnt VALUE lif_app_constants=>cs_start_evtcnt-shipment.
 
 ENDCLASS.
 
@@ -594,16 +637,16 @@ CLASS lcl_sh_tools IMPLEMENTATION.
       lt_vtspvb            TYPE STANDARD TABLE OF vtspvb,
       ls_vttpvb            TYPE vttpvb,
       lt_vttpvb            TYPE STANDARD TABLE OF vttpvb,
-      ls_stop              TYPE lif_pof_types=>ts_stops,
-      ls_dlv_watching_stop TYPE lif_pof_types=>ts_dlv_watch_stops,
+      ls_stop              TYPE lif_app_types=>ts_stops,
+      ls_dlv_watching_stop TYPE lif_app_types=>ts_dlv_watch_stops,
 *       Count
       lv_stopcnt           TYPE int4,
       lv_cnt               TYPE char04,
 *       Source & Destination
-      lv_desloctype        TYPE lif_pof_types=>tv_loctype,
-      lv_deslocid          TYPE lif_pof_types=>tv_locid,
-      lv_srcloctype        TYPE lif_pof_types=>tv_loctype,
-      lv_srclocid          TYPE lif_pof_types=>tv_locid,
+      lv_desloctype        TYPE lif_app_types=>tv_loctype,
+      lv_deslocid          TYPE lif_app_types=>tv_locid,
+      lv_srcloctype        TYPE lif_app_types=>tv_loctype,
+      lv_srclocid          TYPE lif_app_types=>tv_locid,
 *       Timezone
       lv_tzone             TYPE timezone,
 *       Door text
@@ -861,7 +904,7 @@ CLASS lcl_sh_tools IMPLEMENTATION.
                                     ir_struct_data = ir_vttk
                                     iv_field_name  = 'SHTYP' ) ).
 
-    rv_result   = boolc( lv_shtyp = lif_pof_constants=>cs_relevance-shtyp ).
+    rv_result   = boolc( lv_shtyp = lif_app_constants=>cs_relevance-shtyp ).
   ENDMETHOD.
 
   METHOD is_delivery_assigned.
@@ -919,10 +962,10 @@ CLASS lcl_sh_data_old DEFINITION.
 
   PRIVATE SECTION.
     DATA: mo_ef_parameters TYPE REF TO lif_ef_parameters,
-          mt_vttk          TYPE lif_pof_types=>tt_vttkvb,
-          mt_vttp          TYPE lif_pof_types=>tt_vttpvb,
-          mt_vtts          TYPE lif_pof_types=>tt_vttsvb,
-          mt_vtsp          TYPE lif_pof_types=>tt_vtspvb.
+          mt_vttk          TYPE lif_app_types=>tt_vttkvb,
+          mt_vttp          TYPE lif_app_types=>tt_vttpvb,
+          mt_vtts          TYPE lif_app_types=>tt_vttsvb,
+          mt_vtsp          TYPE lif_app_types=>tt_vtspvb.
 
     METHODS init
       RAISING
@@ -980,13 +1023,13 @@ CLASS lcl_sh_data_old IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD init_vttk.
-    FIELD-SYMBOLS: <lt_vttk_new> TYPE lif_pof_types=>tt_vttkvb,
-                   <lt_vttk_old> TYPE lif_pof_types=>tt_vttkvb.
+    FIELD-SYMBOLS: <lt_vttk_new> TYPE lif_app_types=>tt_vttkvb,
+                   <lt_vttk_old> TYPE lif_app_types=>tt_vttkvb.
 
     DATA(lr_vttk_new) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_header_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_header_new ).
     DATA(lr_vttk_old) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_header_old ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_header_old ).
 
     ASSIGN lr_vttk_new->* TO <lt_vttk_new>.
     ASSIGN lr_vttk_old->* TO <lt_vttk_old>.
@@ -1016,13 +1059,13 @@ CLASS lcl_sh_data_old IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD init_vttp.
-    FIELD-SYMBOLS: <lt_vttp_new> TYPE lif_pof_types=>tt_vttpvb,
-                   <lt_vttp_old> TYPE lif_pof_types=>tt_vttpvb.
+    FIELD-SYMBOLS: <lt_vttp_new> TYPE lif_app_types=>tt_vttpvb,
+                   <lt_vttp_old> TYPE lif_app_types=>tt_vttpvb.
 
     DATA(lr_vttp_new) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
     DATA(lr_vttp_old) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_old ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_old ).
 
     ASSIGN lr_vttp_new->* TO <lt_vttp_new>.
     ASSIGN lr_vttp_old->* TO <lt_vttp_old>.
@@ -1053,13 +1096,13 @@ CLASS lcl_sh_data_old IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD init_vtts.
-    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_pof_types=>tt_vttsvb,
-                   <lt_vtts_old> TYPE lif_pof_types=>tt_vttsvb.
+    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_app_types=>tt_vttsvb,
+                   <lt_vtts_old> TYPE lif_app_types=>tt_vttsvb.
 
     DATA(lr_vtts_new) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new ).
     DATA(lr_vtts_old) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_old ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_old ).
 
     ASSIGN lr_vtts_new->* TO <lt_vtts_new>.
     ASSIGN lr_vtts_old->* TO <lt_vtts_old>.
@@ -1090,13 +1133,13 @@ CLASS lcl_sh_data_old IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD init_vtsp.
-    FIELD-SYMBOLS: <lt_vtsp_new> TYPE lif_pof_types=>tt_vtspvb,
-                   <lt_vtsp_old> TYPE lif_pof_types=>tt_vtspvb.
+    FIELD-SYMBOLS: <lt_vtsp_new> TYPE lif_app_types=>tt_vtspvb,
+                   <lt_vtsp_old> TYPE lif_app_types=>tt_vtspvb.
 
     DATA(lr_vtsp_new) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_stage_new ).
     DATA(lr_vtsp_old) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_old ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_stage_old ).
 
     ASSIGN lr_vtsp_new->* TO <lt_vtsp_new>.
     ASSIGN lr_vtsp_old->* TO <lt_vtsp_old>.
@@ -1287,7 +1330,7 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
       EXPORTING
         iv_ebeln      = <ls_header>-ebeln
         ir_ekpo       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_new )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_item_new )
       CHANGING
         cs_po_header  = <ls_header> ).
 
@@ -1295,9 +1338,9 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
       EXPORTING
         iv_ebeln      = <ls_header>-ebeln
         ir_ekpo       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_new )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_item_new )
         ir_eket       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_sched_new )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_sched_new )
       CHANGING
         cs_po_header  = <ls_header> ).
 
@@ -1331,10 +1374,10 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
           lv_eindt_max TYPE eket-eindt,
           lv_eindt_set TYPE abap_bool VALUE abap_false.
 
-    FIELD-SYMBOLS: <lt_ekpo> TYPE lif_pof_types=>tt_uekpo,
-                   <ls_ekpo> TYPE lif_pof_types=>ts_uekpo,
-                   <lt_eket> TYPE lif_pof_types=>tt_ueket,
-                   <ls_eket> TYPE lif_pof_types=>ts_ueket.
+    FIELD-SYMBOLS: <lt_ekpo> TYPE lif_app_types=>tt_uekpo,
+                   <ls_ekpo> TYPE lif_app_types=>ts_uekpo,
+                   <lt_eket> TYPE lif_app_types=>tt_ueket,
+                   <ls_eket> TYPE lif_app_types=>ts_ueket.
 
 
     CLEAR: cs_po_header-eindt.
@@ -1349,7 +1392,7 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
       " Preparation of Active Items List
       LOOP AT <lt_ekpo> ASSIGNING <ls_ekpo>
         WHERE ebeln  = iv_ebeln
-          AND loekz <> lif_pof_constants=>cs_loekz-deleted.
+          AND loekz <> lif_app_constants=>cs_loekz-deleted.
 
         lt_ebelp_rng  = VALUE #( BASE lt_ebelp_rng
                                  ( low    = <ls_ekpo>-ebelp
@@ -1484,7 +1527,7 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
             APPEND |{ <lv_ebeln> }{ <lv_ebelp> }| TO cs_po_header-ebelp.
 
             " Is item not deleted (active or blocked)?
-            IF <lv_loekz> <> lif_pof_constants=>cs_loekz-deleted.
+            IF <lv_loekz> <> lif_app_constants=>cs_loekz-deleted.
               " Plant ID, keep empty in case of different receiving plants on item level
               cs_po_header-werks  = COND #( WHEN sy-tabix = 1 OR
                                                  <lv_werks>  = cs_po_header-werks
@@ -1527,7 +1570,7 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
                                   iv_field_name  = 'EBELN'
                                 ) )
         ir_ekko       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_header_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_header_old )
       CHANGING
         cs_po_header  = <ls_header> ).
 
@@ -1535,7 +1578,7 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
       EXPORTING
         iv_ebeln      = <ls_header>-ebeln
         ir_ekpo       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_item_old )
       CHANGING
         cs_po_header  = <ls_header> ).
 
@@ -1543,9 +1586,9 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
       EXPORTING
         iv_ebeln      = <ls_header>-ebeln
         ir_ekpo       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_item_old )
         ir_eket       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_sched_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_sched_old )
       CHANGING
         cs_po_header  = <ls_header> ).
 
@@ -1558,10 +1601,10 @@ CLASS lcl_bo_reader_po_header IMPLEMENTATION.
     rv_result   = lcl_tools=>is_object_changed(
                     is_app_object    = is_app_object
                     io_ef_parameters = mo_ef_parameters
-                    it_check_tables  = VALUE #( ( lif_pof_constants=>cs_tabledef-po_item_new )
-                                                ( lif_pof_constants=>cs_tabledef-po_item_old )
-                                                ( lif_pof_constants=>cs_tabledef-po_sched_new )
-                                                ( lif_pof_constants=>cs_tabledef-po_sched_old ) )
+                    it_check_tables  = VALUE #( ( lif_app_constants=>cs_tabledef-po_item_new )
+                                                ( lif_app_constants=>cs_tabledef-po_item_old )
+                                                ( lif_app_constants=>cs_tabledef-po_sched_new )
+                                                ( lif_app_constants=>cs_tabledef-po_sched_old ) )
                     iv_key_field = 'EBELN'
                     iv_upd_field = 'KZ' ).
   ENDMETHOD.
@@ -1684,15 +1727,6 @@ CLASS lcl_bo_reader_po_item DEFINITION.
       RAISING
         cx_udm_message.
 
-    METHODS fill_item_from_ekes_table
-      IMPORTING
-        ir_ekpo    TYPE REF TO data
-        ir_ekes    TYPE REF TO data
-      CHANGING
-        cs_po_item TYPE ts_po_item
-      RAISING
-        cx_udm_message.
-
     METHODS fill_item_from_eket_table
       IMPORTING
         ir_ekpo    TYPE REF TO data
@@ -1730,42 +1764,6 @@ ENDCLASS.
 CLASS lcl_bo_reader_po_item IMPLEMENTATION.
   METHOD constructor.
     mo_ef_parameters    = io_ef_parameters.
-  ENDMETHOD.
-
-  METHOD fill_item_from_ekes_table.
-    TYPES: tt_ekes    TYPE STANDARD TABLE OF uekes.
-
-    DATA: lv_deliv_num  TYPE tv_deliv_num VALUE 0.
-
-    DATA(lv_ebeln) = CONV ebeln( lcl_tools=>get_field_of_structure(
-                                   ir_struct_data = ir_ekpo
-                                   iv_field_name  = 'EBELN' ) ).
-    DATA(lv_ebelp) = CONV ebelp( lcl_tools=>get_field_of_structure(
-                                   ir_struct_data = ir_ekpo
-                                   iv_field_name  = 'EBELP' ) ).
-    CLEAR: cs_po_item-deliv_num[],
-           cs_po_item-deliv_item[].
-
-    FIELD-SYMBOLS: <lt_ekes> TYPE tt_ekes.
-
-    ASSIGN ir_ekes->* TO <lt_ekes>.
-
-    IF <lt_ekes> IS ASSIGNED.
-      LOOP AT <lt_ekes> ASSIGNING FIELD-SYMBOL(<ls_ekes>)
-        WHERE ebeln = lv_ebeln
-          AND ebelp = lv_ebelp
-          AND vbeln IS NOT INITIAL
-          AND vbelp IS NOT INITIAL.
-
-        ADD 1 TO lv_deliv_num.
-        APPEND lv_deliv_num TO cs_po_item-deliv_num.
-
-        APPEND |{ <ls_ekes>-vbeln }{ <ls_ekes>-vbelp }| TO cs_po_item-deliv_item.
-      ENDLOOP.
-    ELSE.
-      MESSAGE e002(zpof_gtt) WITH 'EKES' INTO DATA(lv_dummy).
-      lcl_tools=>throw_exception( ).
-    ENDIF.
   ENDMETHOD.
 
   METHOD fill_item_from_eket_table.
@@ -2006,17 +2004,9 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
       EXPORTING
         ir_ekpo       = is_app_object-maintabref
         ir_eket       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_sched_new )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_sched_new )
       CHANGING
         cs_po_item  = <ls_item> ).
-
-    fill_item_from_ekes_table(
-      EXPORTING
-        ir_ekpo    = is_app_object-maintabref
-        ir_ekes    = mo_ef_parameters->get_appl_table(
-                       iv_tabledef = lif_pof_constants=>cs_tabledef-po_vend_conf_new )
-      CHANGING
-        cs_po_item = <ls_item> ).
 
     fill_item_location_types(
       CHANGING
@@ -2039,12 +2029,12 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
 
   METHOD lif_bo_reader~get_track_id_data.
     FIELD-SYMBOLS: <ls_ekpo> TYPE uekpo,
-                   <lt_ekes> TYPE lif_pof_types=>tt_uekes.
+                   <lt_ekes> TYPE lif_app_types=>tt_uekes.
 
     DATA(lv_tzone)  = lcl_tools=>get_system_time_zone( ).
 
     DATA(lr_ekes)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-po_vend_conf_new ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-po_vend_conf_new ).
 
     ASSIGN is_app_object-maintabref->* TO <ls_ekpo>.
 
@@ -2055,7 +2045,7 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
         appsys      = mo_ef_parameters->get_appsys( )
         appobjtype  = is_app_object-appobjtype
         appobjid    = is_app_object-appobjid
-        trxcod      = lif_pof_constants=>cs_trxcod-po_position
+        trxcod      = lif_app_constants=>cs_trxcod-po_position
         trxid       = |{ <ls_ekpo>-ebeln }{ <ls_ekpo>-ebelp }|
         start_date  = lcl_tools=>get_system_date_time( )
         end_date    = lif_ef_constants=>cv_max_end_date
@@ -2068,38 +2058,13 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
           appsys      = mo_ef_parameters->get_appsys( )
           appobjtype  = is_app_object-appobjtype
           appobjid    = is_app_object-appobjid
-          trxcod      = lif_pof_constants=>cs_trxcod-po_number
+          trxcod      = lif_app_constants=>cs_trxcod-po_number
           trxid       = |{ <ls_ekpo>-ebeln }|
           start_date  = lcl_tools=>get_system_date_time( )
           end_date    = lif_ef_constants=>cv_max_end_date
           timzon      = lv_tzone
           msrid       = space
         ) ).
-      ENDIF.
-
-      IF lr_ekes IS BOUND.
-        ASSIGN lr_ekes->* TO <lt_ekes>.
-
-        IF <lt_ekes> IS ASSIGNED.
-          LOOP AT <lt_ekes> ASSIGNING FIELD-SYMBOL(<ls_ekes>)
-            WHERE ebeln = <ls_ekpo>-ebeln
-              AND ebelp = <ls_ekpo>-ebelp
-              AND vbeln IS NOT INITIAL
-              AND vbelp IS NOT INITIAL.
-
-            et_track_id_data = VALUE #( BASE et_track_id_data (
-              appsys      = mo_ef_parameters->get_appsys( )
-              appobjtype  = is_app_object-appobjtype
-              appobjid    = is_app_object-appobjid
-              trxcod      = lif_pof_constants=>cs_trxcod-dl_position
-              trxid       = |{ <ls_ekes>-vbeln }{ <ls_ekes>-vbelp }|
-              start_date  = lcl_tools=>get_system_date_time( )
-              end_date    = lif_ef_constants=>cv_max_end_date
-              timzon      = lv_tzone
-              msrid       = space
-            ) ).
-          ENDLOOP.
-        ENDIF.
       ENDIF.
 
     ELSE.
@@ -2120,7 +2085,7 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
                                     iv_field_name  = 'EBELP' ) ).
     DATA(lr_ekpo)   = get_ekpo_record(
                         ir_ekpo  = mo_ef_parameters->get_appl_table(
-                                     iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_old )
+                                     iv_tabledef = lif_app_constants=>cs_tabledef-po_item_old )
                         iv_ebeln = lv_ebeln
                         iv_ebelp = lv_ebelp ).
 
@@ -2131,7 +2096,7 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
       EXPORTING
         iv_ebeln      = lv_ebeln
         ir_ekko       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_header_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_header_old )
       CHANGING
         cs_po_item  = <ls_item> ).
 
@@ -2145,17 +2110,9 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
       EXPORTING
         ir_ekpo       = lr_ekpo
         ir_eket       = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_sched_old )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_sched_old )
       CHANGING
         cs_po_item  = <ls_item> ).
-
-    fill_item_from_ekes_table(
-      EXPORTING
-        ir_ekpo    = lr_ekpo
-        ir_ekes    = mo_ef_parameters->get_appl_table(
-                       iv_tabledef = lif_pof_constants=>cs_tabledef-po_vend_conf_old )
-      CHANGING
-        cs_po_item = <ls_item> ).
 
     fill_item_location_types(
       CHANGING
@@ -2166,8 +2123,8 @@ CLASS lcl_bo_reader_po_item IMPLEMENTATION.
     rv_result   = lcl_tools=>is_object_changed(
                     is_app_object    = is_app_object
                     io_ef_parameters = mo_ef_parameters
-                    it_check_tables  = VALUE #( ( lif_pof_constants=>cs_tabledef-po_sched_new )
-                                                ( lif_pof_constants=>cs_tabledef-po_sched_old ) )
+                    it_check_tables  = VALUE #( ( lif_app_constants=>cs_tabledef-po_sched_new )
+                                                ( lif_app_constants=>cs_tabledef-po_sched_old ) )
                     iv_key_field = 'EBELN'
                     iv_upd_field = 'KZ' ).
   ENDMETHOD.
@@ -2192,50 +2149,50 @@ CLASS lcl_bo_reader_dl_header DEFINITION.
            tt_item_posnr TYPE STANDARD TABLE OF tv_item_posnr WITH EMPTY KEY.
 
     TYPES: BEGIN OF ts_dl_header,
-             vbeln      TYPE likp-vbeln,
-             lifnr      TYPE likp-lifnr,
-             lifnr_lt   TYPE /saptrx/loc_id_type,
-             bldat      TYPE likp-bldat,
-             lfdat      TYPE likp-lfdat,
-             btgew      TYPE likp-btgew,
-             ntgew      TYPE likp-ntgew,
-             gewei      TYPE likp-gewei,
-             volum      TYPE likp-volum,
-             voleh      TYPE likp-voleh,
-             lgnum      TYPE likp-lgnum,
-             lgtor      TYPE likp-lgtor,
-             lgnum_txt  TYPE /saptrx/paramval200,  "T30BT-ltort using SY-LANGU, see sample in function ‘ZGTT_SOF_OTE_DE_HD’
-             bolnr      TYPE likp-bolnr,
-             proli      TYPE likp-proli,
-             incov      TYPE likp-incov,
-             inco1      TYPE likp-inco1,
-             inco2_l    TYPE likp-inco2_l,
-             item_numb  TYPE tt_item_num,
-             item_posnr TYPE tt_item_posnr,
+             vbeln        TYPE likp-vbeln,
+             lifnr        TYPE likp-lifnr,
+             lifnr_lt     TYPE /saptrx/loc_id_type,
+             werks        TYPE likp-werks,
+             werks_lt     TYPE /saptrx/loc_id_type,
+             bldat        TYPE likp-bldat,
+             lfdat        TYPE likp-lfdat,
+             btgew        TYPE likp-btgew,
+             ntgew        TYPE likp-ntgew,
+             gewei        TYPE likp-gewei,
+             volum        TYPE likp-volum,
+             voleh        TYPE likp-voleh,
+             lgnum        TYPE likp-lgnum,
+             lgtor        TYPE likp-lgtor,
+             lgnum_txt    TYPE /saptrx/paramval200,
+             bolnr        TYPE likp-bolnr,
+             proli        TYPE likp-proli,
+             incov        TYPE likp-incov,
+             inco1        TYPE likp-inco1,
+             inco2_l      TYPE likp-inco2_l,
            END OF ts_dl_header.
 
     CONSTANTS: BEGIN OF cs_mapping,
                  " Header section
-                 vbeln      TYPE /saptrx/paramname VALUE 'YN_DL_DELEVERY',
-                 lifnr      TYPE /saptrx/paramname VALUE 'YN_DL_VENDOR_ID',
-                 lifnr_lt   TYPE /saptrx/paramname VALUE 'YN_DL_VENDOR_LOC_TYPE',
-                 bldat      TYPE /saptrx/paramname VALUE 'YN_DL_DOCUMENT_DATE',
-                 lfdat      TYPE /saptrx/paramname VALUE 'YN_DL_PLANNED_DLV_DATE',
-                 btgew      TYPE /saptrx/paramname VALUE 'YN_DL_TOTAL_WEIGHT',
-                 ntgew      TYPE /saptrx/paramname VALUE 'YN_DL_NET_WEIGHT',
-                 gewei      TYPE /saptrx/paramname VALUE 'YN_DL_WEIGHT_UNITS',
-                 volum      TYPE /saptrx/paramname VALUE 'YN_DL_VOLUME',
-                 voleh      TYPE /saptrx/paramname VALUE 'YN_DL_VOLUME_UNITS',
-                 lgnum      TYPE /saptrx/paramname VALUE 'YN_DL_WAREHOUSE',
-                 lgnum_txt  TYPE /saptrx/paramname VALUE 'YN_DL_WAREHOUSE_DESC',
-                 lgtor      TYPE /saptrx/paramname VALUE 'YN_DL_DOOR',
-                 bolnr      TYPE /saptrx/paramname VALUE 'YN_DL_BILL_OF_LADING',
-                 proli      TYPE /saptrx/paramname VALUE 'YN_DL_DANGEROUS_GOODS',
-                 incov      TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS_VERSION',
-                 inco1      TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS',
-                 inco2_l    TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS_LOCATION',
-                 item_numb  TYPE /saptrx/paramname VALUE 'YN_DL_HDR_ITM_LINE_COUNT',
-                 item_posnr TYPE /saptrx/paramname VALUE 'YN_DL_HDR_ITM_NO',
+                 vbeln        TYPE /saptrx/paramname VALUE 'YN_DL_DELEVERY',
+                 lifnr        TYPE /saptrx/paramname VALUE 'YN_DL_VENDOR_ID',
+                 lifnr_lt     TYPE /saptrx/paramname VALUE 'YN_DL_VENDOR_LOC_TYPE',
+                 werks        TYPE /saptrx/paramname VALUE 'YN_DL_RECEIVING_LOCATION',
+                 werks_lt     TYPE /saptrx/paramname VALUE 'YN_DL_RECEIVING_LOC_TYPE',
+                 bldat        TYPE /saptrx/paramname VALUE 'YN_DL_DOCUMENT_DATE',
+                 lfdat        TYPE /saptrx/paramname VALUE 'YN_DL_PLANNED_DLV_DATE',
+                 btgew        TYPE /saptrx/paramname VALUE 'YN_DL_TOTAL_WEIGHT',
+                 ntgew        TYPE /saptrx/paramname VALUE 'YN_DL_NET_WEIGHT',
+                 gewei        TYPE /saptrx/paramname VALUE 'YN_DL_WEIGHT_UNITS',
+                 volum        TYPE /saptrx/paramname VALUE 'YN_DL_VOLUME',
+                 voleh        TYPE /saptrx/paramname VALUE 'YN_DL_VOLUME_UNITS',
+                 lgnum        TYPE /saptrx/paramname VALUE 'YN_DL_WAREHOUSE',
+                 lgnum_txt    TYPE /saptrx/paramname VALUE 'YN_DL_WAREHOUSE_DESC',
+                 lgtor        TYPE /saptrx/paramname VALUE 'YN_DL_DOOR',
+                 bolnr        TYPE /saptrx/paramname VALUE 'YN_DL_BILL_OF_LADING',
+                 proli        TYPE /saptrx/paramname VALUE 'YN_DL_DANGEROUS_GOODS',
+                 incov        TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS_VERSION',
+                 inco1        TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS',
+                 inco2_l      TYPE /saptrx/paramname VALUE 'YN_DL_INCOTERMS_LOCATION',
                END OF cs_mapping.
 
     DATA: mo_ef_parameters TYPE REF TO lif_ef_parameters.
@@ -2247,15 +2204,6 @@ CLASS lcl_bo_reader_dl_header DEFINITION.
         cs_dl_header TYPE ts_dl_header
       RAISING
         cx_udm_message.
-
-*    METHODS fill_header_from_likp_table
-*      IMPORTING
-*        ir_likp      TYPE REF TO data
-*        iv_vbeln     TYPE vbeln_vl
-*      CHANGING
-*        cs_dl_header TYPE ts_dl_header
-*      RAISING
-*        cx_udm_message.
 
     METHODS fill_header_from_lips_table
       IMPORTING
@@ -2344,6 +2292,10 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
         IF lcl_dl_tools=>is_appropriate_dl_item(
              ir_struct = REF #( <ls_lips> ) ) = abap_true.
           INSERT <ls_lips>-posnr INTO TABLE lt_posnr.
+
+          cs_dl_header-werks  = COND #( WHEN cs_dl_header-werks IS INITIAL
+                                          THEN <ls_lips>-werks
+                                          ELSE cs_dl_header-werks ).
         ENDIF.
       ENDLOOP.
 
@@ -2377,17 +2329,14 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
       MESSAGE e002(zpof_gtt) WITH 'LIPS NEW' INTO lv_dummy.
       lcl_tools=>throw_exception( ).
     ENDIF.
-
-    " fill header fields
-    LOOP AT lt_posnr ASSIGNING FIELD-SYMBOL(<ls_posnr>).
-      APPEND sy-tabix TO cs_dl_header-item_numb.
-
-      APPEND |{ iv_vbeln }{ <ls_posnr> }| TO cs_dl_header-item_posnr.
-    ENDLOOP.
   ENDMETHOD.
 
   METHOD fill_header_location_types.
     cs_dl_header-lifnr_lt   = lif_ef_constants=>cs_loc_types-supplier.
+
+    IF cs_dl_header-werks IS NOT INITIAL.
+      cs_dl_header-werks_lt = lif_ef_constants=>cs_loc_types-plant.
+    ENDIF.
   ENDMETHOD.
 
   METHOD get_likp_struct_old.
@@ -2399,7 +2348,7 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
                    <ls_likp> TYPE likpvb.
 
     DATA(lr_likp)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_header_old ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_header_old ).
 
     ASSIGN lr_likp->* TO <lt_likp>.
 
@@ -2460,9 +2409,9 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
     fill_header_from_lips_table(
       EXPORTING
         ir_lips_new  = mo_ef_parameters->get_appl_table(
-                         iv_tabledef = lif_pof_constants=>cs_tabledef-dl_item_new )
+                         iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_new )
         ir_lips_old  = mo_ef_parameters->get_appl_table(
-                         iv_tabledef = lif_pof_constants=>cs_tabledef-dl_item_old )
+                         iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_old )
         iv_vbeln     = <ls_header>-vbeln
       CHANGING
         cs_dl_header = <ls_header> ).
@@ -2496,9 +2445,9 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
     fill_header_from_lips_table(
       EXPORTING
         ir_lips_new  = mo_ef_parameters->get_appl_table(
-                         iv_tabledef = lif_pof_constants=>cs_tabledef-dl_item_new )
+                         iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_new )
         ir_lips_old  = mo_ef_parameters->get_appl_table(
-                         iv_tabledef = lif_pof_constants=>cs_tabledef-dl_item_old )
+                         iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_old )
         iv_vbeln     = <ls_header>-vbeln
       CHANGING
         cs_dl_header = <ls_header> ).
@@ -2509,12 +2458,7 @@ CLASS lcl_bo_reader_dl_header IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_bo_reader~get_field_parameter.
-    CASE iv_parameter.
-      WHEN lif_ef_constants=>cs_parameter_id-key_field.
-        rv_result   = boolc( iv_field_name = cs_mapping-item_numb ).
-      WHEN OTHERS.
-        CLEAR: rv_result.
-    ENDCASE.
+    CLEAR: rv_result.
   ENDMETHOD.
 
   METHOD lif_bo_reader~get_mapping_structure.
@@ -2778,7 +2722,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
       READ TABLE <lt_vbpa> ASSIGNING <ls_vbpa>
         WITH KEY vbeln = iv_vbeln
                  posnr = iv_posnr
-                 parvw = lif_pof_constants=>cs_parvw-supplier.
+                 parvw = lif_app_constants=>cs_parvw-supplier.
 
       IF sy-subrc = 0.
         ASSIGN COMPONENT 'ADDR_TYPE' OF STRUCTURE <ls_vbpa> TO <lv_addr_type>.
@@ -2788,7 +2732,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
                 iv_addr_type = COND #( WHEN <lv_addr_type> IS ASSIGNED AND
                                             <lv_addr_type> IS NOT INITIAL
                                          THEN <lv_addr_type>
-                                         ELSE lif_pof_constants=>cs_adrtype-organization )
+                                         ELSE lif_app_constants=>cs_adrtype-organization )
                 iv_addr_numb = <ls_vbpa>-adrnr
               IMPORTING
                 ev_address   = cs_dl_item-dep_addr
@@ -2817,7 +2761,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
                    <ls_likp> TYPE likpvb.
 
     DATA(lr_likp)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_header_old ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_header_old ).
 
     ASSIGN lr_likp->* TO <lt_likp>.
 
@@ -2843,7 +2787,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
                    <ls_lips> TYPE lipsvb.
 
     DATA(lr_lips)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_item_old ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_old ).
 
     ASSIGN lr_lips->* TO <lt_lips>.
 
@@ -2882,7 +2826,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
                    <ls_vbpa> TYPE vbpavb.
 
     DATA(lr_vbpa)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-dl_partners_old ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-dl_partners_old ).
 
     ASSIGN lr_vbpa->* TO <lt_vbpa>.
 
@@ -2890,12 +2834,12 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
       READ TABLE <lt_vbpa> ASSIGNING <ls_vbpa>
         WITH KEY vbeln = iv_vbeln
                  posnr = iv_posnr
-                 parvw = lif_pof_constants=>cs_parvw-supplier.
+                 parvw = lif_app_constants=>cs_parvw-supplier.
 
       rr_vbpa = COND #( WHEN sy-subrc = 0
                           THEN lr_vbpa
                           ELSE mo_ef_parameters->get_appl_table(
-                                 iv_tabledef = lif_pof_constants=>cs_tabledef-dl_partners_new ) ).
+                                 iv_tabledef = lif_app_constants=>cs_tabledef-dl_partners_new ) ).
     ELSE.
       MESSAGE e002(zpof_gtt) WITH 'VBPA' INTO DATA(lv_dummy).
       lcl_tools=>throw_exception( ).
@@ -2906,8 +2850,8 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
     rv_result   = lcl_tools=>is_object_changed(
                     is_app_object    = is_app_object
                     io_ef_parameters = mo_ef_parameters
-                    it_check_tables  = VALUE #( ( lif_pof_constants=>cs_tabledef-dl_partners_new )
-                                                ( lif_pof_constants=>cs_tabledef-dl_partners_old ) )
+                    it_check_tables  = VALUE #( ( lif_app_constants=>cs_tabledef-dl_partners_new )
+                                                ( lif_app_constants=>cs_tabledef-dl_partners_old ) )
                     iv_key_field     = 'VBELN'
                     iv_upd_field     = 'UPDKZ'
                     iv_chk_mastertab = abap_true ).
@@ -2956,7 +2900,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
     fill_item_from_vbpa_table(
       EXPORTING
         ir_vbpa    = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-dl_partners_new )
+                          iv_tabledef = lif_app_constants=>cs_tabledef-dl_partners_new )
         iv_vbeln   = <ls_item>-vbeln
         iv_posnr   = cv_posnr_empty
       CHANGING
@@ -3044,7 +2988,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
           appsys      = mo_ef_parameters->get_appsys( )
           appobjtype  = is_app_object-appobjtype
           appobjid    = is_app_object-appobjid
-          trxcod      = lif_pof_constants=>cs_trxcod-dl_position
+          trxcod      = lif_app_constants=>cs_trxcod-dl_position
           trxid       = |{ <ls_lips>-vbeln }{ <ls_lips>-posnr }|
           start_date  = lcl_tools=>get_system_date_time( )
           end_date    = lif_ef_constants=>cv_max_end_date
@@ -3057,7 +3001,7 @@ CLASS lcl_bo_reader_dl_item IMPLEMENTATION.
             appsys      = mo_ef_parameters->get_appsys( )
             appobjtype  = is_app_object-appobjtype
             appobjid    = is_app_object-appobjid
-            trxcod      = lif_pof_constants=>cs_trxcod-dl_number
+            trxcod      = lif_app_constants=>cs_trxcod-dl_number
             trxid       = |{ <ls_lips>-vbeln }|
             start_date  = lcl_tools=>get_system_date_time( )
             end_date    = lif_ef_constants=>cv_max_end_date
@@ -3086,30 +3030,30 @@ CLASS lcl_bo_reader_sh_header DEFINITION.
   PRIVATE SECTION.
     DATA: mo_ef_parameters TYPE REF TO lif_ef_parameters.
 
-    TYPES: tt_trobj_res_id  TYPE STANDARD TABLE OF lif_pof_types=>tv_trobj_res_id WITH EMPTY KEY,
-           tt_trobj_res_val TYPE STANDARD TABLE OF lif_pof_types=>tv_trobj_res_val WITH EMPTY KEY,
-           tt_resrc_cnt     TYPE STANDARD TABLE OF lif_pof_types=>tv_resrc_cnt WITH EMPTY KEY,
-           tt_resrc_tp_id   TYPE STANDARD TABLE OF lif_pof_types=>tv_resrc_tp_id WITH EMPTY KEY,
-           tt_crdoc_ref_typ TYPE STANDARD TABLE OF lif_pof_types=>tv_crdoc_ref_typ WITH EMPTY KEY,
-           tt_crdoc_ref_val TYPE STANDARD TABLE OF lif_pof_types=>tv_crdoc_ref_val WITH EMPTY KEY.
+    TYPES: tt_trobj_res_id  TYPE STANDARD TABLE OF lif_app_types=>tv_trobj_res_id WITH EMPTY KEY,
+           tt_trobj_res_val TYPE STANDARD TABLE OF lif_app_types=>tv_trobj_res_val WITH EMPTY KEY,
+           tt_resrc_cnt     TYPE STANDARD TABLE OF lif_app_types=>tv_resrc_cnt WITH EMPTY KEY,
+           tt_resrc_tp_id   TYPE STANDARD TABLE OF lif_app_types=>tv_resrc_tp_id WITH EMPTY KEY,
+           tt_crdoc_ref_typ TYPE STANDARD TABLE OF lif_app_types=>tv_crdoc_ref_typ WITH EMPTY KEY,
+           tt_crdoc_ref_val TYPE STANDARD TABLE OF lif_app_types=>tv_crdoc_ref_val WITH EMPTY KEY.
 
     TYPES: BEGIN OF ts_sh_header,
              tknum              TYPE vttkvb-tknum,
-             bu_id_num          TYPE bu_id_number,
+             bu_id_num          TYPE /saptrx/paramval200,
              cont_dg            TYPE vttkvb-cont_dg,
              tndr_trkid         TYPE vttkvb-tndr_trkid,
-             ship_type          TYPE lif_pof_types=>tv_ship_type,
-             trans_mode         TYPE lif_pof_types=>tv_trans_mode,
-             departure_dt       TYPE lif_pof_types=>tv_departure_dt,
-             departure_tz       TYPE lif_pof_types=>tv_departure_tz,
-             departure_locid    TYPE lif_pof_types=>tv_locid,
-             departure_loctype  TYPE lif_pof_types=>tv_loctype,
-             arrival_dt         TYPE lif_pof_types=>tv_arrival_dt,
-             arrival_tz         TYPE lif_pof_types=>tv_arrival_tz,
-             arrival_locid      TYPE lif_pof_types=>tv_locid,
-             arrival_loctype    TYPE lif_pof_types=>tv_loctype,
+             ship_type          TYPE lif_app_types=>tv_ship_type,
+             trans_mode         TYPE lif_app_types=>tv_trans_mode,
+             departure_dt       TYPE lif_app_types=>tv_departure_dt,
+             departure_tz       TYPE lif_app_types=>tv_departure_tz,
+             departure_locid    TYPE lif_app_types=>tv_locid,
+             departure_loctype  TYPE lif_app_types=>tv_loctype,
+             arrival_dt         TYPE lif_app_types=>tv_arrival_dt,
+             arrival_tz         TYPE lif_app_types=>tv_arrival_tz,
+             arrival_locid      TYPE lif_app_types=>tv_locid,
+             arrival_loctype    TYPE lif_app_types=>tv_loctype,
              tdlnr              TYPE vttkvb-tdlnr,
-             deliv_cnt          TYPE STANDARD TABLE OF lif_pof_types=>tv_deliv_cnt WITH EMPTY KEY,
+             deliv_cnt          TYPE STANDARD TABLE OF lif_app_types=>tv_deliv_cnt WITH EMPTY KEY,
              deliv_no           TYPE STANDARD TABLE OF vbeln WITH EMPTY KEY,
              trobj_res_id       TYPE tt_trobj_res_id,
              trobj_res_val      TYPE tt_trobj_res_val,
@@ -3117,25 +3061,25 @@ CLASS lcl_bo_reader_sh_header DEFINITION.
              resrc_tp_id        TYPE tt_resrc_tp_id,
              crdoc_ref_typ      TYPE tt_crdoc_ref_typ,
              crdoc_ref_val      TYPE tt_crdoc_ref_val,
-             stops_num          TYPE STANDARD TABLE OF lif_pof_types=>tv_stopnum WITH EMPTY KEY,
-             stops_stopid       TYPE STANDARD TABLE OF lif_pof_types=>tv_stopid WITH EMPTY KEY,
-             stops_stopcnt      TYPE STANDARD TABLE OF lif_pof_types=>tv_stopcnt WITH EMPTY KEY,
-             stops_loccat       TYPE STANDARD TABLE OF lif_pof_types=>tv_loccat  WITH EMPTY KEY,
-             stops_loctype      TYPE STANDARD TABLE OF lif_pof_types=>tv_loctype WITH EMPTY KEY,
-             stops_locid        TYPE STANDARD TABLE OF lif_pof_types=>tv_locid WITH EMPTY KEY,
-             stops_lstelz_txt   TYPE STANDARD TABLE OF lif_pof_types=>tv_lstelz_txt WITH EMPTY KEY,
-             stops_kunablaz_txt TYPE STANDARD TABLE OF lif_pof_types=>tv_kunablaz_txt WITH EMPTY KEY,
-             stops_lgortaz_txt  TYPE STANDARD TABLE OF lif_pof_types=>tv_lgortaz_txt WITH EMPTY KEY,
-             stops_lgnumaz      TYPE STANDARD TABLE OF lif_pof_types=>tv_lgnumaz WITH EMPTY KEY,
-             stops_toraz        TYPE STANDARD TABLE OF lif_pof_types=>tv_toraz WITH EMPTY KEY,
-             stops_lgtraz_txt   TYPE STANDARD TABLE OF lif_pof_types=>tv_lgtraz_txt WITH EMPTY KEY,
-             stops_tsrfo        TYPE STANDARD TABLE OF lif_pof_types=>tv_tsrfo WITH EMPTY KEY,
-             stops_pln_evt_dt   TYPE STANDARD TABLE OF lif_pof_types=>tv_pln_evt_datetime WITH EMPTY KEY,
-             stops_pln_evt_tz   TYPE STANDARD TABLE OF lif_pof_types=>tv_pln_evt_timezone WITH EMPTY KEY,
-             stpid_stopid       TYPE STANDARD TABLE OF lif_pof_types=>tv_stopid WITH EMPTY KEY,
-             stpid_stopcnt      TYPE STANDARD TABLE OF lif_pof_types=>tv_stopcnt WITH EMPTY KEY,
-             stpid_loctype      TYPE STANDARD TABLE OF lif_pof_types=>tv_loctype WITH EMPTY KEY,
-             stpid_locid        TYPE STANDARD TABLE OF lif_pof_types=>tv_locid WITH EMPTY KEY,
+             stops_num          TYPE STANDARD TABLE OF lif_app_types=>tv_stopnum WITH EMPTY KEY,
+             stops_stopid       TYPE STANDARD TABLE OF lif_app_types=>tv_stopid WITH EMPTY KEY,
+             stops_stopcnt      TYPE STANDARD TABLE OF lif_app_types=>tv_stopcnt WITH EMPTY KEY,
+             stops_loccat       TYPE STANDARD TABLE OF lif_app_types=>tv_loccat  WITH EMPTY KEY,
+             stops_loctype      TYPE STANDARD TABLE OF lif_app_types=>tv_loctype WITH EMPTY KEY,
+             stops_locid        TYPE STANDARD TABLE OF lif_app_types=>tv_locid WITH EMPTY KEY,
+             stops_lstelz_txt   TYPE STANDARD TABLE OF lif_app_types=>tv_lstelz_txt WITH EMPTY KEY,
+             stops_kunablaz_txt TYPE STANDARD TABLE OF lif_app_types=>tv_kunablaz_txt WITH EMPTY KEY,
+             stops_lgortaz_txt  TYPE STANDARD TABLE OF lif_app_types=>tv_lgortaz_txt WITH EMPTY KEY,
+             stops_lgnumaz      TYPE STANDARD TABLE OF lif_app_types=>tv_lgnumaz WITH EMPTY KEY,
+             stops_toraz        TYPE STANDARD TABLE OF lif_app_types=>tv_toraz WITH EMPTY KEY,
+             stops_lgtraz_txt   TYPE STANDARD TABLE OF lif_app_types=>tv_lgtraz_txt WITH EMPTY KEY,
+             stops_tsrfo        TYPE STANDARD TABLE OF lif_app_types=>tv_tsrfo WITH EMPTY KEY,
+             stops_pln_evt_dt   TYPE STANDARD TABLE OF lif_app_types=>tv_pln_evt_datetime WITH EMPTY KEY,
+             stops_pln_evt_tz   TYPE STANDARD TABLE OF lif_app_types=>tv_pln_evt_timezone WITH EMPTY KEY,
+             stpid_stopid       TYPE STANDARD TABLE OF lif_app_types=>tv_stopid WITH EMPTY KEY,
+             stpid_stopcnt      TYPE STANDARD TABLE OF lif_app_types=>tv_stopcnt WITH EMPTY KEY,
+             stpid_loctype      TYPE STANDARD TABLE OF lif_app_types=>tv_loctype WITH EMPTY KEY,
+             stpid_locid        TYPE STANDARD TABLE OF lif_app_types=>tv_locid WITH EMPTY KEY,
            END OF ts_sh_header.
 
     CONSTANTS: BEGIN OF cs_mapping,
@@ -3237,7 +3181,7 @@ CLASS lcl_bo_reader_sh_header DEFINITION.
       IMPORTING
         iv_tdlnr         TYPE tdlnr
       RETURNING
-        VALUE(rv_id_num) TYPE bu_id_number.
+        VALUE(rv_id_num) TYPE /saptrx/paramval200.
 
     METHODS get_resource_tracking_id
       IMPORTING
@@ -3267,13 +3211,13 @@ CLASS lcl_bo_reader_sh_header DEFINITION.
         iv_vsart            TYPE clike
         iv_vttp_cnt         TYPE i
       RETURNING
-        VALUE(rv_ship_type) TYPE lif_pof_types=>tv_ship_type.
+        VALUE(rv_ship_type) TYPE lif_app_types=>tv_ship_type.
 
     METHODS get_transportation_mode
       IMPORTING
         iv_vsart             TYPE clike
       RETURNING
-        VALUE(rv_trans_mode) TYPE lif_pof_types=>tv_trans_mode.
+        VALUE(rv_trans_mode) TYPE lif_app_types=>tv_trans_mode.
 
     METHODS is_object_changed
       IMPORTING
@@ -3389,9 +3333,9 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
                                    iv_field_name  = 'TKNUM' ) ).
 
     DATA: lt_vtts     TYPE vttsvb_tab,
-          lt_stops    TYPE lif_pof_types=>tt_stops,
+          lt_stops    TYPE lif_app_types=>tt_stops,
           lt_stop_ids TYPE STANDARD TABLE OF ts_stop_id,
-          lv_datetime TYPE lif_pof_types=>tv_pln_evt_datetime,
+          lv_datetime TYPE lif_app_types=>tv_pln_evt_datetime,
           lv_count    TYPE i.
 
     FIELD-SYMBOLS: <lt_vttp> TYPE vttpvb_tab,
@@ -3520,11 +3464,12 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
         identificationdetail = lt_bpdetail.
 
     READ TABLE lt_bpdetail ASSIGNING FIELD-SYMBOL(<ls_bpdetail>)
-      WITH KEY identificationtype = 'LBN001'
+      WITH KEY identificationtype = lif_app_constants=>cv_agent_id_type
       BINARY SEARCH.
 
     rv_id_num   = COND #( WHEN sy-subrc = 0
-                            THEN <ls_bpdetail>-identificationnumber ).
+                            THEN lif_app_constants=>cv_agent_id_type &&
+                                 <ls_bpdetail>-identificationnumber ).
   ENDMETHOD.
 
   METHOD get_resource_tracking_id.
@@ -3597,19 +3542,19 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
     rv_result = lcl_tools=>is_object_changed(
                   is_app_object    = is_app_object
                   io_ef_parameters = mo_ef_parameters
-                  it_check_tables  = VALUE #( ( lif_pof_constants=>cs_tabledef-sh_item_new )
-                                              ( lif_pof_constants=>cs_tabledef-sh_item_new )
-                                              ( lif_pof_constants=>cs_tabledef-sh_stage_new )
-                                              ( lif_pof_constants=>cs_tabledef-sh_stage_old )
-                                              ( lif_pof_constants=>cs_tabledef-sh_item_stage_new )
-                                              ( lif_pof_constants=>cs_tabledef-sh_item_stage_old ) )
+                  it_check_tables  = VALUE #( ( lif_app_constants=>cs_tabledef-sh_item_new )
+                                              ( lif_app_constants=>cs_tabledef-sh_item_new )
+                                              ( lif_app_constants=>cs_tabledef-sh_stage_new )
+                                              ( lif_app_constants=>cs_tabledef-sh_stage_old )
+                                              ( lif_app_constants=>cs_tabledef-sh_item_stage_new )
+                                              ( lif_app_constants=>cs_tabledef-sh_item_stage_old ) )
                   iv_key_field     = 'TKNUM'
                   iv_upd_field     = 'UPDKZ' ).
   ENDMETHOD.
 
   METHOD lif_bo_reader~check_relevance.
     DATA(lr_vttp) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
 
     rv_result = lif_ef_constants=>cs_condition-false.
 
@@ -3639,7 +3584,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
     ASSIGN rr_data->* TO <ls_header>.
 
     DATA(lr_vttp) = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
 
     fill_header_from_vttk(
       EXPORTING
@@ -3660,9 +3605,9 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
         ir_vttk   = is_app_object-maintabref
         ir_vttp   = lr_vttp
         ir_vtts   = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new )
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new )
         ir_vtsp   = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_new )
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_stage_new )
       CHANGING
         cs_header = <ls_header> ).
   ENDMETHOD.
@@ -3705,44 +3650,6 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
       CHANGING
         cs_header = <ls_header> ).
 
-*    FIELD-SYMBOLS: <ls_header>  TYPE ts_sh_header.
-*
-*    rr_data   = NEW ts_sh_header(  ).
-*
-*    ASSIGN rr_data->* TO <ls_header>.
-*
-*
-*    DATA(lr_vttk) = get_shippment_header(
-*                      is_app_object = is_app_object
-*                      ir_vttk       = mo_ef_parameters->get_appl_table(
-*                                        iv_tabledef = lif_pof_constants=>cs_tabledef-sh_header_old ) ).
-*    DATA(lr_vttp) = mo_ef_parameters->get_appl_table(
-*                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_old ).
-*
-*    fill_header_from_vttk(
-*      EXPORTING
-*        ir_vttk     = lr_vttk
-*        iv_vttp_cnt = get_shippment_item_count( ir_vttp = lr_vttp )
-*      CHANGING
-*        cs_header   = <ls_header> ).
-*
-*    fill_header_from_vttp(
-*      EXPORTING
-*        ir_vttk   = lr_vttk
-*        ir_vttp   = lr_vttp
-*      CHANGING
-*        cs_header = <ls_header> ).
-*
-*    fill_header_from_vtts(
-*      EXPORTING
-*        ir_vttk   = lr_vttk
-*        ir_vttp   = lr_vttp
-*        ir_vtts   = mo_ef_parameters->get_appl_table(
-*                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_old )
-*        ir_vtsp   = mo_ef_parameters->get_appl_table(
-*                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_old )
-*      CHANGING
-*        cs_header = <ls_header> ).
   ENDMETHOD.
 
   METHOD lif_bo_reader~get_field_parameter.
@@ -3790,7 +3697,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
         appsys      = mo_ef_parameters->get_appsys( )
         appobjtype  = is_app_object-appobjtype
         appobjid    = is_app_object-appobjid
-        trxcod      = lif_pof_constants=>cs_trxcod-sh_number
+        trxcod      = lif_app_constants=>cs_trxcod-sh_number
         trxid       = |{ <ls_vttk>-tknum }|
         start_date  = lcl_tools=>get_system_date_time( )
         end_date    = lif_ef_constants=>cv_max_end_date
@@ -3809,7 +3716,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
           appsys      = mo_ef_parameters->get_appsys( )
           appobjtype  = is_app_object-appobjtype
           appobjid    = is_app_object-appobjid
-          trxcod      = lif_pof_constants=>cs_trxcod-sh_resource
+          trxcod      = lif_app_constants=>cs_trxcod-sh_resource
           trxid       = lv_res_tid_new
         ) ).
 
@@ -3818,7 +3725,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
         DATA(lr_vttk_old) = get_shippment_header(
                               is_app_object = is_app_object
                               ir_vttk       = mo_ef_parameters->get_appl_table(
-                                                iv_tabledef = lif_pof_constants=>cs_tabledef-sh_header_old ) ).
+                                                iv_tabledef = lif_app_constants=>cs_tabledef-sh_header_old ) ).
 
         ASSIGN lr_vttk_old->* TO <ls_vttk_old>.
         IF <ls_vttk_old> IS ASSIGNED.
@@ -3833,7 +3740,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
                 appsys      = mo_ef_parameters->get_appsys( )
                 appobjtype  = is_app_object-appobjtype
                 appobjid    = is_app_object-appobjid
-                trxcod      = lif_pof_constants=>cs_trxcod-sh_resource
+                trxcod      = lif_app_constants=>cs_trxcod-sh_resource
                 trxid       = lv_res_tid_new
               ) ).
             ENDIF.
@@ -3844,7 +3751,7 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
                 appsys      = mo_ef_parameters->get_appsys( )
                 appobjtype  = is_app_object-appobjtype
                 appobjid    = is_app_object-appobjid
-                trxcod      = lif_pof_constants=>cs_trxcod-sh_resource
+                trxcod      = lif_app_constants=>cs_trxcod-sh_resource
                 trxid       = lv_res_tid_old
                 action      = lif_ef_constants=>cs_change_mode-delete
               ) ).

@@ -2,68 +2,151 @@
   "d": {
     "__count": "21",
     "results": [{
-      "__metadata": {
+        "__metadata": {
+          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'9b95cf62-a374-50f4-b741-728eca242410')",
+          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'9b95cf62-a374-50f4-b741-728eca242410')",
+          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
+        },
+        "id": "9b95cf62-a374-50f4-b741-728eca242410",
+        "purchaseOrderNo": "4500055504",
+        "supplierId": "VEN_CO",
+        "plannedDeliveryDate": "\/Date(1612310400000)\/",
+        "netValue": "11000.00",
+        "currency": "INR",
+        "receivingLocationId": "0001",
+        "completionValue": null,
+        "incoterms_code": "CFR",
+        "supplierLocationType": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Supplier')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Supplier')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+          },
+          "code": "Supplier",
+          "name": "Supplier"
+        },
+        "incoterms": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.Incoterms"
+          },
+          "code": "CFR",
+          "name": "Costs and freight",
+          "localized": {
+            "__deferred": {
+              "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/Incoterms('CFR')/localized"
+            }
+          }
+        },
+        "receivingLocationType": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Plant')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationType('Plant')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationType"
+          },
+          "code": "Plant",
+          "name": "Plant"
+        },
+        "toReceivingLocation": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001016%3AQW9CLNT170%3ALocation%3APlant%3A0001')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001016%3AQW9CLNT170%3ALocation%3APlant%3A0001')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationDTO"
+          },
+          "locationDescription": "Plant 0001",
+          "locationAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:Location:Plant:0001",
+          "sourceSystem": "QW9CLNT170",
+          "externalId": "0001",
+          "objectTypeDescription": "Plant",
+          "formattedAddress": "Plant 0001$Teststreet 124$19745 Delhi$Indien",
+          "locationId": "QW9CLNT170:0001",
+          "longitude": "78.64741000",
+          "latitude": "28.53406000",
+          "objectTypeCode": "Plant",
+          "locationTypeDescription": "Plant"
+        },
+        "toSupplierLocation": {
+          "__metadata": {
+            "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001016%3AQW9CLNT170%3ALocation%3ASupplier%3AVEN_CO')",
+            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/LocationDTO('xri%3A%2F%2Fsap.com%2Fid%3ALBN%2310010001016%3AQW9CLNT170%3ALocation%3ASupplier%3AVEN_CO')",
+            "type": "com.lbngttsamples.gtt.app.pof.pofService.LocationDTO"
+          },
+          "locationDescription": "Tanaya Milk",
+          "locationAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:Location:Supplier:VEN_CO",
+          "sourceSystem": "QW9CLNT170",
+          "externalId": "VEN_CO",
+          "objectTypeDescription": "Supplier",
+          "formattedAddress": "Tanaya Milk$mumbai 22-55-99$191229 Mumbai$Indien",
+          "locationId": "QW9CLNT170:VEN_CO",
+          "longitude": "72.84287400",
+          "latitude": "19.10378300",
+          "objectTypeCode": "Supplier",
+          "locationTypeDescription": "Supplier"
+        }
+      }, {
+        "__metadata": {
           "id": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')",
           "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')",
           "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"
-      },
-      "id": "18a332e1-140a-5c44-994c-deeafeeeb2b6",
-      "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
-      "purchaseOrderNo": "4500055266",
-      "supplierId": "VEN_CO",
-      "plannedDeliveryDate": "/Date(1603065600000)/",
-      "netValue": "0.00",
-      "currency": "INR",
-      "incotermsVersion": null,
-      "incotermsLocation": "Test location 1",
-      "logicalSystem": "QW9CLNT170",
-      "totalDeliveredValue": null,
-      "totalDelayedValue": null,
-      "receivingLocationId": "0001",
-      "receivingLocationDescription": null,
-      "completionValue": null,
-      "trackingIdType": "PURCHASE_ORDER",
-      "partyId": "LBN#10010001006",
-      "incoterms_code": "CFR",
-      "receivingLocationType_code": "Plant",
-      "processStatus_code": "AS_PLANNED",
-      "supplierDescription": null,
-      "supplierLocationType": {
+        },
+        "id": "18a332e1-140a-5c44-994c-deeafeeeb2b6",
+        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
+        "purchaseOrderNo": "4500055266",
+        "supplierId": "VEN_CO",
+        "plannedDeliveryDate": "/Date(1603065600000)/",
+        "netValue": "0.00",
+        "currency": "INR",
+        "incotermsVersion": null,
+        "incotermsLocation": "Test location 1",
+        "logicalSystem": "QW9CLNT170",
+        "totalDeliveredValue": null,
+        "totalDelayedValue": null,
+        "receivingLocationId": "0001",
+        "receivingLocationDescription": null,
+        "completionValue": null,
+        "trackingIdType": "PURCHASE_ORDER",
+        "partyId": "LBN#10010001006",
+        "incoterms_code": "CFR",
+        "receivingLocationType_code": "Plant",
+        "processStatus_code": "AS_PLANNED",
+        "supplierDescription": null,
+        "supplierLocationType": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/supplierLocationType"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/supplierLocationType"
           }
-      },
-      "incoterms": {
+        },
+        "incoterms": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/incoterms"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/incoterms"
           }
-      },
-      "receivingLocationType": {
+        },
+        "receivingLocationType": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/receivingLocationType"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/receivingLocationType"
           }
-      },
-      "processStatus": {
+        },
+        "processStatus": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/processStatus"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/processStatus"
           }
-      },
-      "purchaseOrderItemTPs": {
+        },
+        "purchaseOrderItemTPs": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/purchaseOrderItemTPs"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/purchaseOrderItemTPs"
           }
-      },
-      "toReceivingLocation": {
+        },
+        "toReceivingLocation": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toReceivingLocation"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toReceivingLocation"
           }
-      },
-      "toSupplierLocation": {
+        },
+        "toSupplierLocation": {
           "__deferred": {
-              "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toSupplierLocation"
+            "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'18a332e1-140a-5c44-994c-deeafeeeb2b6')/toSupplierLocation"
           }
-      }
-  }, {
+        }
+      }, {
         "__metadata": {
           "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')",
           "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrder(guid'a3419caf-3597-52b9-89d9-13d63a573767')",

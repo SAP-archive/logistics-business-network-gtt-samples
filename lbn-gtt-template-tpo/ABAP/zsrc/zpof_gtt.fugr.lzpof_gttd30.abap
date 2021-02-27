@@ -1,10 +1,13 @@
 *&---------------------------------------------------------------------*
 *& Local class definition - Planned Events Fillers
 *&---------------------------------------------------------------------*
+
 **********************************************************************
 *** Statuses of Inbound Delivery Item ********************************
 **********************************************************************
-CLASS lcl_dl_event_relevance DEFINITION.
+CLASS lcl_dl_event_relevance_main DEFINITION
+  ABSTRACT.
+
   PUBLIC SECTION.
     METHODS constructor
       IMPORTING
@@ -25,12 +28,12 @@ CLASS lcl_dl_event_relevance DEFINITION.
 
     METHODS update.
 
-  PRIVATE SECTION.
+  PROTECTED SECTION.
     DATA: mo_ef_parameters TYPE REF TO lif_ef_parameters,
           ms_app_objects   TYPE trxas_appobj_ctab_wa,
           ms_relevance     TYPE zpof_gtt_ee_rel.
 
-    METHODS get_field_name
+    METHODS get_field_name ABSTRACT
       IMPORTING
         iv_milestone         TYPE clike
         iv_internal          TYPE abap_bool DEFAULT abap_false
@@ -39,7 +42,7 @@ CLASS lcl_dl_event_relevance DEFINITION.
       RAISING
         cx_udm_message.
 
-    METHODS get_item_status
+    METHODS get_object_status ABSTRACT
       IMPORTING
         iv_milestone    TYPE clike
       RETURNING
@@ -47,6 +50,7 @@ CLASS lcl_dl_event_relevance DEFINITION.
       RAISING
         cx_udm_message.
 
+  PRIVATE SECTION.
     METHODS set_relevance
       IMPORTING
         iv_milestone TYPE clike
@@ -61,88 +65,14 @@ CLASS lcl_dl_event_relevance DEFINITION.
         cx_udm_message.
 ENDCLASS.
 
-CLASS lcl_dl_event_relevance IMPLEMENTATION.
+CLASS lcl_dl_event_relevance_main IMPLEMENTATION.
   METHOD constructor.
     mo_ef_parameters  = io_ef_parameters.
     ms_app_objects    = is_app_objects.
   ENDMETHOD.
 
-  METHOD get_field_name.
-    CASE iv_milestone.
-      WHEN lif_pof_constants=>cs_milestone-dl_put_away.
-        rv_field_name   = 'KOSTA'.
-      WHEN lif_pof_constants=>cs_milestone-dl_packing.
-        rv_field_name   = 'PKSTA'.
-      WHEN lif_pof_constants=>cs_milestone-dl_goods_receipt.
-        rv_field_name   = 'WBSTA'.
-      WHEN lif_pof_constants=>cs_milestone-dl_pod.
-        rv_field_name   = COND #( WHEN iv_internal = abap_true
-                                    THEN 'PDSTK'
-                                    ELSE 'PDSTA' ).
-      WHEN OTHERS.
-        MESSAGE e009(zpof_gtt) WITH iv_milestone INTO DATA(lv_dummy).
-        lcl_tools=>throw_exception( ).
-    ENDCASE.
-
-    IF iv_internal = abap_true.
-      rv_field_name   = |Z_{ rv_field_name }|.
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD get_item_status.
-    TYPES: tt_vbup  TYPE STANDARD TABLE OF vbupvb.
-
-    DATA: lv_dummy  TYPE char100.
-
-    FIELD-SYMBOLS: <lt_vbup>  TYPE tt_vbup,
-                   <ls_vbup>  TYPE vbupvb,
-                   <lv_value> TYPE any.
-
-    DATA(lv_fname)  = get_field_name( iv_milestone = iv_milestone ).
-
-    DATA(lv_vbeln)  = lcl_tools=>get_field_of_structure(
-                        ir_struct_data = ms_app_objects-maintabref
-                        iv_field_name  = 'VBELN' ).
-
-    DATA(lv_posnr)  = lcl_tools=>get_field_of_structure(
-                        ir_struct_data = ms_app_objects-maintabref
-                        iv_field_name  = 'POSNR' ).
-
-    DATA(lr_vbup)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef    = lif_pof_constants=>cs_tabledef-dl_itm_status_new ).
-
-    CLEAR rv_value.
-
-    ASSIGN lr_vbup->* TO <lt_vbup>.
-
-    IF <lt_vbup> IS ASSIGNED.
-      READ TABLE <lt_vbup> ASSIGNING <ls_vbup>
-        WITH KEY vbeln  = lv_vbeln
-                 posnr  = lv_posnr.
-
-      IF sy-subrc = 0.
-        ASSIGN COMPONENT lv_fname OF STRUCTURE <ls_vbup> TO <lv_value>.
-        IF <lv_value> IS ASSIGNED.
-          rv_value  = <lv_value>.
-        ELSE.
-          MESSAGE e001(zpof_gtt) WITH lv_fname 'VBUP' INTO lv_dummy.
-          lcl_tools=>throw_exception( ).
-        ENDIF.
-      ELSE.
-        MESSAGE e005(zpof_gtt)
-          WITH 'VBUP' |{ lv_vbeln }-{ lv_posnr }|
-          INTO lv_dummy.
-        lcl_tools=>throw_exception( ).
-      ENDIF.
-    ELSE.
-      MESSAGE e002(zpof_gtt) WITH 'VBUP' INTO lv_dummy.
-      lcl_tools=>throw_exception( ).
-    ENDIF.
-  ENDMETHOD.
-
   METHOD initiate.
-    DATA(lv_appobjid) = lcl_dl_tools=>get_tracking_id_dl_item(
-                          ir_lips = ms_app_objects-maintabref ).
+    DATA(lv_appobjid) = ms_app_objects-appobjid.
 
     " read stored statuses
     SELECT SINGLE *
@@ -156,10 +86,10 @@ CLASS lcl_dl_event_relevance IMPLEMENTATION.
       ms_relevance-appobjid = lv_appobjid.
 
       " recalculate statuses
-      recalc_relevance( iv_milestone = lif_pof_constants=>cs_milestone-dl_put_away ).
-      recalc_relevance( iv_milestone = lif_pof_constants=>cs_milestone-dl_packing ).
-      recalc_relevance( iv_milestone = lif_pof_constants=>cs_milestone-dl_goods_receipt ).
-      recalc_relevance( iv_milestone = lif_pof_constants=>cs_milestone-dl_pod ).
+      recalc_relevance( iv_milestone = lif_app_constants=>cs_milestone-dl_put_away ).
+      recalc_relevance( iv_milestone = lif_app_constants=>cs_milestone-dl_packing ).
+      recalc_relevance( iv_milestone = lif_app_constants=>cs_milestone-dl_goods_receipt ).
+      recalc_relevance( iv_milestone = lif_app_constants=>cs_milestone-dl_pod ).
     ENDIF.
   ENDMETHOD.
 
@@ -197,7 +127,7 @@ CLASS lcl_dl_event_relevance IMPLEMENTATION.
 
   METHOD recalc_relevance.
     " retrieve delivery item status field value
-    DATA(lv_status)     = get_item_status( iv_milestone = iv_milestone ).
+    DATA(lv_status)     = get_object_status( iv_milestone = iv_milestone ).
 
     " calculate relevance
     "   for shipment POD planning :
@@ -205,10 +135,10 @@ CLASS lcl_dl_event_relevance IMPLEMENTATION.
     "   for other delivery item level planned events:
     "     initial value is 'A' -> relevant
     DATA(lv_relevance)  = COND abap_bool(
-      WHEN lv_status = lif_pof_constants=>cs_delivery_stat-not_relevant
+      WHEN lv_status = lif_app_constants=>cs_delivery_stat-not_relevant
         THEN abap_false
-      WHEN lv_status = lif_pof_constants=>cs_delivery_stat-not_processed OR
-           iv_milestone = lif_pof_constants=>cs_milestone-dl_pod
+      WHEN lv_status = lif_app_constants=>cs_delivery_stat-not_processed OR
+           iv_milestone = lif_app_constants=>cs_milestone-dl_pod
         THEN abap_true
         ELSE abap_undefined
     ).
@@ -231,12 +161,500 @@ CLASS lcl_dl_event_relevance IMPLEMENTATION.
     CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'
       DESTINATION 'NONE'.
 
-    CALL FUNCTION 'RFC_CONNECTION_CLOSE'  ##FM_SUBRC_OK
+    CALL FUNCTION 'RFC_CONNECTION_CLOSE' ##FM_SUBRC_OK
       EXPORTING
         destination          = 'NONE'
       EXCEPTIONS
         destination_not_open = 1
         OTHERS               = 2.
+  ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
+*** Statuses of Inbound Delivery Item ********************************
+**********************************************************************
+CLASS lcl_dl_event_relevance_item DEFINITION
+  INHERITING FROM lcl_dl_event_relevance_main.
+
+  PROTECTED SECTION.
+    METHODS get_field_name REDEFINITION.
+
+    METHODS get_object_status REDEFINITION.
+
+ENDCLASS.
+
+CLASS lcl_dl_event_relevance_item IMPLEMENTATION.
+  METHOD get_field_name.
+    CASE iv_milestone.
+      WHEN lif_app_constants=>cs_milestone-dl_put_away.
+        rv_field_name   = 'KOSTA'.
+      WHEN lif_app_constants=>cs_milestone-dl_packing.
+        rv_field_name   = 'PKSTA'.
+      WHEN lif_app_constants=>cs_milestone-dl_goods_receipt.
+        rv_field_name   = 'WBSTA'.
+      WHEN lif_app_constants=>cs_milestone-dl_pod.
+        rv_field_name   = COND #( WHEN iv_internal = abap_true
+                                    THEN 'PDSTK'
+                                    ELSE 'PDSTA' ).
+      WHEN OTHERS.
+        MESSAGE e009(zpof_gtt) WITH iv_milestone INTO DATA(lv_dummy).
+        lcl_tools=>throw_exception( ).
+    ENDCASE.
+
+    IF iv_internal = abap_true.
+      rv_field_name   = |Z_{ rv_field_name }|.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD get_object_status.
+    TYPES: tt_vbup  TYPE STANDARD TABLE OF vbupvb.
+
+    DATA: lv_dummy  TYPE char100.
+
+    FIELD-SYMBOLS: <lt_vbup>  TYPE tt_vbup,
+                   <ls_vbup>  TYPE vbupvb,
+                   <lv_value> TYPE any.
+
+    DATA(lv_fname)  = get_field_name( iv_milestone = iv_milestone ).
+
+    DATA(lv_vbeln)  = lcl_tools=>get_field_of_structure(
+                        ir_struct_data = ms_app_objects-maintabref
+                        iv_field_name  = 'VBELN' ).
+
+    DATA(lv_posnr)  = lcl_tools=>get_field_of_structure(
+                        ir_struct_data = ms_app_objects-maintabref
+                        iv_field_name  = 'POSNR' ).
+
+    DATA(lr_vbup)   = mo_ef_parameters->get_appl_table(
+                        iv_tabledef    = lif_app_constants=>cs_tabledef-dl_itm_status_new ).
+
+    CLEAR rv_value.
+
+    ASSIGN lr_vbup->* TO <lt_vbup>.
+
+    IF <lt_vbup> IS ASSIGNED.
+      READ TABLE <lt_vbup> ASSIGNING <ls_vbup>
+        WITH KEY vbeln  = lv_vbeln
+                 posnr  = lv_posnr.
+
+      IF sy-subrc = 0.
+        ASSIGN COMPONENT lv_fname OF STRUCTURE <ls_vbup> TO <lv_value>.
+        IF <lv_value> IS ASSIGNED.
+          rv_value  = <lv_value>.
+        ELSE.
+          MESSAGE e001(zpof_gtt) WITH lv_fname 'VBUP' INTO lv_dummy.
+          lcl_tools=>throw_exception( ).
+        ENDIF.
+      ELSE.
+        MESSAGE e005(zpof_gtt)
+          WITH 'VBUP' |{ lv_vbeln }-{ lv_posnr }|
+          INTO lv_dummy.
+        lcl_tools=>throw_exception( ).
+      ENDIF.
+    ELSE.
+      MESSAGE e002(zpof_gtt) WITH 'VBUP' INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+  ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
+*** Statuses of Inbound Delivery Header ******************************
+**********************************************************************
+CLASS lcl_dl_event_relevance_header DEFINITION
+  INHERITING FROM lcl_dl_event_relevance_main.
+
+  PROTECTED SECTION.
+    METHODS get_field_name REDEFINITION.
+
+    METHODS get_object_status REDEFINITION.
+
+ENDCLASS.
+
+CLASS lcl_dl_event_relevance_header IMPLEMENTATION.
+  METHOD get_field_name.
+    CASE iv_milestone.
+      WHEN lif_app_constants=>cs_milestone-dl_put_away.
+        rv_field_name   = COND #( WHEN iv_internal = abap_true
+                                    THEN 'KOSTA'
+                                    ELSE 'KOSTK' ).
+      WHEN lif_app_constants=>cs_milestone-dl_packing.
+        rv_field_name   = COND #( WHEN iv_internal = abap_true
+                                    THEN 'PKSTA'
+                                    ELSE 'PKSTK' ).
+      WHEN lif_app_constants=>cs_milestone-dl_goods_receipt.
+        rv_field_name   = COND #( WHEN iv_internal = abap_true
+                                    THEN 'WBSTA'
+                                    ELSE 'WBSTK' ).
+      WHEN lif_app_constants=>cs_milestone-dl_pod.
+        rv_field_name   = 'PDSTK'.
+      WHEN OTHERS.
+        MESSAGE e009(zpof_gtt) WITH iv_milestone INTO DATA(lv_dummy).
+        lcl_tools=>throw_exception( ).
+    ENDCASE.
+
+    IF iv_internal = abap_true.
+      rv_field_name   = |Z_{ rv_field_name }|.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD get_object_status.
+*    TYPES: tt_vbuk  TYPE STANDARD TABLE OF vbuk.
+
+    DATA: lv_dummy  TYPE char100.
+
+    FIELD-SYMBOLS: <lt_vbuk>  TYPE shp_vl10_vbuk_t,
+                   <ls_vbuk>  TYPE vbukvb,
+                   <lv_value> TYPE any.
+
+    DATA(lv_fname)  = get_field_name( iv_milestone = iv_milestone ).
+
+    DATA(lv_vbeln)  = lcl_tools=>get_field_of_structure(
+                        ir_struct_data = ms_app_objects-maintabref
+                        iv_field_name  = 'VBELN' ).
+
+    DATA(lr_vbuk)   = mo_ef_parameters->get_appl_table(
+                        iv_tabledef    = lif_app_constants=>cs_tabledef-dl_hdr_status_new ).
+
+    CLEAR rv_value.
+
+    ASSIGN lr_vbuk->* TO <lt_vbuk>.
+
+    IF <lt_vbuk> IS ASSIGNED.
+      READ TABLE <lt_vbuk> ASSIGNING <ls_vbuk>
+        WITH KEY vbeln  = lv_vbeln.
+
+      IF sy-subrc = 0.
+        ASSIGN COMPONENT lv_fname OF STRUCTURE <ls_vbuk> TO <lv_value>.
+        IF <lv_value> IS ASSIGNED.
+          rv_value  = <lv_value>.
+        ELSE.
+          MESSAGE e001(zpof_gtt) WITH lv_fname 'VBUP' INTO lv_dummy.
+          lcl_tools=>throw_exception( ).
+        ENDIF.
+      ELSE.
+        MESSAGE e005(zpof_gtt)
+          WITH 'VBUK' lv_vbeln
+          INTO lv_dummy.
+        lcl_tools=>throw_exception( ).
+      ENDIF.
+    ELSE.
+      MESSAGE e002(zpof_gtt) WITH 'VBUK' INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+  ENDMETHOD.
+ENDCLASS.
+
+***********************************************************************
+**** Statuses of Inbound Delivery Item ********************************
+***********************************************************************
+CLASS lcl_sh_stops_events DEFINITION
+  CREATE PRIVATE.
+
+  PUBLIC SECTION.
+    TYPES: BEGIN OF ts_event_info,
+             appsys        TYPE /saptrx/applsystem,
+             appobjtype    TYPE /saptrx/aotype,
+             appobjid      TYPE /saptrx/aoid,
+             language      TYPE spras,
+             evt_exp_tzone TYPE /saptrx/timezone,
+           END OF ts_event_info.
+
+    CLASS-METHODS get_instance_for_delivery
+      IMPORTING
+        iv_appobjid               TYPE /saptrx/aoid
+        iv_vbeln                  TYPE vbeln_vl
+        iv_posnr                  TYPE posnr_vl DEFAULT 0
+        io_ef_parameters          TYPE REF TO lif_ef_parameters
+      RETURNING
+        VALUE(ro_sh_stops_events) TYPE REF TO lcl_sh_stops_events
+      RAISING
+        cx_udm_message.
+
+    METHODS get_planned_events
+      EXPORTING
+        et_exp_event TYPE /saptrx/bapi_trk_ee_tab
+      RAISING
+        cx_udm_message.
+
+  PRIVATE SECTION.
+    TYPES: tt_tknum   TYPE STANDARD TABLE OF tknum.
+
+    TYPES: BEGIN OF ts_stops_info,
+             tknum    TYPE vttk-tknum,
+             stops    TYPE lif_app_types=>tt_stops,
+             watching TYPE lif_app_types=>tt_dlv_watch_stops,
+           END OF ts_stops_info,
+           tt_stops_info TYPE STANDARD TABLE OF ts_stops_info.
+
+    DATA: mv_vbeln      TYPE vbeln_vl,
+          mv_posnr      TYPE posnr_vl,
+          ms_event_info TYPE ts_event_info,
+          mt_stops_info TYPE tt_stops_info,
+          mt_lips       TYPE lif_app_types=>tt_lipsvb.
+
+    METHODS constructor
+      IMPORTING iv_vbeln      TYPE vbeln_vl
+                iv_posnr      TYPE posnr_vl
+                is_event_info TYPE ts_event_info
+                it_stops_info TYPE tt_stops_info
+                it_lips       TYPE lif_app_types=>tt_lipsvb.
+
+    CLASS-METHODS get_delivery_items
+      IMPORTING
+        iv_vbeln TYPE vbeln_vl
+        iv_posnr TYPE posnr_vl
+        ir_lips  TYPE REF TO data
+      EXPORTING
+        et_lips  TYPE lif_app_types=>tt_lipsvb
+      RAISING
+        cx_udm_message.
+
+    CLASS-METHODS get_event_info
+      IMPORTING
+        iv_appobjid          TYPE /saptrx/aoid
+        io_ef_parameters     TYPE REF TO lif_ef_parameters
+      RETURNING
+        VALUE(rs_event_info) TYPE ts_event_info
+      RAISING
+        cx_udm_message.
+
+    CLASS-METHODS get_shipments_for_delivery
+      IMPORTING
+        iv_vbeln TYPE vbeln_vl
+      EXPORTING
+        et_tknum TYPE tt_tknum.
+
+    CLASS-METHODS get_stops_info_for_delivery
+      IMPORTING
+        iv_vbeln      TYPE vbeln_vl
+      EXPORTING
+        et_stops_info TYPE tt_stops_info.
+
+    METHODS is_pod_relevant
+      IMPORTING
+        iv_locid         TYPE clike
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool.
+
+ENDCLASS.
+
+CLASS lcl_sh_stops_events IMPLEMENTATION.
+  METHOD constructor.
+    mv_vbeln      = iv_vbeln.
+    ms_event_info = is_event_info.
+    mt_stops_info = it_stops_info.
+    mt_lips       = it_lips.
+  ENDMETHOD.
+
+  METHOD get_delivery_items.
+    DATA: lt_vbeln TYPE RANGE OF vbeln_vl,
+          lt_posnr TYPE RANGE OF posnr_vl.
+
+    CLEAR: et_lips[].
+
+    FIELD-SYMBOLS: <lt_lips>  TYPE lif_app_types=>tt_lipsvb.
+
+    ASSIGN ir_lips->* TO <lt_lips>.
+    IF <lt_lips> IS ASSIGNED.
+      IF iv_vbeln IS NOT INITIAL.
+        lt_vbeln    = VALUE #( ( low = iv_vbeln option = 'EQ' sign = 'I' ) ).
+      ENDIF.
+      IF iv_posnr IS NOT INITIAL.
+        lt_posnr    = VALUE #( ( low = iv_posnr option = 'EQ' sign = 'I' ) ).
+      ENDIF.
+
+      LOOP AT <lt_lips> ASSIGNING FIELD-SYMBOL(<ls_lips>)
+        WHERE vbeln IN lt_vbeln
+          AND posnr IN lt_posnr.
+
+        APPEND <ls_lips> TO et_lips.
+      ENDLOOP.
+    ELSE.
+      MESSAGE e002(zpof_gtt) WITH 'LIPS' INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD get_event_info.
+
+    rs_event_info = VALUE #(
+      appsys        = io_ef_parameters->get_appsys(  )
+      appobjtype    = io_ef_parameters->get_app_obj_types( )-aotype
+      appobjid      = iv_appobjid
+      language      = sy-langu
+      evt_exp_tzone = lcl_tools=>get_system_time_zone( )
+    ).
+  ENDMETHOD.
+
+  METHOD get_instance_for_delivery.
+    DATA: lt_stops_info TYPE tt_stops_info,
+          lt_lips       TYPE lif_app_types=>tt_lipsvb.
+
+    DATA(ls_event_info)  = get_event_info(
+                              iv_appobjid      = iv_appobjid
+                              io_ef_parameters = io_ef_parameters ).
+
+    get_stops_info_for_delivery(
+      EXPORTING
+        iv_vbeln      = iv_vbeln
+      IMPORTING
+        et_stops_info = lt_stops_info ).
+
+    get_delivery_items(
+      EXPORTING
+        iv_vbeln = iv_vbeln
+        iv_posnr = iv_posnr
+        ir_lips  = io_ef_parameters->get_appl_table(
+                     iv_tabledef = lif_app_constants=>cs_tabledef-dl_item_new )
+      IMPORTING
+        et_lips  = lt_lips ).
+
+    ro_sh_stops_events    = NEW lcl_sh_stops_events(
+      iv_vbeln      = iv_vbeln
+      iv_posnr      = iv_posnr
+      is_event_info = ls_event_info
+      it_stops_info = lt_stops_info
+      it_lips       = lt_lips ).
+  ENDMETHOD.
+
+  METHOD get_planned_events.
+    DATA: lt_exp_event TYPE /saptrx/bapi_trk_ee_tab.
+
+    LOOP AT mt_stops_info ASSIGNING FIELD-SYMBOL(<ls_stops_info>).
+      LOOP AT <ls_stops_info>-watching ASSIGNING FIELD-SYMBOL(<ls_watching>)
+        WHERE vbeln = mv_vbeln.
+
+        READ TABLE <ls_stops_info>-stops ASSIGNING FIELD-SYMBOL(<ls_stops>)
+          WITH KEY stopid = <ls_watching>-stopid
+                   loccat = <ls_watching>-loccat.
+
+        IF sy-subrc = 0.
+          " Departure / Arrival
+          lt_exp_event = VALUE #( BASE lt_exp_event (
+              milestone         = COND #( WHEN <ls_watching>-loccat = lif_app_constants=>cs_loccat-departure
+                                            THEN lif_app_constants=>cs_milestone-sh_departure
+                                            ELSE lif_app_constants=>cs_milestone-sh_arrival )
+              locid2            = <ls_stops>-stopid
+              loctype           = <ls_stops>-loctype
+              locid1            = <ls_stops>-locid
+              evt_exp_datetime  = <ls_stops>-pln_evt_datetime
+              evt_exp_tzone     = <ls_stops>-pln_evt_timezone
+          ) ).
+
+          " POD
+          IF <ls_stops>-loccat  = lif_app_constants=>cs_loccat-arrival AND
+             <ls_stops>-loctype = lif_ef_constants=>cs_loc_types-plant AND
+             is_pod_relevant( iv_locid = <ls_stops>-locid ) = abap_true.
+
+            lt_exp_event = VALUE #( BASE lt_exp_event (
+                milestone         = lif_app_constants=>cs_milestone-sh_pod
+                locid2            = <ls_stops>-stopid
+                loctype           = <ls_stops>-loctype
+                locid1            = <ls_stops>-locid
+                evt_exp_datetime  = <ls_stops>-pln_evt_datetime
+                evt_exp_tzone     = <ls_stops>-pln_evt_timezone
+            ) ).
+          ENDIF.
+        ELSE.
+          MESSAGE e005(zpof_gtt)
+            WITH |{ <ls_watching>-stopid }{ <ls_watching>-loccat }| 'STOPS'
+            INTO DATA(lv_dummy).
+          lcl_tools=>throw_exception( ).
+        ENDIF.
+      ENDLOOP.
+    ENDLOOP.
+
+    LOOP AT lt_exp_event ASSIGNING FIELD-SYMBOL(<ls_exp_event>).
+      <ls_exp_event>-appsys         = ms_event_info-appsys.         "mv_appsys.
+      <ls_exp_event>-appobjtype     = ms_event_info-appobjtype.     "is_aotype-aot_type.
+      <ls_exp_event>-appobjid       = ms_event_info-appobjid.       "is_likp-vbeln.
+      <ls_exp_event>-language       = ms_event_info-language.       "sy-langu.
+      <ls_exp_event>-evt_exp_tzone  = ms_event_info-evt_exp_tzone.  "lcl_tools=>get_system_time_zone(  ).
+    ENDLOOP.
+
+    et_exp_event  = lt_exp_event.
+  ENDMETHOD.
+
+  METHOD get_shipments_for_delivery.
+    DATA: ls_comwa6 TYPE vbco6,
+          lt_vbfas  TYPE STANDARD TABLE OF vbfas.
+
+    CLEAR: et_tknum[].
+
+    ls_comwa6-vbeln   = iv_vbeln.
+
+    CALL FUNCTION 'RV_ORDER_FLOW_INFORMATION'
+      EXPORTING
+        comwa         = ls_comwa6
+      TABLES
+        vbfa_tab      = lt_vbfas
+      EXCEPTIONS
+        no_vbfa       = 1
+        no_vbuk_found = 2
+        OTHERS        = 3.
+
+    IF sy-subrc = 0.
+      LOOP AT lt_vbfas ASSIGNING FIELD-SYMBOL(<ls_vbfas>)
+        WHERE vbtyp_n = lif_app_constants=>cs_vbtyp-shipment
+          AND vbtyp_v = lif_app_constants=>cs_vbtyp-delivery.
+
+        APPEND <ls_vbfas>-vbeln TO et_tknum.
+      ENDLOOP.
+
+      SORT et_tknum.
+      DELETE ADJACENT DUPLICATES FROM et_tknum.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD get_stops_info_for_delivery.
+    DATA: lt_tknum      TYPE tt_tknum,
+          ls_stops_info TYPE ts_stops_info.
+
+    CLEAR: et_stops_info.
+
+    get_shipments_for_delivery(
+      EXPORTING
+        iv_vbeln = iv_vbeln
+      IMPORTING
+        et_tknum = lt_tknum ).
+
+    LOOP AT lt_tknum ASSIGNING FIELD-SYMBOL(<lv_tknum>).
+      CLEAR: ls_stops_info.
+
+      ls_stops_info-tknum   = <lv_tknum>.
+
+      lcl_sh_tools=>get_stops_from_shipment(
+        EXPORTING
+          iv_tknum              = ls_stops_info-tknum
+        IMPORTING
+          et_stops              = ls_stops_info-stops
+          et_dlv_watching_stops = ls_stops_info-watching ).
+
+      APPEND ls_stops_info TO et_stops_info.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD is_pod_relevant.
+    CLEAR: rv_result.
+
+    IF mv_vbeln IS NOT INITIAL.
+      READ TABLE mt_lips TRANSPORTING NO FIELDS
+        WITH KEY vbeln = mv_vbeln
+                 werks = iv_locid.
+    ELSE.
+      READ TABLE mt_lips TRANSPORTING NO FIELDS
+        WITH KEY werks = iv_locid.
+    ENDIF.
+
+    IF sy-subrc = 0.
+      SELECT SINGLE z_pdstk INTO rv_result
+        FROM zpof_gtt_ee_rel
+        WHERE appobjid  = ms_event_info-appobjid.
+
+      rv_result   = boolc( sy-subrc = 0 AND rv_result = abap_true ).
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.
 
@@ -304,7 +722,7 @@ CLASS lcl_pe_filler_po_item IMPLEMENTATION.
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-po_confirmation
+        milestone         = lif_app_constants=>cs_milestone-po_confirmation
       ) ).
     ENDIF.
   ENDMETHOD.
@@ -329,7 +747,7 @@ CLASS lcl_pe_filler_po_item IMPLEMENTATION.
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-po_goods_receipt
+        milestone         = lif_app_constants=>cs_milestone-po_goods_receipt
         evt_exp_tzone     = COND #( WHEN lv_loekz IS INITIAL
                                       THEN lcl_tools=>get_system_time_zone( ) )
         evt_exp_datetime  = COND #( WHEN lv_loekz IS INITIAL
@@ -398,7 +816,7 @@ CLASS lcl_pe_filler_po_item IMPLEMENTATION.
         rv_result = lif_ef_constants=>cs_condition-true.
       ELSE.
         DATA(lr_ekpo) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-po_item_old ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-po_item_old ).
 
         ASSIGN is_app_objects-maintabref->* TO <ls_ekpo_new>.
         ASSIGN lr_ekpo->* TO <lt_ekpo_old>.
@@ -447,6 +865,175 @@ CLASS lcl_pe_filler_po_item IMPLEMENTATION.
 ENDCLASS.
 
 **********************************************************************
+*** Planned Events Inbound Delivery Header ***************************
+**********************************************************************
+CLASS lcl_pe_filler_dl_header DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_pe_filler.
+
+    METHODS constructor
+      IMPORTING
+        io_ef_parameters TYPE REF TO lif_ef_parameters
+        io_bo_reader     TYPE REF TO lif_bo_reader.
+
+  PRIVATE SECTION.
+    DATA: mo_ef_parameters TYPE REF TO lif_ef_parameters,
+          mo_bo_reader     TYPE REF TO lif_bo_reader.
+
+    METHODS add_goods_receipt_event
+      IMPORTING
+        is_app_objects  TYPE trxas_appobj_ctab_wa
+        io_relevance    TYPE REF TO lcl_dl_event_relevance_main
+      CHANGING
+        ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
+      RAISING
+        cx_udm_message.
+
+    METHODS add_shipment_events
+      IMPORTING
+        is_app_objects  TYPE trxas_appobj_ctab_wa
+      CHANGING
+        ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
+      RAISING
+        cx_udm_message.
+
+    METHODS is_time_of_delivery_changed
+      IMPORTING
+        is_app_objects   TYPE trxas_appobj_ctab_wa
+      RETURNING
+        VALUE(rv_result) TYPE abap_bool
+      RAISING
+        cx_udm_message.
+ENDCLASS.
+
+CLASS lcl_pe_filler_dl_header IMPLEMENTATION.
+  METHOD add_goods_receipt_event.
+    IF io_relevance->is_enabled(
+         iv_milestone   = lif_app_constants=>cs_milestone-dl_goods_receipt ) = abap_true.
+
+      ct_expeventdata = VALUE #( BASE ct_expeventdata (
+        appsys            = mo_ef_parameters->get_appsys(  )
+        appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
+        language          = sy-langu
+        appobjid          = is_app_objects-appobjid
+        milestone         = lif_app_constants=>cs_milestone-dl_goods_receipt
+        evt_exp_tzone     = lcl_tools=>get_system_time_zone( )
+        evt_exp_datetime  = lcl_dl_tools=>get_delivery_date(
+                              ir_data = is_app_objects-maintabref )
+      ) ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD add_shipment_events.
+    DATA: lt_expeventdata  TYPE lif_ef_types=>tt_expeventdata.
+
+    DATA(lv_vbeln)            = CONV vbeln_vl( lcl_tools=>get_field_of_structure(
+                                                 ir_struct_data = is_app_objects-maintabref
+                                                 iv_field_name  = 'VBELN' ) ).
+
+    DATA(lo_sh_stops_events)  = lcl_sh_stops_events=>get_instance_for_delivery(
+                                  iv_vbeln         = lv_vbeln
+                                  iv_appobjid      = is_app_objects-appobjid
+                                  io_ef_parameters = mo_ef_parameters ).
+
+    lo_sh_stops_events->get_planned_events(
+      IMPORTING
+        et_exp_event = lt_expeventdata ).
+
+    ct_expeventdata   = VALUE #( BASE ct_expeventdata
+                                 ( LINES OF lt_expeventdata ) ).
+  ENDMETHOD.
+
+  METHOD constructor.
+    mo_ef_parameters    = io_ef_parameters.
+    mo_bo_reader        = io_bo_reader.
+  ENDMETHOD.
+
+  METHOD is_time_of_delivery_changed.
+    TYPES: tt_likp    TYPE STANDARD TABLE OF likpvb.
+
+    DATA: lv_vbeln     TYPE likp-vbeln,
+          lv_lfuhr_new TYPE lfuhr,
+          lv_lfuhr_old TYPE lfuhr.
+
+    lv_lfuhr_new  = lcl_tools=>get_field_of_structure(
+                      ir_struct_data = is_app_objects-maintabref
+                      iv_field_name  = 'LFUHR' ).
+
+    DATA(lr_likp)  = mo_ef_parameters->get_appl_table(
+                       iv_tabledef = lif_app_constants=>cs_tabledef-dl_header_old ).
+
+    FIELD-SYMBOLS: <lt_likp> TYPE tt_likp.
+
+    IF lr_likp IS BOUND.
+      ASSIGN lr_likp->* TO <lt_likp>.
+
+      IF <lt_likp> IS ASSIGNED.
+        lv_vbeln  = lcl_tools=>get_field_of_structure(
+                      ir_struct_data = is_app_objects-maintabref
+                      iv_field_name  = 'VBELN' ).
+
+        READ TABLE <lt_likp> ASSIGNING FIELD-SYMBOL(<ls_likp>)
+          WITH KEY vbeln = lv_vbeln.
+
+        lv_lfuhr_old  = COND #( WHEN sy-subrc = 0 THEN <ls_likp>-lfuhr ).
+      ENDIF.
+    ENDIF.
+
+    rv_result   = boolc( lv_lfuhr_new <> lv_lfuhr_old ).
+  ENDMETHOD.
+
+  METHOD lif_pe_filler~check_relevance.
+    TYPES: tt_milestones    TYPE STANDARD TABLE OF /saptrx/appl_event_tag
+                              WITH EMPTY KEY.
+
+    IF is_time_of_delivery_changed( is_app_objects = is_app_objects ) = abap_true.
+      rv_result = lif_ef_constants=>cs_condition-true.
+
+    ELSE.
+      DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_header(
+                                      io_ef_parameters = mo_ef_parameters
+                                      is_app_objects   = VALUE #(
+                                                           appobjid   = is_app_objects-appobjid ) ).
+
+      DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_header(
+                                      io_ef_parameters = mo_ef_parameters
+                                      is_app_objects   = is_app_objects ).
+
+      DATA(lv_milestone)      = lif_app_constants=>cs_milestone-dl_goods_receipt.
+
+      rv_result = boolc( lo_relevance_old->is_enabled( iv_milestone = lv_milestone ) <>
+                         lo_relevance_new->is_enabled( iv_milestone = lv_milestone ) ).
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD lif_pe_filler~get_planed_events.
+    DATA(lo_relevance)  = NEW lcl_dl_event_relevance_header(
+                            io_ef_parameters = mo_ef_parameters
+                            is_app_objects   = is_app_objects ).
+
+    " initiate relevance flags
+    lo_relevance->initiate( ).
+
+    " store calculated relevance flags
+    lo_relevance->update( ).
+
+    add_goods_receipt_event(
+      EXPORTING
+        is_app_objects  = is_app_objects
+        io_relevance    = lo_relevance
+      CHANGING
+        ct_expeventdata = ct_expeventdata ).
+
+    add_shipment_events(
+      EXPORTING
+        is_app_objects  = is_app_objects
+      CHANGING
+        ct_expeventdata = ct_expeventdata ).
+  ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
 *** Planned Events Inbound Delivery Item *****************************
 **********************************************************************
 CLASS lcl_pe_filler_dl_item DEFINITION.
@@ -465,7 +1052,7 @@ CLASS lcl_pe_filler_dl_item DEFINITION.
     METHODS add_goods_receipt_event
       IMPORTING
         is_app_objects  TYPE trxas_appobj_ctab_wa
-        io_relevance    TYPE REF TO lcl_dl_event_relevance
+        io_relevance    TYPE REF TO lcl_dl_event_relevance_main
       CHANGING
         ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
       RAISING
@@ -474,7 +1061,7 @@ CLASS lcl_pe_filler_dl_item DEFINITION.
     METHODS add_packing_event
       IMPORTING
         is_app_objects  TYPE trxas_appobj_ctab_wa
-        io_relevance    TYPE REF TO lcl_dl_event_relevance
+        io_relevance    TYPE REF TO lcl_dl_event_relevance_main
       CHANGING
         ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
       RAISING
@@ -483,17 +1070,17 @@ CLASS lcl_pe_filler_dl_item DEFINITION.
     METHODS add_put_away_event
       IMPORTING
         is_app_objects  TYPE trxas_appobj_ctab_wa
-        io_relevance    TYPE REF TO lcl_dl_event_relevance
+        io_relevance    TYPE REF TO lcl_dl_event_relevance_main
       CHANGING
         ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
       RAISING
         cx_udm_message.
 
-    METHODS get_delivery_date
+    METHODS add_shipment_events
       IMPORTING
-        ir_data        TYPE REF TO data
-      RETURNING
-        VALUE(rv_date) TYPE /saptrx/event_exp_datetime
+        is_app_objects  TYPE trxas_appobj_ctab_wa
+      CHANGING
+        ct_expeventdata TYPE lif_ef_types=>tt_expeventdata
       RAISING
         cx_udm_message.
 
@@ -514,16 +1101,16 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
 
   METHOD add_goods_receipt_event.
     IF io_relevance->is_enabled(
-         iv_milestone   = lif_pof_constants=>cs_milestone-dl_goods_receipt ) = abap_true.
+         iv_milestone   = lif_app_constants=>cs_milestone-dl_goods_receipt ) = abap_true.
 
       ct_expeventdata = VALUE #( BASE ct_expeventdata (
         appsys            = mo_ef_parameters->get_appsys(  )
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-dl_goods_receipt
+        milestone         = lif_app_constants=>cs_milestone-dl_goods_receipt
         evt_exp_tzone     = lcl_tools=>get_system_time_zone( )
-        evt_exp_datetime  = get_delivery_date(
+        evt_exp_datetime  = lcl_dl_tools=>get_delivery_date(
                               ir_data = is_app_objects-mastertabref )
         locid1            = lcl_tools=>get_field_of_structure(
                               ir_struct_data = is_app_objects-maintabref
@@ -535,14 +1122,14 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
 
   METHOD add_packing_event.
     IF io_relevance->is_enabled(
-         iv_milestone   = lif_pof_constants=>cs_milestone-dl_packing ) = abap_true.
+         iv_milestone   = lif_app_constants=>cs_milestone-dl_packing ) = abap_true.
 
       ct_expeventdata = VALUE #( BASE ct_expeventdata (
         appsys            = mo_ef_parameters->get_appsys(  )
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-dl_packing
+        milestone         = lif_app_constants=>cs_milestone-dl_packing
         evt_exp_tzone     = lcl_tools=>get_system_time_zone( )
         locid1            = lcl_tools=>get_field_of_structure(
                               ir_struct_data = is_app_objects-maintabref
@@ -554,15 +1141,15 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
 
   METHOD add_put_away_event.
     IF io_relevance->is_enabled(
-         iv_milestone   = lif_pof_constants=>cs_milestone-dl_put_away ) = abap_true.
+         iv_milestone   = lif_app_constants=>cs_milestone-dl_put_away ) = abap_true.
       ct_expeventdata = VALUE #( BASE ct_expeventdata (
         appsys            = mo_ef_parameters->get_appsys(  )
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-dl_put_away
+        milestone         = lif_app_constants=>cs_milestone-dl_put_away
         evt_exp_tzone     = lcl_tools=>get_system_time_zone( )
-        evt_exp_datetime  = get_delivery_date(
+        evt_exp_datetime  = lcl_dl_tools=>get_delivery_date(
                               ir_data = is_app_objects-mastertabref )
         locid1            = lcl_tools=>get_field_of_structure(
                               ir_struct_data = is_app_objects-maintabref
@@ -572,14 +1159,24 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
-  METHOD get_delivery_date.
-    rv_date = lcl_tools=>get_local_timestamp(
-                iv_date = lcl_tools=>get_field_of_structure(
-                            ir_struct_data = ir_data
-                            iv_field_name  = 'LFDAT' )
-                iv_time = lcl_tools=>get_field_of_structure(
-                            ir_struct_data = ir_data
-                            iv_field_name  = 'LFUHR' ) ).
+  METHOD add_shipment_events.
+    DATA: lt_expeventdata  TYPE lif_ef_types=>tt_expeventdata.
+
+    DATA(lv_vbeln)            = CONV vbeln_vl( lcl_tools=>get_field_of_structure(
+                                                 ir_struct_data = is_app_objects-maintabref
+                                                 iv_field_name  = 'VBELN' ) ).
+
+    DATA(lo_sh_stops_events)  = lcl_sh_stops_events=>get_instance_for_delivery(
+                                  iv_vbeln         = lv_vbeln
+                                  iv_appobjid      = is_app_objects-appobjid
+                                  io_ef_parameters = mo_ef_parameters ).
+
+    lo_sh_stops_events->get_planned_events(
+      IMPORTING
+        et_exp_event = lt_expeventdata ).
+
+    ct_expeventdata   = VALUE #( BASE ct_expeventdata
+                                 ( LINES OF lt_expeventdata ) ).
   ENDMETHOD.
 
   METHOD is_time_of_delivery_changed.
@@ -594,7 +1191,7 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
                       iv_field_name  = 'LFUHR' ).
 
     DATA(lr_likp)  = mo_ef_parameters->get_appl_table(
-                       iv_tabledef = lif_pof_constants=>cs_tabledef-dl_header_old ).
+                       iv_tabledef = lif_app_constants=>cs_tabledef-dl_header_old ).
 
     FIELD-SYMBOLS: <lt_likp> TYPE tt_likp.
 
@@ -624,17 +1221,17 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
       rv_result = lif_ef_constants=>cs_condition-true.
 
     ELSE.
-      DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance(
+      DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_item(
                                       io_ef_parameters = mo_ef_parameters ).
 
-      DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance(
+      DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_item(
                                       io_ef_parameters = mo_ef_parameters
                                       is_app_objects   = is_app_objects ).
 
       DATA(lt_milestones)     = VALUE tt_milestones(
-        ( lif_pof_constants=>cs_milestone-dl_goods_receipt )
-        ( lif_pof_constants=>cs_milestone-dl_packing )
-        ( lif_pof_constants=>cs_milestone-dl_put_away )
+        ( lif_app_constants=>cs_milestone-dl_goods_receipt )
+        ( lif_app_constants=>cs_milestone-dl_packing )
+        ( lif_app_constants=>cs_milestone-dl_put_away )
       ).
 
       rv_result = lif_ef_constants=>cs_condition-false.
@@ -651,7 +1248,7 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_pe_filler~get_planed_events.
-    DATA(lo_relevance)  = NEW lcl_dl_event_relevance(
+    DATA(lo_relevance)  = NEW lcl_dl_event_relevance_item(
                             io_ef_parameters = mo_ef_parameters
                             is_app_objects   = is_app_objects ).
 
@@ -679,6 +1276,12 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
       EXPORTING
         is_app_objects  = is_app_objects
         io_relevance    = lo_relevance
+      CHANGING
+        ct_expeventdata = ct_expeventdata ).
+
+    add_shipment_events(
+      EXPORTING
+        is_app_objects  = is_app_objects
       CHANGING
         ct_expeventdata = ct_expeventdata ).
   ENDMETHOD.
@@ -738,7 +1341,7 @@ CLASS lcl_pe_filler_sh_item DEFINITION.
 
     METHODS is_pod_relevant
       IMPORTING
-        is_stops         TYPE lif_pof_types=>ts_stops
+        is_stops         TYPE lif_app_types=>ts_stops
         it_vttp          TYPE vttpvb_tab
         it_vtsp          TYPE vtspvb_tab
       RETURNING
@@ -788,7 +1391,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-sh_check_in
+        milestone         = lif_app_constants=>cs_milestone-sh_check_in
         evt_exp_datetime  = lcl_tools=>get_local_timestamp(
                               iv_date = <ls_vttk>-dpreg
                               iv_time = <ls_vttk>-upreg )
@@ -801,7 +1404,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-sh_load_start
+        milestone         = lif_app_constants=>cs_milestone-sh_load_start
         evt_exp_datetime  = lcl_tools=>get_local_timestamp(
                               iv_date = <ls_vttk>-dplbg
                               iv_time = <ls_vttk>-uplbg )
@@ -814,7 +1417,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
         appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
         language          = sy-langu
         appobjid          = is_app_objects-appobjid
-        milestone         = lif_pof_constants=>cs_milestone-sh_load_end
+        milestone         = lif_app_constants=>cs_milestone-sh_load_end
         evt_exp_datetime  = lcl_tools=>get_local_timestamp(
                               iv_date = <ls_vttk>-dplen
                               iv_time = <ls_vttk>-uplen )
@@ -828,18 +1431,18 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
                                    ir_struct_data = is_app_objects-maintabref
                                    iv_field_name  = 'TKNUM' ) ).
 
-    DATA: lt_stops    TYPE lif_pof_types=>tt_stops.
+    DATA: lt_stops    TYPE lif_app_types=>tt_stops.
 
     FIELD-SYMBOLS: <lt_vttp> TYPE vttpvb_tab,
                    <lt_vtts> TYPE vttsvb_tab,
                    <lt_vtsp> TYPE vtspvb_tab.
 
     DATA(lr_vttp) = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
     DATA(lr_vtts) = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new ).
     DATA(lr_vtsp) = mo_ef_parameters->get_appl_table(
-                      iv_tabledef = lif_pof_constants=>cs_tabledef-sh_item_stage_new ).
+                      iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_stage_new ).
 
     ASSIGN lr_vtts->* TO <lt_vtts>.
     ASSIGN lr_vttp->* TO <lt_vttp>.
@@ -865,9 +1468,9 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
           appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
           language          = sy-langu
           appobjid          = is_app_objects-appobjid
-          milestone         = COND #( WHEN <ls_stops>-loccat = lif_pof_constants=>cs_loccat-departure
-                                        THEN lif_pof_constants=>cs_milestone-sh_departure
-                                        ELSE lif_pof_constants=>cs_milestone-sh_arrival )
+          milestone         = COND #( WHEN <ls_stops>-loccat = lif_app_constants=>cs_loccat-departure
+                                        THEN lif_app_constants=>cs_milestone-sh_departure
+                                        ELSE lif_app_constants=>cs_milestone-sh_arrival )
           evt_exp_datetime  = <ls_stops>-pln_evt_datetime
           evt_exp_tzone     = <ls_stops>-pln_evt_timezone
           locid2            = <ls_stops>-stopid
@@ -884,7 +1487,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
             appobjtype        = mo_ef_parameters->get_app_obj_types( )-aotype
             language          = sy-langu
             appobjid          = is_app_objects-appobjid
-            milestone         = lif_pof_constants=>cs_milestone-sh_pod
+            milestone         = lif_app_constants=>cs_milestone-sh_pod
             evt_exp_datetime  = <ls_stops>-pln_evt_datetime
             evt_exp_tzone     = <ls_stops>-pln_evt_timezone
             locid2            = <ls_stops>-stopid
@@ -937,12 +1540,12 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
   METHOD is_pod_relevant.
     DATA: lt_vbeln    TYPE RANGE OF lips-vbeln,
           lt_appobjid TYPE RANGE OF /saptrx/aoid,
-          lv_locid    TYPE lif_pof_types=>tv_locid,
+          lv_locid    TYPE lif_app_types=>tv_locid,
           lv_pdstk    TYPE pdstk.
 
     rv_result = abap_false.
 
-    IF is_stops-loccat  = lif_pof_constants=>cs_loccat-arrival AND
+    IF is_stops-loccat  = lif_app_constants=>cs_loccat-arrival AND
        is_stops-loctype = lif_ef_constants=>cs_loc_types-plant.
 
       " get Inbound Delivery Numbers
@@ -976,7 +1579,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
 
       " get POD enabled flags for found DLV Items
       IF lt_appobjid[] IS NOT INITIAL.
-        SELECT single z_pdstk   "#EC CI_NOORDER
+        SELECT SINGLE z_pdstk                           "#EC CI_NOORDER
           INTO rv_result
           FROM zpof_gtt_ee_rel
           WHERE appobjid IN lt_appobjid
@@ -986,15 +1589,15 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD is_stop_changed.
-    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_pof_types=>tt_vttsvb,
-                   <lt_vtts_old> TYPE lif_pof_types=>tt_vttsvb.
+    FIELD-SYMBOLS: <lt_vtts_new> TYPE lif_app_types=>tt_vttsvb,
+                   <lt_vtts_old> TYPE lif_app_types=>tt_vttsvb.
 
     DATA(lv_tknum)    = CONV tknum( lcl_tools=>get_field_of_structure(
                                       ir_struct_data = is_app_object-maintabref
                                       iv_field_name  = 'TKNUM' ) ).
 
     DATA(lr_vtts_new) = mo_ef_parameters->get_appl_table(
-                          iv_tabledef = lif_pof_constants=>cs_tabledef-sh_stage_new ).
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_stage_new ).
     DATA(lr_vtts_old) = mo_sh_data_old->get_vtts( ).
 
     rv_result   = lif_ef_constants=>cs_condition-false.
@@ -1045,7 +1648,7 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
 
   METHOD get_corresponding_dlv_items.
     DATA(lr_lips)   = mo_ef_parameters->get_appl_table(
-                        iv_tabledef = lif_pof_constants=>cs_tabledef-sh_delivery_item ).
+                        iv_tabledef = lif_app_constants=>cs_tabledef-sh_delivery_item ).
 
     FIELD-SYMBOLS: <lt_lips> TYPE vtrlp_tab.
 

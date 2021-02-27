@@ -15,6 +15,18 @@
     margin-bottom: 1rem;
   }
 }
+.currentLocationMap {
+  position: relative;
+  animation: currentLocationRefresh 1s ease-out infinite;
+}
+@keyframes currentLocationRefresh {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 .purchaseOrderListPage .sapFDynamicPageContent,
 .purchaseOrderListPage .sapFDynamicPageContentFitContainer {
   padding: 0;
@@ -27,6 +39,9 @@
   margin: 0 auto;
   padding: 0;
   padding-top: 1rem;
+}
+.purchaseOrderItemsSmartTableSemantic.sapMText {
+  font-weight: bold;
 }
 .purchaseOrderDetailItemsTableContainer {
   max-height: 450px;
@@ -78,7 +93,7 @@
   content: ":";
 }
 .pofGenericTag {
-  pointer-events: none;
+  width: 100px;
 }
 .deliveryItemDetailReferenceDocumentsTableContainer {
   max-height: 450px;
@@ -107,4 +122,7 @@
 }
 .sapMListTblHasPopin .sapMListTblCell > * {
   margin-top: 0.3rem;
+}
+.pofCompletionRate .sapSuiteHBMCValueContainer {
+  color: #5899da;
 }

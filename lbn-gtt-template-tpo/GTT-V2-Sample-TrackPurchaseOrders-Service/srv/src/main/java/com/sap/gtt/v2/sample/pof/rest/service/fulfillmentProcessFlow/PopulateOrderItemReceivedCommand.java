@@ -5,17 +5,12 @@ import com.sap.gtt.v2.sample.pof.domain.GoodsReceipt;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
 import com.sap.gtt.v2.sample.pof.rest.domain.fulfillmentprocessflow.Lane;
 import com.sap.gtt.v2.sample.pof.rest.service.AbstractEventService;
-import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @MilestoneCommand(FulfillmentProcessMilestoneEnum.PURCHASE_ORDER_ITEM_RECEIPT)
 public class PopulateOrderItemReceivedCommand extends AbstractEventService implements MilestonePopulateCommand {
-
-    public PopulateOrderItemReceivedCommand(GTTCoreServiceClient gttCoreServiceClient) {
-        super(gttCoreServiceClient);
-    }
 
     @Override
     public void populateMilestone(Lane lane, PurchaseOrderItem item) {

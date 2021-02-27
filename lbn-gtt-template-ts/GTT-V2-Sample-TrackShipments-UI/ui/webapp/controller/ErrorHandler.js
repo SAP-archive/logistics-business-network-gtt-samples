@@ -127,7 +127,7 @@ sap.ui.define(
           }
         }
       }
-      if (isCheckEmbeddedRequests && oEvent) {
+      if (isCheckEmbeddedRequests && oEvent && oEvent.getParameter("requests")) {
         var checkResultEmbeddedRequests = {};
         checkResultEmbeddedRequests = this.checkHttpStatusEmbeddedRequest(oEvent.getParameter("requests"));
         if (checkResultEmbeddedRequests.isMissingAuthorization || checkResultEmbeddedRequests.isError) {

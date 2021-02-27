@@ -1,5 +1,13 @@
 package com.sap.gtt.v2.sample.sst.rest.model.converter;
 
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.DELAY;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.LOCATION_UPDATE;
+import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getDateTimeString;
+import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getEventTypeShortName;
+import static com.sap.gtt.v2.sample.sst.odata.utils.LocationUtils.retrieveLocationByAltKey;
+import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
+
 import com.sap.gtt.v2.sample.sst.common.model.Event;
 import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import com.sap.gtt.v2.sample.sst.common.validator.CoordinatesValidator;
@@ -7,19 +15,13 @@ import com.sap.gtt.v2.sample.sst.odata.model.Location;
 import com.sap.gtt.v2.sample.sst.odata.model.PlannedEvent;
 import com.sap.gtt.v2.sample.sst.odata.service.LocationService;
 import com.sap.gtt.v2.sample.sst.rest.model.ActualSpot;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
-import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getDateTimeString;
-import static com.sap.gtt.v2.sample.sst.odata.utils.LocationUtils.retrieveLocationByAltKey;
-import static java.util.Objects.nonNull;
-import static java.util.stream.Collectors.toList;
+import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * {@link ActualSpotConverter} is a converter which converts provided entities to {@link ActualSpot}.
@@ -71,7 +73,7 @@ public class ActualSpotConverter {
         if (shouldBeFilledWithOwnActualLocation(event)) {
             final String locationAltKey = event.getLocationAltKey();
             fillWithOwnActualLocationInformation(locations, locationAltKey, actualSpot, event);
-        } else if (shouldBeFilledWithMasterPlannedLocation(plannedEvent)) {
+        } else if (shouldBeFilledWithMasterPlannedLocation(event, plannedEvent)) {
             final String locationAltKey = plannedEvent.getLocationAltKey();
             fillWithMasterLocationInformation(locations, locationAltKey, actualSpot);
         }
@@ -121,8 +123,14 @@ public class ActualSpotConverter {
         return coordinatesValidator.isValid(longitude, latitude);
     }
 
-    private boolean shouldBeFilledWithMasterPlannedLocation(final PlannedEvent plannedEvent) {
-        return nonNull(plannedEvent);
+    private boolean shouldBeFilledWithMasterPlannedLocation(final Event event, final PlannedEvent plannedEvent) {
+        return nonNull(plannedEvent) && !isDelayOrLocationUpdateEvent(event);
+    }
+
+    private boolean isDelayOrLocationUpdateEvent(final Event event) {
+        final String eventTypeShortName = getEventTypeShortName(event.getEventType());
+        return DELAY.getValue().equals(eventTypeShortName)
+                || LOCATION_UPDATE.getValue().equals(eventTypeShortName);
     }
 
     private boolean shouldBeFilledWithMasterActualLocation(final ActualSpot actualSpot) {

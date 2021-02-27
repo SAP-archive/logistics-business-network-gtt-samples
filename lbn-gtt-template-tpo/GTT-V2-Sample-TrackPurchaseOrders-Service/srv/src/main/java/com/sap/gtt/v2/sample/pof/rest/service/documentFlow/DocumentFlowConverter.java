@@ -18,6 +18,7 @@ import com.sap.gtt.v2.sample.pof.odata.model.Shipment;
 import com.sap.gtt.v2.sample.pof.rest.domain.documentflow.Attribute;
 import com.sap.gtt.v2.sample.pof.rest.domain.documentflow.Node;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -48,13 +49,11 @@ public class DocumentFlowConverter {
     private static final String PROCESS_STATUS = "processStatus_code";
     private static final String EXECUTION_STATUS = "executionStatus_code";
 
-    private final POFLocationODataHandler locationODataHandler;
-    private final POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler;
+    @Autowired
+    private POFLocationODataHandler locationODataHandler;
 
-    public DocumentFlowConverter(POFLocationODataHandler locationODataHandler, POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler) {
-        this.locationODataHandler = locationODataHandler;
-        this.purchaseOrderItemODataHandler = purchaseOrderItemODataHandler;
-    }
+    @Autowired
+    private POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler;
 
     public List<Node> convertNodes(List<TpDefinition> tpDefinitions) {
         AtomicInteger index = new AtomicInteger();
@@ -95,6 +94,8 @@ public class DocumentFlowConverter {
                 return DocumentFlowGeneralStatusEnum.WARNING;
             case Constants.PROCESS_STATUS_DELAYED:
                 return DocumentFlowGeneralStatusEnum.ERROR;
+            case Constants.PROCESS_STATUS_AS_PLANNED:
+                return DocumentFlowGeneralStatusEnum.SUCCESS;
             default:
                 return DocumentFlowGeneralStatusEnum.INFORMATION;
         }
@@ -143,7 +144,7 @@ public class DocumentFlowConverter {
         node.setGroup(groupKey);
         node.setStatus(convertProcessStatus(tp.getProcessStatusCode()).getStatus());
 
-        String materialNumber = getStringOrDefault(tp.getMaterialNumber(), EMPTY);
+        String materialNumber = getStringOrDefault(tp.getMaterialNumber(), EMPTY).replaceAll(REGEX_LEADING_ZERO, EMPTY);
         String orderQuantity = getStringOrDefault(tp.getOrderQuantity(), EMPTY);
         List<Attribute> attributes = Arrays.asList(
                 new Attribute(MATERIAL_NUMBER, materialNumber, null, null, groupKey),
@@ -240,6 +241,8 @@ public class DocumentFlowConverter {
                 return DocumentFlowAttributeValueStatusEnum.WARNING;
             case Constants.PROCESS_STATUS_DELAYED:
                 return DocumentFlowAttributeValueStatusEnum.ERROR;
+            case Constants.PROCESS_STATUS_AS_PLANNED:
+                return DocumentFlowAttributeValueStatusEnum.SUCCESS;
             default:
                 return DocumentFlowAttributeValueStatusEnum.INFORMATION;
         }

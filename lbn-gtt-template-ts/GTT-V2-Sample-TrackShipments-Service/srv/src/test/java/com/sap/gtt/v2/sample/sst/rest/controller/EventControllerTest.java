@@ -23,18 +23,6 @@ class EventControllerTest {
     private EventController eventController;
 
     @Test
-    void getEventTypesMetadata_givenEventType_shouldCallAllServices() {
-        // given
-        final String eventType = "Arrival";
-
-        // when
-        eventController.getEventTypesMetadata(eventType);
-
-        // then
-        verify(eventService, times(1)).getEventTypesMetadata(eventType);
-    }
-
-    @Test
     void getCodeList_givenCodeListNameAndLocale_shouldCallAllServices() {
         // given
         final String codeListName = "TransportMeansStandardCode";

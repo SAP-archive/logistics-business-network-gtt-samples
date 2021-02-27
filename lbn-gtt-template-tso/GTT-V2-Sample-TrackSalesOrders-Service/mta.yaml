@@ -1,7 +1,7 @@
 ---
 _schema-version: '3.1'
 ID: gtt-v2-sample-track-salesorders-service
-version: 2.3.0
+version: 2.5.0
 modules:
 - name: gtt-sample-track-salesorders-service
   type: java
@@ -22,7 +22,6 @@ modules:
   requires:
   - name: lbn-gtt-sample-app-uaa
   - name: lbn-gtt-sample-destination
-
 resources:
 - name: lbn-gtt-sample-app-uaa
   type: org.cloudfoundry.existing-service

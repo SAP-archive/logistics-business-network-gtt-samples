@@ -19,10 +19,6 @@ public class FulfillmentStatusService extends AbstractEventService {
 
     private static final String EVENT_STATUSES_URL = "/EventStatus";
 
-    public FulfillmentStatusService(GTTCoreServiceClient gttCoreServiceClient) {
-        super(gttCoreServiceClient);
-    }
-
     public List<FulfillmentStatus> getFulfillmentStatus(UUID inboundDeliveryItemId) {
         Map<String, Integer> statusesCountMap = initEventStatusesMap();
         List<PlannedEvent> plannedEvents = queryAllEvents(PLANNED_EVENTS_URL_TEMPLATE, inboundDeliveryItemId, PlannedEvent.class);

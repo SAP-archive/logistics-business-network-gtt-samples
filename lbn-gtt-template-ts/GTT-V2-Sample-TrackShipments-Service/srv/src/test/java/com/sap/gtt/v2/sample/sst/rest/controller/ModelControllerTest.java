@@ -29,4 +29,17 @@ class ModelControllerTest {
         // then
         verify(modelService, times(1)).getUnplannedEventTypesOfTp(trackedProcess);
     }
+
+    @Test
+    void getEventTypesMetadata_givenEventTypeAndTrackedProcess_shouldCallAllServices() {
+        // given
+        final String eventType = "Arrival";
+        final String trackedProcess = "Shipment";
+
+        // when
+        modelController.getEventTypesMetadata(trackedProcess, eventType);
+
+        // then
+        verify(modelService, times(1)).getEventTypesMetadata(trackedProcess, eventType);
+    }
 }

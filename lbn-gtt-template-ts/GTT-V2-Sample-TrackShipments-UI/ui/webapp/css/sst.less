@@ -2,3 +2,13 @@
 .sstTrackingTimelineItem[data-is-actual-event="false"] .sapUiIcon {
   border: 1px solid @sapUiNeutral;
 }
+
+.sstTrackingTimelineItem[data-is-actual-event="true"] .sapUiIcon {
+  color: @sapUiInformative;
+}
+
+.sstTrackingTimelineItem[data-is-actual-event="true"]
+.sapSuiteUiCommonsTimelineItemBarV,
+.sapSuiteUiCommonsTimelineItemBarH {
+  background-color: @sapUiInformative;
+}

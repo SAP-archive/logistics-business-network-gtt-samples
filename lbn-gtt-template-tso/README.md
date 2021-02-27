@@ -1,30 +1,27 @@
-# Track Sales Order Template App
+# Track SO Fulfillment Template App
 
-## What's New in Track Sales Orders app (Micro Delivery 2020.Dec.18)
-*	Enhance sales order and sales order item update logic to adapt to core engine asynchronous change. 
-*	Fix the issue for sales order delay value calculation when delivery process status turns to Overdue.
-*	Implement sendTrackingRequest function in Event-to-Action script.
-*	Rename the event code in the ERP extractor, for example SHP_ARRIVAL>>ARRIV_DEST.
-* Rename the app from Sales Order Fulfillment to Track Sales Orders.
-
+## What's New in Track SO Fulfillment app (Micro Delivery 2021.02.26)
+* [04_What's New(Feb_2021)-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/04_What'sNew_Feb_2021-TSOF.pdf) 
 
 ## Description
-Sales Order Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
+Track SO Fulfillment template app is designed for internal sales representatives to monitor the sales order fulfillment status. The app mainly answers the following questions:
 * How many deliveries in my sales order are delayed?
 * How many deliveries in my sales order are completed?
 * Where are my sales orders?
 * What is the ETA of my sales orders?
-* ……
+* …… </br>
+More details, please refer to </br>
+[01_Application_Introduction-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Application_Introduction-TSOF.pdf)</br>
 ![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/screenshot.png)
 
 ## Requirements
-* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
-* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented 
+* A SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
+* To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.
 * To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
-* [01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Implementation_Guide-TSO.pdf) 
-* [02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Extractor_Creation_Guide-TSO.pdf) 
+* [02_Implementation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Implementation_Guide-TSOF.pdf) 
+* [03_Extractor_Creation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/03_Extractor_Creation_Guide-TSOF.pdf) 
 
 ## Limitations
 * Limitations for Document Flow Implementation: </br>
@@ -36,7 +33,7 @@ For number of nodes > 500, please use table view. </br>
 * Notes for ERP Extractor Implementation: </br>
 The eventMatchKey of the shipment’s planned event = shipmentNo + stopId. "stopId" is set by the stage’s sequence. </br>
 The eventMatchKey of the delivery's and delivery item's planned event is null. </br>
-To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Sales Order Fulfillment template model: </br>
+To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Track SO Fulfillment template model: </br>
 transportation mode code, shipping type code, tracked process type code, carrier refrence document type code  
 
 ## Known Issue

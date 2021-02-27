@@ -16,6 +16,7 @@ sap.ui.define(
     "use strict";
 
     var sShipmentHeadingTitleId = /(.*)shipment--expandedHeadingTitle$/;
+    var sFreightUnitHeadingTitleId = /(.*)freightUnit--expandedHeadingTitle$/;
     var sReportingHistoryPopoverId = /(.*)reportingHistoryPopover--reportingHistoryPopover-popover$/;
     var sHistoricalEventsListId = /(.*)reportingHistoryPopover--historicalEventsList$/;
     var sReportEventsActionSheetId = /(.*)trackingTimelineView--reportEventsActionSheet--actionSheet$/;
@@ -115,6 +116,17 @@ sap.ui.define(
                 Opa5.assert.ok(true, "The shipment heading title is found");
               },
               errorMessage: "Cannot find the shipment heading title",
+            });
+          },
+
+          iShouldSeeTheFreightUnitHeadingTitle: function () {
+            return this.waitFor({
+              id: sFreightUnitHeadingTitleId,
+              controlType: "sap.m.Title",
+              success: function () {
+                Opa5.assert.ok(true, "The freight unit heading title is found");
+              },
+              errorMessage: "Cannot find the freight unit heading title",
             });
           },
 

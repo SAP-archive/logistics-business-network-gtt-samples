@@ -20,11 +20,15 @@
     "plannedEventId": "343fce93-dd15-11ea-aea4-fbf74fd502e6",
     "eventMatchKey": "00000020170004",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+    "estimatedArrival": {
+      "estimatedArrivalTime": "2020-09-23T20:00:00Z"
+    },
+    "deliveryItems": [],
     "historicalEvents": null
   },
   {
     "eventType": "Arrival",
-    "eventStatusCode": "PLANNED",
+    "eventStatusCode": "OVERDUE",
     "plannedBusinessTimestamp": "2020-09-18T14:00:00Z",
     "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:NEWYORK",
     "locationType": null,
@@ -43,11 +47,15 @@
     "plannedEventId": "343d3682-dd15-11ea-aea4-0f24daf727a8",
     "eventMatchKey": "00000020170003",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+    "estimatedArrival": {
+      "estimatedArrivalTime": "2020-09-24T20:00:00Z"
+    },
+    "deliveryItems": [],
     "historicalEvents": []
   },
   {
     "eventType": "POD",
-    "eventStatusCode": "REPORTED",
+    "eventStatusCode": "EARLY_REPORTED",
     "plannedBusinessTimestamp": "2020-08-18T14:20:00Z",
     "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
     "locationType": null,
@@ -66,11 +74,38 @@
     "plannedEventId": "34356e4f-dd15-11ea-aea4-b1851fb40893",
     "eventMatchKey": "00000020170002",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.POD",
+    "estimatedArrival": null,
+    "deliveryItems": [
+      {
+        "id": "1781028f-e85a-584f-9e95-b878cbf6e92c",
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+        "isInFreightUnit": true,
+        "deliveryNo": "9980060256",
+        "itemNo": "000040",
+        "orderQuantity": 50.000,
+        "quantityUoM": "PC",
+        "materialNo": "LBN_M01",
+        "materialDescription": "Monitor",
+        "eventStatusCode": "EARLY_REPORTED"
+      },
+      {
+        "id": "2337b132-c573-5449-b41e-9325e6b18e00",
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+        "isInFreightUnit": true,
+        "deliveryNo": "9980060256",
+        "itemNo": "000060",
+        "orderQuantity": 1000.000,
+        "quantityUoM": "PC",
+        "materialNo": "LBN_M01",
+        "materialDescription": "Laptop",
+        "eventStatusCode": "DELAYED"
+      }
+    ],
     "historicalEvents": []
   },
   {
     "eventType": "Departure",
-    "eventStatusCode": "REPORTED",
+    "eventStatusCode": "LATE_REPORTED",
     "plannedBusinessTimestamp": "2020-08-18T14:00:00Z",
     "locationAltKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:Location:LogisticLocation:HAMBURG",
     "locationType": null,
@@ -89,6 +124,33 @@
     "plannedEventId": "34356e4f-dd15-11ea-aea4-b1851fb40893",
     "eventMatchKey": "00000020170002",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure",
+    "estimatedArrival": null,
+    "deliveryItems": [
+      {
+        "id": "1781028f-e85a-584f-9e95-b878cbf6e92c",
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+        "isInFreightUnit": true,
+        "deliveryNo": "9980060256",
+        "itemNo": "000040",
+        "orderQuantity": 50.000,
+        "quantityUoM": "PC",
+        "materialNo": "LBN_M01",
+        "materialDescription": "Monitor",
+        "eventStatusCode": "EARLY_REPORTED"
+      },
+      {
+        "id": "2337b132-c573-5449-b41e-9325e6b18e00",
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+        "isInFreightUnit": true,
+        "deliveryNo": "9980060256",
+        "itemNo": "000060",
+        "orderQuantity": 1000.000,
+        "quantityUoM": "PC",
+        "materialNo": "LBN_M01",
+        "materialDescription": "Laptop",
+        "eventStatusCode": "DELAYED"
+      }
+    ],
     "historicalEvents": [
       {
         "id": "ef57cc3d-db01-11ea-88be-bfcc584bbdcf",
@@ -134,6 +196,21 @@
     "plannedEventId": "343a9e71-dd15-11ea-aea4-21de78b809b4",
     "eventMatchKey": "00000020170002",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Arrival",
+    "estimatedArrival": null,
+    "deliveryItems": [
+      {
+        "id": "1781028f-e85a-584f-9e95-b878cbf6e92e",
+        "altKey": "xri://sap.com/id:LBN#10010001016:QM7CLNT910:OUTBOUND_DELIVERY_IT:0080045683000020",
+        "isInFreightUnit": false,
+        "deliveryNo": "9980060256",
+        "itemNo": "000020",
+        "orderQuantity": 50.000,
+        "quantityUoM": "PC",
+        "materialNo": "LBN_M01",
+        "materialDescription": "Monitor",
+        "eventStatusCode": "OVERDUE"
+      }
+    ],
     "historicalEvents": [
       {
         "id": "ef57cc3d-db01-11ea-88be-bfcc584bbdcf",
@@ -194,6 +271,10 @@
     "eventMatchKey": "00000020170001",
     "eventTypeFullName": "com.lbngttsamples.gtt.app.sof.Shipment.Departure",
     "eventReasonText": "This is the reason why it is delayed",
+    "estimatedArrival": {
+      "estimatedArrivalTime": "2020-08-20T20:00:00Z"
+    },
+    "deliveryItems": [],
     "historicalEvents": [
       {
         "id": "ef57cc3d-db01-11ea-88be-bfcc584bbdcf",

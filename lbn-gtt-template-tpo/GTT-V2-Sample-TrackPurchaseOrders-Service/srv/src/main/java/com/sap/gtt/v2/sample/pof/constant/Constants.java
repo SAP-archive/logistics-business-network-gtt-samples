@@ -1,19 +1,21 @@
 package com.sap.gtt.v2.sample.pof.constant;
 
 public class Constants {
-    public static final String GTT_MODEL_NAMESPACE = "com.lbngttsample.gtt.app.pof";
+    public static final String GTT_MODEL_NAMESPACE = "com.lbngttsamples.gtt.app.pof";
     public static final String GTT_MODEL_NAMESPACE_WRITE_SERVICE = GTT_MODEL_NAMESPACE + ".pofWriteService";
     public static final String MODEL_NAMESPACE = GTT_MODEL_NAMESPACE + ".pofService";
 
     public static final String URL_SPLITTER = "/";
     public static final String ENTITY_CONTAINER_NAME = "EntityContainer";
-    public static final String SAP_ICON_LEAD = "sap-icon://lead";
-    public static final String SAP_ICON_DOCUMENTS = "sap-icon://documents";
-    public static final String SAP_ICON_DOCUMENT_TEXT = "sap-icon://document-text";
     public static final String ID = "id";
 
     public static final String EVENT_STATUS_PLANNED = "PLANNED";
 
+    public static final String GOODS_RECEIPT_EVENT = "GoodsReceipt";
+    public static final String CONFIRMATION_EVENT = "ConfirmationEvent";
+    public static final String POD_EVENT = "POD";
+
+    public static final String PROCESS_STATUS_AS_PLANNED = "AS_PLANNED";
     public static final String PROCESS_STATUS_OVERDUE = "OVERDUE";
     public static final String PROCESS_STATUS_DELAYED = "DELAYED";
     public static final String PROCESS_STATUS_LATE = "LATE";
@@ -27,7 +29,6 @@ public class Constants {
     public static final int MAX_LONGITUDE = 180;
     public static final int MAX_LATITUDE = 90;
 
-    public static final String EXECUTION_STATUS_COMPLETED = "COMPLETED";
     public static final String PLANNED_EVENT_EXPAND = "plannedEvent";
     public static final String PLANNED_EVENT_ENTITY_NAME = "PlannedEvent";
     public static final String DELETION_EVENT_ENTITY_NAME = "DeletionEvent";
@@ -50,6 +51,8 @@ public class Constants {
     public static final String DATE_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     public static final String PROCESS_ID = "process_id";
     public static final String EVENT_ACTUAL_BUSINESS_TIMESTAMP = "event/actualBusinessTimestamp";
+
+    public static final String MARK_REVERSAL = "X";
 
     private Constants() {
         // Constant class, mark it private

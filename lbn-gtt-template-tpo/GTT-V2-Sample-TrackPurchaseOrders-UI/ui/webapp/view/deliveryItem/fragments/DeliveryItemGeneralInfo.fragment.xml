@@ -31,7 +31,7 @@
 						<HBox justifyContent="SpaceBetween">
 						<Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
 							<core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-								tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+								tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
 						</HBox>
 						</VBox>
 					</ctrl:content>
@@ -67,7 +67,7 @@
 							<HBox justifyContent="SpaceBetween">
 								<Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
 								<core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-									tooltip="{= ${toPlantLocation/latitude} !== null ? ${toPlantLocation/latitude} + ', ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+									tooltip="{= ${toPlantLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toPlantLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
 							</HBox>
 						</VBox>
 					</ctrl:content>

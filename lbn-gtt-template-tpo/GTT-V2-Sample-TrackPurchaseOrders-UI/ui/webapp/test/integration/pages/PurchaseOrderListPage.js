@@ -1,12 +1,14 @@
 sap.ui.define([
   "sap/ui/test/Opa5",
   "sap/ui/test/matchers/AggregationFilled",
+  "sap/ui/test/matchers/AggregationLengthEquals",
   "sap/ui/test/matchers/BindingPath",
   "sap/ui/test/actions/Press",
+  "sap/ui/test/actions/EnterText",
   "sap/ui/test/matchers/PropertyStrictEquals",
 
 ],
-function (Opa5, AggregationFilled, BindingPath, Press, PropertyStrictEquals) {
+function (Opa5, AggregationFilled, AggregationLengthEquals, BindingPath, Press, EnterText, PropertyStrictEquals) {
   "use strict";
 
   var sViewName = "PurchaseOrderList";
@@ -17,10 +19,28 @@ function (Opa5, AggregationFilled, BindingPath, Press, PropertyStrictEquals) {
   var sPurchaseOrderPersonalisationDlgId = /(.*)purchaseOrderSmartTable-persoController-P13nDialog$/;
   var sPurchaseOrderPersonalisationCancelBtnId = /(.*)purchaseOrderSmartTable-persoController-P13nDialog-cancel$/;
   var sPurchaseOrderPersonalisationOkBtnId = /(.*)purchaseOrderSmartTable-persoController-P13nDialog-ok$/;
+  var sPONoId = /(.*)smartFilterBar-filterItemControl_BASIC-purchaseOrderNo$/;
+  var sGoBtnId = /(.*)purchaseOrderList--smartFilterBar-btnGo$/;
 
   Opa5.createPageObjects({
     onThePurchaseOrderListPage: {
       actions: {
+        iEnterPONoFilter: function (sFilterPONoText) {
+          return this.waitFor({
+            id: sPONoId,
+            controlType: "sap.ui.comp.smartfilterbar.SFBMultiInput",
+            actions: new EnterText({text: sFilterPONoText}),
+            errorMessage: "The purchase order No. filter input doesn't exist.",
+          });
+        },
+        iPressGoBtn: function () {
+          return this.waitFor({
+            id: sGoBtnId,
+            controlType: "sap.m.Button",
+            actions: new Press(),
+            errorMessage: "The purchase order list doesn't have 'GO' button.",
+          });
+        },
         iPressPOTabFilter: function () {
           return this.waitFor({
             controlType: "sap.m.IconTabFilter",
@@ -92,8 +112,7 @@ function (Opa5, AggregationFilled, BindingPath, Press, PropertyStrictEquals) {
               path: "/PurchaseOrder(guid'" + sId + "')",
             }),
             actions: new Press(),
-            success: function (aListItems) {
-              // aListItems[0].$().trigger("tap");
+            success: function () {
             },
             errorMessage: "No list item with the ID " + sId + " was found.",
           });
@@ -107,8 +126,7 @@ function (Opa5, AggregationFilled, BindingPath, Press, PropertyStrictEquals) {
               path: "/PurchaseOrderItem(guid'" + sId + "')",
             }),
             actions: new Press(),
-            success: function (aListItems) {
-              // aListItems[0].$().trigger("tap");
+            success: function () {
             },
             errorMessage: "No list item with the ID " + sId + " was found.",
           });
@@ -124,6 +142,20 @@ function (Opa5, AggregationFilled, BindingPath, Press, PropertyStrictEquals) {
       },
 
       assertions: {
+        theTableHasSpecificNumOfEntries: function (sExpectedNum) {
+          return this.waitFor({
+            id: sPurchaseOrderListTableId,
+            controlType: "sap.m.Table",
+            matchers: new AggregationLengthEquals({
+              name: "items",
+              length: sExpectedNum,
+            }),
+            success: function () {
+              Opa5.assert.ok(true, "The purchase order table has entries.");
+            },
+            errorMessage: "The table does not have entries.",
+          });
+        },
         theTableHasEntries: function () {
           return this.waitFor({
             id: sPurchaseOrderListTableId,

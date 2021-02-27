@@ -2,6 +2,7 @@ package com.sap.gtt.v2.sample.pof.constant;
 
 public enum DocumentFlowAttributeValueStatusEnum {
     INFORMATION("ValueStatusInformation"),
+    SUCCESS("ValueStatusSuccess"),
     ERROR("ValueStatusError"),
     WARNING("ValueStatusWarning");
 

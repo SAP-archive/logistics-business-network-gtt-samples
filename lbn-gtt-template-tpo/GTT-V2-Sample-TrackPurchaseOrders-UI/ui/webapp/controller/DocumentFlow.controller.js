@@ -67,10 +67,10 @@ sap.ui.define([
         sUrl, oParameters = {};
 
       if (this.isPOFocusGroup()) {
-        sUrl = ServiceUtils.getUrl(oRestService.uri.concat("/documentFlow"));
+        sUrl = ServiceUtils.getUrl(oRestService.uri + "/documentFlow");
         oParameters.purchaseOrderId = oBindingContext.getProperty("id");
       } else {
-        sUrl = ServiceUtils.getUrl(oRestService.uri.concat("/documentItemFlow"));
+        sUrl = ServiceUtils.getUrl(oRestService.uri + "/documentItemFlow");
         oParameters.purchaseOrderItemId = oBindingContext.getProperty("id");
         oParameters.purchaseOrderId = oBindingContext.getProperty("purchaseOrder/id");
       }
@@ -108,12 +108,46 @@ sap.ui.define([
         case Constants.DOCUMENT_FLOW_GROUP.PURCHASE_ORDER_ITEM:
           sDetailRouteName = Constants.ROUTES_NAME.PURCHASE_ORDER_ITEM;
           break;
-        case Constants.DOCUMENT_FLOW_GROUP.INDOUND_DELIVERY_ITEM:
-          sDetailRouteName = Constants.ROUTES_NAME.INDOUND_DELIVERY_ITEM;
+        case Constants.DOCUMENT_FLOW_GROUP.INBOUND_DELIVERY_ITEM:
+          sDetailRouteName = Constants.ROUTES_NAME.INBOUND_DELIVERY_ITEM;
+          break;
+        case Constants.DOCUMENT_FLOW_GROUP.SHIPMENT:
+          sDetailRouteName = "";
           break;
       }
 
+      // Uncomment once navigation to TS is available
+      // if(!sDetailRouteName) {
+      //   this.navigateToShipmentApp(oRouterConfig.id);
+      // } else {
       this.getRouter().navTo(sDetailRouteName, oRouterConfig);
+      // }
+    },
+
+    /**
+     * Cross-app navigation to the external Shipment application.
+     * @param {string} sShipmentId shipment id
+     */
+    navigateToShipmentApp: function (sShipmentId) {
+      var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+      var oNavObj = {
+        target: {
+          semanticObject: "Shipment",
+          action: "track",
+        },
+      };
+      oCrossAppNav.isNavigationSupported([oNavObj])
+        .done(function (aResults) {
+          if (aResults[0].supported) {
+            var sExternalHref = oCrossAppNav.hrefForExternal(oNavObj);
+            var sPath = "&/Shipment(guid'" + sShipmentId + "')";
+            var sUrl = window.location.href.split("#")[0] + sExternalHref + sPath;
+
+            sap.m.URLHelper.redirect(sUrl, true);
+          } else {
+            this.displayErrorMessageBox(false, true, this.getText("crossNavigationNotSupportedMsg"));
+          }
+        }.bind(this));
     },
 
     /**
@@ -128,8 +162,8 @@ sap.ui.define([
         key: "ValueStatusWarning",
         parameter: "sapUiWarningColor",
       }, {
-        key: "ValueStatusInformation",
-        parameter: "sapUiFieldInformationColor",
+        key: "ValueStatusSuccess",
+        parameter: "sapUiSuccessColor",
       }];
 
       aStatusConfigList.forEach(function (oStatusConf) {
@@ -168,9 +202,9 @@ sap.ui.define([
           return "sap-icon://documents";
         case Constants.DOCUMENT_FLOW_GROUP.PURCHASE_ORDER_ITEM:
           return "sap-icon://document-text";
-        case Constants.DOCUMENT_FLOW_GROUP.INDOUND_DELIVERY_ITEM:
+        case Constants.DOCUMENT_FLOW_GROUP.INBOUND_DELIVERY_ITEM:
           return "sap-icon://sap-box";
-        case Constants.DOCUMENT_FLOW_GROUP.INDOUND_DELIVERY:
+        case Constants.DOCUMENT_FLOW_GROUP.INBOUND_DELIVERY:
           return "sap-icon://shipping-status";
         case Constants.DOCUMENT_FLOW_GROUP.SHIPMENT:
           return "sap-icon://BusinessSuiteInAppSymbols/icon-container-loading";
@@ -196,11 +230,11 @@ sap.ui.define([
         case Constants.DOCUMENT_FLOW_GROUP.PURCHASE_ORDER_ITEM:
           sEntitySet = Constants.ENTITY_TYPES.PURCHASE_ORDER_ITEM;
           break;
-        case Constants.DOCUMENT_FLOW_GROUP.INDOUND_DELIVERY_ITEM:
-          sEntitySet = Constants.ENTITY_TYPES.INDOUND_DELIVERY_ITEM;
+        case Constants.DOCUMENT_FLOW_GROUP.INBOUND_DELIVERY_ITEM:
+          sEntitySet = Constants.ENTITY_TYPES.INBOUND_DELIVERY_ITEM;
           break;
-        case Constants.DOCUMENT_FLOW_GROUP.INDOUND_DELIVERY:
-          sEntitySet = Constants.ENTITY_TYPES.INDOUND_DELIVERY;
+        case Constants.DOCUMENT_FLOW_GROUP.INBOUND_DELIVERY:
+          sEntitySet = Constants.ENTITY_TYPES.INBOUND_DELIVERY;
           break;
         case Constants.DOCUMENT_FLOW_GROUP.SHIPMENT:
           sEntitySet = Constants.ENTITY_TYPES.SHIPMENT;
@@ -223,9 +257,9 @@ sap.ui.define([
         };
         return this.formatter.formatDateRange(oDateConfigurationSettings);
       } else if (oAttribute.propertyName === Constants.PROCESS_STATUS_CODE_PROP) {
-        return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ProcessStatus_".concat(oAttribute.value).concat("_NAME"));
+        return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ProcessStatus_" + oAttribute.value + "_NAME");
       } else if (oAttribute.propertyName === Constants.EXECUTION_STATUS_CODE_PROP) {
-        return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ExecutionStatus_".concat(oAttribute.value).concat("_NAME"));
+        return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ExecutionStatus_" + oAttribute.value + "_NAME");
       } else {
         return this.formatter.formatAmountUnitField(oAttribute.value, oAttribute.uom);
       }
@@ -243,9 +277,9 @@ sap.ui.define([
       }
       var sTrackingIdType = oNode.trackingIdType,
         sGroup = oNode.group,
-        bIfNodeHasLink = sTrackingIdType === Constants.TRACKING_ID_TYPE.INDOUND_DELIVERY
-          || sTrackingIdType === Constants.TRACKING_ID_TYPE.INBOUND_SHIPMENT
-          || sTrackingIdType === Constants.TRACKING_ID_TYPE.RESOURCE;
+        bIfNodeHasLink = sTrackingIdType === Constants.TRACKING_ID_TYPE.INBOUND_DELIVERY
+          || sTrackingIdType === Constants.TRACKING_ID_TYPE.INBOUND_RESOURCE
+          || sTrackingIdType === Constants.TRACKING_ID_TYPE.INBOUND_SHIPMENT;
       return this.getViewModel().getProperty(Constants.FOCUS_GROUP_PATH) !== +sGroup && !bIfNodeHasLink;
     },
 

@@ -89,17 +89,6 @@ class EventServiceImplTest {
     }
 
     @Test
-    void getEventTypesMetadata_givenEventType_shouldReturnEventTypeMetadata() {
-        // given
-        final String eventType = "Arrival";
-
-        when(gttCoreServiceClient.getEventTypesMetadata(eventType)).thenReturn("metadata");
-
-        // when-then
-        assertDoesNotThrow(() -> eventService.getEventTypesMetadata(eventType));
-    }
-
-    @Test
     void getCodeList_givenCodeListNameAndLocale_shouldReturnCodeList() {
         // given
         final String codeListName = "TransportMeansStandardCode";

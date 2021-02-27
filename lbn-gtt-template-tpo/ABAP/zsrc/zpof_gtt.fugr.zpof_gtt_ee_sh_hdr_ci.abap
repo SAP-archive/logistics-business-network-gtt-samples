@@ -62,7 +62,7 @@ FUNCTION zpof_gtt_ee_sh_hdr_ci.
   TRY.
       lcl_ae_performer=>get_event_data(
         EXPORTING
-          is_definition           = VALUE #( maintab = lif_pof_constants=>cs_tabledef-sh_header_new )
+          is_definition           = VALUE #( maintab = lif_app_constants=>cs_tabledef-sh_header_new )
           io_ae_factory           = NEW lcl_ae_factory_sh_header_ci( )
           iv_appsys               = i_appsys
           is_event_type           = i_event_type

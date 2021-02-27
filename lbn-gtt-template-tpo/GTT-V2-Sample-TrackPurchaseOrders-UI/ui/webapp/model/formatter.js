@@ -47,17 +47,17 @@ sap.ui.define([
       } else if (minutes < 60) {
         duration = this.getText(unit.minutes, [minutes]);
         if (seconds % 60 !== 0) {
-          duration = duration.concat(" ", this.getText(unit.seconds, [seconds % 60]));
+          duration = duration + " " + this.getText(unit.seconds, [seconds % 60]);
         }
       } else if (minutes < 1440) {
         duration = this.getText(unit.hours, [hours]);
         if (minutes % 60 !== 0) {
-          duration = duration.concat(" ", this.getText(unit.minutes, [minutes % 60]));
+          duration = duration + " " + this.getText(unit.minutes, [minutes % 60]);
         }
       } else {
         duration = this.getText(unit.days, [days]);
         if (hours % 24 !== 0) {
-          duration = duration.concat(" ", this.getText(unit.hours, [hours % 24]));
+          duration = duration + " " + this.getText(unit.hours, [hours % 24]);
         }
       }
       return duration;
@@ -194,9 +194,9 @@ sap.ui.define([
     formatEventTitle: function (oTimelineEvent) {
       var sTitleDescription = this.formatter.getDescriptionText.call(this, oTimelineEvent.eventType);
       if (oTimelineEvent.location && oTimelineEvent.location.locationDescription) {
-        return sTitleDescription.concat(": ").concat(oTimelineEvent.location.locationDescription);
+        return sTitleDescription + this.getText("labelDescriptionSeparator") + " " + oTimelineEvent.location.locationDescription;
       } else if (oTimelineEvent.locationId) {
-        return sTitleDescription.concat(": ").concat(oTimelineEvent.locationId);
+        return sTitleDescription + this.getText("labelDescriptionSeparator") + " " + oTimelineEvent.locationId;
       } else {
         return sTitleDescription;
       }
@@ -216,7 +216,7 @@ sap.ui.define([
         return "";
       }
 
-      var sKey = "CO_ProcessStatus_".concat(sStatus).concat("_NAME");
+      var sKey = "CO_ProcessStatus_" + sStatus + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
     },
 
@@ -225,7 +225,7 @@ sap.ui.define([
         return "";
       }
 
-      var sKey = "CO_ExecutionStatus_".concat(sStatus).concat("_NAME");
+      var sKey = "CO_ExecutionStatus_" + sStatus + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
     },
 
@@ -238,11 +238,8 @@ sap.ui.define([
       }
 
       return aData.reduce(function (sPrevious, oCurrent) {
-        return sPrevious.concat(
-          formatter.eventStatusText.call(this, oCurrent.eventStatus_code)
-            .concat(" ").concat(oCurrent.count).concat("\n")
-        );
-      }.bind(this), sTitle.concat("\n"));
+        return sPrevious + formatter.eventStatusText.call(this, oCurrent.eventStatus_code) + " " + oCurrent.count + "\n";
+      }.bind(this), sTitle + "\n");
     },
 
     eventStatusText: function (sStatus) {
@@ -250,7 +247,7 @@ sap.ui.define([
         return "";
       }
 
-      var sKey = "CO_EventStatus_".concat(sStatus).concat("_NAME");
+      var sKey = "CO_EventStatus_" + sStatus + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
     },
 
@@ -259,14 +256,14 @@ sap.ui.define([
         return "";
       }
 
-      var sKey = "CO_EventStatus_".concat(sStatus).concat("_NAME");
+      var sKey = "CO_EventStatus_" + sStatus + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
     },
 
     getProcessStatusState: function (sStatus) {
       switch(sStatus) {
         case Constants.PROCESS_STATUS_CODE.AS_PLANNED:
-          return ValueState.Information;
+          return ValueState.Success;
         case Constants.PROCESS_STATUS_CODE.LATE:
         case Constants.PROCESS_STATUS_CODE.EARLY:
         case Constants.PROCESS_STATUS_CODE.OVERDUE:
@@ -317,12 +314,17 @@ sap.ui.define([
       return Number(((Number(sValue) / Number(sTotal)) * 100).toFixed(2));
     },
 
-    vpLocationTypeText: function (sType) {
+    /**
+     * Format vp location type string
+     * @param {string} sType vp location type
+     * @returns {string} formatted value from i18n
+     */
+    formatVpLocationTypeText: function (sType) {
       if (!sType) {
         return "";
       }
 
-      var sKey = "CO_VPLocationType_".concat(sType).concat("_NAME");
+      var sKey = "CO_VPLocationType_" + sType + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sType, sKey);
     },
 
@@ -331,28 +333,81 @@ sap.ui.define([
         return "–";
       }
 
-      var sKey = "ET_".concat(sStatus.split(".").pop()).concat("_DESCR");
+      var sKey = "ET_" + sStatus.split(".").pop() + "_DESCR";
       return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
     },
 
-    lastReportedEventStatusTableText: function (sStatus) {
+    /**
+     * Format last reported event value
+     * @param {string} sStatus execution status code value
+     * @param {string} sLastLocationDescription last location description
+     * @param {string} sLastVPLocationType last VP location type value
+     * @returns {string} formatted last reported event value for table column
+     */
+    lastReportedEventStatusTableText: function (sStatus, sLastLocationDescription, sLastVPLocationType) {
       if (!sStatus) {
         return "";
       }
 
-      var sKey = "ET_".concat(sStatus.split(".").pop()).concat("_DESCR");
-      return formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
+      var sKey = "ET_" + sStatus + "_DESCR";
+      var sLastEventTypeText = formatter.getCodeListDescriptionFromI18n.call(this, sStatus, sKey);
+
+      if (sLastLocationDescription) {
+        return sLastEventTypeText + this.getText("labelDescriptionSeparator") + " " + sLastLocationDescription;
+      } else if (sLastVPLocationType) {
+        return sLastEventTypeText + this.getText("labelDescriptionSeparator") + " " + formatter.formatVpLocationTypeText.call(this, sLastVPLocationType);
+      }
+      return sLastEventTypeText;
     },
 
-    getTableExecutionStatusText: function (sExecutionStatus, sLastReportedEvent) {
+    /**
+     * Format execution status column value
+     * @param {string} sExecutionStatus execution status code value
+     * @param {string} sLastReportedEvent last reported event name
+     * @param {string} sLastLocationDescription last location description
+     * @param {string} sLastVPLocationType last VP location type value
+     * @returns {string} formatted execution status value for table column
+     */
+    getTableExecutionStatusText: function (sExecutionStatus, sLastReportedEvent, sLastLocationDescription, sLastVPLocationType) {
       if(!sLastReportedEvent) {
-        return formatter.getExecutionStatusText.call(this,sExecutionStatus);
+        return formatter.getExecutionStatusText.call(this, sExecutionStatus);
       }
 
-      return formatter.getExecutionStatusText.call(this,sExecutionStatus)
-        .concat(" (")
-        .concat(formatter.lastReportedEventStatusTableText.call(this,sLastReportedEvent))
-        .concat(")");
+      return formatter.getExecutionStatusText.call(this, sExecutionStatus) + " (" + 
+      formatter.lastReportedEventStatusTableText.call(this, sLastReportedEvent, sLastLocationDescription, sLastVPLocationType) + ")";
+    },
+
+    /**
+     * Format execution status generic tag tooltip value in header
+     * @param {string} sExecutionStatus execution status code value
+     * @param {string} sLastReportedEvent last reported event name
+     * @param {string} sLastLocationDescription last location description
+     * @param {string} sLastVPLocationType last VP location type value
+     * @returns {string} formatted execution status tooltip value for inbound delivery item header
+     */
+    getHeaderExecutionStatusTooltip: function (sExecutionStatus, sLastReportedEvent, sLastLocationDescription, sLastVPLocationType) {
+      if(!sLastReportedEvent) {
+        return formatter.getExecutionStatusText.call(this, sExecutionStatus);
+      }
+
+      return formatter.lastReportedEventStatusTableText.call(this, sLastReportedEvent, sLastLocationDescription, sLastVPLocationType);
+    },
+
+    /**
+     * Format execution status generic tag text value in header
+     * @param {string} sExecutionStatus execution status code value
+     * @param {string} sLastReportedEvent last reported event name
+     * @returns {string} formatted execution status value for inbound delivery item header
+     */
+    getHeaderExecutionStatusText: function (sExecutionStatus, sLastReportedEvent) {
+      if(!sLastReportedEvent) {
+        return formatter.getExecutionStatusText.call(this, sExecutionStatus);
+      }
+
+      var sKey = "ET_" + sLastReportedEvent + "_DESCR";
+      var sLastEventTypeText = formatter.getCodeListDescriptionFromI18n.call(this, sLastReportedEvent, sKey);
+
+      return sLastEventTypeText;
     },
 
     carrierRefDocumentTypeText: function (sType) {
@@ -364,7 +419,7 @@ sap.ui.define([
         return this.getText("visibilityProvider");
       }
 
-      var sKey = "CO_CarrierRefDocumentType_".concat(sType).concat("_NAME");
+      var sKey = "CO_CarrierRefDocumentType_" + sType + "_NAME";
       return formatter.getCodeListDescriptionFromI18n.call(this, sType, sKey);
     },
 

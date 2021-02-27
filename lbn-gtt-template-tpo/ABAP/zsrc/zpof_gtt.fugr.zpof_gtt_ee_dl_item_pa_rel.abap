@@ -23,8 +23,8 @@ FUNCTION zpof_gtt_ee_dl_item_pa_rel.
       e_result  = lcl_ae_performer=>check_relevance(
         EXPORTING
           is_definition       = VALUE #(
-                                  maintab   = lif_pof_constants=>cs_tabledef-dl_item_new
-                                  mastertab = lif_pof_constants=>cs_tabledef-dl_header_new )
+                                  maintab   = lif_app_constants=>cs_tabledef-dl_item_new
+                                  mastertab = lif_app_constants=>cs_tabledef-dl_header_new )
           io_ae_factory       = NEW lcl_ae_factory_dl_item_pa( )
           iv_appsys           = i_appsys
           is_event_type       = i_event_types

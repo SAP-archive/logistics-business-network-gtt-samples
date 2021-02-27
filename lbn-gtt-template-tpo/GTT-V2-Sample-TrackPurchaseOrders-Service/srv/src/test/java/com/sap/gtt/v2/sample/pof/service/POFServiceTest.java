@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -34,6 +35,7 @@ public class POFServiceTest {
     @InjectMocks
     private GTTCoreServiceClient gttCoreServiceClient;
 
+    @Spy
     private POFService pofService;
 
     @Before
@@ -41,7 +43,7 @@ public class POFServiceTest {
         ReflectionTestUtils.setField(gttCoreServiceClient, "techUser", "");
         ReflectionTestUtils.setField(gttCoreServiceClient, "criticalInfo", "");
         ReflectionTestUtils.setField(gttCoreServiceClient, "gttBaseUrl", "https://dummy");
-        pofService = Mockito.spy(new POFService(gttCoreServiceClient));
+        ReflectionTestUtils.setField(pofService, "gttCoreServiceClient", gttCoreServiceClient);
     }
 
     @Test

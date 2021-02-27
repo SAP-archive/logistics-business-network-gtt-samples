@@ -35,7 +35,7 @@ sap.ui.define([
     },
 
     getHereMapKey: function () {
-      var sHereMapKeyUrl = ServiceUtils.getUrl(ServiceUtils.getDataSource("restService").uri.concat("/hereMapKey"));
+      var sHereMapKeyUrl = ServiceUtils.getUrl(ServiceUtils.getDataSource("restService").uri + "/hereMapKey");
       var oRequest = RestClient.get(sHereMapKeyUrl);
       oRequest.then(function (oData) {
         this.keys.HERE = oData.key;
@@ -73,7 +73,7 @@ sap.ui.define([
             "name": "layer1",
             "refMapProvider": sProvider,
             "opacity": "1.0",
-            "colBkgnd": "RGB(255,255,255)",
+            "colBkgnd": Constants.COLORS.DELAYED_OVERDUE,
           },
         }],
       };
@@ -157,16 +157,16 @@ sap.ui.define([
       var oLastReportedEvent = aActualSpots[aActualSpots.length - 1];
 
       if(!!oLastReportedEvent.plannedEventId && !!aPlannedSpots.length) {
-        var oRefPlannedSpot = aPlannedSpots.find(function (oPlannedSpot) {
+        var oRefPlannedSpot = aPlannedSpots.filter(function (oPlannedSpot) {
           return oPlannedSpot.plannedEventId === oLastReportedEvent.plannedEventId;
-        });
+        })[0];
         if (oRefPlannedSpot && oRefPlannedSpot.eventMatchKey !== oLastReportedEvent.eventMatchKey) {
           var iNextPlannedSpotIndex = aPlannedSpots.indexOf(oRefPlannedSpot);
           aPlannedSpots = aPlannedSpots.slice(iNextPlannedSpotIndex);
         } else {
-          var oNextSpot = aPlannedSpots.find(function (oPlannedSpot) {
+          var oNextSpot = aPlannedSpots.filter(function (oPlannedSpot) {
             return oPlannedSpot.eventMatchKey === oLastReportedEvent.eventMatchKey && oPlannedSpot.eventType === oLastReportedEvent.eventType;
-          });
+          })[0];
           if (oNextSpot) {
             var iNextSpotIndex = aPlannedSpots.indexOf(oNextSpot);
             aPlannedSpots = aPlannedSpots.slice(iNextSpotIndex + 1);
@@ -215,7 +215,7 @@ sap.ui.define([
 
     getStopWithETATooltip: function (oItem) {
       var sText = this.getText("stop", [oItem.locationDescription]);
-      sText += "\n" + this.getText("estimatedArrivalTime").concat(": ").concat(this.formatTimestamp(oItem.estimatedArrival.estimatedArrivalTime));
+      sText += "\n" + this.getText("estimatedArrivalTime") + " " + this.formatTimestamp(oItem.estimatedArrival.estimatedArrivalTime);
       return sText;
     },
 
@@ -223,10 +223,9 @@ sap.ui.define([
       switch (sEventStatusCode) {
         case Constants.EVENT_STATUS_CODE.DELAYED:
         case Constants.EVENT_STATUS_CODE.OVERDUE:
-          return "rgb(255, 255, 255)";
+          return Constants.COLORS.DELAYED_OVERDUE;
       }
-
-      return "rgb(9, 97, 185)";
+      return Constants.COLORS.STANDARD;
     },
 
     getEventTypeLocationDescription: function (oItem) {
@@ -237,13 +236,13 @@ sap.ui.define([
       }
       var sLocationDescription = oItem.locationDescription;
       if (sLocationDescription) {
-        return sDescription.concat(": ").concat(sLocationDescription);
+        return sDescription + this.getText("labelDescriptionSeparator") + " " + sLocationDescription;
       }
 
       var sLocationTypeCode = oItem.locationTypeCode;
       if (sLocationTypeCode) {
-        var sLocationTypeText = this.formatter.vpLocationTypeText(sLocationTypeCode);
-        return sDescription.concat(": ").concat(sLocationTypeText);
+        var sLocationTypeText = this.formatter.formatVpLocationTypeText(sLocationTypeCode);
+        return sDescription + this.getText("labelDescriptionSeparator") + " " + sLocationTypeText;
       }
       return sDescription;
     },

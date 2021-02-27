@@ -1,7 +1,0 @@
-dist/
-coverage/
-target/
-Gruntfile.js
-karma*.conf.js
-server.js
-vendor/

@@ -9,6 +9,7 @@ import static org.apache.olingo.odata2.api.annotation.edm.EdmType.DATE_TIME_OFFS
 import com.google.gson.annotations.SerializedName;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import org.apache.olingo.odata2.api.annotation.edm.EdmEntitySet;
 import org.apache.olingo.odata2.api.annotation.edm.EdmEntityType;
@@ -229,6 +230,9 @@ public class Shipment {
 
     @EdmNavigationProperty(name = "deliveryTPs", toType = DeliveryTp.class, toMultiplicity = MANY)
     private List<DeliveryTp> deliveryTps;
+
+    @EdmNavigationProperty(name = "freightUnitTPs", toType = FreightUnitTp.class, toMultiplicity = MANY)
+    private List<FreightUnitTp> freightUnitTps;
 
     public UUID getId() {
         return id;
@@ -740,5 +744,30 @@ public class Shipment {
 
     public void setDeliveryTps(List<DeliveryTp> deliveryTps) {
         this.deliveryTps = deliveryTps;
+    }
+
+    public List<FreightUnitTp> getFreightUnitTps() {
+        return freightUnitTps;
+    }
+
+    public void setFreightUnitTps(List<FreightUnitTp> freightUnitTps) {
+        this.freightUnitTps = freightUnitTps;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Shipment that = (Shipment) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -1,4 +1,4 @@
-FUNCTION ZPOF_GTT_EE_DL_ITEM_PA.
+FUNCTION zpof_gtt_ee_dl_item_pa.
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -63,8 +63,8 @@ FUNCTION ZPOF_GTT_EE_DL_ITEM_PA.
       lcl_ae_performer=>get_event_data(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_pof_constants=>cs_tabledef-dl_item_new
-                                    mastertab = lif_pof_constants=>cs_tabledef-dl_header_new )
+                                    maintab   = lif_app_constants=>cs_tabledef-dl_item_new
+                                    mastertab = lif_app_constants=>cs_tabledef-dl_header_new )
           io_ae_factory           = NEW lcl_ae_factory_dl_item_pa( )
           iv_appsys               = i_appsys
           is_event_type           = i_event_type

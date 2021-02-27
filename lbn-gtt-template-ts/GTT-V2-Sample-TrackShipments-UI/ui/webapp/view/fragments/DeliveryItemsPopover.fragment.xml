@@ -1,12 +1,51 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
-	<ResponsivePopover
-		title="{i18n>deliveryItems}"
-		placement="Bottom">
-		<List>
-			<CustomListItem>
-			</CustomListItem>
-		</List>
+	<ResponsivePopover id="deliveryItemsPopover"
+		title="{i18n>items} ({props>/count})"
+		showCloseButton="{device>/system/phone}"
+		contentWidth="34rem"
+		contentHeight="16rem"
+		placement="VerticalPreferredBottom">
+
+		<Table id="deliveryItemsTable"
+			alternateRowColors="true"
+			growing="true"
+			items="{props>/deliveryItems}">
+			<columns>
+				<Column id="deliveryColumn" width="10rem" />
+				<Column id="materialColumn" />
+				<Column id="quantityColumn" hAlign="End" width="6rem" />
+				<Column id="eventStatusColumn" hAlign="Center" />
+			</columns>
+
+			<ColumnListItem type="Navigation"
+				press=".handleDeliveryItemPress(${props>})">
+				<ObjectIdentifier text="{props>deliveryNo} / {props>itemNo}" />
+				<ObjectIdentifier text="{props>materialDescription}" />
+				<ObjectNumber
+					number="{
+						parts: ['props>orderQuantity', 'props>quantityUoM'],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: false
+						}
+					}"
+					unit="{props>quantityUoM}" />
+				<ObjectStatus
+					text="{
+						path: 'props>eventStatusCode',
+						formatter: '.formatter.eventStatusText'
+					}"
+					state="{
+						path: 'props>eventStatusCode',
+						formatter: '.formatter.eventStatus.getState'
+					}"
+					inverted="{=
+						${props>eventStatusCode} === 'DELAYED' ||
+						${props>eventStatusCode} === 'OVERDUE'
+					}" />
+			</ColumnListItem>
+		</Table>
 	</ResponsivePopover>
 </core:FragmentDefinition>

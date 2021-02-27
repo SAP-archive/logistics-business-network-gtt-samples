@@ -45,7 +45,7 @@ sap.ui.define([
     stub(controller, "byId").withArgs("vpRow").returns(fakeRow);
 
     // Act
-    controller.addVpRowInRefDocumentsTable(fakeSource, undefined);
+    controller.addVpRowInRefDocumentsTable(false, fakeSource, undefined);
 
     // Assert
     assert.ok(fakeSource.data.calledWith("isVpRowAdded", false), "The custom data is updated");
@@ -58,12 +58,15 @@ sap.ui.define([
     // Arrange
     var fakeSource = {};
     stub(fakeSource, "data").withArgs("isVpRowAdded").returns(true);
+    var fakeRow = {};
     var fakeText = {};
     stub(fakeText, "setText");
-    stub(controller, "byId").withArgs("trackIdText").returns(fakeText);
+    stub(controller, "byId")
+      .withArgs("vpRow").returns(fakeRow)
+      .withArgs("trackIdText").returns(fakeText);
 
     // Act
-    controller.addVpRowInRefDocumentsTable(fakeSource, "ID1");
+    controller.addVpRowInRefDocumentsTable(false, fakeSource, "ID1");
 
     // Assert
     assert.ok(fakeText.setText.calledWith("ID1"), "The track Id is updated");

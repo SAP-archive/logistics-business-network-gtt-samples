@@ -95,16 +95,6 @@
     "inboundDeliveryItems": {
       "results": [
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=1,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=1,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 1,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020041000010",
-          "inboundDeliveryItem_id": "9d466972-38eb-54e8-9389-f2e1fcdd4849",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'9d466972-38eb-54e8-9389-f2e1fcdd4849')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'9d466972-38eb-54e8-9389-f2e1fcdd4849')",
@@ -225,23 +215,7 @@
               }
             }
           },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=1,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
-          }
-        },
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=2,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=2,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 2,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020043000010",
-          "inboundDeliveryItem_id": "d93c47ba-3192-5663-ba82-7130ac3ebe2d",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'd93c47ba-3192-5663-ba82-7130ac3ebe2d')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'd93c47ba-3192-5663-ba82-7130ac3ebe2d')",
@@ -361,24 +335,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'd93c47ba-3192-5663-ba82-7130ac3ebe2d')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=2,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=3,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=3,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 3,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020044000010",
-          "inboundDeliveryItem_id": "38b94f46-74bd-5d77-b18c-2256393dde03",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'38b94f46-74bd-5d77-b18c-2256393dde03')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'38b94f46-74bd-5d77-b18c-2256393dde03')",
@@ -498,24 +457,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'38b94f46-74bd-5d77-b18c-2256393dde03')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=3,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=4,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=4,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 4,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020045000010",
-          "inboundDeliveryItem_id": "b9e43d17-97c4-5236-a794-7e4cd522ab3b",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'b9e43d17-97c4-5236-a794-7e4cd522ab3b')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'b9e43d17-97c4-5236-a794-7e4cd522ab3b')",
@@ -635,24 +579,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'b9e43d17-97c4-5236-a794-7e4cd522ab3b')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=4,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=5,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=5,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 5,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020046000010",
-          "inboundDeliveryItem_id": "f8739b38-21da-5d6c-9a55-f607b12747e7",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'f8739b38-21da-5d6c-9a55-f607b12747e7')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'f8739b38-21da-5d6c-9a55-f607b12747e7')",
@@ -772,24 +701,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'f8739b38-21da-5d6c-9a55-f607b12747e7')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=5,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=6,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=6,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 6,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020047000010",
-          "inboundDeliveryItem_id": "4bbd1794-2686-5a32-b90e-3c906b003778",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'4bbd1794-2686-5a32-b90e-3c906b003778')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'4bbd1794-2686-5a32-b90e-3c906b003778')",
@@ -909,24 +823,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'4bbd1794-2686-5a32-b90e-3c906b003778')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=6,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=7,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=7,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 7,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020048000010",
-          "inboundDeliveryItem_id": "c6ab07e8-74ba-5153-8020-0c7b3a1d4727",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c6ab07e8-74ba-5153-8020-0c7b3a1d4727')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c6ab07e8-74ba-5153-8020-0c7b3a1d4727')",
@@ -1046,24 +945,9 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c6ab07e8-74ba-5153-8020-0c7b3a1d4727')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=7,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        },
+        ,
         {
-          "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=8,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=8,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')",
-            "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItems"
-          },
-          "lineNo": 8,
-          "inboundDeliveryItemAltKey": "xri://sap.com/id:LBN#10010001016:QW9CLNT170:INBOUND_DELIVERY_IT:0187020050000010",
-          "inboundDeliveryItem_id": "c775ac01-e8b8-5b56-a694-41c91dbc7359",
-          "purchaseOrderItem_id": "01d6b562-6391-5ffa-a018-87a090da75a0",
-          "inboundDeliveryItem": {
             "__metadata": {
               "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c775ac01-e8b8-5b56-a694-41c91dbc7359')",
               "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c775ac01-e8b8-5b56-a694-41c91dbc7359')",
@@ -1183,13 +1067,7 @@
                 "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/InboundDeliveryItem(guid'c775ac01-e8b8-5b56-a694-41c91dbc7359')/executionStatus"
               }
             }
-          },
-          "purchaseOrderItem": {
-            "__deferred": {
-              "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-acc.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.pof.pofService/PurchaseOrderItemInboundDeliveryItems(lineNo=8,purchaseOrderItem_id=guid'01d6b562-6391-5ffa-a018-87a090da75a0')/purchaseOrderItem"
-            }
           }
-        }
       ]
     },
     "scheduleLines": {

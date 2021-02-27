@@ -1,13 +1,11 @@
 sap.ui.define(
   [
     "sap/ui/test/opaQunit",
-    "com/sap/gtt/app/sample/sst/controller/ShipmentList.controller",
     "./pages/ShipmentListPage",
     "./pages/ShipmentPage",
   ],
   function (
-    opaTest,
-    ShipmentList
+    opaTest
   ) {
     "use strict";
 
@@ -34,6 +32,25 @@ sap.ui.define(
 
       // Assertions
       Then.onTheShipmentPage.iShouldSeeTheHeadingTitle();
+
+      // Cleanup
+      Then.iTeardownMyApp();
+    });
+
+    opaTest("Should navigation to the freight unit page", function (Given, When, Then) {
+      // Arrangements
+      Given.iStartMyUIComponent({
+        componentConfig: {
+          name: "com/sap/gtt/app/sample/sst",
+          async: true,
+        },
+        hash: "#/FreightUnit(guid'2337b132-c573-5449-b41e-9325e6b18e00')/?itemNo=10",
+        timeout: 60,
+        autoWait: true,
+      });
+
+      // Assertions
+      Then.onTheShipmentPage.iShouldSeeTheFreightUnitHeadingTitle();
 
       // Cleanup
       Then.iTeardownMyApp();

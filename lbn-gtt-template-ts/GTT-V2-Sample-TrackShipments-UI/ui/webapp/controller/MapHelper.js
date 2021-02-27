@@ -54,9 +54,13 @@ sap.ui.define(
      */
     MapHelper.setMapConfiguration = function (map, provider) {
       var protocal = "https";
-      var hereHost = "1.base.maps.ls.hereapi.com";
+      var hereHost1 = "1.base.maps.ls.hereapi.com";
+      var hereHost2 = "2.base.maps.ls.hereapi.com";
+      var hereHost3 = "3.base.maps.ls.hereapi.com";
+      var hereHost4 = "4.base.maps.ls.hereapi.com";
       var appLanguage = sap.ui.getCore().getConfiguration().getLanguageTag();
       var tileLanguage = LanguageMappings[appLanguage] || "eng";
+      var servicePattern = "{0}://{1}/maptile/2.1/maptile/newest/normal.day/'{LOD}'/'{X}'/'{Y}'/256/png8?apikey={2}&lg={3}";
 
       var configuration = {
         "MapProvider": [{
@@ -66,11 +70,13 @@ sap.ui.define(
           "tileX": "256",
           "tileY": "256",
           "maxLOD": "22",
-          "copyright": "",
-          "Source": [{
-            "id": "s1",
-            "url": formatMessage("{0}://{1}/maptile/2.1/maptile/newest/normal.day/'{LOD}'/'{X}'/'{Y}'/256/png8?apikey={2}&lg={3}", protocal, hereHost, keys.HERE, tileLanguage),
-          }],
+          "copyright": "Copyright &copy; HERE",
+          "Source": [hereHost1, hereHost2, hereHost3, hereHost4].map(function (hereHost, index) {
+            return {
+              "id": "server" + index,
+              "url": formatMessage(servicePattern, protocal, hereHost, keys.HERE, tileLanguage),
+            };
+          }),
         }, {
           "name": "OpenStreet",
           "type": "",
@@ -78,7 +84,7 @@ sap.ui.define(
           "tileX": "256",
           "tileY": "256",
           "maxLOD": "22",
-          "copyright": "",
+          "copyright": "Copyright &copy; OpenStreet",
           "Source": [{
             "id": "s1",
             "url": formatMessage("{0}://maps.geoapify.com/v1/tile/osm-carto/'{LOD}'/'{X}'/'{Y}'.png?apiKey={1}", protocal, keys.OpenStreet),

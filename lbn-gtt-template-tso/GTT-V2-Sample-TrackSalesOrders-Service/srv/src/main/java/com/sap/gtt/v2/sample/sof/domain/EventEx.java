@@ -4,6 +4,7 @@ package com.sap.gtt.v2.sample.sof.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class EventEx extends Event {
@@ -14,6 +15,7 @@ public class EventEx extends Event {
     private String refPlannedEventType;
     private String refPlannedEventMatchKey;
     private String refPlannedEventLocationAltKey;
+    private BigDecimal quantity;
 
     @JsonIgnore
     private List<EstimatedArrival> estimatedArrival;
@@ -75,5 +77,13 @@ public class EventEx extends Event {
 
     public void setActualAt(String actualAt) {
         this.actualAt = actualAt;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
 }

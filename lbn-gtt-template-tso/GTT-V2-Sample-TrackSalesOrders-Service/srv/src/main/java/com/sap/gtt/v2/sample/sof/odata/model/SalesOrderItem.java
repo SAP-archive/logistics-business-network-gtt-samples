@@ -44,9 +44,11 @@ public class SalesOrderItem {
     private String processStatusCode;
     @EdmProperty(name = "currency", facets = @EdmFacets(maxLength = 5))
     private String currency;
-    @EdmNavigationProperty(name = "deliveryItemTPs", toType = SalesOrderItemDeliveryItemTP.class, toMultiplicity =
+
+    @EdmNavigationProperty(name = "deliveryItems", toType = DeliveryItem.class, toMultiplicity =
             EdmNavigationProperty.Multiplicity.MANY)
-    private List<SalesOrderItemDeliveryItemTP> deliveryItemTPs;
+    private List<DeliveryItem> deliveryItems;
+
     @EdmProperty(name = "altKey")
     private String altKey;
     @EdmProperty(name = "salesOrder_id")
@@ -123,12 +125,12 @@ public class SalesOrderItem {
         this.altKey = altKey;
     }
 
-    public List<SalesOrderItemDeliveryItemTP> getDeliveryItemTPs() {
-        return deliveryItemTPs;
+    public List<DeliveryItem> getDeliveryItems() {
+        return deliveryItems;
     }
 
-    public void setDeliveryItemTPs(List<SalesOrderItemDeliveryItemTP> deliveryItemTPs) {
-        this.deliveryItemTPs = deliveryItemTPs;
+    public void setDeliveryItems(List<DeliveryItem> deliveryItems) {
+        this.deliveryItems = deliveryItems;
     }
 
     public String getProcessStatusCode() {

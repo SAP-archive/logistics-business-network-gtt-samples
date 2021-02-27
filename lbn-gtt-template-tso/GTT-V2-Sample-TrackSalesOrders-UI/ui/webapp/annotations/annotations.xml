@@ -68,29 +68,6 @@
 					</Collection>
 				</Annotation>
 			</Annotations>
-			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItemTP">
-				<Annotation Term="Common.SemanticKey">
-					<Collection>
-						<PropertyPath>salesOrderItem/itemNo</PropertyPath>
-					</Collection>
-				</Annotation>
-				<Annotation Term="UI.LineItem">
-					<Collection>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="salesOrderItem/itemNo"/>
-						</Record>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="salesOrderItem/materialDescription"/>
-						</Record>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="salesOrderItem/orderQuantity"/>
-						</Record>
-						<Record Type="UI.DataField">
-							<PropertyValue Property="Value" Path="salesOrderItem/netValue"/>
-						</Record>
-					</Collection>
-				</Annotation>
-			</Annotations>
 			<Annotations Target="com.lbngttsamples.gtt.app.sof.sofService.SalesOrderItem">
 				<Annotation Term="Common.SemanticKey">
 					<Collection>
@@ -282,4 +259,3 @@
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>
-

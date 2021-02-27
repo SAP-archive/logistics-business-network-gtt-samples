@@ -40,6 +40,9 @@
 				<zoomLevelOneContent>
 					<m:VBox renderType="Bare">
 						<m:ObjectStatus id="levelOneEventStatus" visible="{= !!${executionFlow>eventStatus} }" class="sofProcessFlowNodeEventStatus sapUiTinyMarginBottom" text="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatusText'}" state="{path: 'executionFlow>eventStatus', formatter: '.formatter.eventStatus.getState'}"/>
+						<m:ObjectStatus id="levelOneEventReason" class="sofProcessFlowNodeValue sofProcessFlowNodeEventReason sapUiTinyMarginBottom"
+							visible="{= !!${executionFlow>eventReasonText} }"
+							text="{executionFlow>eventReasonText}" state="Error"/>
 
 						<m:Label id="levelOnePlannedAtLabel" class="sofProcessFlowNodeLabel" visible="{= !!${executionFlow>plannedAt} }" text="{i18n>plannedAt}:" labelFor="levelOnePlannedAt"/>
 						<m:Text id="levelOnePlannedAt" class="sofProcessFlowNodeValue sapUiTinyMarginBottom" visible="{= !!${executionFlow>plannedAt} }" text="{path: 'executionFlow>plannedAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>
@@ -51,9 +54,7 @@
 						<m:Label id="levelOneActualAtLabel" class="sofProcessFlowNodeLabel" visible="{= !!${executionFlow>actualAt} }" text="{i18n>actualAt}:" labelFor="levelOneActualAt"/>
 						<m:Text id="levelOneActualAt" class="sofProcessFlowNodeValue" visible="{= !!${executionFlow>actualAt} }" text="{path: 'executionFlow>actualAt', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"/>
 
-						<m:ObjectStatus id="levelOneEventReason" class="sofProcessFlowNodeValue sofProcessFlowNodeEventReason" visible="{= ${executionFlow>eventStatus} === 'DELAYED' ? true : false }"
-							title="{i18n>eventReason}"
-							text="{executionFlow>eventReasonText}" state="Error"/>
+
 					</m:VBox>
 				</zoomLevelOneContent>
 				<zoomLevelTwoContent>

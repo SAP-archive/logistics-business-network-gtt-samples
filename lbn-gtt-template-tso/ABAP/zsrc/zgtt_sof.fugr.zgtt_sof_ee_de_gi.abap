@@ -72,7 +72,9 @@ FUNCTION ZGTT_SOF_EE_DE_GI.
 *   Event Mapping
     ls_eventid_map    TYPE trxas_evtid_evtcnt_map_wa,
 *   Location  table for event message input
-    ls_tracklocation  TYPE /saptrx/bapi_evm_locationid.
+    ls_tracklocation  TYPE /saptrx/bapi_evm_locationid,
+*   BAPI structure for Event Handler control parameters
+    ls_parameters     type /SAPTRX/BAPI_EVM_PARAMETERS.
 
   FIELD-SYMBOLS:
 *   Work Structure for Delivery Header
@@ -132,6 +134,19 @@ FUNCTION ZGTT_SOF_EE_DE_GI.
     ls_tracklocation-loccod = 'ShippingPoint'.
     ls_tracklocation-locid1 = <ls_xlikp>-vstel.
     APPEND ls_tracklocation TO ct_tracklocation.
+
+*   Actual Technical Datetime & Time zone
+    CLEAR ls_parameters.
+    ls_parameters-evtcnt = ls_events-eventid.
+    ls_parameters-param_name = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_parameters-param_value = ls_trackingheader-evtzon.
+    APPEND ls_parameters TO ct_trackparameters.
+
+    CLEAR ls_parameters.
+    ls_parameters-evtcnt = ls_events-eventid.
+    ls_parameters-param_name = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_parameters-param_value.
+    APPEND ls_parameters TO ct_trackparameters.
 
   ENDLOOP.
 ENDFUNCTION.

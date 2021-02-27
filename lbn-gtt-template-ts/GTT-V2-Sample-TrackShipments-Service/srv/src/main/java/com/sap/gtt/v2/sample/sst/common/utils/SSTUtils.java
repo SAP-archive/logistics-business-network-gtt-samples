@@ -1,18 +1,17 @@
 package com.sap.gtt.v2.sample.sst.common.utils;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.Constants.DATE_TIME_PATTERN;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventStatus.DELAYED;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventStatus.OVERDUE;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventStatus.PLANNED;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.Objects.nonNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.sap.gtt.v2.sample.sst.common.exception.InternalErrorException;
 import com.sap.gtt.v2.sample.sst.common.exception.SSTServiceException;
+import org.apache.commons.io.IOUtils;
+import org.apache.olingo.odata2.api.edm.EdmException;
+import org.apache.olingo.odata2.api.edm.EdmType;
+import org.apache.olingo.odata2.api.exception.ODataException;
+import org.apache.olingo.odata2.api.processor.ODataContext;
+import org.springframework.core.io.ClassPathResource;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -20,12 +19,12 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.io.IOUtils;
-import org.apache.olingo.odata2.api.edm.EdmException;
-import org.apache.olingo.odata2.api.edm.EdmType;
-import org.apache.olingo.odata2.api.exception.ODataException;
-import org.apache.olingo.odata2.api.processor.ODataContext;
-import org.springframework.core.io.ClassPathResource;
+
+import static com.sap.gtt.v2.sample.sst.common.constant.Constants.DATE_TIME_PATTERN;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventStatus.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 /**
  * {@link SSTUtils} is a common util class.
@@ -118,7 +117,8 @@ public class SSTUtils {
         Matcher matcher = pattern.matcher(uri);
         if (matcher.find()) {
             final String expandExpression = matcher.group(0);
-            final String parameterRegex = "((\\$expand=" + parameterName + ")$)|(%2c|,)?(" + parameterName + ")(%2c|,)?";
+            final String parameterRegex = "((\\$expand=" + parameterName + ")$)|" +
+                    "(%2c|,)+(" + parameterName + ")|(" + parameterName + ")(%2c|,)+";
             final String replacedExpandExpression = expandExpression.replaceAll(parameterRegex, EMPTY);
             return uri.replace(expandExpression, replacedExpandExpression);
         }

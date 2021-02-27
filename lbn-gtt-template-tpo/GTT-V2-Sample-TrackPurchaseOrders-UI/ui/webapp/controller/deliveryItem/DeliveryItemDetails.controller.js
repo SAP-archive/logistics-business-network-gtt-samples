@@ -3,8 +3,7 @@ sap.ui.define([
   "sap/ui/model/json/JSONModel",
   "com/sap/gtt/app/sample/pof/util/ServiceUtils",
   "com/sap/gtt/app/sample/pof/util/RestClient",
-  "sap/base/Log",
-], function (BaseController,JSONModel, ServiceUtils, RestClient, Log) {
+], function (BaseController,JSONModel, ServiceUtils, RestClient) {
   "use strict";
 
   return BaseController.extend("com.sap.gtt.app.sample.pof.controller.deliveryItem.DeliveryItemDetails", {
@@ -27,7 +26,6 @@ sap.ui.define([
       oModel.setProperty(this.sDeliveryItemIdPath, sId);
       oModel.setProperty("/urlParams", aUrlParams);
       oModel.setProperty("/timelineEventsNumber", 0);
-
 
       var oODataModel = this.getModel();
       oODataModel.metadataLoaded()
@@ -53,25 +51,23 @@ sap.ui.define([
       this._refreshReferenceDocuments();
     },
 
-    // ======================================================================
-    // Events
-    // ======================================================================
-
-    // ======================================================================
-    // Private methods
-    // ======================================================================
-
+    /**
+     * Fire request to get fresh timeline events and map data.
+     */
     _refreshTrackingTimeline: function () {
       var oTrackingTimelineController = this.byId("trackingTimelineView").getController();
       oTrackingTimelineController.refresh();
     },
 
+    /**
+     * Fire request to get fresh fulfillmentStatus data.
+     */
     _refreshFulfillmentStatus: function () {
       var oModel = this.getModel(this.routeName);
       var oJsonService = ServiceUtils.getDataSource("restService");
       var sDeliveryItemId = oModel.getProperty(this.sDeliveryItemIdPath);
 
-      var sUrl = ServiceUtils.getUrl(oJsonService.uri.concat("/fulfillmentStatus"));
+      var sUrl = ServiceUtils.getUrl(oJsonService.uri + "/fulfillmentStatus");
       var oRequest = RestClient.get(sUrl, {
         params: {
           inboundDeliveryItemId: sDeliveryItemId,
@@ -87,13 +83,16 @@ sap.ui.define([
       }.bind(this));
     },
 
+    /**
+     * Fire request to get fresh reference document data.
+     */
     _refreshReferenceDocuments: function () {
       var oModel = this.getModel(this.routeName);
       oModel.setProperty(this.sReferenceDocumentsLoadedPath, false);
 
       var oJsonService = ServiceUtils.getDataSource("restService");
       var sDeliveryItemId = oModel.getProperty(this.sDeliveryItemIdPath);
-      var sUrl = ServiceUtils.getUrl(oJsonService.uri.concat("/carrierRefDocuments"));
+      var sUrl = ServiceUtils.getUrl(oJsonService.uri + "/carrierRefDocuments");
       var oRequest = RestClient.get(sUrl, {
         params: {
           deliveryItemId: sDeliveryItemId,
@@ -101,12 +100,23 @@ sap.ui.define([
       });
 
       oRequest.then(function (aData) {
-        oModel.setProperty("/referenceDocuments", aData);
+        oModel.setProperty("/referenceDocuments", this.getFilteredReferenceDocs(aData));
         oModel.setProperty(this.sReferenceDocumentsLoadedPath, true);
       }.bind(this), function (oError) {
         this.handleServerError(oError);
         oModel.setProperty(this.sReferenceDocumentsLoadedPath, true);
       }.bind(this));
+    },
+
+    /**
+     * Return the array of Reference Documents, that have ID.
+     * @param {Object[]} aReferenceDocs Reference Documents array
+     * @return {Object[]} filtered Reference Documents array
+     */
+    getFilteredReferenceDocs: function (aReferenceDocs) {
+      return aReferenceDocs.filter(function (oDoc) {
+        return !!oDoc.docId;
+      });
     },
 
     /**

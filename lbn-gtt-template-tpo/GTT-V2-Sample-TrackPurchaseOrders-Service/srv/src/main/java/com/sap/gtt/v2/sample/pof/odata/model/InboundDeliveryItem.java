@@ -142,6 +142,9 @@ public class InboundDeliveryItem {
     @EdmProperty(name = "lastReportedEvent", facets = @EdmFacets(maxLength = 255))
     private String lastReportedEvent;
 
+    @EdmProperty(name = "plannedArrivalTimestamp",type = EdmType.DATE_TIME_OFFSET)
+    private Long plannedArrivalTimestamp;
+
     @EdmNavigationProperty(name = "supplierLocationType", toType = LocationType.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private LocationType supplierLocationType;
 
@@ -165,6 +168,23 @@ public class InboundDeliveryItem {
 
     @EdmNavigationProperty(name = "executionStatus", toType = ExecutionStatus.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private ExecutionStatus executionStatus;
+
+    @EdmProperty(name = "lastEventName")
+    private String lastEventName;
+
+    @EdmProperty(name = "lastLocationAltKey")
+    private String lastLocationAltKey;
+
+    @EdmProperty(name = "lastLocationDescription")
+    private String lastLocationDescription;
+
+    @EdmProperty(name = "lastVPLocationType_code")
+    @SerializedName("lastVPLocationType_code")
+    private String lastVPLocationTypeCode;
+
+    @EdmNavigationProperty(name = "lastVPLocationType", toType = VPLocationType.class, toMultiplicity =
+            EdmNavigationProperty.Multiplicity.ONE)
+    private VPLocationType lastVPLocationType;
 
     public UUID getId() {
         return id;
@@ -486,6 +506,14 @@ public class InboundDeliveryItem {
         this.lastReportedEvent = lastReportedEvent;
     }
 
+    public Long getPlannedArrivalTimestamp() {
+        return plannedArrivalTimestamp;
+    }
+
+    public void setPlannedArrivalTimestamp(Long plannedArrivalTimestamp) {
+        this.plannedArrivalTimestamp = plannedArrivalTimestamp;
+    }
+
     public LocationType getSupplierLocationType() {
         return supplierLocationType;
     }
@@ -550,6 +578,46 @@ public class InboundDeliveryItem {
         this.executionStatus = executionStatus;
     }
 
+    public String getLastEventName() {
+        return lastEventName;
+    }
+
+    public void setLastEventName(String lastEventName) {
+        this.lastEventName = lastEventName;
+    }
+
+    public String getLastLocationAltKey() {
+        return lastLocationAltKey;
+    }
+
+    public void setLastLocationAltKey(String lastLocationAltKey) {
+        this.lastLocationAltKey = lastLocationAltKey;
+    }
+
+    public String getLastLocationDescription() {
+        return lastLocationDescription;
+    }
+
+    public void setLastLocationDescription(String lastLocationDescription) {
+        this.lastLocationDescription = lastLocationDescription;
+    }
+
+    public String getLastVPLocationTypeCode() {
+        return lastVPLocationTypeCode;
+    }
+
+    public void setLastVPLocationTypeCode(String lastVPLocationTypeCode) {
+        this.lastVPLocationTypeCode = lastVPLocationTypeCode;
+    }
+
+    public VPLocationType getLastVPLocationType() {
+        return lastVPLocationType;
+    }
+
+    public void setLastVPLocationType(VPLocationType lastVPLocationType) {
+        this.lastVPLocationType = lastVPLocationType;
+    }
+
     @Override
     public String toString() {
         return "InboundDeliveryItem{" +
@@ -593,6 +661,7 @@ public class InboundDeliveryItem {
                 ", processStatusCode='" + processStatusCode + '\'' +
                 ", executionStatusCode='" + executionStatusCode + '\'' +
                 ", lastReportedEvent='" + lastReportedEvent + '\'' +
+                ", plannedArrivalTimestamp=" + plannedArrivalTimestamp +
                 ", supplierLocationType=" + supplierLocationType +
                 ", plantLocationType=" + plantLocationType +
                 ", inboundDelivery=" + inboundDelivery +
@@ -601,6 +670,11 @@ public class InboundDeliveryItem {
                 ", plantLocation=" + plantLocation +
                 ", supplierLocation=" + supplierLocation +
                 ", executionStatus=" + executionStatus +
+                ", lastEventName='" + lastEventName + '\'' +
+                ", lastLocationAltKey='" + lastLocationAltKey + '\'' +
+                ", lastLocationDescription='" + lastLocationDescription + '\'' +
+                ", lastVPLocationTypeCode='" + lastVPLocationTypeCode + '\'' +
+                ", lastVPLocationType=" + lastVPLocationType +
                 '}';
     }
 }

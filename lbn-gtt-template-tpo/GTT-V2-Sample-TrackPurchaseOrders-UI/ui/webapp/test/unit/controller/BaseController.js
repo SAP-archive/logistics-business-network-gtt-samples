@@ -21,7 +21,7 @@ sap.ui.define([
     return stubbed;
   }
 
-  QUnit.module("com.sap.gtt.app.sof.controller.BaseController", {
+  QUnit.module("com.sap.gtt.app.pof.controller.BaseController", {
     beforeEach: function () {
       this.controller = new BaseController();
 

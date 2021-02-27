@@ -19,6 +19,14 @@ CLASS lcl_tools DEFINITION.
       RAISING
         cx_udm_message.
 
+    CLASS-METHODS get_postal_address
+      IMPORTING
+        iv_node_id        TYPE /scmtms/bo_node_id
+      EXPORTING
+        et_postal_address TYPE /bofu/t_addr_postal_addressk
+      RAISING
+        cx_udm_message.
+
     CLASS-METHODS get_field_of_structure
       IMPORTING
         ir_struct_data  TYPE REF TO data
@@ -91,12 +99,256 @@ CLASS lcl_tools DEFINITION.
       RETURNING
         VALUE(rv_is_odd) TYPE abap_bool.
 
+    CLASS-METHODS get_capa_match_key
+      IMPORTING
+        iv_assgn_stop_key       TYPE /scmtms/tor_stop_key
+        it_capa_stop            TYPE /scmtms/t_em_bo_tor_stop
+        it_capa_root            TYPE /scmtms/t_em_bo_tor_root
+      RETURNING
+        VALUE(rv_capa_matchkey) TYPE /saptrx/loc_id_2.
+
+    CLASS-METHODS check_is_fo_deleted
+      IMPORTING
+        is_root_new      TYPE /scmtms/s_em_bo_tor_root
+        is_root_old      TYPE /scmtms/s_em_bo_tor_root
+      RETURNING
+        VALUE(rv_result) TYPE lif_ef_types=>tv_condition
+      RAISING
+        cx_udm_message.
+
+    CLASS-METHODS get_fo_tracked_item_obj
+      IMPORTING
+        is_app_object    TYPE trxas_appobj_ctab_wa
+        is_root          TYPE /scmtms/s_em_bo_tor_root
+        it_item          TYPE /scmtms/t_em_bo_tor_item
+        iv_appsys        TYPE /saptrx/applsystem
+        iv_old_data      TYPE abap_bool DEFAULT abap_false
+      CHANGING
+        ct_track_id_data TYPE lif_ef_types=>tt_enh_track_id_data
+      RAISING
+        cx_udm_message.
+
+    CLASS-METHODS get_track_obj_changes
+      IMPORTING
+        is_app_object        TYPE trxas_appobj_ctab_wa
+        iv_appsys            TYPE /saptrx/applsystem
+        it_track_id_data_new TYPE lif_ef_types=>tt_enh_track_id_data
+        it_track_id_data_old TYPE lif_ef_types=>tt_enh_track_id_data
+      CHANGING
+        ct_track_id_data     TYPE lif_ef_types=>tt_track_id_data
+      RAISING
+        cx_udm_message.
 ENDCLASS.
 
 CLASS lcl_tools IMPLEMENTATION.
 
+  METHOD get_track_obj_changes.
+
+    CONSTANTS: cs_mtr_truck       TYPE string VALUE '31',
+               cs_trxcod_resource TYPE string VALUE 'RESOURCE'.
+
+    DATA(lt_track_id_data_new) = it_track_id_data_new.
+    DATA(lt_track_id_data_old) = it_track_id_data_old.
+
+    LOOP AT lt_track_id_data_new ASSIGNING FIELD-SYMBOL(<ls_track_id_data>) WHERE trxcod = cs_trxcod_resource.
+      READ TABLE lt_track_id_data_old WITH KEY key = <ls_track_id_data>-key ASSIGNING FIELD-SYMBOL(<ls_track_id_data_old>).
+      IF sy-subrc = 0.
+        DATA(lt_fields) = CAST cl_abap_structdescr(
+                      cl_abap_typedescr=>describe_by_data(
+                        p_data = <ls_track_id_data> )
+                    )->get_included_view( ).
+
+        DATA(lv_result) = abap_false.
+
+        LOOP AT lt_fields ASSIGNING FIELD-SYMBOL(<ls_fields>).
+          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data> TO FIELD-SYMBOL(<lv_value1>).
+          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data_old> TO FIELD-SYMBOL(<lv_value2>).
+
+          IF <lv_value1> IS ASSIGNED AND
+             <lv_value2> IS ASSIGNED.
+            IF <lv_value1> <> <lv_value2>.
+              lv_result   = abap_true.
+              EXIT.
+            ENDIF.
+          ENDIF.
+        ENDLOOP.
+
+        IF lv_result = abap_true.
+
+          APPEND VALUE #( appsys      = iv_appsys
+                          appobjtype  = is_app_object-appobjtype
+                          appobjid    = is_app_object-appobjid
+                          trxcod      = <ls_track_id_data>-trxcod
+                          trxid       = <ls_track_id_data>-trxid
+                          start_date  = lcl_tools=>get_system_date_time( )
+                          end_date    = lif_ef_constants=>cv_max_end_date
+                          timzon      = lcl_tools=>get_system_time_zone( )
+                          msrid       = space  ) TO ct_track_id_data.
+
+          APPEND VALUE #( appsys      = iv_appsys
+                          appobjtype  = is_app_object-appobjtype
+                          appobjid    = is_app_object-appobjid
+                          trxcod      = <ls_track_id_data_old>-trxcod
+                          trxid       = <ls_track_id_data_old>-trxid
+                          start_date  = lcl_tools=>get_system_date_time( )
+                          end_date    = lif_ef_constants=>cv_max_end_date
+                          timzon      = lcl_tools=>get_system_time_zone( )
+                          msrid       = space
+                          action      = /scmtms/cl_scem_int_c=>sc_param_action-delete ) TO ct_track_id_data.
+        ENDIF.
+
+        DELETE lt_track_id_data_old WHERE key = <ls_track_id_data>-key.
+
+      ELSE.
+        APPEND VALUE #( appsys      = iv_appsys
+                        appobjtype  = is_app_object-appobjtype
+                        appobjid    = is_app_object-appobjid
+                        trxcod      = <ls_track_id_data>-trxcod
+                        trxid       = <ls_track_id_data>-trxid
+                        start_date  = lcl_tools=>get_system_date_time( )
+                        end_date    = lif_ef_constants=>cv_max_end_date
+                        timzon      = lcl_tools=>get_system_time_zone( )
+                        msrid       = space ) TO ct_track_id_data.
+      ENDIF.
+    ENDLOOP.
+
+    "Deleted resources
+    LOOP AT lt_track_id_data_old ASSIGNING FIELD-SYMBOL(<ls_track_id_data_del>).
+      APPEND VALUE #( appsys      = iv_appsys
+                      appobjtype  = is_app_object-appobjtype
+                      appobjid    = is_app_object-appobjid
+                      trxcod      = <ls_track_id_data_del>-trxcod
+                      trxid       = <ls_track_id_data_del>-trxid
+                      start_date  = lcl_tools=>get_system_date_time( )
+                      end_date    = lif_ef_constants=>cv_max_end_date
+                      timzon      = lcl_tools=>get_system_time_zone( )
+                      msrid       = space
+                      action      = /scmtms/cl_scem_int_c=>sc_param_action-delete ) TO ct_track_id_data.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD get_fo_tracked_item_obj.
+
+    CONSTANTS: cs_mtr_truck       TYPE string VALUE '31',
+               cs_trxcod_resource TYPE string VALUE 'RESOURCE'.
+
+    LOOP AT it_item ASSIGNING FIELD-SYMBOL(<ls_item>).
+
+      IF <ls_item>-platenumber IS ASSIGNED AND <ls_item>-res_id IS ASSIGNED AND <ls_item>-node_id IS ASSIGNED AND
+         <ls_item>-item_cat    IS ASSIGNED AND <ls_item>-item_cat = /scmtms/if_tor_const=>sc_tor_item_category-av_item.
+
+        IF is_root-tor_id IS NOT INITIAL AND <ls_item>-res_id IS NOT INITIAL.
+          APPEND VALUE #( key = <ls_item>-node_id
+                  appsys      = iv_appsys
+                  appobjtype  = is_app_object-appobjtype
+                  appobjid    = is_app_object-appobjid
+                  trxcod      = cs_trxcod_resource
+                  trxid       = |{ is_root-tor_id }{ <ls_item>-res_id }|
+                  start_date  = lcl_tools=>get_system_date_time( )
+                  end_date    = lif_ef_constants=>cv_max_end_date
+                  timzon      = lcl_tools=>get_system_time_zone( )
+                  msrid       = space  ) TO ct_track_id_data.
+        ENDIF.
+
+        DATA(lv_mtr) = is_root-mtr.
+        SELECT SINGLE motscode FROM /sapapo/trtype INTO lv_mtr WHERE ttype = lv_mtr.
+        SHIFT lv_mtr LEFT DELETING LEADING '0'.
+        IF is_root-tor_id IS NOT INITIAL AND <ls_item>-platenumber IS NOT INITIAL AND lv_mtr = cs_mtr_truck.
+          APPEND VALUE #( key = |{ <ls_item>-node_id }P|
+                  appsys      = iv_appsys
+                  appobjtype  = is_app_object-appobjtype
+                  appobjid    = is_app_object-appobjid
+                  trxcod      = cs_trxcod_resource
+                  trxid       = |{ is_root-tor_id }{ <ls_item>-platenumber }|
+                  start_date  = lcl_tools=>get_system_date_time( )
+                  end_date    = lif_ef_constants=>cv_max_end_date
+                  timzon      = lcl_tools=>get_system_time_zone( )
+                  msrid       = space  ) TO ct_track_id_data.
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD check_is_fo_deleted.
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+
+    DATA(lv_carrier_removed) = xsdbool(
+            is_root_old-tsp IS INITIAL AND is_root_new-tsp IS NOT INITIAL ).
+
+    DATA(lv_execution_status_changed) = xsdbool(
+      ( is_root_old-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        AND
+        is_root_old-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution AND
+        is_root_old-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_executed )          AND
+      ( is_root_new-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        OR
+        is_root_new-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution OR
+        is_root_new-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_executed ) ).
+
+    DATA(lv_lifecycle_status_changed) = xsdbool(
+      ( is_root_old-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  AND
+        is_root_old-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) AND
+      ( is_root_new-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  OR
+        is_root_new-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) ).
+
+    IF lv_carrier_removed = abap_true OR lv_execution_status_changed = abap_true OR
+       lv_lifecycle_status_changed = abap_true .
+      rv_result = lif_ef_constants=>cs_condition-true.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD get_capa_match_key.
+
+    DATA lt_stop TYPE /scmtms/t_em_bo_tor_stop.
+
+    ASSIGN it_capa_stop[ node_id = iv_assgn_stop_key ] TO FIELD-SYMBOL(<ls_capa_stop>).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    ASSIGN it_capa_root[ node_id = <ls_capa_stop>-parent_node_id ]-tor_id TO FIELD-SYMBOL(<lv_tor_id>).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    /scmtms/cl_tor_helper_stop=>get_stop_sequence(
+      EXPORTING
+        it_root_key     = VALUE #( ( key = <ls_capa_stop>-parent_node_id ) )
+        iv_before_image = abap_false
+      IMPORTING
+        et_stop_seq_d   = DATA(lt_stop_seq) ).
+
+    ASSIGN lt_stop_seq[ root_key = <ls_capa_stop>-parent_node_id ] TO FIELD-SYMBOL(<ls_stop_seq>).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    lt_stop = CORRESPONDING /scmtms/t_em_bo_tor_stop( <ls_stop_seq>-stop_seq ).
+    ASSIGN <ls_stop_seq>-stop_map[ stop_key = <ls_capa_stop>-node_id ]-tabix TO FIELD-SYMBOL(<lv_seq_num>).
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    lcl_tools=>get_stop_points(
+      EXPORTING
+        iv_root_id     = <lv_tor_id>
+        it_stop        = lt_stop
+      IMPORTING
+        et_stop_points = DATA(lt_stop_points) ).
+
+    ASSIGN lt_stop_points[ seq_num   = <lv_seq_num>
+                           log_locid = <ls_capa_stop>-log_locid ] TO FIELD-SYMBOL(<ls_stop_point>).
+    IF sy-subrc = 0.
+      rv_capa_matchkey = <ls_stop_point>-stop_id.
+      SHIFT rv_capa_matchkey LEFT DELETING LEADING '0'.
+    ENDIF.
+
+  ENDMETHOD.
+
   METHOD is_odd.
-    DATA(lv_reminder) = iv_value MOD 2.
+    DATA lv_reminder TYPE n.
+    lv_reminder = iv_value MOD 2.
     IF lv_reminder <> 0.
       rv_is_odd = abap_true.
     ELSE.
@@ -272,22 +524,76 @@ CLASS lcl_tools IMPLEMENTATION.
 *         new intermediate location only if the loc_uuid is different form the last intermediate location
           IF lv_last_loc_uuid <> <ls_stop>-log_loc_uuid AND <ls_stop>-log_loc_uuid <> /scmtms/if_common_c=>c_empty_key.
             ADD 1 TO lv_ord_no_counter.
-            APPEND VALUE #(
-            stop_id   = |{ iv_root_id }{ lv_ord_no_counter }|
-            log_locid = <ls_stop>-log_locid
-            seq_num   = <ls_stop>-seq_num
-            ) TO et_stop_points.
           ENDIF.
+          APPEND VALUE #(
+          stop_id   = |{ iv_root_id }{ lv_ord_no_counter }|
+          log_locid = <ls_stop>-log_locid
+          seq_num   = <ls_stop>-seq_num
+          ) TO et_stop_points.
+
       ENDCASE.
       lv_last_loc_uuid = <ls_stop>-log_loc_uuid.
     ENDLOOP.
 
   ENDMETHOD.
+
+  METHOD get_postal_address.
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    DATA(lo_loc_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_location_c=>sc_bo_key ).
+
+    lo_tor_srv_mgr->retrieve_by_association(
+        EXPORTING
+          iv_node_key    = /scmtms/if_tor_c=>sc_node-root
+          it_key         = VALUE #( ( key = iv_node_id ) )
+          iv_association = /scmtms/if_tor_c=>sc_association-root-stop
+        IMPORTING
+          et_target_key  = DATA(lt_stop_target_key) ).
+
+    IF lt_stop_target_key IS NOT INITIAL.
+      lo_tor_srv_mgr->retrieve_by_association(
+        EXPORTING
+          iv_node_key    = /scmtms/if_tor_c=>sc_node-stop
+          it_key         = CORRESPONDING #( lt_stop_target_key )
+          iv_association = /scmtms/if_tor_c=>sc_association-stop-bo_loc_log
+        IMPORTING
+          et_key_link    = DATA(lt_loc_log_key_link) ).
+
+      IF lt_loc_log_key_link IS NOT INITIAL.
+        lo_loc_srv_mgr->retrieve_by_association(
+        EXPORTING
+          iv_node_key    = /scmtms/if_location_c=>sc_node-root
+          it_key         = CORRESPONDING #( lt_loc_log_key_link MAPPING key = target_key )
+          iv_association = /scmtms/if_location_c=>sc_association-root-address
+        IMPORTING
+          et_key_link    = DATA(lt_address_key_link) ).
+
+        IF lt_address_key_link IS NOT INITIAL.
+          TRY.
+              DATA(lr_bo_conf) = /bobf/cl_frw_factory=>get_configuration( iv_bo_key = /scmtms/if_location_c=>sc_bo_key ).
+            CATCH /bobf/cx_frw.
+              MESSAGE e011(zsst_gtt) INTO  DATA(lv_dummy).
+              lcl_tools=>throw_exception( ).
+          ENDTRY.
+
+          DATA(lv_postal_ass_key) = lr_bo_conf->get_content_key_mapping(
+                           iv_content_cat      = /bobf/if_conf_c=>sc_content_ass
+                           iv_do_content_key   = /bofu/if_addr_constants=>sc_association-root-postal_address
+                           iv_do_root_node_key = /scmtms/if_location_c=>sc_node-/bofu/address ).
+
+          lo_loc_srv_mgr->retrieve_by_association(
+            EXPORTING
+              iv_node_key    = /scmtms/if_location_c=>sc_node-/bofu/address
+              it_key         = CORRESPONDING #( lt_address_key_link MAPPING key = target_key )
+              iv_association = lv_postal_ass_key
+              iv_fill_data   = abap_true
+            IMPORTING
+              et_data        = et_postal_address ).
+        ENDIF.
+      ENDIF.
+    ENDIF.
+  ENDMETHOD.
 ENDCLASS.
 
-**********************************************************************
-**********************************************************************
-**********************************************************************
 CLASS lcl_ef_performer DEFINITION.
   PUBLIC SECTION.
 
@@ -410,6 +716,8 @@ CLASS lcl_ef_performer IMPLEMENTATION.
     lo_ef_processor->check_app_objects( ).
 
     lo_ef_processor->get_planned_events(
+      EXPORTING
+        io_factory      = io_factory
       CHANGING
         ct_expeventdata = ct_expeventdata
         ct_measrmntdata = ct_measrmntdata
@@ -443,9 +751,6 @@ CLASS lcl_ef_performer IMPLEMENTATION.
 ENDCLASS.
 
 
-**********************************************************************
-**********************************************************************
-**********************************************************************
 CLASS lcl_ef_processor DEFINITION.
   PUBLIC SECTION.
     INTERFACES lif_ef_processor.
@@ -570,7 +875,8 @@ CLASS lcl_ef_processor IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD add_sys_attr_to_control_data.
-    DATA: ls_control_data TYPE lif_ef_types=>ts_control_data.
+    DATA: ls_control_data TYPE lif_ef_types=>ts_control_data,
+          lv_tzone        TYPE timezone.
 
     ls_control_data-appsys      = mo_ef_parameters->get_appsys( ).
     ls_control_data-appobjtype  = mo_ef_parameters->get_app_obj_types( )-aotype.
@@ -582,6 +888,14 @@ CLASS lcl_ef_processor IMPLEMENTATION.
     APPEND ls_control_data TO ct_control_data.
 
     ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_bisiness_datetime.
+    ls_control_data-value       = lcl_tools=>get_system_date_time( ).
+    APPEND ls_control_data TO ct_control_data.
+
+    ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_technical_timezone.
+    ls_control_data-value       = lcl_tools=>get_system_time_zone( ).
+    APPEND ls_control_data TO ct_control_data.
+
+    ls_control_data-paramname   = lif_ef_constants=>cs_system_fields-actual_technical_datetime.
     ls_control_data-value       = lcl_tools=>get_system_date_time( ).
     APPEND ls_control_data TO ct_control_data.
   ENDMETHOD.
@@ -652,6 +966,7 @@ CLASS lcl_ef_processor IMPLEMENTATION.
         EXIT.
       ENDIF.
     ENDLOOP.
+
   ENDMETHOD.
 
   METHOD lif_ef_processor~get_control_data.
@@ -693,13 +1008,17 @@ CLASS lcl_ef_processor IMPLEMENTATION.
           lt_infodata     TYPE lif_ef_types=>tt_infodata,
           lr_app_objects  TYPE REF TO data.
 
-    FIELD-SYMBOLS: <lt_app_objects>   TYPE trxas_appobj_ctabs.
+    FIELD-SYMBOLS <lt_app_objects> TYPE trxas_appobj_ctabs.
 
     lr_app_objects  = mo_ef_parameters->get_app_objects( ).
     ASSIGN lr_app_objects->* TO <lt_app_objects>.
 
     LOOP AT <lt_app_objects> ASSIGNING FIELD-SYMBOL(<ls_app_objects>)
       WHERE maintabdef = ms_definition-maintab.
+
+      mo_pe_filler = io_factory->get_pe_filler(
+                          is_appl_object   = <ls_app_objects>
+                          io_ef_parameters = mo_ef_parameters ).
 
       mo_pe_filler->get_planed_events(
         EXPORTING
@@ -713,16 +1032,13 @@ CLASS lcl_ef_processor IMPLEMENTATION.
     " Add all the changes to result tables in the end of the method,
     " so that in case of exceptions there will be no inconsistent data in them
     IF lt_expeventdata[] IS NOT INITIAL.
-      ct_expeventdata[] = VALUE #( BASE ct_expeventdata
-                                   ( LINES OF lt_expeventdata ) ).
+      ct_expeventdata[] = VALUE #( BASE ct_expeventdata ( LINES OF lt_expeventdata ) ).
     ENDIF.
     IF lt_measrmntdata[] IS NOT INITIAL.
-      ct_measrmntdata[] = VALUE #( BASE ct_measrmntdata
-                                   ( LINES OF lt_measrmntdata ) ).
+      ct_measrmntdata[] = VALUE #( BASE ct_measrmntdata ( LINES OF lt_measrmntdata ) ).
     ENDIF.
     IF lt_expeventdata[] IS NOT INITIAL.
-      lt_infodata[] = VALUE #( BASE ct_infodata
-                                   ( LINES OF lt_infodata ) ).
+      lt_infodata[] = VALUE #( BASE ct_infodata ( LINES OF lt_infodata ) ).
     ENDIF.
   ENDMETHOD.
 
@@ -758,9 +1074,6 @@ CLASS lcl_ef_processor IMPLEMENTATION.
   ENDMETHOD.
 ENDCLASS.
 
-**********************************************************************
-**********************************************************************
-**********************************************************************
 CLASS lcl_ef_parameters DEFINITION.
   PUBLIC SECTION.
     INTERFACES lif_ef_parameters.
@@ -777,9 +1090,9 @@ CLASS lcl_ef_parameters DEFINITION.
     DATA:
       mv_appsys             TYPE /saptrx/applsystem,
       ms_app_obj_types      TYPE /saptrx/aotypes,
-      mr_all_appl_tables    TYPE REF TO data,     "trxas_tabcontainer,
-      mr_app_type_cntl_tabs TYPE REF TO data,     "trxas_apptype_tabs,
-      mr_app_objects        TYPE REF TO data.     "trxas_appobj_ctabs.
+      mr_all_appl_tables    TYPE REF TO data,
+      mr_app_type_cntl_tabs TYPE REF TO data,
+      mr_app_objects        TYPE REF TO data.
 ENDCLASS.
 
 CLASS lcl_ef_parameters IMPLEMENTATION.
@@ -826,9 +1139,6 @@ CLASS lcl_ef_parameters IMPLEMENTATION.
 
 ENDCLASS.
 
-**********************************************************************
-**********************************************************************
-**********************************************************************
 CLASS lcl_factory DEFINITION
   ABSTRACT.
 
@@ -860,10 +1170,6 @@ CLASS lcl_factory IMPLEMENTATION.
                            it_all_appl_tables    = it_all_appl_tables
                            it_app_type_cntl_tabs = it_app_type_cntl_tabs
                            it_app_objects        = it_app_objects ).
-
-    lo_pe_filler = lif_factory~get_pe_filler(
-                       io_ef_parameters = lo_ef_parameters
-                       io_bo_reader     = lo_bo_reader ).
 
     ro_ef_processor = NEW lcl_ef_processor(
                               io_ef_parameters = lo_ef_parameters

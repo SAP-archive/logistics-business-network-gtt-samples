@@ -141,4 +141,42 @@ sap.ui.define([
     // Assert
     assert.deepEqual(controller.getText.thirdCall.args, ["routeTooltip", ["<Undefined>", "<Undefined>"]], "The tooltip is right");
   });
+
+  QUnit.test("fetchTimeZones", function (assert) {
+    assert.expect(0);
+    var controller = this.controller;
+
+    // Arrange
+    var fakeModel = {};
+    stub(fakeModel, "getProperty").withArgs("/timezonesLoaded").returns(true);
+    stub(controller, "getModel").withArgs("globalJson").returns(fakeModel);
+
+    // Act
+    controller.fetchTimeZones();
+  });
+
+  QUnit.test("fetchUnplannedEvents", function (assert) {
+    assert.expect(0);
+    var controller = this.controller;
+
+    // Arrange
+    var fakeModel = {};
+    stub(fakeModel, "getProperty").withArgs("/hasUnplannedEvents").returns(true);
+    stub(controller, "getModel").withArgs("timeline").returns(fakeModel);
+
+    // Act
+    controller.fetchUnplannedEvents();
+  });
+
+  QUnit.test("cancelMapRequest, processMapData", function (assert) {
+    assert.expect(0);
+    var controller = this.controller;
+
+    // Arrange
+    controller.mapRequest = {};
+
+    // Act
+    controller.cancelMapRequest();
+    controller.processMapData(controller.mapRequest);
+  });
 });

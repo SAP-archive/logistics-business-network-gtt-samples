@@ -16,8 +16,8 @@
 			</smartForm:GroupElement>
 		</smartForm:Group>
 
-		<smartForm:Group label="{parts: [{'value': 'incoterms_code'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}">
-			<smartForm:GroupElement label="{parts: [{'value': 'incoterms_code'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}">
+		<smartForm:Group label="{label>/SalesOrder/incoterms_code}">
+			<smartForm:GroupElement label="{label>/SalesOrder/incoterms_code}">
 				<smartField:SmartField id="incoterms" value="{incoterms/name}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement>
@@ -29,7 +29,7 @@
 		</smartForm:Group>
 
 		<smartForm:Group label="{i18n>administrativeInformation}">
-			<smartForm:GroupElement label="{parts: [{'value': 'documentDate'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/SalesOrder/documentDate}">
 				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 		</smartForm:Group>

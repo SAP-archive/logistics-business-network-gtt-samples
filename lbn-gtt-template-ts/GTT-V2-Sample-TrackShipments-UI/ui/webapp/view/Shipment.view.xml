@@ -11,8 +11,8 @@
 		isChildPage="true"
 		enableLazyLoading="false"
 		upperCaseAnchorBar="false"
-		busy="{shipment>/busy}"
-		busyIndicatorDelay="{shipment>/delay}">
+		busy="{view>/busy}"
+		busyIndicatorDelay="{view>/delay}">
 		<headerTitle>
 			<ObjectPageDynamicHeaderTitle id="dynamicHeaderTitle" class="sstDynamicPageTitle"
 				areaShrinkRatio="1:1.6:1.6">
@@ -34,7 +34,7 @@
 							status="{path: 'executionStatus_code', formatter: '.formatter.executionStatus.getState'}"
 							text="{executionStatus/name}">
 							<m:layoutData>
-								<m:OverflowToolbarLayoutData priority="{shipment>/genericTagPriority}" />
+								<m:OverflowToolbarLayoutData priority="{view>/genericTagPriority}" />
 							</m:layoutData>
 						</m:GenericTag>
 						<m:GenericTag id="processStatusGenericTag"
@@ -43,7 +43,7 @@
 							status="{path: 'processStatus_code', formatter: '.formatter.processStatus.getState'}"
 							text="{processStatus/name}">
 							<m:layoutData>
-								<m:OverflowToolbarLayoutData priority="{shipment>/genericTagPriority}" />
+								<m:OverflowToolbarLayoutData priority="{view>/genericTagPriority}" />
 							</m:layoutData>
 						</m:GenericTag>
 					</m:OverflowToolbar>
@@ -66,7 +66,7 @@
 
 		<headerContent>
 			<core:Fragment id="headerContentFragment"
-				fragmentName="com.sap.gtt.app.sample.sst.view.fragments.ShipmentHeaderContent"
+				fragmentName="com.sap.gtt.app.sample.sst.view.fragments.ObjectPageHeaderContent"
 				type="XML" />
 		</headerContent>
 

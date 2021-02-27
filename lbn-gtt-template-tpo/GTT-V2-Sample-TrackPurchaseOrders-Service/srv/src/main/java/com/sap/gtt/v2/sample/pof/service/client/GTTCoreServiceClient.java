@@ -66,10 +66,6 @@ public class GTTCoreServiceClient {
     @Autowired
     private VcapParser vcapParser;
 
-    private String gttBaseUrl;
-    private String techUser;
-    private String criticalInfo;
-
     @PostConstruct
     public void init() {
         Destination destination = vcapParser.getDestination(destinationGTT);
@@ -77,6 +73,11 @@ public class GTTCoreServiceClient {
         techUser = destination.getUser();
         criticalInfo = destination.getPassword();
     }
+
+    private String gttBaseUrl;
+    private String techUser;
+    private String criticalInfo;
+
 
     public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT, HttpHeaders headers) {
         uri = StringUtils.replaceIgnoreCase(uri, INLINECOUNT_NONE, INLINECOUNT_ALLPAGES);

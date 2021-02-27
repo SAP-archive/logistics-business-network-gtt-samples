@@ -160,5 +160,19 @@ FUNCTION ZGTT_SOF_EE_DE_PICKING.
     ls_parameters-param_value = <ls_xlips>-pikmg.
     SHIFT ls_parameters-param_value LEFT  DELETING LEADING space.
     APPEND ls_parameters TO ct_trackparameters.
+
+*   Actual Technical Datetime & Time zone
+    CLEAR ls_parameters.
+    ls_parameters-evtcnt = ls_events-eventid.
+    ls_parameters-param_name = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_parameters-param_value = ls_trackingheader-evtzon.
+    APPEND ls_parameters TO ct_trackparameters.
+
+    CLEAR ls_parameters.
+    ls_parameters-evtcnt = ls_events-eventid.
+    ls_parameters-param_name = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_parameters-param_value.
+    APPEND ls_parameters TO ct_trackparameters.
+
   ENDLOOP.
 ENDFUNCTION.

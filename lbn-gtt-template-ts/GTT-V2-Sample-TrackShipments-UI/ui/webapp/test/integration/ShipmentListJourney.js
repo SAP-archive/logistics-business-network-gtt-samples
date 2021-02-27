@@ -40,5 +40,28 @@ sap.ui.define(
       // Cleanup
       Then.iTeardownMyApp();
     });
+
+    opaTest("Should filter the shipment list", function (Given, When, Then) {
+      // Arrangements
+      Given.iStartMyUIComponent({
+        componentConfig: {
+          name: "com/sap/gtt/app/sample/sst",
+          async: true,
+          componentData: {
+            startupParameters: {
+              shipmentNo: "No.123",
+            },
+          },
+        },
+        timeout: 60,
+        autoWait: true,
+      });
+
+      // Assertions
+      Then.onTheShipmentListPage.theTableHasEntries();
+
+      // Cleanup
+      Then.iTeardownMyApp();
+    });
   }
 );

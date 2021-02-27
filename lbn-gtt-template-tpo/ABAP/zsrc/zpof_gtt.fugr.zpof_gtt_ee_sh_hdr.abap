@@ -1,4 +1,4 @@
-FUNCTION ZPOF_GTT_EE_SH_HDR.
+FUNCTION zpof_gtt_ee_sh_hdr.
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -28,7 +28,7 @@ FUNCTION ZPOF_GTT_EE_SH_HDR.
       lcl_ef_performer=>get_planned_events(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_pof_constants=>cs_tabledef-sh_header_new )
+                                    maintab   = lif_app_constants=>cs_tabledef-sh_header_new )
           io_factory            = NEW lcl_factory_sh_header( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types

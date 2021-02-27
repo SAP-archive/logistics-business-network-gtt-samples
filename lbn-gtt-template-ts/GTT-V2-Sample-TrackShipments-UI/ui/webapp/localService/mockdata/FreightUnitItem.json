@@ -1,0 +1,22 @@
+[
+  {
+    "itemNo": "10",
+    "freightUnit_id": "2337b132-c573-5449-b41e-9325e6b18e00",
+    "deliveryNo": null,
+    "deliveryItemNo": null,
+    "quantity": "320.00000000000000",
+    "quantityUoM": "ST",
+    "materialNo": "LSO_LSO_PRODUCT_A",
+    "materialDescription": "Product A"
+  },
+  {
+    "itemNo": "10",
+    "freightUnit_id": "c99ed82d-3a84-5b45-a3f1-fdfa0f9bde28",
+    "deliveryNo": null,
+    "deliveryItemNo": null,
+    "quantity": "320.00000000000000",
+    "quantityUoM": "ST",
+    "materialNo": "LSO_LSO_PRODUCT_A",
+    "materialDescription": "Product A"
+  }
+]

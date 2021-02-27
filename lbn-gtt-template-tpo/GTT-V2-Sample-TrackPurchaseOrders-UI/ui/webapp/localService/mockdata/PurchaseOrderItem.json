@@ -20,7 +20,7 @@
         "receivingLocationDescription": null,
         "plannedDeliveryDate": "/Date(1603065600000)/",
         "nextETA": null,
-        "orderQuantity": "22.000",
+        "orderQuantity": "22.170",
         "orderQuantityUoM": "KG",
         "materialDescription": "DH_TM_MAT1 desc.",
         "netWeight": "0.900",
@@ -31,7 +31,7 @@
         "netValue": "0",
         "currency": "INR",
         "receivingLocationType_code": "Plant",
-        "completedQuantity": "1.000",
+        "completedQuantity": "18.000",
         "completionValue": "0",
         "trackingIdType": "PURCHASE_ORDER_ITEM",
         "incotermsVersion": null,
@@ -113,7 +113,7 @@
         "netValue": "30800.44",
         "currency": "INR",
         "receivingLocationType_code": "Plant",
-        "completedQuantity": null,
+        "completedQuantity": "18.000",
         "trackingIdType": "PURCHASE_ORDER_ITEM",
         "incotermsVersion": "",
         "completionValue": "140.00",
@@ -169,7 +169,7 @@
         "netValue": "79201.32",
         "currency": "INR",
         "receivingLocationType_code": "Plant",
-        "completedQuantity": null,
+        "completedQuantity": "18.000",
         "trackingIdType": "PURCHASE_ORDER_ITEM",
         "incotermsVersion": "",
         "incotermsLocation": "Test location",
@@ -243,63 +243,8 @@
             }
           }
         },
-        "lastReportedEvent": null
-      },
-      {
-        "__metadata": {
-          "id": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
-          "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')",
-          "type": "com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"
-        },
-        "id": "cd509b27-e9b6-548a-a868-a18cfb3ca28e",
-        "purchaseOrderNo": "4500055229",
-        "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
-        "itemNo": "10",
-        "materialId": "DH_TM_MAT1",
-        "supplierId": "VEN_CO",
-        "receivingLocationId": "0001",
-        "plannedDeliveryDate": "/Date(1603152000000)/",
-        "nextETA": null,
-        "orderQuantity": "22.000",
-        "orderQuantityUoM": "KG",
-        "materialDescription": "DH_TM_MAT1 desc.",
-        "netWeight": "0.900",
-        "weightUoM": "KG",
-        "grossWeight": "1.000",
-        "volume": "0.010",
-        "volumeUoM": "M3",
-        "netValue": "30800.44",
-        "completionValue": "3000",
-        "currency": "INR",
-        "receivingLocationType_code": "Plant",
-        "completedQuantity": null,
-        "trackingIdType": "PURCHASE_ORDER_ITEM",
-        "incotermsVersion": "",
-        "incotermsLocation": "Test location",
-        "processStatus_code": "OVERDUE",
-        "incoterms_code": "CFR",
-        "purchaseOrder_id": "a3419caf-3597-52b9-89d9-13d63a573767",
-        "processStatus": {
-          "__deferred": {
-            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/processStatus"
-          }
-        },
-        "incoterms": {
-          "__deferred": {
-            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/incoterms"
-          }
-        },
-        "purchaseOrder": {
-          "__deferred": {
-            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/purchaseOrder"
-          }
-        },
-        "receivingLocationType": {
-          "__deferred": {
-            "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/receivingLocationType"
-          }
-        },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -328,7 +273,7 @@
         "completionValue": "67000.321",
         "currency": "INR",
         "receivingLocationType_code": "Plant",
-        "completedQuantity": null,
+        "completedQuantity": "18.000",
         "trackingIdType": "PURCHASE_ORDER_ITEM",
         "incotermsVersion": "",
         "incotermsLocation": "Test location",
@@ -401,7 +346,8 @@
             }
           }
         },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -447,7 +393,8 @@
             }
           }
         },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -480,7 +427,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -513,7 +461,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -545,7 +494,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -577,7 +527,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -609,7 +560,8 @@
         "incoterms": null,
         "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -641,7 +593,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -673,7 +626,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -705,7 +659,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -737,7 +692,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -769,7 +725,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -801,7 +758,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -833,7 +791,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -865,7 +824,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -897,7 +857,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -930,7 +891,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -962,7 +924,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -994,7 +957,8 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "completedQuantity": "18.000"
       },
       {
         "__metadata": {
@@ -1008,7 +972,7 @@
         "materialId": null,
         "nextETA": "/Date(1486684800000)/",
         "receivingLocationType_code": "Plant",
-        "completedQuantity": 234,
+        "completedQuantity": "18.000",
         "trackingIdType": "trackingType",
         "processStatus_code": "123",
         "supplierId": "L0001DID",

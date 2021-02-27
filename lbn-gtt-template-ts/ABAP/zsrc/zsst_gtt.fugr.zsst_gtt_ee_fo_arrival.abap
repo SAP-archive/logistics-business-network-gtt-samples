@@ -67,7 +67,6 @@ FUNCTION zsst_gtt_ee_fo_arrival.
       ct_trackingheader      = ct_trackingheader
       ct_tracklocation       = ct_tracklocation
       ct_trackaddress        = ct_trackaddress
-      ct_trackparameters     = ct_trackparameters
     CHANGING
       c_eventid_map          = c_eventid_map
     EXCEPTIONS
@@ -84,12 +83,27 @@ FUNCTION zsst_gtt_ee_fo_arrival.
       RAISE stop_processing.
   ENDCASE.
 
-  NEW lcl_actual_event( )->lif_actual_event~adjust_ae_location_data(
-    EXPORTING
-      i_all_appl_tables  = i_all_appl_tables
-    CHANGING
-      ct_trackingheader  = ct_trackingheader[]
-      ct_tracklocation   = ct_tracklocation[]
-      ct_trackparameters = ct_trackparameters[] ).
+  TRY.
+      LOOP AT i_events ASSIGNING FIELD-SYMBOL(<ls_event>).
+        NEW lcl_actual_event( )->get_tor_actual_event_class( <ls_event> )->adjust_ae_location_data(
+          EXPORTING
+            i_all_appl_tables  = i_all_appl_tables
+            iv_event_code      = /scmtms/if_tor_const=>sc_tor_event-arriv_dest
+            i_event            = <ls_event>
+          CHANGING
+            ct_trackingheader  = ct_trackingheader[]
+            ct_tracklocation   = ct_tracklocation[]
+            ct_trackparameters = ct_trackparameters[] ).
+      ENDLOOP.
+    CATCH cx_udm_message INTO DATA(lo_udm_message).
+      lcl_tools=>get_errors_log(
+        EXPORTING
+          io_umd_message = lo_udm_message
+          iv_appsys      = i_appsys
+        IMPORTING
+          es_bapiret     = DATA(ls_bapiret) ).
+      APPEND ls_bapiret TO ct_logtable.
+      RAISE stop_processing.
+  ENDTRY.
 
 ENDFUNCTION.

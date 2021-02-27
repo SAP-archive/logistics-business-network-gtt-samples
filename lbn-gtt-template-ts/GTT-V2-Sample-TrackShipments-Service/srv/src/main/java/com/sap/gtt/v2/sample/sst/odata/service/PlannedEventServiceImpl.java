@@ -26,14 +26,14 @@ public class PlannedEventServiceImpl implements PlannedEventService {
     private GTTCoreServiceClient gttCoreServiceClient;
 
     @Override
-    public List<PlannedEvent> getAllByShipmentId(@NotNull final String shipmentId) {
-        final String uri = buildUriWithShipmentId(shipmentId);
+    public List<PlannedEvent> getAllByTrackedProcessId(@NotNull final String trackedProcessId) {
+        final String uri = buildUriWithTrackedProcessId(trackedProcessId);
         return gttCoreServiceClient.readEntitySetAll(uri, PlannedEvent.class).getResults();
     }
 
-    private String buildUriWithShipmentId(final String shipmentId) {
+    private String buildUriWithTrackedProcessId(final String trackedProcessId) {
         return UriComponentsBuilder.fromPath(PLANNED_EVENT_ENDPOINT)
-                .queryParam(FILTER, format("%s eq guid'%s'", PROCESS_ID_PARAM, shipmentId))
+                .queryParam(FILTER, format("%s eq guid'%s'", PROCESS_ID_PARAM, trackedProcessId))
                 .build().encode().toUriString();
     }
 }

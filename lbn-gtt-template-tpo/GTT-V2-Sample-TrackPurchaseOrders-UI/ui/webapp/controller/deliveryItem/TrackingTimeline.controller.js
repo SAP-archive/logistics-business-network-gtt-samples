@@ -25,13 +25,51 @@ sap.ui.define([
     },
 
     initControls: function () {
-      this._oSearchField = this.getControlFromFragment("trackingTimelineEvents", "trackingTimeline-searchField");
-      this._oSearchField.setPlaceholder(this.getText("EL_Event_eventMatchKey_LABEL", null, "@i18n"));
       this._oTimeline = this.getControlFromFragment("trackingTimelineEvents", "trackingTimeline");
 
       this._oMap = this.getControlFromFragment("trackingTimelineMap", "geoMap");
       this.initMap(this._oMap);
-      this._initBindingEventHandler();
+    },
+
+    /**
+     * Timeline Item select event handler.
+     * Set the center position on the Map based on the selected timeline.
+     * @param {sap.ui.base.Event} oEvent timeline item select event
+     */
+    onTimelineItemSelect: function (oEvent) {
+      var oEventContext = oEvent.getParameter("selectedItem").getBindingContext("trackingTimeline");
+      var oSelectedEventData = oEventContext.getObject();
+      var oSelectedStop = this._getSelectedStop(oSelectedEventData);
+
+      if(oSelectedStop) {
+        this._oMap.setCenterPosition(oSelectedStop.longitude + ";" + oSelectedStop.latitude);
+      }
+    },
+
+    /**
+     * Return selected stop data.
+     * @param {object} oSelectedEventData selected timeline event data
+     * @return {object} oSelectedStop selected stop data
+     */
+    _getSelectedStop: function (oSelectedEventData) {
+      var sActualEventId = oSelectedEventData.actualEventId;
+      var sPlannedEventId = oSelectedEventData.plannedEventId;
+      var aEventStops = this.oMapModel.getProperty("/eventStops");
+      var oSelectedStop;
+      if (!!sPlannedEventId && !sActualEventId) {
+        oSelectedStop = aEventStops.filter(function (oEventStop) {
+          return oEventStop.plannedEventId === sPlannedEventId;
+        })[0];
+      } else if (!!sPlannedEventId && !!sActualEventId) {
+        oSelectedStop = aEventStops.filter(function (oEventStop) {
+          return oEventStop.eventId === sPlannedEventId;
+        })[0];
+      } else {
+        oSelectedStop = aEventStops.filter(function (oEventStop) {
+          return oEventStop.eventId === sActualEventId;
+        })[0];
+      }
+      return oSelectedStop;
     },
 
     /**
@@ -85,33 +123,6 @@ sap.ui.define([
     },
 
     /**
-     * Change default filter change behaviour for the timeline.
-     */
-    _initBindingEventHandler: function () {
-      this._oTimeline.attachFilterSelectionChange(function (oEvent) {
-        var sType = oEvent.getParameter("type"),
-          bClear = oEvent.getParameter("clear");
-        if (bClear) {
-          this._cleanEventMatchKeyFilter();
-          return;
-        }
-
-        if (sType === sap.suite.ui.commons.TimelineFilterType.Search) {
-          this._eventMatchKeyChanged(oEvent);
-        }
-      }, this);
-    },
-
-    /**
-     * Remove event match key filter.
-     */
-    _cleanEventMatchKeyFilter: function () {
-      this._oTimeline.setCustomFilterMessage("");
-      this._oTimeline.setCustomModelFilter("eventMatchKeyFilter", null);
-      this._oSearchField.setValue();
-    },
-
-    /**
      * Set empty array to timeline.
      */
     _clearTrackingTimeline: function () {
@@ -119,24 +130,8 @@ sap.ui.define([
     },
 
     /**
-     * Filter timeline items based on the event match key.
-     * @param {sap.ui.base.Event} oEvent search event object
+     * Fire requests to refresh data.
      */
-    _eventMatchKeyChanged: function (oEvent) {
-      oEvent.preventDefault();
-      var sSelectedValue = oEvent.getParameter("searchTerm");
-      if (!sSelectedValue) {
-        this._cleanEventMatchKeyFilter();
-      } else {
-        this._oTimeline.setCustomFilterMessage(this.getText("eventMatchKeyLabelTemplate", sSelectedValue));
-        this._oTimeline.setCustomModelFilter("eventMatchKeyFilter", new sap.ui.model.Filter({
-          path: "eventMatchKey",
-          value1: sSelectedValue,
-          operator: sap.ui.model.FilterOperator.Contains,
-        }));
-      }
-    },
-
     refresh: function () {
       this._clearTrackingTimeline();
 
@@ -150,7 +145,7 @@ sap.ui.define([
     _requestTimelineEvents: function () {
       var oRestService = ServiceUtils.getDataSource("restService"),
         oBindingContext = this.getView().getBindingContext(),
-        sTimelineEventsRequestUrl = ServiceUtils.getUrl(oRestService.uri.concat("/timelineEvent"));
+        sTimelineEventsRequestUrl = ServiceUtils.getUrl(oRestService.uri + "/timelineEvent");
 
       this._oTimeline.setBusy(true);
       var oTimelineEventsRequest = RestClient.get(sTimelineEventsRequestUrl, {
@@ -180,7 +175,7 @@ sap.ui.define([
     _requestMapRoutes: function () {
       var oRestService = ServiceUtils.getDataSource("restService"),
         oBindingContext = this.getView().getBindingContext(),
-        sTimelineEventsRequestUrl = ServiceUtils.getUrl(oRestService.uri.concat("/routes"));
+        sTimelineEventsRequestUrl = ServiceUtils.getUrl(oRestService.uri + "/routes");
 
       this._oMap.setBusy(true);
       var oMapRoutesRequest = RestClient.get(sTimelineEventsRequestUrl, {

@@ -1,7 +1,7 @@
 {
   "name": "gtt-v2-ui-sample-track-purchaseorders",
   "version": "2.0.0",
-  "description": "GTT V2 Sample Track Purchase Orders UI",
+  "description": "GTT V2 Sample Track PO Fulfillment UI",
   "license": "ISC",
   "author": "SAP SE",
   "repository": {
@@ -14,10 +14,12 @@
     "npm": "^6"
   },
   "devDependencies": {
+    "@sap/approuter": "^8.0.0",
     "@sap/grunt-sapui5-bestpractice-build": "1.4.2",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "fs-extra": "^9.0.0",
+    "grunt-sonar-runner": "^2.4.8",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.1",
@@ -33,10 +35,12 @@
   },
   "dependencies": {},
   "scripts": {
+    "start:dev": "node node_modules/@sap/approuter/approuter.js -w ./ui_appRouter",
     "build": "grunt",
     "lint": "grunt eslint",
-    "test": "npm run lint && npm run test:ci",
+    "test": "npm run lint && npm run test:ci && npm run sonar",
     "test:ci": "karma start karma-ci.conf.js",
-    "test:debug": "karma start"
+    "test:debug": "karma start",
+    "sonar": "grunt sonar"
   }
 }

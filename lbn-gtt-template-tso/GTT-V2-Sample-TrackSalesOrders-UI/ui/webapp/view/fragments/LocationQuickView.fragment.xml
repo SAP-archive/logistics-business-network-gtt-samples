@@ -39,8 +39,12 @@
 							<layout:GridData span="XL10 L10 M10 S10"/>
 						</layoutData>
 					</Text>
-					<core:Icon id="globeIcon" src="sap-icon://globe" color="{= ${/latitude} !== null ? 'Default' : 'Neutral' }"
-						tooltip="{= ${/latitude} !== null ? ${/latitude} + ', ' + ${/longitude} : ${i18n>geoCoordinatesMissing} }"
+					<core:Icon id="globeIcon" src="sap-icon://globe"
+						color="{= ${/latitude} !== null ? 'Default' : 'Neutral' }"
+						tooltip="{
+							parts: ['/longitude', '/latitude'],
+							formatter: '.formatter.geoCoordinatesTooltip'
+						}"
 						press=".onCoordinatePressed">
 						<core:layoutData>
 							<layout:GridData span="XL2 L2 M2 S2"/>
@@ -48,7 +52,11 @@
 					</core:Icon>
 				</form:content>
 			</form:SimpleForm>
-			<core:InvisibleText id="cooridateDescription" text="{= ${/latitude} !== null ? ${/latitude} + ', ' + ${/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+			<core:InvisibleText id="cooridateDescription"
+				text="{
+					parts: ['/longitude', '/latitude'],
+					formatter: '.formatter.geoCoordinatesTooltip'
+				}"/>
 		</content>
 	</ResponsivePopover>
 </core:FragmentDefinition>

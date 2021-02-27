@@ -26,10 +26,10 @@ sap.ui.define(
         var model = new JSONModel({
           customFilters: {
             "isDelayed": {},
-            "salesOrderItemTPs.salesOrderItem.processStatus_code": {
+            "salesOrderItems.processStatus_code": {
               keys: [],
             },
-            "salesOrderItemTPs.salesOrderItem.deliveryItemTPs.deliveryItem.delivery.shipmentTPs.shipment.shipmentNo": {
+            "salesOrderItems.deliveryItems.delivery.shipmentTPs.shipment.shipmentNo": {
               inputValue: "",
             },
           },
@@ -103,9 +103,9 @@ sap.ui.define(
           }
           if (filter.sPath) {
             if (filter.sPath === "vMaterialNo") {
-              filter.sPath = "salesOrderItemTPs/salesOrderItem/materialNo";
+              filter.sPath = "salesOrderItems/materialNo";
             } else if (filter.sPath === "vMaterialDescription") {
-              filter.sPath = "salesOrderItemTPs/salesOrderItem/materialDescription";
+              filter.sPath = "salesOrderItems/materialDescription";
             }
           }
         }.bind(this));
@@ -195,6 +195,8 @@ sap.ui.define(
         var smartFilterBar = this.byId("smartFilterBar");
         var data = smartFilterBar.getFilterData();
         model.setProperty(PropertyPaths.CUSTOM_FILTERS, data._CUSTOM);
+
+        smartFilterBar.search();
       },
 
       onBeforeVariantSave: function (event) {

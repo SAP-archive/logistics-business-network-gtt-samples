@@ -177,6 +177,15 @@ FUNCTION zgtt_sof_ote_so_item.
     CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
     APPEND ls_control_data TO e_control_data.
 
+*   Actual Technical Datetime & Time zone
+    ls_control_data-paramname = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_control_data-value     = lv_tzone.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
+    APPEND ls_control_data TO e_control_data.
+
 *   Schedule line table
     LOOP AT lt_xvbep INTO ls_xvbep WHERE vbeln = <ls_xvbap>-vbeln
                                      AND posnr = <ls_xvbap>-posnr

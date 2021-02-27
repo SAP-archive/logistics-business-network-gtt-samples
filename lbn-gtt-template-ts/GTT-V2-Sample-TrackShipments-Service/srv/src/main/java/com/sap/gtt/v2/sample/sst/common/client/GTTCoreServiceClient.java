@@ -5,7 +5,6 @@ import static com.sap.gtt.v2.sample.sst.common.constant.Constants.ELEMENTS_PATH_
 import static com.sap.gtt.v2.sample.sst.common.constant.Constants.GTT_MODEL_NAMESPACE;
 import static com.sap.gtt.v2.sample.sst.common.constant.Constants.GTT_MODEL_NAMESPACE_WRITE_SERVICE;
 import static com.sap.gtt.v2.sample.sst.common.constant.Constants.MODEL_NAMESPACE;
-import static com.sap.gtt.v2.sample.sst.common.constant.Constants.SHIPMENT_MODEL_NAME;
 import static com.sap.gtt.v2.sample.sst.common.exception.SSTServiceException.MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED;
 import static com.sap.gtt.v2.sample.sst.common.exception.SSTServiceException.MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED;
 import static com.sap.gtt.v2.sample.sst.common.exception.SSTServiceException.MESSAGE_CODE_CALL_READ_SERVICE_FAILED;
@@ -271,10 +270,10 @@ public class GTTCoreServiceClient {
         return ODataUtils.readEntity(responseEntity.getBody(), Location.class);
     }
 
-    public String getEventTypesMetadata(final String eventType) {
+    public String getEventTypesMetadata(final String trackedProcess, final String eventType) {
         final HttpHeaders headers = buildHttpHeaders();
         final HttpEntity<Object> httpEntity = new HttpEntity<>(null, headers);
-        final String url = buildEventTypeMetadataServiceUrl(eventType);
+        final String url = buildEventTypeMetadataServiceUrl(trackedProcess, eventType);
 
         logger.debug("Ready to call Metadata Service: {}", url);
 
@@ -332,8 +331,8 @@ public class GTTCoreServiceClient {
                 .build().encode().toUriString();
     }
 
-    private String buildEventTypeMetadataServiceUrl(final String eventType) {
-        final String eventModelNamespace = format("%s.%s", SHIPMENT_MODEL_NAME, eventType);
+    private String buildEventTypeMetadataServiceUrl(final String trackedProcess, final String eventType) {
+        final String eventModelNamespace = format("%s.%s", trackedProcess, eventType);
         return UriComponentsBuilder.fromHttpUrl(buildMetadataServiceUrl())
                 .pathSegment(COMBINED_MODEL_PATH_SEGMENT, eventModelNamespace, ELEMENTS_PATH_SEGMENT)
                 .build().encode().toUriString();

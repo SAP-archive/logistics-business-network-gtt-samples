@@ -3,19 +3,19 @@ sap.ui.define(
     "sap/ui/core/UIComponent",
     "sap/ui/core/IconPool",
     "sap/ui/core/theming/Parameters",
+    "sap/ui/base/BindingParser",
     "./controller/ErrorHandler",
     "./util/ServiceUtils",
     "./util/RestClient",
-    "./util/AnnotationUtil",
   ],
   function (
     UIComponent,
     IconPool,
     Parameters,
+    BindingParser,
     ErrorHandler,
     ServiceUtils,
-    RestClient,
-    AnnotationUtil
+    RestClient
   ) {
     "use strict";
 
@@ -48,25 +48,24 @@ sap.ui.define(
         }.bind(this));
         this.resetStylesheets();
 
-        var metaModel = this.getModel().getMetaModel();
-        metaModel.loaded().then(function () {
-          AnnotationUtil.init({
-            metaModel: metaModel,
-          });
+        /** @type {sap.ui.model.odata.v2.ODataModel} */
+        var odataModel = this.getModel();
 
-          // enable routing
-          this.getRouter().initialize();
+        // init the property label model
+        odataModel.annotationsLoaded().then(function (annotations) {
+          this.initPropertyLabelModel(annotations.annotations);
         }.bind(this));
+
+        // enable routing
+        this.getRouter().initialize();
       },
 
       updateSOFIconPool: function () {
-        IconPool.addIcon("icon-truck-driver", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0df");
         IconPool.addIcon("icon-truck-load", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0e8");
         IconPool.addIcon("icon-box-truck", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0ce");
         IconPool.addIcon("icon-truck-unload", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0e9");
         IconPool.addIcon("icon-products", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e073");
         IconPool.addIcon("icon-box-truck-empty", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0cf");
-        IconPool.addIcon("icon-vessel", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e105");
         IconPool.addIcon("icon-warehouse", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0dc");
         IconPool.addIcon("icon-outbound-delivery", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e07d");
         IconPool.addIcon("icon-ship", "BusinessSuiteInAppSymbols", "BusinessSuiteInAppSymbols", "e0de");
@@ -123,6 +122,43 @@ sap.ui.define(
 
           stylesheetNode.innerHTML = stylesheetText;
         });
+      },
+
+      /**
+       * Init the property label JSONModel named "label"
+       *
+       * @param {object} annotations Annotation object
+       *
+       * @example {label>/Product/id}  // {label>/<EntitySetName>/<PropertyName>}
+       */
+      initPropertyLabelModel: function (annotations) {
+        var propertyAnnotations = annotations.propertyAnnotations;
+
+        /** @type {sap.ui.model.json.JSONModel} */
+        var labelModel = this.getModel("label");
+        var labels = {};
+
+        Object.keys(propertyAnnotations).forEach(function (entitySetFullName) {
+          var entitySetName = entitySetFullName.split(".").pop();
+          var entitySet = propertyAnnotations[entitySetFullName];
+
+          if (!labels[entitySetName]) {
+            labels[entitySetName] = {};
+          }
+
+          Object.keys(entitySet).forEach(function (propertyName) {
+            var labelAnnotation = entitySet[propertyName]["com.sap.vocabularies.Common.v1.Label"];
+
+            if (labelAnnotation) {
+              var bindingInfo = BindingParser.simpleParser(labelAnnotation.String);
+              labels[entitySetName][propertyName] = this.getModel(bindingInfo.model).getResourceBundle().getText(bindingInfo.path);
+            } else {
+              labels[entitySetName][propertyName] = propertyName;
+            }
+          }, this);
+        }, this);
+
+        labelModel.setData(labels);
       },
 
       /**

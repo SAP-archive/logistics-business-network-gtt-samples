@@ -1,16 +1,11 @@
 package com.sap.gtt.v2.sample.sof.rest.controller.service;
 
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import com.google.gson.Gson;
-
 import com.sap.gtt.v2.sample.sof.domain.*;
-import com.sap.gtt.v2.sample.sof.odata.model.Delivery;
+import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.sof.odata.model.DeliveryItem;
 import com.sap.gtt.v2.sample.sof.odata.model.Shipment;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.map.Route;
-import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.sof.rest.controller.domain.map.SideContent;
 import com.sap.gtt.v2.sample.sof.service.SOFService;
 import com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient;
@@ -19,7 +14,6 @@ import com.sap.gtt.v2.sample.sof.utils.SOFUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.platform.commons.util.CollectionUtils;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,16 +22,16 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.yaml.snakeyaml.util.UriEncoder;
 
 import java.io.IOException;
-import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
-import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.*;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.EXPAND;
+import static com.sap.gtt.v2.sample.sof.service.client.GTTCoreServiceClient.FILTER;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 
 @RunWith(PowerMockRunner.class)
@@ -144,7 +138,7 @@ public class MapServiceTest {
         Assert.assertEquals(expected,url);
         altKey = "hello://SHIPMENT_ORDER#altKey";
         url = mapService.generateContentSideUrl(deliveryItemId,altKey);
-        expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'****-*****')%20and%20(%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20)%20&$expand=event%20,%20plannedEvent%20&$orderby=event/actualBusinessTimestamp%20desc";
+        expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'****-*****')%20and%20(%20correlationType_code%20eq%20'EARLY_REPORTED'%20or%20correlationType_code%20eq%20'REPORTED'%20or%20correlationType_code%20eq%20'LATE_REPORTED'%20or%20correlationType_code%20eq%20'UNPLANNED'%20)%20and%20(substringof('hello://RESOURCE%23altKey',event/altKey)%20or%20(event/altKey%20eq%20'hello://SHIPMENT_ORDER%23altKey'))%20&$expand=event%20,%20plannedEvent%20&$orderby=event/actualBusinessTimestamp%20desc";
         Assert.assertEquals(expected,url);
     }
 
@@ -160,9 +154,9 @@ public class MapServiceTest {
                 processEventDirectoryODataResultList);
         String plannedEventJson = IOUtils.toString(new ClassPathResource("/odata/plannedEvent-sideContent.json").getInputStream());
         ODataResultList<PlannedEvent> plannedEventODataResultList = ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class);
-        String generatePlannedEventUrl = "/PlannedEvent?$filter=%20(process_id%20eq%20guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff')%20&$orderby=eventMatchKey%20desc,plannedBusinessTimestamp%20desc,payloadSequence%20desc";
+        String generatePlannedEventUrl = "/PlannedEvent?$filter=%20(process_id%20eq%20guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff')%20and%20(substringof('0000002090',eventMatchKey))%20&$orderby=eventMatchKey%20desc,plannedBusinessTimestamp%20desc,payloadSequence%20desc";
         Mockito.when(gttCoreServiceClient.readEntitySetAll(generatePlannedEventUrl,PlannedEvent.class)).thenReturn(plannedEventODataResultList);
-        String getEventReasonTextUrl = "/ProcessEventDirectory?$filter=%20(plannedEvent_id%20eq%20guid'8eeb8e94-e760-11ea-b9d1-cf9f4484a832')%20&$expand=event%20&$orderby=event/actualBusinessTimestamp%20desc&$top=1";
+        String getEventReasonTextUrl = "/ProcessEventDirectory?$filter=%20(plannedEvent_id%20eq%20guid'8eeb8e94-e760-11ea-b9d1-cf9f4484a832')%20and%20(substringof('Delay',event/eventType))%20&$expand=event%20&$orderby=event/actualBusinessTimestamp%20desc&$top=1";
         /*"/ProcessEventDirectory?&$filter= (plannedEvent_id eq guid'8eeb8e94-e760-11ea-b9d1-cf9f4484a832') and (substringof('Delay',event/eventType)) &$expand=event &$orderby=event/actualBusinessTimestamp desc&$top=1";*/
         ODataResultList<ProcessEventDirectory> oDataResultList = new ODataResultList<>();
 
@@ -180,6 +174,12 @@ public class MapServiceTest {
                 .build().encode().toUriString();
         /*String plannedEventUrl = "/PlannedEvent?&$filter= (process_id eq guid'2ae61e82-0af3-518f-b20d-fd2ca06b5cff') &$expand=lastProcessEventDirectory/event ";*/
         Mockito.when(gttCoreServiceClient.readEntitySetAll(plannedEventUrl, PlannedEvent.class)).thenReturn(new ODataResultList<PlannedEvent>());
+
+        String departureEventJson = IOUtils.toString(new ClassPathResource("/odata/departure-event-route.json").getInputStream(), StandardCharsets.UTF_8);
+        ODataResultList<EventEx> departureEvent = ODataUtils.readEntitySet(departureEventJson, EventEx.class);
+        Mockito.when(gttCoreServiceClient.readEntitySetAll(contains("/Departure"), eq(EventEx.class))).thenReturn(
+                departureEvent);
+
         List<SideContent> sideContents = mapService.getSideContents(deliveryItemId,altKey,eventMatchKey,plannedEventId);
         Assert.assertEquals(7,sideContents.size());
         Assert.assertEquals("POD",sideContents.get(0).getEventType());

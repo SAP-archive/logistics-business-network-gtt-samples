@@ -17,12 +17,12 @@ sap.ui.define([
 
   QUnit.test("getState", function (assert) {
     var statuses = [
-      { type: "EARLY", valueState: ValueState.Success },
-      { type: "AS_PLANNED", valueState: ValueState.Success },
+      { type: "AS_PLANNED", valueState: ValueState.Information },
+      { type: "EARLY", valueState: ValueState.Warning },
       { type: "LATE", valueState: ValueState.Warning },
+      { type: "OVERDUE", valueState: ValueState.Warning },
       { type: "DELAYED", valueState: ValueState.Error },
-      { type: "OVERDUE", valueState: ValueState.Error },
-      { type: undefined, valueState: ValueState.Success },
+      { type: undefined, valueState: ValueState.Information },
     ];
 
     // Assert

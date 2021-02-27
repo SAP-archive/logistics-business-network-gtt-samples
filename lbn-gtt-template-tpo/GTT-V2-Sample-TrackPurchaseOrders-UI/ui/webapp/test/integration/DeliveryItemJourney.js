@@ -56,29 +56,6 @@ sap.ui.define([
     Then.iTeardownMyApp();
   });
 
-  opaQunit("Should display timeline events", function (Given, When, Then) {
-    // Arrangements
-    Given.iStartMyUIComponent({
-      componentConfig: {
-        name: "com/sap/gtt/app/sample/pof",
-        async: true,
-      },
-      hash: "DeliveryItem(guid'c75316ce-a2cd-5f8c-82e4-b4661d3a48e2')",
-      timeout: 60,
-      autoWait: true,
-    });
-
-    Then.onTheTrackingTimeline.theTimelineShouldHaveEvents(7);
-    When.onTheTrackingTimeline.iEnterFilterValue("25");
-    Then.onTheTrackingTimeline.theTimelineShouldHaveEvents(2);
-
-    When.onTheTrackingTimeline.iEnterFilterValue("01");
-    Then.onTheTrackingTimeline.theTimelineShouldHaveEvents(1);
-
-    // Cleanup
-    Then.iTeardownMyApp();
-  });
-
   opaQunit("Should display Location Master popover", function (Given, When, Then) {
     // Arrangements
     Given.iStartMyUIComponent({
@@ -101,4 +78,45 @@ sap.ui.define([
     Then.iTeardownMyApp();
   });
 
+  opaQunit("Should display number of reference documents", function (Given, When, Then) {
+    // Arrangements
+    Given.iStartMyUIComponent({
+      componentConfig: {
+        name: "com/sap/gtt/app/sample/pof",
+        async: true,
+      },
+      hash: "DeliveryItem(guid'c75316ce-a2cd-5f8c-82e4-b4661d3a48e2')",
+      timeout: 60,
+      autoWait: true,
+    });
+
+    // check reference documents items lenght
+    Then.onTheDeliveryItemPage.theRefDocsTableHasItemsNum(2);
+
+    // Cleanup
+    Then.iTeardownMyApp();
+  });
+  opaQunit("Filter events in timeline", function (Given, When, Then) {
+    // Arrangements
+    Given.iStartMyUIComponent({
+      componentConfig: {
+        name: "com/sap/gtt/app/sample/pof",
+        async: true,
+      },
+      hash: "DeliveryItem(guid'c75316ce-a2cd-5f8c-82e4-b4661d3a48e2')",
+      timeout: 60,
+      autoWait: true,
+    });
+
+    When.onTheTrackingTimeline.iPressFilterBtn();
+    Then.onTheTrackingTimeline.theFilterDialogOpens();
+
+    When.onTheTrackingTimeline.iPressFilterItem();
+    When.onTheTrackingTimeline.iPressEventStatus("Late Reported");
+    When.onTheTrackingTimeline.iPressFilterByEventStatus();
+    Then.onTheTrackingTimeline.theTimelineShouldHaveEvents(3);
+
+    // Cleanup
+    Then.iTeardownMyApp();
+  });
 });

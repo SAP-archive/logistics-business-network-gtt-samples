@@ -44,26 +44,27 @@ public class POFController {
 
     private static final Logger logger = LoggerFactory.getLogger(POFController.class);
 
-    private final POFService pofService;
-    private final DocumentFlowService documentFlowService;
-    private final FulfillmentProcessFlowService fulfillmentProcessFlowService;
-    private final TimeTrackingService timeTrackingService;
-    private final FulfillmentStatusService fulfillmentStatusService;
-    private final ForwardService forwardService;
-    private final MapService mapService;
+    @Autowired
+    private POFService pofService;
 
     @Autowired
-    public POFController(POFService pofService, DocumentFlowService documentFlowService, FulfillmentProcessFlowService fulfillmentProcessFlowService,
-                         TimeTrackingService timeTrackingService, FulfillmentStatusService fulfillmentStatusService, ForwardService forwardService,
-                         MapService mapService) {
-        this.pofService = pofService;
-        this.documentFlowService = documentFlowService;
-        this.fulfillmentProcessFlowService = fulfillmentProcessFlowService;
-        this.timeTrackingService = timeTrackingService;
-        this.fulfillmentStatusService = fulfillmentStatusService;
-        this.forwardService = forwardService;
-        this.mapService = mapService;
-    }
+    private DocumentFlowService documentFlowService;
+
+    @Autowired
+    private FulfillmentProcessFlowService fulfillmentProcessFlowService;
+
+    @Autowired
+    private TimeTrackingService timeTrackingService;
+
+    @Autowired
+    private FulfillmentStatusService fulfillmentStatusService;
+
+    @Autowired
+    private ForwardService forwardService;
+
+    @Autowired
+    private MapService mapService;
+
 
     @PostMapping(value = "/forward")
     @ResponseStatus(HttpStatus.OK)

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class SideContent {
 
+    private UUID eventId;
     private String eventType;
     private String eventStatusCode;
     private String plannedBusinessTimestamp;
@@ -19,6 +20,7 @@ public class SideContent {
     private String eventMatchKey;
     private String eventTypeFullName;
     private String eventReasonText;
+    private String estimatedArrivalTime;
 
     public String getEventReasonText() {
         return eventReasonText;
@@ -115,5 +117,21 @@ public class SideContent {
     }
     public void setActualBusinessTimestamp(Long actualBusinessTimestamp) {
         this.actualBusinessTimestamp = SOFUtils.getTimeStr(actualBusinessTimestamp);
+    }
+
+    public String getEstimatedArrivalTime() {
+        return estimatedArrivalTime;
+    }
+
+    public void setEstimatedArrivalTime(String estimatedArrivalTime) {
+        this.estimatedArrivalTime = estimatedArrivalTime;
+    }
+
+    public UUID getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(UUID eventId) {
+        this.eventId = eventId;
     }
 }

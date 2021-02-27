@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sap.gtt.v2.sample.sst.odata.model.Location;
 import com.sap.gtt.v2.sample.sst.odata.model.LocationType;
+import com.sap.gtt.v2.sample.sst.odata.model.PlannedEvent;
+import com.sap.gtt.v2.sample.sst.rest.model.dto.DeliveryItemDto;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,10 +44,19 @@ public class TimelineEvent {
 
     private String eventTypeFullName;
 
+    private String eventReasonCode;
+
     private String eventReasonText;
 
     @JsonProperty("historicalEvents")
     private List<EventHistory> eventHistory;
+
+    @JsonIgnore
+    private PlannedEvent plannedEvent;
+
+    private List<DeliveryItemDto> deliveryItems;
+
+    private EstimatedArrival estimatedArrival;
 
     public String getEventType() {
         return eventType;
@@ -159,6 +170,14 @@ public class TimelineEvent {
         this.eventTypeFullName = eventTypeFullName;
     }
 
+    public String getEventReasonCode() {
+        return eventReasonCode;
+    }
+
+    public void setEventReasonCode(String eventReasonCode) {
+        this.eventReasonCode = eventReasonCode;
+    }
+
     public String getEventReasonText() {
         return eventReasonText;
     }
@@ -173,5 +192,29 @@ public class TimelineEvent {
 
     public void setEventHistory(List<EventHistory> eventHistory) {
         this.eventHistory = eventHistory;
+    }
+
+    public PlannedEvent getPlannedEvent() {
+        return plannedEvent;
+    }
+
+    public void setPlannedEvent(PlannedEvent plannedEvent) {
+        this.plannedEvent = plannedEvent;
+    }
+
+    public List<DeliveryItemDto> getDeliveryItems() {
+        return deliveryItems;
+    }
+
+    public void setDeliveryItems(List<DeliveryItemDto> deliveryItems) {
+        this.deliveryItems = deliveryItems;
+    }
+
+    public EstimatedArrival getEstimatedArrival() {
+        return estimatedArrival;
+    }
+
+    public void setEstimatedArrival(EstimatedArrival estimatedArrival) {
+        this.estimatedArrival = estimatedArrival;
     }
 }

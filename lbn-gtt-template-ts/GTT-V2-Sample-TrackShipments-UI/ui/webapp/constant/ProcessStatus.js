@@ -31,22 +31,24 @@ sap.ui.define(
 
     ProcessStatus.getState = function (status) {
       switch(status) {
+        case Type.EARLY:
         case Type.LATE:
+        case Type.OVERDUE:
           return ValueState.Warning;
         case Type.DELAYED:
-        case Type.OVERDUE:
           return ValueState.Error;
         default:
-          return ValueState.Success;
+          return ValueState.Information;
       }
     };
 
     ProcessStatus.getListRowState = function (status) {
       switch(status) {
+        case Type.EARLY:
         case Type.LATE:
+        case Type.OVERDUE:
           return MessageType.Warning;
         case Type.DELAYED:
-        case Type.OVERDUE:
           return MessageType.Error;
         default:
           return MessageType.None;

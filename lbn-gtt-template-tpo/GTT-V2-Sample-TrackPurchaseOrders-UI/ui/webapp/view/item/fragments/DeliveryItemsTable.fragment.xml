@@ -22,6 +22,7 @@
     useExportToExcel="false"
     enableAutoBinding="true"
     beforeRebindTable="onBeforeRebindTable"
+    ignoreFromPersonalisation="lastEventName,lastLocationDescription,lastLocationAltKey,lastVPLocationType_code,plannedArrivalTimestamp"
     ignoredFields="id,inboundDeliveryNo,weightUoM,departure,destination,volumeUoM,doorText,destinationAddress,departureAddress,departureEmail,departureTelephone,inboundDelivery,orderQuantityUoM,plantLocationType,purchaseOrderItem,purchaseOrderItem_id,supplierLocationType,materialDescription,logicalSystem,partyId,plantLocationDescription,trackingIdType,altKey,lastReportedEvent">
     <smartTable:customData>
       <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
@@ -47,13 +48,13 @@
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_departure_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "supplier", "leadingProperty": "supplier", "navigationProperty": "inboundDeliveryItem/toSupplierLocation", "columnIndex": 2}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "supplier", "leadingProperty": "supplier", "navigationProperty": "toSupplierLocation", "columnIndex": 2}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "plant", "leadingProperty": "plant", "navigationProperty": "inboundDeliveryItem/toPlantLocation", "columnIndex": 3}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "plant", "leadingProperty": "plant", "navigationProperty": "toPlantLocation", "columnIndex": 3}'/>
           </customData>
         </Column>
         <Column>
@@ -150,7 +151,7 @@
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_incoterms_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "inboundDeliveryItem/incoterms", "columnIndex": 19}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 19}'/>
           </customData>
         </Column>
         <Column visible="false">
@@ -163,9 +164,9 @@
       <items>
         <ColumnListItem type="Navigation" press=".onDeliveryItemPressed">
           <cells>
-            <Text class="tableKeyColumn" text="{inboundDeliveryItem/inboundDeliveryNo} / {inboundDeliveryItem/itemNo}"></Text>
+            <Text class="tableKeyColumn" text="{inboundDeliveryNo} / {itemNo}"></Text>
             <Text text="{
-              path: 'inboundDeliveryItem/plannedDeliveryDate', 
+              path: 'plannedDeliveryDate', 
               type: 'sap.ui.model.type.Date', 
               formatOptions: {
                 style: 'medium',
@@ -176,21 +177,21 @@
               placement="Right"
               contentHeight="15rem"
               title="{i18n>locationDetailsPopoverTitle}"
-              text="{inboundDeliveryItem/supplier}"
-              linkText="{inboundDeliveryItem/toSupplierLocation/locationDescription}"
-              relatedObject="inboundDeliveryItem/toSupplierLocation">
+              text="{supplier}"
+              linkText="{toSupplierLocation/locationDescription}"
+              relatedObject="toSupplierLocation">
               <ctrl:content>
                 <VBox>
-                <Title class="pofLocationPopoverTitle" text="{inboundDeliveryItem/toSupplierLocation/locationDescription}"/>
+                <Title class="pofLocationPopoverTitle" text="{toSupplierLocation/locationDescription}"/>
                 <Label labelFor="supplierLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
-                <Text id="supplierLocationObjectType" text="{inboundDeliveryItem/toSupplierLocation/objectTypeDescription}" />
+                <Text id="supplierLocationObjectType" text="{toSupplierLocation/objectTypeDescription}" />
                 <Label labelFor="supplierLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
-                <Text id="supplierLocationSourceSystemId" text="{inboundDeliveryItem/toSupplierLocation/sourceSystem} / {inboundDeliveryItem/toSupplierLocation/externalId}"/>
+                <Text id="supplierLocationSourceSystemId" text="{toSupplierLocation/sourceSystem} / {toSupplierLocation/externalId}"/>
                 <Label labelFor="supplierLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
                 <HBox justifyContent="SpaceBetween">
-                <Text id="supplierLocationAddress" text="{path: 'inboundDeliveryItem/toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
-                <core:Icon src="sap-icon://globe" color="{= ${inboundDeliveryItem/toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                  tooltip="{= ${inboundDeliveryItem/toSupplierLocation/latitude} !== null ? ${inboundDeliveryItem/toSupplierLocation/latitude} + ', ' + ${inboundDeliveryItem/toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                <Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                  tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                 </HBox>
                 </VBox>
               </ctrl:content>
@@ -199,86 +200,89 @@
               contentHeight="15rem"
               placement="Right"
               title="{i18n>locationDetailsPopoverTitle}"
-              text="{inboundDeliveryItem/plant}"
-              linkText="{inboundDeliveryItem/toPlantLocation/locationDescription}"
-              relatedObject="inboundDeliveryItem/toPlantLocation">
+              text="{plant}"
+              linkText="{toPlantLocation/locationDescription}"
+              relatedObject="toPlantLocation">
               <ctrl:content>
                 <VBox>
-                  <Title class="pofLocationPopoverTitle" text="{inboundDeliveryItem/toPlantLocation/locationDescription}"/>
+                  <Title class="pofLocationPopoverTitle" text="{toPlantLocation/locationDescription}"/>
                   <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
-                  <Text id="receivingLocationObjectType" text="{inboundDeliveryItem/toPlantLocation/objectTypeDescription}" />
+                  <Text id="receivingLocationObjectType" text="{toPlantLocation/objectTypeDescription}" />
                   <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
-                  <Text id="receivingLocationSourceSystemId" text="{inboundDeliveryItem/toPlantLocation/sourceSystem} / {inboundDeliveryItem/toPlantLocation/externalId}"/>
+                  <Text id="receivingLocationSourceSystemId" text="{toPlantLocation/sourceSystem} / {toPlantLocation/externalId}"/>
                   <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
                   <HBox justifyContent="SpaceBetween">
-                  <Text id="receivingLocationAddress" text="{path: 'inboundDeliveryItem/toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
-                  <core:Icon src="sap-icon://globe" color="{= ${inboundDeliveryItem/toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                    tooltip="{= ${inboundDeliveryItem/toPlantLocation/latitude} !== null ? ${inboundDeliveryItem/toPlantLocation/latitude} + ', ' + ${inboundDeliveryItem/toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                  <Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                  <core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                    tooltip="{= ${toPlantLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toPlantLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                   </HBox>
                 </VBox>
               </ctrl:content>
             </ctrl:link.LinkPopover>
-            <Text text="{inboundDeliveryItem/materialNumber}"/>
+            <Text text="{materialNumber}"/>
             <ObjectStatus id="processStatus"
-							text="{path:'inboundDeliveryItem/processStatus_code', formatter:'.formatter.getProcessStatusText'}"
-							state="{path: 'inboundDeliveryItem/processStatus_code', formatter: '.formatter.getProcessStatusState'}"/>
+							text="{path:'processStatus_code', formatter:'.formatter.getProcessStatusText'}"
+							state="{path: 'processStatus_code', formatter: '.formatter.getProcessStatusState'}"/>
             <ObjectStatus id="executionStatus"
               text="{
                 parts:[
-                  {path:'inboundDeliveryItem/executionStatus_code'},
-                  {path:'inboundDeliveryItem/lastReportedEvent'}], formatter:'.formatter.getTableExecutionStatusText'}"
-							state="{path: 'inboundDeliveryItem/executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
-              icon="{path: 'inboundDeliveryItem/executionStatus_code', formatter: '.formatter.getExecutionStatusIcon'}"/>
+                  {path:'executionStatus_code'},
+                  {path:'lastEventName'},
+                  {path:'lastLocationDescription'},
+                  {path:'lastVPLocationType_code'}], 
+                formatter:'.formatter.getTableExecutionStatusText'}"
+							state="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
+              icon="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusIcon'}"/>
             <!-- hidden -->
-            <Text text="{inboundDeliveryItem/itemDescription}"/>
+            <Text text="{itemDescription}"/>
             <ObjectNumber
               emphasized="false"
               number="{ 
-                path: 'inboundDeliveryItem/orderQuantity',
+                path: 'orderQuantity',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 3}
               }"
-              unit="{inboundDeliveryItem/orderQuantityUoM}"/>
+              unit="{orderQuantityUoM}"/>
             <Text text="{
-              path: 'inboundDeliveryItem/documentDate', 
+              path: 'documentDate', 
               type: 'sap.ui.model.type.Date', 
               formatOptions: {
                 style: 'medium',
                 UTC: true
               }
             }" />
-            <Text text="{inboundDeliveryItem/warehouseNo}"/>
-            <Text text="{inboundDeliveryItem/doorForWarehouse}"/>
-            <Text text="{inboundDeliveryItem/warehouseDescription}"/>
+            <Text text="{warehouseNo}"/>
+            <Text text="{doorForWarehouse}"/>
+            <Text text="{warehouseDescription}"/>
             <ObjectNumber
               emphasized="false"
               number="{ 
-                path: 'inboundDeliveryItem/grossWeight',
+                path: 'grossWeight',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 3}
               }"
-              unit="{inboundDeliveryItem/weightUoM}"/>
+              unit="{weightUoM}"/>
               <ObjectNumber
               emphasized="false"
               number="{ 
-                path: 'inboundDeliveryItem/netWeight',
+                path: 'netWeight',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 3}
               }"
-              unit="{inboundDeliveryItem/weightUoM}"/>
+              unit="{weightUoM}"/>
               <ObjectNumber
               emphasized="false"
               number="{ 
-                path: 'inboundDeliveryItem/volume',
+                path: 'volume',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 3}
               }"
-              unit="{inboundDeliveryItem/volumeUoM}"/>
-              <Text text="{inboundDeliveryItem/billOfLading}"/>
-              <Text text="{path:'inboundDeliveryItem/dangerousGoods', formatter:'.formatter.formatBooleanFields'}"/>
-              <Text text="{inboundDeliveryItem/incotermsVersion}"/>
-              <Text text="{inboundDeliveryItem/incoterms/name}"/>
-              <Text text="{inboundDeliveryItem/incotermsLocation}"/>
+              unit="{volumeUoM}"/>
+              <Text text="{billOfLading}"/>
+              <Text text="{path:'dangerousGoods', formatter:'.formatter.formatBooleanFields'}"/>
+              <Text text="{incotermsVersion}"/>
+              <Text text="{incoterms/name}"/>
+              <Text text="{incotermsLocation}"/>
           </cells>
         </ColumnListItem>
       </items>

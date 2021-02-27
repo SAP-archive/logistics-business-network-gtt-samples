@@ -32,24 +32,6 @@ sap.ui.define([
     },
   });
 
-  QUnit.test("timeDuration", function (assert) {
-    // Arrange
-    stub(formatter, "getText").returns("fakeText");
-
-    // Act
-    var start = new Date("1995-12-17T03:24:00");
-    formatter.timeDuration(start, new Date("1995-12-17T03:24:30")); // +30s
-    formatter.timeDuration(start, new Date("1995-12-17T03:25:00")); // +1m
-    formatter.timeDuration(start, new Date("1995-12-17T07:24:00")); // +4h
-    formatter.timeDuration(start, new Date("1995-12-19T03:24:00")); // +2d
-
-    // Assert
-    assert.deepEqual(formatter.getText.args[0], ["seconds", [30]], "The 'seconds' text is got from i18n");
-    assert.deepEqual(formatter.getText.args[1], ["minutes", [1]], "The 'minutes' text is got from i18n");
-    assert.deepEqual(formatter.getText.args[2], ["hours", [4]], "The 'hours' text is got from i18n");
-    assert.deepEqual(formatter.getText.args[3], ["days", [2]], "The 'days' text is got from i18n");
-  });
-
   QUnit.test("ISODate, ISODateTime", function (assert) {
     var isoDate = new ISODate();
     var isoDateTime = new ISODateTime();
@@ -59,5 +41,56 @@ sap.ui.define([
 
     assert.ok(date, "The formatted date is got");
     assert.ok(datetime, "The formatted datetime is got");
+  });
+
+  QUnit.test("geoCoordinatesTooltip", function (assert) {
+    // Arrange
+    stub(formatter, "getText");
+
+    // Act
+    formatter.geoCoordinatesTooltip(null, null);
+
+    // Assert
+    assert.ok(formatter.getText.calledWith("geoCoordinatesMissing"), "Geo coordinates is missing");
+  });
+
+  QUnit.test("stopTooltip, stopIcon, stopPosition", function (assert) {
+    // Arrange
+    stub(formatter, "getText").withArgs("sourceLocation").returns("sourceLocation");
+
+    // Act
+    var tooltip = formatter.stopTooltip("locId", true, "locId", "locId2", "descrption");
+    var icon = formatter.stopIcon("locId", true, "locId");
+    var pos = formatter.stopPosition(null);
+
+    // Assert
+    assert.ok(tooltip === "sourceLocation: descrption", "The tooltip is right");
+    assert.ok(icon === "sap-icon://arrow-top", "the source location icon is right");
+    assert.ok(pos === "", "The position is right");
+  });
+
+  QUnit.test("eventTypeText", function (assert) {
+    // Arrange
+    stub(formatter, "getText").returns("ET_type_DESCR");
+
+    // Act
+    var text1 = formatter.eventTypeText(null);
+    var text2 = formatter.eventTypeText("type");
+
+    // Asssert
+    assert.ok(text1 === "", "The text is right");
+    assert.ok(text2 === "type", "The text is right");
+  });
+
+  QUnit.test("eventStatusText", function (assert) {
+    // Arrange
+    stub(formatter, "getText").returns("unplanned").returns("unplanned");
+    // Act
+    var text1 = formatter.eventStatusText(null);
+    var text2 = formatter.eventStatusText("UNPLANNED");
+
+    // Assert
+    assert.ok(text1 === "", "The text is right");
+    assert.ok(text2 === "unplanned", "The text is right");
   });
 });

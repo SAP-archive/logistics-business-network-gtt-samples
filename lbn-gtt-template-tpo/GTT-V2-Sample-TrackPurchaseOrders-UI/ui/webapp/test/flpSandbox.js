@@ -38,9 +38,9 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
                   {
                     tileType: "sap.ushell.ui.tile.StaticTile",
                     properties: {
-                      title: "Track Purchase Orders",
+                      title: "Track PO Fulfillment",
                       subTitle: "Template",
-                      description: "Track Purchase Orders",
+                      description: "Track PO Fulfillment",
                       icon: "sap-icon://document",
                       targetURL: "#PurchaseOrder-track",
                     },
@@ -58,9 +58,9 @@ sap.ui.define(["sap/base/util/ObjectPath", "sap/ushell/services/Container"], fun
               "PurchaseOrder-track": {
                 semanticObject: "PurchaseOrder",
                 action: "track",
-                title: "Purchase Orders Fulfillment",
+                title: "Track PO Fulfillment",
                 subTitle: "Template",
-                description: "Track Purchase Orders",
+                description: "Track PO Fulfillment",
                 signature: {
                   parameters: {},
                   additionalParameters: "allowed",

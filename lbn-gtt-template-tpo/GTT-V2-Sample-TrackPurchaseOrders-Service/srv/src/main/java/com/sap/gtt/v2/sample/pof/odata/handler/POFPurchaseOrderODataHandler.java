@@ -5,13 +5,13 @@ import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.odata.model.LocationDTO;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrder;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItem;
-import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrderItemTP;
 import com.sap.gtt.v2.sample.pof.service.LocationService;
 import com.sap.gtt.v2.sample.pof.utils.ODataUtils;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
 import org.apache.olingo.odata2.api.processor.ODataContext;
 import org.apache.olingo.odata2.api.uri.info.GetEntitySetUriInfo;
 import org.apache.olingo.odata2.api.uri.info.GetEntityUriInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -34,15 +35,12 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
     public static final String COMMA = ",";
     public static final String COMMA_ENCODED = "%2c";
 
+    @Autowired
+    private LocationService locationService;
 
-    private final LocationService locationService;
-    private final POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler;
+    @Autowired
+    private POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler;
 
-
-    public POFPurchaseOrderODataHandler(LocationService locationService, POFPurchaseOrderItemODataHandler purchaseOrderItemODataHandler) {
-        this.locationService = locationService;
-        this.purchaseOrderItemODataHandler = purchaseOrderItemODataHandler;
-    }
 
     @Override
     public ODataResultList<Map<String, Object>> handleReadEntitySet(GetEntitySetUriInfo uriInfo, ODataContext oDataContext) {
@@ -75,25 +73,13 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
         }
         updateNetValuesForExpand(entity);
         setLocationsForExpands(entity);
-        removeNullPurchaseOrderItem(entity);
         removeUnneededLeadingZero(entity);
         return ODataUtils.toMap(entity);
-    }
-
-    private void removeNullPurchaseOrderItem(PurchaseOrder purchaseOrder) {
-        List<PurchaseOrderItemTP> purchaseOrderItemTPS = purchaseOrder.getPurchaseOrderItemTPs();
-        if (purchaseOrderItemTPS != null && purchaseOrderItemTPS.size() > 0) {
-            purchaseOrder.setPurchaseOrderItemTPs(purchaseOrderItemTPS
-                    .stream()
-                    .filter(x -> x.getPurchaseOrderItem() != null)
-                    .collect(Collectors.toList()));
-        }
     }
 
     public void updateNetValuesForExpands(List<PurchaseOrder> purchaseOrders) {
         List<PurchaseOrderItem> purchaseOrderItems = purchaseOrders.stream()
                 .flatMap(it -> isNull(it.getPurchaseOrderItemTPs()) ? Stream.empty() : it.getPurchaseOrderItemTPs().stream())
-                .map(PurchaseOrderItemTP::getPurchaseOrderItem)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (!purchaseOrderItems.isEmpty()) {
@@ -102,14 +88,8 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
     }
 
     public void updateNetValuesForExpand(PurchaseOrder purchaseOrder) {
-        if (purchaseOrder.getPurchaseOrderItemTPs() == null) {
-            return;
-        }
-        List<PurchaseOrderItem> purchaseOrderItems = purchaseOrder.getPurchaseOrderItemTPs().stream()
-                .map(PurchaseOrderItemTP::getPurchaseOrderItem)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        if (!purchaseOrderItems.isEmpty()) {
+        List<PurchaseOrderItem> purchaseOrderItems = purchaseOrder.getPurchaseOrderItemTPs();
+        if (nonNull(purchaseOrderItems) && !purchaseOrderItems.isEmpty()) {
             purchaseOrderItemODataHandler.updateCompletionValues(purchaseOrderItems);
         }
     }
@@ -119,20 +99,13 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
             Map<String, LocationDTO> map = locationService.getLocationsForPurchaseOrderTP(purchaseOrder.getPurchaseOrderItemTPs());
 
             purchaseOrder.getPurchaseOrderItemTPs()
-                    .stream()
-                    .filter(x -> x.getPurchaseOrderItem() != null)
-                    .map(PurchaseOrderItemTP::getPurchaseOrderItem)
-                    .forEach(purchaseOrderItem -> {
-                        locationService.setLocationsForPurchaseOrderItem(purchaseOrderItem, map);
-                    });
+                    .forEach(purchaseOrderItem -> locationService.setLocationsForPurchaseOrderItem(purchaseOrderItem, map));
         }
     }
 
     private void setLocations(ODataResultList<PurchaseOrder> entityList) {
         Map<String, LocationDTO> map = locationService.getLocationsForPurchaseOrders(entityList.getResults());
-        entityList.getResults().forEach(purchaseOrder -> {
-           locationService.setLocationsForPurchaseOrder(purchaseOrder, map);
-        });
+        entityList.getResults().forEach(purchaseOrder -> locationService.setLocationsForPurchaseOrder(purchaseOrder, map));
     }
 
     private Boolean isLocationExists(String uri) {
@@ -165,7 +138,7 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
     }
 
     private String removeUnnecessaryExpands(String uri) {
-        String urlWithoutExpands = "";
+        String urlWithoutExpands = uri;
         if (uri.contains(COMMA)) {
             urlWithoutExpands = removeCommas(uri, COMMA, DIV);
         } else if (uri.contains(COMMA_ENCODED)) {
@@ -183,10 +156,7 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
     }
 
     private void removeUnneededLeadingZero(List<PurchaseOrder> orders) {
-        for (PurchaseOrder purchaseOrder : orders) {
-            removeUnneededLeadingZero(purchaseOrder);
-            removeNullPurchaseOrderItem(purchaseOrder);
-        }
+        orders.forEach(this::removeUnneededLeadingZero);
     }
 
     private void removeUnneededLeadingZero(PurchaseOrder order) {
@@ -194,11 +164,12 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
             order.setPurchaseOrderNo(order.getPurchaseOrderNo().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
 
+        if (isNotBlank(order.getSupplierId())) {
+            order.setSupplierId(order.getSupplierId().replaceAll(REGEX_LEADING_ZERO, EMPTY));
+        }
+
         if (order.getPurchaseOrderItemTPs() != null) {
-            order.getPurchaseOrderItemTPs()
-                    .stream()
-                    .map(PurchaseOrderItemTP::getPurchaseOrderItem)
-                    .forEach(this::removeUnneededLeadingZero);
+            order.getPurchaseOrderItemTPs().forEach(this::removeUnneededLeadingZero);
         }
     }
 
@@ -214,6 +185,9 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
         }
         if (isNotEmpty(purchaseOrderItem.getItemNo())) {
             purchaseOrderItem.setItemNo(purchaseOrderItem.getItemNo().replaceAll(REGEX_LEADING_ZERO, EMPTY));
+        }
+        if (isNotEmpty(purchaseOrderItem.getSupplierId())) {
+            purchaseOrderItem.setSupplierId(purchaseOrderItem.getSupplierId().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
     }
 

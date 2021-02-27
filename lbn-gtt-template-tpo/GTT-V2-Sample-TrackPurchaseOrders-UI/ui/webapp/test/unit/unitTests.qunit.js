@@ -14,7 +14,7 @@ sap.ui.define([
 //   "use strict";
 
 //   sap.ui.require([
-//     "com/sap/gtt/app/sample/pof/test/unit/controller/test"
+//     "com/sap/gtt/app/sample/pof/test/unit/controller/test",
 //   ], function () {
 //     QUnit.start();
 //   });

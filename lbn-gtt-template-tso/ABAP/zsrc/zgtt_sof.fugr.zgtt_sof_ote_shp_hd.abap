@@ -88,6 +88,8 @@ FUNCTION zgtt_sof_ote_shp_hd.
 * TransportatonMode
 * Actual Business Time zone
 * Actual Business Datetime
+* Actual Technical Time zone
+* Actual Technical Datetime
 * Shipment Item table
 * TrackedObject table
 * Resource table
@@ -140,7 +142,13 @@ FUNCTION zgtt_sof_ote_shp_hd.
         identificationdetail = lt_bpdetail.
     READ TABLE lt_bpdetail INTO ls_bpdetail WITH KEY identificationtype = 'LBN001' BINARY SEARCH.
     ls_control_data-paramname = gc_cp_yn_shp_sa_lbn_id.
-    ls_control_data-value     = ls_bpdetail-identificationnumber.
+    "    ls_control_data-value     = ls_bpdetail-identificationnumber.
+*   According the GTT adjustment,change the value of 'Service Agent LBN ID'
+    IF ls_bpdetail-identificationnumber IS NOT INITIAL.
+      CONCATENATE 'LBN#' ls_bpdetail-identificationnumber INTO ls_control_data-value.
+    ELSE.
+      CLEAR ls_control_data-value.
+    ENDIF.
     APPEND ls_control_data TO e_control_data.
 
 * Contains DG or not: VTTK-CONT_DG
@@ -222,6 +230,15 @@ FUNCTION zgtt_sof_ote_shp_hd.
 
 * Actual Business Datetime
     ls_control_data-paramname = gc_cp_yn_act_datetime.
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
+    APPEND ls_control_data TO e_control_data.
+
+*   Actual Technical Datetime & Time zone
+    ls_control_data-paramname = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_control_data-value     = lv_tzone.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
     CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
     APPEND ls_control_data TO e_control_data.
 

@@ -38,7 +38,7 @@ class PlannedEventServiceImplTest {
                 .thenReturn(plannedEventODataResultList);
 
         // when
-        final List<PlannedEvent> result = plannedEventService.getAllByShipmentId(shipmentId);
+        final List<PlannedEvent> result = plannedEventService.getAllByTrackedProcessId(shipmentId);
 
         // then
         assertThat(result).isNotEmpty();

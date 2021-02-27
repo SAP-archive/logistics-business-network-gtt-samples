@@ -276,7 +276,7 @@
     "processStatus_code": "OVERDUE",
     "lastChangeDateTime": "/Date(0)/",
     "serviceAgentLbnId": "Carrier ID 3",
-    "transportationMode_code": "05",
+    "transportationMode_code": "04",
     "dangerousGoods": true,
     "forwardingAgentTrackingId": "trackingId 3",
     "shippingType_code": "2",

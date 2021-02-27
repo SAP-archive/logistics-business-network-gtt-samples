@@ -7,13 +7,13 @@
 		items="{deliveryItem>/referenceDocuments}">
 		<columns>
 			<Column>
-				<Text id="shipmentNoColumn" text="{parts: [{'value': 'shipmentNo'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+				<Text id="shipmentNoColumn" text="{label>/Shipment/shipmentNo}" />
 			</Column>
 			<Column>
-				<Text id="documentTypeColumn" text="{parts: [{'value': 'docType_code'}, {'value': 'ShipmentCarrierRefDocuments'}], formatter: '.getPropertyLabelText'}"/>
+				<Text id="documentTypeColumn" text="{label>/ShipmentCarrierRefDocuments/docType_code}" />
 			</Column>
 			<Column>
-				<Text id="documentIdColumn" text="{parts: [{'value': 'docId'}, {'value': 'ShipmentCarrierRefDocuments'}], formatter: '.getPropertyLabelText'}"/>
+				<Text id="documentIdColumn" text="{label>/ShipmentCarrierRefDocuments/docId}" />
 			</Column>
 		</columns>
 		<items>

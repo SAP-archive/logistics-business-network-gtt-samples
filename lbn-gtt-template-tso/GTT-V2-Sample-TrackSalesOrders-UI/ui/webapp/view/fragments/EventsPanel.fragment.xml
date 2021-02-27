@@ -60,7 +60,37 @@
 								<suite:embeddedControl>
 									<VBox>
 										<items>
-											<ObjectStatus visible="{map>isPlannedEvent}" text="{path: 'map>eventStatusCode', formatter: '.formatter.eventStatusText'}" state="{path: 'map>eventStatusCode', formatter: '.formatter.eventStatus.getState'}" class="sapUiTinyMarginBottom"/>
+											<HBox wrap="Wrap">
+												<items>
+												<ObjectStatus class="sapUiTinyMarginBottom"
+													visible="{map>isPlannedEvent}"
+													text="{path: 'map>eventStatusCode', formatter: '.formatter.eventStatusText'}"
+													state="{path: 'map>eventStatusCode', formatter: '.formatter.eventStatus.getState'}"
+													inverted="{= ${map>eventStatusCode} === 'DELAYED' || ${map>eventStatusCode} === 'OVERDUE' }"/>
+												<ObjectStatus class="sapUiTinyMarginBegin"
+													visible="{= !!${map>plannedBusinessTimestamp} &amp;&amp; !!${map>estimatedArrivalTime} }"
+													state="{path: 'map>eventStatusCode', formatter: '.formatter.eventStatus.getState'}"
+													text="{
+														parts: [
+															'map>plannedBusinessTimestamp',
+															'map>estimatedArrivalTime',
+															{ value: 'short' }
+														],
+														formatter: '.formatter.timeDuration'
+													}"
+													tooltip="{
+														parts: [
+															'map>plannedBusinessTimestamp',
+															'map>estimatedArrivalTime'
+														],
+														formatter: '.formatter.etaDeltaTooltip'
+													}"/>
+												</items>
+											</HBox>
+											<ObjectStatus class="sapUiTinyMarginBottom"
+												visible="{= ${map>eventStatusCode} === 'DELAYED' &amp;&amp; !!${map>eventReasonText} }"
+												text="{map>eventReasonText}"
+												state="Error"/>
 											<ObjectAttribute class="sapUiTinyMarginBottom"
 												title="{i18n>location}"
 												text="{= ${map>location} ? ${map>location/locationDescription} : ${map>locationAltKey} }"
@@ -77,11 +107,13 @@
 												title="{i18n>actualAt}"
 												text="{path: 'map>actualBusinessTimestamp', type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'}"
 												active="false"/>
-											<ObjectStatus class="sapUiTinyMarginBottom sofSideContentEventReason"
-												visible="{= ${map>eventStatusCode} === 'DELAYED'}"
-												title="{i18n>eventReason}"
-												text="{map>eventReasonText}"
-												state="Error"/>
+											<ObjectAttribute class="sapUiTinyMarginBottom"
+												visible="{= !!${map>estimatedArrivalTime} }"
+												title="{i18n>estimatedArrivalTime}"
+												text="{
+													path: 'map>estimatedArrivalTime',
+													type: 'com.sap.gtt.app.sample.sof.model.type.ISODateTime'
+												}"/>
 											<HBox>
 												<Link id="viewEventDetailLink"
 													visible="{= ${map>isPlannedEvent} &amp;&amp; ${map>isActualEvent} }"

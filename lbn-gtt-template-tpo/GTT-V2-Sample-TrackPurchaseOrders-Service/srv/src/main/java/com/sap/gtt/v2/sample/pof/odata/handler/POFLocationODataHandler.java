@@ -10,6 +10,7 @@ import org.apache.olingo.odata2.api.uri.info.GetEntitySetUriInfo;
 import org.apache.olingo.odata2.api.uri.info.GetEntityUriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -20,11 +21,8 @@ import java.util.Set;
 @Component
 public class POFLocationODataHandler extends POFDefaultODataHandler {
 
-    private final MapService mapService;
-
-    public POFLocationODataHandler(MapService mapService) {
-        this.mapService = mapService;
-    }
+    @Autowired
+    private MapService mapService;
 
     @Override
     public ODataResultList<Map<String, Object>> handleReadEntitySet(GetEntitySetUriInfo uriInfo, ODataContext oDataContext) {

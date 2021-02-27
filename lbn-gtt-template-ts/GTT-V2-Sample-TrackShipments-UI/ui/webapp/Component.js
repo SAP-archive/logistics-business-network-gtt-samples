@@ -8,7 +8,8 @@ sap.ui.define(
     "sap/ui/model/odata/v2/ODataModel",
     "./util/ServiceUtils",
     "./util/RestClient",
-    "./util/AnnotationUtil",
+    "./util/Api",
+    "./util/i18n",
     "./controller/ReportEventsDialog",
   ],
   function (
@@ -20,7 +21,8 @@ sap.ui.define(
     ODataModelV2,
     ServiceUtils,
     RestClient,
-    AnnotationUtil,
+    Api,
+    i18n,
     ReportEventsDialog
   ) {
     "use strict";
@@ -44,6 +46,15 @@ sap.ui.define(
         // initialize ServiceUtils
         ServiceUtils.init();
 
+        // initialize Api
+        Api.initialize(this);
+
+        // setup i18n
+        i18n.use(
+          this.getModel("i18n"),
+          this.getModel("@i18n")
+        );
+
         // add business suite and tnt icons
         this.updatesstIconPool();
 
@@ -53,23 +64,20 @@ sap.ui.define(
         }.bind(this));
         this.resetStylesheets();
 
+        /** @type {sap.ui.model.odata.v2.ODataModel} */
         var odataModel = this.getModel();
         this.enhanceReadMethod(odataModel);
 
-        // initialize AnnotationUtil
-        var metaModel = odataModel.getMetaModel();
-        metaModel.loaded().then(function () {
-          AnnotationUtil.init({
-            metaModel: metaModel,
-            annotations: odataModel.getServiceAnnotations(),
-          });
-
-          // enable routing
-          this.getRouter().initialize();
+        // init the property label model
+        odataModel.annotationsLoaded().then(function (annotations) {
+          this.initPropertyLabelModel(annotations.annotations);
         }.bind(this));
 
         // create dialogs
-        this.reportEventsDialog = new ReportEventsDialog(this.getRootControl(), this);
+        this.reportEventsDialog = new ReportEventsDialog(this.getRootControl());
+
+        // enable routing
+        this.getRouter().initialize();
       },
 
       exit: function () {
@@ -167,6 +175,43 @@ sap.ui.define(
       },
 
       /**
+       * Init the property label JSONModel named "label"
+       *
+       * @param {object} annotations Annotation object
+       *
+       * @example {label>/Product/id}  // {label>/<EntitySetName>/<PropertyName>}
+       */
+      initPropertyLabelModel: function (annotations) {
+        var propertyAnnotations = annotations.propertyAnnotations;
+
+        /** @type {sap.ui.model.json.JSONModel} */
+        var labelModel = this.getModel("label");
+        var labels = {};
+
+        Object.keys(propertyAnnotations).forEach(function (entitySetFullName) {
+          var entitySetName = entitySetFullName.split(".").pop();
+          var entitySet = propertyAnnotations[entitySetFullName];
+
+          if (!labels[entitySetName]) {
+            labels[entitySetName] = {};
+          }
+
+          Object.keys(entitySet).forEach(function (propertyName) {
+            var labelAnnotation = entitySet[propertyName]["com.sap.vocabularies.Common.v1.Label"];
+
+            if (labelAnnotation) {
+              var bindingInfo = BindingParser.simpleParser(labelAnnotation.String);
+              labels[entitySetName][propertyName] = this.getModel(bindingInfo.model).getResourceBundle().getText(bindingInfo.path);
+            } else {
+              labels[entitySetName][propertyName] = propertyName;
+            }
+          }, this);
+        }, this);
+
+        labelModel.setData(labels);
+      },
+
+      /**
        * Sets the component's error handler instance.
        *
        * @param {sap.lbn.uilib.abstracts.helpers.ErrorHandler} errorHandler Error handler instance
@@ -190,7 +235,7 @@ sap.ui.define(
        * Getter for the resource bundle.
        * @public
        * @param {string} name The name of i18n model
-       * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
+       * @returns {sap.base.i18n.ResourceBundle} The i18n resource bundle of the component
        */
       getResourceBundle: function (name) {
         var i18nModelName = name || "i18n";
@@ -200,16 +245,6 @@ sap.ui.define(
       getText: function (key, params, i18nModel)  {
         var resourceBundle = this.getResourceBundle(i18nModel);
         return resourceBundle.getText(key, params);
-      },
-
-      getPropertyLabelText: function (propertyName, entitySet) {
-        var label = AnnotationUtil.getPropertyLabel(propertyName, entitySet);
-        var bindingInfo = BindingParser.simpleParser(label);
-        if (!bindingInfo) {
-          return label;
-        }
-
-        return this.getText(bindingInfo.path, null, bindingInfo.model);
       },
     });
   }

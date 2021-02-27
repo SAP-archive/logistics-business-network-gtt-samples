@@ -1,4 +1,4 @@
-FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
+FUNCTION zgtt_sof_ee_shp_departure .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -79,7 +79,9 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
     lt_stops          TYPE zgtt_stops,
     lv_relevance      TYPE boole_d,
     lv_cnt            TYPE /saptrx/evtcnt,
-    lv_evtcnt         TYPE /saptrx/evtcnt.
+    lv_evtcnt         TYPE /saptrx/evtcnt,
+*   BAPI structure for Event Handler control parameters
+    ls_parameters     TYPE /saptrx/bapi_evm_parameters.
 
   FIELD-SYMBOLS:
 *   Shipment Header
@@ -104,7 +106,7 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
 * <3> Loop at application objects for geting shipment item data
   LOOP AT i_events INTO ls_events.
 *   Check if Main table is Shipment Header or not.
-     IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
+    IF ls_events-maintabdef <> gc_bpt_shipment_header_new.
       PERFORM create_logtable_et
           TABLES ct_logtable
           USING  ls_events-maintabdef
@@ -120,11 +122,11 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
 
     IF lt_stops IS INITIAL.
       CALL FUNCTION 'ZGTT_GET_STOPS_FROM_SHIPMENT'
-      EXPORTING
-        iv_tknum    = <ls_xvttk>-tknum
-        it_vtts_new = lt_xvtts
-      IMPORTING
-        et_stops    = lt_stops.
+        EXPORTING
+          iv_tknum    = <ls_xvttk>-tknum
+          it_vtts_new = lt_xvtts
+        IMPORTING
+          et_stops    = lt_stops.
       SORT lt_stops BY tknum tsnum loccat.
     ENDIF.
 
@@ -144,7 +146,7 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
           IF <ls_xvtts>-datbg IS NOT INITIAL
              AND ( <ls_xvtts>-datbg <> <ls_yvtts>-datbg
                     OR <ls_xvtts>-uatbg <> <ls_yvtts>-uatbg ).
-             lv_relevance = gc_true.
+            lv_relevance = gc_true.
           ENDIF.
         ENDIF.
       ENDIF.
@@ -202,6 +204,19 @@ FUNCTION ZGTT_SOF_EE_SHP_DEPARTURE .
           ls_tracklocation-locid1 = <ls_stops>-locid.
           ls_tracklocation-locid2 = <ls_stops>-stopid.
           APPEND ls_tracklocation TO ct_tracklocation.
+
+*         Actual Technical Datetime & Time zone
+          CLEAR ls_parameters.
+          ls_parameters-evtcnt = lv_cnt.
+          ls_parameters-param_name = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+          ls_parameters-param_value = ls_trackingheader-evtzon.
+          APPEND ls_parameters TO ct_trackparameters.
+
+          CLEAR ls_parameters.
+          ls_parameters-evtcnt = lv_cnt.
+          ls_parameters-param_name = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+          CONCATENATE '0' sy-datum sy-uzeit INTO ls_parameters-param_value.
+          APPEND ls_parameters TO ct_trackparameters.
 
         ENDIF.
       ENDIF.

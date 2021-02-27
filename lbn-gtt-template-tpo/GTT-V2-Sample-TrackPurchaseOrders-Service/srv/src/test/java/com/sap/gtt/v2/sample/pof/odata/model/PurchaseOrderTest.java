@@ -36,7 +36,7 @@ public class PurchaseOrderTest {
         purchaseOrder.setId(id);
         Incoterms incoterms = new Incoterms();
         purchaseOrder.setIncoterms(incoterms);
-        List<PurchaseOrderItemTP> tps = new ArrayList<>();
+        List<PurchaseOrderItem> tps = new ArrayList<>();
         purchaseOrder.setPurchaseOrderItemTPs(tps);
 
         Assert.assertEquals(SALES_ORDER_NO, purchaseOrder.getPurchaseOrderNo());

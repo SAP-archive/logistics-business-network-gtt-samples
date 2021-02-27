@@ -44,7 +44,7 @@ public class ODataBasicTestEx {
     public void testReadSalesOrderSet() {
         String querySalesOrderSet = "/sap/logistics/gtt/sample/sof/odata/v1" +
                 "/SalesOrder?$format=json&$inlinecount=allpages&$top=2" +
-                "&$expand=salesOrderItemTPs, salesOrderItemTPs/salesOrderItem, incoterms";
+                "&$expand=salesOrderItems, incoterms";
         ResponseEntity<String> response = restTemplate.getForEntity(querySalesOrderSet, String.class);
         System.out.println(response);
         Assertions.assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
@@ -58,7 +58,7 @@ public class ODataBasicTestEx {
     private void testReadSalesOrderEntity(SalesOrder salesOrder) {
         String querySalesOrderEntity = "/sap/logistics/gtt/sample/sof/odata/v1" +
                 "/SalesOrder(guid'to-be-replaced')?$format=json" +
-                "&$expand=salesOrderItemTPs, salesOrderItemTPs/salesOrderItem, incoterms";
+                "&$expand=salesOrderItems, incoterms";
         querySalesOrderEntity = querySalesOrderEntity.replace("to-be-replaced", salesOrder.getId().toString());
         ResponseEntity<String> response = restTemplate.getForEntity(querySalesOrderEntity, String.class);
         System.out.println(response);
@@ -362,7 +362,7 @@ public class ODataBasicTestEx {
         ResponseEntity<String> response = restTemplate.getForEntity(query, String.class);
         System.out.println(response);
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-        Assertions.assertThat(response.getBody()).contains("Call read service failed. Contact your System Administrator.");
+        Assertions.assertThat(response.getBody()).contains("Call to read service failed. Contact your System Administrator.");
     }
 
     @Test

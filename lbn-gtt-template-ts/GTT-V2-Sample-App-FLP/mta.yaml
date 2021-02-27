@@ -1,11 +1,12 @@
+---
 ID: lbn-gtt-sample-app-flp
-_schema-version: '3.1'
+_schema-version: "3.1"
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
   append: "${space}"
   xsappname: tt_sof_${append}
-version: 2.0.0
+version: 2.3.0
 modules:
   - name: lbn-gtt-sample-app-appRouter
     type: approuter.nodejs
@@ -17,29 +18,38 @@ modules:
         - route: lbn-gtt-samples-app-flp-{unique-identifier}.${domain}
     properties:
       SAP_JWT_TRUST_ACL:
-      - clientid: "*"
-        identityzone: "*"
+        - clientid: "*"
+          identityzone: "*"
       destinations:
+        - name: lbn-gtt-sof-api
+          url: "~{lbn-gtt-sof-api/url}"
+          forwardAuthToken: true
         - name: lbn-gtt-sst-api
           url: "~{lbn-gtt-sst-api/url}"
+          forwardAuthToken: true
+        - name: lbn-gtt-pof-api
+          url: "~{lbn-gtt-pof-api/url}"
           forwardAuthToken: true
     requires:
       - name: lbn-gtt-sample-app-uaa
       - name: lbn-gtt-sample-app-runtime
       - name: lbn-gtt-sample-portal-resources
+      - name: lbn-gtt-sof-api
       - name: lbn-gtt-sst-api
-
+      - name: lbn-gtt-pof-api
   - name: flp
     type: com.sap.portal.content
     path: flp
     parameters:
       stack: cflinuxfs3
       memory: 128M
-      buildpack: 'https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip'
+      buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip
     requires:
       - name: lbn-gtt-sample-app-uaa
       - name: lbn-gtt-sample-portal-resources
+      - name: gtt-ui-sample-track-salesorders-app-host
       - name: gtt-ui-sample-track-shipments-app-host
+      - name: gtt-ui-sample-track-purchaseorders-app-host
 resources:
   - name: lbn-gtt-sample-app-runtime
     parameters:
@@ -51,9 +61,15 @@ resources:
       service-plan: standard
       service: portal
     type: org.cloudfoundry.managed-service
+  - name: lbn-gtt-sof-api
+    properties:
+      url: https://gtt-sample-track-salesorders-service-{unique-identifier}.${default-domain}
   - name: lbn-gtt-sst-api
     properties:
       url: https://gtt-sample-track-shipments-service-{unique-identifier}.${default-domain}
+  - name: lbn-gtt-pof-api
+    properties:
+      url: https://gtt-sample-track-purchaseorders-service-{unique-identifier}.${default-domain}
   - name: lbn-gtt-sample-app-uaa
     type: com.sap.xs.uaa-application
     parameters:
@@ -63,22 +79,50 @@ resources:
         oauth2-configuration:
           system-attributes:
             - rolecollections
-        description: Security profile of track shipments application
+        description: Security profile of sales order fulfillment application
         scopes:
+          - name: "$XSAPPNAME.sof.r"
+            description: Allow to access sales order fulfillment application
+          - name: "$XSAPPNAME.pof.r"
+            description: Allow to access purchase order fulfillment application
           - name: "$XSAPPNAME.sst.r"
-            description: Allow to access track shipments application
-          - name: "uaa.user"
+            description: Allow to access standalone shipment tracking application
+          - name: "$XSAPPNAME.sst.w"
+            description: Allow to report events in standalone shipment tracking application
+          - name: uaa.user
             description: UAA
         authorities:
+          - "$XSAPPNAME.sof.r"
+          - "$XSAPPNAME.pof.r"
           - "$XSAPPNAME.sst.r"
-          - "uaa.user"
+          - "$XSAPPNAME.sst.w"
+          - uaa.user
         role-templates:
-          - name: StandaloneShipmentTrackingAppUser
-            description: Track & Trace Track Shipments Template App User
+          - name: SalesOrderFulfillmentAppUserDisplayTemplate
+            description: Track & Trace Sales Order Fulfillment Template App User Read Access
             scope-references:
-            - "$XSAPPNAME.sst.r"
-            - uaa.user
+              - "$XSAPPNAME.sof.r"
+              - uaa.user
+          - name: PurchaseOrderFulfillmentAppUserDisplayTemplate
+            description: Track & Trace Purchase Order Fulfillment Template App User Read Access
+            scope-references:
+              - "$XSAPPNAME.pof.r"
+              - uaa.user
+          - name: StandaloneShipmentTrackingAppUserDisplayTemplate
+            description: Track & Trace Standalone Shipment Tracking Template App User Read Access
+            scope-references:
+              - "$XSAPPNAME.sst.r"
+              - uaa.user
+          - name: StandaloneShipmentTrackingAppUserProcessTemplate
+            description: Track & Trace Standalone Shipment Tracking Template App User Write Access
+            scope-references:
+              - "$XSAPPNAME.sst.w"
+              - uaa.user
+  - name: gtt-ui-sample-track-salesorders-app-host
+    type: org.cloudfoundry.existing-service
   - name: gtt-ui-sample-track-shipments-app-host
+    type: org.cloudfoundry.existing-service
+  - name: gtt-ui-sample-track-purchaseorders-app-host
     type: org.cloudfoundry.existing-service
   - name: lbn-gtt-sample-destination
     type: org.cloudfoundry.managed-service

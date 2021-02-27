@@ -63,7 +63,7 @@
                 <HBox justifyContent="SpaceBetween">
                   <Text id="receivingLocationAddress" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                   <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                    tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                    tooltip="{= ${toReceivingLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toReceivingLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                 </HBox>  
               </VBox>
             </ctrl:content>
@@ -85,15 +85,16 @@
             level="H4"
             class="sapUiTinyMarginBottom" />
           <mc:HarveyBallMicroChart id="headerCompletionRate"
+            class="pofCompletionRate"
             size="L"
             width="100%"
-            total="{= parseFloat(${netValue}) || 0}"
-            totalScale="{currency}"
+            total="{= parseFloat(${orderQuantity}) || 0}"
+            totalScale="{orderQuantityUoM}"
             colorPalette="sapUiChartPaletteQualitativeHue1"
             tooltip="{i18n>completionRate}">
             <mc:items>
-              <mc:HarveyBallMicroChartItem fraction="{= parseFloat(${completionValue}) || 0 }"
-                fractionScale="{currency}" />
+              <mc:HarveyBallMicroChartItem fraction="{= parseFloat(${completedQuantity}) || 0 }"
+                fractionScale="{orderQuantityUoM}" />
             </mc:items>
           </mc:HarveyBallMicroChart>
         </VBox>

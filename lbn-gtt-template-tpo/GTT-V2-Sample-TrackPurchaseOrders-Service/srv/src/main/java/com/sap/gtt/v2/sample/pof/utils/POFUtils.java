@@ -1,12 +1,5 @@
 package com.sap.gtt.v2.sample.pof.utils;
 
-import static com.sap.gtt.v2.sample.pof.constant.Constants.DATE_TIME_PATTERN;
-import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
-import static com.sap.gtt.v2.sample.pof.constant.Constants.URL_SPLITTER;
-import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
-import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.ORDERBY;
-import static org.apache.logging.log4j.util.Strings.EMPTY;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -16,14 +9,6 @@ import com.sap.gtt.v2.sample.pof.exception.InternalErrorException;
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterExpressionBuilder;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +20,23 @@ import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
+import static com.sap.gtt.v2.sample.pof.constant.Constants.DATE_TIME_PATTERN;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.URL_SPLITTER;
+import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
+import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.ORDERBY;
+import static org.apache.logging.log4j.util.Strings.EMPTY;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 public class POFUtils {
 
@@ -93,17 +95,10 @@ public class POFUtils {
             "Shipment.Coupling",
             "Shipment.Decoupling");
 
-    private static final List<String> EVENT_STATUS_WHITE_LIST_IN_MAP = Arrays.asList(
-            "PLANNED",
-            "OVERDUE",
-            "DELAYED"
-    );
-
     private static final List<String> EVENT_TYPE_WHITE_LIST_FOR_EXECUTION_FLOW = Arrays.asList(
+            "PurchaseOrderItem.GoodsReceipt",
             "InboundDeliveryItem.Picking",
-            "InboundDeliveryItem.Packing",
-            "InboundDeliveryItem.DeliveryItemPOD",
-            "InboundDelivery.GoodsIssued",
+            "InboundDeliveryItem.PutAway",
             "Shipment.Departure",
             "Shipment.Arrival",
             "Shipment.LoadingStart",
@@ -124,9 +119,7 @@ public class POFUtils {
             "Shipment.Delivered",
             "Shipment.Coupling",
             "Shipment.Decoupling",
-            "Shipment.OutForDelivery",
-            "Shipment.OtherEvent",
-            "Shipment.ExceptionalEvent");
+            "Shipment.OutForDelivery");
 
     private static final List<String> EVENT_TYPE_BLACK_LIST_IN_MAP = Arrays.asList(
             "Delay",
@@ -137,6 +130,10 @@ public class POFUtils {
 
     }
 
+    public static boolean isEventTypesEqual(String eventName, String eventType) {
+        return isNotBlank(eventType) && eventType.endsWith(eventName);
+    }
+
     public static boolean isEventTypeInBlackList(String eventType) {
         return EVENT_TYPE_BLACK_LIST_IN_MAP.stream().anyMatch(typeName -> typeName.equals(eventType));
     }
@@ -145,10 +142,6 @@ public class POFUtils {
         String[] parts = eventType.split("\\.");
         String eventName = parts[parts.length - 1];
         return EVENT_TYPE_WHITE_LIST_FOR_EXECUTION_FLOW.stream().anyMatch(typeName -> typeName.endsWith(eventName));
-    }
-
-    public static boolean isEventStatusInWhiteList(String eventStatus) {
-        return EVENT_STATUS_WHITE_LIST_IN_MAP.stream().anyMatch(typeName -> typeName.equals(eventStatus));
     }
 
     public static String getStringFromResource(String resourceFile) {
@@ -338,6 +331,11 @@ public class POFUtils {
     public static String getTimeString() {
         return getUTCTimeString(System.currentTimeMillis());
     }
+
+    public static String getTimeStr() {
+        return getTimeStr(System.currentTimeMillis());
+    }
+
 
     public static String getUTCTimeString(Long time) {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_TIME_PATTERN);

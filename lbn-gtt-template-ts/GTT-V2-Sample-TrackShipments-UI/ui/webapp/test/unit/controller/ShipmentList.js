@@ -38,10 +38,9 @@ sap.ui.define([
     var controller = this.controller;
 
     // Arrange
-    controller.routeName = "shipmentList";
     var fakeModel = {};
     var fakeSmartFilterBar = {};
-    stub(controller, "getModel").withArgs(controller.routeName).returns(fakeModel);
+    stub(controller, "getModel").withArgs("view").returns(fakeModel);
     stub(fakeModel, "setProperty");
     stub(controller, "byId").withArgs("smartFilterBar").returns(fakeSmartFilterBar);
     stub(fakeSmartFilterBar, "getFilterData").returns({
@@ -53,32 +52,32 @@ sap.ui.define([
         },
       },
     });
+    stub(fakeSmartFilterBar, "search");
 
     // Act
     controller.onAfterVariantLoad();
 
     // Assert
-    assert.ok(controller.getModel(controller.routeName).setProperty.calledOnce, "The customFilters property is set.");
+    assert.ok(controller.getModel("view").setProperty.calledOnce, "The customFilters property is set.");
   });
 
   QUnit.test("refineFilters - location filter", function (assert) {
     var controller = this.controller;
 
     // Arrange
-    var fakeSFB = {};
-    stub(fakeSFB, "getFilterData").returns({
+    var fakeFilterData = {
       departureLocationId: {},
       arrivalLocationId: {},
-    });
-    stub(controller, "byId").withArgs("smartFilterBar").returns(fakeSFB);
+    };
 
     var fakeLocationFilter = new Filter("departureLocationId", FilterOperator.EQ, "xri://sap.com/id:LBN#10010001006:QM7CLNT910:Location:Customer:0000010105");
     var fakeFilters = [{
       aFilters: [fakeLocationFilter],
+      bAnd: false,
     }];
 
     // Act
-    controller.refineFilters(fakeFilters);
+    controller.refineFilters(fakeFilterData, fakeFilters);
 
     // Assert
     assert.equal(fakeFilters[0].aFilters[0].aFilters[0].oValue1, "0000010105", "The departureLocationId is right");

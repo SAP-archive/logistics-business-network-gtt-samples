@@ -2,7 +2,9 @@ sap.ui.define([
   "com/sap/gtt/app/sample/pof/controller/BaseController",
   "sap/ui/model/json/JSONModel",
   "com/sap/gtt/app/sample/pof/util/Constants",
-], function (BaseController, JSONModel, Constants) {
+  "sap/ui/model/Filter",
+  "sap/ui/model/FilterOperator",
+], function (BaseController, JSONModel, Constants, Filter, FilterOperator) {
   "use strict";
 
   return BaseController.extend("com.sap.gtt.app.sample.pof.controller.list.PurchaseOrderList", {
@@ -18,7 +20,15 @@ sap.ui.define([
     },
 
     initModel: function () {
-      var oListModel = new JSONModel({customFilters: {}});
+      var oListModel = new JSONModel({
+        customFilters: {
+          "inboundDeliveryItems.inboundDelivery.inboundDeliveryNo":{
+            inputValue: "",
+          },
+          "inboundDeliveryItems.inboundDelivery.shipmentTPs.shipment.shipmentNo":{
+            inputValue: "",
+          },
+        }});
       this.setModel(oListModel, this.routeName);
     },
 
@@ -29,6 +39,12 @@ sap.ui.define([
         selectedTabFitlerKey: "purchaseOrderTab",
         purchaseOrderAmount: "0",
         purchaseOrderItemsAmount: "0"});
+    },
+
+    initControls: function () {
+      var oCompletionRate = this.byId("orderCompletionRate");
+      var oItemCompletionRate = this.byId("itemCompletionRate");
+      this.initCompletionRate([oCompletionRate, oItemCompletionRate], Constants.TWO_DECIMALS_AFTER_DOT);
     },
 
     subscribeEvents: function () {
@@ -64,17 +80,42 @@ sap.ui.define([
     },
 
     /**
+     * Add custom filters to PO.
+     * @param {Object[]} aBindingFilters smart table binding filters
+     * @returns {Object[]} return the changed filters array
+     */
+    _addCustomFilters: function (aBindingFilters) {
+      var oCustomFilters = this.getModel(this.routeName).getProperty("/customFilters");
+      var aCustomFilters = [],
+        oResultFilter;
+      for (var key in oCustomFilters) {
+        if (oCustomFilters[key] && oCustomFilters[key].filter) {
+          aCustomFilters.push(oCustomFilters[key].filter);
+        }
+      }
+      if (aCustomFilters.length) {
+        if(!aBindingFilters.length) {
+          oResultFilter = new Filter(aCustomFilters, true);
+        } else {
+          aBindingFilters.push(new Filter(aCustomFilters, true));
+          oResultFilter = new Filter(aBindingFilters, true);
+        }
+      }
+      return oResultFilter;
+    },
+
+    /**
      * Change the filter path if items should be filtered by child nodes.
      * @param {object} oBindingParams binding parameters
      */
     _changeFilterBeforeRequest: function (oBindingParams) {
-      var aFiltersParam = oBindingParams.filters;
-      if(!aFiltersParam.length) {
+      var oFiltersParam = this._addCustomFilters(oBindingParams.filters);
+      if(!oFiltersParam) {
         return;
       }
-      var oMainFiter = aFiltersParam[0];
-
-      this._setFilterPath(oMainFiter);
+      this._setFilterPath(oFiltersParam);
+      // update binding filters
+      oBindingParams.filters = oFiltersParam;
     },
 
     /**
@@ -92,18 +133,47 @@ sap.ui.define([
         if(oFilter.sPath === Constants.PO_ITEM_MATERIAL_ID_PROP || oFilter.sPath === Constants.PO_ITEM_MATERIAL_DESC_PROP) {
           oFilter.sPath = Constants.PO_TO_PO_ITEM_NAV_PATH + "/" + oFilter.sPath;
         }
+        if(oFilter.sPath === Constants.PO_ITEM_DELIVERY_NO) {
+          oFilter.sPath = Constants.PO_DELIVERY_NO;
+        }
+        if(oFilter.sPath === Constants.PO_ITEM_SHIPMENT_NO) {
+          oFilter.sPath = Constants.PO_SHIPMENT_NO;
+        }
       }
-    },
-
-    initControls: function () {
-      var oCompletionRate = this.byId("orderCompletionRate");
-      var oItemCompletionRate = this.byId("itemCompletionRate");
-      this.initCompletionRate([oCompletionRate,oItemCompletionRate]);
     },
 
     // ======================================================================
     // Events
     // ======================================================================
+
+    /**
+     * Event when change custom filter input, set Filter to model
+     * @param {object} oEvent event object
+     */
+    onItemChanged: function (oEvent) {
+      var oSource = oEvent.getSource();
+      var sFilterKey = oSource.data("key");
+      var sNewValue = oEvent.getParameter("newValue").trim();
+      var oFilter = null;
+
+      if (sNewValue) {
+        oFilter = new Filter({
+          path: sFilterKey.replace(/\./g, "/"),
+          operator: FilterOperator.Contains,
+          value1: sNewValue,
+        });
+      }
+
+      var oModel = this.getModel(this.routeName);
+      if (oFilter) {
+        oModel.setProperty(Constants.CUSTOM_FILTERTS_PATH + "/" + sFilterKey + "/filter", oFilter);
+      } else {
+        oModel.setProperty(Constants.CUSTOM_FILTERTS_PATH + "/" + sFilterKey + "/filter", null);
+      }
+
+      var oSmartFilterBar = this.byId("smartFilterBar");
+      oSmartFilterBar.fireFilterChange(oEvent);
+    },
 
     /**
      * PO SmartTable lifecycle 'beforeRebind' hook event.
@@ -143,7 +213,47 @@ sap.ui.define([
         oBindingParameters.expand += ",supplierLocationType,receivingLocationType";
       }
 
+      // add default sorting
       this.addDefaultSorters(oBindingParams.sorter, ["purchaseOrderNo", "itemNo"]);
+
+      // update binding filter
+      var oFiltersParam = this._getResultPOIFilters(oBindingParams.filters);
+      if(!oFiltersParam) {
+        return;
+      }
+      oBindingParams.filters = oFiltersParam;
+    },
+
+    /**
+     * Add custom filters to PO Items.
+     * @param {Object[]} aBindingFilters binding filters
+     * @returns {sap.ui.model.Filter} oResultFilter result filter for the PO Item binding
+     */
+    _getResultPOIFilters: function (aBindingFilters) {
+      var oCustomFilters = this.getModel(this.routeName).getProperty("/customFilters");
+      var aCustomFilters = [],
+        oResultFilter;
+      for (var key in oCustomFilters) {
+        if (oCustomFilters[key] && oCustomFilters[key].filter) {
+          if(oCustomFilters[key].filter.sPath === Constants.PO_DELIVERY_NO) {
+            oCustomFilters[key].filter.sPath = Constants.PO_ITEM_DELIVERY_NO;
+          }
+          if(oCustomFilters[key].filter.sPath === Constants.PO_SHIPMENT_NO) {
+            oCustomFilters[key].filter.sPath = Constants.PO_ITEM_SHIPMENT_NO;
+          }
+          aCustomFilters.push(oCustomFilters[key].filter);
+        }
+      }
+      if (aCustomFilters.length) {
+        if(!aBindingFilters.length) {
+          oResultFilter = new Filter(aCustomFilters, true);
+        } else {
+          aBindingFilters.push(new Filter(aCustomFilters, true));
+          oResultFilter = new Filter(aBindingFilters, true);
+        }
+      }
+
+      return oResultFilter;
     },
 
     /**
@@ -189,7 +299,9 @@ sap.ui.define([
       var oModel = this.getModel(this.routeName);
       var oSmartFilterBar = this.byId("smartFilterBar");
       var oData = oSmartFilterBar.getFilterData();
-      oModel.setProperty("/customFilters", oData._CUSTOM);
+      oModel.setProperty(Constants.CUSTOM_FILTERTS_PATH, oData._CUSTOM);
+
+      oSmartFilterBar.search();
     },
 
     onBeforeVariantSave: function (oEvent) {
@@ -204,7 +316,7 @@ sap.ui.define([
 
     updateCustomFilter: function () {
       var oModel = this.getModel(this.routeName);
-      var oCustomFilters = oModel.getProperty("/customFilters");
+      var oCustomFilters = oModel.getProperty(Constants.CUSTOM_FILTERTS_PATH);
       var oSmartFilterBar = this.byId("smartFilterBar");
       oSmartFilterBar.setFilterData({
         _CUSTOM: oCustomFilters,

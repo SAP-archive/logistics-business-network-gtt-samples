@@ -11,10 +11,10 @@
 			<smartForm:GroupElement>
 				<smartField:SmartField id="departure" value="{shippingPoint}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'departureAddress'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/departureAddress}">
 				<Text id="departureAddress" text="{path: 'departureAddress', formatter: '.formatter.formattedAddress'}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'warehouseNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'} / {parts: [{'value': 'door'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/warehouseNo} / {label>/DeliveryItem/door}">
 				<Text id="warehouse" text="{warehouseNo} / {door}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement>
@@ -26,25 +26,25 @@
 			<smartForm:GroupElement>
 				<smartField:SmartField id="destination" value="{destination}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'destinationAddress'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/destinationAddress}">
 				<Text id="destinationAddress" text="{path: 'destinationAddress', formatter: '.formatter.formattedAddress'}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'destinationEmail'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/destinationEmail}">
 				<Link id="email" text="{= ${destinationEmail} ? ${destinationEmail} : String.fromCharCode(parseInt(2013, 16)) }" href="mailto:{destinationEmail}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'destinationTelephone'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/destinationTelephone}">
 				<Link id="phone" text="{= ${destinationTelephone} ? ${destinationTelephone} : String.fromCharCode(parseInt(2013, 16)) }" href="tel:{destinationTelephone}"/>
 			</smartForm:GroupElement>
 		</smartForm:Group>
 
 		<smartForm:Group label=" ">
-			<smartForm:GroupElement label="{parts: [{'value': 'revisedPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/revisedPlannedDate}">
 				<Text id="revisedPlannedDate" text="{path: 'revisedPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'initialPlannedDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/initialPlannedDate}">
 				<Text id="initialPlannedDate" text="{path: 'initialPlannedDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'documentDate'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/documentDate}">
 				<Text id="documentDate" text="{path: 'documentDate', type: 'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement>
@@ -68,7 +68,7 @@
 			<smartForm:GroupElement>
 				<smartField:SmartField id="enaUPC" value="{upc}"/>
 			</smartForm:GroupElement>
-			<smartForm:GroupElement label="{parts: [{'value': 'incoterms_code'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}">
+			<smartForm:GroupElement label="{label>/DeliveryItem/incoterms_code}">
 				<Text id="incoterms" text="{= ${incoterms/localized/name} ? ${incoterms/localized/name} : ${incoterms/name} }"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement>

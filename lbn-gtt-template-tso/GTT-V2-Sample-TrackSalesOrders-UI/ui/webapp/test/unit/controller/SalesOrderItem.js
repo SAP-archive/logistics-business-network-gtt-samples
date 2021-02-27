@@ -53,23 +53,4 @@ sap.ui.define([
     // Assert
     assert.ok(fakeTargets.display.calledWith("notFound"), "Sales order item is not found");
   });
-
-  QUnit.test("onBeforeRebindDeliveryItemsTable - no sales order id", function (assert) {
-    var controller = this.controller;
-
-    // Arrange
-    var fakeModel = {};
-    stub(fakeModel, "getProperty").withArgs("salesOrderItemId").returns(null);
-    stub(controller, "getModel").returns(fakeModel);
-
-    var fakeEvent = {};
-    var fakeParams = {};
-    stub(fakeEvent, "getParameter").withArgs("bindingParams").returns(fakeParams);
-
-    // Act
-    controller.onBeforeRebindDeliveryItemsTable(fakeEvent);
-
-    // Assert
-    assert.ok(fakeParams.preventTableBind, "Will not fetch delivery items");
-  });
 });

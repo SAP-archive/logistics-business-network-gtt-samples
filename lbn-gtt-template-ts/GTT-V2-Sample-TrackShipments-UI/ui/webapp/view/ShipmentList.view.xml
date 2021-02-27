@@ -15,7 +15,7 @@
 			<f:DynamicPageTitle>
 				<f:heading>
 					<sv:SmartVariantManagement id="pageVariant"
-						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="true"/>
+						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="false"/>
 				</f:heading>
 				<f:snappedContent>
 					<Text id="statusText"/>
@@ -31,6 +31,7 @@
 						smartVariant="pageVariant" useToolbar="false" useDateRangeType="true" entitySet="Shipment"
 						considerSelectionVariants="true" persistencyKey="listReportFilterBar"
 						initialise=".onInitSmartFilterBar"
+						initialized=".onInitializedSmartFilterBar"
 						assignedFiltersChanged=".onAssignedFiltersChanged"
 						beforeVariantSave=".onBeforeVariantSave"
 						beforeVariantFetch=".onBeforeVariantFetch"
@@ -60,83 +61,83 @@
 				header="{i18n>shipmentList}"
 				showRowCount="true"
 				useExportToExcel="false"
-				enableAutoBinding="true"
+				enableAutoBinding="false"
 				beforeRebindTable=".onBeforeRebindTable">
 				<smartTable:customData>
 					<core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
-					<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
+					<core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: true}}"/>
 				</smartTable:customData>
 				<Table id="innerTable" class="sstShipmentsTable" growing="true">
 					<columns>
 						<Column>
-							<Text text="{parts: [{'value': 'shipmentNo'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/transportationMode_code}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "shipmentNo,transportationMode_code", "leadingProperty": "shipmentNo, transportationMode_code", "sortProperty": "shipmentNo", "columnIndex": 0}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "transportationMode_code", "leadingProperty": "transportationMode_code, transportationMode/localized/name, transportationMode/name", "navigationProperty": "transportationMode/localized", "sortProperty": "transportationMode_code", "columnIndex": 1}'/>
 							</customData>
 						</Column>
 						<Column>
 							<Text text="{i18n>carrier}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "serviceAgentLbnId", "leadingProperty": "serviceAgentLbnId", "sortProperty": "serviceAgentLbnId", "columnIndex": 1}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "serviceAgentLbnId", "leadingProperty": "serviceAgentLbnId", "sortProperty": "serviceAgentLbnId", "columnIndex": 2}'/>
 							</customData>
 						</Column>
 						<Column>
 							<Text text="{i18n>departureAndDatetime}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "departureLocationId,plannedDepartureDateTime", "leadingProperty": "departureLocationId, departureLocation, plannedDepartureDateTime", "navigationProperty": "departureLocation", "columnIndex": "2"}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "departureLocationId,plannedDepartureDateTime", "leadingProperty": "departureLocationId, departureLocation, plannedDepartureDateTime", "navigationProperty": "departureLocation", "columnIndex": 3}'/>
 							</customData>
 						</Column>
 						<Column>
 							<Text text="{i18n>arrivalAndDatetime}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "arrivalLocationId,plannedArrivalDateTime", "leadingProperty": "arrivalLocationId, arrivalLocation, plannedArrivalDateTime", "navigationProperty": "arrivalLocation", "columnIndex": "3"}' />
+								<core:CustomData key="p13nData" value='{"columnKey": "arrivalLocationId,plannedArrivalDateTime", "leadingProperty": "arrivalLocationId, arrivalLocation, plannedArrivalDateTime", "navigationProperty": "arrivalLocation", "columnIndex": 4}' />
 							</customData>
 						</Column>
 						<Column>
-							<Text text="{parts: [{'value': 'executionStatus_code'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/executionStatus_code}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code, executionStatus/name, executionStatus/localized/name", "navigationProperty": "executionStatus/localized", "sortProperty": "executionStatus_code", "columnIndex": 4}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code, executionStatus/name, executionStatus/localized/name", "navigationProperty": "executionStatus/localized", "sortProperty": "executionStatus_code", "columnIndex": 5}'/>
 							</customData>
 						</Column>
 						<Column>
-							<Text text="{parts: [{'value': 'processStatus_code'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/processStatus_code}"/>
 							<customData>
-								<core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code, processStatus/name, processStatus/localized/name", "navigationProperty": "processStatus/localized", "sortProperty": "processStatus_code", "columnIndex": 5}'/>
+								<core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code, processStatus/name, processStatus/localized/name", "navigationProperty": "processStatus/localized", "sortProperty": "processStatus_code", "columnIndex": 6}'/>
 							</customData>
 						</Column>
 						<!-- customized columns which are not visible initially -->
 						<Column visible="false" hAlign="Right">
-							<Text text="{parts: [{'value': 'cargoVolumn'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/cargoVolumn}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "cargoVolumn,volumnUoM", "leadingProperty": "cargoVolumn, volumnUoM", "sortProperty": "cargoVolumn", "columnIndex": 10000}'/>
 							</customData>
 						</Column>
 						<Column visible="false" hAlign="Right">
-							<Text text="{parts: [{'value': 'cargoWeight'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/cargoWeight}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "cargoWeight,weightUoM", "leadingProperty": "cargoWeight, weightUoM", "sortProperty": "cargoWeight", "columnIndex": 10001}'/>
 							</customData>
 						</Column>
 						<Column visible="false" hAlign="Right">
-							<Text text="{parts: [{'value': 'cargoQuantity'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/cargoQuantity}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "cargoQuantity,quantityUoM", "leadingProperty": "cargoQuantity, quantityUoM", "sortProperty": "cargoQuantity", "columnIndex": 10002}'/>
 							</customData>
 						</Column>
 						<Column visible="false" hAlign="Right">
-							<Text text="{parts: [{'value': 'plannedTotalDistance'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/plannedTotalDistance}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "plannedTotalDistance", "leadingProperty": "plannedTotalDistance", "sortProperty": "plannedTotalDistance", "columnIndex": 10003}'/>
 							</customData>
 						</Column>
 						<Column visible="false">
-							<Text text="{parts: [{'value': 'plannedGrossDuration'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/plannedGrossDuration}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "plannedGrossDuration", "leadingProperty": "plannedGrossDuration", "sortProperty": "plannedGrossDuration", "columnIndex": 10004}'/>
 							</customData>
 						</Column>
 						<Column visible="false">
-							<Text text="{parts: [{'value': 'plannedNetDuration'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}"/>
+							<Text text="{label>/Shipment/plannedNetDuration}"/>
 							<customData>
 								<core:CustomData key="p13nData" value='{"columnKey": "plannedNetDuration", "leadingProperty": "plannedNetDuration", "sortProperty": "plannedNetDuration", "columnIndex": 10005}'/>
 							</customData>
@@ -145,12 +146,19 @@
 					<items>
 						<ColumnListItem class="sapUiTinyMarginTop" vAlign="Top" type="Navigation" highlight="{path: 'processStatus_code', formatter: '.formatter.processStatus.getListRowState' }" press=".onShipmentPressed">
 							<cells>
-								<VBox>
+								<HBox>
 									<items>
-										<ObjectIdentifier title="{shipmentNo}"/>
-										<core:Icon class="sapUiTinyMarginTop" src="{path: 'transportationMode_code', formatter: '.formatter.transportationMode.getIcon'}"/>
+										<core:Icon visible="{= ${transportationMode_code} !== '00' &amp;&amp; ${transportationMode_code} !== '09' }" class="sapUiTinyMarginEnd" src="{path: 'transportationMode_code', formatter: '.formatter.transportationMode.getIcon'}"/>
+										<Text text="{
+											parts: [
+												'transportationMode/localized/name',
+												'transportationMode/name',
+												'transportationMode_code'
+											],
+											formatter: '.formatter.codeListDescription'
+										}"/>
 									</items>
-								</VBox>
+								</HBox>
 								<Text text="{serviceAgentLbnId}"/>
 								<ObjectIdentifier class="sstDepartureLocation"
 									titleActive="{= !!${departureLocation} }"

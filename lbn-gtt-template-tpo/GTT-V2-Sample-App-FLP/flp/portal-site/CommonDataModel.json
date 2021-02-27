@@ -17,6 +17,14 @@
         "payload": {
           "viz": [
             {
+              "id": "com.sap.gtt.app.sample.sof",
+              "vizId": "SalesOrder-track"
+            },
+            {
+              "id": "com.sap.gtt.app.sample.sst",
+              "vizId": "Shipment-track"
+            },
+            {
               "id": "com.sap.gtt.app.sample.pof",
               "vizId": "PurchaseOrder-track"
             }
@@ -25,6 +33,42 @@
       }
     ],
     "groups": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "salesOrder",
+          "title": "{{title}}",
+          "entityType": "group",
+          "i18n": "i18n/salesOrder.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.sof",
+              "appId": "com.sap.gtt.app.sample.sof",
+              "vizId": "SalesOrder-track"
+            }
+          ]
+        }
+      },
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "shipment",
+          "title": "{{title}}",
+          "entityType": "group",
+          "i18n": "i18n/shipment.properties"
+        },
+        "payload": {
+          "viz": [
+            {
+              "id": "com.sap.gtt.app.sample.sst",
+              "appId": "com.sap.gtt.app.sample.sst",
+              "vizId": "Shipment-track"
+            }
+          ]
+        }
+      },
       {
         "_version": "3.0.0",
         "identification": {
@@ -74,6 +118,8 @@
             }
           },
           "groupsOrder": [
+            "salesOrder",
+            "shipment",
             "purchaseOrder"
           ],
           "sap.cloud.portal": {

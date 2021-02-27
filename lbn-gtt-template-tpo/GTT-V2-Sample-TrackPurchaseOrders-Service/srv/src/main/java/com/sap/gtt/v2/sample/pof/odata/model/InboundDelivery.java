@@ -82,8 +82,8 @@ public class InboundDelivery {
     @EdmProperty(name = "supplierDescription", facets = @EdmFacets(maxLength = 255))
     private String supplierDescription;
 
-    @EdmNavigationProperty(name = "inboundDeliveryItemTPs", toType = InboundDeliveryItemTP.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
-    private List<InboundDeliveryItemTP> inboundDeliveryItemTPs;
+    @EdmNavigationProperty(name = "inboundDeliveryItemTPs", toType = InboundDeliveryItem.class, toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
+    private List<InboundDeliveryItem> inboundDeliveryItemTPs;
 
     @EdmNavigationProperty(name = "supplierLocationType", toType = LocationType.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private LocationType supplierLocationType;
@@ -262,11 +262,11 @@ public class InboundDelivery {
         this.processStatusCode = processStatusCode;
     }
 
-    public List<InboundDeliveryItemTP> getInboundDeliveryItemTPs() {
+    public List<InboundDeliveryItem> getInboundDeliveryItemTPs() {
         return inboundDeliveryItemTPs;
     }
 
-    public void setInboundDeliveryItemTPs(List<InboundDeliveryItemTP> inboundDeliveryItemTPs) {
+    public void setInboundDeliveryItemTPs(List<InboundDeliveryItem> inboundDeliveryItemTPs) {
         this.inboundDeliveryItemTPs = inboundDeliveryItemTPs;
     }
 

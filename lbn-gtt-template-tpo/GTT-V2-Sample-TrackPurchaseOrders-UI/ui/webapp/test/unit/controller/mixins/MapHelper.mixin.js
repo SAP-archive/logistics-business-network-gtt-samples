@@ -1,11 +1,9 @@
 sap.ui.define([
   "com/sap/gtt/app/sample/pof/controller/mixins/MapHelper.mixin",
-  "com/sap/gtt/app/sample/pof/util/Constants",
   "com/sap/gtt/app/sample/pof/util/ServiceUtils",
   "com/sap/gtt/app/sample/pof/util/RestClient",
   "sap/ui/vbm/SemanticType",
-  "sap/ui/base/Event",
-], function (MapHelper, Constants, ServiceUtils, RestClient, SemanticType, Event) {
+], function (MapHelper, ServiceUtils, RestClient, SemanticType) {
   "use strict";
 
   // mockserver.init();

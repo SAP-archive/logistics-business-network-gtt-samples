@@ -2,41 +2,48 @@ sap.ui.define(
   [
     "./BaseDetailController",
     "sap/ui/core/Fragment",
-    "../util/ServiceUtils",
-    "../util/RestClient",
   ],
   function (
     BaseDetailController,
-    Fragment,
-    ServiceUtils,
-    RestClient
+    Fragment
   ) {
     "use strict";
+
+    var CONSTANTS = Object.freeze({
+      SLASH: "/",
+      IS_FREIGHT_UNIT: "isFreightUnit",
+    });
 
     return BaseDetailController.extend("com.sap.gtt.app.sample.sst.controller.Shipment", {
       routeName: "shipment",
 
       initControls: function () {
         this.initGenericTags(["executionStatusGenericTag", "processStatusGenericTag"]);
-        this.registerEvents(this.routeName);
+        this.registerEvents();
+      },
+
+      onBeforeRendering: function () {
+        this.getModel("view").setProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT, false);
       },
 
       routePatternMatched: function (oEvent) {
-        var model = this.getModel(this.routeName);
-        model.setProperty("/shipmentNo", null);
-
-        var args = oEvent.getParameter("arguments");
-        var id = args.id;
-        model.setProperty("/shipmentId", id);
-
         // Bind the view with an entry
+        var args = oEvent.getParameter("arguments");
+        if (args["?params"]) {
+          this.getModel("view").setProperty("/urlParams", args["?params"]);
+        }
+
         var odataModel = this.getModel();
         odataModel.metadataLoaded().then(function () {
-          var entitySetKey = odataModel.createKey("Shipment", {
-            id: id,
-          });
+          var entitySetKey = this.getEntitySetKey(odataModel, args.id);
           this.bindView(entitySetKey);
         }.bind(this));
+      },
+
+      getEntitySetKey: function (odataModel, id) {
+        return odataModel.createKey("Shipment", {
+          id: id,
+        });
       },
 
       getExpandList: function () {
@@ -53,18 +60,18 @@ sap.ui.define(
       },
 
       /**
-       * Update events by status
+       * Update events status chart and the tracking view
        */
       updateView: function () {
-        var model = this.getModel(this.routeName);
+        var model = this.getModel("view");
 
-        var isCompleted = this.isShipmentCompleted();
+        var isCompleted = this.isTrackedProcessCompleted();
         model.setProperty("/isCompleted", isCompleted);
 
         if (!isCompleted) {
           this.updateNextStop();
         }
-        this.updateShipmentEventsByStatus();
+        this.updateTrackedProcessEventsByStatus();
 
         // refresh subsections
         this.refreshSubSection("trackingTimelineView");
@@ -85,18 +92,18 @@ sap.ui.define(
       },
 
       updateNextStop: function () {
-        var model = this.getModel(this.routeName);
+        var model = this.getModel("view");
 
-        var request = this.createGetRequestWithShipmentId("nextStop");
+        var request = this.createGetRequestWithId("nextStop", model.getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT));
         request.then(function (data) {
           model.setProperty("/nextStop", data);
         });
       },
 
-      updateShipmentEventsByStatus: function () {
-        var model = this.getModel(this.routeName);
+      updateTrackedProcessEventsByStatus: function () {
+        var model = this.getModel("view");
 
-        var request = this.createGetRequestWithShipmentId("eventsByStatus");
+        var request = this.createGetRequestWithId("eventsByStatus", model.getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT));
         request.then(function (data) {
           model.setProperty("/eventStatusTypeCount", data.length);
           model.setProperty("/eventsCount", data.reduce(
@@ -129,16 +136,21 @@ sap.ui.define(
       /**
        * Add "Visibility Provider" row in the reference documents table
        *
+       * @param {boolean} isFreightUnit `true` if is on delivery item page
        * @param {sap.ui.base.EventProvider} source Event source
        * @param {string} trackId trackId
        */
-      addVpRowInRefDocumentsTable: function (source, trackId) {
+      addVpRowInRefDocumentsTable: function (isFreightUnit, source, trackId) {
+        if (isFreightUnit) {
+          return;
+        }
+
         if (!trackId) {
           // Remove visibility provider row
           this.byId("vpRow").destroy();
           source.data("isVpRowAdded", false);
           return;
-        } else if (source.data("isVpRowAdded")) {
+        } else if (source.data("isVpRowAdded") && this.byId("vpRow")) {
           // Update trackId
           this.byId("trackIdText").setText(trackId);
           return;
@@ -164,7 +176,7 @@ sap.ui.define(
         source.data("isVpRowAdded", true);
       },
 
-      isShipmentCompleted: function () {
+      isTrackedProcessCompleted: function () {
         var bindingContext = this.getView().getBindingContext();
         return bindingContext.getProperty("executionStatus_code") === "COMPLETED";
       },

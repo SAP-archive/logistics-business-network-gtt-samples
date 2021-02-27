@@ -9,7 +9,8 @@
 				minSize="225" />
 		</m:layoutData>
 
-		<m:OverflowToolbar class="sapSuiteUiCommonsTimelineHeaderBar">
+		<m:OverflowToolbar class="sapSuiteUiCommonsTimelineHeaderBar"
+			visible="{timeline>/hasWritePrivilege}">
 			<m:ToolbarSpacer />
 
 			<m:Button id="reportEventsButton"
@@ -51,22 +52,10 @@
 						}.toString() }"
 						writeToDom="true" />
 				</customData>
+
 				<m:VBox>
-					<m:HBox wrap="Wrap"
-						class="sapUiTinyMarginBottom"
-						justifyContent="SpaceBetween">
-						<m:ObjectAttribute class="sapUiTinyMarginTop"
-							visible="{:= ${timeline>plannedBusinessTimestamp} !== null }"
-							title="{i18n>plannedAt}"
-							text="{
-								path: 'timeline>plannedBusinessTimestamp',
-								type: 'sap.ui.model.odata.type.DateTimeOffset'
-							}" />
-
-						<m:ObjectAttribute class="sapUiTinyMarginTop"
-							visible="{:= !${timeline>plannedBusinessTimestamp} }" />
-
-						<m:ObjectStatus class="sapUiTinyMarginTop"
+					<m:HBox wrap="Wrap">
+						<m:ObjectStatus
 							text="{
 								path: 'timeline>eventStatusCode',
 								formatter: '.formatter.eventStatusText'
@@ -75,30 +64,83 @@
 								path: 'timeline>eventStatusCode',
 								formatter: '.formatter.eventStatus.getState'
 							}"
-							inverted="{:= ${timeline>eventStatusCode} === 'DELAYED' }" />
+							inverted="{:=
+								${timeline>eventStatusCode} === 'DELAYED' ||
+								${timeline>eventStatusCode} === 'OVERDUE'
+							}" />
+
+						<m:ObjectStatus
+							class="sapUiTinyMarginBegin"
+							visible="{=
+								!!${timeline>plannedBusinessTimestamp} &amp;&amp;
+								!!${timeline>estimatedArrival/estimatedArrivalTime}
+							}"
+							state="{:= ${timeline>eventStatusCode} === 'PLANNED'
+								? 'Success' : ${
+									path: 'timeline>eventStatusCode',
+									formatter: '.formatter.eventStatus.getState'
+								}
+							}"
+							text="{
+								parts: [
+									'timeline>plannedBusinessTimestamp',
+									'timeline>estimatedArrival/estimatedArrivalTime'
+								],
+								formatter: '.formatter.dateDelta'
+							}"
+							tooltip="{
+								parts: [
+									'timeline>estimatedArrival/estimatedArrivalTime',
+									'timeline>plannedBusinessTimestamp'
+								],
+								formatter: '.formatter.etaDeltaTooltip'
+							}" />
 					</m:HBox>
+
+					<m:ObjectStatus class="sapUiTinyMarginTop"
+						visible="{:= !!${timeline>eventReasonText} }"
+						text="{timeline>eventReasonText}"
+						state="Error" />
+
+					<m:ObjectAttribute class="sapUiTinyMarginTop"
+						visible="{:= !!${timeline>plannedBusinessTimestamp} }"
+						title="{i18n>plannedAt}"
+						text="{
+							path: 'timeline>plannedBusinessTimestamp',
+							type: 'sap.ui.model.odata.type.DateTimeOffset'
+						}" />
+
+					<m:ObjectAttribute class="sapUiTinyMarginTop"
+						visible="{:= !!${timeline>actualBusinessTimestamp} }"
+						title="{i18n>actualAt}"
+						text="{
+							path: 'timeline>actualBusinessTimestamp',
+							type: 'sap.ui.model.odata.type.DateTimeOffset'
+						}" />
+
+					<m:ObjectAttribute class="sapUiTinyMarginTop"
+						visible="{:= !!${timeline>estimatedArrival/estimatedArrivalTime} }"
+						title="{i18n>eta}"
+						text="{
+							path: 'timeline>estimatedArrival/estimatedArrivalTime',
+							type: 'sap.ui.model.odata.type.DateTimeOffset'
+						}" />
 
 					<m:HBox wrap="Wrap">
-						<!-- <m:Link id="viewDeliveryItemsLink"
+						<m:Link id="viewDeliveryItemsLink"
+							visible="{:= !${parentView>/isFreightUnit} &amp;&amp; !!${timeline>deliveryItems} &amp;&amp; ${timeline>deliveryItems}.length > 0 }"
 							class="sapUiTinyMarginTop sapUiSmallMarginEnd"
-							text="{i18n>deliveryItems}"
-							press=".openDeliveryItemsPopover(${$source>})" /> -->
+							text="{i18n>items} ({= ${timeline>deliveryItems}.length })"
+							press=".openDeliveryItemsPopover(${$source>}, ${timeline>deliveryItems})" />
 
 						<m:Link id="viewReportingHistoryLink"
-							visible="{:= ${
-								path: 'timeline>eventStatusCode',
-								formatter: '.formatter.eventStatus.isActual'
-							} &amp;&amp; !!${timeline>historicalEvents}
-								&amp;&amp; ${timeline>historicalEvents}.length > 0
-							}"
+							visible="{:= !!${timeline>historicalEvents} &amp;&amp; ${timeline>historicalEvents}.length > 0 }"
 							class="sapUiTinyMarginTop sapUiSmallMarginEnd"
 							text="{i18n>reportingHistory} ({= ${timeline>historicalEvents}.length })"
-							press=".openReportingHistoryPopover(
-								${$source>},
-								${timeline>historicalEvents}
-							)" />
+							press=".openReportingHistoryPopover(${$source>}, ${timeline>historicalEvents})" />
 					</m:HBox>
 				</m:VBox>
+
 			</TimelineItem>
 		</Timeline>
 	</m:VBox>

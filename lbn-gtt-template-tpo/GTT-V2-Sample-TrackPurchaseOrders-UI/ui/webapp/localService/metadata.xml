@@ -4,206 +4,21 @@
     xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
     <Schema Namespace="com.lbngttsamples.gtt.app.pof.pofService"
       xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-      <EntityType Name="LocationDTO">
+      <EntityType Name="ExecutionStatus">
         <Key>
-          <PropertyRef Name="locationAltKey"></PropertyRef>
+          <PropertyRef Name="code"></PropertyRef>
         </Key>
-        <Property Name="locationDescription" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locationAltKey" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="sourceSystem" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="externalId" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="objectTypeDescription" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="formattedAddress" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locationId" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="longitude" Type="Edm.Decimal" Nullable="true"></Property>
-        <Property Name="latitude" Type="Edm.Decimal" Nullable="true"></Property>
-        <Property Name="objectTypeCode" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locationTypeDescription" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus_2_r_Localized" FromRole="ExecutionStatus" ToRole="r_Localized"></NavigationProperty>
       </EntityType>
-      <EntityType Name="TransportationModeTexts">
+      <EntityType Name="TrackedObjectTypeTexts">
         <Key>
           <PropertyRef Name="code"></PropertyRef>
           <PropertyRef Name="locale"></PropertyRef>
         </Key>
         <Property Name="code" Type="Edm.String" Nullable="true"></Property>
         <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-      </EntityType>
-      <EntityType Name="TransportationMode">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode_2_r_Localized" FromRole="TransportationMode" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="InboundDeliveryItemTP">
-        <Key>
-          <PropertyRef Name="lineNo"></PropertyRef>
-        </Key>
-        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <NavigationProperty Name="inboundDeliveryItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemTP_2_r_InboundDeliveryItem" FromRole="InboundDeliveryItemTP" ToRole="r_InboundDeliveryItem"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="PurchaseOrder">
-        <Key>
-          <PropertyRef Name="id"></PropertyRef>
-        </Key>
-        <Property Name="id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="altKey" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="purchaseOrderNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="supplierId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="plannedDeliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
-        <Property Name="netValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
-        <Property Name="currency" Type="Edm.String" Nullable="true" MaxLength="5"></Property>
-        <Property Name="incotermsVersion" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
-        <Property Name="incotermsLocation" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="logicalSystem" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="totalDeliveredValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
-        <Property Name="totalDelayedValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
-        <Property Name="receivingLocationId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="receivingLocationDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="completionValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
-        <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
-        <Property Name="partyId" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="incoterms_code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="receivingLocationType_code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="processStatus_code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="supplierDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_SupplierLocationType" FromRole="PurchaseOrder" ToRole="r_SupplierLocationType"></NavigationProperty>
-        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_Incoterms" FromRole="PurchaseOrder" ToRole="r_Incoterms"></NavigationProperty>
-        <NavigationProperty Name="receivingLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_SupplierLocationType" FromRole="PurchaseOrder" ToRole="r_SupplierLocationType"></NavigationProperty>
-        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ProcessStatus" FromRole="PurchaseOrder" ToRole="r_ProcessStatus"></NavigationProperty>
-        <NavigationProperty Name="purchaseOrderItemTPs" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_PurchaseOrder_2_r_PurchaseOrderItemTPs" FromRole="r_PurchaseOrder" ToRole="r_PurchaseOrderItemTPs"></NavigationProperty>
-        <NavigationProperty Name="toReceivingLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ReceivingLocation" FromRole="PurchaseOrder" ToRole="r_ReceivingLocation"></NavigationProperty>
-        <NavigationProperty Name="toSupplierLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ReceivingLocation" FromRole="PurchaseOrder" ToRole="r_ReceivingLocation"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ShipmentStopsForVP">
-        <Key>
-          <PropertyRef Name="stopId"></PropertyRef>
-        </Key>
-        <Property Name="stopId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="ordinalNumber" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="locationId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="locationType_code" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
-        <NavigationProperty Name="locationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStopsForVP_2_r_LocationType" FromRole="ShipmentStopsForVP" ToRole="r_LocationType"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ShippingTypeTexts">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-          <PropertyRef Name="locale"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-      </EntityType>
-      <EntityType Name="PurchaseOrderItem">
-        <Key>
-          <PropertyRef Name="id"></PropertyRef>
-        </Key>
-        <Property Name="id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="altKey" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="purchaseOrderNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="itemNo" Type="Edm.String" Nullable="true" MaxLength="6"></Property>
-        <Property Name="materialId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="logicalSystem" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="partyId" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="supplierId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="receivingLocationId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="receivingLocationDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="plannedDeliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
-        <Property Name="nextETA" Type="Edm.DateTimeOffset" Nullable="true"></Property>
-        <Property Name="orderQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"></Property>
-        <Property Name="orderQuantityUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="materialDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="netWeight" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
-        <Property Name="weightUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="grossWeight" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
-        <Property Name="volume" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
-        <Property Name="volumeUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="netValue" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="2"></Property>
-        <Property Name="currency" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="receivingLocationType_code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="completedQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"></Property>
-        <Property Name="completionValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
-        <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
-        <Property Name="incotermsVersion" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="incotermsLocation" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="processStatus_code" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
-        <Property Name="incoterms_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
-        <Property Name="purchaseOrder_id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="supplierDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="lastReportedEvent" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ProcessStatus" FromRole="PurchaseOrderItem" ToRole="r_ProcessStatus"></NavigationProperty>
-        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_Incoterms" FromRole="PurchaseOrderItem" ToRole="r_Incoterms"></NavigationProperty>
-        <NavigationProperty Name="purchaseOrder" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_PurchaseOrder" FromRole="PurchaseOrderItem" ToRole="r_PurchaseOrder"></NavigationProperty>
-        <NavigationProperty Name="receivingLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocationType" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocationType"></NavigationProperty>
-        <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocationType" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocationType"></NavigationProperty>
-        <NavigationProperty Name="inboundDeliveryItems" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDeliveryItems_2_r_PurchaseOrderItem" FromRole="r_PurchaseOrderItem" ToRole="r_InboundDeliveryItems"></NavigationProperty>
-        <NavigationProperty Name="scheduleLines" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ScheduleLines" FromRole="PurchaseOrderItem" ToRole="r_ScheduleLines"></NavigationProperty>
-        <NavigationProperty Name="toReceivingLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocation" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocation"></NavigationProperty>
-        <NavigationProperty Name="toSupplierLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocation" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocation"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ShippingType">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShippingType_2_r_Localized" FromRole="ShippingType" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ResourceTP">
-        <Key>
-          <PropertyRef Name="lineNo"></PropertyRef>
-          <PropertyRef Name="shipment_id"></PropertyRef>
-        </Key>
-        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="shipment_id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="resourceAltKey" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="resource_id" Type="Edm.Guid" Nullable="true"></Property>
-        <NavigationProperty Name="resource" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP_2_r_Resource" FromRole="ResourceTP" ToRole="r_Resource"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="PurchaseOrderItemInboundDeliveryItemTP">
-        <Key>
-          <PropertyRef Name="lineNo"></PropertyRef>
-        </Key>
-        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <NavigationProperty Name="inboundDeliveryItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP_2_r_InboundDeliveryItem" FromRole="PurchaseOrderItemInboundDeliveryItemTP" ToRole="r_InboundDeliveryItem"></NavigationProperty>
-        <NavigationProperty Name="purchaseOrderItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDeliveryItems_2_r_PurchaseOrderItem" FromRole="r_InboundDeliveryItems" ToRole="r_PurchaseOrderItem"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="PurchaseOrderItemTP">
-        <Key>
-          <PropertyRef Name="lineNo"></PropertyRef>
-          <PropertyRef Name="purchaseOrder_id"></PropertyRef>
-        </Key>
-        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="purchaseOrder_id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="purchaseOrderItem_id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="purchaseOrderItemAltKey" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="purchaseOrder" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_PurchaseOrder_2_r_PurchaseOrderItemTPs" FromRole="r_PurchaseOrderItemTPs" ToRole="r_PurchaseOrder"></NavigationProperty>
-        <NavigationProperty Name="purchaseOrderItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP_2_r_PurchaseOrderItem" FromRole="PurchaseOrderItemTP" ToRole="r_PurchaseOrderItem"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="EventStatusTexts">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-          <PropertyRef Name="locale"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-      </EntityType>
-      <EntityType Name="EventStatus">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.EventStatus_2_r_Localized" FromRole="EventStatus" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="LocationType">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
       <EntityType Name="CarrierRefDocumentTypeTexts">
@@ -215,7 +30,7 @@
         <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
-      <EntityType Name="TrackedResourceTypeTexts">
+      <EntityType Name="ProcessStatusTexts">
         <Key>
           <PropertyRef Name="code"></PropertyRef>
           <PropertyRef Name="locale"></PropertyRef>
@@ -268,23 +83,20 @@
         <Property Name="processStatus_code" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
         <Property Name="executionStatus_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
         <Property Name="lastReportedEvent" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="plannedArrivalTimestamp" Type="Edm.DateTimeOffset" Nullable="true"></Property>
+        <Property Name="lastEventName" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="lastLocationAltKey" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="lastLocationDescription" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="lastVPLocationType_code" Type="Edm.String" Nullable="true"></Property>
         <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_SupplierLocationType" FromRole="InboundDeliveryItem" ToRole="r_SupplierLocationType"></NavigationProperty>
         <NavigationProperty Name="plantLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_SupplierLocationType" FromRole="InboundDeliveryItem" ToRole="r_SupplierLocationType"></NavigationProperty>
-        <NavigationProperty Name="inboundDelivery" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_InboundDelivery" FromRole="InboundDeliveryItem" ToRole="r_InboundDelivery"></NavigationProperty>
-        <NavigationProperty Name="purchaseOrderItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_PurchaseOrderItem" FromRole="InboundDeliveryItem" ToRole="r_PurchaseOrderItem"></NavigationProperty>
+        <NavigationProperty Name="inboundDelivery" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_InboundDeliveryItemTPs" FromRole="r_InboundDeliveryItemTPs" ToRole="r_InboundDelivery"></NavigationProperty>
+        <NavigationProperty Name="purchaseOrderItem" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDeliveryItems_2_r_PurchaseOrderItem" FromRole="r_InboundDeliveryItems" ToRole="r_PurchaseOrderItem"></NavigationProperty>
         <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_Incoterms" FromRole="InboundDeliveryItem" ToRole="r_Incoterms"></NavigationProperty>
         <NavigationProperty Name="toPlantLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_PlantLocation" FromRole="InboundDeliveryItem" ToRole="r_PlantLocation"></NavigationProperty>
         <NavigationProperty Name="toSupplierLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_PlantLocation" FromRole="InboundDeliveryItem" ToRole="r_PlantLocation"></NavigationProperty>
         <NavigationProperty Name="executionStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_ExecutionStatus" FromRole="InboundDeliveryItem" ToRole="r_ExecutionStatus"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="IncotermsTexts">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-          <PropertyRef Name="locale"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="lastVPLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_LastVPLocationType" FromRole="InboundDeliveryItem" ToRole="r_LastVPLocationType"></NavigationProperty>
       </EntityType>
       <EntityType Name="ProcessStatus">
         <Key>
@@ -294,24 +106,15 @@
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
         <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus_2_r_Localized" FromRole="ProcessStatus" ToRole="r_Localized"></NavigationProperty>
       </EntityType>
-      <EntityType Name="ReferenceDocument">
+      <EntityType Name="TrackedObjectType">
         <Key>
-          <PropertyRef Name="documentType"></PropertyRef>
-          <PropertyRef Name="documentNumber"></PropertyRef>
+          <PropertyRef Name="code"></PropertyRef>
         </Key>
-        <Property Name="documentType" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="documentNumber" Type="Edm.String" Nullable="true" MaxLength="16"></Property>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType_2_r_Localized" FromRole="TrackedObjectType" ToRole="r_Localized"></NavigationProperty>
       </EntityType>
-      <EntityType Name="ShipmentCarrierRefDocuments">
-        <Key>
-          <PropertyRef Name="docType_code"></PropertyRef>
-          <PropertyRef Name="docId"></PropertyRef>
-        </Key>
-        <Property Name="docType_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
-        <Property Name="docId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="docType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentCarrierRefDocuments_2_r_DocType" FromRole="ShipmentCarrierRefDocuments" ToRole="r_DocType"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ProcessStatusTexts">
+      <EntityType Name="TrackedResourceTypeTexts">
         <Key>
           <PropertyRef Name="code"></PropertyRef>
           <PropertyRef Name="locale"></PropertyRef>
@@ -320,13 +123,112 @@
         <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
-      <EntityType Name="ExecutionStatus">
+      <EntityType Name="EventStatusTexts">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="locale"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+      </EntityType>
+      <EntityType Name="ScheduleLine">
+        <Key>
+          <PropertyRef Name="lineNo"></PropertyRef>
+        </Key>
+        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
+        <Property Name="deliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
+        <Property Name="scheduledQuantityUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="scheduledQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="2"></Property>
+      </EntityType>
+      <EntityType Name="ShipmentStops">
+        <Key>
+          <PropertyRef Name="stopId"></PropertyRef>
+        </Key>
+        <Property Name="stopId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="ordinalNumber" Type="Edm.Int32" Nullable="true"></Property>
+        <Property Name="warehouse" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="gate" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="loadingPoint" Type="Edm.String" Nullable="true" MaxLength="2"></Property>
+        <Property Name="unloadingPoint" Type="Edm.String" Nullable="true" MaxLength="25"></Property>
+        <Property Name="warehouseDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="locationId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="locationType_code" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
+        <NavigationProperty Name="locationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStops_2_r_LocationType" FromRole="ShipmentStops" ToRole="r_LocationType"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="LocationDTO">
+        <Key>
+          <PropertyRef Name="locationAltKey"></PropertyRef>
+        </Key>
+        <Property Name="locationDescription" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locationAltKey" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="sourceSystem" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="externalId" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="objectTypeDescription" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="formattedAddress" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locationId" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="longitude" Type="Edm.Decimal" Nullable="true"></Property>
+        <Property Name="latitude" Type="Edm.Decimal" Nullable="true"></Property>
+        <Property Name="objectTypeCode" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locationTypeDescription" Type="Edm.String" Nullable="true"></Property>
+      </EntityType>
+      <EntityType Name="EventStatus">
         <Key>
           <PropertyRef Name="code"></PropertyRef>
         </Key>
         <Property Name="code" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus_2_r_Localized" FromRole="ExecutionStatus" ToRole="r_Localized"></NavigationProperty>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.EventStatus_2_r_Localized" FromRole="EventStatus" ToRole="r_Localized"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="ReferenceDocument">
+        <Key>
+          <PropertyRef Name="documentType"></PropertyRef>
+          <PropertyRef Name="documentNumber"></PropertyRef>
+        </Key>
+        <Property Name="documentType" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="documentNumber" Type="Edm.String" Nullable="true" MaxLength="16"></Property>
+      </EntityType>
+      <EntityType Name="ShippingTypeTexts">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="locale"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+      </EntityType>
+      <EntityType Name="TransportationModeTexts">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="locale"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+      </EntityType>
+      <EntityType Name="ShipmentTrackedObjects">
+        <Key>
+          <PropertyRef Name="idType_code"></PropertyRef>
+          <PropertyRef Name="value"></PropertyRef>
+        </Key>
+        <Property Name="idType_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
+        <Property Name="value" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <NavigationProperty Name="idType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects_2_r_IdType" FromRole="ShipmentTrackedObjects" ToRole="r_IdType"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="TrackedResourceType">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType_2_r_Localized" FromRole="TrackedResourceType" ToRole="r_Localized"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="LocationType">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
       <EntityType Name="DeliveryTP">
         <Key>
@@ -339,63 +241,80 @@
         <Property Name="delivery_id" Type="Edm.Guid" Nullable="true"></Property>
         <NavigationProperty Name="delivery" Relationship="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP_2_r_Delivery" FromRole="DeliveryTP" ToRole="r_Delivery"></NavigationProperty>
       </EntityType>
-      <EntityType Name="TrackedObjectType">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType_2_r_Localized" FromRole="TrackedObjectType" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="TrackedResourceType">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType_2_r_Localized" FromRole="TrackedResourceType" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="ScheduleLine">
+      <EntityType Name="ShipmentTP">
         <Key>
           <PropertyRef Name="lineNo"></PropertyRef>
         </Key>
         <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="deliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
-        <Property Name="scheduledQuantityUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="scheduledQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="2"></Property>
+        <Property Name="shipment_id" Type="Edm.Guid" Nullable="true"></Property>
+        <Property Name="shipmentAltKey" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="firstStop" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="lastStop" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <NavigationProperty Name="shipment" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP_2_r_Shipment" FromRole="ShipmentTP" ToRole="r_Shipment"></NavigationProperty>
+        <NavigationProperty Name="inboundDelivery" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_ShipmentTPs" FromRole="r_ShipmentTPs" ToRole="r_InboundDelivery"></NavigationProperty>
       </EntityType>
-      <EntityType Name="ShipmentTrackedObjects">
+      <EntityType Name="VPLocationType">
         <Key>
-          <PropertyRef Name="idType_code"></PropertyRef>
-          <PropertyRef Name="value"></PropertyRef>
+          <PropertyRef Name="code"></PropertyRef>
         </Key>
-        <Property Name="idType_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
-        <Property Name="value" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="idType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects_2_r_IdType" FromRole="ShipmentTrackedObjects" ToRole="r_IdType"></NavigationProperty>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.VPLocationType_2_r_Localized" FromRole="VPLocationType" ToRole="r_Localized"></NavigationProperty>
       </EntityType>
-      <EntityType Name="Resource">
+      <EntityType Name="CarrierRefDocumentType">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType_2_r_Localized" FromRole="CarrierRefDocumentType" ToRole="r_Localized"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="PurchaseOrderItem">
         <Key>
           <PropertyRef Name="id"></PropertyRef>
         </Key>
         <Property Name="id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="resourceNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="serviceAgentLbnId" Type="Edm.String" Nullable="true" MaxLength="60"></Property>
-        <Property Name="dangerousGoods" Type="Edm.Boolean" Nullable="true"></Property>
-        <Property Name="forwardingAgentTrackingId" Type="Edm.String" Nullable="true" MaxLength="35"></Property>
-        <Property Name="trackedResourceId" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
-        <Property Name="trackingId" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
+        <Property Name="altKey" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="purchaseOrderNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="itemNo" Type="Edm.String" Nullable="true" MaxLength="6"></Property>
+        <Property Name="materialId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="logicalSystem" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="partyId" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="supplierId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="receivingLocationId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="receivingLocationDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="plannedDeliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
+        <Property Name="nextETA" Type="Edm.DateTimeOffset" Nullable="true"></Property>
+        <Property Name="orderQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"></Property>
+        <Property Name="orderQuantityUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="materialDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="netWeight" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
+        <Property Name="weightUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="grossWeight" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
+        <Property Name="volume" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"></Property>
+        <Property Name="volumeUoM" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="netValue" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="2"></Property>
+        <Property Name="currency" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
+        <Property Name="receivingLocationType_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="completedQuantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"></Property>
+        <Property Name="completionValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
         <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
-        <Property Name="transportationMode_code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="incoterms_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="incotermsVersion" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="incotermsLocation" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
         <Property Name="processStatus_code" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
-        <Property Name="executionStatus_code" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ProcessStatus" FromRole="Resource" ToRole="r_ProcessStatus"></NavigationProperty>
-        <NavigationProperty Name="transportationMode" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TransportationMode" FromRole="Resource" ToRole="r_TransportationMode"></NavigationProperty>
-        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Incoterms" FromRole="Resource" ToRole="r_Incoterms"></NavigationProperty>
-        <NavigationProperty Name="stops" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Stops" FromRole="Resource" ToRole="r_Stops"></NavigationProperty>
-        <NavigationProperty Name="shippingType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ShippingType" FromRole="Resource" ToRole="r_ShippingType"></NavigationProperty>
-        <NavigationProperty Name="referenceDocuments" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ReferenceDocuments" FromRole="Resource" ToRole="r_ReferenceDocuments"></NavigationProperty>
-        <NavigationProperty Name="trackedResourceType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TrackedResourceType" FromRole="Resource" ToRole="r_TrackedResourceType"></NavigationProperty>
+        <Property Name="incoterms_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
+        <Property Name="purchaseOrder_id" Type="Edm.Guid" Nullable="true"></Property>
+        <Property Name="supplierDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="lastReportedEvent" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ProcessStatus" FromRole="PurchaseOrderItem" ToRole="r_ProcessStatus"></NavigationProperty>
+        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_Incoterms" FromRole="PurchaseOrderItem" ToRole="r_Incoterms"></NavigationProperty>
+        <NavigationProperty Name="purchaseOrder" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_PurchaseOrder_2_r_PurchaseOrderItemTPs" FromRole="r_PurchaseOrderItemTPs" ToRole="r_PurchaseOrder"></NavigationProperty>
+        <NavigationProperty Name="receivingLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocationType" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocationType"></NavigationProperty>
+        <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocationType" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocationType"></NavigationProperty>
+        <NavigationProperty Name="inboundDeliveryItems" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDeliveryItems_2_r_PurchaseOrderItem" FromRole="r_PurchaseOrderItem" ToRole="r_InboundDeliveryItems"></NavigationProperty>
+        <NavigationProperty Name="scheduleLines" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ScheduleLines" FromRole="PurchaseOrderItem" ToRole="r_ScheduleLines"></NavigationProperty>
+        <NavigationProperty Name="toReceivingLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocation" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocation"></NavigationProperty>
+        <NavigationProperty Name="toSupplierLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocation" FromRole="PurchaseOrderItem" ToRole="r_ReceivingLocation"></NavigationProperty>
       </EntityType>
       <EntityType Name="Shipment">
         <Key>
@@ -431,22 +350,38 @@
         <NavigationProperty Name="carrierRefDocuments" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_CarrierRefDocuments" FromRole="Shipment" ToRole="r_CarrierRefDocuments"></NavigationProperty>
         <NavigationProperty Name="trackedObjects" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_TrackedObjects" FromRole="Shipment" ToRole="r_TrackedObjects"></NavigationProperty>
       </EntityType>
-      <EntityType Name="Incoterms">
+      <EntityType Name="PurchaseOrder">
         <Key>
-          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="id"></PropertyRef>
         </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Incoterms_2_r_Localized" FromRole="Incoterms" ToRole="r_Localized"></NavigationProperty>
-      </EntityType>
-      <EntityType Name="TrackedObjectTypeTexts">
-        <Key>
-          <PropertyRef Name="code"></PropertyRef>
-          <PropertyRef Name="locale"></PropertyRef>
-        </Key>
-        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
-        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="id" Type="Edm.Guid" Nullable="true"></Property>
+        <Property Name="altKey" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="purchaseOrderNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="supplierId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="plannedDeliveryDate" Type="Edm.DateTime" Nullable="true"></Property>
+        <Property Name="netValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
+        <Property Name="currency" Type="Edm.String" Nullable="true" MaxLength="5"></Property>
+        <Property Name="incotermsVersion" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
+        <Property Name="incotermsLocation" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="logicalSystem" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="totalDeliveredValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
+        <Property Name="totalDelayedValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
+        <Property Name="receivingLocationId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="receivingLocationDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="completionValue" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="2"></Property>
+        <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
+        <Property Name="partyId" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="incoterms_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="receivingLocationType_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="processStatus_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="supplierDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_SupplierLocationType" FromRole="PurchaseOrder" ToRole="r_SupplierLocationType"></NavigationProperty>
+        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_Incoterms" FromRole="PurchaseOrder" ToRole="r_Incoterms"></NavigationProperty>
+        <NavigationProperty Name="receivingLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_SupplierLocationType" FromRole="PurchaseOrder" ToRole="r_SupplierLocationType"></NavigationProperty>
+        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ProcessStatus" FromRole="PurchaseOrder" ToRole="r_ProcessStatus"></NavigationProperty>
+        <NavigationProperty Name="purchaseOrderItemTPs" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_PurchaseOrder_2_r_PurchaseOrderItemTPs" FromRole="r_PurchaseOrder" ToRole="r_PurchaseOrderItemTPs"></NavigationProperty>
+        <NavigationProperty Name="toReceivingLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ReceivingLocation" FromRole="PurchaseOrder" ToRole="r_ReceivingLocation"></NavigationProperty>
+        <NavigationProperty Name="toSupplierLocation" Relationship="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_ReceivingLocation" FromRole="PurchaseOrder" ToRole="r_ReceivingLocation"></NavigationProperty>
       </EntityType>
       <EntityType Name="InboundDelivery">
         <Key>
@@ -473,18 +408,88 @@
         <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
         <Property Name="processStatus_code" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
         <Property Name="supplierDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="inboundDeliveryItemTPs" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery_2_r_InboundDeliveryItemTPs" FromRole="InboundDelivery" ToRole="r_InboundDeliveryItemTPs"></NavigationProperty>
+        <NavigationProperty Name="inboundDeliveryItemTPs" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_InboundDeliveryItemTPs" FromRole="r_InboundDelivery" ToRole="r_InboundDeliveryItemTPs"></NavigationProperty>
         <NavigationProperty Name="supplierLocationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery_2_r_SupplierLocationType" FromRole="InboundDelivery" ToRole="r_SupplierLocationType"></NavigationProperty>
         <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery_2_r_Incoterms" FromRole="InboundDelivery" ToRole="r_Incoterms"></NavigationProperty>
         <NavigationProperty Name="shipmentTPs" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_ShipmentTPs" FromRole="r_InboundDelivery" ToRole="r_ShipmentTPs"></NavigationProperty>
       </EntityType>
-      <EntityType Name="CarrierRefDocumentType">
+      <EntityType Name="Resource">
+        <Key>
+          <PropertyRef Name="id"></PropertyRef>
+        </Key>
+        <Property Name="id" Type="Edm.Guid" Nullable="true"></Property>
+        <Property Name="resourceNo" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="serviceAgentLbnId" Type="Edm.String" Nullable="true" MaxLength="60"></Property>
+        <Property Name="dangerousGoods" Type="Edm.Boolean" Nullable="true"></Property>
+        <Property Name="forwardingAgentTrackingId" Type="Edm.String" Nullable="true" MaxLength="35"></Property>
+        <Property Name="trackedResourceId" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
+        <Property Name="trackingId" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
+        <Property Name="trackingIdType" Type="Edm.String" Nullable="true" MaxLength="40"></Property>
+        <Property Name="transportationMode_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="incoterms_code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="processStatus_code" Type="Edm.String" Nullable="true" MaxLength="50"></Property>
+        <Property Name="executionStatus_code" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="processStatus" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ProcessStatus" FromRole="Resource" ToRole="r_ProcessStatus"></NavigationProperty>
+        <NavigationProperty Name="transportationMode" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TransportationMode" FromRole="Resource" ToRole="r_TransportationMode"></NavigationProperty>
+        <NavigationProperty Name="incoterms" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Incoterms" FromRole="Resource" ToRole="r_Incoterms"></NavigationProperty>
+        <NavigationProperty Name="stops" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Stops" FromRole="Resource" ToRole="r_Stops"></NavigationProperty>
+        <NavigationProperty Name="shippingType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ShippingType" FromRole="Resource" ToRole="r_ShippingType"></NavigationProperty>
+        <NavigationProperty Name="referenceDocuments" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ReferenceDocuments" FromRole="Resource" ToRole="r_ReferenceDocuments"></NavigationProperty>
+        <NavigationProperty Name="trackedResourceType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TrackedResourceType" FromRole="Resource" ToRole="r_TrackedResourceType"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="ResourceTP">
+        <Key>
+          <PropertyRef Name="lineNo"></PropertyRef>
+          <PropertyRef Name="shipment_id"></PropertyRef>
+        </Key>
+        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
+        <Property Name="shipment_id" Type="Edm.Guid" Nullable="true"></Property>
+        <Property Name="resourceAltKey" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <Property Name="resource_id" Type="Edm.Guid" Nullable="true"></Property>
+        <NavigationProperty Name="resource" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP_2_r_Resource" FromRole="ResourceTP" ToRole="r_Resource"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="ShippingType">
         <Key>
           <PropertyRef Name="code"></PropertyRef>
         </Key>
         <Property Name="code" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
-        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType_2_r_Localized" FromRole="CarrierRefDocumentType" ToRole="r_Localized"></NavigationProperty>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShippingType_2_r_Localized" FromRole="ShippingType" ToRole="r_Localized"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="Incoterms">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.Incoterms_2_r_Localized" FromRole="Incoterms" ToRole="r_Localized"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="ShipmentStopsForVP">
+        <Key>
+          <PropertyRef Name="stopId"></PropertyRef>
+        </Key>
+        <Property Name="stopId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="ordinalNumber" Type="Edm.Int32" Nullable="true"></Property>
+        <Property Name="locationId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
+        <Property Name="locationType_code" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
+        <NavigationProperty Name="locationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStopsForVP_2_r_LocationType" FromRole="ShipmentStopsForVP" ToRole="r_LocationType"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="IncotermsTexts">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="locale"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+      </EntityType>
+      <EntityType Name="TransportationMode">
+        <Key>
+          <PropertyRef Name="code"></PropertyRef>
+        </Key>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
+        <NavigationProperty Name="localized" Relationship="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode_2_r_Localized" FromRole="TransportationMode" ToRole="r_Localized"></NavigationProperty>
       </EntityType>
       <EntityType Name="ExecutionStatusText">
         <Key>
@@ -495,40 +500,27 @@
         <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
         <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
-      <EntityType Name="ShipmentTP">
+      <EntityType Name="ShipmentCarrierRefDocuments">
         <Key>
-          <PropertyRef Name="lineNo"></PropertyRef>
+          <PropertyRef Name="docType_code"></PropertyRef>
+          <PropertyRef Name="docId"></PropertyRef>
         </Key>
-        <Property Name="lineNo" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="shipment_id" Type="Edm.Guid" Nullable="true"></Property>
-        <Property Name="shipmentAltKey" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="firstStop" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="lastStop" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <NavigationProperty Name="shipment" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP_2_r_Shipment" FromRole="ShipmentTP" ToRole="r_Shipment"></NavigationProperty>
-        <NavigationProperty Name="inboundDelivery" Relationship="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_ShipmentTPs" FromRole="r_ShipmentTPs" ToRole="r_InboundDelivery"></NavigationProperty>
+        <Property Name="docType_code" Type="Edm.String" Nullable="true" MaxLength="20"></Property>
+        <Property Name="docId" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
+        <NavigationProperty Name="docType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentCarrierRefDocuments_2_r_DocType" FromRole="ShipmentCarrierRefDocuments" ToRole="r_DocType"></NavigationProperty>
       </EntityType>
-      <EntityType Name="ShipmentStops">
+      <EntityType Name="VPLocationTypeTexts">
         <Key>
-          <PropertyRef Name="stopId"></PropertyRef>
+          <PropertyRef Name="code"></PropertyRef>
+          <PropertyRef Name="locale"></PropertyRef>
         </Key>
-        <Property Name="stopId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="ordinalNumber" Type="Edm.Int32" Nullable="true"></Property>
-        <Property Name="warehouse" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="gate" Type="Edm.String" Nullable="true" MaxLength="3"></Property>
-        <Property Name="loadingPoint" Type="Edm.String" Nullable="true" MaxLength="2"></Property>
-        <Property Name="unloadingPoint" Type="Edm.String" Nullable="true" MaxLength="25"></Property>
-        <Property Name="warehouseDescription" Type="Edm.String" Nullable="true" MaxLength="255"></Property>
-        <Property Name="locationId" Type="Edm.String" Nullable="true" MaxLength="10"></Property>
-        <Property Name="locationType_code" Type="Edm.String" Nullable="true" MaxLength="4"></Property>
-        <NavigationProperty Name="locationType" Relationship="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStops_2_r_LocationType" FromRole="ShipmentStops" ToRole="r_LocationType"></NavigationProperty>
+        <Property Name="code" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="locale" Type="Edm.String" Nullable="true"></Property>
+        <Property Name="name" Type="Edm.String" Nullable="true"></Property>
       </EntityType>
       <Association Name="Shipment_2_r_TransportationMode">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode" Multiplicity="1" Role="r_TransportationMode"></End>
-      </Association>
-      <Association Name="PurchaseOrderItemTP_2_r_PurchaseOrderItem">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP" Multiplicity="1" Role="PurchaseOrderItemTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="r_PurchaseOrderItem"></End>
       </Association>
       <Association Name="Resource_2_r_Stops">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
@@ -538,25 +530,13 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.EventStatus" Multiplicity="1" Role="EventStatus"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.EventStatusTexts" Multiplicity="1" Role="r_Localized"></End>
       </Association>
-      <Association Name="InboundDeliveryItem_2_r_PurchaseOrderItem">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="r_PurchaseOrderItem"></End>
-      </Association>
       <Association Name="PurchaseOrder_2_r_Incoterms">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder" Multiplicity="1" Role="PurchaseOrder"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="r_Incoterms"></End>
       </Association>
-      <Association Name="InboundDeliveryItemTP_2_r_InboundDeliveryItem">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemTP" Multiplicity="1" Role="InboundDeliveryItemTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="r_InboundDeliveryItem"></End>
-      </Association>
       <Association Name="PurchaseOrderItem_2_r_ProcessStatus">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus" Multiplicity="1" Role="r_ProcessStatus"></End>
-      </Association>
-      <Association Name="InboundDelivery_2_r_InboundDeliveryItemTPs">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="InboundDelivery"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemTP" Multiplicity="*" Role="r_InboundDeliveryItemTPs"></End>
       </Association>
       <Association Name="Resource_2_r_Incoterms">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
@@ -569,10 +549,6 @@
       <Association Name="Shipment_2_r_CarrierRefDocuments">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentCarrierRefDocuments" Multiplicity="*" Role="r_CarrierRefDocuments"></End>
-      </Association>
-      <Association Name="PurchaseOrderItemInboundDeliveryItemTP_2_r_InboundDeliveryItem">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP" Multiplicity="1" Role="PurchaseOrderItemInboundDeliveryItemTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="r_InboundDeliveryItem"></End>
       </Association>
       <Association Name="InboundDeliveryItem_2_r_ExecutionStatus">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
@@ -590,10 +566,6 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder" Multiplicity="1" Role="PurchaseOrder"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus" Multiplicity="1" Role="r_ProcessStatus"></End>
       </Association>
-      <Association Name="PurchaseOrderItem_2_r_PurchaseOrder">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder" Multiplicity="1" Role="r_PurchaseOrder"></End>
-      </Association>
       <Association Name="CarrierRefDocumentType_2_r_Localized">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType" Multiplicity="1" Role="CarrierRefDocumentType"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentTypeTexts" Multiplicity="1" Role="r_Localized"></End>
@@ -606,13 +578,17 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP" Multiplicity="*" Role="r_ResourceTPs"></End>
       </Association>
+      <Association Name="DeliveryTP_2_r_Delivery">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP" Multiplicity="1" Role="DeliveryTP"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_Delivery"></End>
+      </Association>
       <Association Name="ShippingType_2_r_Localized">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShippingType" Multiplicity="1" Role="ShippingType"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShippingTypeTexts" Multiplicity="1" Role="r_Localized"></End>
       </Association>
-      <Association Name="DeliveryTP_2_r_Delivery">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP" Multiplicity="1" Role="DeliveryTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_Delivery"></End>
+      <Association Name="ShipmentTP_2_r_Shipment">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP" Multiplicity="1" Role="ShipmentTP"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="r_Shipment"></End>
       </Association>
       <Association Name="PurchaseOrderItem_2_r_ReceivingLocation">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
@@ -621,10 +597,6 @@
       <Association Name="Shipment_2_r_ExecutionStatus">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus" Multiplicity="1" Role="r_ExecutionStatus"></End>
-      </Association>
-      <Association Name="ShipmentTP_2_r_Shipment">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP" Multiplicity="1" Role="ShipmentTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="r_Shipment"></End>
       </Association>
       <Association Name="TrackedObjectType_2_r_Localized">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType" Multiplicity="1" Role="TrackedObjectType"></End>
@@ -638,13 +610,13 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ReferenceDocument" Multiplicity="*" Role="r_ReferenceDocuments"></End>
       </Association>
-      <Association Name="PurchaseOrderItem_2_r_Incoterms">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="r_Incoterms"></End>
-      </Association>
       <Association Name="ShipmentStops_2_r_LocationType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStops" Multiplicity="1" Role="ShipmentStops"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.LocationType" Multiplicity="1" Role="r_LocationType"></End>
+      </Association>
+      <Association Name="PurchaseOrderItem_2_r_Incoterms">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="r_Incoterms"></End>
       </Association>
       <Association Name="PurchaseOrderItem_2_r_ScheduleLines">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
@@ -654,13 +626,13 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.LocationType" Multiplicity="1" Role="r_ReceivingLocationType"></End>
       </Association>
-      <Association Name="ResourceTP_2_r_Resource">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP" Multiplicity="1" Role="ResourceTP"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="r_Resource"></End>
-      </Association>
       <Association Name="Shipment_2_r_StopsForVP">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStopsForVP" Multiplicity="*" Role="r_StopsForVP"></End>
+      </Association>
+      <Association Name="ResourceTP_2_r_Resource">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP" Multiplicity="1" Role="ResourceTP"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="r_Resource"></End>
       </Association>
       <Association Name="PurchaseOrder_2_r_SupplierLocationType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder" Multiplicity="1" Role="PurchaseOrder"></End>
@@ -670,25 +642,25 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Shipment" Multiplicity="1" Role="Shipment"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType" Multiplicity="1" Role="r_TrackedResourceType"></End>
       </Association>
-      <Association Name="InboundDeliveryItem_2_r_InboundDelivery">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_InboundDelivery"></End>
-      </Association>
       <Association Name="InboundDeliveryItem_2_r_SupplierLocationType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.LocationType" Multiplicity="1" Role="r_SupplierLocationType"></End>
+      </Association>
+      <Association Name="r_InboundDelivery_2_r_ShipmentTPs">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP" Multiplicity="*" Role="r_ShipmentTPs"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_InboundDelivery"></End>
       </Association>
       <Association Name="Resource_2_r_TransportationMode">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode" Multiplicity="1" Role="r_TransportationMode"></End>
       </Association>
-      <Association Name="r_InboundDelivery_2_r_ShipmentTPs">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_InboundDelivery"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP" Multiplicity="*" Role="r_ShipmentTPs"></End>
-      </Association>
       <Association Name="Resource_2_r_TrackedResourceType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType" Multiplicity="1" Role="r_TrackedResourceType"></End>
+      </Association>
+      <Association Name="VPLocationType_2_r_Localized">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.VPLocationType" Multiplicity="1" Role="VPLocationType"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.VPLocationTypeTexts" Multiplicity="1" Role="r_Localized"></End>
       </Association>
       <Association Name="Resource_2_r_ShippingType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
@@ -699,8 +671,8 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.LocationType" Multiplicity="1" Role="r_LocationType"></End>
       </Association>
       <Association Name="r_InboundDeliveryItems_2_r_PurchaseOrderItem">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="*" Role="r_InboundDeliveryItems"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="1" Role="r_PurchaseOrderItem"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP" Multiplicity="*" Role="r_InboundDeliveryItems"></End>
       </Association>
       <Association Name="ExecutionStatus_2_r_Localized">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus" Multiplicity="1" Role="ExecutionStatus"></End>
@@ -718,25 +690,33 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="InboundDelivery"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.LocationType" Multiplicity="1" Role="r_SupplierLocationType"></End>
       </Association>
-      <Association Name="TransportationMode_2_r_Localized">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode" Multiplicity="1" Role="TransportationMode"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationModeTexts" Multiplicity="1" Role="r_Localized"></End>
-      </Association>
       <Association Name="Resource_2_r_ReferenceDocuments">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Resource" Multiplicity="1" Role="Resource"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ReferenceDocument" Multiplicity="*" Role="r_ReferenceDocuments"></End>
+      </Association>
+      <Association Name="TransportationMode_2_r_Localized">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode" Multiplicity="1" Role="TransportationMode"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.TransportationModeTexts" Multiplicity="1" Role="r_Localized"></End>
       </Association>
       <Association Name="InboundDeliveryItem_2_r_Incoterms">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="r_Incoterms"></End>
       </Association>
-      <Association Name="Incoterms_2_r_Localized">
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="Incoterms"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.IncotermsTexts" Multiplicity="1" Role="r_Localized"></End>
+      <Association Name="InboundDeliveryItem_2_r_LastVPLocationType">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.VPLocationType" Multiplicity="1" Role="r_LastVPLocationType"></End>
+      </Association>
+      <Association Name="r_InboundDelivery_2_r_InboundDeliveryItemTPs">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="*" Role="r_InboundDeliveryItemTPs"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="r_InboundDelivery"></End>
       </Association>
       <Association Name="InboundDelivery_2_r_Incoterms">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery" Multiplicity="1" Role="InboundDelivery"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="r_Incoterms"></End>
+      </Association>
+      <Association Name="Incoterms_2_r_Localized">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.Incoterms" Multiplicity="1" Role="Incoterms"></End>
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.IncotermsTexts" Multiplicity="1" Role="r_Localized"></End>
       </Association>
       <Association Name="ShipmentTrackedObjects_2_r_IdType">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects" Multiplicity="1" Role="ShipmentTrackedObjects"></End>
@@ -747,8 +727,8 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP" Multiplicity="*" Role="r_DeliveryTPs"></End>
       </Association>
       <Association Name="r_PurchaseOrder_2_r_PurchaseOrderItemTPs">
+        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem" Multiplicity="*" Role="r_PurchaseOrderItemTPs"></End>
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder" Multiplicity="1" Role="r_PurchaseOrder"></End>
-        <End Type="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP" Multiplicity="*" Role="r_PurchaseOrderItemTPs"></End>
       </Association>
       <Association Name="InboundDeliveryItem_2_r_PlantLocation">
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem" Multiplicity="1" Role="InboundDeliveryItem"></End>
@@ -763,51 +743,46 @@
         <End Type="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType" Multiplicity="1" Role="r_DocType"></End>
       </Association>
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
-        <EntitySet Name="LocationDTO" EntityType="com.lbngttsamples.gtt.app.pof.pofService.LocationDTO"></EntitySet>
-        <EntitySet Name="TransportationMode_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TransportationModeTexts"></EntitySet>
-        <EntitySet Name="TransportationMode" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode"></EntitySet>
-        <EntitySet Name="InboundDeliveryInboundDeliveryItemTPs" EntityType="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemTP"></EntitySet>
-        <EntitySet Name="PurchaseOrder" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"></EntitySet>
-        <EntitySet Name="ShipmentStopsForVP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStopsForVP"></EntitySet>
-        <EntitySet Name="ShippingType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShippingTypeTexts"></EntitySet>
-        <EntitySet Name="PurchaseOrderItem" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"></EntitySet>
-        <EntitySet Name="ShippingType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShippingType"></EntitySet>
-        <EntitySet Name="ResourceTP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP"></EntitySet>
-        <EntitySet Name="PurchaseOrderItemInboundDeliveryItems" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP"></EntitySet>
-        <EntitySet Name="PurchaseOrderPurchaseOrderItemTPs" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP"></EntitySet>
-        <EntitySet Name="EventStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.EventStatusTexts"></EntitySet>
-        <EntitySet Name="EventStatus" EntityType="com.lbngttsamples.gtt.app.pof.pofService.EventStatus"></EntitySet>
-        <EntitySet Name="LocationType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.LocationType"></EntitySet>
-        <EntitySet Name="CarrierRefDocumentType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentTypeTexts"></EntitySet>
-        <EntitySet Name="TrackedResourceType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceTypeTexts"></EntitySet>
-        <EntitySet Name="InboundDeliveryItem" EntityType="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem"></EntitySet>
-        <EntitySet Name="Incoterms_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.IncotermsTexts"></EntitySet>
-        <EntitySet Name="ProcessStatus" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"></EntitySet>
-        <EntitySet Name="ReferenceDocument" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ReferenceDocument"></EntitySet>
-        <EntitySet Name="ShipmentCarrierRefDocuments" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentCarrierRefDocuments"></EntitySet>
-        <EntitySet Name="ProcessStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatusTexts"></EntitySet>
         <EntitySet Name="ExecutionStatus" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus"></EntitySet>
-        <EntitySet Name="DeliveryTP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP"></EntitySet>
-        <EntitySet Name="TrackedObjectType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType"></EntitySet>
-        <EntitySet Name="TrackedResourceType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType"></EntitySet>
-        <EntitySet Name="PurchaseOrderItemScheduleLines" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ScheduleLine"></EntitySet>
-        <EntitySet Name="ShipmentTrackedObjects" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects"></EntitySet>
-        <EntitySet Name="Resource" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Resource"></EntitySet>
-        <EntitySet Name="Shipment" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Shipment"></EntitySet>
-        <EntitySet Name="Incoterms" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Incoterms"></EntitySet>
         <EntitySet Name="TrackedObjectType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectTypeTexts"></EntitySet>
-        <EntitySet Name="InboundDelivery" EntityType="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery"></EntitySet>
-        <EntitySet Name="CarrierRefDocumentType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType"></EntitySet>
-        <EntitySet Name="ExecutionStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatusText"></EntitySet>
-        <EntitySet Name="InboundDeliveryShipmentTPs" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP"></EntitySet>
+        <EntitySet Name="CarrierRefDocumentType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentTypeTexts"></EntitySet>
+        <EntitySet Name="ProcessStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatusTexts"></EntitySet>
+        <EntitySet Name="InboundDeliveryItem" EntityType="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem"></EntitySet>
+        <EntitySet Name="ProcessStatus" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ProcessStatus"></EntitySet>
+        <EntitySet Name="TrackedObjectType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType"></EntitySet>
+        <EntitySet Name="TrackedResourceType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceTypeTexts"></EntitySet>
+        <EntitySet Name="EventStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.EventStatusTexts"></EntitySet>
+        <EntitySet Name="PurchaseOrderItemScheduleLines" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ScheduleLine"></EntitySet>
         <EntitySet Name="ShipmentStops" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStops"></EntitySet>
+        <EntitySet Name="LocationDTO" EntityType="com.lbngttsamples.gtt.app.pof.pofService.LocationDTO"></EntitySet>
+        <EntitySet Name="EventStatus" EntityType="com.lbngttsamples.gtt.app.pof.pofService.EventStatus"></EntitySet>
+        <EntitySet Name="ReferenceDocument" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ReferenceDocument"></EntitySet>
+        <EntitySet Name="ShippingType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShippingTypeTexts"></EntitySet>
+        <EntitySet Name="TransportationMode_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TransportationModeTexts"></EntitySet>
+        <EntitySet Name="ShipmentTrackedObjects" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects"></EntitySet>
+        <EntitySet Name="TrackedResourceType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TrackedResourceType"></EntitySet>
+        <EntitySet Name="LocationType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.LocationType"></EntitySet>
+        <EntitySet Name="DeliveryTP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP"></EntitySet>
+        <EntitySet Name="InboundDeliveryShipmentTPs" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP"></EntitySet>
+        <EntitySet Name="VPLocationType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.VPLocationType"></EntitySet>
+        <EntitySet Name="CarrierRefDocumentType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType"></EntitySet>
+        <EntitySet Name="PurchaseOrderItem" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem"></EntitySet>
+        <EntitySet Name="Shipment" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Shipment"></EntitySet>
+        <EntitySet Name="PurchaseOrder" EntityType="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder"></EntitySet>
+        <EntitySet Name="InboundDelivery" EntityType="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery"></EntitySet>
+        <EntitySet Name="Resource" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Resource"></EntitySet>
+        <EntitySet Name="ResourceTP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP"></EntitySet>
+        <EntitySet Name="ShippingType" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShippingType"></EntitySet>
+        <EntitySet Name="Incoterms" EntityType="com.lbngttsamples.gtt.app.pof.pofService.Incoterms"></EntitySet>
+        <EntitySet Name="ShipmentStopsForVP" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStopsForVP"></EntitySet>
+        <EntitySet Name="Incoterms_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.IncotermsTexts"></EntitySet>
+        <EntitySet Name="TransportationMode" EntityType="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode"></EntitySet>
+        <EntitySet Name="ExecutionStatus_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatusText"></EntitySet>
+        <EntitySet Name="ShipmentCarrierRefDocuments" EntityType="com.lbngttsamples.gtt.app.pof.pofService.ShipmentCarrierRefDocuments"></EntitySet>
+        <EntitySet Name="VPLocationType_texts" EntityType="com.lbngttsamples.gtt.app.pof.pofService.VPLocationTypeTexts"></EntitySet>
         <AssociationSet Name="Shipment_2_r_TransportationMode" Association="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_TransportationMode">
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="TransportationMode" Role="r_TransportationMode"></End>
-        </AssociationSet>
-        <AssociationSet Name="PurchaseOrderItemTP_2_r_PurchaseOrderItem" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemTP_2_r_PurchaseOrderItem">
-          <End EntitySet="PurchaseOrderPurchaseOrderItemTPs" Role="PurchaseOrderItemTP"></End>
-          <End EntitySet="PurchaseOrderItem" Role="r_PurchaseOrderItem"></End>
         </AssociationSet>
         <AssociationSet Name="Resource_2_r_Stops" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Stops">
           <End EntitySet="Resource" Role="Resource"></End>
@@ -817,25 +792,13 @@
           <End EntitySet="EventStatus" Role="EventStatus"></End>
           <End EntitySet="EventStatus_texts" Role="r_Localized"></End>
         </AssociationSet>
-        <AssociationSet Name="InboundDeliveryItem_2_r_PurchaseOrderItem" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_PurchaseOrderItem">
-          <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
-          <End EntitySet="PurchaseOrderItem" Role="r_PurchaseOrderItem"></End>
-        </AssociationSet>
         <AssociationSet Name="PurchaseOrder_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_Incoterms">
           <End EntitySet="PurchaseOrder" Role="PurchaseOrder"></End>
           <End EntitySet="Incoterms" Role="r_Incoterms"></End>
         </AssociationSet>
-        <AssociationSet Name="InboundDeliveryItemTP_2_r_InboundDeliveryItem" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItemTP_2_r_InboundDeliveryItem">
-          <End EntitySet="InboundDeliveryInboundDeliveryItemTPs" Role="InboundDeliveryItemTP"></End>
-          <End EntitySet="InboundDeliveryItem" Role="r_InboundDeliveryItem"></End>
-        </AssociationSet>
         <AssociationSet Name="PurchaseOrderItem_2_r_ProcessStatus" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ProcessStatus">
           <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
           <End EntitySet="ProcessStatus" Role="r_ProcessStatus"></End>
-        </AssociationSet>
-        <AssociationSet Name="InboundDelivery_2_r_InboundDeliveryItemTPs" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery_2_r_InboundDeliveryItemTPs">
-          <End EntitySet="InboundDelivery" Role="InboundDelivery"></End>
-          <End EntitySet="InboundDeliveryInboundDeliveryItemTPs" Role="r_InboundDeliveryItemTPs"></End>
         </AssociationSet>
         <AssociationSet Name="Resource_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_Incoterms">
           <End EntitySet="Resource" Role="Resource"></End>
@@ -848,10 +811,6 @@
         <AssociationSet Name="Shipment_2_r_CarrierRefDocuments" Association="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_CarrierRefDocuments">
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="ShipmentCarrierRefDocuments" Role="r_CarrierRefDocuments"></End>
-        </AssociationSet>
-        <AssociationSet Name="PurchaseOrderItemInboundDeliveryItemTP_2_r_InboundDeliveryItem" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItemInboundDeliveryItemTP_2_r_InboundDeliveryItem">
-          <End EntitySet="PurchaseOrderItemInboundDeliveryItems" Role="PurchaseOrderItemInboundDeliveryItemTP"></End>
-          <End EntitySet="InboundDeliveryItem" Role="r_InboundDeliveryItem"></End>
         </AssociationSet>
         <AssociationSet Name="InboundDeliveryItem_2_r_ExecutionStatus" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_ExecutionStatus">
           <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
@@ -869,10 +828,6 @@
           <End EntitySet="PurchaseOrder" Role="PurchaseOrder"></End>
           <End EntitySet="ProcessStatus" Role="r_ProcessStatus"></End>
         </AssociationSet>
-        <AssociationSet Name="PurchaseOrderItem_2_r_PurchaseOrder" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_PurchaseOrder">
-          <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
-          <End EntitySet="PurchaseOrder" Role="r_PurchaseOrder"></End>
-        </AssociationSet>
         <AssociationSet Name="CarrierRefDocumentType_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.CarrierRefDocumentType_2_r_Localized">
           <End EntitySet="CarrierRefDocumentType" Role="CarrierRefDocumentType"></End>
           <End EntitySet="CarrierRefDocumentType_texts" Role="r_Localized"></End>
@@ -885,13 +840,17 @@
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="ResourceTP" Role="r_ResourceTPs"></End>
         </AssociationSet>
+        <AssociationSet Name="DeliveryTP_2_r_Delivery" Association="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP_2_r_Delivery">
+          <End EntitySet="DeliveryTP" Role="DeliveryTP"></End>
+          <End EntitySet="InboundDelivery" Role="r_Delivery"></End>
+        </AssociationSet>
         <AssociationSet Name="ShippingType_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.ShippingType_2_r_Localized">
           <End EntitySet="ShippingType" Role="ShippingType"></End>
           <End EntitySet="ShippingType_texts" Role="r_Localized"></End>
         </AssociationSet>
-        <AssociationSet Name="DeliveryTP_2_r_Delivery" Association="com.lbngttsamples.gtt.app.pof.pofService.DeliveryTP_2_r_Delivery">
-          <End EntitySet="DeliveryTP" Role="DeliveryTP"></End>
-          <End EntitySet="InboundDelivery" Role="r_Delivery"></End>
+        <AssociationSet Name="ShipmentTP_2_r_Shipment" Association="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP_2_r_Shipment">
+          <End EntitySet="InboundDeliveryShipmentTPs" Role="ShipmentTP"></End>
+          <End EntitySet="Shipment" Role="r_Shipment"></End>
         </AssociationSet>
         <AssociationSet Name="PurchaseOrderItem_2_r_ReceivingLocation" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ReceivingLocation">
           <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
@@ -900,10 +859,6 @@
         <AssociationSet Name="Shipment_2_r_ExecutionStatus" Association="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_ExecutionStatus">
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="ExecutionStatus" Role="r_ExecutionStatus"></End>
-        </AssociationSet>
-        <AssociationSet Name="ShipmentTP_2_r_Shipment" Association="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTP_2_r_Shipment">
-          <End EntitySet="InboundDeliveryShipmentTPs" Role="ShipmentTP"></End>
-          <End EntitySet="Shipment" Role="r_Shipment"></End>
         </AssociationSet>
         <AssociationSet Name="TrackedObjectType_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.TrackedObjectType_2_r_Localized">
           <End EntitySet="TrackedObjectType" Role="TrackedObjectType"></End>
@@ -917,13 +872,13 @@
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="ReferenceDocument" Role="r_ReferenceDocuments"></End>
         </AssociationSet>
-        <AssociationSet Name="PurchaseOrderItem_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_Incoterms">
-          <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
-          <End EntitySet="Incoterms" Role="r_Incoterms"></End>
-        </AssociationSet>
         <AssociationSet Name="ShipmentStops_2_r_LocationType" Association="com.lbngttsamples.gtt.app.pof.pofService.ShipmentStops_2_r_LocationType">
           <End EntitySet="ShipmentStops" Role="ShipmentStops"></End>
           <End EntitySet="LocationType" Role="r_LocationType"></End>
+        </AssociationSet>
+        <AssociationSet Name="PurchaseOrderItem_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_Incoterms">
+          <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
+          <End EntitySet="Incoterms" Role="r_Incoterms"></End>
         </AssociationSet>
         <AssociationSet Name="PurchaseOrderItem_2_r_ScheduleLines" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem_2_r_ScheduleLines">
           <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
@@ -933,13 +888,13 @@
           <End EntitySet="PurchaseOrderItem" Role="PurchaseOrderItem"></End>
           <End EntitySet="LocationType" Role="r_ReceivingLocationType"></End>
         </AssociationSet>
-        <AssociationSet Name="ResourceTP_2_r_Resource" Association="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP_2_r_Resource">
-          <End EntitySet="ResourceTP" Role="ResourceTP"></End>
-          <End EntitySet="Resource" Role="r_Resource"></End>
-        </AssociationSet>
         <AssociationSet Name="Shipment_2_r_StopsForVP" Association="com.lbngttsamples.gtt.app.pof.pofService.Shipment_2_r_StopsForVP">
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="ShipmentStopsForVP" Role="r_StopsForVP"></End>
+        </AssociationSet>
+        <AssociationSet Name="ResourceTP_2_r_Resource" Association="com.lbngttsamples.gtt.app.pof.pofService.ResourceTP_2_r_Resource">
+          <End EntitySet="ResourceTP" Role="ResourceTP"></End>
+          <End EntitySet="Resource" Role="r_Resource"></End>
         </AssociationSet>
         <AssociationSet Name="PurchaseOrder_2_r_SupplierLocationType" Association="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrder_2_r_SupplierLocationType">
           <End EntitySet="PurchaseOrder" Role="PurchaseOrder"></End>
@@ -949,25 +904,25 @@
           <End EntitySet="Shipment" Role="Shipment"></End>
           <End EntitySet="TrackedResourceType" Role="r_TrackedResourceType"></End>
         </AssociationSet>
-        <AssociationSet Name="InboundDeliveryItem_2_r_InboundDelivery" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_InboundDelivery">
-          <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
-          <End EntitySet="InboundDelivery" Role="r_InboundDelivery"></End>
-        </AssociationSet>
         <AssociationSet Name="InboundDeliveryItem_2_r_SupplierLocationType" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_SupplierLocationType">
           <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
           <End EntitySet="LocationType" Role="r_SupplierLocationType"></End>
+        </AssociationSet>
+        <AssociationSet Name="r_InboundDelivery_2_r_ShipmentTPs" Association="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_ShipmentTPs">
+          <End EntitySet="InboundDeliveryShipmentTPs" Role="r_ShipmentTPs"></End>
+          <End EntitySet="InboundDelivery" Role="r_InboundDelivery"></End>
         </AssociationSet>
         <AssociationSet Name="Resource_2_r_TransportationMode" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TransportationMode">
           <End EntitySet="Resource" Role="Resource"></End>
           <End EntitySet="TransportationMode" Role="r_TransportationMode"></End>
         </AssociationSet>
-        <AssociationSet Name="r_InboundDelivery_2_r_ShipmentTPs" Association="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_ShipmentTPs">
-          <End EntitySet="InboundDelivery" Role="r_InboundDelivery"></End>
-          <End EntitySet="InboundDeliveryShipmentTPs" Role="r_ShipmentTPs"></End>
-        </AssociationSet>
         <AssociationSet Name="Resource_2_r_TrackedResourceType" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_TrackedResourceType">
           <End EntitySet="Resource" Role="Resource"></End>
           <End EntitySet="TrackedResourceType" Role="r_TrackedResourceType"></End>
+        </AssociationSet>
+        <AssociationSet Name="VPLocationType_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.VPLocationType_2_r_Localized">
+          <End EntitySet="VPLocationType" Role="VPLocationType"></End>
+          <End EntitySet="VPLocationType_texts" Role="r_Localized"></End>
         </AssociationSet>
         <AssociationSet Name="Resource_2_r_ShippingType" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ShippingType">
           <End EntitySet="Resource" Role="Resource"></End>
@@ -978,8 +933,8 @@
           <End EntitySet="LocationType" Role="r_LocationType"></End>
         </AssociationSet>
         <AssociationSet Name="r_InboundDeliveryItems_2_r_PurchaseOrderItem" Association="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDeliveryItems_2_r_PurchaseOrderItem">
+          <End EntitySet="InboundDeliveryItem" Role="r_InboundDeliveryItems"></End>
           <End EntitySet="PurchaseOrderItem" Role="r_PurchaseOrderItem"></End>
-          <End EntitySet="PurchaseOrderItemInboundDeliveryItems" Role="r_InboundDeliveryItems"></End>
         </AssociationSet>
         <AssociationSet Name="ExecutionStatus_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.ExecutionStatus_2_r_Localized">
           <End EntitySet="ExecutionStatus" Role="ExecutionStatus"></End>
@@ -997,25 +952,33 @@
           <End EntitySet="InboundDelivery" Role="InboundDelivery"></End>
           <End EntitySet="LocationType" Role="r_SupplierLocationType"></End>
         </AssociationSet>
-        <AssociationSet Name="TransportationMode_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode_2_r_Localized">
-          <End EntitySet="TransportationMode" Role="TransportationMode"></End>
-          <End EntitySet="TransportationMode_texts" Role="r_Localized"></End>
-        </AssociationSet>
         <AssociationSet Name="Resource_2_r_ReferenceDocuments" Association="com.lbngttsamples.gtt.app.pof.pofService.Resource_2_r_ReferenceDocuments">
           <End EntitySet="Resource" Role="Resource"></End>
           <End EntitySet="ReferenceDocument" Role="r_ReferenceDocuments"></End>
+        </AssociationSet>
+        <AssociationSet Name="TransportationMode_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.TransportationMode_2_r_Localized">
+          <End EntitySet="TransportationMode" Role="TransportationMode"></End>
+          <End EntitySet="TransportationMode_texts" Role="r_Localized"></End>
         </AssociationSet>
         <AssociationSet Name="InboundDeliveryItem_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_Incoterms">
           <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
           <End EntitySet="Incoterms" Role="r_Incoterms"></End>
         </AssociationSet>
-        <AssociationSet Name="Incoterms_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.Incoterms_2_r_Localized">
-          <End EntitySet="Incoterms" Role="Incoterms"></End>
-          <End EntitySet="Incoterms_texts" Role="r_Localized"></End>
+        <AssociationSet Name="InboundDeliveryItem_2_r_LastVPLocationType" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_LastVPLocationType">
+          <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>
+          <End EntitySet="VPLocationType" Role="r_LastVPLocationType"></End>
+        </AssociationSet>
+        <AssociationSet Name="r_InboundDelivery_2_r_InboundDeliveryItemTPs" Association="com.lbngttsamples.gtt.app.pof.pofService.r_InboundDelivery_2_r_InboundDeliveryItemTPs">
+          <End EntitySet="InboundDeliveryItem" Role="r_InboundDeliveryItemTPs"></End>
+          <End EntitySet="InboundDelivery" Role="r_InboundDelivery"></End>
         </AssociationSet>
         <AssociationSet Name="InboundDelivery_2_r_Incoterms" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDelivery_2_r_Incoterms">
           <End EntitySet="InboundDelivery" Role="InboundDelivery"></End>
           <End EntitySet="Incoterms" Role="r_Incoterms"></End>
+        </AssociationSet>
+        <AssociationSet Name="Incoterms_2_r_Localized" Association="com.lbngttsamples.gtt.app.pof.pofService.Incoterms_2_r_Localized">
+          <End EntitySet="Incoterms" Role="Incoterms"></End>
+          <End EntitySet="Incoterms_texts" Role="r_Localized"></End>
         </AssociationSet>
         <AssociationSet Name="ShipmentTrackedObjects_2_r_IdType" Association="com.lbngttsamples.gtt.app.pof.pofService.ShipmentTrackedObjects_2_r_IdType">
           <End EntitySet="ShipmentTrackedObjects" Role="ShipmentTrackedObjects"></End>
@@ -1026,8 +989,8 @@
           <End EntitySet="DeliveryTP" Role="r_DeliveryTPs"></End>
         </AssociationSet>
         <AssociationSet Name="r_PurchaseOrder_2_r_PurchaseOrderItemTPs" Association="com.lbngttsamples.gtt.app.pof.pofService.r_PurchaseOrder_2_r_PurchaseOrderItemTPs">
+          <End EntitySet="PurchaseOrderItem" Role="r_PurchaseOrderItemTPs"></End>
           <End EntitySet="PurchaseOrder" Role="r_PurchaseOrder"></End>
-          <End EntitySet="PurchaseOrderPurchaseOrderItemTPs" Role="r_PurchaseOrderItemTPs"></End>
         </AssociationSet>
         <AssociationSet Name="InboundDeliveryItem_2_r_PlantLocation" Association="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem_2_r_PlantLocation">
           <End EntitySet="InboundDeliveryItem" Role="InboundDeliveryItem"></End>

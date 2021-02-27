@@ -1,4 +1,4 @@
-FUNCTION ZSST_GTT_OTE_FO_HDR_REL .
+FUNCTION zsst_gtt_ote_fo_hdr_rel .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -23,13 +23,13 @@ FUNCTION ZSST_GTT_OTE_FO_HDR_REL .
   lt_app_objects  = VALUE #( ( i_app_object ) ).
 
   TRY.
-      e_result  = lcl_ef_performer=>check_relevance(
-                    is_definition         = VALUE #( maintab = lif_sst_constants=>cs_tabledef-fo_header_new )
-                    io_bo_factory         = NEW lcl_tor_factory( )
-                    iv_appsys             = i_appsys
-                    is_app_obj_types      = i_app_obj_types
-                    it_all_appl_tables    = i_all_appl_tables
-                    it_app_objects        = lt_app_objects ).
+      e_result = lcl_ef_performer=>check_relevance(
+                   is_definition      = VALUE #( maintab = lif_sst_constants=>cs_tabledef-fo_header_new )
+                   io_bo_factory      = NEW lcl_tor_factory( )
+                   iv_appsys          = i_appsys
+                   is_app_obj_types   = i_app_obj_types
+                   it_all_appl_tables = i_all_appl_tables
+                   it_app_objects     = lt_app_objects ).
 
     CATCH cx_udm_message INTO lo_udm_message.
       lcl_tools=>get_errors_log(

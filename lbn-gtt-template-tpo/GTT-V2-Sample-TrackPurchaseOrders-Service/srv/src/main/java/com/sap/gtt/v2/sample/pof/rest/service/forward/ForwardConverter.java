@@ -44,4 +44,19 @@ public class ForwardConverter {
         event.setItemNo(inboundDeliveryItem.getItemNo());
         return event;
     }
+
+    public InboundDeliveryItemEvent generateDeliveryItemEvent(String altKey, String deliveryNo, String itemNo, String lastEventName, String lastVPLocationTypeCode, String lastLocationAltKey) {
+        InboundDeliveryItemEvent inboundDeliveryItemEvent = new InboundDeliveryItemEvent();
+        String time = POFUtils.getTimeStr();
+        inboundDeliveryItemEvent.setActualBusinessTimestamp(time);
+        inboundDeliveryItemEvent.setActualBusinessTimeZone("UTC");
+        inboundDeliveryItemEvent.setAltKey(altKey);
+        inboundDeliveryItemEvent.setInboundDeliveryNo(deliveryNo);
+        inboundDeliveryItemEvent.setItemNo(itemNo);
+        inboundDeliveryItemEvent.setLastEventName(lastEventName);
+        inboundDeliveryItemEvent.setLastVPLocationTypeCode(lastVPLocationTypeCode);
+        inboundDeliveryItemEvent.setLastLocationAltKey(lastLocationAltKey);
+
+        return inboundDeliveryItemEvent;
+    }
 }

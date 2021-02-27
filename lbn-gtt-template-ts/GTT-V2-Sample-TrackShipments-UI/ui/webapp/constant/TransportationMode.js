@@ -14,7 +14,6 @@ sap.ui.define([
     RAIL: "02",
     ROAD: "03",
     AIR: "04",
-    MAIL: "05",
     NOT_SPECIFIED: "00",
     NOT_APPLICABLE: "09",
   };
@@ -35,8 +34,6 @@ sap.ui.define([
         return "sap-icon://shipping-status";
       case TransportationMode.Type.AIR:
         return "sap-icon://flight";
-      case TransportationMode.Type.MAIL:
-        return "sap-icon://email";
       default:
         return "";
     }

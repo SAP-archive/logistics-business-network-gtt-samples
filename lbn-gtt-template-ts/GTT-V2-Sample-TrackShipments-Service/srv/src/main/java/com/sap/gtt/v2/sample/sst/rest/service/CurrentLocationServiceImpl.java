@@ -7,6 +7,7 @@ import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import com.sap.gtt.v2.sample.sst.common.service.ProcessEventDirectoryService;
 import com.sap.gtt.v2.sample.sst.common.utils.ProcessEventDirectoryUtils;
 import com.sap.gtt.v2.sample.sst.common.validator.CoordinatesValidator;
+import com.sap.gtt.v2.sample.sst.rest.helper.ActualSpotHelper;
 import com.sap.gtt.v2.sample.sst.rest.model.ActualSpot;
 import com.sap.gtt.v2.sample.sst.rest.model.CurrentLocation;
 import com.sap.gtt.v2.sample.sst.rest.model.converter.CurrentLocationConverter;
@@ -35,21 +36,19 @@ public class CurrentLocationServiceImpl implements CurrentLocationService {
     private CurrentLocationConverter currentLocationConverter;
 
     @Autowired
-    private ActualSpotService actualSpotService;
+    private ActualSpotHelper actualSpotHelper;
 
     @Override
-    public Optional<CurrentLocation> getByShipmentId(@NotNull final String shipmentId) {
-        final List<ProcessEventDirectory> actualEvents = getActualEventsInWhitelist(shipmentId);
-        final List<ActualSpot> actualSpots = actualSpotService.getAllAscending(actualEvents);
+    public Optional<CurrentLocation> getByTrackedProcessId(@NotNull final String trackedProcessId) {
+        final List<ProcessEventDirectory> actualEvents = getActualEventsInWhitelist(trackedProcessId);
+        final List<ActualSpot> actualSpots = actualSpotHelper.getAllAscending(actualEvents);
         return getFromActualSpots(actualSpots);
     }
 
     @Override
     public Optional<CurrentLocation> getFromActualSpots(@NotNull final List<ActualSpot> actualSpots) {
         return getMaxActualSpot(actualSpots)
-                .filter(it -> coordinatesValidator.isValid(
-                        it.getLongitude(),
-                        it.getLatitude()))
+                .filter(actualSpot -> coordinatesValidator.isValid(actualSpot.getLongitude(), actualSpot.getLatitude()))
                 .map(currentLocationConverter::fromActualSpot);
     }
 
@@ -61,8 +60,8 @@ public class CurrentLocationServiceImpl implements CurrentLocationService {
         return comparing(actualSpot -> actualSpot.getEvent().getActualBusinessTimestamp(), nullsLast(Long::compareTo));
     }
 
-    private List<ProcessEventDirectory> getActualEventsInWhitelist(final String shipmentId) {
-        final List<ProcessEventDirectory> processEventDirectories = processEventDirectoryService.getByShipmentId(shipmentId);
+    private List<ProcessEventDirectory> getActualEventsInWhitelist(final String trackedProcessId) {
+        final List<ProcessEventDirectory> processEventDirectories = processEventDirectoryService.getByTrackedProcessId(trackedProcessId);
         return ProcessEventDirectoryUtils.filterByWhitelistForRoutes(processEventDirectories);
     }
 }

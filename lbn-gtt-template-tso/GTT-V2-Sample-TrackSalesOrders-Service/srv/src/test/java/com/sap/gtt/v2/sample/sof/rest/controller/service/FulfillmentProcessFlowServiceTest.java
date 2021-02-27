@@ -38,8 +38,10 @@ public class FulfillmentProcessFlowServiceTest {
     public void testGenerateFulfillmentProcessFlowWhenPartReject() {
         String partRejectJson = SOFUtils.getStringFromResource("/odata/fulfillment-process-flow-part-reject.json");
         String goodsIssueJson = SOFUtils.getStringFromResource("/odata/fulfillment-process-flow-goods-issue.json");
-        Mockito.when(client.readEntity(contains("/SalesOrderItem(guid'7a9cd038-0e53-509d-a75a-c2cb6801d1f8')"), eq(SalesOrderItem.class))).thenReturn(ODataUtils.readEntity(partRejectJson, SalesOrderItem.class));
-        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$expand=process"), eq(ProcessEventDirectory.class))).thenReturn(ODataUtils.readEntitySet(goodsIssueJson, ProcessEventDirectory.class));
+        Mockito.when(client.readEntity(contains("/SalesOrderItem(guid'7a9cd038-0e53-509d-a75a-c2cb6801d1f8')"), eq(SalesOrderItem.class)))
+                .thenReturn(ODataUtils.readEntity(partRejectJson, SalesOrderItem.class));
+        Mockito.when(client.readEntitySetAll(contains("/ProcessEventDirectory?$expand=process"), eq(ProcessEventDirectory.class)))
+                .thenReturn(ODataUtils.readEntitySet(goodsIssueJson, ProcessEventDirectory.class));
 
         FulfillmentProcessFlow flow = fulfillmentProcessFlowService.generateFulfillmentProcessFlow(UUID.fromString("7a9cd038-0e53-509d-a75a-c2cb6801d1f8"));
         List<Lane> lanes =  flow.getLanes();
@@ -70,7 +72,8 @@ public class FulfillmentProcessFlowServiceTest {
     @Test
     public void testGenerateFulfillmentProcessFlowWhenAllReject() {
         String partRejectJson = SOFUtils.getStringFromResource("/odata/fulfillment-process-flow-all-reject.json");
-        Mockito.when(client.readEntity(contains("/SalesOrderItem(guid'106d23ab-9ee3-5931-9d29-9acdddbf6bcc')"), eq(SalesOrderItem.class))).thenReturn(ODataUtils.readEntity(partRejectJson, SalesOrderItem.class));
+        Mockito.when(client.readEntity(contains("/SalesOrderItem(guid'106d23ab-9ee3-5931-9d29-9acdddbf6bcc')"), eq(SalesOrderItem.class)))
+                .thenReturn(ODataUtils.readEntity(partRejectJson, SalesOrderItem.class));
 
         FulfillmentProcessFlow flow = fulfillmentProcessFlowService.generateFulfillmentProcessFlow(UUID.fromString("106d23ab-9ee3-5931-9d29-9acdddbf6bcc"));
         List<Lane> lanes =  flow.getLanes();

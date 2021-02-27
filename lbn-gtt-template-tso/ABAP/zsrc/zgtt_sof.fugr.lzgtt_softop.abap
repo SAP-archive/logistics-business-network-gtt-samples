@@ -160,6 +160,8 @@ CONSTANTS:
   gc_cp_yn_doc_date              TYPE /saptrx/paramname     VALUE 'YN_DOCUMENT_DATE',
   gc_cp_yn_act_datetime          TYPE /saptrx/paramname     VALUE 'ACTUAL_BUSINESS_DATETIME',
   gc_cp_yn_act_timezone          TYPE /saptrx/paramname     VALUE 'ACTUAL_BUSINESS_TIMEZONE',
+  gc_cp_yn_acttec_datetime       TYPE /saptrx/paramname     VALUE 'ACTUAL_TECHNICAL_DATETIME',
+  gc_cp_yn_acttec_timezone       TYPE /saptrx/paramname     VALUE 'ACTUAL_TECHNICAL_TIMEZONE',
   gc_cp_yn_de_no                 TYPE /saptrx/paramname     VALUE 'YN_DLV_NO',
   gc_cp_yn_de_item_no            TYPE /saptrx/paramname     VALUE 'YN_DLV_ITEM_NO',
   gc_cp_yn_de_ship_to            TYPE /saptrx/paramname     VALUE 'YN_DLV_SHIPTO',

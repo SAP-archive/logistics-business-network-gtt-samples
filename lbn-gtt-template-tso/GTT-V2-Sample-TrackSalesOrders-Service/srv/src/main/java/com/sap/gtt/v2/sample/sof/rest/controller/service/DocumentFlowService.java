@@ -51,8 +51,8 @@ public class DocumentFlowService extends DocumentFlowServiceBase {
 
     private SalesOrder querySalesOrder(UUID salesOrderId) {
         String query = UriComponentsBuilder.fromUriString(format("/SalesOrder(guid'%s')", salesOrderId))
-                .queryParam(EXPAND, "salesOrderItemTPs/salesOrderItem/deliveryItemTPs/deliveryItem" +
-                        "/delivery/shipmentTPs/shipment/resourceTPs/resource")
+                .queryParam(EXPAND, "salesOrderItems/deliveryItems/delivery" +
+                        "/shipmentTPs/shipment/resourceTPs/resource")
                 .build().encode().toUriString();
         return gttCoreServiceClient.readEntity(query, SalesOrder.class);
     }
@@ -168,22 +168,14 @@ public class DocumentFlowService extends DocumentFlowServiceBase {
         List<TPRelation> tpRelations = new ArrayList<>();
 
         if (tp instanceof SalesOrder) {
-            List<SalesOrderItemTP> salesOrderItemTPs = ((SalesOrder) tp).getSalesOrderItemTPs();
-            List<SalesOrderItem> salesOrderItems = salesOrderItemTPs.stream()
-                    .map(SalesOrderItemTP::getSalesOrderItem)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-
+            List<SalesOrderItem> salesOrderItems = ((SalesOrder) tp).getSalesOrderItems();
             tps.addAll(salesOrderItems);
+
             salesOrderItems.forEach(item -> tpRelations.add(new TPRelation(((SalesOrder) tp).getId(), item.getId(),
                     Optional.ofNullable(item.getDelayed()).map(str -> String.valueOf(item.getDelayed())).orElse(String.valueOf(Boolean.FALSE)))));
 
         } else if (tp instanceof SalesOrderItem) {
-            List<SalesOrderItemDeliveryItemTP> deliveryItemTPs = ((SalesOrderItem) tp).getDeliveryItemTPs();
-            List<DeliveryItem> deliveryItems = deliveryItemTPs.stream()
-                    .map(SalesOrderItemDeliveryItemTP::getDeliveryItem)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+            List<DeliveryItem> deliveryItems = ((SalesOrderItem) tp).getDeliveryItems();
 
             tps.addAll(deliveryItems);
             deliveryItems.forEach(item -> tpRelations.add(new TPRelation(((SalesOrderItem) tp).getId(), item.getId(), item.getProcessStatusCode())));

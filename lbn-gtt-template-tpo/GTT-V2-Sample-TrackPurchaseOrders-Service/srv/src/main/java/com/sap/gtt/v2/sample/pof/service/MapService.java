@@ -16,6 +16,7 @@ import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,13 +46,12 @@ public class MapService {
     public static final String STOPS_FOR_VP = "stopsForVP";
     public static final String ALT_KEY = "altKey";
 
-    private final GTTCoreServiceClient gttCoreServiceClient;
-    private final POFService pofService;
+    @Autowired
+    private GTTCoreServiceClient gttCoreServiceClient;
 
-    public MapService(GTTCoreServiceClient gttCoreServiceClient, POFService pofService) {
-        this.gttCoreServiceClient = gttCoreServiceClient;
-        this.pofService = pofService;
-    }
+    @Autowired
+    private POFService pofService;
+
 
     public LocationDTO getLocationDetail(Location location) {
         if (location == null) {
@@ -572,60 +572,6 @@ public class MapService {
         return true;
     }
 
-    public void setEventReasonText(List<SideContent> sideContents) {
-        sideContents.stream().filter(sideContent -> sideContent.getIsPlannedEvent()&&sideContent.getEventStatusCode().contains("DELAYED")).forEach(sideContent -> {
-            UUID plannedEventId = sideContent.getPlannedEventId();
-            String url = getLatestReportedDelayEvent(plannedEventId);
-            ODataResultList<ProcessEventDirectory> processEventDirectories = gttCoreServiceClient.readEntitySet(url,ProcessEventDirectory.class);
-            if(!CollectionUtils.isEmpty(processEventDirectories.getResults())) {
-                String eventReasonText = processEventDirectories.getResults().get(0).getEvent().getEventReasonText();
-                sideContent.setEventReasonText(eventReasonText);
-            }
-        });
-    }
-
-    public String getLatestReportedDelayEvent(UUID plannedEventId) {
-        List<FilterCondition> filterConditions = new ArrayList<>();
-
-        FilterCondition propertyCondition = new FilterCondition("plannedEvent_id", FilterCondition.EDM_TYPE_GUID, plannedEventId.toString(), BinaryOperator.EQ);
-        filterConditions.add(propertyCondition);
-
-        List<OrderBy> orderbys = new ArrayList<>();
-        orderbys.add(new OrderBy(Constants.EVENT_ACTUAL_BUSINESS_TIMESTAMP, "desc"));
-
-        String targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
-        String filter = "and (substringof('Delay',event/eventType)) ";
-        List<String> expand = new ArrayList<>();
-        expand.add("event");
-        return POFUtils.generateUrl(targetEntityName, filter, filterConditions, BinaryOperator.AND, false, false, expand, orderbys)+"&$top=1";
-    }
-
-    public void setLocationInSideContent(List<SideContent> sideContents) {
-        if (CollectionUtils.isEmpty(sideContents)) {
-            return;
-        }
-        Set<String> locationAltKeys = sideContents.stream().map(SideContent::getLocationAltKey).collect(Collectors.toSet());
-        List<Location> locations = gttCoreServiceClient.getLocations(locationAltKeys);
-        Map<String, Location> locationMap = createLocationMap(locations);
-        sideContents.forEach(sideContent -> {
-            Optional<Location> location = Optional.ofNullable(locationMap.get(sideContent.getLocationAltKey()));
-            location.ifPresent(l ->
-                    sideContent.setLocation(getLocationDetail(l))
-            );
-        });
-    }
-
-    public List<PlannedEvent> removeNotMatchedEvents(List<PlannedEvent> plannedEvents, String plannedEventId) {
-        int lastIndex = 0;
-        for (; lastIndex < plannedEvents.size(); lastIndex++) {
-            if (StringUtils.equals(plannedEvents.get(lastIndex).getId().toString(), plannedEventId)) {
-                break;
-            }
-        }
-        if(plannedEvents.size() == 0) return plannedEvents;
-        return plannedEvents.subList(0, lastIndex + 1);
-    }
-
     private LocationDTO getLocationDTO(String locationAltKey) {
         Location location = gttCoreServiceClient.getLocation(locationAltKey);
         return getLocationDetail(location);
@@ -662,7 +608,7 @@ public class MapService {
         return plannedRouteMap;
     }
 
-    private List<PlannedEvent> getPlannedEvents4DeliveryItem(String deliveryItemId) {
+    public List<PlannedEvent> getPlannedEvents4DeliveryItem(String deliveryItemId) {
         return pofService.getPlannedEvents4TP(UUID.fromString(deliveryItemId));
     }
 

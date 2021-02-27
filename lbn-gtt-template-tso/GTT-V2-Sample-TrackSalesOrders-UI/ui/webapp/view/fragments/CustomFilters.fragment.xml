@@ -3,9 +3,9 @@
 	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
 	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 	xmlns:core="sap.ui.core">
-	<smartfilterbar:ControlConfiguration key="vMaterialNo" label="{parts: [{'value': 'materialNo'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}" index="3"/>
-	<smartfilterbar:ControlConfiguration key="vMaterialDescription" label="{parts: [{'value': 'materialDescription'}, {'value': 'SalesOrderItem'}], formatter: '.getPropertyLabelText'}" index="4"/>
-	<smartfilterbar:ControlConfiguration key="isDelayed" label="{parts: [{'value': 'isDelayed'}, {'value': 'SalesOrder'}], formatter: '.getPropertyLabelText'}" index="5">
+	<smartfilterbar:ControlConfiguration key="vMaterialNo" label="{label>/SalesOrderItem/materialNo}" index="3"/>
+	<smartfilterbar:ControlConfiguration key="vMaterialDescription" label="{label>/SalesOrderItem/materialDescription}" index="4"/>
+	<smartfilterbar:ControlConfiguration key="isDelayed" label="{label>/SalesOrder/isDelayed}" index="5">
 		<smartfilterbar:customControl>
 			<ComboBox id="isDelayedComboBox"
 				selectedKey="{salesOrderList>/customFilters/isDelayed/key}"
@@ -17,11 +17,11 @@
 			</ComboBox>
 		</smartfilterbar:customControl>
 	</smartfilterbar:ControlConfiguration>
-	<smartfilterbar:ControlConfiguration key="salesOrderItemTPs.salesOrderItem.deliveryItemTPs.deliveryItem.delivery.shipmentTPs.shipment.shipmentNo" label="{parts: [{'value': 'shipmentNo'}, {'value': 'Shipment'}], formatter: '.getPropertyLabelText'}" index="6">
+	<smartfilterbar:ControlConfiguration key="salesOrderItems.deliveryItems.delivery.shipmentTPs.shipment.shipmentNo" label="{label>/Shipment/shipmentNo}" index="6">
 		<smartfilterbar:customControl>
 			<Input id="shipmentNoInput"
-				value="{salesOrderList>/customFilters/salesOrderItemTPs.salesOrderItem.deliveryItemTPs.deliveryItem.delivery.shipmentTPs.shipment.shipmentNo/inputValue}"
-				customData:key="salesOrderItemTPs.salesOrderItem.deliveryItemTPs.deliveryItem.delivery.shipmentTPs.shipment.shipmentNo"
+				value="{salesOrderList>/customFilters/salesOrderItems.deliveryItems.delivery.shipmentTPs.shipment.shipmentNo/inputValue}"
+				customData:key="salesOrderItems.deliveryItems.delivery.shipmentTPs.shipment.shipmentNo"
 				liveChange=".onItemChanged"/>
 		</smartfilterbar:customControl>
 	</smartfilterbar:ControlConfiguration>

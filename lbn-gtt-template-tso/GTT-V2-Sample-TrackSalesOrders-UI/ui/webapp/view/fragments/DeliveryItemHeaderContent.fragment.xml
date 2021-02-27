@@ -11,21 +11,21 @@
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="materialDescriptionLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="materialDescription"
-						text="{parts: [{'value': 'materialDescription'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/DeliveryItem/materialDescription}" />
 					<Text id="materialDescription" class="sofHeaderContentPropertyText" text="{materialDescription}"/>
 				</items>
 			</HBox>
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="materialNoLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="materialNo"
-						text="{parts: [{'value': 'materialNo'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/DeliveryItem/materialNo}" />
 					<Text id="materialNo" class="sofHeaderContentPropertyText" text="{materialNo}"/>
 				</items>
 			</HBox>
 			<HBox wrap="Wrap">
 				<items>
 					<Label id="orderQuantityLabel" class="sofHeaderContentPropertyLabel sapUiTinyMarginEnd" labelFor="orderQuantity"
-						text="{parts: [{'value': 'orderQuantity'}, {'value': 'DeliveryItem'}], formatter: '.getPropertyLabelText'}"/>
+						text="{label>/DeliveryItem/orderQuantity}" />
 					<Text id="orderQuantity" class="sofHeaderContentPropertyText" text="{orderQuantity} {quantityUoM}"/>
 				</items>
 			</HBox>
@@ -74,12 +74,12 @@
 				inverted="true"
 				state="Warning"
 				text="{
-					parts: ['deliveryItem>/earliestETA', 'deliveryItem>/plannedArrivalTime', { value: 'short' }],
+					parts: ['deliveryItem>/plannedArrivalTime', 'deliveryItem>/earliestETA', { value: 'short' }],
 					formatter: '.formatter.timeDuration'
 				}"
 				tooltip="{
-					parts: ['deliveryItem>/earliestETA', 'deliveryItem>/plannedArrivalTime'],
-					formatter: '.formatter.destinationDurationTooltip'
+					parts: ['deliveryItem>/plannedArrivalTime', 'deliveryItem>/earliestETA'],
+					formatter: '.formatter.etaDeltaTooltip'
 				}" />
 		</VBox>
 

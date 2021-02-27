@@ -22,7 +22,7 @@ CLASS lcl_factory_po_header IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_factory~get_pe_filler.
-    MESSAGE E010(ZPOF_GTT) WITH lif_pof_constants=>cs_tabledef-po_header_new
+    MESSAGE E010(ZPOF_GTT) WITH lif_app_constants=>cs_tabledef-po_header_new
       INTO DATA(lv_dummy).
     lcl_tools=>throw_exception( ).
   ENDMETHOD.
@@ -74,9 +74,9 @@ CLASS lcl_factory_dl_header IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_factory~get_pe_filler.
-    MESSAGE E010(ZPOF_GTT) WITH lif_pof_constants=>cs_tabledef-dl_header_new
-      INTO DATA(lv_dummy).
-    lcl_tools=>throw_exception( ).
+    ro_pe_filler    = NEW lcl_pe_filler_dl_header(
+      io_ef_parameters = io_ef_parameters
+      io_bo_reader     = io_bo_reader ).
   ENDMETHOD.
 ENDCLASS.
 
@@ -161,6 +161,24 @@ CLASS lcl_ae_factory_po_item_del IMPLEMENTATION.
 ENDCLASS.
 
 **********************************************************************
+*** Goods Receipt of Inbound Delivery Header *************************
+**********************************************************************
+CLASS lcl_ae_factory_dl_header_gr DEFINITION
+  INHERITING FROM lcl_ae_factory.
+
+  PUBLIC SECTION.
+    METHODS lif_ae_factory~get_ae_filler REDEFINITION.
+
+ENDCLASS.
+
+CLASS lcl_ae_factory_dl_header_gr IMPLEMENTATION.
+  METHOD lif_ae_factory~get_ae_filler.
+    ro_ae_filler    = NEW lcl_ae_filler_dl_header_gr(
+                        io_ae_parameters = io_ae_parameters ).
+  ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
 *** Put Away of Inbound Delivery Item ********************************
 **********************************************************************
 CLASS lcl_ae_factory_dl_item_pa DEFINITION
@@ -192,24 +210,6 @@ ENDCLASS.
 CLASS lcl_ae_factory_dl_item_pkng IMPLEMENTATION.
   METHOD lif_ae_factory~get_ae_filler.
     ro_ae_filler    = NEW lcl_ae_filler_dl_item_pkng(
-                        io_ae_parameters = io_ae_parameters ).
-  ENDMETHOD.
-ENDCLASS.
-
-**********************************************************************
-*** Goods Receipt of Inbound Delivery Item ***************************
-**********************************************************************
-CLASS lcl_ae_factory_dl_item_gr DEFINITION
-  INHERITING FROM lcl_ae_factory.
-
-  PUBLIC SECTION.
-    METHODS lif_ae_factory~get_ae_filler REDEFINITION.
-
-ENDCLASS.
-
-CLASS lcl_ae_factory_dl_item_gr IMPLEMENTATION.
-  METHOD lif_ae_factory~get_ae_filler.
-    ro_ae_filler    = NEW lcl_ae_filler_dl_item_gr(
                         io_ae_parameters = io_ae_parameters ).
   ENDMETHOD.
 ENDCLASS.

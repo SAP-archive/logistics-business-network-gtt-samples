@@ -40,7 +40,7 @@ class NextStopConverterTest {
         final String plannedEventsJson = SSTUtils.getStringFromResource("/odata/planned-events.json");
         final List<PlannedEvent> plannedEvents = ODataUtils.readEntitySet(plannedEventsJson, PlannedEvent.class).getResults();
 
-        when(plannedEventService.getAllByShipmentId(shipmentId)).thenReturn(plannedEvents);
+        when(plannedEventService.getAllByTrackedProcessId(shipmentId)).thenReturn(plannedEvents);
         when(locationService.getByAltKey(any())).thenReturn(Optional.of(new Location()));
 
         // when

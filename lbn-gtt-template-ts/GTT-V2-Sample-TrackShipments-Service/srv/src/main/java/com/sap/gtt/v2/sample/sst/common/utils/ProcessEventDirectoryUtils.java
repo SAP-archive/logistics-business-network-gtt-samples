@@ -1,18 +1,19 @@
 package com.sap.gtt.v2.sample.sst.common.utils;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.DELAY;
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType.LOCATION_UPDATE;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.DELAY;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.LOCATION_UPDATE;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getEventTypeShortName;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.nullsFirst;
 import static java.util.Comparator.nullsLast;
 import static java.util.stream.Collectors.toList;
 
-import com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventType;
+import com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType;
 import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * {@link ProcessEventDirectoryUtils} is an util class for {@link ProcessEventDirectory} entity.
@@ -28,14 +29,14 @@ public class ProcessEventDirectoryUtils {
             final List<ProcessEventDirectory> processEventDirectories) {
         return processEventDirectories.stream()
                 .filter(it -> isSuitableEventTypeForTimelineEvent(it.getEvent().getEventType()))
-                .filter(it -> ShipmentEventType.containsEventType(it.getEvent().getEventType()))
+                .filter(it -> TrackedProcessEventType.containsEventType(it.getEvent().getEventType()))
                 .collect(toList());
     }
 
     public static List<ProcessEventDirectory> filterByWhitelistForRoutes(
             final List<ProcessEventDirectory> processEventDirectories) {
         return processEventDirectories.stream()
-                .filter(it -> ShipmentEventType.containsEventType(it.getEvent().getEventType()))
+                .filter(it -> TrackedProcessEventType.containsEventType(it.getEvent().getEventType()))
                 .collect(toList());
     }
 
@@ -72,6 +73,13 @@ public class ProcessEventDirectoryUtils {
     public static Comparator<ProcessEventDirectory> getAscendingComparator() {
         return comparing((ProcessEventDirectory processEventDirectory) ->
                 processEventDirectory.getEvent().getActualBusinessTimestamp(), nullsLast(Long::compareTo));
+    }
+
+    public static Optional<ProcessEventDirectory> retrieveLastProcessEventDirectory(
+            final UUID lastProcessEventDirectoryId, final List<ProcessEventDirectory> lastProcessEventDirectories) {
+        return lastProcessEventDirectories.stream()
+                .filter(processEventDirectory -> processEventDirectory.getId().equals(lastProcessEventDirectoryId))
+                .findFirst();
     }
 
     private static boolean isSuitableEventTypeForTimelineEvent(final String eventType) {

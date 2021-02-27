@@ -15,6 +15,11 @@ function (BaseController, Constants, RestClient, JSONModel) {
       this.setModel(oModel, this.routeName);
     },
 
+    initControls: function () {
+      var oCompletionRate = this.byId("headerCompletionRate");
+      this.initCompletionRate([oCompletionRate]);
+    },
+
     routePatternMatched: function (oEvent) {
       var oModel = this.getModel(this.routeName),
         oODataModel = this.getModel(),
@@ -31,7 +36,7 @@ function (BaseController, Constants, RestClient, JSONModel) {
             id: sPOItemId,
           });
           this.bindView(sEntitySetKey, {
-            expand: "receivingLocationType,supplierLocationType,scheduleLines,incoterms,purchaseOrder,toSupplierLocation,toReceivingLocation,inboundDeliveryItems/inboundDeliveryItem/incoterms,inboundDeliveryItems/inboundDeliveryItem/supplierLocationType,inboundDeliveryItems/inboundDeliveryItem/plantLocationType,inboundDeliveryItems/inboundDeliveryItem/toSupplierLocation,inboundDeliveryItems/inboundDeliveryItem/toPlantLocation",
+            expand: "receivingLocationType,supplierLocationType,scheduleLines,incoterms,purchaseOrder,toSupplierLocation,toReceivingLocation,inboundDeliveryItems/incoterms,inboundDeliveryItems/supplierLocationType,inboundDeliveryItems/plantLocationType,inboundDeliveryItems/toSupplierLocation,inboundDeliveryItems/toPlantLocation",
           });
         }.bind(this));
     },
@@ -46,32 +51,30 @@ function (BaseController, Constants, RestClient, JSONModel) {
       this._refreshDocumentFlow();
     },
 
+    /**
+     * Fire request to refresh milestones fulfillment process data.
+     */
     _refreshProcessFulfillment: function () {
       var oMilestoneProcessController = this.byId("milestoneProcessView").getController();
       oMilestoneProcessController.refresh();
     },
 
-    _getProcessFulfillmentRequest: function () {
-      return RestClient.request();
-    },
-
+    /**
+     * Fire request to refresh document flow process data.
+     */
     _refreshDocumentFlow: function () {
       var oDocumentFlowController = this.byId("documentFlowView").getController();
       oDocumentFlowController.setFocusGroup(Constants.DOCUMENT_FLOW_GROUP.PURCHASE_ORDER_ITEM);
       oDocumentFlowController.refresh();
     },
 
-    initControls: function () {
-      var oCompletionRate = this.byId("headerCompletionRate");
-      this.initCompletionRate([oCompletionRate]);
-    },
     // ======================================================================
     // Events
     // ======================================================================
 
     onBeforeRebindTable: function (oEvent) {
       var oBindingParams = oEvent.getParameter("bindingParams");
-      this.addDefaultSorters(oBindingParams.sorter, ["inboundDeliveryItem/inboundDeliveryNo", "lineNo"]);
+      this.addDefaultSorters(oBindingParams.sorter, ["inboundDeliveryNo", "itemNo"]);
     },
 
     /**
@@ -82,7 +85,7 @@ function (BaseController, Constants, RestClient, JSONModel) {
       var oContext = oEvent.getSource().getBindingContext();
       var sPath = oContext.getPath();
       var oModel = oContext.getModel();
-      var sId = oModel.getProperty(sPath + "/inboundDeliveryItem/id");
+      var sId = oModel.getProperty(sPath + "/id");
 
       this.getRouter().navTo("DeliveryItemDetails", {
         id: sId,

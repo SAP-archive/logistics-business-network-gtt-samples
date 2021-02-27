@@ -183,12 +183,11 @@ public class ImpactAnalysisService extends DocumentFlowServiceBase {
     private List<Node> generateNextNodesForDelivery(UUID tpId) {
         List<Node> res = new ArrayList<>();
         String query = UriComponentsBuilder.fromUriString("/Delivery(guid'" + tpId + "')")
-                .queryParam(EXPAND, "deliveryItemTPs/deliveryItem")
+                .queryParam(EXPAND, "deliveryItems")
                 .build().encode().toUriString();
 
         Delivery delivery = gttCoreServiceClient.readEntity(query, Delivery.class);
-        for (DeliveryDeliveryItemTP deliveryItemTP: delivery.getDeliveryItemTPs()) {
-            DeliveryItem deliveryItem = deliveryItemTP.getDeliveryItem();
+        for (DeliveryItem deliveryItem: delivery.getDeliveryItems()) {
             if (deliveryItem == null) continue;
             Node node = generateDeliveryItemNode(deliveryItem);
             res.add(node);

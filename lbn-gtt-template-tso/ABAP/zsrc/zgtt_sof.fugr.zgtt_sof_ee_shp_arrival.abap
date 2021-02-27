@@ -79,7 +79,9 @@ FUNCTION zgtt_sof_ee_shp_arrival .
     lt_stops          TYPE zgtt_stops,
     lv_relevance      TYPE boole_d,
     lv_cnt            TYPE /saptrx/evtcnt,
-    lv_evtcnt         TYPE /saptrx/evtcnt.
+    lv_evtcnt         TYPE /saptrx/evtcnt,
+*   BAPI structure for Event Handler control parameters
+    ls_parameters     type /SAPTRX/BAPI_EVM_PARAMETERS.
 
   FIELD-SYMBOLS:
 *   Shipment Header
@@ -202,6 +204,19 @@ FUNCTION zgtt_sof_ee_shp_arrival .
           ls_tracklocation-locid1 = <ls_stops>-locid.
           ls_tracklocation-locid2 = <ls_stops>-stopid.
           APPEND ls_tracklocation TO ct_tracklocation.
+
+*         Actual Technical Datetime & Time zone
+          CLEAR ls_parameters.
+          ls_parameters-evtcnt = lv_cnt.
+          ls_parameters-param_name = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+          ls_parameters-param_value = ls_trackingheader-evtzon.
+          APPEND ls_parameters TO ct_trackparameters.
+
+          CLEAR ls_parameters.
+          ls_parameters-evtcnt = lv_cnt.
+          ls_parameters-param_name = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
+          CONCATENATE '0' sy-datum sy-uzeit INTO ls_parameters-param_value.
+          APPEND ls_parameters TO ct_trackparameters.
 
         ENDIF.
       ENDIF.

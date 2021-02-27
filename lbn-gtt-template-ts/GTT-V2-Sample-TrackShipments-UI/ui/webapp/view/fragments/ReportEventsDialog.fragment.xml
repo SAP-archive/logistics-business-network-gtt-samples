@@ -1,6 +1,8 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
+	xmlns:table="sap.ui.table"
+	xmlns:unified="sap.ui.unified"
 	xmlns:core="sap.ui.core">
 	<Dialog id="dialog"
 		contentWidth="60rem"
@@ -229,6 +231,20 @@
 							value="{eventDetail>/eventReasonText}"
 							maxLength="255" />
 					</f:FormElement>
+
+					<f:FormElement label="{i18n>locationAltKey}"
+						visible="{= ${props>/eventStatus} === 'Unplanned' }">
+						<Input id="locationAltKey"
+							value="{eventDetail>/locationAltKey}"
+							maxLength="255" />
+					</f:FormElement>
+
+					<f:FormElement label="{i18n>eventMatchKey}"
+						visible="{= ${props>/eventStatus} === 'Unplanned' }">
+						<Input id="eventMatchKey"
+							value="{eventDetail>/eventMatchKey}"
+							maxLength="255" />
+					</f:FormElement>
 				</f:FormContainer>
 			</f:Form>
 
@@ -242,6 +258,53 @@
 
 				<f:FormContainer id="userDefinedFieldsFormContainer" />
 			</f:Form>
+
+			<VBox id="compositionTableVBox" />
+
+			<Panel id="reportDeliveryItemsPanel"
+				visible="{= ${state>/deliveryItems}.length > 0 }"
+				headerText="{i18n>reportDeliveryItems}"
+				expandable="true"
+				expanded="true">
+				<table:Table id="deliveryItemsTable"
+					enableColumnReordering="false"
+					visibleRowCount="{= ${state>/deliveryItems}.length }"
+					alternateRowColors="true"
+					selectionMode="None"
+					rows="{state>/deliveryItems}">
+					<table:Column>
+						<Label text="{label>/DeliveryItem/deliveryNo} / {label>/DeliveryItem/itemNo}" />
+						<table:template>
+							<Text text="{state>deliveryNo} / {state>itemNo}" />
+						</table:template>
+					</table:Column>
+
+					<table:Column>
+						<Label text="{label>/DeliveryItem/materialDescription}" />
+						<table:template>
+							<Text text="{state>materialDescription}" />
+						</table:template>
+					</table:Column>
+
+					<table:Column>
+						<Label text="{i18n>quantity}" />
+						<table:template>
+							<HBox alignItems="Center"
+								justifyContent="Start">
+								<StepInput
+									value="{state>quantity}"
+									min="0"
+									max="{state>orderQuantity}" />
+								<Text text="/"
+									class="sapUiSmallMarginBeginEnd" />
+								<unified:Currency
+									value="{state>orderQuantity}"
+									currency="{state>quantityUoM}" />
+							</HBox>
+						</table:template>
+					</table:Column>
+				</table:Table>
+			</Panel>
 		</VBox>
 
 		<beginButton>

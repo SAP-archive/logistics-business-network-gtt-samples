@@ -1,26 +1,40 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/logistics-business-network-gtt-samples)](https://api.reuse.software/info/github.com/SAP-samples/logistics-business-network-gtt-samples) 
 # Template Apps for SAP Logistics Business Network, Global Track and Trace Option
 
-## Announcement (2020.12.21):
-In this release, we have two new template apps: [Track Shipments app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-template-ts) and [Track Purchase Orders app](https://github.com/SAP-samples/logistics-business-network-gtt-samples/tree/master/lbn-gtt-template-tpo), you can find the code and documents in relevant folder.  </br>
-We also upgrade Track Sales Orders app model, to adapt to the newest change, please upgrade your SOF model to the [newest SOF model version](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Model/sof-model-2020122101.json).
+## Announcement (2021.02.26) 
+In this release, the following changes are made. For more information, refer to Read Me and What’s New in the relevant document folder.  </br>
+* Rename Track Sales Orders to Track SO Fulfillment 
+* Rename Track Purchase Orders to Track PO Fulfillment 
+* Add the requirement “To implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.”
+* Integrate with deliveries and freight units in the Track Shipments template app 
+* Deliver non-feature enhancements in the Track SO Fulfillment and Track PO Fulfillment template app
+* Deliver feature enhancements in the Track PO Fulfillment template app
+* Provide introduction material in the Track PO Fulfillment template app
+* Provide FAQs for Template Code Implementation
+* Add annotations for the Event-to-Action script to make each function more understandable. </br>
+
+If you choose not to upgrade to the latest version, here are some mandatory steps for you to adapt to GTT V2 February Delivery. 
+* [Mandatory for VP integration] Add LBN# as a prefix for Service Agent LBN ID for the shipment and freight order/freight booking and freight unit extractors. 
+* [Mandatory for receiving actual events from data contributors] Grant report and read authorization to Service Agent LBN ID in the shipment and resource process types of the corresponding model. 
 
 ## Description
 You can find the template code for [SAP Logistics Business Network, global track and trace option]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the option. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes: 
-* ERP extractor to send out the tracked process to global track and trace option (ABAP) 
+* ERP extractors to send out the tracked processes and events to global track and trace option (ABAP) 
 * Tracked process model that needs to be imported into global track and trace option (model file) 
 * Backend and frontend codes to build Fiori application on global track and trace option (Java and JavaScript)
  
 ## Requirements
-* An SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
-* To integrate with ERP, an SAP ERP or SAP ECC system running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented
+* A SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
+* To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher
 * To integrate with visibility provider, log your incidents in SAP BCP system with component “SCM-LBN-GTT-COR”
 
 ## Download and Installation
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
-* Track Sales Orders app </br>
-[01_Implementation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Implementation_Guide-TSO.pdf)  </br>
-[02_Extractor_Creation_Guide-TSO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Extractor_Creation_Guide-TSO.pdf)  </br>
+* Check the FAQs when you get errors during template code implmentation </br> 
+[FAQs_for_Template_Code_Implementation.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/FAQs_for_Template_Code_Implementation.pdf) </br>
+* Track SO Fulfillment app </br>
+[02_Implementation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Implementation_Guide-TSOF.pdf)  </br>
+[03_Extractor_Creation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/03_Extractor_Creation_Guide-TSOF.pdf)  </br>
 
 * Track Shipments app </br>
 [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/01_Application_Introduction-TS.pdf) </br>
@@ -29,32 +43,30 @@ Click the link below to find the detailed installation guide for each tracking s
 [04_Extractor_Creation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/04_Extractor_Creation_Guide-TS.pdf)
 
 * Track Purchase Orders app </br>
-[01_Implementation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/01_Implementation_Guide-TPO.pdf) </br>
-[02_Extractor_Creation_Guide-TPO.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/02_Extractor_Creation_Guide-TPO.pdf) </br>
-
+[01_Implementation_Guide-TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/01_Implementation_Guide-TPOF.pdf) </br>
+[02_Extractor_Creation_Guide-TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/02_Extractor_Creation_Guide-TPOF.pdf) </br>
+[03_Introduction_Material_for_TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/03_Introduction_Material_for_TPOF.pdf) </br>
 
 ## Limitations
 Click the link below to check the limitations of each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#limitations)
+* [Track SO Fulfillment – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#limitations)
 * [Track Shipments – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/README.md#limitations)
-* [Track Purchase Orders – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#limitations)
+* [Track PO Fulfillment – Limitations](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#limitations)
 
 ## Known Issues
 Click the link below to check known issues for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#known-issue)
-* [Track Purchase Orders – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#known-issue)
-
-
+* [Track SO Fulfillment – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#known-issue)
+* [Track PO Fulfillment – Known Issue](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#known-issue)
 
 ## FAQs
 Click the link below to check FAQs for each tracking scenario. You can also find them in the “README.md” file of the corresponding scenario.
-* [Track Sales Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#faqs)
+* [Track SO Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/README.md#faqs)
 * [Track Shipments – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/README.md#faqs)
-* [Track Purchase Orders – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#faqs)
+* [Track PO Fulfillment – FAQ](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/README.md#faqs)
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”. 
+If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-APP”. 
 
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html?additionalTagId=73555000100800000602).
 

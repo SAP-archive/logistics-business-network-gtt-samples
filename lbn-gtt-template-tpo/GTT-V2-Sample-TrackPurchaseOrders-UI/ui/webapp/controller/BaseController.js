@@ -166,11 +166,25 @@ sap.ui.define([
       return this.getText(oBindingInfo.path, null, oBindingInfo.model);
     },
 
-    initCompletionRate: function (aControls) {
-      var oFloatNumberFormat = NumberFormat.getFloatInstance({
-        decimals: 2,
-        groupingEnabled: true,
-      }, sap.ui.getCore().getConfiguration().getLocale());
+    /**
+     *Format text value for Completion rate
+     * @param {Object[]} aControls array of controls
+     * @param {Number} iIndex number of decimals after dot
+     */
+    initCompletionRate: function (aControls, iIndex) {
+      var oFloatNumberFormat;
+      if(iIndex === Constants.TWO_DECIMALS_AFTER_DOT) {
+        oFloatNumberFormat = NumberFormat.getFloatInstance({
+          decimals: 2,
+          groupingEnabled: true,
+        }, sap.ui.getCore().getConfiguration().getLocale());
+      } else {
+        oFloatNumberFormat = NumberFormat.getFloatInstance({
+          decimals: 3,
+          groupingEnabled: true,
+        }, sap.ui.getCore().getConfiguration().getLocale());
+
+      }
 
       aControls.forEach(function (oControl) {
         oControl.addEventDelegate({

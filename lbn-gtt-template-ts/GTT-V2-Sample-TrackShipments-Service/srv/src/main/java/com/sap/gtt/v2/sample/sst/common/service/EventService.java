@@ -24,7 +24,6 @@ public interface EventService {
      */
     Optional<Event> getById(@NotNull final String id, @NotNull final String eventType);
 
-
     /**
      * Retrieves {@link Event} entities.
      *
@@ -41,14 +40,6 @@ public interface EventService {
      * @param eventType - type name of {@link Event} entity
      */
     void create(@NotNull final String eventJson, @NotNull final String eventType);
-
-    /**
-     * Retrieves metadata for event type.
-     *
-     * @param eventType - type name of {@link Event} entity
-     * @return metadata of provided event type
-     */
-    String getEventTypesMetadata(@NotNull final String eventType);
 
     /**
      * Retrieves {@link CodeListValue} entities.

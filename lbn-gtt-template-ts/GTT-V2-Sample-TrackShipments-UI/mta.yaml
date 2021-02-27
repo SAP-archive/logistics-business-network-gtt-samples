@@ -1,12 +1,11 @@
+---
 _schema-version: '3.1'
 ID: gtt-v2-ui-sample-track-shipments
 description: GTT Sample UI Track Shipments
-version: 2.1.0
-
+version: 2.2.0
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
-
 modules:
 - name: gtt-ui-sample-track-shipments_ui_deployer
   type: com.sap.html5.application-content
@@ -19,7 +18,6 @@ modules:
       artifacts:
       - "./*"
       target-path: resources/gtt-ui-sample-track-shipments
-
 - name: gtt-ui-sample-track-shipments
   type: html5
   path: ui
@@ -31,7 +29,6 @@ modules:
     builder: grunt
     supported-platforms: []
     build-result: dist
-
 resources:
 - name: gtt-ui-sample-track-shipments-app-host
   type: org.cloudfoundry.managed-service

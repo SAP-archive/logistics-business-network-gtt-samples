@@ -22,6 +22,7 @@ INTERFACE lif_sst_constants.
 
   CONSTANTS: BEGIN OF cs_trxcod,
                fo_number   TYPE /saptrx/trxcod VALUE 'SHIPMENT_ORDER',
+               fu_number   TYPE /saptrx/trxcod VALUE 'FREIGHT_UNIT',
                fo_resource TYPE /saptrx/trxcod VALUE 'RESOURCE',
              END OF cs_trxcod.
 
@@ -114,6 +115,12 @@ CLASS lcl_bo_tor_reader DEFINITION.
     TYPES: tv_loc_id TYPE /scmtms/location_id,
            tt_loc_id TYPE STANDARD TABLE OF tv_loc_id WITH EMPTY KEY.
 
+    TYPES: tt_req_doc_line_number TYPE STANDARD TABLE OF int4 WITH EMPTY KEY.
+    TYPES: tt_req_doc_number      TYPE STANDARD TABLE OF /scmtms/tor_id WITH EMPTY KEY.
+
+    TYPES: tt_capacity_doc_line_number  TYPE STANDARD TABLE OF int4 WITH EMPTY KEY.
+    TYPES: tt_capacity_doc_number TYPE STANDARD TABLE OF /scmtms/tor_id WITH EMPTY KEY.
+
     CONSTANTS:
       BEGIN OF cs_text_type,
         cont TYPE /bobf/txc_text_type VALUE 'CONT',
@@ -166,6 +173,18 @@ CLASS lcl_bo_tor_reader DEFINITION.
         ordinal_no          TYPE /saptrx/paramname VALUE 'YN_SHP_VP_STOP_ORD_NO',
         loc_type            TYPE /saptrx/paramname VALUE 'YN_SHP_VP_STOP_LOC_TYPE',
         loc_id              TYPE /saptrx/paramname VALUE 'YN_SHP_VP_STOP_LOC_ID',
+        item_id             TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_FU_ITEM_ID',
+        erp_dlv_id          TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_ERP_DLV_ID',
+        erp_dlv_item_id     TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_ERP_DLV_ITM_ID',
+        itm_qua_pcs_val     TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_QUANTITY',
+        itm_qua_pcs_uni     TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_QUANTITY_UOM',
+        product_id          TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_PRODUCT_ID',
+        product_txt         TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_PRODUCT_TEXT',
+        req_doc_line_no     TYPE /saptrx/paramname VALUE 'YN_SHP_REQ_DOC_LINE_NO',
+        req_doc_no          TYPE /saptrx/paramname VALUE 'YN_SHP_REQ_DOC_NO',
+        capa_doc_line_no    TYPE /saptrx/paramname VALUE 'YN_SHP_CAPA_DOC_LINE_NO',
+        capa_doc_no         TYPE /saptrx/paramname VALUE 'YN_SHP_CAPA_DOC_NO',
+        dlv_item_alt_id     TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_ALT_ID',
       END OF cs_mapping,
 
       cs_bp_type TYPE bu_id_type VALUE 'LBN001'.
@@ -296,12 +315,104 @@ CLASS lcl_bo_tor_reader DEFINITION.
       RAISING
         cx_udm_message.
 
+    METHODS get_customizing_aot
+      IMPORTING
+        iv_tor_type   TYPE /scmtms/tor_type
+      RETURNING
+        VALUE(rv_aot) TYPE /saptrx/aotype.
+
+    METHODS get_requirement_doc_list
+      IMPORTING
+        ir_data            TYPE REF TO data
+        iv_old_data        TYPE abap_bool DEFAULT abap_false
+      CHANGING
+        ct_req_doc_line_no TYPE tt_req_doc_line_number
+        ct_req_doc_no      TYPE tt_req_doc_number
+      RAISING
+        cx_udm_message.
+
+    METHODS get_carrier_name
+      IMPORTING
+        iv_tspid          TYPE bu_id_number
+      RETURNING
+        VALUE(rv_carrier) TYPE bu_id_number
+      RAISING
+        cx_udm_message.
+
 ENDCLASS.
 
 CLASS lcl_bo_tor_reader IMPLEMENTATION.
 
   METHOD constructor.
     mo_ef_parameters = io_ef_parameters.
+  ENDMETHOD.
+
+  METHOD get_carrier_name.
+
+    CONSTANTS lc_lbn TYPE char4 VALUE 'LBN#'.
+
+    SELECT SINGLE idnumber
+      FROM but0id
+      INTO @DATA(lv_idnumber)
+      WHERE partner = @iv_tspid AND
+            type    = @cs_bp_type.
+    IF sy-subrc = 0.
+      rv_carrier = lc_lbn && lv_idnumber.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD get_requirement_doc_list.
+
+    DATA lv_freight_unit_line_no TYPE int4.
+
+    FIELD-SYMBOLS:
+      <ls_tor_root>     TYPE /scmtms/s_em_bo_tor_root,
+      <lt_tor_root_req> TYPE /scmtms/t_em_bo_tor_root.
+
+    ASSIGN ir_data->* TO <ls_tor_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lv_tabledef) = SWITCH #( iv_old_data
+                          WHEN abap_false THEN /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root
+                          ELSE /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root_before ).
+
+    DATA(lr_req_root) = mo_ef_parameters->get_appl_table( iv_tabledef = lv_tabledef ).
+    ASSIGN lr_req_root->* TO <lt_tor_root_req>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    lo_tor_srv_mgr->retrieve_by_association(
+      EXPORTING
+        iv_node_key    = /scmtms/if_tor_c=>sc_node-root
+        it_key         = VALUE #( ( key = <ls_tor_root>-node_id ) )
+        iv_association = /scmtms/if_tor_c=>sc_association-root-req_tor
+      IMPORTING
+        et_key_link    = DATA(lt_capa2req_link) ).
+
+    LOOP AT lt_capa2req_link ASSIGNING FIELD-SYMBOL(<ls_capa2req_link>).
+      ASSIGN <lt_tor_root_req>[ node_id = <ls_capa2req_link>-target_key ]-tor_id TO FIELD-SYMBOL(<lv_tor_req_id>).
+      CHECK sy-subrc = 0.
+
+      lv_freight_unit_line_no += 1.
+      APPEND lv_freight_unit_line_no TO ct_req_doc_line_no.
+
+      APPEND <lv_tor_req_id> TO ct_req_doc_no.
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD get_customizing_aot.
+    SELECT SINGLE aotype
+      FROM /scmtms/c_torty
+      INTO rv_aot
+      WHERE type = iv_tor_type.
   ENDMETHOD.
 
   METHOD check_non_idoc_status_fields.
@@ -347,6 +458,7 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD check_non_idoc_stop_fields.
 
     FIELD-SYMBOLS:
@@ -363,7 +475,9 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
     ASSIGN lt_stop_new->* TO <lt_stop_new>.
     ASSIGN lt_stop_old->* TO <lt_stop_old>.
     ASSIGN is_app_object-maintabref->* TO <ls_header>.
-
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
     LOOP AT <lt_stop_new> ASSIGNING FIELD-SYMBOL(<ls_stop_new>)
       USING KEY parent_seqnum WHERE parent_node_id = <ls_header>-node_id.
       ASSIGN <lt_stop_old>[ node_id = <ls_stop_new>-node_id ] TO FIELD-SYMBOL(<ls_stop_old>).
@@ -405,7 +519,7 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
         ct_stop_id    = ct_stop_id
         ct_ordinal_no = ct_ordinal_no
         ct_loc_type   = ct_loc_type
-        ct_loc_id     = ct_loc_id  ).
+        ct_loc_id     = ct_loc_id ).
 
     get_header_data_from_stop(
       EXPORTING
@@ -556,53 +670,44 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_bo_reader~check_relevance.
+    " FO relevance function
+    FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
-    FIELD-SYMBOLS <ls_root> TYPE any.
+    rv_result = lif_ef_constants=>cs_condition-false.
 
     ASSIGN is_app_object-maintabref->* TO <ls_root>.
-    ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-tspid
-      OF STRUCTURE <ls_root> TO FIELD-SYMBOL(<fs_tspid>).
-    ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-lifecycle
-      OF STRUCTURE <ls_root> TO FIELD-SYMBOL(<fs_lifecycle>).
-    ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-execution
-      OF STRUCTURE <ls_root> TO FIELD-SYMBOL(<fs_execution>).
-    ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-track_exec_rel
-      OF STRUCTURE <ls_root> TO FIELD-SYMBOL(<fs_track_exec_rel>).
-    ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-tor_cat
-      OF STRUCTURE <ls_root> TO FIELD-SYMBOL(<fs_tor_cat>).
-
-    IF <fs_tspid>     IS ASSIGNED AND <fs_lifecycle>      IS ASSIGNED AND <fs_tor_cat> IS ASSIGNED AND
-       <fs_execution> IS ASSIGNED AND <fs_track_exec_rel> IS ASSIGNED.
-
-      rv_result = lif_ef_constants=>cs_condition-false.
-
-      IF is_app_object-maintabdef = lif_sst_constants=>cs_tabledef-fo_header_new AND
-        ( <fs_track_exec_rel> = lif_sst_constants=>cs_track_exec_rel-execution OR
-          <fs_track_exec_rel> = lif_sst_constants=>cs_track_exec_rel-exec_with_extern_event_mngr ) AND
-        <fs_lifecycle> = lif_sst_constants=>cs_lifecycle_status-in_process AND
-        ( <fs_execution> = lif_sst_constants=>cs_execution_status-in_execution OR
-          <fs_execution> = lif_sst_constants=>cs_execution_status-ready_for_transp_exec ) AND
-        <fs_tspid> IS NOT INITIAL AND
-        ( <fs_tor_cat> = /scmtms/if_tor_const=>sc_tor_category-active OR
-          <fs_tor_cat> = /scmtms/if_tor_const=>sc_tor_category-booking ).
-
-        CASE is_app_object-update_indicator.
-          WHEN lif_ef_constants=>cs_change_mode-insert.
-            rv_result = lif_ef_constants=>cs_condition-true.
-          WHEN lif_ef_constants=>cs_change_mode-update OR
-               lif_ef_constants=>cs_change_mode-undefined.
-            rv_result = lcl_tools=>are_structures_different(
-                            ir_data1  = lif_bo_reader~get_data( is_app_object = is_app_object )
-                            ir_data2  = lif_bo_reader~get_data(
-                                            is_app_object = is_app_object
-                                            iv_old_data   = abap_true ) ).
-            IF rv_result = lif_ef_constants=>cs_condition-false.
-              rv_result = check_non_idoc_fields( is_app_object ).
-            ENDIF.
-        ENDCASE.
-      ENDIF.
-    ELSE.
+    IF sy-subrc <> 0.
       RETURN.
+    ENDIF.
+
+    IF get_customizing_aot( <ls_root>-tor_type ) <> is_app_object-appobjtype.
+      RETURN.
+    ENDIF.
+
+    IF is_app_object-maintabdef = lif_sst_constants=>cs_tabledef-fo_header_new AND
+      ( <ls_root>-track_exec_rel = lif_sst_constants=>cs_track_exec_rel-execution OR
+        <ls_root>-track_exec_rel = lif_sst_constants=>cs_track_exec_rel-exec_with_extern_event_mngr ) AND
+      <ls_root>-lifecycle = lif_sst_constants=>cs_lifecycle_status-in_process AND
+      ( <ls_root>-execution = lif_sst_constants=>cs_execution_status-in_execution OR
+        <ls_root>-execution = lif_sst_constants=>cs_execution_status-ready_for_transp_exec ) AND
+     <ls_root>-tspid IS NOT INITIAL AND
+      ( <ls_root>-tor_cat = /scmtms/if_tor_const=>sc_tor_category-active OR
+        <ls_root>-tor_cat = /scmtms/if_tor_const=>sc_tor_category-booking ).
+
+      CASE is_app_object-update_indicator.
+        WHEN lif_ef_constants=>cs_change_mode-insert.
+          rv_result = lif_ef_constants=>cs_condition-true.
+        WHEN lif_ef_constants=>cs_change_mode-update OR
+             lif_ef_constants=>cs_change_mode-undefined.
+          rv_result = lcl_tools=>are_structures_different(
+                          ir_data1  = lif_bo_reader~get_data( is_app_object = is_app_object )
+                          ir_data2  = lif_bo_reader~get_data(
+                                          is_app_object = is_app_object
+                                          iv_old_data   = abap_true ) ).
+          IF rv_result = lif_ef_constants=>cs_condition-false.
+            rv_result = check_non_idoc_fields( is_app_object ).
+          ENDIF.
+      ENDCASE.
     ENDIF.
   ENDMETHOD.
 
@@ -707,16 +812,16 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD add_track_id_data.
-    APPEND VALUE #( appsys      = mo_ef_parameters->get_appsys( )
-                    appobjtype  = is_app_object-appobjtype
-                    appobjid    = is_app_object-appobjid
-                    trxcod      = iv_trxcod
-                    trxid       = iv_trxid
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
-                    timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space
-                    action      = iv_action  ) TO ct_track_id.
+    APPEND VALUE #( appsys     = mo_ef_parameters->get_appsys( )
+                    appobjtype = is_app_object-appobjtype
+                    appobjid   = is_app_object-appobjid
+                    trxcod     = iv_trxcod
+                    trxid      = iv_trxid
+                    start_date = lcl_tools=>get_system_date_time( )
+                    end_date   = lif_ef_constants=>cv_max_end_date
+                    timzon     = lcl_tools=>get_system_time_zone( )
+                    msrid      = space
+                    action     = iv_action ) TO ct_track_id.
   ENDMETHOD.
 
   METHOD get_container_mobile_track_id.
@@ -765,7 +870,6 @@ CLASS lcl_bo_freight_order_reader DEFINITION INHERITING FROM lcl_bo_tor_reader.
 
   PUBLIC SECTION.
     METHODS lif_bo_reader~get_data REDEFINITION.
-
     METHODS lif_bo_reader~get_track_id_data REDEFINITION.
 
   PRIVATE SECTION.
@@ -808,6 +912,8 @@ CLASS lcl_bo_freight_order_reader DEFINITION INHERITING FROM lcl_bo_tor_reader.
              ordinal_no          TYPE tt_ordinal_no,
              loc_type            TYPE tt_loc_type,
              loc_id              TYPE tt_loc_id,
+             req_doc_line_no     TYPE tt_req_doc_line_number,
+             req_doc_no          TYPE tt_req_doc_number,
            END OF ts_fo_header.
 
     METHODS get_data_from_root
@@ -912,7 +1018,7 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
         ct_ref_doc_id   = <ls_freight_order>-ref_doc_id
         ct_ref_doc_type = <ls_freight_order>-ref_doc_type ).
     IF <ls_freight_order>-ref_doc_id IS INITIAL.
-      APPEND ''  TO <ls_freight_order>-ref_doc_id.
+      APPEND '' TO <ls_freight_order>-ref_doc_id.
     ENDIF.
 
     get_data_from_stop(
@@ -933,34 +1039,44 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
         ct_loc_type         = <ls_freight_order>-loc_type
         ct_loc_id           = <ls_freight_order>-loc_id ).
 
+    get_requirement_doc_list(
+      EXPORTING
+        ir_data            = lr_maintabref
+        iv_old_data        = iv_old_data
+      CHANGING
+        ct_req_doc_line_no = <ls_freight_order>-req_doc_line_no
+        ct_req_doc_no      = <ls_freight_order>-req_doc_no ).
+    IF <ls_freight_order>-req_doc_no IS INITIAL.
+      APPEND '' TO <ls_freight_order>-req_doc_line_no.
+    ENDIF.
+
   ENDMETHOD.
 
 
   METHOD lif_bo_reader~get_track_id_data.
-
-    DATA: lr_item              TYPE REF TO data,
-          lr_item_old          TYPE REF TO data,
-          lr_root_new          TYPE REF TO data,
-          lr_root_old          TYPE REF TO data,
-          lt_track_id_data     TYPE lif_ef_types=>tt_enh_track_id_data,
-          lt_track_id_data_old TYPE lif_ef_types=>tt_enh_track_id_data.
-
-    FIELD-SYMBOLS: <lt_item>     TYPE ANY TABLE,
-                   <lt_item_old> TYPE ANY TABLE,
-                   <ls_root>     TYPE /scmtms/s_em_bo_tor_root,
-                   <lt_root_new> TYPE /scmtms/t_em_bo_tor_root,
-                   <lt_root_old> TYPE /scmtms/t_em_bo_tor_root.
-
+    "FO
     CONSTANTS: cs_mtr_truck TYPE string VALUE '31'.
 
-    ASSIGN is_app_object-maintabref->* TO <ls_root>.
-    IF sy-subrc <> 0.
-      RETURN.
-    ENDIF.
+    DATA:
+      lr_item_new          TYPE REF TO data,
+      lr_item_old          TYPE REF TO data,
+      lr_root_new          TYPE REF TO data,
+      lr_root_old          TYPE REF TO data,
+      lt_track_id_data_new TYPE lif_ef_types=>tt_enh_track_id_data,
+      lt_track_id_data_old TYPE lif_ef_types=>tt_enh_track_id_data.
+
+    FIELD-SYMBOLS:
+      <lt_item_new> TYPE /scmtms/t_em_bo_tor_item,
+      <lt_item_old> TYPE /scmtms/t_em_bo_tor_item,
+      <ls_root_new> TYPE /scmtms/s_em_bo_tor_root,
+      <lt_root_new> TYPE /scmtms/t_em_bo_tor_root,
+      <lt_root_old> TYPE /scmtms/t_em_bo_tor_root.
+
+    ASSIGN is_app_object-maintabref->* TO <ls_root_new>.
 
     lr_root_old = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_header_old ).
     ASSIGN lr_root_old->* TO <lt_root_old>.
-    IF sy-subrc <> 0.
+    IF <ls_root_new> IS NOT ASSIGNED OR <lt_root_old> IS NOT ASSIGNED.
       MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
       lcl_tools=>throw_exception( ).
     ENDIF.
@@ -969,7 +1085,7 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
       EXPORTING
         is_app_object = is_app_object
         iv_trxcod     = lif_sst_constants=>cs_trxcod-fo_number
-        iv_trxid      = |{ <ls_root>-tor_id }|
+        iv_trxid      = |{ <ls_root_new>-tor_id }|
       CHANGING
         ct_track_id   = et_track_id_data ).
 
@@ -977,7 +1093,7 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
       EXPORTING
         is_app_object    = is_app_object
       CHANGING
-        ct_track_id_data = lt_track_id_data ).
+        ct_track_id_data = lt_track_id_data_new ).
 
     get_container_mobile_track_id(
       EXPORTING
@@ -986,197 +1102,56 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
       CHANGING
         ct_track_id_data = lt_track_id_data_old ).
 
-    lr_item     = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_new ).
+    lr_item_new = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_new ).
     lr_item_old = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_old ).
 
-    ASSIGN <lt_root_old>[ node_id = <ls_root>-node_id ]
-         TO FIELD-SYMBOL(<ls_root_old>).
+    ASSIGN <lt_root_old>[ node_id = <ls_root_new>-node_id ] TO FIELD-SYMBOL(<ls_root_old>).
     IF sy-subrc = 0.
-      DATA(lv_carrier_removed) = xsdbool(
-        <ls_root_old>-tsp IS INITIAL AND <ls_root>-tsp IS NOT INITIAL ).
-
-      DATA(lv_execution_status_changed) = xsdbool(
-        ( <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        AND
-          <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution AND
-          <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_executed )          AND
-        ( <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        OR
-          <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution OR
-          <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_executed ) ).
-
-      DATA(lv_lifecycle_status_changed) = xsdbool(
-        ( <ls_root_old>-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  AND
-          <ls_root_old>-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) AND
-        ( <ls_root>-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  OR
-          <ls_root>-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) ).
-
-      IF lv_carrier_removed = abap_true OR lv_execution_status_changed = abap_true OR
-         lv_lifecycle_status_changed = abap_true .
+      DATA(lv_deleted) = lcl_tools=>check_is_fo_deleted(
+                          is_root_new = <ls_root_new>
+                          is_root_old = <ls_root_old> ).
+      IF lv_deleted = lif_ef_constants=>cs_condition-true.
         CLEAR: lt_track_id_data_old, lr_item_old.
       ENDIF.
     ENDIF.
 
-    ASSIGN lr_item->* TO <lt_item>.
-    IF <lt_item> IS ASSIGNED.
-      LOOP AT <lt_item> ASSIGNING FIELD-SYMBOL(<ls_item>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-platenumber
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_platenumber>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-res_id
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_res_id>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-item_cat
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_item_cat>).
-        ASSIGN COMPONENT 'NODE_ID'
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_item_id>).
-
-        IF <lv_platenumber> IS ASSIGNED AND  <lv_res_id>   IS ASSIGNED AND <lv_item_id>   IS ASSIGNED AND
-           <lv_item_cat>    IS ASSIGNED AND  <lv_item_cat> = /scmtms/if_tor_const=>sc_tor_item_category-av_item.
-
-          IF <ls_root>-tor_id IS NOT INITIAL AND <lv_res_id> IS NOT INITIAL.
-            APPEND VALUE #( key = <lv_item_id>
-                    appsys      = mo_ef_parameters->get_appsys( )
-                    appobjtype  = is_app_object-appobjtype
-                    appobjid    = is_app_object-appobjid
-                    trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root>-tor_id }{ <lv_res_id> }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
-                    timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space  ) TO lt_track_id_data.
-          ENDIF.
-
-          SELECT SINGLE motscode FROM /sapapo/trtype INTO <ls_root>-mtr WHERE ttype = <ls_root>-mtr.
-          SHIFT <ls_root>-mtr LEFT DELETING LEADING '0'.
-          IF <ls_root>-tor_id IS NOT INITIAL AND <lv_platenumber> IS NOT INITIAL AND <ls_root>-mtr = cs_mtr_truck.
-            APPEND VALUE #( key = |{ <lv_item_id> }P|
-                    appsys      = mo_ef_parameters->get_appsys( )
-                    appobjtype  = is_app_object-appobjtype
-                    appobjid    = is_app_object-appobjid
-                    trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root>-tor_id }{ <lv_platenumber> }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
-                    timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space  ) TO lt_track_id_data.
-          ENDIF.
-        ENDIF.
-        UNASSIGN: <lv_platenumber>, <lv_item_cat>, <lv_res_id>, <lv_item_id>.
-      ENDLOOP.
+    ASSIGN lr_item_new->* TO <lt_item_new>.
+    IF sy-subrc = 0.
+      lcl_tools=>get_fo_tracked_item_obj(
+          EXPORTING
+            is_app_object    = is_app_object
+            is_root          = <ls_root_new>
+            it_item          = <lt_item_new>
+            iv_appsys        = mo_ef_parameters->get_appsys( )
+            iv_old_data      = abap_false
+         CHANGING
+            ct_track_id_data = lt_track_id_data_new ).
     ELSE.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
     ENDIF.
 
     ASSIGN lr_item_old->* TO <lt_item_old>.
-    IF <lt_item_old> IS ASSIGNED.
-      LOOP AT <lt_item_old> ASSIGNING FIELD-SYMBOL(<ls_item_old>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-platenumber
-          OF STRUCTURE <ls_item_old> TO <lv_platenumber>.
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-res_id
-          OF STRUCTURE <ls_item_old> TO <lv_res_id>.
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-item_cat
-          OF STRUCTURE <ls_item_old> TO <lv_item_cat>.
-        ASSIGN COMPONENT 'NODE_ID'
-          OF STRUCTURE <ls_item_old> TO <lv_item_id>.
-
-        IF <lv_platenumber> IS ASSIGNED AND  <lv_res_id>   IS ASSIGNED AND  <lv_item_id>   IS ASSIGNED AND
-           <lv_item_cat>    IS ASSIGNED AND  <lv_item_cat> = /scmtms/if_tor_const=>sc_tor_item_category-av_item.
-
-          IF <ls_root>-tor_id IS NOT INITIAL AND <lv_res_id> IS NOT INITIAL.
-            APPEND VALUE #( key = <lv_item_id>
-                    appsys      = mo_ef_parameters->get_appsys( )
-                    appobjtype  = is_app_object-appobjtype
-                    appobjid    = is_app_object-appobjid
-                    trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root>-tor_id }{ <lv_res_id> }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
-                    timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space  ) TO lt_track_id_data_old.
-          ENDIF.
-
-          SELECT motscode FROM /sapapo/trtype INTO <ls_root_old>-mtr WHERE ttype = <ls_root_old>-mtr. ENDSELECT.
-          SHIFT <ls_root_old>-mtr LEFT DELETING LEADING '0'.
-          IF <ls_root_old>-tor_id IS NOT INITIAL AND <lv_platenumber> IS NOT INITIAL AND <ls_root_old>-mtr = cs_mtr_truck.
-            APPEND VALUE #( key = |{ <lv_item_id> }P|
-                    appsys      = mo_ef_parameters->get_appsys( )
-                    appobjtype  = is_app_object-appobjtype
-                    appobjid    = is_app_object-appobjid
-                    trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root>-tor_id }{ <lv_platenumber> }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
-                    timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space  ) TO lt_track_id_data_old.
-          ENDIF.
-        ENDIF.
-        UNASSIGN: <lv_platenumber>, <lv_item_cat>, <lv_res_id>, <lv_item_id>.
-      ENDLOOP.
-    ELSE.
+    IF sy-subrc = 0 AND lv_deleted = lif_ef_constants=>cs_condition-false.
+      lcl_tools=>get_fo_tracked_item_obj(
+        EXPORTING
+          is_app_object = is_app_object
+          is_root       = <ls_root_old>
+          it_item       = <lt_item_old>
+          iv_appsys     = mo_ef_parameters->get_appsys( )
+          iv_old_data   = abap_true
+       CHANGING
+          ct_track_id_data = lt_track_id_data_old ).
     ENDIF.
 
-    LOOP AT lt_track_id_data ASSIGNING FIELD-SYMBOL(<ls_track_id_data>) WHERE trxcod = lif_sst_constants=>cs_trxcod-fo_resource.
-      READ TABLE lt_track_id_data_old WITH KEY key = <ls_track_id_data>-key ASSIGNING FIELD-SYMBOL(<ls_track_id_data_old>).
-      IF sy-subrc = 0.
-        DATA(lt_fields) = CAST cl_abap_structdescr(
-                      cl_abap_typedescr=>describe_by_data(
-                        p_data = <ls_track_id_data> )
-                    )->get_included_view( ).
-
-        DATA(lv_result) = abap_false.
-
-        LOOP AT lt_fields ASSIGNING FIELD-SYMBOL(<ls_fields>).
-          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data> TO FIELD-SYMBOL(<lv_value1>).
-          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data_old> TO FIELD-SYMBOL(<lv_value2>).
-
-          IF <lv_value1> IS ASSIGNED AND
-             <lv_value2> IS ASSIGNED.
-            IF <lv_value1> <> <lv_value2>.
-              lv_result   = abap_true.
-              EXIT.
-            ENDIF.
-          ENDIF.
-        ENDLOOP.
-
-        IF lv_result = abap_true.
-          add_track_id_data(
-            EXPORTING
-              is_app_object = is_app_object
-              iv_trxcod     = <ls_track_id_data>-trxcod
-              iv_trxid      = <ls_track_id_data>-trxid
-            CHANGING
-              ct_track_id   = et_track_id_data ).
-
-          add_track_id_data(
-           EXPORTING
-             is_app_object = is_app_object
-             iv_trxcod     = <ls_track_id_data_old>-trxcod
-             iv_trxid      = <ls_track_id_data_old>-trxid
-             iv_action     = /scmtms/cl_scem_int_c=>sc_param_action-delete
-           CHANGING
-             ct_track_id   = et_track_id_data ).
-        ENDIF.
-
-        DELETE lt_track_id_data_old WHERE key = <ls_track_id_data>-key.
-
-      ELSE.
-        add_track_id_data(
-         EXPORTING
-           is_app_object = is_app_object
-           iv_trxcod     = <ls_track_id_data>-trxcod
-           iv_trxid      = <ls_track_id_data>-trxid
-         CHANGING
-           ct_track_id   = et_track_id_data ).
-      ENDIF.
-    ENDLOOP.
-
-    "Deleted resources
-    LOOP AT lt_track_id_data_old ASSIGNING FIELD-SYMBOL(<ls_track_id_data_del>).
-      add_track_id_data(
+    lcl_tools=>get_track_obj_changes(
        EXPORTING
-         is_app_object = is_app_object
-         iv_trxcod     = <ls_track_id_data_del>-trxcod
-         iv_trxid      = <ls_track_id_data_del>-trxid
-         iv_action     = /scmtms/cl_scem_int_c=>sc_param_action-delete
+         is_app_object        = is_app_object
+         iv_appsys            = mo_ef_parameters->get_appsys( )
+         it_track_id_data_new = lt_track_id_data_new
+         it_track_id_data_old = lt_track_id_data_old
        CHANGING
-         ct_track_id   = et_track_id_data ).
-    ENDLOOP.
+         ct_track_id_data     = et_track_id_data ).
 
   ENDMETHOD.
 
@@ -1220,11 +1195,7 @@ CLASS lcl_bo_freight_order_reader IMPLEMENTATION.
       cs_fo_header-pln_grs_duration = <ls_tor_additional_info>-tot_duration.
     ENDIF.
 
-    SELECT SINGLE idnumber
-      FROM but0id
-      INTO cs_fo_header-tspid
-      WHERE partner = cs_fo_header-tspid AND
-            type    = cs_bp_type.
+    cs_fo_header-tspid = get_carrier_name( iv_tspid = cs_fo_header-tspid ).
 
     SELECT SINGLE motscode
       FROM /sapapo/trtype
@@ -1477,6 +1448,8 @@ CLASS lcl_bo_freight_booking_reader DEFINITION INHERITING FROM lcl_bo_tor_reader
         ordinal_no          TYPE tt_ordinal_no,
         loc_type            TYPE tt_loc_type,
         loc_id              TYPE tt_loc_id,
+        req_doc_line_no     TYPE tt_req_doc_line_number,
+        req_doc_no          TYPE tt_req_doc_number,
       END OF ts_freight_booking.
 
     CONSTANTS:
@@ -1605,24 +1578,35 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
         ct_loc_type         = <ls_freight_booking>-loc_type
         ct_loc_id           = <ls_freight_booking>-loc_id ).
 
+    get_requirement_doc_list(
+      EXPORTING
+        ir_data            = lr_maintabref
+        iv_old_data        = iv_old_data
+      CHANGING
+        ct_req_doc_line_no = <ls_freight_booking>-req_doc_line_no
+        ct_req_doc_no      = <ls_freight_booking>-req_doc_no ).
+    IF <ls_freight_booking>-req_doc_no IS INITIAL.
+      APPEND '' TO <ls_freight_booking>-req_doc_line_no.
+    ENDIF.
+
   ENDMETHOD.
 
   METHOD lif_bo_reader~get_track_id_data.
-
-    DATA: lr_item              TYPE REF TO data,
+    "FB
+    DATA: lr_item_new          TYPE REF TO data,
           lr_item_old          TYPE REF TO data,
           lr_root_new          TYPE REF TO data,
           lr_root_old          TYPE REF TO data,
-          lt_track_id_data     TYPE lif_ef_types=>tt_enh_track_id_data,
+          lt_track_id_data_new TYPE lif_ef_types=>tt_enh_track_id_data,
           lt_track_id_data_old TYPE lif_ef_types=>tt_enh_track_id_data.
 
-    FIELD-SYMBOLS: <lt_item>     TYPE ANY TABLE,
-                   <lt_item_old> TYPE ANY TABLE,
-                   <ls_root>     TYPE /scmtms/s_em_bo_tor_root,
+    FIELD-SYMBOLS: <lt_item_new> TYPE /scmtms/t_em_bo_tor_item,
+                   <lt_item_old> TYPE /scmtms/t_em_bo_tor_item,
+                   <ls_root_new> TYPE /scmtms/s_em_bo_tor_root,
                    <lt_root_new> TYPE /scmtms/t_em_bo_tor_root,
                    <lt_root_old> TYPE /scmtms/t_em_bo_tor_root.
 
-    ASSIGN is_app_object-maintabref->* TO <ls_root>.
+    ASSIGN is_app_object-maintabref->* TO <ls_root_new>.
     IF sy-subrc <> 0.
       RETURN.
     ENDIF.
@@ -1645,7 +1629,7 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
       EXPORTING
         is_app_object = is_app_object
         iv_trxcod     = lif_sst_constants=>cs_trxcod-fo_number
-        iv_trxid      = |{ <ls_root>-tor_id }|
+        iv_trxid      = |{ <ls_root_new>-tor_id }|
       CHANGING
         ct_track_id   = et_track_id_data ).
 
@@ -1653,7 +1637,7 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
       EXPORTING
         is_app_object    = is_app_object
       CHANGING
-        ct_track_id_data = lt_track_id_data ).
+        ct_track_id_data = lt_track_id_data_new ).
 
     get_container_mobile_track_id(
       EXPORTING
@@ -1662,166 +1646,74 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
       CHANGING
         ct_track_id_data = lt_track_id_data_old ).
 
-    lr_item     = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_new ).
+    lr_item_new     = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_new ).
     lr_item_old = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_old ).
 
-
-    ASSIGN <lt_root_old>[ node_id = <ls_root>-node_id ]
-      TO FIELD-SYMBOL(<ls_root_old>).
+    ASSIGN <lt_root_old>[ node_id = <ls_root_new>-node_id ] TO FIELD-SYMBOL(<ls_root_old>).
     IF sy-subrc = 0.
-
-      DATA(lv_carrier_removed) = xsdbool(
-        <ls_root_old>-tsp IS INITIAL AND <ls_root>-tsp IS NOT INITIAL ).
-
-      DATA(lv_execution_status_changed) = xsdbool(
-        ( <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        AND
-          <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution AND
-          <ls_root_old>-execution <> /scmtms/if_tor_status_c=>sc_root-execution-v_executed )          AND
-        ( <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_in_execution        OR
-          <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_ready_for_execution OR
-          <ls_root>-execution  = /scmtms/if_tor_status_c=>sc_root-execution-v_executed ) ).
-
-      DATA(lv_lifecycle_status_changed) = xsdbool(
-        ( <ls_root_old>-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  AND
-          <ls_root_old>-lifecycle <> /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) AND
-        ( <ls_root>-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_in_process  OR
-          <ls_root>-lifecycle  = /scmtms/if_tor_status_c=>sc_root-lifecycle-v_completed ) ).
-
-      IF lv_carrier_removed = abap_true OR lv_execution_status_changed = abap_true OR
-         lv_lifecycle_status_changed = abap_true .
+      DATA(lv_deleted) = lcl_tools=>check_is_fo_deleted(
+                          is_root_new = <ls_root_new>
+                          is_root_old = <ls_root_old> ).
+      IF lv_deleted = lif_ef_constants=>cs_condition-true.
         CLEAR: lt_track_id_data_old, lr_item_old.
       ENDIF.
     ENDIF.
 
+    ASSIGN lr_item_new->* TO <lt_item_new>.
+    IF <lt_item_new> IS ASSIGNED.
+      LOOP AT <lt_item_new> ASSIGNING FIELD-SYMBOL(<ls_item>).
 
-    ASSIGN lr_item->* TO <lt_item>.
-    IF <lt_item> IS ASSIGNED.
-      LOOP AT <lt_item> ASSIGNING FIELD-SYMBOL(<ls_item>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-vessel_id
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_vessel_id>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-item_cat
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_item_cat>).
-        ASSIGN COMPONENT 'NODE_ID'
-          OF STRUCTURE <ls_item> TO FIELD-SYMBOL(<lv_item_id>).
+        IF <ls_item>-vessel_id IS ASSIGNED AND <ls_item>-item_id   IS ASSIGNED AND
+           <ls_item>-item_cat IS ASSIGNED AND <ls_item>-item_cat = /scmtms/if_tor_const=>sc_tor_item_category-booking.
 
-        IF <lv_vessel_id>   IS ASSIGNED AND <lv_item_id>   IS ASSIGNED AND
-           <lv_item_cat>    IS ASSIGNED AND  <lv_item_cat> = /scmtms/if_tor_const=>sc_tor_item_category-booking.
-
-          IF <ls_root>-tor_id IS NOT INITIAL AND <lv_vessel_id> IS NOT INITIAL.
-            APPEND VALUE #( key = <lv_item_id>
+          IF <ls_root_new>-tor_id IS NOT INITIAL AND <ls_item>-vessel_id IS NOT INITIAL.
+            APPEND VALUE #( key = <ls_item>-item_id
                     appsys      = mo_ef_parameters->get_appsys( )
                     appobjtype  = is_app_object-appobjtype
                     appobjid    = is_app_object-appobjid
                     trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root>-tor_id }{ <lv_vessel_id> }|
+                    trxid       = |{ <ls_root_new>-tor_id }{ <ls_item>-vessel_id }|
                     start_date  = lcl_tools=>get_system_date_time( )
                     end_date    = lif_ef_constants=>cv_max_end_date
                     timzon      = lcl_tools=>get_system_time_zone( )
-                    msrid       = space  ) TO lt_track_id_data.
+                    msrid       = space  ) TO lt_track_id_data_new.
           ENDIF.
         ENDIF.
-        UNASSIGN: <lv_vessel_id>, <lv_item_cat>, <lv_item_id>.
       ENDLOOP.
     ELSE.
     ENDIF.
 
     ASSIGN lr_item_old->* TO <lt_item_old>.
-    IF <lt_item_old> IS ASSIGNED.
+    IF sy-subrc = 0 AND lv_deleted = lif_ef_constants=>cs_condition-false.
       LOOP AT <lt_item_old> ASSIGNING FIELD-SYMBOL(<ls_item_old>).
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-vessel_id
-          OF STRUCTURE <ls_item_old> TO <lv_vessel_id>.
-        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-item_tr-item_cat
-          OF STRUCTURE <ls_item_old> TO <lv_item_cat>.
-        ASSIGN COMPONENT 'NODE_ID'
-          OF STRUCTURE <ls_item_old> TO <lv_item_id>.
 
-        IF <lv_vessel_id>   IS ASSIGNED AND <lv_item_id>   IS ASSIGNED AND
-           <lv_item_cat>    IS ASSIGNED AND  <lv_item_cat> = /scmtms/if_tor_const=>sc_tor_item_category-booking.
+        IF <ls_item>-vessel_id IS ASSIGNED AND <ls_item>-item_id   IS ASSIGNED AND
+           <ls_item>-item_cat IS ASSIGNED AND <ls_item>-item_cat = /scmtms/if_tor_const=>sc_tor_item_category-booking.
 
-          IF <ls_root_old>-tor_id IS NOT INITIAL AND <lv_vessel_id> IS NOT INITIAL.
-            APPEND VALUE #( key = <lv_item_id>
+          IF <ls_root_old>-tor_id IS NOT INITIAL AND <ls_item>-vessel_id IS NOT INITIAL.
+            APPEND VALUE #( key = <ls_item>-item_id
                     appsys      = mo_ef_parameters->get_appsys( )
                     appobjtype  = is_app_object-appobjtype
                     appobjid    = is_app_object-appobjid
                     trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
-                    trxid       = |{ <ls_root_old>-tor_id }{ <lv_vessel_id> }|
+                    trxid       = |{ <ls_root_old>-tor_id }{ <ls_item>-vessel_id }|
                     start_date  = lcl_tools=>get_system_date_time( )
                     end_date    = lif_ef_constants=>cv_max_end_date
                     timzon      = lcl_tools=>get_system_time_zone( )
                     msrid       = space  ) TO lt_track_id_data_old.
           ENDIF.
         ENDIF.
-        UNASSIGN: <lv_vessel_id>, <lv_item_cat>, <lv_item_id>.
       ENDLOOP.
-    ELSE.
     ENDIF.
 
-    LOOP AT lt_track_id_data ASSIGNING FIELD-SYMBOL(<ls_track_id_data>) WHERE trxcod = lif_sst_constants=>cs_trxcod-fo_resource.
-      READ TABLE lt_track_id_data_old WITH KEY key = <ls_track_id_data>-key ASSIGNING FIELD-SYMBOL(<ls_track_id_data_old>).
-      IF sy-subrc = 0.
-        DATA(lt_fields) = CAST cl_abap_structdescr(
-                      cl_abap_typedescr=>describe_by_data(
-                        p_data = <ls_track_id_data> )
-                    )->get_included_view( ).
-
-        DATA(lv_result) = abap_false.
-
-        LOOP AT lt_fields ASSIGNING FIELD-SYMBOL(<ls_fields>).
-          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data> TO FIELD-SYMBOL(<lv_value1>).
-          ASSIGN COMPONENT <ls_fields>-name OF STRUCTURE <ls_track_id_data_old> TO FIELD-SYMBOL(<lv_value2>).
-
-          IF <lv_value1> IS ASSIGNED AND
-             <lv_value2> IS ASSIGNED.
-            IF <lv_value1> <> <lv_value2>.
-              lv_result   = abap_true.
-              EXIT.
-            ENDIF.
-          ENDIF.
-        ENDLOOP.
-
-        IF lv_result = abap_true.
-          add_track_id_data(
-            EXPORTING
-              is_app_object = is_app_object
-              iv_trxcod     = <ls_track_id_data>-trxcod
-              iv_trxid      = <ls_track_id_data>-trxid
-            CHANGING
-              ct_track_id   = et_track_id_data ).
-
-          add_track_id_data(
-           EXPORTING
-             is_app_object = is_app_object
-             iv_trxcod     = <ls_track_id_data_old>-trxcod
-             iv_trxid      = <ls_track_id_data_old>-trxid
-             iv_action     = /scmtms/cl_scem_int_c=>sc_param_action-delete
-           CHANGING
-             ct_track_id   = et_track_id_data ).
-        ENDIF.
-
-        DELETE lt_track_id_data_old WHERE key = <ls_track_id_data>-key.
-
-      ELSE.
-        add_track_id_data(
-         EXPORTING
-           is_app_object = is_app_object
-           iv_trxcod     = <ls_track_id_data>-trxcod
-           iv_trxid      = <ls_track_id_data>-trxid
-         CHANGING
-           ct_track_id   = et_track_id_data ).
-      ENDIF.
-    ENDLOOP.
-
-    "Deleted resources
-    LOOP AT lt_track_id_data_old ASSIGNING FIELD-SYMBOL(<ls_track_id_data_del>).
-      add_track_id_data(
-       EXPORTING
-         is_app_object = is_app_object
-         iv_trxcod     = <ls_track_id_data_del>-trxcod
-         iv_trxid      = <ls_track_id_data_del>-trxid
-         iv_action     = /scmtms/cl_scem_int_c=>sc_param_action-delete
-       CHANGING
-         ct_track_id   = et_track_id_data ).
-    ENDLOOP.
+    lcl_tools=>get_track_obj_changes(
+    EXPORTING
+      is_app_object        = is_app_object
+      iv_appsys            = mo_ef_parameters->get_appsys( )
+      it_track_id_data_new = lt_track_id_data_new
+      it_track_id_data_old = lt_track_id_data_old
+    CHANGING
+      ct_track_id_data     = et_track_id_data ).
 
   ENDMETHOD.
 
@@ -1854,12 +1746,7 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
     cs_freight_booking-tor_id = <ls_root>-tor_id.
     SHIFT cs_freight_booking-tor_id LEFT DELETING LEADING '0'.
     cs_freight_booking-dgo_indicator = <ls_root>-dgo_indicator.
-
-    SELECT SINGLE idnumber
-      FROM but0id
-      INTO cs_freight_booking-tspid
-      WHERE partner = <ls_root>-tspid AND
-            type    = cs_bp_type.
+    cs_freight_booking-tspid = get_carrier_name( iv_tspid = cs_freight_booking-tspid ).
 
     SELECT SINGLE motscode
       FROM /sapapo/trtype
@@ -1922,7 +1809,7 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
     cs_freight_booking-gro_vol_uni      = <ls_booking_item>-gro_vol_uni.
     cs_freight_booking-gro_wei_val      = <ls_booking_item>-gro_wei_val.
     cs_freight_booking-gro_wei_uni      = <ls_booking_item>-gro_wei_uni.
-    cs_freight_booking-qua_pcs_val      = <ls_booking_item>-qua_pcs_uni.
+    cs_freight_booking-qua_pcs_val      = <ls_booking_item>-qua_pcs_val.
     cs_freight_booking-qua_pcs_uni      = <ls_booking_item>-qua_pcs_uni.
 
   ENDMETHOD.
@@ -2054,6 +1941,738 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
       APPEND <ls_root>-partner_mbl_id TO ct_ref_doc_id.
       APPEND cs_mbl_doctype TO ct_ref_doc_type.
     ENDIF.
+
+  ENDMETHOD.
+
+ENDCLASS.
+
+CLASS lcl_bo_freight_unit_reader DEFINITION INHERITING FROM lcl_bo_tor_reader.
+
+  PUBLIC SECTION.
+    METHODS lif_bo_reader~get_data          REDEFINITION.
+    METHODS lif_bo_reader~check_relevance   REDEFINITION.
+    METHODS lif_bo_reader~get_track_id_data REDEFINITION.
+
+    TYPES:
+      BEGIN OF ts_freight_unit,
+        tor_id             TYPE /scmtms/s_em_bo_tor_root-tor_id,
+        shipping_type      TYPE /scmtms/s_em_bo_tor_root-shipping_type,
+        inc_class_code     TYPE /scmtms/s_em_bo_tor_item-inc_class_code,
+        trmodcod           TYPE /scmtms/s_em_bo_tor_root-trmodcod,
+        total_distance_km  TYPE /scmtms/total_distance_km,
+        pln_grs_duration   TYPE /scmtms/total_duration_net,
+        total_duration_net TYPE /scmtms/total_duration_net,
+        dgo_indicator      TYPE /scmtms/s_em_bo_tor_root-dgo_indicator,
+        pln_arr_loc_id     TYPE /scmtms/s_em_bo_tor_stop-log_locid,
+        pln_arr_loc_type   TYPE /saptrx/loc_id_type,
+        pln_arr_timest     TYPE char16,
+        pln_arr_timezone   TYPE timezone,
+        pln_dep_loc_id     TYPE /scmtms/s_em_bo_tor_stop-log_locid,
+        pln_dep_loc_type   TYPE /saptrx/loc_id_type,
+        pln_dep_timest     TYPE char16,
+        pln_dep_timezone   TYPE timezone,
+        tspid              TYPE bu_id_number,
+        ref_doc_id         TYPE tt_ref_doc_id,
+        ref_doc_type       TYPE tt_ref_doc_type,
+        stop_id            TYPE tt_stop_id,
+        ordinal_no         TYPE tt_ordinal_no,
+        loc_type           TYPE tt_loc_type,
+        loc_id             TYPE tt_loc_id,
+        item_id            TYPE STANDARD TABLE OF /scmtms/item_id              WITH EMPTY KEY,
+        erp_dlv_id         TYPE STANDARD TABLE OF /scmtms/erp_shpm_dlv_id      WITH EMPTY KEY,
+        erp_dlv_item_id    TYPE STANDARD TABLE OF /scmtms/erp_shpm_dlv_item_id WITH EMPTY KEY,
+        itm_qua_pcs_val	   TYPE STANDARD TABLE OF /scmtms/qua_pcs_val          WITH EMPTY KEY,
+        itm_qua_pcs_uni	   TYPE STANDARD TABLE OF /scmtms/qua_pcs_uni          WITH EMPTY KEY,
+        product_id         TYPE STANDARD TABLE OF /scmtms/product_id           WITH EMPTY KEY,
+        product_txt        TYPE STANDARD TABLE OF /scmtms/item_description     WITH EMPTY KEY,
+        dlv_item_alt_id    TYPE STANDARD TABLE OF char16                       WITH EMPTY KEY,
+        capa_doc_line_no   TYPE tt_capacity_doc_line_number,
+        capa_doc_no        TYPE tt_capacity_doc_number,
+      END OF ts_freight_unit.
+
+    CONSTANTS:
+      cs_base_btd_tco_inb_dlv       TYPE /scmtms/base_btd_tco VALUE '58',
+      cs_base_btd_tco_outb_dlv      TYPE /scmtms/base_btd_tco VALUE '73',
+      cs_base_btd_tco_delivery_item TYPE /scmtms/base_btd_item_tco VALUE '14'.
+
+    METHODS get_data_from_maintab
+      IMPORTING
+        ir_maintab      TYPE REF TO data
+        iv_old_data     TYPE abap_bool DEFAULT abap_false
+      CHANGING
+        cs_freight_unit TYPE ts_freight_unit
+      RAISING
+        cx_udm_message.
+
+    METHODS check_fo_track_obj_changes
+      IMPORTING
+        is_app_object    TYPE trxas_appobj_ctab_wa
+      RETURNING
+        VALUE(rv_result) TYPE lif_ef_types=>tv_condition
+      RAISING
+        cx_udm_message.
+
+    METHODS get_maintabref
+      IMPORTING
+        is_app_object        TYPE trxas_appobj_ctab_wa
+      RETURNING
+        VALUE(rr_maintabref) TYPE REF TO data.
+
+    METHODS get_data_from_item
+      IMPORTING
+        ir_data         TYPE REF TO data
+        iv_old_data     TYPE abap_bool DEFAULT abap_false
+      CHANGING
+        cs_freight_unit TYPE ts_freight_unit
+      RAISING
+        cx_udm_message.
+
+    METHODS get_capacity_doc_list
+      IMPORTING
+        ir_data             TYPE REF TO data
+        iv_old_data         TYPE abap_bool DEFAULT abap_false
+      CHANGING
+        ct_capa_doc_line_no TYPE tt_capacity_doc_line_number
+        ct_capa_doc_no      TYPE tt_capacity_doc_number
+      RAISING
+        cx_udm_message.
+
+    METHODS check_fo_route_change
+      IMPORTING
+        is_app_object    TYPE trxas_appobj_ctab_wa
+      RETURNING
+        VALUE(rv_result) TYPE lif_ef_types=>tv_condition
+      RAISING
+        cx_udm_message.
+
+  PROTECTED SECTION.
+    METHODS check_non_idoc_stop_fields REDEFINITION.
+    METHODS check_non_idoc_fields      REDEFINITION.
+
+ENDCLASS.
+
+CLASS lcl_bo_freight_unit_reader IMPLEMENTATION.
+
+  METHOD check_non_idoc_stop_fields.
+
+    DATA lt_capa_stop_old TYPE /scmtms/t_tor_stop_k.
+
+    FIELD-SYMBOLS:
+      <lt_stop_new>      TYPE /scmtms/t_em_bo_tor_stop,
+      <lt_stop_old>      TYPE /scmtms/t_em_bo_tor_stop,
+      <lt_capa_stop_new> TYPE /scmtms/t_em_bo_tor_stop,
+      <ls_header>        TYPE /scmtms/s_em_bo_tor_root.
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+
+    DATA(lt_stop_new) = mo_ef_parameters->get_appl_table(
+                            iv_tabledef = lif_sst_constants=>cs_tabledef-fo_stop_new ).
+    DATA(lt_stop_old) = mo_ef_parameters->get_appl_table(
+                            iv_tabledef = lif_sst_constants=>cs_tabledef-fo_stop_old ).
+    DATA(lt_capa_stop_new) = mo_ef_parameters->get_appl_table(
+                               /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-capa_stop ).
+
+    ASSIGN lt_stop_new->* TO <lt_stop_new>.
+    ASSIGN lt_stop_old->* TO <lt_stop_old>.
+    ASSIGN lt_capa_stop_new->* TO <lt_capa_stop_new>.
+    ASSIGN is_app_object-maintabref->* TO <ls_header>.
+    IF <lt_stop_new>      IS NOT ASSIGNED OR <lt_stop_old> IS NOT ASSIGNED OR
+       <lt_capa_stop_new> IS NOT ASSIGNED OR <ls_header> IS NOT ASSIGNED.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    DATA(lt_capa_stop_key) = VALUE /bobf/t_frw_key( FOR <ls_stop> IN <lt_stop_new> ( key = <ls_stop>-assgn_stop_key ) ).
+    lo_tor_srv_mgr->retrieve(
+      EXPORTING
+        iv_node_key     = /scmtms/if_tor_c=>sc_node-stop
+        it_key          = lt_capa_stop_key
+        iv_before_image = abap_true
+      IMPORTING
+        et_data         = lt_capa_stop_old ).
+
+    LOOP AT <lt_stop_new> ASSIGNING FIELD-SYMBOL(<ls_stop_new>)
+      USING KEY parent_seqnum WHERE parent_node_id = <ls_header>-node_id.
+
+      ASSIGN <lt_stop_old>[ node_id = <ls_stop_new>-node_id ] TO FIELD-SYMBOL(<ls_stop_old>).
+      CHECK sy-subrc = 0.
+
+      IF <ls_stop_new>-assgn_start <> <ls_stop_old>-assgn_start OR
+         <ls_stop_new>-assgn_end   <> <ls_stop_old>-assgn_end.
+        rv_result = lif_ef_constants=>cs_condition-true.
+        EXIT.
+      ENDIF.
+
+      ASSIGN <lt_capa_stop_new>[ node_id = <ls_stop_new>-assgn_stop_key ] TO FIELD-SYMBOL(<ls_capa_stop_new>).
+      CHECK sy-subrc = 0.
+
+      ASSIGN lt_capa_stop_old[ key = <ls_stop_new>-assgn_stop_key ] TO FIELD-SYMBOL(<ls_capa_stop_old>).
+      CHECK sy-subrc = 0.
+
+      IF <ls_capa_stop_new>-plan_trans_time <> <ls_capa_stop_old>-plan_trans_time.
+        rv_result = lif_ef_constants=>cs_condition-true.
+        EXIT.
+      ENDIF.
+
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD check_fo_track_obj_changes.
+    "FU
+    DATA:
+      lr_item_new          TYPE REF TO data,
+      lr_item_old          TYPE REF TO data,
+      lr_root_new          TYPE REF TO data,
+      lr_root_old          TYPE REF TO data,
+      lt_track_id_data     TYPE lif_ef_types=>tt_track_id_data,
+      lt_track_id_data_new TYPE lif_ef_types=>tt_enh_track_id_data,
+      lt_track_id_data_old TYPE lif_ef_types=>tt_enh_track_id_data,
+      ls_capa_root_fo      TYPE /scmtms/s_em_bo_tor_root.
+
+    FIELD-SYMBOLS:
+      <lt_item_new>          TYPE /scmtms/t_em_bo_tor_item,
+      <lt_item_old>          TYPE /scmtms/t_em_bo_tor_item,
+      <ls_root>              TYPE /scmtms/s_em_bo_tor_root,
+      <ls_root_new>          TYPE /scmtms/s_em_bo_tor_root,
+      <ls_root_old>          TYPE /scmtms/s_em_bo_tor_root,
+      <lt_tor_root_capa_new> TYPE /scmtms/t_em_bo_tor_root,
+      <lt_tor_root_capa_old> TYPE /scmtms/t_em_bo_tor_root.
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+
+    ASSIGN is_app_object-maintabref->* TO <ls_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lr_root_capa_new) = mo_ef_parameters->get_appl_table(
+                                  iv_tabledef = /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-capa_root ).
+    ASSIGN lr_root_capa_new->* TO <lt_tor_root_capa_new>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lr_capa_root_old) = mo_ef_parameters->get_appl_table(
+                                  iv_tabledef = /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-capa_root_before ).
+    ASSIGN lr_capa_root_old->* TO <lt_tor_root_capa_old>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    lo_tor_srv_mgr->retrieve_by_association(
+      EXPORTING
+        iv_node_key    = /scmtms/if_tor_c=>sc_node-root
+        it_key         = VALUE #( ( key = <ls_root>-node_id ) )
+        iv_association = /scmtms/if_tor_c=>sc_association-root-capa_tor
+      IMPORTING
+        et_key_link    = DATA(lt_req2capa_link) ).
+
+    LOOP AT lt_req2capa_link ASSIGNING FIELD-SYMBOL(<ls_req2capa_link>).
+      ASSIGN <lt_tor_root_capa_new>[ node_id = <ls_req2capa_link>-target_key ] TO <ls_root_new>.
+      CHECK sy-subrc = 0.
+
+      ASSIGN <lt_tor_root_capa_old>[ node_id = <ls_req2capa_link>-target_key ] TO <ls_root_old>.
+      CHECK sy-subrc = 0.
+
+      DATA(ls_app_object) = is_app_object.
+      ls_capa_root_fo = CORRESPONDING #( <ls_root_new> MAPPING node_id = node_id  ).
+      GET REFERENCE OF ls_capa_root_fo INTO ls_app_object-maintabref.
+
+      get_container_mobile_track_id(
+        EXPORTING
+          is_app_object    = ls_app_object
+        CHANGING
+          ct_track_id_data = lt_track_id_data_new ).
+
+      get_container_mobile_track_id(
+        EXPORTING
+          is_app_object    = ls_app_object
+          iv_old_data      = abap_true
+        CHANGING
+          ct_track_id_data = lt_track_id_data_old ).
+
+      lr_item_new = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_new ).
+      lr_item_old = mo_ef_parameters->get_appl_table( iv_tabledef = lif_sst_constants=>cs_tabledef-fo_item_old ).
+
+      DATA(lv_deleted) = lcl_tools=>check_is_fo_deleted(
+                             is_root_new = <ls_root_new>
+                             is_root_old = <ls_root_old> ).
+      IF lv_deleted = lif_ef_constants=>cs_condition-true.
+        CLEAR: lt_track_id_data_old, lr_item_old.
+      ENDIF.
+
+      ASSIGN lr_item_new->* TO <lt_item_new>.
+      IF <lt_item_new> IS ASSIGNED.
+        lcl_tools=>get_fo_tracked_item_obj(
+          EXPORTING
+            is_app_object = ls_app_object
+            is_root       = <ls_root_new>
+            it_item       = <lt_item_new>
+            iv_appsys     = mo_ef_parameters->get_appsys( )
+            iv_old_data   = abap_false
+         CHANGING
+            ct_track_id_data = lt_track_id_data_new ).
+      ELSE.
+        MESSAGE e010(zsst_gtt) INTO lv_dummy.
+        lcl_tools=>throw_exception( ).
+      ENDIF.
+
+      ASSIGN lr_item_old->* TO <lt_item_old>.
+      IF sy-subrc = 0 AND lv_deleted =  lif_ef_constants=>cs_condition-false.
+        lcl_tools=>get_fo_tracked_item_obj(
+          EXPORTING
+            is_app_object = ls_app_object
+            is_root       = <ls_root_old>
+            it_item       = <lt_item_old>
+            iv_appsys     = mo_ef_parameters->get_appsys( )
+            iv_old_data   = abap_true
+         CHANGING
+            ct_track_id_data = lt_track_id_data_old ).
+      ENDIF.
+
+      lcl_tools=>get_track_obj_changes(
+        EXPORTING
+          is_app_object        = ls_app_object
+          iv_appsys            = mo_ef_parameters->get_appsys( )
+          it_track_id_data_new = lt_track_id_data_new
+          it_track_id_data_old = lt_track_id_data_old
+        CHANGING
+          ct_track_id_data     = lt_track_id_data ).
+    ENDLOOP.
+
+    IF lt_track_id_data IS NOT INITIAL.
+      rv_result = lif_ef_constants=>cs_condition-true.
+      RETURN.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD check_fo_route_change.
+
+    FIELD-SYMBOLS <ls_header> TYPE /scmtms/s_em_bo_tor_root.
+
+    DATA:
+      lv_stage_num_difference    TYPE i,
+      lv_stage_num_difference_bi TYPE i.
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+
+    ASSIGN is_app_object-maintabref->* TO <ls_header>.
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    lo_tor_srv_mgr->retrieve_by_association(
+      EXPORTING
+        iv_node_key    = /scmtms/if_tor_c=>sc_node-root
+        it_key         = VALUE #( ( key = <ls_header>-node_id ) )
+        iv_association = /scmtms/if_tor_c=>sc_association-root-capa_tor
+      IMPORTING
+        et_key_link    = DATA(lt_req2capa_kl)
+        et_target_key  = DATA(lt_tor_capa_key) ).
+
+    /scmtms/cl_tor_helper_stage=>get_stage(
+      EXPORTING
+        it_root_key = VALUE #( ( key = <ls_header>-node_id ) )
+      IMPORTING
+        et_stage    = DATA(lt_req_stage) ).
+
+    /scmtms/cl_tor_helper_stage=>get_stage(
+      EXPORTING
+        it_root_key = lt_tor_capa_key
+      IMPORTING
+        et_stage    = DATA(lt_capa_stage) ).
+
+    /scmtms/cl_tor_helper_stage=>get_stage(
+      EXPORTING
+        it_root_key     = lt_tor_capa_key
+        iv_before_image = abap_true
+      IMPORTING
+        et_stage        = DATA(lt_capa_stage_bi) ).
+
+    DATA(lv_req_stage_count) = lines( lt_req_stage ).
+    DATA(lv_stop_des_key) = lt_req_stage[ lv_req_stage_count ]-dest_stop-assgn_stop_key.
+    DATA(lv_stop_src_key) = lt_req_stage[ 1 ]-source_stop-assgn_stop_key.
+
+    DO 1 TIMES.
+
+      ASSIGN lt_capa_stage[ KEY source_stop_key COMPONENTS
+        source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num>).
+      CHECK sy-subrc = 0.
+
+      ASSIGN lt_capa_stage[ dest_stop_key = lv_stop_des_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_last_num>).
+      CHECK sy-subrc = 0.
+
+      lv_stage_num_difference = <lv_capa_stage_last_num> - <lv_capa_stage_first_num>.
+
+      ASSIGN lt_capa_stage_bi[ KEY source_stop_key COMPONENTS
+        source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num_bi>).
+      CHECK sy-subrc = 0.
+
+      ASSIGN lt_capa_stage_bi[ dest_stop_key = lv_stop_des_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_last_num_bi>).
+      CHECK sy-subrc = 0.
+
+      lv_stage_num_difference_bi = <lv_capa_stage_last_num_bi> - <lv_capa_stage_first_num_bi>.
+
+    ENDDO.
+
+    IF lv_stage_num_difference <> lv_stage_num_difference_bi.
+      rv_result = lif_ef_constants=>cs_condition-true.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD check_non_idoc_fields.
+
+    rv_result = check_non_idoc_stop_fields( is_app_object = is_app_object ).
+    IF rv_result = lif_ef_constants=>cs_condition-true.
+      RETURN.
+    ENDIF.
+
+    rv_result = check_fo_route_change( is_app_object = is_app_object ).
+
+  ENDMETHOD.
+
+  METHOD get_capacity_doc_list.
+
+    DATA lv_capa_doc_line_no TYPE int4.
+
+    FIELD-SYMBOLS:
+      <ls_tor_root>      TYPE /scmtms/s_em_bo_tor_root,
+      <lt_tor_root_capa> TYPE /scmtms/t_em_bo_tor_root.
+
+    ASSIGN ir_data->* TO <ls_tor_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lv_tabledef) = SWITCH #( iv_old_data
+                          WHEN abap_false THEN /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-capa_root
+                          ELSE /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-capa_root_before ).
+
+    DATA(lr_req_root) = mo_ef_parameters->get_appl_table( iv_tabledef = lv_tabledef ).
+    ASSIGN lr_req_root->* TO <lt_tor_root_capa>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lo_tor_srv_mgr) = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( iv_bo_key = /scmtms/if_tor_c=>sc_bo_key ).
+    lo_tor_srv_mgr->retrieve_by_association(
+      EXPORTING
+        iv_node_key    = /scmtms/if_tor_c=>sc_node-root
+        it_key         = VALUE #( ( key = <ls_tor_root>-node_id ) )
+        iv_association = /scmtms/if_tor_c=>sc_association-root-capa_tor
+      IMPORTING
+        et_key_link    = DATA(lt_req2capa_link) ).
+
+    LOOP AT lt_req2capa_link ASSIGNING FIELD-SYMBOL(<ls_req2capa_link>).
+      ASSIGN <lt_tor_root_capa>[ node_id = <ls_req2capa_link>-target_key ]-tor_id TO FIELD-SYMBOL(<lv_tor_capa_id>).
+      CHECK sy-subrc = 0.
+
+      lv_capa_doc_line_no += 1.
+      APPEND lv_capa_doc_line_no TO ct_capa_doc_line_no.
+
+      APPEND <lv_tor_capa_id> TO ct_capa_doc_no.
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD lif_bo_reader~get_data.
+
+    FIELD-SYMBOLS <ls_freight_unit> TYPE ts_freight_unit.
+
+    rr_data = NEW ts_freight_unit( ).
+    ASSIGN rr_data->* TO <ls_freight_unit>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lr_maintabref) = get_maintabref( is_app_object ).
+    get_data_from_maintab(
+      EXPORTING
+        iv_old_data     = iv_old_data
+        ir_maintab      = lr_maintabref
+      CHANGING
+        cs_freight_unit = <ls_freight_unit> ).
+    IF <ls_freight_unit> IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    get_data_from_item(
+      EXPORTING
+        iv_old_data     = iv_old_data
+        ir_data         = lr_maintabref
+      CHANGING
+        cs_freight_unit = <ls_freight_unit> ).
+    IF <ls_freight_unit>-item_id IS INITIAL.
+      APPEND '' TO <ls_freight_unit>-item_id.
+    ENDIF.
+
+    get_docref_data(
+      EXPORTING
+        iv_old_data     = iv_old_data
+        ir_root         = lr_maintabref
+      CHANGING
+        ct_ref_doc_id   = <ls_freight_unit>-ref_doc_id
+        ct_ref_doc_type = <ls_freight_unit>-ref_doc_type ).
+    IF <ls_freight_unit>-ref_doc_id IS INITIAL.
+      APPEND '' TO <ls_freight_unit>-ref_doc_id.
+    ENDIF.
+
+    get_data_from_stop(
+      EXPORTING
+        ir_data             = lr_maintabref
+        iv_old_data         = iv_old_data
+      CHANGING
+        cv_pln_dep_loc_id   = <ls_freight_unit>-pln_dep_loc_id
+        cv_pln_dep_loc_type = <ls_freight_unit>-pln_dep_loc_type
+        cv_pln_dep_timest   = <ls_freight_unit>-pln_dep_timest
+        cv_pln_dep_timezone = <ls_freight_unit>-pln_dep_timezone
+        cv_pln_arr_loc_id   = <ls_freight_unit>-pln_arr_loc_id
+        cv_pln_arr_loc_type = <ls_freight_unit>-pln_arr_loc_type
+        cv_pln_arr_timest   = <ls_freight_unit>-pln_arr_timest
+        cv_pln_arr_timezone = <ls_freight_unit>-pln_arr_timezone
+        ct_stop_id          = <ls_freight_unit>-stop_id
+        ct_ordinal_no       = <ls_freight_unit>-ordinal_no
+        ct_loc_type         = <ls_freight_unit>-loc_type
+        ct_loc_id           = <ls_freight_unit>-loc_id ).
+
+    get_capacity_doc_list(
+      EXPORTING
+        ir_data             = lr_maintabref
+        iv_old_data         = iv_old_data
+      CHANGING
+        ct_capa_doc_line_no = <ls_freight_unit>-capa_doc_line_no
+        ct_capa_doc_no      = <ls_freight_unit>-capa_doc_no ).
+    IF <ls_freight_unit>-capa_doc_no IS INITIAL.
+      APPEND '' TO <ls_freight_unit>-capa_doc_line_no.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD get_data_from_maintab.
+
+    FIELD-SYMBOLS:
+      <ls_root>     TYPE /scmtms/s_em_bo_tor_root,
+      <lt_root_old> TYPE /scmtms/t_em_bo_tor_root.
+
+    ASSIGN ir_maintab->* TO <ls_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    IF iv_old_data = abap_true.
+      DATA(lr_root_old) = mo_ef_parameters->get_appl_table( lif_sst_constants=>cs_tabledef-fo_header_old ).
+
+      ASSIGN lr_root_old->* TO <lt_root_old>.
+      IF sy-subrc = 0.
+        ASSIGN <lt_root_old>[ tor_id = <ls_root>-tor_id ] TO <ls_root>.
+        IF sy-subrc <> 0.
+          " Record was just created
+          RETURN.
+        ENDIF.
+      ENDIF.
+      DATA(lv_before_image) = abap_true.
+    ENDIF.
+
+    cs_freight_unit-tor_id = <ls_root>-tor_id.
+    SHIFT cs_freight_unit-tor_id LEFT DELETING LEADING '0'.
+    cs_freight_unit-dgo_indicator = <ls_root>-dgo_indicator.
+
+    cs_freight_unit-tspid = get_carrier_name( iv_tspid = cs_freight_unit-tspid ).
+
+    /scmtms/cl_tor_helper_root=>det_transient_root_fields(
+      EXPORTING
+        it_key               = VALUE #( ( key = <ls_root>-node_id ) )
+        iv_get_stop_infos    = abap_true
+        iv_get_mainitem_info = abap_true
+        iv_before_image      = lv_before_image
+      IMPORTING
+        et_tor_add_info      = DATA(lt_tor_add_info) ).
+    ASSIGN lt_tor_add_info[ 1 ] TO FIELD-SYMBOL(<ls_tor_additional_info>).
+    IF sy-subrc = 0.
+      cs_freight_unit-pln_grs_duration = <ls_tor_additional_info>-tot_duration.
+    ENDIF.
+
+    cs_freight_unit-total_duration_net = <ls_root>-total_duration_net.
+    cs_freight_unit-total_distance_km  = <ls_root>-total_distance_km.
+    cs_freight_unit-shipping_type      = <ls_root>-shipping_type.
+    cs_freight_unit-trmodcod           = <ls_root>-trmodcod.
+
+  ENDMETHOD.
+
+  METHOD get_data_from_item.
+    DATA:
+      lv_item_id    TYPE /scmtms/item_id,
+      lv_product_id TYPE /scmtms/product_id.
+
+    FIELD-SYMBOLS:
+      <lt_tor_item> TYPE /scmtms/t_em_bo_tor_item,
+      <ls_tor_root> TYPE /scmtms/s_em_bo_tor_root.
+
+    ASSIGN ir_data->* TO <ls_tor_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    DATA(lr_item) = mo_ef_parameters->get_appl_table(
+                        SWITCH #( iv_old_data WHEN abap_true THEN lif_sst_constants=>cs_tabledef-fo_item_old
+                                              ELSE lif_sst_constants=>cs_tabledef-fo_item_new ) ).
+    ASSIGN lr_item->* TO <lt_tor_item>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    ASSIGN <lt_tor_item>[ item_cat       = /scmtms/if_tor_const=>sc_tor_item_category-fu_root
+                          parent_node_id = <ls_tor_root>-node_id ] TO FIELD-SYMBOL(<ls_fu_item>).
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO lv_dummy.
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    cs_freight_unit-inc_class_code = <ls_fu_item>-inc_class_code.
+
+    SORT <lt_tor_item> BY item_id.
+
+    LOOP AT <lt_tor_item> ASSIGNING FIELD-SYMBOL(<ls_tor_item>) USING KEY parent_node_track_rel
+      WHERE parent_node_id = <ls_tor_root>-node_id AND
+            item_cat = /scmtms/if_tor_const=>sc_tor_item_category-product.
+
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+        EXPORTING
+          input  = <ls_tor_item>-item_id
+        IMPORTING
+          output = lv_item_id.
+      APPEND lv_item_id TO cs_freight_unit-item_id.
+
+      IF <ls_tor_item>-base_btd_tco = cs_base_btd_tco_inb_dlv OR
+         <ls_tor_item>-base_btd_tco = cs_base_btd_tco_outb_dlv.
+        DATA(lv_base_btd_id) = <ls_tor_item>-base_btd_id.
+        SHIFT  lv_base_btd_id LEFT DELETING LEADING '0'.
+        APPEND lv_base_btd_id TO cs_freight_unit-erp_dlv_id.
+      ELSE.
+        APPEND '' TO cs_freight_unit-erp_dlv_id.
+      ENDIF.
+
+      IF  <ls_tor_item>-base_btditem_tco = cs_base_btd_tco_delivery_item.
+        DATA(lv_base_btditem_id) = <ls_tor_item>-base_btditem_id.
+        SHIFT  lv_base_btditem_id LEFT DELETING LEADING '0'.
+        APPEND lv_base_btditem_id TO cs_freight_unit-erp_dlv_item_id.
+      ELSE.
+        APPEND '' TO cs_freight_unit-erp_dlv_item_id.
+      ENDIF.
+
+      IF ( <ls_tor_item>-base_btd_tco = cs_base_btd_tco_inb_dlv OR
+           <ls_tor_item>-base_btd_tco = cs_base_btd_tco_outb_dlv ) AND
+          <ls_tor_item>-base_btditem_tco = cs_base_btd_tco_delivery_item.
+        DATA(lv_base_btd_alt_item_id) = '00' && lv_base_btd_id && <ls_tor_item>-base_btditem_id+4(6).
+        APPEND lv_base_btd_alt_item_id TO cs_freight_unit-dlv_item_alt_id.
+      ELSE.
+        APPEND '' TO cs_freight_unit-dlv_item_alt_id.
+      ENDIF.
+      APPEND <ls_tor_item>-qua_pcs_val TO cs_freight_unit-itm_qua_pcs_val.
+      APPEND <ls_tor_item>-qua_pcs_uni TO cs_freight_unit-itm_qua_pcs_uni.
+      APPEND <ls_tor_item>-item_descr  TO cs_freight_unit-product_txt.
+
+      CALL FUNCTION 'CONVERSION_EXIT_MATN1_OUTPUT'
+        EXPORTING
+          input  = <ls_tor_item>-product_id
+        IMPORTING
+          output = lv_product_id.
+      APPEND lv_product_id TO cs_freight_unit-product_id.
+
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD get_maintabref.
+    " FU
+    FIELD-SYMBOLS <lt_maintabref> TYPE ANY TABLE.
+
+    ASSIGN is_app_object-maintabref->* TO FIELD-SYMBOL(<ls_maintabref>).
+
+    IF <ls_maintabref> IS ASSIGNED AND lcl_tools=>is_table( iv_value = <ls_maintabref> ) = abap_true.
+      ASSIGN <ls_maintabref> TO <lt_maintabref>.
+      LOOP AT <lt_maintabref> ASSIGNING FIELD-SYMBOL(<ls_line>).
+        ASSIGN COMPONENT /scmtms/if_tor_c=>sc_node_attribute-root-tor_cat
+          OF STRUCTURE <ls_line> TO FIELD-SYMBOL(<lv_tor_cat>).
+        IF sy-subrc = 0 AND <lv_tor_cat> = /scmtms/if_tor_const=>sc_tor_category-freight_unit.
+          GET REFERENCE OF <ls_line> INTO rr_maintabref.
+          EXIT.
+        ENDIF.
+      ENDLOOP.
+    ELSEIF <ls_maintabref> IS ASSIGNED.
+      GET REFERENCE OF <ls_maintabref> INTO rr_maintabref.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD lif_bo_reader~check_relevance.
+    " FU relevance function
+    FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+    ASSIGN is_app_object-maintabref->* TO <ls_root>.
+    IF sy-subrc <> 0.
+      RETURN.
+    ENDIF.
+
+    IF get_customizing_aot( <ls_root>-tor_type ) <> is_app_object-appobjtype.
+      RETURN.
+    ENDIF.
+
+    IF is_app_object-maintabdef = lif_sst_constants=>cs_tabledef-fo_header_new AND
+      ( <ls_root>-track_exec_rel = lif_sst_constants=>cs_track_exec_rel-execution OR
+        <ls_root>-track_exec_rel = lif_sst_constants=>cs_track_exec_rel-exec_with_extern_event_mngr ).
+
+      CASE is_app_object-update_indicator.
+        WHEN lif_ef_constants=>cs_change_mode-insert.
+          rv_result = lif_ef_constants=>cs_condition-true.
+        WHEN lif_ef_constants=>cs_change_mode-update OR
+             lif_ef_constants=>cs_change_mode-undefined.
+          rv_result = lcl_tools=>are_structures_different(
+                          ir_data1  = lif_bo_reader~get_data( is_app_object = is_app_object )
+                          ir_data2  = lif_bo_reader~get_data(
+                                          is_app_object = is_app_object
+                                          iv_old_data   = abap_true ) ).
+          IF rv_result = lif_ef_constants=>cs_condition-false.
+            rv_result = check_non_idoc_fields( is_app_object ).
+          ENDIF.
+      ENDCASE.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD lif_bo_reader~get_track_id_data.
+
+    FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
+
+    CLEAR: et_track_id_data.
+
+    ASSIGN is_app_object-maintabref->* TO <ls_root>.
+    IF sy-subrc <> 0.
+      MESSAGE e010(zsst_gtt) INTO DATA(lv_dummy).
+      lcl_tools=>throw_exception( ).
+    ENDIF.
+
+    add_track_id_data(
+      EXPORTING
+        is_app_object = is_app_object
+        iv_trxcod     = lif_sst_constants=>cs_trxcod-fu_number
+        iv_trxid      = |{ <ls_root>-tor_id }|
+      CHANGING
+        ct_track_id   = et_track_id_data ).
 
   ENDMETHOD.
 

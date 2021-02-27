@@ -340,12 +340,13 @@
             </build>
         </profile>
     </profiles>
-	
-	<repositories>
+
+    <repositories>
         <repository>
             <id>SpringFramework</id>
             <name>Spring Framework</name>
             <url>https://maven.springframework.org/milestone/</url>
         </repository>
     </repositories>
+
 </project>

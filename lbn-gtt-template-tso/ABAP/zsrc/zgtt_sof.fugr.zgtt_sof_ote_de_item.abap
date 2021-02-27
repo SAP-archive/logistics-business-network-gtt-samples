@@ -115,6 +115,8 @@ FUNCTION zgtt_sof_ote_de_item.
 *Incoterms version (LIKP-INCOV)
 *     - Actual Business Time
 *     - Actual Business Time zone
+*     - Actual Technical Datetime
+*     - Actual Technical Time zone
 
   LOOP AT i_app_objects INTO ls_app_objects.
 
@@ -443,6 +445,15 @@ FUNCTION zgtt_sof_ote_de_item.
     APPEND ls_control_data TO e_control_data.
 
     ls_control_data-paramname = gc_cp_yn_act_datetime.
+    CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
+    APPEND ls_control_data TO e_control_data.
+
+*   Actual Technical Datetime & Time zone
+    ls_control_data-paramname = gc_cp_yn_acttec_timezone."ACTUAL_TECHNICAL_TIMEZONE
+    ls_control_data-value     = lv_tzone.
+    APPEND ls_control_data TO e_control_data.
+
+    ls_control_data-paramname = gc_cp_yn_acttec_datetime."ACTUAL_TECHNICAL_DATETIME
     CONCATENATE '0' sy-datum sy-uzeit INTO ls_control_data-value.
     APPEND ls_control_data TO e_control_data.
 

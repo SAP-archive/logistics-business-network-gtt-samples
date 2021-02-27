@@ -101,14 +101,7 @@ public class SOFUtilsTest {
 
     @Test
     public void testGenerateUrl4() {
-        String url = SOFUtils.generateUrl(targetEntityName,filter,filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
-        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
-        Assert.assertEquals(expected,url);
-    }
-
-    @Test
-    public void testGenerateUrl5() {
-        String url = SOFUtils.generateUrl(targetEntityName,"null",filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
+        String url = SOFUtils.generateUrl(targetEntityName,"",filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
         String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }

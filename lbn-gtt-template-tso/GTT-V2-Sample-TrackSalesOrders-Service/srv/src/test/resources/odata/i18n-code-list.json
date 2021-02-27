@@ -3,21 +3,21 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus"
         },
         "code": "NOT_STARTED",
         "name": "Not Started",
         "texts": {
           "__deferred": {
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')/texts"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('NOT_STARTED')/texts"
           }
         },
         "localized": {
           "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='NOT_STARTED')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='NOT_STARTED')",
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='NOT_STARTED')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='NOT_STARTED')",
             "type": "com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus_texts"
           },
           "locale": "en",
@@ -27,21 +27,21 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus"
         },
         "code": "IN_TRANSIT",
         "name": "In Transit",
         "texts": {
           "__deferred": {
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')/texts"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('IN_TRANSIT')/texts"
           }
         },
         "localized": {
           "__metadata": {
-            "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='IN_TRANSIT')",
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='IN_TRANSIT')",
+            "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='IN_TRANSIT')",
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus_texts(locale='en',code='IN_TRANSIT')",
             "type": "com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus_texts"
           },
           "locale": "en",
@@ -51,15 +51,15 @@
       },
       {
         "__metadata": {
-          "id": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')",
-          "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')",
+          "id": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')",
+          "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')",
           "type": "com.lbngttsamples.gtt.app.sof.sofService.ExecutionStatus"
         },
         "code": "COMPLETED",
         "name": "Completed",
         "texts": {
           "__deferred": {
-            "uri": "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')/texts"
+            "uri": "https://dummy/sap/logistics/gtt/outbound/odata/v1/com.lbngttsamples.gtt.app.sof.sofService/ExecutionStatus('COMPLETED')/texts"
           }
         },
         "localized": null

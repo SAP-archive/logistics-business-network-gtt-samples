@@ -59,8 +59,8 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "SalesOrders-track": {
-          "semanticObject": "SalesOrders",
+        "SalesOrder-track": {
+          "semanticObject": "SalesOrder",
           "action": "track",
           "icon": "sap-icon://my-sales-order",
           "title": "{{appTitle}}",
@@ -132,6 +132,12 @@
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "tracksalesorders/sap/logistics/gtt/sample/sof/rest/v1/i18n/i18n.properties"
+      },
+      "label": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "defaultBindingMode": "OneTime"
+        }
       },
       "": {
         "dataSource": "mainService",

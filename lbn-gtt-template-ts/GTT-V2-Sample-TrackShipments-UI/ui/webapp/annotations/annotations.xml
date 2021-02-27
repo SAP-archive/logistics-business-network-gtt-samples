@@ -133,7 +133,7 @@
 									<PropertyValue Property="ValueListProperty" String="code"/>
 								</Record>
 								<Record Type="Common.ValueListParameterDisplayOnly">
-									<PropertyValue Property="ValueListProperty" String="localize/name"/>
+									<PropertyValue Property="ValueListProperty" String="localized/name"/>
 								</Record>
 							</Collection>
 						</PropertyValue>

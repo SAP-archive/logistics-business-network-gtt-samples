@@ -42,8 +42,10 @@
 									<vk:LegendItem title="{i18n>logisticLocation}" icon="sap-icon://functional-location"/>
 
 									<GroupHeaderListItem title="{i18n>currentLocationLegend}"/>
-									<vk:LegendItem title="{i18n>truck}" icon="sap-icon://shipping-status"/>
-									<vk:LegendItem title="{i18n>container}" icon="sap-icon://BusinessSuiteInAppSymbols/icon-vessel"/>
+									<vk:LegendItem title="{@i18n>CO_TransportationMode_01_NAME}" icon="sap-icon://BusinessSuiteInAppSymbols/icon-ship"/>
+									<vk:LegendItem title="{@i18n>CO_TransportationMode_02_NAME}" icon="sap-icon://cargo-train"/>
+									<vk:LegendItem title="{@i18n>CO_TransportationMode_03_NAME}" icon="sap-icon://shipping-status"/>
+									<vk:LegendItem title="{@i18n>CO_TransportationMode_04_NAME}" icon="sap-icon://flight"/>
 
 									<GroupHeaderListItem title="{i18n>route}"/>
 									<vk:LegendItem title="{i18n>actual}" icon="sap-icon://less"/>
@@ -56,7 +58,7 @@
 				<vk:content>
 					<vk:ContainerContent>
 						<vk:content>
-							<vbm:GeoMap id="geoMap" ariaLabel="" width="100%" legendVisible="true">
+							<vbm:GeoMap id="geoMap" ariaLabel="" initialZoom="3" legendVisible="true">
 								<vbm:resources>
 									<vbm:Resource name="eventSpot" value="iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAF/mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDAgNzkuMTYwNDUxLCAyMDE3LzA1LzA2LTAxOjA4OjIxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5YTYzY2JkNS01YmM5LTRlZjktOWFkZi1mNDIyMTA2MjEwOGIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEFBODU5NzA3QURDMTFFOUFBMUVCMTI5Qjg1NTlDMzkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ZjIxMWM3NzctN2MzYi00NjIzLTkxODEtZTYxYmI1NTAxM2VlIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE4IChNYWNpbnRvc2gpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wNS0zMFQxNzowMzozMiswODowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDUtMzBUMTc6MDQ6MDcrMDg6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDUtMzBUMTc6MDQ6MDcrMDg6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0ic1JHQiBJRUM2MTk2Ni0yLjEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDplZjc3NWEyNC0zODE0LTQ0NjQtYmRiMC1lYWRlNTQ3NTBmNDQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OWE2M2NiZDUtNWJjOS00ZWY5LTlhZGYtZjQyMjEwNjIxMDhiIi8+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmYyMTFjNzc3LTdjM2ItNDYyMy05MTgxLWU2MWJiNTUwMTNlZSIgc3RFdnQ6d2hlbj0iMjAxOS0wNS0zMFQxNzowNDowNyswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8++hf0NQAAAiBJREFUSMe91rtOlEEYBuDZJVFiQ0NiTNRWG+3QShPxYkTBK2A9FHoZwu5KokQkHiARbkBCZWxWqQQTNVCABYFddv/HYuZXAiysAk7yNpP53nfmO05AaINTuIJhTKGGlYRa2htOZ06149lrs4A+VPAd67ItWnWamxGtOtkWrKczlWRTOEigC7fxGU2NVRZfMjfAbD9vLkfM3mT+Ll/fUl+FZrK5kzj2FOjCfSwjEs/2M36asZOUAyMJ5cBYN+Nn4pnFCWktJ46uvQTuYFlzkw8PeXGW0W2ElUC1EFEJfwRHQzz74WF0X4zR4E6BvvREPj7mWU80rgSqxf1RSULPeqJtXAuJMwR0pyCxOMnEeZ7kty12iEK0mTgfOeKqojukNPum8TP6czRQ+Rvy/CWFaDtzg8Ya/MDVgGFZtmlpkvHe+Ny/Jc8xEnjey9IkWbaJUsC01lZmboCxEzF4/ypQDpFj7hatrRamAmpa9eiecoeBbYuUXTPXadahFrCiucHrS4dzz3Y3vbpAcwNW/ovAsbvo2INc+p2mz48qTV/maXovL7TvGmuxSI6h0LpTWR9BqzgXu3BcT/NWkTe7hcM3u0d7NrscgzFl92vXxU7b9dABAyeLQ6SjgXODLxPIcvIH7QZOLjK0a2S+H+DdNV5djAU5e5P5oZ0jcwF39xuZOYrJf9XdQ3+j3dCvJptiJ7+Knd+WEqbxadu35VPaKx30bfkFaoLZhUem3mgAAAAASUVORK5CYII=" />
 									<vbm:Resource name="normalEventSpot" value="iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACtklEQVRIia2Wv08TYRjHP/deSw/SplRoCBFMS3DQCpGEgAtMRkBFiWGRhIRBHMQgLg3xDwBlUYjBhA0GnDAIGoGVBQwqouCgSRshAQRSmlY4bK/nQA8BQfnR7/je3efz3nM/nkfi0Wf2iu71pAAXgQagAHAAcvxwBAgCH4BnwAiwthdH2i3QvR4JuAq0B1TN3TsTZNgf5uMPlYWfUSyyxEmbmdOOJMpcVmrO2nEosg+4B7wC9H0FutcjA0/VqH67ZWxJPJ5YIfwrtucdGrEmCe4XpvHggjOmmKRuoF5qm9Z0r2enIA4f9AcjFddffGdqSf0neHfynAoDN07hspuH4hXQAMS2c7rmQpGKkl7foeEAn5ZUSnp9zIUi5UCXsS7iu69Uo3pddf8sc6HIoeFG5kIRqvtnUaN6HVAJIHSvRwHan0ysiPH59SPDjYzPr9P+bkUAHYAigEsBVXM/HF8+NtxI69gyAVVzAWUCaBj4FiK4oSVMENzQeP4lCHBHAAUvv4YSBjcy5AsDFAjAMbFw/NrvzuSiCuAQgLy4Fk24IM40CQCLLCVcYEQAWqbVlHBwRooJICqA1XPpSsIF5zMUgIAA3lfm2hIuKHdbASYF0Hkt14bdIv/nkoPHbpG5ecYO0CmA4ROK7G8uTk+YoLk4HYci+4EhIbVNq0BjU2FarCgz+djwosxkmgrTYkAjoAoAqW16UDFJ3X1V2WTZzEeGZ9nM9FVlo5ikHmAQdvaD+iyb+c1ojZt85+HfqjynwmiNmyybeQS4ZaxvCaS2aQ2odNnNXeO1ObHW0gxSD/DgUy0yLaUZvK3Nibns5h7gcpy1yd2j6QvgCtARUDVX70yQIV+YqSWV+fDmLyXTaiLfqVDu3mr6fjZr/hrY0cT/EmwTGWPLXTbHllTA+OSjwCp/xpZh9hlbfgMeUeqIlM3ZRwAAAABJRU5ErkJggg==" />
@@ -75,12 +77,12 @@
 												color="rgb(92, 186, 230)" hotDeltaColor="RHLSA(0;1.0;2.0;2.0)" click=".showRouteDetail"/>
 										</vbm:items>
 									</vbm:Routes>
-									<vbm:Spots id="stops" items="{map>/stops}">
+									<!-- <vbm:Spots id="stops" items="{map>/stops}">
 										<vbm:items>
 											<vbm:Spot id="stop" position="{map>longitude};{map>latitude};0" type="Default"
 												tooltip="{map>locationDescription}" icon="{path: 'map>locationTypeCode', formatter: '.formatter.stopIcon'}"/>
 										</vbm:items>
-									</vbm:Spots>
+									</vbm:Spots> -->
 									<vbm:Spots id="eventStops" items="{map>/eventStops}">
 										<vbm:items>
 											<vbm:Spot id="eventStop" position="{map>longitude};{map>latitude};0" type="{path: 'map>eventStatusCode', formatter: '.formatter.spotType'}"
@@ -90,7 +92,7 @@
 									<vbm:Spots id="currentLocations" items="{map>/currentLocations}">
 										<vbm:items>
 											<vbm:Spot id="current" position="{map>longitude};{map>latitude};0" tooltip="{i18n>currentLocation}" type="Default"
-												icon="{= ${map>transportationModeCode} === '01' ? 'sap-icon://BusinessSuiteInAppSymbols/icon-vessel' : 'sap-icon://shipping-status' }"/>
+												icon="{path: 'map>transportationModeCode', formatter: '.formatter.transportationMode.getIcon'}"/>
 										</vbm:items>
 									</vbm:Spots>
 									<vbm:Spots id="stopsWithETA" items="{map>/stopsWithETA}">

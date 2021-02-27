@@ -27,17 +27,17 @@ public class NextStopServiceImpl implements NextStopService {
     private NextStopConverter nextStopConverter;
 
     @Override
-    public Optional<NextStop> getByShipmentId(@NotNull final String shipmentId) {
-        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByShipmentId(shipmentId);
-        return currentLocationOpt.flatMap(currentLocation -> convertToNextStop(currentLocation, shipmentId));
+    public Optional<NextStop> getByTrackedProcessId(@NotNull final String trackedProcessId) {
+        final Optional<CurrentLocation> currentLocationOpt = currentLocationService.getByTrackedProcessId(trackedProcessId);
+        return currentLocationOpt.flatMap(currentLocation -> convertToNextStop(currentLocation, trackedProcessId));
     }
 
-    private Optional<NextStop> convertToNextStop(final CurrentLocation currentLocation, final String shipmentId) {
+    private Optional<NextStop> convertToNextStop(final CurrentLocation currentLocation, final String trackedProcessId) {
         final List<EstimatedArrival> estimatedArrivals = currentLocation.getEstimatedArrival();
         return estimatedArrivals.isEmpty()
                 ? Optional.empty()
                 : getSmallestEstimatedArrival(estimatedArrivals).map(
-                estimatedArrival -> nextStopConverter.fromEstimatedArrival(estimatedArrival, shipmentId));
+                estimatedArrival -> nextStopConverter.fromEstimatedArrival(estimatedArrival, trackedProcessId));
     }
 
     private Optional<EstimatedArrival> getSmallestEstimatedArrival(final List<EstimatedArrival> estimatedArrivals) {

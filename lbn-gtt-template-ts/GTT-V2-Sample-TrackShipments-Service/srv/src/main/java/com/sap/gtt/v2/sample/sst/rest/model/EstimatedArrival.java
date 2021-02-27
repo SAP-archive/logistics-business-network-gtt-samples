@@ -15,6 +15,8 @@ public class EstimatedArrival {
 
     private String estimatedArrivalTimeZone;
 
+    private String eventStatusCode;
+
     public String getStopId() {
         return stopId;
     }
@@ -37,5 +39,13 @@ public class EstimatedArrival {
 
     public void setEstimatedArrivalTimeZone(String estimatedArrivalTimeZone) {
         this.estimatedArrivalTimeZone = estimatedArrivalTimeZone;
+    }
+
+    public String getEventStatusCode() {
+        return eventStatusCode;
+    }
+
+    public void setEventStatusCode(String eventStatusCode) {
+        this.eventStatusCode = eventStatusCode;
     }
 }

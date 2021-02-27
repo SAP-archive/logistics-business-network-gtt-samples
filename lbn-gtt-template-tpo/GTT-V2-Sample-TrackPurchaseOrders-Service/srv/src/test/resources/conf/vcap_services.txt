@@ -1,0 +1,32 @@
+{
+ "destination": [
+ 			{
+ 				"label": "destination",
+ 				"provider": null,
+ 				"plan": "lite",
+ 				"name": "test-destination",
+ 				"tags": [
+ 					"destination",
+ 					"conn",
+ 					"connsvc"
+ 				],
+ 				"instance_name": "test-destination",
+ 				"binding_name": null,
+ 				"credentials": {
+ 					"uaadomain": "authentication.hana.ondemand.com",
+ 					"tenantmode": "dedicated",
+ 					"clientid": "ID",
+ 					"instanceid": "ID",
+ 					"verificationkey": "-----BEGIN PUBLIC KEY-----KEY-----END PUBLIC KEY-----",
+ 					"xsappname": "APPNAME",
+ 					"identityzone": "IDENTITY_ZONE",
+ 					"clientsecret": "SECRET",
+ 					"tenantid": "TENANT",
+ 					"uri": "https://destination-configuration.cfapps.hana.ondemand.com",
+ 					"url": "https://IDENTITY.authentication.hana.ondemand.com"
+ 				},
+ 				"syslog_drain_url": null,
+ 				"volume_mounts": []
+ 			}
+ 		]
+}

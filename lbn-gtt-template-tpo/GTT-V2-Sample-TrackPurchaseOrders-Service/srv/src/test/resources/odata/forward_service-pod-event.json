@@ -1,0 +1,14 @@
+{
+  "eventProcesses": {
+    "results": [
+      {
+        "process_id": "2e2a43a7-1e2d-5068-bd8f-e3bfc44a86be",
+        "plannedEvent": {
+          "locationAltKey": "xri://locationAltKey"
+        }
+      }
+    ]
+  },
+  "locationTypeCode": "typeCode",
+  "eventType": "com.lbnsamples.app.pof.Shipment.POD"
+}

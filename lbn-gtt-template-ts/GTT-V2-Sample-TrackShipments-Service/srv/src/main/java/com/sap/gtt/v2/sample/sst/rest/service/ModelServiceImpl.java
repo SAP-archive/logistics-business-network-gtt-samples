@@ -32,6 +32,11 @@ public class ModelServiceImpl implements ModelService {
         return parseEventTypesOfTp(response);
     }
 
+    @Override
+    public String getEventTypesMetadata(@NotNull final String trackedProcess, @NotNull final String eventType) {
+        return gttCoreServiceClient.getEventTypesMetadata(trackedProcess, eventType);
+    }
+
     private List<AdmissibleUnplannedEvent> parseEventTypesOfTp(String response) {
         JsonObject object = new Gson().fromJson(response, JsonObject.class);
         JsonArray array = object.getAsJsonArray(ADMISSIBLE_UNPLANNED_EVENTS);

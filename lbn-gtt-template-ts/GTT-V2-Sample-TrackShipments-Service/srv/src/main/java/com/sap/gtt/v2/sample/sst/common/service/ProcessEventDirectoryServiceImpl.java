@@ -48,8 +48,8 @@ public class ProcessEventDirectoryServiceImpl implements ProcessEventDirectorySe
     private GTTCoreServiceClient gttCoreServiceClient;
 
     @Override
-    public List<ProcessEventDirectory> getByShipmentId(@NotNull final String shipmentId) {
-        final String uri = buildUriByShipmentId(shipmentId);
+    public List<ProcessEventDirectory> getByTrackedProcessId(@NotNull final String trackedProcessId) {
+        final String uri = buildUriByTrackedProcessId(trackedProcessId);
         return gttCoreServiceClient.readEntitySetAll(uri, ProcessEventDirectory.class).getResults();
     }
 
@@ -132,9 +132,9 @@ public class ProcessEventDirectoryServiceImpl implements ProcessEventDirectorySe
                 .collect(toList());
     }
 
-    private String buildUriByShipmentId(final String shipmentId) {
+    private String buildUriByTrackedProcessId(final String trackedProcessId) {
         return UriComponentsBuilder.fromPath(PROCESS_EVENT_DIRECTORY_ENDPOINT)
-                .queryParam(FILTER, format("%s eq guid'%s'", PROCESS_ID_PARAM, shipmentId))
+                .queryParam(FILTER, format("%s eq guid'%s'", PROCESS_ID_PARAM, trackedProcessId))
                 .queryParam(EXPAND, format("%s,%s", PLANNED_EVENT_FIELD, EVENT_FIELD))
                 .build().encode().toUriString();
     }

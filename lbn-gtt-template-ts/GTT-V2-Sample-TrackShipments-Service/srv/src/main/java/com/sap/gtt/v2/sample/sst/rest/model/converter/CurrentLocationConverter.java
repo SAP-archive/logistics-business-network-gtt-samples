@@ -1,6 +1,6 @@
 package com.sap.gtt.v2.sample.sst.rest.model.converter;
 
-import static com.sap.gtt.v2.sample.sst.common.constant.ShipmentEventStatus.UNPLANNED;
+import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventStatus.UNPLANNED;
 import static java.util.Objects.nonNull;
 
 import com.sap.gtt.v2.sample.sst.common.model.Event;

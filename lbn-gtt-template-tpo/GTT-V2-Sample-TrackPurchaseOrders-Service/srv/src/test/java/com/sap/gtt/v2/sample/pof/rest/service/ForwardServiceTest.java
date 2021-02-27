@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -42,10 +42,13 @@ public class ForwardServiceTest {
     @InjectMocks
     private GTTCoreServiceClient gttCoreServiceClient;
 
+    @Spy
     private InternalCompleteValueService completeValueService;
 
+    @Spy
     private InternalExecutionStatusService executionStatusService;
 
+    @Spy
     private ForwardService forwardService;
 
     @Before
@@ -54,10 +57,30 @@ public class ForwardServiceTest {
         ReflectionTestUtils.setField(gttCoreServiceClient, "criticalInfo", "");
         ReflectionTestUtils.setField(gttCoreServiceClient, "gttBaseUrl", "https://dummy");
 
-        completeValueService = Mockito.spy(new InternalCompleteValueService(gttCoreServiceClient));
-        executionStatusService = Mockito.spy(new InternalExecutionStatusService(gttCoreServiceClient));
+        ReflectionTestUtils.setField(completeValueService, "gttCoreServiceClient", gttCoreServiceClient);
+        ReflectionTestUtils.setField(executionStatusService, "gttCoreServiceClient", gttCoreServiceClient);
 
-        forwardService = new ForwardService(gttCoreServiceClient, executionStatusService, completeValueService, new ForwardConverter());
+        ReflectionTestUtils.setField(forwardService, "gttCoreServiceClient", gttCoreServiceClient);
+        ReflectionTestUtils.setField(forwardService, "internalCompleteValueService", completeValueService);
+        ReflectionTestUtils.setField(forwardService, "internalExecutionStatusService", executionStatusService);
+        ReflectionTestUtils.setField(forwardService, "forwardConverter", new ForwardConverter());
+    }
+
+    @Test
+    public void testDeletionInboundDeliveryItemProcessLevel() {
+        mockRestTemplateResponse("/PurchaseOrder", "odata/forward_service-order-with-delivery.json");
+        mockRestTemplateResponse("/PlannedEvent", "odata/forward_service-relevant-planned-events.json");
+        mockRestTemplateResponse("/ProcessEventDirectory", "odata/fulfillment-process-deletion-event.json");
+        mockRestTemplateResponse("/GoodsReceipt", "odata/empty_response.json");
+        mockRestTemplateResponse("/Event", "odata/forward_service-event.json");
+        mockRestTemplateResponse("/POD", "odata/forward_service-pod-event.json");
+
+        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item-goods-receipt.json");
+
+        verify(completeValueService, atMostOnce()).recalculateCompletionValue(any(PurchaseOrder.class));
+        verify(executionStatusService, atMostOnce()).updateForNotPODInboundDelivery(any(InboundDeliveryItem.class));
+
+        forwardService.execute(payload);
     }
 
     @Test
@@ -65,8 +88,11 @@ public class ForwardServiceTest {
         mockRestTemplateResponse("/PurchaseOrder", "odata/forward_service-order-with-delivery.json");
         mockRestTemplateResponse("/PlannedEvent", "odata/forward_service-relevant-planned-events.json");
         mockRestTemplateResponse("/ProcessEventDirectory", "odata/empty_response.json");
+        mockRestTemplateResponse("/GoodsReceipt", "odata/empty_response.json");
+        mockRestTemplateResponse("/Event", "odata/forward_service-event.json");
+        mockRestTemplateResponse("/POD", "odata/forward_service-pod-event.json");
 
-        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item.json");
+        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item-goods-receipt.json");
 
         verify(completeValueService, atMostOnce()).recalculateCompletionValue(any(PurchaseOrder.class));
         verify(executionStatusService, atMostOnce()).updateForNotPODInboundDelivery(any(InboundDeliveryItem.class));
@@ -80,8 +106,10 @@ public class ForwardServiceTest {
         mockRestTemplateResponse("/PlannedEvent", "odata/forward_service-not-relevant-planned-events.json");
         mockRestTemplateResponse("/ProcessEventDirectory", "odata/empty_response.json");
         mockRestTemplateResponse("/GoodsReceipt", "odata/forward_service-goods-receipt.json");
+        mockRestTemplateResponse("/Event", "odata/forward_service-event.json");
+        mockRestTemplateResponse("/POD", "odata/forward_service-pod-event.json");
 
-        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item.json");
+        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item-goods-receipt.json");
 
         verify(completeValueService, atMostOnce()).recalculateCompletionValue(any(PurchaseOrder.class));
         verify(executionStatusService, atMostOnce()).updateForNotPODInboundDelivery(any(InboundDeliveryItem.class));
@@ -90,10 +118,30 @@ public class ForwardServiceTest {
     }
 
     @Test
+    public void testLastActivityUpdate() {
+        mockRestTemplateResponse("/PurchaseOrder", "odata/forward_service-order-with-delivery.json");
+        mockRestTemplateResponse("/PlannedEvent", "odata/forward_service-not-relevant-planned-events.json");
+        mockRestTemplateResponse("/ProcessEventDirectory", "odata/empty_response.json");
+        mockRestTemplateResponse("/GoodsReceipt", "odata/forward_service-goods-receipt.json");
+        mockRestTemplateResponse("/Event", "odata/forward_service-event.json");
+        mockRestTemplateResponse("/POD", "odata/forward_service-pod-event.json");
+
+        String payload = POFUtils.getStringFromResource("odata/tracked-process-delivery-item-pod.json");
+
+        verify(completeValueService, atMostOnce()).recalculateCompletionValue(any(PurchaseOrder.class));
+        verify(executionStatusService, atMostOnce()).updateForNotPODInboundDelivery(any(InboundDeliveryItem.class));
+
+        forwardService.execute(payload);
+
+    }
+
+    @Test
     public void testPurchaseOrderItemProcessLevel() {
         mockRestTemplateResponse("/PurchaseOrder", "odata/forward_service-order-without-delivery.json");
         mockRestTemplateResponse("/ProcessEventDirectory", "odata/empty_response.json");
         mockRestTemplateResponse("/GoodsReceipt", "odata/forward_service-goods-receipt.json");
+        mockRestTemplateResponse("/Event", "odata/forward_service-event.json");
+        mockRestTemplateResponse("/POD", "odata/forward_service-pod-event.json");
 
         String payload = POFUtils.getStringFromResource("odata/tracked-process-order-item.json");
 

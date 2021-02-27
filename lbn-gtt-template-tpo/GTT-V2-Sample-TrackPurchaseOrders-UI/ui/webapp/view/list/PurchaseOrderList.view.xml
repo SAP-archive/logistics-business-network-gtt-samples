@@ -17,7 +17,7 @@
 			<f:DynamicPageTitle>
 				<f:heading>
 					<sv:SmartVariantManagement id="pageVariant"
-						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="true"/>
+						persistencyKey="listReportHeading" showShare="true" showExecuteOnSelection="false"/>
 				</f:heading>
 				<f:snappedContent>
 					<Text id="statusText"/>
@@ -110,6 +110,12 @@
                       <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "sortProperty": "plannedDeliveryDate", "columnIndex": 3}'/>
                     </customData>
                   </Column>
+                  <Column hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrder_netValue_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "netValue", "leadingProperty": "netValue,currency", "sortProperty": "netValue", "columnIndex": 4}'/>
+                    </customData>
+                  </Column>
                   <Column>
                     <Text text="{i18n>completionRate}"/>
                     <customData>
@@ -144,7 +150,7 @@
                           <HBox justifyContent="SpaceBetween">
                             <Text id="supplierLocationAddress" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                             <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                           </HBox>
                           </VBox>
                         </ctrl:content>
@@ -167,7 +173,7 @@
                             <HBox justifyContent="SpaceBetween">
                               <Text id="receivingLocationAddress" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                               <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toReceivingLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                             </HBox>
                           </VBox>
                         </ctrl:content>
@@ -179,6 +185,13 @@
                           style: 'medium',
                           UTC: true
                         }
+                      }" />
+                      <Text text="{
+                        parts: [
+                          'netValue',
+                          'currency'
+                        ],
+                        formatter: '.formatter.formatAmountUnitField'
                       }" />
                       <mc:HarveyBallMicroChart
                         id="orderCompletionRate"
@@ -216,7 +229,7 @@
               smartVariant="pageVariant"
               persistencyKey="listReportItemsTable"
               tableType="ResponsiveTable"
-              requestAtLeastFields="id,incoterms,toSupplierLocation,toReceivingLocation,receivingLocationType,supplierLocationType,altKey"
+              requestAtLeastFields="id,incoterms,toSupplierLocation,toReceivingLocation,receivingLocationType,supplierLocationType,altKey,completedQuantity"
               demandPopin="true"
               noData="{i18n>noDataFoundText}"
               editable="false"
@@ -228,7 +241,7 @@
               useExportToExcel="false"
               enableAutoBinding="true"
               beforeRebindTable="onBeforeRebindPOItemsTable"
-              ignoredFields="id,purchaseOrderNo,nextETA,orderQuantityUoM,volumeUoM,weightUoM,currency,completedQuantity,processStatus_code,purchaseOrder_id,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,receivingLocationId,supplierDescription,logicalSystem,lastReportedEvent,altKey">
+              ignoredFields="id,purchaseOrderNo,nextETA,orderQuantityUoM,volumeUoM,weightUoM,currency,processStatus_code,completedQuantity,purchaseOrder_id,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,receivingLocationId,supplierDescription,logicalSystem,lastReportedEvent,altKey">
               <smartTable:customData>
                 <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
                 <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
@@ -327,7 +340,7 @@
                           <HBox justifyContent="SpaceBetween">
                             <Text id="supplierLocationAddressItem" text="{path: 'toSupplierLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                             <core:Icon src="sap-icon://globe" color="{= ${toSupplierLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${toSupplierLocation/latitude} + ', ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                              tooltip="{= ${toSupplierLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toSupplierLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toSupplierLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                           </HBox>
                           </VBox>
                         </ctrl:content>
@@ -350,7 +363,7 @@
                             <HBox justifyContent="SpaceBetween">
                               <Text id="receivingLocationAddressItem" text="{path: 'toReceivingLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
                               <core:Icon src="sap-icon://globe" color="{= ${toReceivingLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${toReceivingLocation/latitude} + ', ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                                tooltip="{= ${toReceivingLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toReceivingLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toReceivingLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
                             </HBox>
                           </VBox>
                         </ctrl:content>
@@ -380,7 +393,10 @@
                         totalScale="%"
                         tooltip="{i18n>completionRate}">
                         <mc:items>
-                          <mc:HarveyBallMicroChartItem fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
+                          <mc:HarveyBallMicroChartItem 
+                            fraction="{parts: ['completedQuantity', 'orderQuantity'], formatter: '.formatter.completionFraction'}" 
+                            fractionScale="%" 
+                            color="sapUiChartPaletteQualitativeHue1"/>
                         </mc:items>
                       </mc:HarveyBallMicroChart>
                       <!-- hidden -->

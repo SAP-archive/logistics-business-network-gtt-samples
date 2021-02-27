@@ -2,8 +2,6 @@ package com.sap.gtt.v2.sample.sof.odata.handler;
 
 
 import com.sap.gtt.v2.sample.sof.odata.helper.ODataResultList;
-import com.sap.gtt.v2.sample.sof.odata.model.DeliveryItem;
-import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItemDeliveryItemTP;
 import com.sap.gtt.v2.sample.sof.odata.model.SalesOrderItem;
 import com.sap.gtt.v2.sample.sof.service.SOFService;
 import com.sap.gtt.v2.sample.sof.utils.ODataUtils;
@@ -16,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
 
 /**
