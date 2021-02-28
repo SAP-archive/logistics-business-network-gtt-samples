@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZPOF_GTT</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Purchasing Order Fullfillment Messages</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Provided structure &amp;2 does not contain field &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Provided reference &amp;1 is not bound</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Error on getting system timezone</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Track ID function is not implemented in &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Record is not found in &amp;1 for key &amp;2</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>GTT is not enabled</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Logical system is not defined</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>No POF extractor is found</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Unknown Delivery Item milestone &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Planned events are not implemented for &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZPOF_GTT</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Stop ID &amp;1 is not found for Shipment &amp;2</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

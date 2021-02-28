@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_AVAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AVAS>
+    <HEADER>
+     <GUID>0894EF4577391EEAAB910BD805B24F18</GUID>
+     <ATTRIBUTE>TABLE_LOGGING_REQUIREMENT</ATTRIBUTE>
+     <OBJECT>
+      <TROBJTYPE>TABL</TROBJTYPE>
+      <SOBJ_NAME>ZGTT_SOF_EE_REL</SOBJ_NAME>
+     </OBJECT>
+    </HEADER>
+    <VALUES>
+     <CLS_VALUE_ASSIGNMENT>
+      <VALUE>REQUIRED</VALUE>
+      <ICON>@B4@</ICON>
+     </CLS_VALUE_ASSIGNMENT>
+    </VALUES>
+   </AVAS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
