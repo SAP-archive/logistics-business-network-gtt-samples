@@ -6,6 +6,7 @@ In this release, the following changes are made. For more information, refer to 
 * Rename Track Sales Orders to Track SO Fulfillment 
 * Rename Track Purchase Orders to Track PO Fulfillment 
 * Add the requirement “To implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.”
+* Add the requirement "To enable GTT FO-FU event coorrelation feature in Track Shipments app, Set up your "forwardEventToTM" function and enable event propagation between FO and FU in your SAP TM system."
 * Integrate with deliveries and freight units in the Track Shipments template app 
 * Deliver non-feature enhancements in the Track SO Fulfillment and Track PO Fulfillment template app
 * Deliver feature enhancements in the Track PO Fulfillment template app
@@ -27,6 +28,7 @@ You can find the template code for [SAP Logistics Business Network, global track
 * A SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
 * To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher
 * To integrate with visibility provider, log your incidents in SAP BCP system with component “SCM-LBN-GTT-COR”
+* To enable GTT FO-FU event coorrelation feature in Track Shipments app, Set up your "forwardEventToTM" function and enable event propagation between FO and FU in your SAP TM system.
 
 ## Download and Installation
 Click the link below to find the detailed installation guide for each tracking scenario. You can also find them in the “Document” folder of the corresponding scenario.
