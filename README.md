@@ -35,6 +35,7 @@ Click the link below to find the detailed installation guide for each tracking s
 * Check the FAQs when you get errors during template code implmentation </br> 
 [FAQs_for_Template_Code_Implementation.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/FAQs_for_Template_Code_Implementation.pdf) </br>
 * Track SO Fulfillment app </br>
+[01_Application_Introduction-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/01_Application_Introduction-TSOF.pdf)
 [02_Implementation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/02_Implementation_Guide-TSOF.pdf)  </br>
 [03_Extractor_Creation_Guide-TSOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tso/Documents/03_Extractor_Creation_Guide-TSOF.pdf)  </br>
 
