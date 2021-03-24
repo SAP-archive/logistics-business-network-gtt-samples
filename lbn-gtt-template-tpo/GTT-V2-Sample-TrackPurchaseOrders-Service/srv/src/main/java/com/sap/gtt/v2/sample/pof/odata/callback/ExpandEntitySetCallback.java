@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
 
 public class ExpandEntitySetCallback implements OnWriteFeedContent {
 
@@ -51,7 +52,7 @@ public class ExpandEntitySetCallback implements OnWriteFeedContent {
             result.setFeedData(propertyValues);
         } catch (EdmException e) {
             logger.error("Retrieving feed failed", e);
-            throw new POFServiceException(POFServiceException.MESSAGE_CODE_ERROR_FEED_RESULT);
+            throw new POFServiceException(e,POFServiceException.MESSAGE_CODE_ERROR_FEED_RESULT, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
 
         EntityProviderWriteProperties inlineProperties = EntityProviderWriteProperties.serviceRoot(serviceRoot)

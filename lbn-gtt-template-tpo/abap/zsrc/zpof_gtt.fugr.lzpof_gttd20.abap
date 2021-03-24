@@ -888,11 +888,17 @@ CLASS lcl_sh_tools IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_carrier_reference_document.
-    IF is_vttk-vsart = '01' AND is_vttk-tndr_trkid IS NOT INITIAL.
+    IF is_vttk-vsart = '01' AND
+       is_vttk-tndr_trkid IS NOT INITIAL.
       ev_ref_typ  = 'BN'.
       ev_ref_val  = is_vttk-tndr_trkid.
-    ELSEIF is_vttk-vsart = '04' AND is_vttk-tndr_trkid IS NOT INITIAL.
+    ELSEIF is_vttk-vsart = '04' AND
+           is_vttk-tndr_trkid IS NOT INITIAL.
       ev_ref_typ  = 'T50'.
+      ev_ref_val  = is_vttk-tndr_trkid.
+    ELSEIF ( is_vttk-vsart = '05' OR is_vttk-vsart = '15' ) AND
+             is_vttk-tndr_trkid IS NOT INITIAL.
+      ev_ref_typ  = 'T55'.
       ev_ref_val  = is_vttk-tndr_trkid.
     ELSE.
       CLEAR: ev_ref_typ, ev_ref_val.
@@ -3322,10 +3328,10 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
 
   METHOD fill_header_from_vtts.
     TYPES: BEGIN OF ts_stop_id,
-             stopid  TYPE zgtt_stopid,
-             stopcnt TYPE zgtt_stopcnt,
-             loctype TYPE zgtt_loctype,
-             locid   TYPE zgtt_locid,
+             stopid  TYPE lif_app_types=>tv_stopid,
+             stopcnt TYPE lif_app_types=>tv_stopcnt,
+             loctype TYPE lif_app_types=>tv_loctype,
+             locid   TYPE lif_app_types=>tv_locid,
            END OF ts_stop_id.
 
     DATA(lv_tknum) = CONV tknum( lcl_tools=>get_field_of_structure(
@@ -3434,11 +3440,17 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD fill_tracked_object_tables.
-    IF is_vttk-vsart = '01' AND is_vttk-exti1 IS NOT INITIAL.
+    IF is_vttk-exti1 IS NOT INITIAL AND
+       ( is_vttk-vsart = '01' OR
+         is_vttk-vsart = '05' OR
+         is_vttk-vsart = '15' ).
+
       et_res_id  = VALUE #( ( 'NA' ) ).
       et_res_val = VALUE #( ( is_vttk-exti1 ) ).
 
-    ELSEIF is_vttk-vsart = '04' AND is_vttk-signi IS NOT INITIAL.
+    ELSEIF is_vttk-vsart = '04' AND
+           is_vttk-signi IS NOT INITIAL.
+
       et_res_id  = VALUE #( ( 'CONTAINER_ID' ) ).
       et_res_val = VALUE #( ( is_vttk-signi ) ).
 
@@ -3468,15 +3480,19 @@ CLASS lcl_bo_reader_sh_header IMPLEMENTATION.
       BINARY SEARCH.
 
     rv_id_num   = COND #( WHEN sy-subrc = 0
-                            THEN lif_app_constants=>cv_agent_id_type &&
+                            THEN lif_app_constants=>cv_agent_id_prefix &&
                                  <ls_bpdetail>-identificationnumber ).
   ENDMETHOD.
 
   METHOD get_resource_tracking_id.
     rv_tracking_id  = COND #(
-      WHEN is_vttk-vsart = '01' AND is_vttk-exti1 IS NOT INITIAL
+      WHEN is_vttk-exti1 IS NOT INITIAL AND
+           ( is_vttk-vsart = '01' OR
+             is_vttk-vsart = '05' OR
+             is_vttk-vsart = '15' )
         THEN |{ is_vttk-tknum }{ is_vttk-exti1 }|
-      WHEN is_vttk-vsart = '04' AND is_vttk-signi IS NOT INITIAL
+      WHEN is_vttk-signi IS NOT INITIAL AND
+           is_vttk-vsart = '04'
         THEN |{ is_vttk-tknum }{ is_vttk-signi }|
     ).
   ENDMETHOD.

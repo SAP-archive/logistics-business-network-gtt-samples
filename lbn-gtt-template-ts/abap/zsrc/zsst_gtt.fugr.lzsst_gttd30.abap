@@ -201,6 +201,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
   METHOD pod.
 
     DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
+
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
     ASSIGN is_app_objects-maintabref->* TO <ls_root>.
@@ -214,8 +215,9 @@ CLASS lcl_pe_filler IMPLEMENTATION.
             <ls_stop>-aggr_assgn_start_l IS NOT INITIAL AND
             <ls_stop>-aggr_assgn_end_l   IS NOT INITIAL.
 
-      READ TABLE it_stop_points WITH KEY log_locid = <ls_stop>-log_locid
-                                         seq_num   = <ls_stop>-seq_num REFERENCE INTO DATA(ls_stop_points).
+      READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
+                                    WITH KEY log_locid = <ls_stop>-log_locid
+                                             seq_num   = <ls_stop>-seq_num.
       CHECK sy-subrc = 0.
 
       READ TABLE it_loc_addr REFERENCE INTO ls_loc_addr WITH KEY root_key = <ls_stop>-log_loc_uuid.
@@ -248,8 +250,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
 
   METHOD load_start.
 
-    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk,
-          lv_seq_num  TYPE /scmtms/seq_num.
+    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
 
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
@@ -264,12 +265,9 @@ CLASS lcl_pe_filler IMPLEMENTATION.
          AND <ls_stop>-aggr_assgn_start_l IS NOT INITIAL
          AND <ls_stop>-aggr_assgn_end_l IS NOT INITIAL.
 
-        lv_seq_num = COND #( WHEN sy-tabix > 1 THEN <ls_stop>-seq_num - 1
-                                               ELSE <ls_stop>-seq_num ).
-
         READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
                                        WITH KEY log_locid = <ls_stop>-log_locid
-                                                seq_num   = lv_seq_num.
+                                                seq_num   = <ls_stop>-seq_num.
         IF sy-subrc IS NOT INITIAL.
           CONTINUE.
         ENDIF.
@@ -308,8 +306,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
 
   METHOD load_end.
 
-    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk,
-          lv_seq_num  TYPE /scmtms/seq_num.
+    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
 
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
@@ -324,13 +321,9 @@ CLASS lcl_pe_filler IMPLEMENTATION.
          AND <ls_stop>-aggr_assgn_start_l IS NOT INITIAL
          AND <ls_stop>-aggr_assgn_end_l IS NOT INITIAL.
 
-
-        lv_seq_num = COND #( WHEN sy-tabix > 1 THEN <ls_stop>-seq_num - 1
-                                               ELSE <ls_stop>-seq_num ).
-
         READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
                                        WITH KEY log_locid = <ls_stop>-log_locid
-                                                seq_num   = lv_seq_num.
+                                                seq_num   = <ls_stop>-seq_num.
         IF sy-subrc IS NOT INITIAL.
           CONTINUE.
         ENDIF.
@@ -372,8 +365,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
 
   METHOD coupling.
 
-    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk,
-          lv_seq_num  TYPE /scmtms/seq_num.
+    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
 
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
@@ -388,13 +380,9 @@ CLASS lcl_pe_filler IMPLEMENTATION.
          AND <ls_stop>-aggr_assgn_start_c IS NOT INITIAL
          AND <ls_stop>-aggr_assgn_end_c IS NOT INITIAL.
 
-
-        lv_seq_num = COND #( WHEN sy-tabix > 1 THEN <ls_stop>-seq_num - 1
-                                               ELSE <ls_stop>-seq_num ).
-
         READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
                                        WITH KEY log_locid = <ls_stop>-log_locid
-                                                seq_num   = lv_seq_num.
+                                                seq_num   = <ls_stop>-seq_num.
         IF sy-subrc IS NOT INITIAL.
           CONTINUE.
         ENDIF.
@@ -442,6 +430,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
   METHOD decoupling.
 
     DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
+
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
     ASSIGN is_app_objects-maintabref->* TO <ls_root>.
@@ -458,6 +447,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
         READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
                                        WITH KEY log_locid = <ls_stop>-log_locid
                                                 seq_num   = <ls_stop>-seq_num.
+
         READ TABLE it_loc_addr REFERENCE INTO ls_loc_addr
                                        WITH KEY root_key = <ls_stop>-log_loc_uuid.
 
@@ -675,8 +665,7 @@ CLASS lcl_pe_filler IMPLEMENTATION.
 
   METHOD shp_departure.
 
-    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk,
-          lv_seq_num  TYPE /scmtms/seq_num.
+    DATA: ls_loc_addr TYPE REF TO /bofu/s_addr_postal_addressk.
 
     FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
@@ -690,12 +679,9 @@ CLASS lcl_pe_filler IMPLEMENTATION.
       IF <ls_stop>-stop_cat = /scmtms/if_common_c=>c_stop_category-outbound.
         IF <ls_stop>-plan_trans_time IS NOT INITIAL.
 
-          lv_seq_num = COND #( WHEN sy-tabix > 1 THEN <ls_stop>-seq_num - 1
-                                                 ELSE <ls_stop>-seq_num ).
-
           READ TABLE it_stop_points REFERENCE INTO DATA(ls_stop_points)
                                          WITH KEY log_locid = <ls_stop>-log_locid
-                                                  seq_num   = lv_seq_num.
+                                                  seq_num   = <ls_stop>-seq_num.
           IF sy-subrc IS NOT INITIAL.
             CONTINUE.
           ENDIF.

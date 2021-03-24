@@ -4,30 +4,30 @@
   xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
   xmlns:layout="sap.ui.layout"
   xmlns:smartTable="sap.ui.comp.smarttable">
-  <smartTable:SmartTable 
-    id="purchaseOrderDetailsItemsSmartTable" 
+  <smartTable:SmartTable
+    id="purchaseOrderDetailsItemsSmartTable"
     class="purchaseOrderDetailsItemsSmartTable"
-    persistencyKey="listReportTable" 
-    tableType="ResponsiveTable" 
+    persistencyKey="listReportTable"
+    tableType="ResponsiveTable"
     requestAtLeastFields="id,incoterms,toReceivingLocation,toSupplierLocation,supplierLocationType,receivingLocationType"
     demandPopin="true"
-    noData="{i18n>noData}" 
-    editable="false" 
+    noData="{i18n>noData}"
+    editable="false"
     entitySet="PurchaseOrderItem"
     tableBindingPath="purchaseOrderItemTPs"
-    useTablePersonalisation="true" 
-    header="{i18n>purchaseOrderDetailsItemListTitle}" 
+    useTablePersonalisation="true"
+    header="{i18n>purchaseOrderDetailsItemListTitle}"
     showRowCount="true"
     beforeRebindTable="onBeforeRebindTable"
     useVariantManagement="false"
     useExportToExcel="false"
     enableAutoBinding="true"
-    ignoredFields="completedQuantity,currency,volumeUoM,weightUoM,orderQuantityUoM,nextETA,supplierId,supplierDescription,purchaseOrderNo,id,purchaseOrder_id,incoterms_code,processStatus_code,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,supplierDescription,logicalSystem,altKey">
+    ignoredFields="completedQuantity,currency,volumeUoM,weightUoM,orderQuantityUoM,nextETA,supplierId,supplierDescription,purchaseOrderNo,id,purchaseOrder_id,incoterms_code,processStatus_code,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,supplierDescription,logicalSystem,altKey,delayedValue,completedAndLateValue">
     <smartTable:customData>
       <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}, sort: {visible: false}}"/>
     </smartTable:customData>
-    <Table 
-      id="innerTable" 
+    <Table
+      id="innerTable"
       growing="true"
       growingThreshold="5">
       <columns>
@@ -67,70 +67,90 @@
             <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "columnIndex": 5}'/>
           </customData>
         </Column>
-        <Column>
-          <Text text="{@i18n>EL_PurchaseOrderItem_materialId_LABEL}"/>
+        <Column width="6rem">
+          <Text text="{@i18n>EL_PurchaseOrderItem_isDelayed_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "materialId", "leadingProperty": "materialId", "columnIndex": 6}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "isDelayed", "leadingProperty": "isDelayed", "columnIndex": 6}'/>
           </customData>
         </Column>
         <!-- hidden -->
         <Column visible="false">
+          <Text text="{@i18n>EL_PurchaseOrderItem_materialId_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "materialId", "leadingProperty": "materialId", "columnIndex": 7}'/>
+          </customData>
+        </Column>
+        <Column visible="false"  hAlign="Right">
+          <Text text="{@i18n>EL_PurchaseOrderItem_delayedQuantity_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "delayedQuantity", "leadingProperty": "delayedQuantity", "columnIndex": 7}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right" visible="false">
+          <Text text="{@i18n>EL_PurchaseOrderItem_completedAndLateQuantity_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "completedAndLateQuantity", "leadingProperty": "completedAndLateQuantity", "columnIndex": 7}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
           <Text text="{i18n>completionRate}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 7}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 8}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_lastReportedEvent_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "lastReportedEvent", "leadingProperty": "lastReportedEvent", "columnIndex": 7}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "lastReportedEvent", "leadingProperty": "lastReportedEvent", "columnIndex": 9}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_netWeight_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "columnIndex": 7}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "columnIndex": 10}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_grossWeight_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "columnIndex": 8}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "columnIndex": 11}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_volume_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "columnIndex": 9}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "columnIndex": 12}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_incoterms_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 12}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 13}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_incotermsVersion_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incotermsVersion", "leadingProperty": "incotermsVersion", "columnIndex": 11}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsVersion", "leadingProperty": "incotermsVersion", "columnIndex": 14}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_PurchaseOrderItem_incotermsLocation_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incotermsLocation", "leadingProperty": "incotermsLocation", "columnIndex": 12}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsLocation", "leadingProperty": "incotermsLocation", "columnIndex": 15}'/>
           </customData>
         </Column>
       </columns>
       <items>
-        <ColumnListItem type="Navigation" press=".onPurchaseOrderDetailsItemPressed">
+        <ColumnListItem
+          type="Navigation"
+          press=".onPurchaseOrderDetailsItemPressed">
           <cells>
             <Text class="tableKeyColumn" text="{itemNo}"></Text>
             <Text text="{materialDescription}"></Text>
             <ObjectNumber
               emphasized="false"
-              number="{ 
+              number="{
                 path: 'orderQuantity',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 3}
@@ -138,12 +158,12 @@
               unit="{orderQuantityUoM}"/>
             <ObjectNumber
               emphasized="false"
-              number="{ 
+              number="{
                 path: 'netValue',
                 type: 'sap.ui.model.odata.type.Decimal',
                 constraints: {scale: 2}
               }"
-              unit="{currency}"/> 
+              unit="{currency}"/>
             <ctrl:link.LinkPopover
               placement="Right"
               contentHeight="15rem"
@@ -169,30 +189,47 @@
               </ctrl:content>
             </ctrl:link.LinkPopover>
             <Text text="{
-              path: 'plannedDeliveryDate', 
-              type: 'sap.ui.model.type.Date', 
+              path: 'plannedDeliveryDate',
+              type: 'sap.ui.model.type.Date',
               formatOptions: {
                 style: 'medium',
                 UTC: true
               }
             }" />
+            <Text text="{path: 'isDelayed', formatter: '.formatter.formatYesNo'}" />
             <Text text="{materialId}"></Text>
-            <mc:HarveyBallMicroChart 
+            <ObjectStatus
+              id="delayedQuantity"
+              text="{parts: ['delayedQuantity', 'orderQuantity', 'orderQuantityUoM'],
+              formatter: '.formatter.formattedDelayedQuantity'}"
+              state="{path: 'delayedQuantity', formatter: '.formatter.delayStatus'}"/>
+            <ObjectNumber
+              emphasized="false"
+              number="{
+                path: 'completedAndLateQuantity',
+                formatter: '.formatter.formatCompletedAndLateValueAndQuantityColumn',
+                type: 'sap.ui.model.odata.type.Decimal',
+                constraints: {scale: 3}
+              }"
+              unit="{
+                parts:['completedAndLateQuantity','orderQuantityUoM'],
+                formatter:'.formatter.formatCompletedAndLateUnit'}"/>
+            <mc:HarveyBallMicroChart
               id="itemCompletionRate"
-              size="XS" 
+              size="XS"
               isResponsive="false"
               class="completionRateTableChart"
-              total="100" 
-              totalScale="%" 
+              total="100"
+              totalScale="%"
               tooltip="{i18n>completionRate}">
               <mc:items>
-                <mc:HarveyBallMicroChartItem 
-                  fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}" 
-                  fractionScale="%" 
+                <mc:HarveyBallMicroChartItem
+                  fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}"
+                  fractionScale="%"
                   color="sapUiChartPaletteQualitativeHue1"/>
               </mc:items>
             </mc:HarveyBallMicroChart>
-            <Text text="{path:'lastReportedEvent', formatter:'.formatter.lastReportedEventStatusTableText'}"/>
+            <Text text="{path:'lastReportedEvent', formatter:'.formatter.lastReportedEventStatusText'}"/>
             <Text text="{
               parts: [
                 {path: 'netWeight'},

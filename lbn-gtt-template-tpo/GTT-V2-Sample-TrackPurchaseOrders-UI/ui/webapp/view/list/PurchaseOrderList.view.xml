@@ -9,9 +9,7 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:sv="sap.ui.comp.smartvariants"
-	xmlns:mc="sap.suite.ui.microchart"
-	xmlns:uxap="sap.uxap"
-	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	xmlns:mc="sap.suite.ui.microchart">
 	<f:DynamicPage id="dynamicPage" class="purchaseOrderListPage">
 		<f:title>
 			<f:DynamicPageTitle>
@@ -122,15 +120,40 @@
                       <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 5}'/>
                     </customData>
                   </Column>
-                  <Column>
+                   <Column width="6rem">
+                    <Text text="{@i18n>EL_PurchaseOrder_isDelayed_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "isDelayed", "leadingProperty": "isDelayed", "sortProperty": "isDelayed", "columnIndex": 6}'/>
+                    </customData>
+                  </Column>
+                  <!-- hidden -->
+                  <Column visible="false">
                     <Text text="{@i18n>EL_PurchaseOrder_incoterms_LABEL}"/>
                     <customData>
-                      <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "sortProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 6}'/>
+                      <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "sortProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 7}'/>
+                    </customData>
+                  </Column>
+                  <Column visible="false" hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrder_delayedValue_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "delayedValue", "leadingProperty": "delayedValue", "sortProperty": "delayedValue", "columnIndex": 8}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrder_completedAndLateValue_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "completedAndLateValue", "leadingProperty": "completedAndLateValue", "sortProperty": "completedAndLateValue", "columnIndex": 9}'/>
                     </customData>
                   </Column>
                 </columns>
                 <items>
-                  <ColumnListItem type="Navigation" press=".onPurchaseOrderPressed">
+                  <ColumnListItem
+                    type="Navigation"
+                    press="onPurchaseOrderPressed"
+                    highlight="{
+                      path:'isDelayed',
+                      formatter:'.formatter.formatRowHighlight'
+                    }">
                     <cells>
                       <ctrl:link.LinkPopover
                         relatedObject="toSupplierLocation"
@@ -205,7 +228,24 @@
                           <mc:HarveyBallMicroChartItem fraction="{parts: ['completionValue', 'netValue'], formatter: '.formatter.completionFraction'}" fractionScale="%" color="sapUiChartPaletteQualitativeHue1"/>
                         </mc:items>
                       </mc:HarveyBallMicroChart>
+                      <Text text="{path: 'isDelayed', formatter: '.formatter.formatYesNo'}" />
                       <Text text="{incoterms/name}" />
+                      <ObjectStatus
+                        id="delayedValue"
+                        text="{parts: ['delayedValue', 'netValue', 'currency'],
+                        formatter: '.formatter.formattedDelayedValue'}"
+                        state="{path: 'delayedValue', formatter: '.formatter.delayStatus'}"/>
+                        <ObjectNumber
+                          emphasized="false"
+                          number="{
+                            path: 'completedAndLateValue',
+                            formatter: '.formatter.formatCompletedAndLateValueAndQuantityColumn',
+                            type: 'sap.ui.model.odata.type.Decimal',
+                            constraints: {scale: 2}
+                          }"
+                          unit="{
+                            parts:['completedAndLateValue','currency'],
+                            formatter:'.formatter.formatCompletedAndLateUnit'}"/>
                     </cells>
                   </ColumnListItem>
                 </items>
@@ -241,7 +281,7 @@
               useExportToExcel="false"
               enableAutoBinding="true"
               beforeRebindTable="onBeforeRebindPOItemsTable"
-              ignoredFields="id,purchaseOrderNo,nextETA,orderQuantityUoM,volumeUoM,weightUoM,currency,processStatus_code,completedQuantity,purchaseOrder_id,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,receivingLocationId,supplierDescription,logicalSystem,lastReportedEvent,altKey">
+              ignoredFields="id,purchaseOrderNo,nextETA,orderQuantityUoM,volumeUoM,weightUoM,currency,processStatus_code,completedQuantity,purchaseOrder_id,trackingIdType,receivingLocationType_code,partyId,receivingLocationDescription,receivingLocationId,supplierDescription,logicalSystem,lastReportedEvent,altKey,delayedValue,completedAndLateValue">
               <smartTable:customData>
                 <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
                 <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}}"/>
@@ -286,7 +326,25 @@
                       <core:CustomData key="p13nData" value='{"columnKey": "completionValue", "leadingProperty": "completionValue, netValue, currency", "columnIndex": 5}'/>
                     </customData>
                   </Column>
+                  <Column width="6rem">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_isDelayed_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "isDelayed", "leadingProperty": "isDelayed", "sortProperty": "delayedValue", "columnIndex": 6}'/>
+                    </customData>
+                  </Column>
                   <!-- hidden -->
+                  <Column visible="false"  hAlign="Right">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_delayedQuantity_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "delayedQuantity", "leadingProperty": "delayedQuantity", "sortProperty": "delayedQuantity", "columnIndex": 7}'/>
+                    </customData>
+                  </Column>
+                  <Column hAlign="Right" visible="false">
+                    <Text text="{@i18n>EL_PurchaseOrderItem_completedAndLateQuantity_LABEL}"/>
+                    <customData>
+                      <core:CustomData key="p13nData" value='{"columnKey": "completedAndLateQuantity", "leadingProperty": "completedAndLateQuantity", "sortProperty": "completedAndLateQuantity", "columnIndex": 7}'/>
+                    </customData>
+                  </Column>
                   <Column hAlign="Right" visible="false">
                     <Text text="{@i18n>EL_PurchaseOrderItem_netWeight_LABEL}"/>
                     <customData>
@@ -319,7 +377,13 @@
                   </Column>
                 </columns>
                 <items>
-                  <ColumnListItem type="Navigation" press=".onPurchaseOrderItemPressed">
+                  <ColumnListItem
+                    type="Navigation"
+                    press="onPurchaseOrderItemPressed"
+                    highlight="{
+                      path:'isDelayed',
+                      formatter:'.formatter.formatRowHighlight'
+                    }">
                     <cells>
                       <Text class="tableKeyColumn" text="{purchaseOrderNo} / {itemNo}"></Text>
                       <ctrl:link.LinkPopover
@@ -393,13 +457,30 @@
                         totalScale="%"
                         tooltip="{i18n>completionRate}">
                         <mc:items>
-                          <mc:HarveyBallMicroChartItem 
-                            fraction="{parts: ['completedQuantity', 'orderQuantity'], formatter: '.formatter.completionFraction'}" 
-                            fractionScale="%" 
+                          <mc:HarveyBallMicroChartItem
+                            fraction="{parts: ['completedQuantity', 'orderQuantity'], formatter: '.formatter.completionFraction'}"
+                            fractionScale="%"
                             color="sapUiChartPaletteQualitativeHue1"/>
                         </mc:items>
                       </mc:HarveyBallMicroChart>
+                      <Text text="{path: 'isDelayed', formatter: '.formatter.formatYesNo'}" />
                       <!-- hidden -->
+                      <ObjectStatus
+                        id="delayedQuantity"
+                        text="{parts: ['delayedQuantity', 'orderQuantity', 'orderQuantityUoM'],
+                        formatter: '.formatter.formattedDelayedQuantity'}"
+                        state="{path: 'delayedQuantity', formatter: '.formatter.delayStatus'}"/>
+                        <ObjectNumber
+                          emphasized="false"
+                          number="{
+                            path: 'completedAndLateQuantity',
+                            formatter: '.formatter.formatCompletedAndLateValueAndQuantityColumn',
+                            type: 'sap.ui.model.odata.type.Decimal',
+                            constraints: {scale: 3}
+                          }"
+                          unit="{
+                            parts:['completedAndLateQuantity','orderQuantityUoM'],
+                            formatter:'.formatter.formatCompletedAndLateUnit'}"/>
                       <Text text="{
                         parts: [
                           {path: 'netWeight'},

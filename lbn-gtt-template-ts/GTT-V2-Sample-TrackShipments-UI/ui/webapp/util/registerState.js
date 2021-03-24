@@ -16,6 +16,9 @@ sap.ui.define(["sap/base/util/deepEqual"], function (deepEqual) {
    * `loading` -> `onLoadingChange(changes)`, where `changes` is an object containing
    * the previous value and the current value, e.g., `{ previous: false, current: true }`.
    *
+   * `observe(targets, effect)` is a method that allows you to observe state changes from
+   * the outside, you can use it to observe multiple states from another object easily.
+   *
    * In addition, you can customize the validators by using the _Validator Hooks_,
    * the naming rule will be: `{ count: 0 }` -> `validateCount(nextValue, callback)`.
    * If you call the `callback` with an error message, it will throw an `Error`.
@@ -54,10 +57,24 @@ sap.ui.define(["sap/base/util/deepEqual"], function (deepEqual) {
       thisArg.state = state;
     }
 
-    Object.defineProperty(thisArg, "initialState", {
-      value: Object.assign({}, state),
-      enumerable: true,
+    Object.defineProperties(thisArg, {
+      "initialState": {
+        value: Object.assign({}, state),
+        enumerable: true,
+      },
+      "resetState": {
+        /**
+         * Reset all states to their initial values
+         */
+        value: function () {
+          Object.assign(thisArg.state, thisArg.initialState);
+        },
+        enumerable: true,
+      },
     });
+
+    /** @type {Record<string, Function[]>} */
+    var effectRegistry = {};
 
     Object.keys(state).forEach(function (stateName) {
       var capitalizedStateName = stateName.replace(/^\S/, function (initial) {
@@ -93,6 +110,10 @@ sap.ui.define(["sap/base/util/deepEqual"], function (deepEqual) {
               previous: previous,
               current: value,
             });
+
+            thisArg._effectRegistry[stateName].forEach(function (effect) {
+              effect.call(thisArg);
+            });
           }
         },
         enumerable: true,
@@ -124,16 +145,28 @@ sap.ui.define(["sap/base/util/deepEqual"], function (deepEqual) {
           value: function (changes) { },
         });
       }
+
+      effectRegistry[stateName] = [];
     }, thisArg);
 
-    Object.defineProperty(thisArg, "resetState", {
-      /**
-       * Reset all states to their initial values
-       */
-      value: function () {
-        Object.assign(thisArg.state, thisArg.initialState);
+    Object.defineProperties(thisArg, {
+      "_effectRegistry": {
+        value: effectRegistry,
       },
-      enumerable: true,
+      "observe": {
+        /**
+         * Observe state changes
+         *
+         * @param {string[]} targets Observation targets
+         * @param {() => void} effect Side-effect
+         */
+        value: function (targets, effect) {
+          targets.forEach(function (target) {
+            thisArg._effectRegistry[target].push(effect);
+          }, thisArg);
+        },
+        enumerable: true,
+      },
     });
   };
 

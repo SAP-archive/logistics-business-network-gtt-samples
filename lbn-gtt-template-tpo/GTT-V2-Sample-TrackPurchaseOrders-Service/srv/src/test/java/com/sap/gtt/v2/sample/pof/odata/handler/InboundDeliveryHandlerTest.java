@@ -1,6 +1,5 @@
 package com.sap.gtt.v2.sample.pof.odata.handler;
 
-import com.google.gson.Gson;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.service.LocationService;
@@ -49,9 +48,10 @@ public class InboundDeliveryHandlerTest {
     public void setUp() {
         ReflectionTestUtils.setField(handler, "gttCoreServiceClient", client);
         ReflectionTestUtils.setField(handler, "locationService", locationService);
+        ReflectionTestUtils.setField(handler, "mapService", mapService);
 
         mockStatic(POFUtils.class);
-        given(POFUtils.getGson()).willReturn(new Gson());
+        given(POFUtils.getGson()).willCallRealMethod();
     }
 
     @Test

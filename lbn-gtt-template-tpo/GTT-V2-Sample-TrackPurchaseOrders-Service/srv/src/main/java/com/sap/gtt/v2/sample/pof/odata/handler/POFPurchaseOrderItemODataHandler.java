@@ -27,6 +27,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.sap.gtt.v2.sample.pof.constant.Constants.GTT_MODEL_NAMESPACE;
+import static com.sap.gtt.v2.sample.pof.odata.handler.POFInboundDeliveryItemODataHandler.ARRIVAL_TIMES;
 import static com.sap.gtt.v2.sample.pof.odata.handler.POFPurchaseOrderODataHandler.COMMA;
 import static com.sap.gtt.v2.sample.pof.odata.handler.POFPurchaseOrderODataHandler.COMMA_ENCODED;
 import static com.sap.gtt.v2.sample.pof.odata.handler.POFPurchaseOrderODataHandler.DIV_ENCODED;
@@ -38,11 +39,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
 
     private static final String REGEX_LEADING_ZERO = "^0*";
-    private static final String PROCESS_ID_FILTER_PART = " process_id eq guid'%s' ";
+    private static final String PROCESS_ID_FILTER_PART = "process_id eq guid'%s'";
     private static final String PROCESS_EVENT_DIRECTORY_URI = "/ProcessEventDirectory";
     private static final String DIRECTORY_QUERY_TEMPLATE = "$expand=event" +
             "&$filter=(event/eventType eq '" + GTT_MODEL_NAMESPACE + ".PurchaseOrderItem.DeletionEvent' " +
-            "or event/eventType eq '" + GTT_MODEL_NAMESPACE + ".PurchaseOrderItem.UndeletionEvent') and";
+            "or event/eventType eq '" + GTT_MODEL_NAMESPACE + ".PurchaseOrderItem.UndeletionEvent') and ";
     public static final String DIV = "/";
 
     @Autowired
@@ -54,17 +55,17 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
     @Override
     public ODataResultList<Map<String, Object>> handleReadEntitySet(GetEntitySetUriInfo uriInfo, ODataContext oDataContext) {
         String uri = POFUtils.getNormalizedUri(oDataContext);
-        Boolean isLocation = isLocationExists(uri);
+        boolean isLocation = isLocationExists(uri);
         uri = removeUnnecessaryExpands(uri);
 
         ODataResultList<PurchaseOrderItem> entityList = gttCoreServiceClient.readEntitySet(uri, PurchaseOrderItem.class);
         List<PurchaseOrderItem> list = entityList.getResults();
+        if (isLocation) {
+            setLocations(entityList);
+        }
         if (!list.isEmpty()) {
             removeUnneededLeadingZero(list);
             updateCompletionValues(list);
-        }
-        if (isLocation) {
-            setLocations(entityList);
         }
         return convertResults(entityList);
     }
@@ -72,11 +73,11 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
     @Override
     public Map<String, Object> handleReadEntity(GetEntityUriInfo uriInfo, ODataContext oDataContext) {
         String uri = POFUtils.getNormalizedUri(oDataContext);
-        Boolean isLocation = isLocationExists(uri);
+        boolean isLocation = isLocationExists(uri);
+        boolean containsArrivalTimes = uri.contains(ARRIVAL_TIMES);
         uri = removeUnnecessaryExpands(uri);
 
         PurchaseOrderItem entity = gttCoreServiceClient.readEntity(uri, PurchaseOrderItem.class);
-        removeUnneededLeadingZero(entity);
         updateCompletionValue(entity);
 
         if(isLocation) {
@@ -84,23 +85,23 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
             locationService.setSupplierLocation(entity);
         }
 
-        processExpands(entity);
+        processExpands(entity, containsArrivalTimes);
+
+        removeUnneededLeadingZero(entity);
 
         return ODataUtils.toMap(entity);
     }
 
     public void updateCompletionValues(List<PurchaseOrderItem> entities) {
-        StringBuilder queryBuilder = new StringBuilder(DIRECTORY_QUERY_TEMPLATE + "(");
-        for (PurchaseOrderItem entity : entities) {
-            String filter = String.format(PROCESS_ID_FILTER_PART + "or", entity.getId());
-            queryBuilder.append(filter);
-        }
-        String query = queryBuilder.delete(queryBuilder.length() - 2, queryBuilder.length()).append(")").toString();
-        String url = UriComponentsBuilder.fromUriString(PROCESS_EVENT_DIRECTORY_URI).query(query).build().encode().toUriString();
-        List<ProcessEventDirectory> results = gttCoreServiceClient.readEntitySetAll(url, ProcessEventDirectory.class).getResults();
-        Map<UUID, List<Event>> map = results.stream()
+        List<UUID> ids = entities.stream().map(PurchaseOrderItem::getId).collect(Collectors.toList());
+        List<String> splitFilters = POFUtils.generateSplitLargeFilterExpr(PROCESS_ID_FILTER_PART, "or", ids);
+        Map<UUID, List<Event>> map = splitFilters.parallelStream()
+                .map(filter -> DIRECTORY_QUERY_TEMPLATE + "(" + filter + ")")
+                .map(filter -> UriComponentsBuilder.fromUriString(PROCESS_EVENT_DIRECTORY_URI).query(filter).build().encode().toUriString())
+                .flatMap(uri -> gttCoreServiceClient.readEntitySetAll(uri, ProcessEventDirectory.class).getResults().stream())
                 .filter(ped -> nonNull(ped.getEvent()))
                 .collect(Collectors.groupingBy(ProcessEventDirectory::getProcessId, Collectors.mapping(ProcessEventDirectory::getEvent, Collectors.toList())));
+
         for (PurchaseOrderItem purchaseOrderItem : entities) {
             List<Event> events = map.getOrDefault(purchaseOrderItem.getId(), Collections.emptyList());
             if (isDeletionLatest(events)) {
@@ -128,8 +129,12 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
                 .map(Event::getEventType).orElse(EMPTY).endsWith(".DeletionEvent");
     }
 
-    private void processExpands(PurchaseOrderItem purchaseOrderItem) {
+    private void processExpands(PurchaseOrderItem purchaseOrderItem, boolean containsArrivalTimes) {
         Map<String, LocationDTO> map = locationService.getLocationsForPurchaseOrderItemInboundDeliveryItem(purchaseOrderItem.getInboundDeliveryItems());
+
+        if (containsArrivalTimes) {
+            pofInboundDeliveryItemODataHandler.updateArrivalTime(purchaseOrderItem.getInboundDeliveryItems());
+        }
 
         purchaseOrderItem.getInboundDeliveryItems().forEach(inboundDeliveryItem -> {
             locationService.setLocationsForInboundDelivery(inboundDeliveryItem, map);
@@ -165,6 +170,9 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
         if (urlWithoutExpands.contains(Constants.SUPPLIER_LOCATION)) {
             urlWithoutExpands = POFUtils.removeFieldFromUrl(urlWithoutExpands, Constants.SUPPLIER_LOCATION);
         }
+        if (urlWithoutExpands.contains(ARRIVAL_TIMES)) {
+            urlWithoutExpands = POFUtils.removeFieldFromUrl(urlWithoutExpands, "inboundDeliveryItems\\/" + ARRIVAL_TIMES);
+        }
         return urlWithoutExpands;
     }
 
@@ -173,9 +181,10 @@ public class POFPurchaseOrderItemODataHandler extends POFDefaultODataHandler {
         String[] split = uri.split(comma);
         StringBuilder urlWithoutExpandsBuilder = new StringBuilder();
         for (String urlElement : split) {
-            if (urlElement.contains(div + Constants.RECEIVING_LOCATION) ||
-                    urlElement.contains(div + Constants.SUPPLIER_LOCATION)
-                    || urlElement.contains(div + Constants.PLANT_LOCATION)) {
+            if (urlElement.contains(div + Constants.RECEIVING_LOCATION)
+                    || urlElement.contains(div + Constants.SUPPLIER_LOCATION)
+                    || urlElement.contains(div + Constants.PLANT_LOCATION)
+                    || urlElement.isEmpty()) {
                 continue;
             }
 

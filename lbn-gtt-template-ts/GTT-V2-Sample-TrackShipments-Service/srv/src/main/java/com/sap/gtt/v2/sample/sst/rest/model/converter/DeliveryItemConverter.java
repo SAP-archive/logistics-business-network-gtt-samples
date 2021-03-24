@@ -33,6 +33,7 @@ public class DeliveryItemConverter {
         deliveryItemDto.setId(deliveryItem.getId().toString());
         deliveryItemDto.setItemNo(deliveryItem.getItemNo());
         deliveryItemDto.setDeliveryNo(deliveryItem.getDeliveryNo());
+        deliveryItemDto.setDeliveryItemNo(deliveryItem.getItemNo());
         deliveryItemDto.setOrderQuantity(deliveryItem.getOrderQuantity());
         deliveryItemDto.setQuantityUoM(deliveryItem.getQuantityUoM());
         deliveryItemDto.setMaterialNo(deliveryItem.getMaterialNo());
@@ -66,8 +67,9 @@ public class DeliveryItemConverter {
         final DeliveryItemDto deliveryItemDto = new DeliveryItemDto();
         final Optional<DeliveryItem> deliveryItemOpt = Optional.ofNullable(freightUnitItem.getDeliveryItem());
         deliveryItemDto.setId(freightUnitItem.getFreightUnitId().toString());
-        deliveryItemDto.setItemNo(freightUnitItem.getDeliveryItemNo());
+        deliveryItemDto.setItemNo(freightUnitItem.getItemNo());
         deliveryItemDto.setDeliveryNo(freightUnitItem.getDeliveryNo());
+        deliveryItemDto.setDeliveryItemNo(freightUnitItem.getDeliveryItemNo());
         deliveryItemDto.setOrderQuantity(freightUnitItem.getQuantity());
         deliveryItemDto.setQuantityUoM(freightUnitItem.getQuantityUoM());
         deliveryItemDto.setMaterialNo(freightUnitItem.getMaterialNo());

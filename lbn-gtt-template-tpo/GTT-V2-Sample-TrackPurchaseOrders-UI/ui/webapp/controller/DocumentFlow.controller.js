@@ -257,7 +257,7 @@ sap.ui.define([
         };
         return this.formatter.formatDateRange(oDateConfigurationSettings);
       } else if (oAttribute.propertyName === Constants.PROCESS_STATUS_CODE_PROP) {
-        return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ProcessStatus_" + oAttribute.value + "_NAME");
+        return this.formatter.getProcessStatusText.call(this, oAttribute.value);
       } else if (oAttribute.propertyName === Constants.EXECUTION_STATUS_CODE_PROP) {
         return this.formatter.getCodeListDescriptionFromI18n.call(this, oAttribute.value, "CO_ExecutionStatus_" + oAttribute.value + "_NAME");
       } else {

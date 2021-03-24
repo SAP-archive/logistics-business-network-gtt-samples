@@ -12,6 +12,8 @@ public class DeliveryItemDto {
 
     private String deliveryNo;
 
+    private String deliveryItemNo;
+
     private String itemNo;
 
     private BigDecimal orderQuantity;
@@ -44,6 +46,14 @@ public class DeliveryItemDto {
 
     public void setDeliveryNo(String deliveryNo) {
         this.deliveryNo = deliveryNo;
+    }
+
+    public String getDeliveryItemNo() {
+        return deliveryItemNo;
+    }
+
+    public void setDeliveryItemNo(String deliveryItemNo) {
+        this.deliveryItemNo = deliveryItemNo;
     }
 
     public String getItemNo() {

@@ -100,6 +100,7 @@ sap.ui.define([
 
     EVENT_TYPE: {
       LOCATION_UPDATE: "LocationUpdate",
+      LOCATION_UPDATE_NEW: "LocationUpdateNew",
       DELAY: "Delay",
     },
 
@@ -113,12 +114,6 @@ sap.ui.define([
 
     ROUTE_WIDTH: {
       DEFAULT: 4,
-    },
-
-    DEVICE_TYPE: {
-      PHONE  : "Phone",
-      TABLET : "Tablet",
-      DESKTOP: "Desktop",
     },
 
     REF_BUSINESS_DOCUMENTS_TYPE:{

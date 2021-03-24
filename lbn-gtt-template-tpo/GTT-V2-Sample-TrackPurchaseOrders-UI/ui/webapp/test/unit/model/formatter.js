@@ -36,17 +36,83 @@ sap.ui.define([
     stub(formatter, "getText").returns("fakeText");
 
     // Act
+    var aModes = ["short", "complete","wrongMode"];
     var start = new Date("1995-12-17T03:24:00");
     formatter.timeDuration(start, new Date("1995-12-17T03:24:30")); // +30s
     formatter.timeDuration(start, new Date("1995-12-17T03:25:00")); // +1m
     formatter.timeDuration(start, new Date("1995-12-17T07:24:00")); // +4h
     formatter.timeDuration(start, new Date("1995-12-19T03:24:00")); // +2d
+    formatter.timeDuration(start, new Date("1995-12-19T03:24:00"), aModes[0]); // +2d
+    formatter.timeDuration(start, new Date("1995-12-19T03:24:00"), aModes[1]); // +2d
+    formatter.timeDuration(start, new Date("1995-12-19T03:24:00"), aModes[2]); // +2d
 
     // Assert
     assert.deepEqual(formatter.getText.args[0], ["seconds", [30]], "The 'seconds' text is got from i18n");
     assert.deepEqual(formatter.getText.args[1], ["minutes", [1]], "The 'minutes' text is got from i18n");
     assert.deepEqual(formatter.getText.args[2], ["hours", [4]], "The 'hours' text is got from i18n");
     assert.deepEqual(formatter.getText.args[3], ["days", [2]], "The 'days' text is got from i18n");
+    assert.deepEqual(formatter.getText.args[4], ["daysWithUnit", [2]], "The 'daysWithUnit' text is got from i18n");
+    assert.deepEqual(formatter.getText.args[5], ["days", [2]], "The 'days' text is got from i18n");
+    assert.deepEqual(formatter.getText.args[6], ["days", [2]], "The 'days' text is got from i18n");
+
+    formatter.getText.restore();
+  });
+
+  QUnit.test("formatEventStatusText", function (assert) {
+    // Arrange
+    stub(formatter, "getText").returns("fakeText");
+
+    // Act
+    formatter.formatEventStatusText("UNPLANNED");
+
+    // Assert
+    assert.deepEqual(formatter.getText.args[0], ["unplannedEventStatusLabel"], "The 'unplannedEventStatusLabel' text is got from i18n");
+
+
+    formatter.getText.restore();
+  });
+
+  QUnit.test("eventStatusText", function (assert) {
+    assert.equal(formatter.eventStatusText(null), "", "The '' text because of null entry ");
+  });
+
+  QUnit.test("processStatusText", function (assert) {
+    assert.equal(formatter.processStatusText(null), "", "The '' text because of null entry ");
+  });
+
+  QUnit.test("getProcessStatusState", function (assert) {
+    assert.equal(formatter.getProcessStatusState("DELAYED"), ValueState.Error, "The 'Error' text because of DELAYED entry ");
+  });
+
+  QUnit.test("eventTypeText", function (assert) {
+    assert.equal(formatter.eventTypeText(null), "", "The '' text because of null entry ");
+  });
+
+  QUnit.test("formatDetailTitle", function (assert) {
+    assert.equal(formatter.formatDetailTitle(null,null), "-", "The '-' text because of null entry ");
+    assert.equal(formatter.formatDetailTitle("0001",null), "0001 / -", "The '0001 / -' text because of second parameter null ");
+    assert.equal(formatter.formatDetailTitle(null,"10"), "- / 10", "The '- / 10' text because of first parameter null ");
+    assert.equal(formatter.formatDetailTitle("0001","10"), "0001 / 10", "The '0001 / 10' text ");
+  });
+
+  QUnit.test("formatEventStatusState", function (assert) {
+    assert.equal(formatter.formatEventStatusState(null), ValueState.None, "The None value because of null entry ");
+    assert.equal(formatter.formatEventStatusState("UNPLANNED"), ValueState.Success, "The Success value because of UNPLANNED entry ");
+    assert.equal(formatter.formatEventStatusState("REPORTED"), ValueState.Success, "The Success value because of REPORTED entry ");
+  });
+
+  QUnit.test("formatYesNo", function (assert) {
+    // Arrange
+    stub(formatter, "getText").returns("fakeText");
+
+    // Act
+    formatter.formatYesNo(true);
+    formatter.formatYesNo(false);
+
+    // Assert
+    assert.deepEqual(formatter.getText.args[0], ["yes"], "The 'Yes' text is got from i18n");
+    assert.deepEqual(formatter.getText.args[1], ["no"], "The 'No' text is got from i18n");
+
 
     formatter.getText.restore();
   });
@@ -109,6 +175,20 @@ sap.ui.define([
     assert.equal(formatter.getColor("REPORTED"), ValueColor.Good, "Return critical color");
     assert.equal(formatter.getColor("OVERDUE"), ValueColor.Critical, "Return good color");
     assert.equal(formatter.getColor("PLANNED"), ValueColor.Neutral, "Return error color");
+    assert.equal(formatter.getColor(null), ValueColor.Neutral, "Return error color");
+  });
+
+  QUnit.test("listCompletionRateVisibility", function (assert) {
+    // Assert
+    assert.equal(formatter.listCompletionRateVisibility(null,null), false, "Return false because of null entry");
+    assert.equal(formatter.listCompletionRateVisibility(null,"25"), false, "Return false because of first null param");
+    assert.equal(formatter.listCompletionRateVisibility("12",null), false, "Return false because of second null param");
+    assert.equal(formatter.listCompletionRateVisibility("12","25"), true, "Return true because of both number entry");
+  });
+
+  QUnit.test("formatVpLocationTypeText", function (assert) {
+    // Assert
+    assert.equal(formatter.listCompletionRateVisibility(null), "", "Return '' because of null entry");
   });
 
   QUnit.test("getExecutionStatusState", function (assert) {
@@ -132,14 +212,16 @@ sap.ui.define([
   QUnit.test("formatBooleanFields", function (assert) {
     // Arrange
     stub(formatter, "getText").returns("fakeText");
+    stub(formatter, "formatter").returns(formatter);
+    stub(formatter.formatter, "formatYesNo").returns("yes");
 
-    // Act
-    formatter.formatBooleanFields(false, "No");
-    formatter.formatBooleanFields(true, "Yes");
+    // // Assert
+    assert.deepEqual(formatter.formatBooleanFields("X"), "yes", "The 'yes' text is got from i18n");
+    formatter.formatter.formatYesNo.restore();
 
-    // Assert
-    assert.deepEqual(formatter.getText.args[0], ["no"], "The 'no' text is got from i18n");
-    assert.deepEqual(formatter.getText.args[1], ["yes"], "The 'yes' text is got from i18n");
+    stub(formatter.formatter, "formatYesNo").returns("no");
+    assert.deepEqual(formatter.formatBooleanFields("no"), "no", "The 'no' text is got from i18n");
+
     assert.deepEqual(formatter.formatBooleanFields(undefined), "-", "The '-' text is for undefined value");
     assert.deepEqual(formatter.formatBooleanFields(null), "-", "The '-' text is for null value");
 

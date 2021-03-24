@@ -6,17 +6,17 @@ CLASS zcl_im_pof_gtt_le_shipment DEFINITION
   PUBLIC SECTION.
 
     INTERFACES if_ex_badi_le_shipment .
-PROTECTED SECTION.
-PRIVATE SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_IM_POF_GTT_LE_SHIPMENT IMPLEMENTATION.
+CLASS zcl_im_pof_gtt_le_shipment IMPLEMENTATION.
 
 
-  method IF_EX_BADI_LE_SHIPMENT~AT_SAVE.
-  endmethod.
+  METHOD if_ex_badi_le_shipment~at_save.
+  ENDMETHOD.
 
 
   METHOD if_ex_badi_le_shipment~before_update.
@@ -26,6 +26,6 @@ CLASS ZCL_IM_POF_GTT_LE_SHIPMENT IMPLEMENTATION.
   ENDMETHOD.
 
 
-  method IF_EX_BADI_LE_SHIPMENT~IN_UPDATE.
-  endmethod.
+  METHOD if_ex_badi_le_shipment~in_update.
+  ENDMETHOD.
 ENDCLASS.

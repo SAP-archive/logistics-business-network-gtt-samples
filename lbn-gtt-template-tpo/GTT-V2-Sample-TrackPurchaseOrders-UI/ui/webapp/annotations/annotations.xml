@@ -67,7 +67,7 @@
               <PropertyValue Property="Value" Path="completionValue"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="incoterms_code"/>
+              <PropertyValue Property="Value" Path="isDelayed"/>
             </Record>
           </Collection>
         </Annotation>
@@ -113,6 +113,10 @@
                 <PropertyPath>completionValue</PropertyPath>
                 <PropertyPath>lastReportedEvent</PropertyPath>
                 <PropertyPath>altKey</PropertyPath>
+                <PropertyPath>completedAndLateQuantity</PropertyPath>
+                <PropertyPath>completedAndLateValue</PropertyPath>
+                <PropertyPath>delayedQuantity</PropertyPath>
+                <PropertyPath>delayedValue</PropertyPath>
               </Collection>
             </PropertyValue>
             <PropertyValue Property="FilterExpressionRestrictions">
@@ -141,9 +145,13 @@
             <PropertyPath>plannedDeliveryDate</PropertyPath>
             <PropertyPath>materialId</PropertyPath>
             <PropertyPath>materialDescription</PropertyPath>
+            <PropertyPath>isDelayed</PropertyPath>
           </Collection>
         </Annotation>
         <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/orderQuantity">
+          <Annotation Term="Measures.Unit" Path="orderQuantityUoM"/>
+        </Annotations>
+        <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/completedAndLateQuantity">
           <Annotation Term="Measures.Unit" Path="orderQuantityUoM"/>
         </Annotations>
         <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.PurchaseOrderItem/volume">
@@ -205,17 +213,15 @@
               <PropertyValue Property="Value" Path="orderQuantity"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="materialId"/>
+              <PropertyValue Property="Value" Path="completionValue"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="completionValue"/>
+              <PropertyValue Property="Value" Path="isDelayed"/>
             </Record>
           </Collection>
         </Annotation>
       </Annotations>
-
       <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem">
-
         <Annotations Target="com.lbngttsamples.gtt.app.pof.pofService.InboundDeliveryItem/orderQuantity">
           <Annotation Term="Measures.Unit" Path="orderQuantityUoM"/>
         </Annotations>

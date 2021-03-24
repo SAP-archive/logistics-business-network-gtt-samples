@@ -16,15 +16,15 @@ public class SOFUtilsTest {
 
     @Test
     public void testGetNormalizedUri() {
-        String requestUri = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
-        String serviceRoot = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/sof/odata/v1/";
+        String requestUri = "https://dummy/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
+        String serviceRoot = "https://dummy:443/sap/logistics/gtt/sample/sof/odata/v1/";
 
         String normalizedUri = SOFUtils.getNormalizedUri(requestUri, serviceRoot);
         Assertions.assertThat(normalizedUri).doesNotContain("443");
         Assertions.assertThat(normalizedUri).isNotEqualTo("/SalesOrder(guid'73ca77e6-85b1-5523-b05c-726ec9ef3027')?$format=json");
 
-        requestUri = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
-        serviceRoot = "https://gtt-sample-track-salesorders-service-int.cfapps.sap.hana.ondemand.com:80/sap/logistics/gtt/sample/sof/odata/v1/";
+        requestUri = "https://dummy/sap/logistics/gtt/sample/sof/odata/v1/SalesOrder(guid%2773ca77e6-85b1-5523-b05c-726ec9ef3027%27)?$format=json";
+        serviceRoot = "https://dummy:80/sap/logistics/gtt/sample/sof/odata/v1/";
 
         normalizedUri = SOFUtils.getNormalizedUri(requestUri, serviceRoot);
         Assertions.assertThat(normalizedUri).doesNotContain("80");

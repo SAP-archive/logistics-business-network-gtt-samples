@@ -1,6 +1,6 @@
 {
   "d": {
-    "__count": "67",
+    "__count": "25",
     "results": [
       {
         "__metadata": {
@@ -85,7 +85,10 @@
           "__deferred": {
             "uri": "https://gtt-sample-track-purchaseorders-service-int.cfapps.sap.hana.ondemand.com:443/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'1f0be436-6646-5713-95e3-bcdc95a14c9f')/toSupplierLocation"
           }
-        }
+        },
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -141,7 +144,10 @@
             "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'cd509b27-e9b6-548a-a868-a18cfb3ca28e')/receivingLocationType"
           }
         },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -197,7 +203,10 @@
             "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/receivingLocationType"
           }
         },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -244,7 +253,10 @@
           }
         },
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -300,7 +312,10 @@
             "uri": "http://localhost:80/sap/logistics/gtt/sample/pof/odata/v1/PurchaseOrderItem(guid'767640ff-2ba0-568d-b158-6c6291e10c94')/receivingLocationType"
           }
         },
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -347,7 +362,10 @@
           }
         },
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -394,7 +412,10 @@
           }
         },
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -428,7 +449,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -462,7 +486,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -495,7 +522,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -528,7 +558,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -561,7 +594,10 @@
         "altKey": "xri://sap.com/id:LBN#10010001006:QW9CLNT170:PURCHASE_ORDER:4500055266",
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -594,7 +630,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -627,7 +666,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -660,7 +702,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -693,7 +738,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -726,7 +774,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -759,7 +810,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -792,7 +846,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -825,7 +882,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -858,7 +918,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -892,7 +955,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -925,7 +991,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -958,7 +1027,10 @@
         "incoterms": null,
         "completionValue": null,
         "lastReportedEvent": null,
-        "completedQuantity": "18.000"
+        "completedQuantity": "18.000",
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       },
       {
         "__metadata": {
@@ -995,7 +1067,10 @@
         "incoterms_code": null,
         "incoterms": null,
         "completionValue": null,
-        "lastReportedEvent": null
+        "lastReportedEvent": null,
+        "delayedQuantity": "34.000",
+        "completedAndLateQuantity": "21.000",
+        "isDelayed": "X"
       }
     ]
   }

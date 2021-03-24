@@ -18,6 +18,7 @@ public enum TrackedProcessEventType {
     UNLOADING_START("UnloadingStart"),
     UNLOADING_END("UnloadingEnd"),
     LOCATION_UPDATE("LocationUpdate"),
+    LOCATION_UPDATE_NEW("LocationUpdateNew"),
     DELAY("Delay"),
     STUFFING("Stuffing"),
     RETURN("Return"),

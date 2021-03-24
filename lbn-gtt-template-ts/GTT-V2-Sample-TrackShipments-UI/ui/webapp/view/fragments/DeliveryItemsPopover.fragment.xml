@@ -21,7 +21,7 @@
 
 			<ColumnListItem type="Navigation"
 				press=".handleDeliveryItemPress(${props>})">
-				<ObjectIdentifier text="{props>deliveryNo} / {props>itemNo}" />
+				<ObjectIdentifier text="{props>deliveryNo} / {props>deliveryItemNo}" />
 				<ObjectIdentifier text="{props>materialDescription}" />
 				<ObjectNumber
 					number="{

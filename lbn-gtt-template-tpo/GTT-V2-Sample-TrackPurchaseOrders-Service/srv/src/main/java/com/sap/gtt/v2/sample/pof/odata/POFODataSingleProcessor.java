@@ -1,5 +1,7 @@
 package com.sap.gtt.v2.sample.pof.odata;
 
+import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_INTERNAL_SERVER_ERROR;
+
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.callback.ExpandEntityCallback;
 import com.sap.gtt.v2.sample.pof.odata.callback.ExpandEntitySetCallback;
@@ -29,6 +31,7 @@ import org.apache.olingo.odata2.api.uri.info.GetEntitySetUriInfo;
 import org.apache.olingo.odata2.api.uri.info.GetEntityUriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -121,7 +124,7 @@ public class POFODataSingleProcessor extends ODataSingleProcessor {
                     callbacks.put(prop.getNavigationProperty().getName(), expandEntityCallback);
                 }
             } catch (EdmException e) {
-                throw new POFServiceException(e);
+                throw new POFServiceException(e,MESSAGE_CODE_INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value());
             }
         }
 

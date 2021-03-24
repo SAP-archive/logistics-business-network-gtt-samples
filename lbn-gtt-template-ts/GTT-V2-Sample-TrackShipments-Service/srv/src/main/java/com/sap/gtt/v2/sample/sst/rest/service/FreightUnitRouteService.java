@@ -28,9 +28,12 @@ import com.sap.gtt.v2.sample.sst.odata.service.FreightUnitStopsForVpService;
 import com.sap.gtt.v2.sample.sst.odata.service.PlannedEventService;
 import com.sap.gtt.v2.sample.sst.rest.helper.RouteHelper;
 import com.sap.gtt.v2.sample.sst.rest.model.ActualSpot;
+import com.sap.gtt.v2.sample.sst.rest.model.CurrentLocation;
+import com.sap.gtt.v2.sample.sst.rest.model.EstimatedArrival;
 import com.sap.gtt.v2.sample.sst.rest.model.PlannedSpot;
 import com.sap.gtt.v2.sample.sst.rest.model.Route;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -89,10 +92,49 @@ public class FreightUnitRouteService extends RouteAbstractService {
         fillCurrentLocation(route);
         validateAndFillPlannedSpots(route, plannedSpots);
 
+        updateETAOfStopsForVp(route);
         routeHelper.updateRoutesConnection(route, plannedEvents);
-        routeHelper.updateETAOfStopsForVp(route);
         routeHelper.updateEventStatusOfStopsForVp(route, plannedEvents);
         return route;
+    }
+
+    private void updateETAOfStopsForVp(final Route route) {
+        final List<StopsForVp> stopsForVp = route.getStopsForVp();
+        final Optional<CurrentLocation> currentLocationOpt = Optional.ofNullable(route.getCurrentLocation());
+        currentLocationOpt.ifPresent(currentLocation -> stopsForVp.stream()
+                .filter(stopForVp -> nonNull(stopForVp.getLocation()))
+                .filter(stopForVp -> nonNull(stopForVp.getLocation().getLocationAltKey()))
+                .forEach(stopForVp -> updateETAOfStopForVp(stopForVp, currentLocation, route)));
+    }
+
+    private void updateETAOfStopForVp(
+            final StopsForVp stopForVp, final CurrentLocation currentLocation, final Route route) {
+        final List<EstimatedArrival> estimatedArrivals = currentLocation.getEstimatedArrival();
+        final List<PlannedSpot> plannedSpots = route.getPlannedSpots();
+        final String stopsForVpLocationAltKey = stopForVp.getLocation().getLocationAltKey();
+        final Map<String, EstimatedArrival> estimatedArrivalsByLocationAltKeys =
+                getEstimatedArrivalsByLocationAltKeys(estimatedArrivals, plannedSpots);
+        stopForVp.setEstimatedArrival(estimatedArrivalsByLocationAltKeys.get(stopsForVpLocationAltKey));
+    }
+
+    private Map<String, EstimatedArrival> getEstimatedArrivalsByLocationAltKeys(
+            final List<EstimatedArrival> estimatedArrivals, final List<PlannedSpot> plannedSpots) {
+        final Map<String, EstimatedArrival> estimatedArrivalByLocationAltKeys = new HashMap<>();
+        estimatedArrivals.forEach(estimatedArrival -> {
+            final Optional<String> locationAltKeyOpt = getLocationAltKeyOfMatchedPlannedSpot(estimatedArrival, plannedSpots);
+            locationAltKeyOpt.ifPresent(locationAltKey -> estimatedArrivalByLocationAltKeys.put(locationAltKey, estimatedArrival));
+        });
+        return estimatedArrivalByLocationAltKeys;
+    }
+
+    private Optional<String> getLocationAltKeyOfMatchedPlannedSpot(
+            final EstimatedArrival estimatedArrival, final List<PlannedSpot> plannedSpots) {
+        return plannedSpots.stream()
+                .filter(plannedSpot -> nonNull(plannedSpot.getEventMatchKey()))
+                .filter(plannedSpot -> plannedSpot.getEventMatchKey().equals(estimatedArrival.getStopId()))
+                .map(PlannedSpot::getLocationAltKey)
+                .filter(Objects::nonNull)
+                .findFirst();
     }
 
     private List<ActualSpot> getActualSpots(final String freightUnitId) {

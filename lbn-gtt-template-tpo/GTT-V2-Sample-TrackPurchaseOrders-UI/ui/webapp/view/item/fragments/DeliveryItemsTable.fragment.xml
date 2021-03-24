@@ -1,6 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
   xmlns="sap.m"
   xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:microchart="sap.suite.ui.microchart"
   xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
   xmlns:layout="sap.ui.layout"
   >
@@ -23,7 +24,7 @@
     enableAutoBinding="true"
     beforeRebindTable="onBeforeRebindTable"
     ignoreFromPersonalisation="lastEventName,lastLocationDescription,lastLocationAltKey,lastVPLocationType_code,plannedArrivalTimestamp"
-    ignoredFields="id,inboundDeliveryNo,weightUoM,departure,destination,volumeUoM,doorText,destinationAddress,departureAddress,departureEmail,departureTelephone,inboundDelivery,orderQuantityUoM,plantLocationType,purchaseOrderItem,purchaseOrderItem_id,supplierLocationType,materialDescription,logicalSystem,partyId,plantLocationDescription,trackingIdType,altKey,lastReportedEvent">
+    ignoredFields="id,inboundDeliveryNo,weightUoM,departure,destination,volumeUoM,doorText,destinationAddress,departureAddress,departureEmail,departureTelephone,inboundDelivery,orderQuantityUoM,plantLocationType,purchaseOrderItem,purchaseOrderItem_id,supplierLocationType,materialDescription,logicalSystem,partyId,plantLocationDescription,trackingIdType,altKey,lastReportedEvent,plannedDeliveryDate">
     <smartTable:customData>
       <core:CustomData key="dateFormatSettings" value="{UTC: true, style: 'medium'}"/>
       <core:CustomData key="p13nDialogSettings" value="{filter: {visible: false}, group: {visible: false}, sort: {visible: false}}"/>
@@ -40,124 +41,136 @@
           </customData>
         </Column>
         <Column hAlign="Right">
-          <Text text="{@i18n>EL_InboundDeliveryItem_plannedDeliveryDate_LABEL}"/>
+          <Text text="{@i18n>EL_InboundDeliveryItem_initialPlannedDeliveryDate_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "plannedDeliveryDate", "leadingProperty": "plannedDeliveryDate", "columnIndex": 1}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "initialPlannedDeliveryDate", "leadingProperty": "initialPlannedDeliveryDate", "columnIndex": 1}'/>
+          </customData>
+        </Column>
+        <Column hAlign="Right">
+          <Text text="{@i18n>EL_InboundDeliveryItem_revisedPlannedDeliveryDate_LABEL}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "revisedPlannedDeliveryDate", "leadingProperty": "revisedPlannedDeliveryDate", "columnIndex": 2}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_departure_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "supplier", "leadingProperty": "supplier", "navigationProperty": "toSupplierLocation", "columnIndex": 2}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "supplier", "leadingProperty": "supplier", "navigationProperty": "toSupplierLocation", "columnIndex": 3}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "plant", "leadingProperty": "plant", "navigationProperty": "toPlantLocation", "columnIndex": 3}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "plant", "leadingProperty": "plant", "navigationProperty": "toPlantLocation", "columnIndex": 4}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_materialNumber_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "materialNumber", "leadingProperty": "materialNumber", "columnIndex": 4}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "materialNumber", "leadingProperty": "materialNumber", "columnIndex": 5}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_TrackedProcess_processStatus_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code", "columnIndex": 5}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "processStatus_code", "leadingProperty": "processStatus_code", "columnIndex": 6}'/>
           </customData>
         </Column>
         <Column>
           <Text text="{@i18n>EL_InboundDeliveryItem_executionStatus_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code", "columnIndex": 6}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "executionStatus_code", "leadingProperty": "executionStatus_code", "columnIndex": 7}'/>
           </customData>
         </Column>
         <!-- hidden -->
         <Column visible="false">
+          <Text text="{i18n>plannedActualArrivalTimeLabel}"/>
+          <customData>
+            <core:CustomData key="p13nData" value='{"columnKey": "arrivalTimes", "leadingProperty": "arrivalTimes", "navigationProperty": "arrivalTimes", "columnIndex": 8}'/>
+          </customData>
+        </Column>
+        <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_itemDescription_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "itemDescription", "leadingProperty": "itemDescription", "columnIndex": 7}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "itemDescription", "leadingProperty": "itemDescription", "columnIndex": 9}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_orderQuantity_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "orderQuantity", "leadingProperty": "orderQuantity,orderQuantityUoM", "columnIndex": 8}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "orderQuantity", "leadingProperty": "orderQuantity,orderQuantityUoM", "columnIndex": 10}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_documentDate_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "columnIndex": 9}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "documentDate", "leadingProperty": "documentDate", "columnIndex": 11}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_warehouseNo_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "warehouseNo", "leadingProperty": "warehouseNo", "columnIndex": 10}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "warehouseNo", "leadingProperty": "warehouseNo", "columnIndex": 12}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_doorForWarehouse_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "doorForWarehouse", "leadingProperty": "doorForWarehouse", "columnIndex": 11}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "doorForWarehouse", "leadingProperty": "doorForWarehouse", "columnIndex": 13}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_warehouseDescription_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "warehouseDescription", "leadingProperty": "warehouseDescription", "columnIndex": 12}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "warehouseDescription", "leadingProperty": "warehouseDescription", "columnIndex": 14}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_grossWeight_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "columnIndex": 13}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "grossWeight", "leadingProperty": "grossWeight,weightUoM", "columnIndex": 15}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_netWeight_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "columnIndex": 14}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "netWeight", "leadingProperty": "netWeight,weightUoM", "columnIndex": 16}'/>
           </customData>
         </Column>
         <Column hAlign="Right" visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_volume_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "columnIndex": 15}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "volume", "leadingProperty": "volume,volumeUoM", "columnIndex": 17}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_billOfLading_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "billOfLading", "leadingProperty": "billOfLading", "columnIndex": 16}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "billOfLading", "leadingProperty": "billOfLading", "columnIndex": 18}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_dangerousGoods_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "dangerousGoods", "leadingProperty": "dangerousGoods", "columnIndex": 17}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "dangerousGoods", "leadingProperty": "dangerousGoods", "columnIndex": 19}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_incotermsVersion_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incotermsVersion", "leadingProperty": "incotermsVersion", "columnIndex": 18}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsVersion", "leadingProperty": "incotermsVersion", "columnIndex": 20}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_incoterms_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 19}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incoterms_code", "leadingProperty": "incoterms_code", "navigationProperty": "incoterms", "columnIndex": 21}'/>
           </customData>
         </Column>
         <Column visible="false">
           <Text text="{@i18n>EL_InboundDeliveryItem_incotermsLocation_LABEL}"/>
           <customData>
-            <core:CustomData key="p13nData" value='{"columnKey": "incotermsLocation", "leadingProperty": "incotermsLocation", "columnIndex": 20}'/>
+            <core:CustomData key="p13nData" value='{"columnKey": "incotermsLocation", "leadingProperty": "incotermsLocation", "columnIndex": 22}'/>
           </customData>
         </Column>
       </columns>
@@ -166,7 +179,15 @@
           <cells>
             <Text class="tableKeyColumn" text="{inboundDeliveryNo} / {itemNo}"></Text>
             <Text text="{
-              path: 'plannedDeliveryDate', 
+              path: 'initialPlannedDeliveryDate', 
+              type: 'sap.ui.model.type.Date', 
+              formatOptions: {
+                style: 'medium',
+                UTC: true
+              }
+            }" />
+            <Text text="{
+              path: 'revisedPlannedDeliveryDate', 
               type: 'sap.ui.model.type.Date', 
               formatOptions: {
                 style: 'medium',
@@ -234,6 +255,74 @@
 							state="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusState'}"
               icon="{path: 'executionStatus_code', formatter: '.formatter.getExecutionStatusIcon'}"/>
             <!-- hidden -->
+            <VBox id="deltaArrivalTimeVBox"
+							items="{
+								path: 'arrivalTimes',
+								templateShareable: false
+							}">
+							<microchart:BulletMicroChart
+                id="deltaArrivalTimeChart"
+								visible="{= ${plannedBizTs} !== null &amp;&amp; ${actualBizTs} !== null }"
+								class="sapUiSmallMarginEnd pofArribalTimeMicroChart"
+								size="S"
+								scale=""
+								targetValue="{=
+									${plannedBizTsEarliest} !== null
+										? (${plannedBizTs} - ${plannedBizTsEarliest}) * 2
+										: ${PurchaseOrderItemDetails>/criticalThreshold} * 2
+								}"
+								minValue="0"
+								maxValue="{=
+									${plannedBizTsEarliest} !== null
+										? (${plannedBizTs} - ${plannedBizTsEarliest}) * 4
+										: ${PurchaseOrderItemDetails>/criticalThreshold} * 4
+								}"
+								mode="Delta"
+								showDeltaValue="true"
+								deltaValueLabel="{
+									parts: ['plannedBizTs', 'actualBizTs', { value: 'short' }],
+									formatter: '.formatter.timeDuration'
+								}"
+								showValueMarker="true"
+								showTargetValue="false"
+								tooltip="{
+									parts: [
+										{path: 'plannedBizTs', type: 'sap.ui.model.odata.type.DateTimeOffset'},
+										{path: 'actualBizTs', type: 'sap.ui.model.odata.type.DateTimeOffset'}
+									],
+									formatter: '.formatter.deltaTimeTooltip'
+								}">
+                <microchart:actual>
+                  <microchart:BulletMicroChartData id="deltaArrivalTimeChartData"
+                    value="{=
+                      ${plannedBizTsEarliest} !== null
+                        ? ${actualBizTs} - ${plannedBizTs} + (${plannedBizTs} - ${plannedBizTsEarliest}) * 2
+                        : ${actualBizTs} - ${plannedBizTs} + ${PurchaseOrderItemDetails>/criticalThreshold} * 2
+                    }"
+                    color="{:=
+                      Math.abs(${actualBizTs} - ${plannedBizTs}) >= (${plannedBizTs} - ${plannedBizTsEarliest})
+                        ? 'Error'
+                        : 'Good'
+                    }" />
+                </microchart:actual>
+								<microchart:thresholds>
+									<microchart:BulletMicroChartData color="Critical"
+										value="{=
+											${plannedBizTsEarliest} !== null
+												? ${plannedBizTs} - ${plannedBizTsEarliest}
+												: ${PurchaseOrderItemDetails>/criticalThreshold}
+										}"
+										tooltip="" />
+									<microchart:BulletMicroChartData color="Critical"
+										value="{=
+											${plannedBizTsEarliest} !== null
+												? (${plannedBizTs} - ${plannedBizTsEarliest}) * 3
+												: ${PurchaseOrderItemDetails>/criticalThreshold} * 3
+										}"
+										tooltip="" />
+								</microchart:thresholds>
+							</microchart:BulletMicroChart>
+						</VBox>
             <Text text="{itemDescription}"/>
             <ObjectNumber
               emphasized="false"

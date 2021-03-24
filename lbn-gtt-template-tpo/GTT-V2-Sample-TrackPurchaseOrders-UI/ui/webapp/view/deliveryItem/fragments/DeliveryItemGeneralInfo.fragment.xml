@@ -87,9 +87,18 @@
 			</smartForm:GroupElement>
 		</smartForm:Group>
 		<smartForm:Group label=" ">
-			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_plannedDeliveryDate_LABEL}">
+			<smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_initialPlannedDeliveryDate_LABEL}">
 				<Text text="{
-					path:'plannedDeliveryDate', 
+					path:'initialPlannedDeliveryDate', 
+					type: 'sap.ui.model.type.DateTime',
+					formatOptions: {
+						pattern: 'MMM dd, yyyy',
+						UTC: true
+					}}" />
+			</smartForm:GroupElement>
+      <smartForm:GroupElement label="{@i18n>EL_InboundDeliveryItem_revisedPlannedDeliveryDate_LABEL}">
+				<Text text="{
+					path:'revisedPlannedDeliveryDate', 
 					type: 'sap.ui.model.type.DateTime',
 					formatOptions: {
 						pattern: 'MMM dd, yyyy',
@@ -106,13 +115,13 @@
 					}}" />
 			</smartForm:GroupElement>
 			<smartForm:GroupElement >
-				<smartField:SmartField value="{grossWeight}"/>
+				<smartField:SmartField value="{grossWeight}" uomVisible="{= !!${grossWeight}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement  >
-				<smartField:SmartField value="{netWeight}"/>
+				<smartField:SmartField value="{netWeight}" uomVisible="{= !!${netWeight}}"/>
 			</smartForm:GroupElement>
 			<smartForm:GroupElement  >
-				<smartField:SmartField value="{volume}"/>
+				<smartField:SmartField value="{volume}" uomVisible="{= !!${volume}}"/>
 			</smartForm:GroupElement>
 		</smartForm:Group>
 		<smartForm:Group label=" ">

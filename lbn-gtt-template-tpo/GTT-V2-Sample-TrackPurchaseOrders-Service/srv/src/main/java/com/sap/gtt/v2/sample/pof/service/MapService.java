@@ -1,7 +1,17 @@
 package com.sap.gtt.v2.sample.pof.service;
 
 import com.sap.gtt.v2.sample.pof.constant.Constants;
-import com.sap.gtt.v2.sample.pof.domain.*;
+import com.sap.gtt.v2.sample.pof.domain.ActualSpot;
+import com.sap.gtt.v2.sample.pof.domain.CurrentLocation;
+import com.sap.gtt.v2.sample.pof.domain.EstimatedArrival;
+import com.sap.gtt.v2.sample.pof.domain.Event;
+import com.sap.gtt.v2.sample.pof.domain.EventEx;
+import com.sap.gtt.v2.sample.pof.domain.Location;
+import com.sap.gtt.v2.sample.pof.domain.OrderBy;
+import com.sap.gtt.v2.sample.pof.domain.PlannedEvent;
+import com.sap.gtt.v2.sample.pof.domain.PlannedSpot;
+import com.sap.gtt.v2.sample.pof.domain.ProcessEventDirectory;
+import com.sap.gtt.v2.sample.pof.domain.Route;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterExpressionBuilder;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
@@ -22,7 +32,16 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
@@ -51,7 +70,6 @@ public class MapService {
 
     @Autowired
     private POFService pofService;
-
 
     public LocationDTO getLocationDetail(Location location) {
         if (location == null) {
@@ -129,7 +147,7 @@ public class MapService {
             FilterExpression filter = FilterExpressionBuilder.createFilterExpression(filterConditions, BinaryOperator.OR);
             if (filter != null) {
                 String url = UriComponentsBuilder.fromUriString(Constants.URL_SPLITTER+k)
-                        .queryParam(FILTER,filter.getExpressionString())
+                        .queryParam(FILTER, filter.getExpressionString())
                         .build().encode().toUriString();
                 List<EventEx> events = gttCoreServiceClient.readEntitySetAll(url, EventEx.class).getResults();
                 events.forEach(eventEx -> eventExMap.put(eventEx.getId(), eventEx));
@@ -212,14 +230,14 @@ public class MapService {
         Map<String, Location> locationMap = createLocationMap(locations);
         routes.forEach(route -> route.getActualSpots()
                 .forEach(actualSpot -> {
-            Location location = locationMap.get(actualSpot.getLocationAltKey());
-            LocationDTO locationDTO = getLocationDetail(location);
-            actualSpot.setLocation(locationDTO);
-            if (locationDTO != null ) {
-                actualSpot.setLocationDescription(locationDTO.getLocationDescription());
-                actualSpot.setObjectTypeCode(locationDTO.getObjectTypeCode());
-            }
-        }));
+                    Location location = locationMap.get(actualSpot.getLocationAltKey());
+                    LocationDTO locationDTO = getLocationDetail(location);
+                    if (locationDTO != null) {
+                        actualSpot.setLocationDescription(locationDTO.getLocationDescription());
+                        actualSpot.setObjectTypeCode(locationDTO.getObjectTypeCode());
+                        actualSpot.setLocation(locationDTO);
+                    }
+                }));
     }
 
     /**
@@ -617,6 +635,7 @@ public class MapService {
         locations.forEach(location -> locationMap.put(location.getLocationAltKey(), location));
         return locationMap;
     }
+
     public Comparator<PlannedEvent> getPlannedEventComparator() {
         return comparing(PlannedEvent::getPlannedBusinessTimestamp, nullsFirst(Long::compareTo))
                 .thenComparing(PlannedEvent::getPayloadSequence, nullsFirst(Integer::compareTo));

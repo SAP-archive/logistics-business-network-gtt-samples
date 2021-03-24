@@ -20,6 +20,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +43,7 @@ public class PurchaseOrderHandlerTest {
     private LocationService locationService;
 
     @Mock
-    POFPurchaseOrderItemODataHandler itemODataHandler;
+    private POFPurchaseOrderItemODataHandler itemODataHandler;
 
     @Before
     public void setUp() {
@@ -61,7 +62,7 @@ public class PurchaseOrderHandlerTest {
                 "&$expand=purchaseOrderItemTPs, purchasesOrderItemTPs/purchaseOrderItem, incoterms,receivingLocationType, " +
                 "supplierLocationType, toReceivingLocation, toSupplierLocation";
 
-        String json = IOUtils.toString(new ClassPathResource("/odata/purchase-orders.json").getInputStream());
+        String json = IOUtils.toString(new ClassPathResource("/odata/purchase-orders.json").getInputStream(), StandardCharsets.UTF_8);
         ODataResultList<PurchaseOrder> entityList = ODataUtils.readEntitySet(json, PurchaseOrder.class);
         when(this.client.readEntitySet(anyString(), eq(PurchaseOrder.class))).thenReturn(entityList);
         given(POFUtils.getNormalizedUri(any())).willReturn(querySalesOrderSet);
@@ -87,7 +88,7 @@ public class PurchaseOrderHandlerTest {
                 "&$expand=purchaseOrderItemTPs, purchaseOrderItemTPs/purchaseOrderItem, incoterms, receivingLocationType, " +
                 "supplierLocationType, toReceivingLocation, toSupplierLocation";
 
-        String json = IOUtils.toString(new ClassPathResource("/odata/purchase-order.json").getInputStream());
+        String json = IOUtils.toString(new ClassPathResource("/odata/purchase-order.json").getInputStream(), StandardCharsets.UTF_8);
         PurchaseOrder entity = ODataUtils.readEntity(json, PurchaseOrder.class);
 
         when(this.client.readEntity(anyString(), eq(PurchaseOrder.class))).thenReturn(entity);

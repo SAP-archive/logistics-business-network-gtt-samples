@@ -130,7 +130,7 @@
                 "sap_belize_hcb",
                 "sap_belize_hcw"
               ],
-              "ui5VersionNumber": "1.78.19",
+              "ui5VersionNumber": "1.78.20",
               "InAppHelp": {
                 "config": {
                   "enabled": false,

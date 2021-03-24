@@ -15,6 +15,34 @@
     margin-bottom: 1rem;
   }
 }
+.pofObjectNumber .sapMObjectNumberText {
+  font-size: 1.5rem;
+}
+.pofObjectNumber .sapMObjectNumberUnit {
+  font-size: 1rem;
+}
+.completionRateTableChart .sapSuiteHBMCChartSvg {
+  border-radius: 50%;
+  background-color: #d5dadc;
+}
+.sapMListTblCell .tableKeyColumn {
+  font-weight: bold;
+}
+.sapMListTblHeaderCell .sapMColumnHeaderContent {
+  margin-top: 0.2rem;
+}
+.sapMListTblCell {
+  vertical-align: middle;
+}
+.sapMListTblHasPopin .sapMListTblCell {
+  vertical-align: top;
+}
+.sapMListTblHasPopin .sapMListTblCell > * {
+  margin-top: 0.3rem;
+}
+.pofCompletionRate .sapSuiteHBMCValueContainer {
+  color: #5899da;
+}
 .currentLocationMap {
   position: relative;
   animation: currentLocationRefresh 1s ease-out infinite;
@@ -49,6 +77,14 @@
 .purchaseOrderItemDetail .milestoneProcess .suiteUiProcessFlowLaneHeaderText {
   white-space: pre;
 }
+.purchaseOrderItemDetail .pofArribalTimeMicroChart {
+  height: 2rem;
+}
+.purchaseOrderItemDetail .pofArribalTimeMicroChart .sapSuiteBMCTopLabel {
+  display: block;
+  font-size: 0.65rem;
+  margin-bottom: 0;
+}
 .purchaseOrderItemDetailDeliveryItemsTableContainer {
   max-height: 450px;
 }
@@ -77,52 +113,18 @@
 .pofTrackingMap .sapMPanelWrappingDivTb > .sapMBtn[aria-expanded="false"] {
   display: none;
 }
-.pofReportingHistoryList {
-  padding: 0.5rem 1rem;
-}
-.pofReportingHistoryList .sapMLIB .sapMLIBContent {
-  padding: 0.2rem 0;
-}
-.purchaseOrderItemDetailScheduleLinesTableContainer {
-  max-height: 450px;
-}
-.pofLocationPopoverTitle {
-  font-weight: bold;
-}
-.pofHeaderContentPropertyLabel:after {
-  content: ":";
-}
 .pofGenericTag {
   width: 100px;
 }
 .deliveryItemDetailReferenceDocumentsTableContainer {
   max-height: 450px;
 }
-.pofObjectNumber .sapMObjectNumberText {
-  font-size: 1.5rem;
+.pofReportingHistoryList {
+  padding: 0.5rem 1rem;
 }
-.pofObjectNumber .sapMObjectNumberUnit {
-  font-size: 1rem;
+.pofReportingHistoryList .sapMLIB .sapMLIBContent {
+  padding: 0.2rem 0;
 }
-.completionRateTableChart .sapSuiteHBMCChartSvg {
-  border-radius: 50%;
-  background-color: #d5dadc;
-}
-.sapMListTblCell .tableKeyColumn {
+.pofLocationPopoverTitle {
   font-weight: bold;
-}
-.sapMListTblHeaderCell .sapMColumnHeaderContent {
-  margin-top: 0.2rem;
-}
-.sapMListTblCell {
-  vertical-align: middle;
-}
-.sapMListTblHasPopin .sapMListTblCell {
-  vertical-align: top;
-}
-.sapMListTblHasPopin .sapMListTblCell > * {
-  margin-top: 0.3rem;
-}
-.pofCompletionRate .sapSuiteHBMCValueContainer {
-  color: #5899da;
 }

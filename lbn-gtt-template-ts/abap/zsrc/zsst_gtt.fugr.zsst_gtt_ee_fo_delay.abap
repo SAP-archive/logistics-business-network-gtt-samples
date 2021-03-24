@@ -56,98 +56,82 @@ FUNCTION zsst_gtt_ee_fo_delay.
 *"      EVENT_DATA_ERROR
 *"      STOP_PROCESSING
 *"----------------------------------------------------------------------
-  DATA:
-    lv_timestamp      TYPE timestampl,
-    lv_event_count    TYPE /saptrx/evtcnt,
-    ls_trackingheader TYPE /saptrx/bapi_evm_header.
+  DATA: lt_execinfo_tr TYPE /scmtms/t_tor_exec_tr_k.
+  FIELD-SYMBOLS <ls_root> TYPE /scmtms/s_em_bo_tor_root.
 
-  FIELD-SYMBOLS:
-    <ls_tor_root>            TYPE /scmtms/s_em_bo_tor_root,
-    <ls_tor_execinfo>        TYPE /scmtms/s_em_bo_tor_execinfo,
-    <ls_tor_execinfo_before> TYPE /scmtms/s_em_bo_tor_execinfo.
+  CALL FUNCTION 'ZSST_GTT_EXTR_EVT_TU_DELAY'
+    EXPORTING
+      i_appsys               = i_appsys
+      i_event_type           = i_event_type
+      i_all_appl_tables      = i_all_appl_tables
+      i_event_type_cntl_tabs = i_event_type_cntl_tabs
+      i_events               = i_events
+    TABLES
+      ct_trackingheader      = ct_trackingheader
+      ct_tracklocation       = ct_tracklocation
+      ct_trackaddress        = ct_trackaddress
+      ct_trackparameters     = ct_trackparameters
+    CHANGING
+      c_eventid_map          = c_eventid_map
+    EXCEPTIONS
+      parameter_error        = 1
+      event_data_error       = 2
+      stop_processing        = 3
+      OTHERS                 = 4.
+  CASE sy-subrc.
+    WHEN 1.
+      RAISE parameter_error.
+    WHEN 2.
+      RAISE event_data_error.
+    WHEN 3.
+      RAISE stop_processing.
+  ENDCASE.
+
 
   DATA(lo_actual_event) = NEW lcl_actual_event( ).
-  lo_actual_event->get_execution(
-    EXPORTING
-      i_all_appl_tables = i_all_appl_tables
-    IMPORTING
-      et_execution      = DATA(lt_tor_execinfo) ).
-
-  lo_actual_event->get_execution(
-    EXPORTING
-      i_all_appl_tables = i_all_appl_tables
-      iv_old            = abap_true
-    IMPORTING
-      et_execution      = DATA(lt_tor_execinfo_before) ).
-
   TRY.
       LOOP AT i_events ASSIGNING FIELD-SYMBOL(<ls_event>).
-
-        CLEAR ls_trackingheader.
-        ls_trackingheader-language = sy-langu.
-
-        ASSIGN <ls_event>-maintabref->* TO <ls_tor_root>.
-        CHECK sy-subrc = 0.
-        ls_trackingheader-evtid   = /scmtms/if_tor_const=>sc_tor_event-delay.
-
-        CASE <ls_tor_root>-tor_cat.
-          WHEN /scmtms/if_tor_const=>sc_tor_category-active.
-            ls_trackingheader-trxcod = /scmtms/cl_scem_int_c=>sc_trackid_codesets-tor_tec.
-          WHEN /scmtms/if_tor_const=>sc_tor_category-booking.
-            ls_trackingheader-trxcod = /scmtms/cl_scem_int_c=>sc_trackid_codesets-tor_tec.
-          WHEN /scmtms/if_tor_const=>sc_tor_category-freight_unit.
-            ls_trackingheader-trxcod = /scmtms/cl_scem_int_c=>sc_trackid_codesets-freight_unit.
-          WHEN /scmtms/if_tor_const=>sc_tor_category-transp_unit.
-            ls_trackingheader-trxcod = /scmtms/cl_scem_int_c=>sc_trackid_codesets-tor_tec.
-        ENDCASE.
-
-        ls_trackingheader-trxid   = <ls_tor_root>-tor_id.
-
-        GET TIME STAMP FIELD lv_timestamp.
-        ls_trackingheader-evttst = lv_timestamp.
-        ls_trackingheader-sndnam = /scmtms/cl_scem_int_c=>gc_sendername_tm.
-
-
-        LOOP AT lt_tor_execinfo ASSIGNING <ls_tor_execinfo>
-          WHERE parent_node_id = <ls_tor_root>-node_id AND
-                event_code     = /scmtms/if_tor_const=>sc_tor_event-delay.
-
-          ASSIGN lt_tor_execinfo_before[ KEY node_id COMPONENTS
-            node_id = <ls_tor_execinfo>-node_id ] TO <ls_tor_execinfo_before>.
-          IF ( sy-subrc = 0 AND <ls_tor_execinfo_before> <> <ls_tor_execinfo> ) OR  sy-subrc <> 0.
-            lv_event_count += 1.
-            /scmtms/cl_em_tm_helper=>extract_standard_event(
-              EXPORTING
-                is_execinfo           = <ls_tor_execinfo>
-                iv_evt_cnt            = lv_event_count
-                iv_eventid            = <ls_event>-eventid
-                is_trackingheader     = ls_trackingheader
-              CHANGING
-                ct_trackingheader     = ct_trackingheader[]
-                ct_tracklocation      = ct_tracklocation[]
-                ct_trackaddress       = ct_trackaddress[]
-                ct_trackparameters    = ct_trackparameters[]
-                ct_eventid_map        = c_eventid_map ).
-          ENDIF.
-        ENDLOOP.
-      ENDLOOP.
-
-      CLEAR ct_trackparameters.
-
-      LOOP AT i_events ASSIGNING <ls_event>.
-
         DATA(lo_tor_actual_event) = lo_actual_event->get_tor_actual_event_class( <ls_event> ).
-
         lo_tor_actual_event->adjust_ae_location_data(
           EXPORTING
             i_all_appl_tables  = i_all_appl_tables
             iv_event_code      = /scmtms/if_tor_const=>sc_tor_event-delay
             i_event            = <ls_event>
+            it_eventid_map     = c_eventid_map
           CHANGING
             ct_trackingheader  = ct_trackingheader[]
             ct_tracklocation   = ct_tracklocation[]
             ct_trackparameters = ct_trackparameters[] ).
+
+        ASSIGN <ls_event>-maintabref->* TO <ls_root>.
+        CHECK sy-subrc = 0.
+
+        ASSIGN ct_trackingheader[ trxid = <ls_root>-tor_id ] TO FIELD-SYMBOL(<ls_trackingheader>).
+        CHECK sy-subrc = 0.
+
+        ASSIGN ct_tracklocation[ evtcnt = <ls_trackingheader>-evtcnt ] TO FIELD-SYMBOL(<ls_tracklocation>).
+        CHECK sy-subrc = 0.
+
+        ASSIGN ct_trackparameters[ param_name  = lif_ef_constants=>cs_parameter-ref_planned_event_milestone ]
+          TO FIELD-SYMBOL(<ls_trackparams>).
+        IF sy-subrc = 0.
+          IF <ls_trackparams>-param_value IS NOT INITIAL.
+            INSERT VALUE #( evtcnt      = <ls_trackingheader>-evtcnt
+                            param_name  = lif_ef_constants=>cs_parameter-ref_planned_event_locid1
+                            param_value = <ls_tracklocation>-locid1 ) INTO TABLE ct_trackparameters.
+
+            INSERT VALUE #( evtcnt      = <ls_trackingheader>-evtcnt
+                            param_name  = lif_ef_constants=>cs_parameter-ref_planned_event_locid2
+                            param_value = <ls_tracklocation>-locid2 ) INTO TABLE ct_trackparameters.
+
+          ENDIF.
+        ENDIF.
+
+        CLEAR: <ls_tracklocation>-loccod,
+               <ls_tracklocation>-locid1,
+               <ls_tracklocation>-locid2.
       ENDLOOP.
+
     CATCH cx_udm_message INTO DATA(lo_udm_message).
       lcl_tools=>get_errors_log(
         EXPORTING

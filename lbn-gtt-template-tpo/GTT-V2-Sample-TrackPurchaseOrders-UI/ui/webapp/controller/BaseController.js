@@ -223,22 +223,18 @@ sap.ui.define([
      */
     registerEvents: function (sRouteName) {
       var oModel = this.getModel(sRouteName);
-      function _sizeChanged(mParams) {
-        switch (mParams.name) {
-          case Constants.DEVICE_TYPE.PHOHE:
-            oModel.setProperty("/genericTagPriority", sap.m.OverflowToolbarPriority.AlwaysOverflow);
-            break;
-          case Constants.DEVICE_TYPE.TABLET:
-          case Constants.DEVICE_TYPE.DESKTOP:
-            oModel.setProperty("/genericTagPriority", sap.m.OverflowToolbarPriority.NeverOverflow);
-            break;
+      function _sizeChanged() {
+        if(Device.system.phone) {
+          oModel.setProperty("/genericTagPriority", sap.m.OverflowToolbarPriority.AlwaysOverflow);
+        } else if (Device.system.tablet || Device.system.desktop) {
+          oModel.setProperty("/genericTagPriority", sap.m.OverflowToolbarPriority.NeverOverflow);
         }
       }
 
       Device.media.attachHandler(_sizeChanged, null, Device.media.RANGESETS.SAP_STANDARD);
 
       // Do some initialization work based on the current size
-      _sizeChanged(Device.media.getCurrentRange(Device.media.RANGESETS.SAP_STANDARD));
+      _sizeChanged();
     },
 
     // ============================================================

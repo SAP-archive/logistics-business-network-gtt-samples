@@ -3,6 +3,7 @@ package com.sap.gtt.v2.sample.sst.rest.service;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.nullsLast;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 import com.sap.gtt.v2.sample.sst.common.model.ProcessEventDirectory;
 import com.sap.gtt.v2.sample.sst.common.service.ProcessEventDirectoryService;
@@ -13,10 +14,15 @@ import com.sap.gtt.v2.sample.sst.odata.service.PlannedEventService;
 import com.sap.gtt.v2.sample.sst.odata.service.ShipmentStopsForVpService;
 import com.sap.gtt.v2.sample.sst.rest.helper.RouteHelper;
 import com.sap.gtt.v2.sample.sst.rest.model.ActualSpot;
+import com.sap.gtt.v2.sample.sst.rest.model.CurrentLocation;
+import com.sap.gtt.v2.sample.sst.rest.model.EstimatedArrival;
 import com.sap.gtt.v2.sample.sst.rest.model.PlannedSpot;
 import com.sap.gtt.v2.sample.sst.rest.model.Route;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,10 +60,21 @@ public class ShipmentRouteService extends RouteAbstractService {
         fillCurrentLocation(route);
         validateAndFillPlannedSpots(route, plannedSpots);
 
+        updateETAOfStopsForVp(route);
         routeHelper.updateRoutesConnection(route, plannedEvents);
-        routeHelper.updateETAOfStopsForVp(route);
         routeHelper.updateEventStatusOfStopsForVp(route, plannedEvents);
         return route;
+    }
+
+    private void updateETAOfStopsForVp(final Route route) {
+        final List<StopsForVp> stopsForVp = route.getStopsForVp();
+        final Optional<CurrentLocation> currentLocationOpt = Optional.ofNullable(route.getCurrentLocation());
+        currentLocationOpt.ifPresent(currentLocation -> {
+            final List<EstimatedArrival> estimatedArrivals = currentLocation.getEstimatedArrival();
+            final Map<String, EstimatedArrival> estimatedArrivalsByStopIds = estimatedArrivals.stream()
+                    .collect(toMap(EstimatedArrival::getStopId, Function.identity()));
+            stopsForVp.forEach(stopForVp -> stopForVp.setEstimatedArrival(estimatedArrivalsByStopIds.get(stopForVp.getStopId())));
+        });
     }
 
     private List<ActualSpot> getActualSpots(final String shipmentId) {

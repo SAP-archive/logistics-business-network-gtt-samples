@@ -91,6 +91,7 @@ FUNCTION ZSST_GTT_EE_FO_DECOUPLING.
             i_all_appl_tables  = i_all_appl_tables
             iv_event_code      = /scmtms/if_tor_const=>sc_tor_event-decoupling
             i_event            = <ls_event>
+            it_eventid_map     = c_eventid_map
           CHANGING
             ct_trackingheader  = ct_trackingheader[]
             ct_tracklocation   = ct_tracklocation[]

@@ -59,6 +59,30 @@ sap.ui.define(
       Then.iTeardownMyApp();
     });
 
+    opaQunit("FilterBar should filter Is Delayed", function (Given, When, Then) {
+      // Arrangements
+      Given.iStartMyUIComponent({
+        componentConfig: {
+          name: "com/sap/gtt/app/sample/pof",
+          async: true,
+        },
+        timeout: 60,
+        autoWait: true,
+      });
+      // check items in the PO table
+      Then.onThePurchaseOrderListPage.theTableHasEntries();
+
+      // enter filter in filterbar
+      When.onThePurchaseOrderListPage.iEnterIsDelayedFilter("yes").
+        and.iPressGoBtn();
+      // Then.onThePurchaseOrderListPage.theTableHasSpecificNumOfEntries(1);
+
+      // check items in the PO table
+      Then.onThePurchaseOrderListPage.theTableHasEntries();
+      // Cleanup
+      Then.iTeardownMyApp();
+    });
+
     opaQunit("Should see the purchase order / purchase order items lists", function (Given, When, Then) {
       // Arrangements
       Given.iStartMyUIComponent({

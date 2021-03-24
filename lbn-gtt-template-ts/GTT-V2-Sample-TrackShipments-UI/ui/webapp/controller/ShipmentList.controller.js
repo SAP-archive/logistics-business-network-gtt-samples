@@ -57,9 +57,6 @@ sap.ui.define(
                 }
                 break;
               case GenericAppLibrary.navigation.service.NavType.xAppState:
-                selectionVariant = appData.oSelectionVariant;
-                presentationVariant = appData.presentationVariant;
-                break;
               case GenericAppLibrary.navigation.service.NavType.iAppState:
                 selectionVariant = appData.oSelectionVariant;
                 presentationVariant = appData.presentationVariant;
@@ -76,7 +73,6 @@ sap.ui.define(
 
       routePatternMatched: function () {
         this.getEventBus().publish("tracking-timeline", "clear-map");
-        this.getEventBus().publish("tracking-timeline", "cancel-map-request");
       },
 
       onShipmentPressed: function (oEvent) {
@@ -254,7 +250,7 @@ sap.ui.define(
 
       handleNavigation: function (navType, selectionVariant, presentationVariant) {
         var smartVariantManagement = this.byId("pageVariant");
-        if (smartVariantManagement.getCurrentVariantId()) {
+        if (selectionVariant && smartVariantManagement.getCurrentVariantId()) {
           // for a standard variant, an empty string is returned.
           // if not, set standard variant.
           smartVariantManagement.setCurrentVariantId("");

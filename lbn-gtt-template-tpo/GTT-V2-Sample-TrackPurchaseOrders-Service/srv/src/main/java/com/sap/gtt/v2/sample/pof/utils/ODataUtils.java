@@ -1,6 +1,8 @@
 package com.sap.gtt.v2.sample.pof.utils;
 
 
+import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getGson;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,16 +11,6 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.olingo.odata2.api.annotation.edm.EdmEntityType;
-import org.apache.olingo.odata2.api.annotation.edm.EdmNavigationProperty;
-import org.apache.olingo.odata2.api.annotation.edm.EdmProperty;
-import org.apache.olingo.odata2.api.annotation.edm.EdmType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -36,9 +28,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_INVALID_JSON;
-import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getGson;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.olingo.odata2.api.annotation.edm.EdmEntityType;
+import org.apache.olingo.odata2.api.annotation.edm.EdmNavigationProperty;
+import org.apache.olingo.odata2.api.annotation.edm.EdmProperty;
+import org.apache.olingo.odata2.api.annotation.edm.EdmType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.ReflectionUtils;
 
 public class ODataUtils {
 
@@ -172,7 +171,7 @@ public class ODataUtils {
             return null;
         } catch (JsonParseException e) {
             logger.error("Can't parse the json of class:", e);
-            throw new POFServiceException(MESSAGE_CODE_INVALID_JSON);
+            throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return t;
     }

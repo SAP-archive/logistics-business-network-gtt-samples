@@ -30,6 +30,7 @@ CLASS lcl_ctp_sender DEFINITION
 
     TYPES: BEGIN OF ts_idoc_data,
              control      TYPE /saptrx/bapi_trk_control_tab,
+             info         TYPE /saptrx/bapi_trk_info_tab,
              tracking_id  TYPE /saptrx/bapi_trk_trkid_tab,
              exp_event    TYPE /saptrx/bapi_trk_ee_tab,
              trxserv      TYPE /saptrx/trxserv,
@@ -185,7 +186,7 @@ CLASS lcl_ctp_sender IMPLEMENTATION.
     DATA: lt_bapiret    TYPE bapiret2_t.
 
     LOOP AT mt_idoc_data ASSIGNING FIELD-SYMBOL(<ls_idoc_data>).
-      CALL METHOD zcl_gtt_sof_upd_xtp_references=>send_idoc_ehpost01
+      CALL METHOD zcl_pof_gtt_upd_xtp_references=>send_idoc_ehpost01
         EXPORTING
           it_control      = <ls_idoc_data>-control
           it_tracking_id  = <ls_idoc_data>-tracking_id
@@ -652,9 +653,9 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
     DATA: ls_comwa6 TYPE vbco6,
           lt_vbfas  TYPE STANDARD TABLE OF vbfas,
           lv_vbeln  TYPE likp-vbeln,
-          lv_tknum  TYPE vttk-tknum,
           ls_vbfa   TYPE ts_vbfaex,
-          ls_likp   TYPE ts_likpex.
+          ls_likp   TYPE ts_likpex,
+          ls_vttk   TYPE vttk.
 
     CLEAR: et_vbfa[], et_likp[].
 
@@ -677,20 +678,24 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
           WHERE vbtyp_n = lif_app_constants=>cs_vbtyp-shipment
             AND vbtyp_v = lif_app_constants=>cs_vbtyp-delivery.
 
-          SELECT SINGLE tknum
-            INTO lv_tknum
+          SELECT SINGLE *
+            INTO ls_vttk
             FROM vttk
-            WHERE tknum = <ls_vbfas>-vbeln
-              AND shtyp = lif_app_constants=>cs_relevance-shtyp.
+            WHERE tknum = <ls_vbfas>-vbeln.
 
-          IF sy-subrc = 0.
+          IF sy-subrc = 0 AND
+             lcl_sh_tools=>is_appropriate_type(
+               ir_vttk = REF #( ls_vttk ) ) = abap_true.
+
             SELECT SINGLE *
               INTO CORRESPONDING FIELDS OF ls_likp
               FROM likp
-              WHERE vbeln = <ls_vbfas>-vbelv
-                AND lfart = lif_app_constants=>cs_relevance-lfart.
+              WHERE vbeln = <ls_vbfas>-vbelv.
 
-            IF sy-subrc = 0.
+            IF sy-subrc = 0 AND
+               lcl_dl_tools=>is_appropriate_dl_type(
+                 ir_struct = REF #( ls_likp ) ) = abap_true.
+
               ls_vbfa       = CORRESPONDING #( <ls_vbfas> ).
               ls_vbfa-tknum = <ls_likp_dlt>-tknum.
 
@@ -725,10 +730,12 @@ CLASS lcl_ctp_shipment_data IMPLEMENTATION.
         SELECT SINGLE *
           INTO CORRESPONDING FIELDS OF ls_likp
           FROM likp
-          WHERE vbeln = <ls_vttp_dlt>-vbeln
-            AND lfart = lif_app_constants=>cs_relevance-lfart.
+          WHERE vbeln = <ls_vttp_dlt>-vbeln.
 
-        IF sy-subrc = 0.
+        IF sy-subrc = 0 AND
+               lcl_dl_tools=>is_appropriate_dl_type(
+                 ir_struct = REF #( ls_likp ) ) = abap_true.
+
           ls_vbfa-tknum = <ls_vttp_dlt>-tknum.
           ls_vbfa-vbelv = <ls_vttp_dlt>-vbeln.
           ls_vbfa-vbeln = <ls_vttp_dlt>-tknum.
@@ -1953,7 +1960,6 @@ CLASS lcl_ctp_sender_sh_to_dl_item IMPLEMENTATION.
             INTO DATA(lv_dummy).
           lcl_tools=>throw_exception( ).
         ENDIF.
-
       ENDLOOP.
 
       IF ls_idoc_data-appobj_ctabs[] IS NOT INITIAL AND

@@ -11,6 +11,7 @@ import org.apache.olingo.odata2.api.annotation.edm.EdmProperty;
 import org.apache.olingo.odata2.api.annotation.edm.EdmType;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @EdmEntityType(namespace = Constants.MODEL_NAMESPACE)
@@ -139,11 +140,38 @@ public class InboundDeliveryItem {
     @EdmProperty(name = "executionStatus_code", facets = @EdmFacets(maxLength = 20))
     private String executionStatusCode;
 
+    @SerializedName("incoterms_code")
+    @EdmProperty(name = "incoterms_code", facets = @EdmFacets(maxLength = 255))
+    private String incotermsCode;
+
+    @EdmProperty(name = "plantLocationType_code")
+    @SerializedName("plantLocationType_code")
+    private String plantLocationTypeCode;
+
     @EdmProperty(name = "lastReportedEvent", facets = @EdmFacets(maxLength = 255))
     private String lastReportedEvent;
 
-    @EdmProperty(name = "plannedArrivalTimestamp",type = EdmType.DATE_TIME_OFFSET)
+    @EdmProperty(name = "plannedArrivalTimestamp", type = EdmType.DATE_TIME_OFFSET)
     private Long plannedArrivalTimestamp;
+
+    @EdmProperty(name = "lastEventName")
+    private String lastEventName;
+
+    @EdmProperty(name = "lastLocationAltKey")
+    private String lastLocationAltKey;
+
+    @EdmProperty(name = "lastLocationDescription")
+    private String lastLocationDescription;
+
+    @EdmProperty(name = "lastVPLocationType_code")
+    @SerializedName("lastVPLocationType_code")
+    private String lastVPLocationTypeCode;
+
+    @EdmProperty(name = "revisedPlannedDeliveryDate", type = EdmType.DATE_TIME)
+    private Long revisedPlannedDeliveryDate;
+
+    @EdmProperty(name = "initialPlannedDeliveryDate", type = EdmType.DATE_TIME)
+    private Long initialPlannedDeliveryDate;
 
     @EdmNavigationProperty(name = "supplierLocationType", toType = LocationType.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private LocationType supplierLocationType;
@@ -169,18 +197,8 @@ public class InboundDeliveryItem {
     @EdmNavigationProperty(name = "executionStatus", toType = ExecutionStatus.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private ExecutionStatus executionStatus;
 
-    @EdmProperty(name = "lastEventName")
-    private String lastEventName;
-
-    @EdmProperty(name = "lastLocationAltKey")
-    private String lastLocationAltKey;
-
-    @EdmProperty(name = "lastLocationDescription")
-    private String lastLocationDescription;
-
-    @EdmProperty(name = "lastVPLocationType_code")
-    @SerializedName("lastVPLocationType_code")
-    private String lastVPLocationTypeCode;
+    @EdmNavigationProperty(name = "arrivalTimes",toType = ArrivalTime.class,toMultiplicity = EdmNavigationProperty.Multiplicity.MANY)
+    private List<ArrivalTime> arrivalTimes;
 
     @EdmNavigationProperty(name = "lastVPLocationType", toType = VPLocationType.class, toMultiplicity =
             EdmNavigationProperty.Multiplicity.ONE)
@@ -498,6 +516,22 @@ public class InboundDeliveryItem {
         this.executionStatusCode = executionStatusCode;
     }
 
+    public String getIncotermsCode() {
+        return incotermsCode;
+    }
+
+    public void setIncotermsCode(String incotermsCode) {
+        this.incotermsCode = incotermsCode;
+    }
+
+    public String getPlantLocationTypeCode() {
+        return plantLocationTypeCode;
+    }
+
+    public void setPlantLocationTypeCode(String plantLocationTypeCode) {
+        this.plantLocationTypeCode = plantLocationTypeCode;
+    }
+
     public String getLastReportedEvent() {
         return lastReportedEvent;
     }
@@ -578,6 +612,14 @@ public class InboundDeliveryItem {
         this.executionStatus = executionStatus;
     }
 
+    public List<ArrivalTime> getArrivalTimes() {
+        return arrivalTimes;
+    }
+
+    public void setArrivalTimes(List<ArrivalTime> arrivalTimes) {
+        this.arrivalTimes = arrivalTimes;
+    }
+
     public String getLastEventName() {
         return lastEventName;
     }
@@ -616,6 +658,22 @@ public class InboundDeliveryItem {
 
     public void setLastVPLocationType(VPLocationType lastVPLocationType) {
         this.lastVPLocationType = lastVPLocationType;
+    }
+
+    public Long getRevisedPlannedDeliveryDate() {
+        return revisedPlannedDeliveryDate;
+    }
+
+    public void setRevisedPlannedDeliveryDate(Long revisedPlannedDeliveryDate) {
+        this.revisedPlannedDeliveryDate = revisedPlannedDeliveryDate;
+    }
+
+    public Long getInitialPlannedDeliveryDate() {
+        return initialPlannedDeliveryDate;
+    }
+
+    public void setInitialPlannedDeliveryDate(Long initialPlannedDeliveryDate) {
+        this.initialPlannedDeliveryDate = initialPlannedDeliveryDate;
     }
 
     @Override
@@ -660,8 +718,16 @@ public class InboundDeliveryItem {
                 ", trackingIdType='" + trackingIdType + '\'' +
                 ", processStatusCode='" + processStatusCode + '\'' +
                 ", executionStatusCode='" + executionStatusCode + '\'' +
+                ", incotermsCode='" + incotermsCode + '\'' +
+                ", plantLocationTypeCode='" + plantLocationTypeCode + '\'' +
                 ", lastReportedEvent='" + lastReportedEvent + '\'' +
                 ", plannedArrivalTimestamp=" + plannedArrivalTimestamp +
+                ", lastEventName='" + lastEventName + '\'' +
+                ", lastLocationAltKey='" + lastLocationAltKey + '\'' +
+                ", lastLocationDescription='" + lastLocationDescription + '\'' +
+                ", lastVPLocationTypeCode='" + lastVPLocationTypeCode + '\'' +
+                ", revisedPlannedDeliveryDate=" + revisedPlannedDeliveryDate +
+                ", initialPlannedDeliveryDate=" + initialPlannedDeliveryDate +
                 ", supplierLocationType=" + supplierLocationType +
                 ", plantLocationType=" + plantLocationType +
                 ", inboundDelivery=" + inboundDelivery +
@@ -670,10 +736,7 @@ public class InboundDeliveryItem {
                 ", plantLocation=" + plantLocation +
                 ", supplierLocation=" + supplierLocation +
                 ", executionStatus=" + executionStatus +
-                ", lastEventName='" + lastEventName + '\'' +
-                ", lastLocationAltKey='" + lastLocationAltKey + '\'' +
-                ", lastLocationDescription='" + lastLocationDescription + '\'' +
-                ", lastVPLocationTypeCode='" + lastVPLocationTypeCode + '\'' +
+                ", arrivalTimes=" + arrivalTimes +
                 ", lastVPLocationType=" + lastVPLocationType +
                 '}';
     }

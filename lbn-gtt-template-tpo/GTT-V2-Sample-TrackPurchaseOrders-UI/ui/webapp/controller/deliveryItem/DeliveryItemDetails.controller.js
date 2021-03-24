@@ -1,9 +1,10 @@
 sap.ui.define([
   "com/sap/gtt/app/sample/pof/controller/BaseController",
   "sap/ui/model/json/JSONModel",
+  "sap/ui/core/format/DateFormat",
   "com/sap/gtt/app/sample/pof/util/ServiceUtils",
   "com/sap/gtt/app/sample/pof/util/RestClient",
-], function (BaseController,JSONModel, ServiceUtils, RestClient) {
+], function (BaseController,JSONModel, DateFormat,  ServiceUtils, RestClient) {
   "use strict";
 
   return BaseController.extend("com.sap.gtt.app.sample.pof.controller.deliveryItem.DeliveryItemDetails", {
@@ -12,7 +13,9 @@ sap.ui.define([
     sReferenceDocumentsLoadedPath: "/isReferenceDocumentsLoaded",
 
     initModel: function () {
-      var oModel = new JSONModel({});
+      var oModel = new JSONModel({
+        lastUpdatedTimeText: "",
+      });
       this.setModel(oModel, this.routeName);
       this.initGenericTags(["processStatusGenericTag","executionStatusGenericTag"]);
       this.registerEvents(this.routeName);
@@ -27,17 +30,21 @@ sap.ui.define([
       oModel.setProperty("/urlParams", aUrlParams);
       oModel.setProperty("/timelineEventsNumber", 0);
 
+      this.bindDeliveryItemToView();
+    },
+
+    bindDeliveryItemToView: function () {
       var oODataModel = this.getModel();
       oODataModel.metadataLoaded()
         .then(function () {
           var sEntitySetKey = oODataModel.createKey("InboundDeliveryItem", {
-            id: sId,
+            id: this.getModel(this.routeName).getProperty(this.sDeliveryItemIdPath),
           });
           this.bindView(sEntitySetKey, {
             expand: "incoterms,toSupplierLocation,toPlantLocation,plantLocationType,supplierLocationType",
           });
-        }.bind(this)
-        );
+          this.setLastUpdatedTime();
+        }.bind(this));
     },
 
     updateView: function () {
@@ -135,6 +142,25 @@ sap.ui.define([
       return aEvents.sort(function (a, b) {
         return oGroupNo[a.eventStatus_code] - oGroupNo[b.eventStatus_code];
       });
+    },
+
+    onRefreshBtnPressed: function (oEvent) {
+      // refresh view binding
+      this.getView().getElementBinding().refresh(true);
+      this.updateView();
+
+      this.setLastUpdatedTime();
+    },
+
+    setLastUpdatedTime: function () {
+      var oMediumDateFormat = DateFormat.getDateTimeInstance({
+        style: "medium",
+        UTC: false,
+      });
+      var dLastUpdated = oMediumDateFormat.format(new Date());
+
+      this.getModel(this.routeName).setProperty("/lastUpdatedTime", dLastUpdated);
+      this.getModel(this.routeName).setProperty("/lastUpdatedTimeText", this.getText("lastRefreshedAtTimeLabel", dLastUpdated));
     },
   });
 });

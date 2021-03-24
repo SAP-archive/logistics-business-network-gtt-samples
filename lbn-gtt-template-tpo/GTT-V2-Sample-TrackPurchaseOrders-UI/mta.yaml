@@ -2,7 +2,7 @@
 _schema-version: '3.1'
 ID: gtt-v2-ui-sample-track-purchaseorders
 description: GTT Sample UI Track Purchase Orders
-version: 2.3.0
+version: 2.5.0
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

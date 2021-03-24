@@ -185,6 +185,8 @@ CLASS lcl_bo_tor_reader DEFINITION.
         capa_doc_line_no    TYPE /saptrx/paramname VALUE 'YN_SHP_CAPA_DOC_LINE_NO',
         capa_doc_no         TYPE /saptrx/paramname VALUE 'YN_SHP_CAPA_DOC_NO',
         dlv_item_alt_id     TYPE /saptrx/paramname VALUE 'YN_SHP_DLV_ITM_ALT_ID',
+        estimated_datetime  TYPE /saptrx/paramname VALUE 'YN_SHP_ESTIMATED_DATETIME',
+        estimated_timezone  TYPE /saptrx/paramname VALUE 'YN_SHP_ESTIMATED_TIMEZONE',
       END OF cs_mapping,
 
       cs_bp_type TYPE bu_id_type VALUE 'LBN001'.
@@ -367,8 +369,9 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
     DATA lv_freight_unit_line_no TYPE int4.
 
     FIELD-SYMBOLS:
-      <ls_tor_root>     TYPE /scmtms/s_em_bo_tor_root,
-      <lt_tor_root_req> TYPE /scmtms/t_em_bo_tor_root.
+      <ls_tor_root>        TYPE /scmtms/s_em_bo_tor_root,
+      <lt_tor_root_req>    TYPE /scmtms/t_em_bo_tor_root,
+      <lt_tor_root_req_tu> TYPE /scmtms/t_em_bo_tor_root.
 
     ASSIGN ir_data->* TO <ls_tor_root>.
     IF sy-subrc <> 0.
@@ -376,11 +379,11 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
       lcl_tools=>throw_exception( ).
     ENDIF.
 
-    DATA(lv_tabledef) = SWITCH #( iv_old_data
-                          WHEN abap_false THEN /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root
-                          ELSE /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root_before ).
+    DATA(lv_tabledef_fu) = SWITCH #( iv_old_data
+                             WHEN abap_false THEN /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root
+                             ELSE /scmtms/cl_scem_int_c=>sc_table_definition-bo_tor-req_root_before ).
 
-    DATA(lr_req_root) = mo_ef_parameters->get_appl_table( iv_tabledef = lv_tabledef ).
+    DATA(lr_req_root) = mo_ef_parameters->get_appl_table( iv_tabledef = lv_tabledef_fu ).
     ASSIGN lr_req_root->* TO <lt_tor_root_req>.
     IF sy-subrc <> 0.
       MESSAGE e010(zsst_gtt) INTO lv_dummy.
@@ -1453,7 +1456,8 @@ CLASS lcl_bo_freight_booking_reader DEFINITION INHERITING FROM lcl_bo_tor_reader
       END OF ts_freight_booking.
 
     CONSTANTS:
-      cs_mbl_doctype TYPE string VALUE 'T52'.
+      cs_mbl_doctype_ocean TYPE string VALUE 'T52',
+      cs_mbl_doctype_air   TYPE string VALUE 'T55'.
 
     METHODS get_data_from_maintab
       IMPORTING
@@ -1746,7 +1750,7 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
     cs_freight_booking-tor_id = <ls_root>-tor_id.
     SHIFT cs_freight_booking-tor_id LEFT DELETING LEADING '0'.
     cs_freight_booking-dgo_indicator = <ls_root>-dgo_indicator.
-    cs_freight_booking-tspid = get_carrier_name( iv_tspid = cs_freight_booking-tspid ).
+    cs_freight_booking-tspid = get_carrier_name( iv_tspid = CONV #( <ls_root>-tspid ) ).
 
     SELECT SINGLE motscode
       FROM /sapapo/trtype
@@ -1771,8 +1775,11 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
     cs_freight_booking-total_distance_km  = <ls_root>-total_distance_km.
     cs_freight_booking-traffic_direct     = <ls_root>-traffic_direct.
     cs_freight_booking-shipping_type      = <ls_root>-shipping_type.
-    cs_freight_booking-trmodcod           = lif_sst_constants=>cs_trmodcod-road.
-
+    IF <ls_root>-trmodcod = lif_sst_constants=>cs_trmodcod-air.
+      cs_freight_booking-trmodcod = lif_sst_constants=>cs_trmodcod-inland_waterway.
+    ELSE.
+      cs_freight_booking-trmodcod = lif_sst_constants=>cs_trmodcod-road.
+    ENDIF.
   ENDMETHOD.
 
   METHOD get_data_from_item.
@@ -1907,6 +1914,8 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
 
   METHOD get_docref_data.
 
+    DATA: lv_master_bill_of_landing TYPE string.
+
     FIELD-SYMBOLS:
       <ls_root>     TYPE /scmtms/s_em_bo_tor_root,
       <lt_root_old> TYPE /scmtms/t_em_bo_tor_root.
@@ -1937,9 +1946,25 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
         DATA(lv_before_image) = abap_true.
       ENDIF.
     ENDIF.
-    IF <ls_root>-partner_mbl_id IS NOT INITIAL.
-      APPEND <ls_root>-partner_mbl_id TO ct_ref_doc_id.
-      APPEND cs_mbl_doctype TO ct_ref_doc_type.
+
+
+    IF <ls_root>-trmodcod = lif_sst_constants=>cs_trmodcod-air.
+      IF <ls_root>-tsp_airlcawb IS NOT INITIAL AND <ls_root>-partner_mbl_id IS INITIAL.
+        lv_master_bill_of_landing = <ls_root>-tsp_airlcawb.
+      ELSEIF <ls_root>-tsp_airlcawb IS INITIAL AND <ls_root>-partner_mbl_id IS NOT INITIAL.
+        lv_master_bill_of_landing = <ls_root>-partner_mbl_id.
+      ELSEIF <ls_root>-tsp_airlcawb IS NOT INITIAL AND <ls_root>-partner_mbl_id IS NOT INITIAL.
+        lv_master_bill_of_landing = |{ <ls_root>-tsp_airlcawb }-{ <ls_root>-partner_mbl_id }|.
+      ENDIF.
+      IF lv_master_bill_of_landing IS NOT INITIAL.
+        APPEND lv_master_bill_of_landing TO ct_ref_doc_id.
+        APPEND cs_mbl_doctype_air TO ct_ref_doc_type.
+      ENDIF.
+    ELSE.
+      IF <ls_root>-partner_mbl_id IS NOT INITIAL.
+        APPEND <ls_root>-partner_mbl_id TO ct_ref_doc_id.
+        APPEND cs_mbl_doctype_ocean TO ct_ref_doc_type.
+      ENDIF.
     ENDIF.
 
   ENDMETHOD.
@@ -2507,8 +2532,11 @@ CLASS lcl_bo_freight_unit_reader IMPLEMENTATION.
     cs_freight_unit-total_duration_net = <ls_root>-total_duration_net.
     cs_freight_unit-total_distance_km  = <ls_root>-total_distance_km.
     cs_freight_unit-shipping_type      = <ls_root>-shipping_type.
-    cs_freight_unit-trmodcod           = <ls_root>-trmodcod.
-
+    IF <ls_root>-trmodcod = lif_sst_constants=>cs_trmodcod-air.
+      cs_freight_unit-trmodcod = lif_sst_constants=>cs_trmodcod-inland_waterway.
+    ELSE.
+      cs_freight_unit-trmodcod = <ls_root>-trmodcod.
+    ENDIF.
   ENDMETHOD.
 
   METHOD get_data_from_item.

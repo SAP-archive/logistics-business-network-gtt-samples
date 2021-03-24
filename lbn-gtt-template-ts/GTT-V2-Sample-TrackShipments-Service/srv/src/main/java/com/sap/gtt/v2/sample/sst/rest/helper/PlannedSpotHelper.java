@@ -51,7 +51,7 @@ public class PlannedSpotHelper {
         final String eventType = currentLocation.getEventType();
         return isDelayOrLocationUpdateEvent(eventType)
                 ? findNextPlannedSpotForDelayOrLocationUpdateEvent(plannedSpots, plannedEvents, currentLocation)
-                : findNextPlannedSpotBasedOnLastReportedEvent(plannedSpots, plannedEvents);
+                : findNextPlannedSpotAmongPlannedEvents(plannedSpots, plannedEvents);
     }
 
     private boolean isDelayOrLocationUpdateEvent(final String eventType) {
@@ -67,7 +67,7 @@ public class PlannedSpotHelper {
         final Optional<PlannedSpot> plannedSpotOpt = findReferredPlannedSpot(plannedSpots, currentLocation);
         return plannedSpotOpt.isPresent()
                 ? plannedSpotOpt
-                : findNextPlannedSpotBasedOnLastReportedEvent(plannedSpots, plannedEvents);
+                : findNextPlannedSpotAmongPlannedEvents(plannedSpots, plannedEvents);
     }
 
     private Optional<PlannedSpot> findReferredPlannedSpot(
@@ -89,7 +89,7 @@ public class PlannedSpotHelper {
                 && StringUtils.equals(refPlannedEventMatchKey, plannedSpotEventMatchKey);
     }
 
-    private Optional<PlannedSpot> findNextPlannedSpotBasedOnLastReportedEvent(
+    private Optional<PlannedSpot> findNextPlannedSpotAmongPlannedEvents(
             final List<PlannedSpot> plannedSpots, final List<PlannedEvent> plannedEvents) {
         final List<PlannedEvent> plannedEventsSublist = getPlannedEventsSublist(plannedEvents);
         return plannedEventsSublist.stream()
@@ -99,10 +99,21 @@ public class PlannedSpotHelper {
     }
 
     private List<PlannedEvent> getPlannedEventsSublist(final List<PlannedEvent> plannedEvents) {
+        return hasAnyReportedPlannedEvents(plannedEvents)
+                ? getPlannedEventsSublistByLastReported(plannedEvents)
+                : plannedEvents;
+    }
+
+    private List<PlannedEvent> getPlannedEventsSublistByLastReported(final List<PlannedEvent> plannedEvents) {
         final int index = findLastReportedPlannedEventIndex(plannedEvents);
         return (index != -1) && (index < plannedEvents.size() - 1)
                 ? plannedEvents.subList(index + 1, plannedEvents.size())
                 : emptyList();
+    }
+
+    private boolean hasAnyReportedPlannedEvents(final List<PlannedEvent> plannedEvents) {
+        return plannedEvents.stream()
+                .anyMatch(this::isPlannedEventReported);
     }
 
     private int findLastReportedPlannedEventIndex(final List<PlannedEvent> plannedEvents) {

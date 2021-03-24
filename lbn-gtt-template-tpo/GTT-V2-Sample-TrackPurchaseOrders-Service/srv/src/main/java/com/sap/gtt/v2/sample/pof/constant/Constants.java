@@ -11,6 +11,7 @@ public class Constants {
 
     public static final String EVENT_STATUS_PLANNED = "PLANNED";
 
+    public static final String DELAY_EVENT = "Delay";
     public static final String GOODS_RECEIPT_EVENT = "GoodsReceipt";
     public static final String CONFIRMATION_EVENT = "ConfirmationEvent";
     public static final String POD_EVENT = "POD";
@@ -20,6 +21,9 @@ public class Constants {
     public static final String PROCESS_STATUS_DELAYED = "DELAYED";
     public static final String PROCESS_STATUS_LATE = "LATE";
     public static final String PROCESS_STATUS_EARLY = "EARLY";
+
+    public static final String EXECUTION_STATUS_COMPLETED = "COMPLETED";
+    public static final String EXECUTION_STATUS_IN_TRANSIT = "IN_TRANSIT";
 
     public static final String CORRELATION_TYPE_CODE = "correlationType_code";
     public static final String BLANK = " ";
@@ -52,7 +56,7 @@ public class Constants {
     public static final String PROCESS_ID = "process_id";
     public static final String EVENT_ACTUAL_BUSINESS_TIMESTAMP = "event/actualBusinessTimestamp";
 
-    public static final String MARK_REVERSAL = "X";
+    public static final String BOOL_MARK = "X";
 
     private Constants() {
         // Constant class, mark it private

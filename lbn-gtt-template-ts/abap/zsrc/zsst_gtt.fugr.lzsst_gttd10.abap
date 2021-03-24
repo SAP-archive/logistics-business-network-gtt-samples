@@ -498,41 +498,15 @@ CLASS lcl_tools IMPLEMENTATION.
 
   METHOD get_stop_points.
 
-    DATA: lv_last_loc_uuid     TYPE /scmtms/locuuid,
-          lv_ord_no_counter(4) TYPE n.
+    DATA lv_order(4) TYPE n VALUE '0001'.
 
-    DATA(lv_stops) = lines( it_stop ).
-
-    LOOP AT it_stop USING KEY parent_seqnum ASSIGNING FIELD-SYMBOL(<ls_stop>). "n_2217177
-
-      CASE sy-tabix.
-        WHEN 1.
-          ADD 1 TO lv_ord_no_counter.
-          APPEND VALUE #(
-          stop_id   = |{ iv_root_id }{ lv_ord_no_counter }|
-          log_locid = <ls_stop>-log_locid
-          seq_num   = <ls_stop>-seq_num
-          ) TO et_stop_points.
-        WHEN lv_stops.
-          ADD 1 TO lv_ord_no_counter.
-          APPEND VALUE #(
-          stop_id   = |{ iv_root_id }{ lv_ord_no_counter }|
-          log_locid = <ls_stop>-log_locid
-          seq_num   = <ls_stop>-seq_num
-          ) TO et_stop_points.
-        WHEN OTHERS.
-*         new intermediate location only if the loc_uuid is different form the last intermediate location
-          IF lv_last_loc_uuid <> <ls_stop>-log_loc_uuid AND <ls_stop>-log_loc_uuid <> /scmtms/if_common_c=>c_empty_key.
-            ADD 1 TO lv_ord_no_counter.
-          ENDIF.
-          APPEND VALUE #(
-          stop_id   = |{ iv_root_id }{ lv_ord_no_counter }|
-          log_locid = <ls_stop>-log_locid
-          seq_num   = <ls_stop>-seq_num
-          ) TO et_stop_points.
-
-      ENDCASE.
-      lv_last_loc_uuid = <ls_stop>-log_loc_uuid.
+    LOOP AT it_stop USING KEY parent_seqnum ASSIGNING FIELD-SYMBOL(<ls_stop>).
+      IF NOT lcl_tools=>is_odd( <ls_stop>-seq_num ).
+        lv_order += 1.
+      ENDIF.
+      APPEND VALUE #( stop_id   = |{ iv_root_id }{ lv_order }|
+                      log_locid = <ls_stop>-log_locid
+                      seq_num   = <ls_stop>-seq_num ) TO et_stop_points.
     ENDLOOP.
 
   ENDMETHOD.

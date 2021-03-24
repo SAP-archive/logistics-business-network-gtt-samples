@@ -1,14 +1,32 @@
 package com.sap.gtt.v2.sample.pof.utils;
 
+import static com.sap.gtt.v2.sample.pof.constant.Constants.DATE_TIME_PATTERN;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.URL_SPLITTER;
+import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
+import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.ORDERBY;
+import static org.apache.logging.log4j.util.Strings.EMPTY;
+import static org.apache.logging.log4j.util.Strings.isBlank;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.sap.gtt.v2.sample.pof.constant.Constants;
 import com.sap.gtt.v2.sample.pof.domain.OrderBy;
-import com.sap.gtt.v2.sample.pof.exception.InternalErrorException;
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterExpressionBuilder;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.TimeZone;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,24 +37,8 @@ import org.apache.olingo.odata2.api.processor.ODataContext;
 import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import static com.sap.gtt.v2.sample.pof.constant.Constants.DATE_TIME_PATTERN;
-import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
-import static com.sap.gtt.v2.sample.pof.constant.Constants.URL_SPLITTER;
-import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.FILTER;
-import static com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient.ORDERBY;
-import static org.apache.logging.log4j.util.Strings.EMPTY;
-import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 public class POFUtils {
 
@@ -55,6 +57,8 @@ public class POFUtils {
     public static final String UNPLANNED_ONTIME = "UNPLANNED_ONTIME";
     public static final String EQ = " eq '";
 
+    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    private static final int MAX_FILTER_LENGTH_FOR_SPLIT = 8192;
 
     private static final String[] admissableCorrelationTypeCode = {
             EARLY_REPORTED,
@@ -93,7 +97,8 @@ public class POFUtils {
             "Shipment.Receive",
             "Shipment.Delivered",
             "Shipment.Coupling",
-            "Shipment.Decoupling");
+            "Shipment.Decoupling"
+    );
 
     private static final List<String> EVENT_TYPE_WHITE_LIST_FOR_EXECUTION_FLOW = Arrays.asList(
             "PurchaseOrderItem.GoodsReceipt",
@@ -119,11 +124,17 @@ public class POFUtils {
             "Shipment.Delivered",
             "Shipment.Coupling",
             "Shipment.Decoupling",
-            "Shipment.OutForDelivery");
+            "Shipment.OutForDelivery",
+            "Shipment.FlightBooked",
+            "Shipment.ManifestReady",
+            "Shipment.ReceivedFromShipper",
+            "Shipment.ConsigneeNotified"
+    );
 
     private static final List<String> EVENT_TYPE_BLACK_LIST_IN_MAP = Arrays.asList(
             "Delay",
-            "LocationUpdate"
+            "LocationUpdate",
+            "LocationUpdateNew"
     );
 
     private POFUtils() {
@@ -147,9 +158,9 @@ public class POFUtils {
     public static String getStringFromResource(String resourceFile) {
         String json;
         try (InputStream inputStream = new ClassPathResource(resourceFile).getInputStream()) {
-            json = IOUtils.toString(inputStream);
+            json = IOUtils.toString(inputStream, "UTF-8");
         } catch (IOException e) {
-            throw new InternalErrorException(e);
+            throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return json;
     }
@@ -161,7 +172,7 @@ public class POFUtils {
             return getNormalizedUri(requestUri, serviceRoot);
 
         } catch (ODataException e) {
-            throw new InternalErrorException(e);
+            throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 
@@ -195,7 +206,7 @@ public class POFUtils {
         try {
             return edmType.getNamespace() + "." + edmType.getName();
         } catch (EdmException e) {
-            throw new POFServiceException(e);
+            throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 
@@ -208,7 +219,7 @@ public class POFUtils {
         if (timeLong == null) {
             return null;
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN);
         Date data = new Date(timeLong);
         return formatter.format(data);
     }
@@ -221,14 +232,13 @@ public class POFUtils {
         return POFUtils.generateUrl(targetEntityName, filterConditions, andOr, true, false, expand, orderby);
     }
 
-
     public static String generateUrl(String targetEntityName, String filter, List<FilterCondition> filterConditions, BinaryOperator andOr, boolean isAdmissableCorrelatrionType, boolean isAdmissableCorrelationTypeWithoutGeoEvent, List<String> expand, List<OrderBy> orderby) {
         String filterStr = generateFilter(filterConditions, andOr, isAdmissableCorrelatrionType, isAdmissableCorrelationTypeWithoutGeoEvent);
         String expandStr = generateExpand(expand);
         String orderbyStr = generateOrderBy(orderby);
         UriComponentsBuilder re = UriComponentsBuilder.fromUriString(URL_SPLITTER.concat(targetEntityName));
         if(StringUtils.isNotBlank(filterStr))
-            re = re.queryParam(FILTER,filterStr);
+            re = re.queryParam(FILTER,filterStr + (isBlank(filter) ? EMPTY : filter));
         if(StringUtils.isNotBlank(expandStr))
             re = re.queryParam(EXPAND,expandStr);
         if(StringUtils.isNotBlank(orderbyStr))
@@ -319,7 +329,6 @@ public class POFUtils {
     }
 
     public static Gson getGson() {
-        // TODO: add adapters and use singleton when necessary
         return new Gson();
     }
 
@@ -336,11 +345,48 @@ public class POFUtils {
         return getTimeStr(System.currentTimeMillis());
     }
 
-
     public static String getUTCTimeString(Long time) {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_TIME_PATTERN);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(time);
         return formatter.format(date);
+    }
+
+    private static final String[] reportedCorrelationTypeCode = {
+            EARLY_REPORTED,
+            REPORTED,
+            LATE_REPORTED,
+    };
+
+    public static String getReportedCorrelationTypeCode() {
+        String filterCorrelationTypeCode = "";
+        for (int i = 0; i < reportedCorrelationTypeCode.length; i++) {
+            filterCorrelationTypeCode += Constants.BLANK + Constants.CORRELATION_TYPE_CODE + EQ + reportedCorrelationTypeCode[i] + "' or";
+        }
+        filterCorrelationTypeCode = filterCorrelationTypeCode.substring(0, filterCorrelationTypeCode.lastIndexOf("or"));
+        filterCorrelationTypeCode = " (".concat(filterCorrelationTypeCode).concat(") ");
+        return filterCorrelationTypeCode;
+    }
+
+    public static List<String> generateSplitLargeFilterExpr(String expression, String operator, List values) {
+        if (values.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<String> filters = new LinkedList<>();
+        StringBuilder filterBuilder = new StringBuilder();
+        for (Object value : values) {
+            String filter = String.format("%s %s ", String.format(expression, value), operator);
+            filterBuilder.append(filter);
+            if (filterBuilder.length() >= MAX_FILTER_LENGTH_FOR_SPLIT) {
+                String substring = filterBuilder.substring(0, filterBuilder.length() - operator.length() - 1);
+                filters.add(substring);
+                filterBuilder = new StringBuilder();
+            }
+        }
+        if (filterBuilder.length() != 0) {
+            String substring = filterBuilder.substring(0, filterBuilder.length() - operator.length() - 1);
+            filters.add(substring);
+        }
+        return filters;
     }
 }

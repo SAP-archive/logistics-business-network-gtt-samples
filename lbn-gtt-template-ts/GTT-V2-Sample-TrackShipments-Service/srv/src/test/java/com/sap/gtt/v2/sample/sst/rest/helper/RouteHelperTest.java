@@ -64,27 +64,6 @@ class RouteHelperTest {
     }
 
     @Test
-    void updateETAOfStopsForVp_givenRoute_shouldUpdateETAOfStopsForVp() {
-        // given
-        final Route route = new Route();
-        final StopsForVp stopForVp = new StopsForVp();
-        final Location location = new Location();
-        location.setLongitude(ONE);
-        location.setLatitude(ONE);
-        stopForVp.setLocation(location);
-        final CurrentLocation currentLocation = new CurrentLocation();
-        final PlannedEvent plannedEvent = new PlannedEvent();
-        plannedEvent.setId(randomUUID());
-        currentLocation.setPlannedEvent(plannedEvent);
-        currentLocation.setEstimatedArrival(emptyList());
-        route.setStopsForVp(singletonList(stopForVp));
-        route.setCurrentLocation(currentLocation);
-
-        // when-then
-        assertDoesNotThrow(() -> routeHelper.updateETAOfStopsForVp(route));
-    }
-
-    @Test
     void updateEventStatusOfStopsForVp_givenRoute_shouldUpdate_StopsForVp() {
         // given
         final Route route = new Route();

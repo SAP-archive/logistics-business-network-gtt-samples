@@ -1,8 +1,10 @@
 package com.sap.gtt.v2.sample.pof.configuration;
 
+import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getGson;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
+import com.sap.gtt.v2.sample.pof.exception.DestinationServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_DESTINATION_SERVICE_BINDING_NOT_FOUND;
-import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getGson;
 
 
 @Component
@@ -63,7 +63,7 @@ public class VcapParser {
 
         } catch (JsonParseException | HttpClientErrorException e) {
             logger.error("getDestination failed.", e);
-            throw new POFServiceException(MESSAGE_CODE_DESTINATION_SERVICE_BINDING_NOT_FOUND);
+            throw new DestinationServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 

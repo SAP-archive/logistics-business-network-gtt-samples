@@ -123,6 +123,21 @@ public class PurchaseOrderItem {
     @EdmProperty(name = "lastReportedEvent", facets = @EdmFacets(maxLength = 255))
     private String lastReportedEvent;
 
+    @EdmProperty(name = "isDelayed", facets = @EdmFacets(maxLength = 1))
+    private String isDelayed;
+
+    @EdmProperty(name = "delayedValue", facets = @EdmFacets(precision = 15, scale = 3))
+    private BigDecimal delayedValue;
+
+    @EdmProperty(name = "delayedQuantity", facets = @EdmFacets(precision = 15, scale = 2))
+    private BigDecimal delayedQuantity;
+
+    @EdmProperty(name = "completedAndLateValue", facets = @EdmFacets(precision = 15, scale = 2))
+    private BigDecimal completedAndLateValue;
+
+    @EdmProperty(name = "completedAndLateQuantity", facets = @EdmFacets(precision = 15, scale = 3))
+    private BigDecimal completedAndLateQuantity;
+
     @EdmNavigationProperty(name = "processStatus", toType = ProcessStatus.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private ProcessStatus processStatus;
 
@@ -414,6 +429,46 @@ public class PurchaseOrderItem {
         this.lastReportedEvent = lastReportedEvent;
     }
 
+    public String getIsDelayed() {
+        return isDelayed;
+    }
+
+    public void setIsDelayed(String isDelayed) {
+        this.isDelayed = isDelayed;
+    }
+
+    public BigDecimal getDelayedValue() {
+        return delayedValue;
+    }
+
+    public void setDelayedValue(BigDecimal delayedValue) {
+        this.delayedValue = delayedValue;
+    }
+
+    public BigDecimal getDelayedQuantity() {
+        return delayedQuantity;
+    }
+
+    public void setDelayedQuantity(BigDecimal delayedQuantity) {
+        this.delayedQuantity = delayedQuantity;
+    }
+
+    public BigDecimal getCompletedAndLateValue() {
+        return completedAndLateValue;
+    }
+
+    public void setCompletedAndLateValue(BigDecimal completedAndLateValue) {
+        this.completedAndLateValue = completedAndLateValue;
+    }
+
+    public BigDecimal getCompletedAndLateQuantity() {
+        return completedAndLateQuantity;
+    }
+
+    public void setCompletedAndLateQuantity(BigDecimal completedAndLateQuantity) {
+        this.completedAndLateQuantity = completedAndLateQuantity;
+    }
+
     public ProcessStatus getProcessStatus() {
         return processStatus;
     }
@@ -522,6 +577,11 @@ public class PurchaseOrderItem {
                 ", purchaseOrderId=" + purchaseOrderId +
                 ", supplierDescription='" + supplierDescription + '\'' +
                 ", lastReportedEvent='" + lastReportedEvent + '\'' +
+                ", isDelayed='" + isDelayed + '\'' +
+                ", delayedValue=" + delayedValue +
+                ", delayedQuantity=" + delayedQuantity +
+                ", completedAndLateValue='" + completedAndLateValue + '\'' +
+                ", completedAndLateQuantity='" + completedAndLateQuantity + '\'' +
                 ", processStatus=" + processStatus +
                 ", incoterms=" + incoterms +
                 ", purchaseOrder=" + purchaseOrder +

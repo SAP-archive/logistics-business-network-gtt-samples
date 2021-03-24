@@ -1,16 +1,25 @@
 package com.sap.gtt.v2.sample.pof.odata.bootstrap;
 
+import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_ERROR_ODATA_INIT_FAILED;
+import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_ERROR_PACKAGE_SCAN;
+import static java.util.Objects.isNull;
+
+import com.sap.gtt.v2.sample.pof.exception.DefaultExceptionHandler;
+import com.sap.gtt.v2.sample.pof.exception.FormattedErrorMessage;
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.POFODataSingleProcessor;
 import com.sap.gtt.v2.sample.pof.odata.model.ProcessStatus;
-import com.sap.gtt.v2.sample.pof.utils.POFUtils;
 import com.sap.gtt.v2.sample.pof.utils.SpringContextUtils;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import org.apache.olingo.odata2.annotation.processor.core.edm.AnnotationEdmProvider;
 import org.apache.olingo.odata2.annotation.processor.core.util.ClassHelper;
 import org.apache.olingo.odata2.api.ODataCallback;
 import org.apache.olingo.odata2.api.ODataService;
 import org.apache.olingo.odata2.api.ODataServiceFactory;
-import org.apache.olingo.odata2.api.ep.EntityProvider;
+import org.apache.olingo.odata2.api.commons.HttpStatusCodes;
 import org.apache.olingo.odata2.api.exception.ODataException;
 import org.apache.olingo.odata2.api.processor.ODataContext;
 import org.apache.olingo.odata2.api.processor.ODataErrorCallback;
@@ -25,17 +34,9 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.SystemPropertyUtils;
-
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_ERROR_ODATA_INIT_FAILED;
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_ERROR_PACKAGE_SCAN;
-import static java.util.Objects.isNull;
 
 @Component
 public class POFODataServiceFactory extends ODataServiceFactory {
@@ -49,7 +50,7 @@ public class POFODataServiceFactory extends ODataServiceFactory {
             edmProvider = new AnnotationEdmProvider(annotatedClasses);
         } catch (ODataException e) {
             logger.error("AnnotationProvider instantiating failed", e);
-            throw new POFServiceException(MESSAGE_CODE_ERROR_ODATA_INIT_FAILED);
+            throw new POFServiceException(e,MESSAGE_CODE_ERROR_ODATA_INIT_FAILED,HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 
@@ -76,7 +77,7 @@ public class POFODataServiceFactory extends ODataServiceFactory {
             }
         } catch (IOException e) {
             logger.error("package scan failed", e);
-            throw new POFServiceException(MESSAGE_CODE_ERROR_PACKAGE_SCAN);
+            throw new POFServiceException(e,MESSAGE_CODE_ERROR_PACKAGE_SCAN, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return classes;
     }
@@ -94,7 +95,7 @@ public class POFODataServiceFactory extends ODataServiceFactory {
                 }
             }
         } catch (ClassNotFoundException | IOException e) {
-            throw new POFServiceException(e);
+            throw new POFServiceException(e,HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return classes;
     }
@@ -118,10 +119,22 @@ public class POFODataServiceFactory extends ODataServiceFactory {
 
         @Override
         public ODataResponse handleError(ODataErrorContext context) {
-            String json = POFUtils.getGson().toJson(context);
+            Exception exception = context.getException();
+            logger.error("{}", exception);
+            DefaultExceptionHandler exceptionHandler = SpringContextUtils.getBean(DefaultExceptionHandler.class);
+            /*if(exception instanceof POFServiceException) {
+                exception = new POFServiceException(exception);
+            }*/
+            FormattedErrorMessage formattedErrorMessage = exceptionHandler.handleExceptionAndTransformMessage(exception);
+            HttpStatusCodes statusCodes = HttpStatusCodes.fromStatusCode(formattedErrorMessage.getHttpStatus());
+            if(statusCodes == null) {
+                statusCodes = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+            }
+            return ODataResponse.entity(formattedErrorMessage.getHttpResponse().getBody()).status(statusCodes).build();
+            /*String json = POFUtils.getGson().toJson(context);
             logger.error("{}", json, context.getException());
 
-            return EntityProvider.writeErrorDocument(context);
+            return EntityProvider.writeErrorDocument(context);*/
         }
 
     }

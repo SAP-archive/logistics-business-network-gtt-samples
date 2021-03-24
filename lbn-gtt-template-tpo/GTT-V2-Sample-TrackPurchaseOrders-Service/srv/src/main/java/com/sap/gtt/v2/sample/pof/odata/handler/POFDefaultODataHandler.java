@@ -1,11 +1,15 @@
 package com.sap.gtt.v2.sample.pof.odata.handler;
 
+import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getTargetName;
+
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.odata.model.ProcessStatus;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 import com.sap.gtt.v2.sample.pof.utils.ODataUtils;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.olingo.odata2.api.edm.EdmException;
 import org.apache.olingo.odata2.api.edm.EdmType;
 import org.apache.olingo.odata2.api.processor.ODataContext;
@@ -15,12 +19,8 @@ import org.apache.olingo.odata2.api.uri.info.GetEntityUriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import static com.sap.gtt.v2.sample.pof.utils.POFUtils.getTargetName;
 
 @Component
 public class POFDefaultODataHandler implements POFODataHandler {
@@ -96,7 +96,7 @@ public class POFDefaultODataHandler implements POFODataHandler {
             return Class.forName(getDefaultPackageName() + "." + targetType.getName());
         } catch (ClassNotFoundException | EdmException e) {
             logger.error("get class type of {} failed.", targetType, e);
-            throw new POFServiceException("get class type failed.");
+            throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 

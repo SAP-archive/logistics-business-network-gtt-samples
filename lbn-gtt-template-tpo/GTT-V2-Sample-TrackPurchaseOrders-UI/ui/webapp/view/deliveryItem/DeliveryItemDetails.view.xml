@@ -2,13 +2,9 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:uxap="sap.uxap"
 	xmlns="sap.m"
-  xmlns:layout="sap.ui.layout"
   xmlns:ctrl="com.sap.gtt.app.sample.pof.control"
-	xmlns:smartForm="sap.ui.comp.smartform"
-	xmlns:smartField="sap.ui.comp.smartfield"
   xmlns:mc="sap.suite.ui.microchart"
 	core:require="{formatMessage: 'sap/base/strings/formatMessage'}"
-	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 	xmlns:core="sap.ui.core">
 	<uxap:ObjectPageLayout 
 		id="objectPageLayout" 
@@ -27,7 +23,7 @@
 					<Title id="deliveryItemHeaderTitle" text="{inboundDeliveryNo} / {itemNo}"/>
 				</uxap:heading>
 				<uxap:content>
-        <OverflowToolbar>
+          <OverflowToolbar>
 						<content>
               <GenericTag 
                 visible="{= !!${executionStatus_code} || !!${lastEventName}}" 
@@ -66,6 +62,16 @@
 					</OverflowToolbar>
 				</uxap:content>
 				<uxap:actions>
+					<Label id="lastUpdatedAtTime"
+						text="{DeliveryItemDetails>/lastUpdatedTimeText}"
+						labelFor="refreshButton" />
+					<uxap:ObjectPageHeaderActionButton
+						id="refreshButton"
+						type="Transparent"
+						icon="sap-icon://refresh"
+						text="{i18n>refreshButton}"
+						tooltip="{i18n>refreshButton}"
+						press="onRefreshBtnPressed" />
 				</uxap:actions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
@@ -108,47 +114,47 @@
         </VBox>
           <VBox>
           <VBox alignContent="Start">
-					<Title 
+					  <Title 
               text="{@i18n>EL_InboundDeliveryItem_destination_LABEL}"
               level="H4"/>
-              <ctrl:link.LinkPopover
-                id="plantLocationPopoverId"
-								contentHeight="15rem"
-								placement="Right"
-								title="{i18n>locationDetailsPopoverTitle}"
-								text="{plant}"
-								linkText="{toPlantLocation/locationDescription}"
-								relatedObject="toPlantLocation">
-                <ctrl:content>
-                  <VBox>
-                    <Title class="pofLocationPopoverTitle" text="{toPlantLocation/locationDescription}"/>
-                    <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
-                    <Text id="receivingLocationObjectType" text="{toPlantLocation/objectTypeDescription}" />
-                    <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
-                    <Text id="receivingLocationSourceSystemId" text="{toPlantLocation/sourceSystem} / {toPlantLocation/externalId}"/>
-                    <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
-                    <HBox justifyContent="SpaceBetween">
-                      <Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
-                      <core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
-                        tooltip="{= ${toPlantLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toPlantLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
-                    </HBox>  
-                  </VBox>
-                </ctrl:content>
-              </ctrl:link.LinkPopover>
-            </VBox>
-            <VBox
-              visible="{= !!${plannedArrivalTimestamp}}"
-              class="sapUiTinyMarginTop">
-                <Title 
-                  text="{i18n>plannedArrivalAt}"
-                  level="H4"/>
+            <ctrl:link.LinkPopover
+              id="plantLocationPopoverId"
+              contentHeight="15rem"
+              placement="Right"
+              title="{i18n>locationDetailsPopoverTitle}"
+              text="{plant}"
+              linkText="{toPlantLocation/locationDescription}"
+              relatedObject="toPlantLocation">
+              <ctrl:content>
+                <VBox>
+                  <Title class="pofLocationPopoverTitle" text="{toPlantLocation/locationDescription}"/>
+                  <Label labelFor="receivingLocationObjectType" text="{i18n>objectTypeDescriptionLocationLabel}"/>
+                  <Text id="receivingLocationObjectType" text="{toPlantLocation/objectTypeDescription}" />
+                  <Label labelFor="receivingLocationSourceSystemId" text="{i18n>sourceSystemLocationLabel}"/>
+                  <Text id="receivingLocationSourceSystemId" text="{toPlantLocation/sourceSystem} / {toPlantLocation/externalId}"/>
+                  <Label labelFor="receivingLocationAddress" text="{i18n>formattedAddressLocationLabel}"/>
+                  <HBox justifyContent="SpaceBetween">
+                    <Text id="receivingLocationAddress" text="{path: 'toPlantLocation/formattedAddress', formatter: '.formatter.formatLineBreaks'}"/>
+                    <core:Icon src="sap-icon://globe" color="{= ${toPlantLocation/latitude} !== null ? 'Default' : 'Neutral' }"
+                      tooltip="{= ${toPlantLocation/latitude} !== null ? ${i18n>latitude} + ': ' + ${toPlantLocation/latitude} + '\n' + ${i18n>longitude} + ': ' + ${toPlantLocation/longitude} : ${i18n>geoCoordinatesMissing} }"/>
+                  </HBox>  
+                </VBox>
+              </ctrl:content>
+            </ctrl:link.LinkPopover>
+          </VBox>
+          <VBox
+            visible="{= !!${plannedArrivalTimestamp}}"
+            class="sapUiTinyMarginTop">
+              <Title 
+                text="{i18n>plannedArrivalAt}"
+                level="H4"/>
               <Text id="plannedArrivalTime"
                   text="{
                     path: 'plannedArrivalTimestamp',
                     type: 'sap.ui.model.odata.type.DateTimeOffset'
                   }"/>
             </VBox>
-            </VBox>
+          </VBox>
 			</HBox>
 		</uxap:headerContent>
 		<uxap:sections>

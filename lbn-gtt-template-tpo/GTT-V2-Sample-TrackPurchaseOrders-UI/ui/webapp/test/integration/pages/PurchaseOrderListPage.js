@@ -4,11 +4,13 @@ sap.ui.define([
   "sap/ui/test/matchers/AggregationLengthEquals",
   "sap/ui/test/matchers/BindingPath",
   "sap/ui/test/actions/Press",
+  "sap/ui/test/matchers/Properties",
+  "sap/ui/test/matchers/Ancestor",
   "sap/ui/test/actions/EnterText",
   "sap/ui/test/matchers/PropertyStrictEquals",
 
 ],
-function (Opa5, AggregationFilled, AggregationLengthEquals, BindingPath, Press, EnterText, PropertyStrictEquals) {
+function (Opa5, AggregationFilled, AggregationLengthEquals, BindingPath, Press, Properties, Ancestor, EnterText, PropertyStrictEquals) {
   "use strict";
 
   var sViewName = "PurchaseOrderList";
@@ -20,11 +22,24 @@ function (Opa5, AggregationFilled, AggregationLengthEquals, BindingPath, Press, 
   var sPurchaseOrderPersonalisationCancelBtnId = /(.*)purchaseOrderSmartTable-persoController-P13nDialog-cancel$/;
   var sPurchaseOrderPersonalisationOkBtnId = /(.*)purchaseOrderSmartTable-persoController-P13nDialog-ok$/;
   var sPONoId = /(.*)smartFilterBar-filterItemControl_BASIC-purchaseOrderNo$/;
+  var sIsDelayedId = /(.*)customFilterFragment--isDelayedComboBox$/;
   var sGoBtnId = /(.*)purchaseOrderList--smartFilterBar-btnGo$/;
 
   Opa5.createPageObjects({
     onThePurchaseOrderListPage: {
       actions: {
+        iEnterIsDelayedFilter: function (sFilterIsDelayedText) {
+          return this.waitFor({
+            id: sIsDelayedId,
+            controlType: "sap.m.ComboBox",
+            actions: new Press(),
+            success: function (aControls) {
+              var oComboBox = aControls[0];
+              oComboBox.setSelectedKey(sFilterIsDelayedText);
+            },
+            errorMessage: "The Is Delayed filter select doesn't exist.",
+          });
+        },
         iEnterPONoFilter: function (sFilterPONoText) {
           return this.waitFor({
             id: sPONoId,

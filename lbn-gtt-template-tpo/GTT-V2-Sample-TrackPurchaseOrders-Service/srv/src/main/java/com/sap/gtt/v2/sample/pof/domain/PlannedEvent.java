@@ -12,6 +12,7 @@ public class PlannedEvent implements Serializable {
     private Long plannedBusinessTimestamp;
     private String plannedBusinessTimeZone;
     private Long plannedBizTsEarliest;
+    private Long plannedBizTsLatest;
     private String eventType;
     private UUID id;
     @SerializedName("process_id")
@@ -42,6 +43,14 @@ public class PlannedEvent implements Serializable {
 
     public void setPlannedBizTsEarliest(Long plannedBizTsEarliest) {
         this.plannedBizTsEarliest = plannedBizTsEarliest;
+    }
+
+    public Long getPlannedBizTsLatest() {
+        return plannedBizTsLatest;
+    }
+
+    public void setPlannedBizTsLatest(Long plannedBizTsLatest) {
+        this.plannedBizTsLatest = plannedBizTsLatest;
     }
 
     public Long getPlannedBusinessTimestamp() {

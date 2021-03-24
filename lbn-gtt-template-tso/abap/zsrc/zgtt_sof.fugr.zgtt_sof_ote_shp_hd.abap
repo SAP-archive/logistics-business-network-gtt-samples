@@ -265,7 +265,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
     ENDIF.
 
 * TrackedObject table
-    IF <ls_xvttk>-vsart = '01' AND <ls_xvttk>-exti1 IS NOT INITIAL.
+    IF ( <ls_xvttk>-vsart = '01' or <ls_xvttk>-vsart = '05' or <ls_xvttk>-vsart = '15' ) AND <ls_xvttk>-exti1 IS NOT INITIAL.
       ls_control_data-paramname = gc_cp_yn_shp_res_id.
       ls_control_data-value     = 'NA'.
       ls_control_data-paramindex = '1'.
@@ -293,7 +293,7 @@ FUNCTION zgtt_sof_ote_shp_hd.
     ENDIF.
 
 * Resource table
-    IF <ls_xvttk>-vsart = '01' AND <ls_xvttk>-exti1 IS NOT INITIAL.
+    IF ( <ls_xvttk>-vsart = '01' or <ls_xvttk>-vsart = '05' or <ls_xvttk>-vsart = '15' ) AND <ls_xvttk>-exti1 IS NOT INITIAL.
       ls_control_data-paramindex = '1'.
       ls_control_data-paramname = gc_cp_yn_shp_res_tp_cnt.
       ls_control_data-value = '1'.
@@ -321,6 +321,16 @@ FUNCTION zgtt_sof_ote_shp_hd.
     ENDIF.
 
 * CarrierReferenceDocument table
+*Document Reference Type：
+*T50 - Bill of Lading
+*T51 - House Bill of Lading
+*T52 - Master Bill of Lading
+*T53 - Air Waybill
+*T54 - House Air Waybill
+*T55 - Master Air Waybill
+*T67 - Reference number of Carrier
+*CUSTR - Customer Reference
+*BN - Consignment identifier, carrier assigned
     IF <ls_xvttk>-vsart = '01' AND <ls_xvttk>-tndr_trkid IS NOT INITIAL.
       ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_type.
       ls_control_data-paramindex = '1'.
@@ -335,6 +345,16 @@ FUNCTION zgtt_sof_ote_shp_hd.
       ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_type.
       ls_control_data-paramindex = '1'.
       ls_control_data-value = 'T50'.
+      APPEND ls_control_data TO e_control_data.
+
+      ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_value.
+      ls_control_data-paramindex = '1'.
+      ls_control_data-value = <ls_xvttk>-tndr_trkid.
+      APPEND ls_control_data TO e_control_data.
+    ELSEIF ( <ls_xvttk>-vsart = '05' or <ls_xvttk>-vsart = '15' ) AND <ls_xvttk>-tndr_trkid IS NOT INITIAL.
+      ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_type.
+      ls_control_data-paramindex = '1'.
+      ls_control_data-value = 'T55'. "T55 - Master Air Waybill
       APPEND ls_control_data TO e_control_data.
 
       ls_control_data-paramname = gc_cp_yn_shp_carrier_ref_value.

@@ -1,10 +1,10 @@
 package com.sap.gtt.v2.sample.pof.constant;
 
+import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_UNSUPPORTED_TRACKING_ID_TYPE;
+
 import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
-
 import java.util.Arrays;
-
-import static java.lang.String.format;
+import org.springframework.http.HttpStatus;
 
 public enum TrackingIdTypeEnum {
     PURCHASE_ORDER("PURCHASE_ORDER"),
@@ -24,7 +24,8 @@ public enum TrackingIdTypeEnum {
         return Arrays.stream(values())
                 .filter(type -> type.getTrackingIdType().equals(trackingIdType))
                 .findFirst()
-                .orElseThrow(() -> new POFServiceException(format("Unsupported trackingIdType: %s", trackingIdType)));
+                .orElseThrow(() -> new POFServiceException(MESSAGE_CODE_UNSUPPORTED_TRACKING_ID_TYPE, new Object[]{trackingIdType},
+                    HttpStatus.INTERNAL_SERVER_ERROR.value()));
     }
 
     public String getTrackingIdType() {

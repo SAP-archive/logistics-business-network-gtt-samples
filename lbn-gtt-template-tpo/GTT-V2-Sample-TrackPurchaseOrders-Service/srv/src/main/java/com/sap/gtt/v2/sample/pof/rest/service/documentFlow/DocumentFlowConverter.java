@@ -1,5 +1,10 @@
 package com.sap.gtt.v2.sample.pof.rest.service.documentFlow;
 
+import static java.lang.String.format;
+import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import com.sap.gtt.v2.sample.pof.constant.Constants;
 import com.sap.gtt.v2.sample.pof.constant.DocumentFlowAttributeValueStatusEnum;
 import com.sap.gtt.v2.sample.pof.constant.DocumentFlowGeneralStatusEnum;
@@ -18,20 +23,15 @@ import com.sap.gtt.v2.sample.pof.odata.model.Shipment;
 import com.sap.gtt.v2.sample.pof.rest.domain.documentflow.Attribute;
 import com.sap.gtt.v2.sample.pof.rest.domain.documentflow.Node;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
-import static java.lang.String.format;
-import static java.util.Objects.isNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DocumentFlowConverter {
@@ -82,7 +82,8 @@ public class DocumentFlowConverter {
             case RESOURCE:
                 return generateResourceNode(node, (Resource) tpDefinition.getTp());
             default:
-                throw new POFServiceException(format("Unsupported Node type: %s", tpDefinition.getTrackingIdType()));
+                throw new POFServiceException(POFServiceException.ERROR_CODE,format("Unsupported Node type: %s", tpDefinition.getTrackingIdType()),
+                    HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 

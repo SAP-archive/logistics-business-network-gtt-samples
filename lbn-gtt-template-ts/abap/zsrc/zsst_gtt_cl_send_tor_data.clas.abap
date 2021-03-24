@@ -406,9 +406,9 @@ CLASS ZSST_GTT_CL_SEND_TOR_DATA IMPLEMENTATION.
           IF <ls_req_tu_root_sstring>-node_id = <ls_tor_root_sstring>-node_id.
             APPEND <ls_req_tu_root_sstring> TO lt_req_tu_root_sstring_tmp.
             READ TABLE it_req_tu_stop_sstring WITH KEY parent_seqnum
-              COMPONENTS parent_node_id = <ls_req_root_sstring>-node_id TRANSPORTING NO FIELDS.
+              COMPONENTS parent_node_id = <ls_req_tu_root_sstring>-node_id TRANSPORTING NO FIELDS.
             LOOP AT it_req_tu_stop_sstring FROM sy-tabix ASSIGNING FIELD-SYMBOL(<ls_req_tu_stop_sstring_tmp>).
-              IF <ls_req_tu_stop_sstring_tmp>-parent_node_id = <ls_req_root_sstring>-node_id.
+              IF <ls_req_tu_stop_sstring_tmp>-parent_node_id = <ls_req_tu_root_sstring>-node_id.
                 INSERT <ls_req_tu_stop_sstring_tmp> INTO TABLE lt_req_tu_stop_sstring_tmp.
               ELSE.
                 EXIT.

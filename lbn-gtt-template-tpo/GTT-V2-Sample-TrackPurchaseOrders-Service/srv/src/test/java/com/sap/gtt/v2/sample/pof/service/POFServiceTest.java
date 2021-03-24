@@ -1,5 +1,6 @@
 package com.sap.gtt.v2.sample.pof.service;
 
+import com.sap.gtt.v2.sample.pof.odata.handler.ODataHandlerFactory;
 import com.sap.gtt.v2.sample.pof.odata.model.CarrierRefDocumentForDeliveryItem;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
@@ -13,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,8 @@ import static org.mockito.ArgumentMatchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
 public class POFServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(POFServiceTest.class);
 
     @Mock
     private RestTemplate restTemplate;
@@ -59,7 +64,6 @@ public class POFServiceTest {
                 ResponseEntity.ok().body(codeList));
 
         String response = pofService.getI18n("i18n.properties");
-        System.out.println(response);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.contains("com.sap.gtt.core.DisplayFields=Display Fields"));
         Assert.assertTrue(response.contains("EL_SalesOrderItem_uom_LABEL=UoM"));
@@ -74,7 +78,6 @@ public class POFServiceTest {
                 ResponseEntity.ok(uiAnnotation));
 
         String response = pofService.getUiAnnotation();
-        System.out.println(response);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"));
         Assert.assertTrue(response.contains("<Annotation Term=\"Common.Label\" String=\"{@i18n&gt;EL_Event_trackingIdType_LABEL}\"/>"));
@@ -91,7 +94,6 @@ public class POFServiceTest {
         List<CarrierRefDocumentForDeliveryItem> docs = pofService.getCarrierRefDocuments(
                 UUID.fromString("b8b7c6c9-9a3f-5299-9a73-13f21f071d4f"));
 
-        System.out.println(docs);
         Assertions.assertThat(docs).hasSize(2);
     }
 }

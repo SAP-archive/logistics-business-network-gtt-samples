@@ -34,17 +34,22 @@ sap.ui.define([
 
       if (oData.error) {
         var oError = oData.error;
-
+        var oMessageErrorBoxConfig = {};
         var aMessages = (oError.details || []).map(function (oDetail) {
           return oDetail.message;
         });
         if (aMessages.length) {
-          MessageBox.error(oError.message, {
+          oMessageErrorBoxConfig = {
             details: aMessages.join("<br>"),
-          });
-        } else {
-          MessageBox.error(oError.message);
+          };
+        } else if (oError.rootCauseMessage) {
+          oMessageErrorBoxConfig = {
+            details: oError.rootCauseMessage,
+            contentWidth: "100px",
+            styleClass: "",
+          };
         }
+        MessageBox.error(oError.message, oMessageErrorBoxConfig);
       }
     },
 
@@ -95,7 +100,7 @@ sap.ui.define([
       var sResponseText = oResponse.responseText;
       if (sResponseText) {
         var oErrorMessage = JSON.parse(sResponseText).error,
-          sErrorMessage = oErrorMessage.message.value + "\n";
+          sErrorMessage = oErrorMessage.message.value || oErrorMessage.message + "\n";
         if (!~oResult.errorMessage.indexOf(sErrorMessage)) {
           oResult.errorMessage.push(sErrorMessage);
         }
@@ -103,6 +108,8 @@ sap.ui.define([
           oErrorMessage.details.forEach(function (detail) {
             oResult.detailMessage += detail.message + "\n";
           });
+        } else if (oErrorMessage.rootCauseMessage) {
+          oResult.detailMessage += oErrorMessage.rootCauseMessage + "\n";
         }
       }
     },
@@ -121,6 +128,8 @@ sap.ui.define([
       } else if (bIsError) {
         MessageBox.error(sErrorMessage, {
           details: sDetailMessage,
+          contentWidth: "100px",
+          styleClass: "",
           onClose: function () {
             this._messageOpen = false;
           }.bind(this),
@@ -156,6 +165,8 @@ sap.ui.define([
               oResponseText.error.details.forEach(function (detail) {
                 sDetailMessage += detail.message + "\n";
               });
+            } else if (oResponse.error.rootCauseMessage) {
+              sDetailMessage = oResponse.error.rootCauseMessage + "\n";
             }
             this.displayErrorMessageBox(oCheckResult.isMissingAuthorization, oCheckResult.isError, sErrorMessage, sDetailMessage);
           }

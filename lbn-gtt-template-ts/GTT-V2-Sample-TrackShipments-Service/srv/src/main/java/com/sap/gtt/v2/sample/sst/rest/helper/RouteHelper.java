@@ -3,7 +3,6 @@ package com.sap.gtt.v2.sample.sst.rest.helper;
 import static com.sap.gtt.v2.sample.sst.common.constant.TrackedProcessEventType.ARRIVAL;
 import static com.sap.gtt.v2.sample.sst.common.utils.SSTUtils.getEventTypeShortName;
 import static java.util.Objects.nonNull;
-import static java.util.stream.Collectors.toMap;
 
 import com.sap.gtt.v2.sample.sst.odata.model.PlannedEvent;
 import com.sap.gtt.v2.sample.sst.odata.model.StopsForVp;
@@ -13,9 +12,7 @@ import com.sap.gtt.v2.sample.sst.rest.model.PlannedSpot;
 import com.sap.gtt.v2.sample.sst.rest.model.Route;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,22 +51,6 @@ public class RouteHelper {
                 plannedSpots.clear();
             }
         }
-    }
-
-    /**
-     * Updates ETA data of {@link StopsForVp} of {@link Route} entity.
-     *
-     * @param route - {@link Route} entity of tracked process
-     */
-    public void updateETAOfStopsForVp(@NotNull final Route route) {
-        final List<StopsForVp> stopsForVp = route.getStopsForVp();
-        final Optional<CurrentLocation> currentLocationOpt = Optional.ofNullable(route.getCurrentLocation());
-        currentLocationOpt.ifPresent(currentLocation -> {
-            final List<EstimatedArrival> estimatedArrivals = currentLocation.getEstimatedArrival();
-            final Map<String, EstimatedArrival> stopEstimatedArrival = estimatedArrivals.stream()
-                    .collect(toMap(EstimatedArrival::getStopId, Function.identity()));
-            stopsForVp.forEach(stopForVp -> stopForVp.setEstimatedArrival(stopEstimatedArrival.get(stopForVp.getStopId())));
-        });
     }
 
     /**

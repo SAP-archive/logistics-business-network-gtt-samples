@@ -69,6 +69,8 @@ public class InboundDeliveryItemTest {
         inboundDeliveryItem.setLastLocationDescription(EMPTY);
         inboundDeliveryItem.setLastVPLocationTypeCode(EMPTY);
         inboundDeliveryItem.setLastVPLocationType(new VPLocationType());
+        inboundDeliveryItem.setInitialPlannedDeliveryDate(Long.MAX_VALUE);
+        inboundDeliveryItem.setRevisedPlannedDeliveryDate(Long.MAX_VALUE);
 
         assertEquals(MOCK_ID, inboundDeliveryItem.getId());
         assertEquals(EMPTY, inboundDeliveryItem.getAltKey());
@@ -115,6 +117,8 @@ public class InboundDeliveryItemTest {
         assertEquals(EMPTY, inboundDeliveryItem.getLastLocationAltKey());
         assertEquals(EMPTY, inboundDeliveryItem.getLastLocationDescription());
         assertEquals(EMPTY, inboundDeliveryItem.getLastVPLocationTypeCode());
+        assertEquals(Long.MAX_VALUE, inboundDeliveryItem.getInitialPlannedDeliveryDate().longValue());
+        assertEquals(Long.MAX_VALUE, inboundDeliveryItem.getRevisedPlannedDeliveryDate().longValue());
 
         logger.info("inboundDelivery info: {}", inboundDeliveryItem.toString());
     }

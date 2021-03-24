@@ -55,6 +55,16 @@ INTERFACE lif_ef_constants.
                actual_technical_datetime TYPE /saptrx/paramname VALUE 'ACTUAL_TECHNICAL_DATETIME',
              END OF cs_system_fields.
 
+  CONSTANTS: BEGIN OF cs_parameter,
+               ref_planned_event_milestone TYPE /saptrx/paramname VALUE 'REF_PLANNED_EVENT_MILESTONE',
+               ref_planned_event_locid2    TYPE /saptrx/paramname VALUE 'REF_PLANNED_EVENT_LOCID2',
+               ref_planned_event_loctype   TYPE /saptrx/paramname VALUE 'REF_PLANNED_EVENT_LOCTYPE',
+               ref_planned_event_locid1    TYPE /saptrx/paramname VALUE 'REF_PLANNED_EVENT_LOCID1',
+               estimated_datetime          TYPE /saptrx/paramname VALUE 'ESTIMATED_DATETIME',
+               estimated_timezone          TYPE /saptrx/paramname VALUE 'ESTIMATED_TIMEZONE',
+             END OF cs_parameter.
+  CONSTANTS: cv_logistic_location TYPE string VALUE 'LogisticLocation'.
+
   CONSTANTS: BEGIN OF cs_errors,
                wrong_parameter     TYPE sotr_conc VALUE '1216f03004ce11ebbf450050c2490048',
                cdata_determination TYPE sotr_conc VALUE '1216f03004ce11ebbf460050c2490048',

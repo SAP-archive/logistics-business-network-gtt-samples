@@ -300,7 +300,8 @@ CLASS lcl_fu_actual_event IMPLEMENTATION.
        iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-unload_end   AND
        iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-coupling     AND
        iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-decoupling   AND
-       iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-delay.
+       iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-delay        AND
+       iv_event_code <> /scmtms/if_tor_const=>sc_tor_event-delay_fu.
       e_result = lif_ef_constants=>cs_condition-false.
     ENDIF.
   ENDMETHOD.
@@ -321,7 +322,7 @@ CLASS lcl_fu_actual_event IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    ASSIGN ct_trackingheader[ trxid = <ls_root>-tor_id ] TO FIELD-SYMBOL(<ls_trackingheader>).
+    ASSIGN ct_trackingheader[ trxid  = <ls_root>-tor_id ] TO FIELD-SYMBOL(<ls_trackingheader>).
     IF sy-subrc = 0.
       <ls_trackingheader>-trxcod = lif_actual_event~cs_trxcode-freight_unit.
       <ls_trackingheader>-evtid  = get_model_event_id( <ls_trackingheader>-evtid ).
@@ -358,7 +359,8 @@ CLASS lcl_fu_actual_event IMPLEMENTATION.
            iv_event_code = /scmtms/if_tor_const=>sc_tor_event-popu       OR
            iv_event_code = /scmtms/if_tor_const=>sc_tor_event-load_begin OR
            iv_event_code = /scmtms/if_tor_const=>sc_tor_event-load_end   OR
-           iv_event_code = /scmtms/if_tor_const=>sc_tor_event-coupling.
+           iv_event_code = /scmtms/if_tor_const=>sc_tor_event-coupling   OR
+           iv_event_code = /scmtms/if_tor_const=>sc_tor_event-delay.
           lv_stop_category = /scmtms/if_tor_const=>sc_tor_stop_cat-outbound.
         ELSEIF iv_event_code = /scmtms/if_tor_const=>sc_tor_event-arriv_dest   OR
                iv_event_code = /scmtms/if_tor_const=>sc_tor_event-pod          OR
@@ -371,9 +373,21 @@ CLASS lcl_fu_actual_event IMPLEMENTATION.
                         log_locid      = <ls_tracklocation>-locid1
                         stop_cat       = lv_stop_category ] TO <ls_stop>.
       ENDIF.
-      CHECK sy-subrc = 0.
+      IF sy-subrc <> 0.
+        RETURN.
+      ENDIF.
 
-      IF iv_event_code = /scmtms/if_tor_const=>sc_tor_event-pod.
+      IF iv_event_code = /scmtms/if_tor_const=>sc_tor_event-delay.
+        ASSIGN ct_trackparameters[
+                  param_name = lif_ef_constants=>cs_parameter-ref_planned_event_milestone
+                  evtcnt     = <ls_trackingheader>-evtcnt ] TO FIELD-SYMBOL(<ls_track_param>).
+        IF sy-subrc = 0.
+          DATA(lv_reference_event) = <ls_track_param>-param_value.
+        ENDIF.
+      ENDIF.
+
+      IF iv_event_code = /scmtms/if_tor_const=>sc_tor_event-pod OR
+         lv_reference_event = /scmtms/if_tor_const=>sc_tor_event-pod.
         <ls_tracklocation>-locid2 = <ls_root>-tor_id.
       ELSE.
         <ls_tracklocation>-locid2 = lcl_tools=>get_capa_match_key(

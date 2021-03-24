@@ -32,6 +32,16 @@
 						}"/>
 				</uxap:heading>
 				<uxap:content>
+					<OverflowToolbar>
+            <GenericTag 
+                visible="{= !!${isDelayed}}" 
+                id="processStatusGenericTag" 
+                design="StatusIconHidden"
+								status="Error"
+								text="{@i18n>CO_EventStatus_DELAYED_NAME}"
+                tooltip="{@i18n>CO_EventStatus_DELAYED_NAME}">
+							</GenericTag>
+          </OverflowToolbar>
 				</uxap:content>
 				<uxap:actions>
 				</uxap:actions>
@@ -116,6 +126,27 @@
               }"
               unit="{orderQuantityUoM}"/>
 				</VBox>
+        </VBox>
+        <VBox id="delayVBox"
+          visible="{= parseFloat(${delayedQuantity}) > 0}"
+          class="sapUiLargeMarginBegin sapUiSmallMarginBottom">
+          <Title id="delayTitle"
+            text="{@i18n>EL_PurchaseOrderItem_delayedQuantity_LABEL}"
+            level="H4"/>
+          <ObjectNumber id="delay"
+            state="{
+              path: 'delayedQuantity',
+              formatter: '.formatter.delayStatus'
+            }"
+            emphasized="false"
+            class="sapMObjectNumberLarge pofObjectNumber"
+            number="{
+              parts: [{path: 'delayedQuantity'}, {path: 'orderQuantity'}],
+              formatter: '.formatter.formattedRate'
+            }"
+            unit="%" />
+          <Label id="delayValue"
+            text="({path: 'delayedQuantity', formatter: '.formatter.getFormatted3DFloatNumber'} {orderQuantityUoM})" />
         </VBox>
 			</HBox>
 		</uxap:headerContent>

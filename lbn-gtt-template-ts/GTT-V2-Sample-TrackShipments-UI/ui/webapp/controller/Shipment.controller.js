@@ -27,6 +27,8 @@ sap.ui.define(
       },
 
       routePatternMatched: function (oEvent) {
+        this.getEventBus().publish("tracking-timeline", "clear-map");
+
         // Bind the view with an entry
         var args = oEvent.getParameter("arguments");
         if (args["?params"]) {

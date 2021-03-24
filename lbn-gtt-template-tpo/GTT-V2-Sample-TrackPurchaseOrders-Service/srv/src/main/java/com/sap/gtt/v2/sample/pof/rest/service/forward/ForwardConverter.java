@@ -19,6 +19,9 @@ public class ForwardConverter {
         event.setActualBusinessTimestamp(POFUtils.getTimeString());
         event.setActualBusinessTimeZone("UTC");
         event.setPurchaseOrderNo(purchaseOrder.getPurchaseOrderNo());
+        event.setIsDelayed(purchaseOrder.getIsDelayed());
+        event.setDelayedValue(purchaseOrder.getDelayedValue());
+        event.setCompletedAndLateValue(purchaseOrder.getCompletedAndLateValue());
         return event;
     }
 
@@ -31,6 +34,11 @@ public class ForwardConverter {
         event.setActualBusinessTimeZone("UTC");
         event.setPurchaseOrderNo(purchaseOrderItem.getPurchaseOrderNo());
         event.setItemNo(purchaseOrderItem.getItemNo());
+        event.setIsDelayed(purchaseOrderItem.getIsDelayed());
+        event.setDelayedQuantity(purchaseOrderItem.getDelayedQuantity());
+        event.setDelayedValue(purchaseOrderItem.getDelayedValue());
+        event.setCompletedAndLateQuantity(purchaseOrderItem.getCompletedAndLateQuantity());
+        event.setCompletedAndLateValue(purchaseOrderItem.getCompletedAndLateValue());
         return event;
     }
 
@@ -42,21 +50,9 @@ public class ForwardConverter {
         event.setActualBusinessTimeZone("UTC");
         event.setInboundDeliveryNo(inboundDeliveryItem.getInboundDeliveryNo());
         event.setItemNo(inboundDeliveryItem.getItemNo());
+        event.setLastEventName(inboundDeliveryItem.getLastEventName());
+        event.setLastVPLocationTypeCode(inboundDeliveryItem.getLastVPLocationTypeCode());
+        event.setLastLocationAltKey(inboundDeliveryItem.getLastLocationAltKey());
         return event;
-    }
-
-    public InboundDeliveryItemEvent generateDeliveryItemEvent(String altKey, String deliveryNo, String itemNo, String lastEventName, String lastVPLocationTypeCode, String lastLocationAltKey) {
-        InboundDeliveryItemEvent inboundDeliveryItemEvent = new InboundDeliveryItemEvent();
-        String time = POFUtils.getTimeStr();
-        inboundDeliveryItemEvent.setActualBusinessTimestamp(time);
-        inboundDeliveryItemEvent.setActualBusinessTimeZone("UTC");
-        inboundDeliveryItemEvent.setAltKey(altKey);
-        inboundDeliveryItemEvent.setInboundDeliveryNo(deliveryNo);
-        inboundDeliveryItemEvent.setItemNo(itemNo);
-        inboundDeliveryItemEvent.setLastEventName(lastEventName);
-        inboundDeliveryItemEvent.setLastVPLocationTypeCode(lastVPLocationTypeCode);
-        inboundDeliveryItemEvent.setLastLocationAltKey(lastLocationAltKey);
-
-        return inboundDeliveryItemEvent;
     }
 }

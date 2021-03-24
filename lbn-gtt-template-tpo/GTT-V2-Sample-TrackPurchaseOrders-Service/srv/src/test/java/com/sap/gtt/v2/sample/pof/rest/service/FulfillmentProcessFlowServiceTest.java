@@ -66,7 +66,6 @@ public class FulfillmentProcessFlowServiceTest {
 
         assertEquals(4, flow.getLanes().size());
         assertTrue(flow.getLanes().stream().allMatch(lane -> lane.getTotal().intValue() == 200));
-        // todo add more assertions
     }
 
     @Test

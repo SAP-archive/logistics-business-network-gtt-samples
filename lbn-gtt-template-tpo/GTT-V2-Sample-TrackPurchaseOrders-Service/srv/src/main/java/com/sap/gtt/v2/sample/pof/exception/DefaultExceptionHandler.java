@@ -14,7 +14,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.multipart.MultipartException;
 
-
 @ControllerAdvice
 public class DefaultExceptionHandler {
     private static final String MESSAGE_PATH = "/error/message";
@@ -28,22 +27,22 @@ public class DefaultExceptionHandler {
     public FormattedErrorMessage handleExceptionAndTransformMessage(Exception e) {
         BaseRuntimeException finalException = null;
         if (!(e instanceof BaseRuntimeException)) {
-            if (e instanceof HttpStatusCodeException) {
+           if (e instanceof HttpStatusCodeException) {
                 HttpStatusCodeException httpStatusCodeException = (HttpStatusCodeException) e;
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, httpStatusCodeException.getStatusCode().value());
+                finalException = new POFServiceException(e, httpStatusCodeException.getStatusCode().value());
             } else if (e instanceof HttpRequestMethodNotSupportedException) {
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, HttpStatus.METHOD_NOT_ALLOWED.value());
+                finalException = new POFServiceException(e, HttpStatus.METHOD_NOT_ALLOWED.value());
             } else if (e instanceof HttpMediaTypeException) {
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, HttpStatus.UNSUPPORTED_MEDIA_TYPE.value());
+                finalException = new POFServiceException( e, HttpStatus.UNSUPPORTED_MEDIA_TYPE.value());
             } else if (e instanceof AuthenticationCredentialsNotFoundException) {
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, HttpStatus.UNAUTHORIZED.value());
+                finalException = new POFServiceException( e, HttpStatus.UNAUTHORIZED.value());
             } else if (e instanceof MultipartException) {
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, HttpStatus.URI_TOO_LONG.value());
+                finalException = new POFServiceException( e, HttpStatus.URI_TOO_LONG.value());
             } else if (e instanceof MissingServletRequestParameterException
                     || e instanceof HttpClientErrorException) {
-                finalException = new GeneralNoneTranslatableException(e.getMessage(), e, HttpStatus.BAD_REQUEST.value());
+                finalException = new POFServiceException(e, HttpStatus.BAD_REQUEST.value());
             } else {
-                finalException = new InternalErrorException(e.getMessage(), e);
+                finalException = new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
             }
         } else {
             finalException = (BaseRuntimeException) e;

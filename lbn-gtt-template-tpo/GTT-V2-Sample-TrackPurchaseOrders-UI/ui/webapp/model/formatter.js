@@ -2,10 +2,23 @@ sap.ui.define([
   "sap/ui/core/ValueState",
   "com/sap/gtt/app/sample/pof/util/Constants",
   "sap/m/ValueColor",
-], function (ValueState, Constants, ValueColor) {
+  "sap/ui/core/format/DateFormat",
+  "sap/ui/core/format/NumberFormat",
+], function (ValueState, Constants, ValueColor, DateFormat, NumberFormat) {
   "use strict";
 
   var formatter = {
+
+    floatNumberFormat: NumberFormat.getFloatInstance({
+      decimals: 2,
+      groupingEnabled: true,
+    }, sap.ui.getCore().getConfiguration().getLocale()),
+
+    floatNumberFormat3Decimals: NumberFormat.getFloatInstance({
+      decimals: 3,
+      groupingEnabled: true,
+    }, sap.ui.getCore().getConfiguration().getLocale()),
+
     /**
      * Get the time duration from start to end
      *
@@ -63,6 +76,25 @@ sap.ui.define([
       return duration;
     },
 
+    /**
+     * Format tooltip for planned / actual arrival time.
+     * @param {string} sPlannedArrivalTime planned arrival time
+     * @param {string} sActualArrivalTime actual arrival time
+     * @returns {string} delta arrival time tooltip
+     */
+    deltaTimeTooltip: function (sPlannedArrivalTime, sActualArrivalTime) {
+      var oDateTimeInstance = DateFormat.getDateTimeInstance();
+      var dPlanned = oDateTimeInstance.parse(sPlannedArrivalTime);
+      var dActual = oDateTimeInstance.parse(sActualArrivalTime);
+
+      return this.getText("plannedArrivalAtTooltip") + this.getText("labelDescriptionSeparator") + " " + sPlannedArrivalTime + "\n" +
+        this.getText("actualArrivalAtTooltip") + this.getText("labelDescriptionSeparator") + " " + sActualArrivalTime + "\n" +
+        this.getText("delta") + this.getText("labelDescriptionSeparator") + " " + this.getText(
+        (dActual >= dPlanned) ? "later" : "earlier",
+        [formatter.timeDuration.call(this, dPlanned, dActual)]
+      );
+    },
+
     getCodeListDescriptionFromI18n: function (sCode, sKey) {
       var sText = this.getText(sKey, null, "@i18n");
 
@@ -97,7 +129,7 @@ sap.ui.define([
       if(oDateSettings.limit === "end") {
         dDate = new Date(dDate.getFullYear(), dDate.getMonth(), dDate.getDate() + 1);
       }
-      var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+      var oDateFormat = DateFormat.getDateInstance({
         pattern: oDateSettings.pattern || "yyyy-MM-dd",
       });
       return oDateFormat.format(dDate);
@@ -123,14 +155,23 @@ sap.ui.define([
     },
 
     /**
-     * Format boolean field to Yes/No
+     * Format boolean field to -/Yes/No
      * @param {Boolean} bValue Boolean value of field
-     * @returns {string} Text Yes/No for values true/false
+     * @returns {string} Text -/Yes/No for values true/false
      */
     formatBooleanFields: function (bValue) {
       if(!bValue && typeof bValue !== "boolean") {
         return "-";
       }
+      return this.formatter.formatYesNo.call(this, bValue);
+    },
+
+    /**
+     * Format boolean field to Yes/No
+     * @param {Boolean} bValue Boolean value of field
+     * @returns {string} Text Yes/No for values true/false
+     */
+    formatYesNo: function (bValue) {
       return bValue ? this.getText("yes") : this.getText("no");
     },
 
@@ -373,7 +414,7 @@ sap.ui.define([
         return formatter.getExecutionStatusText.call(this, sExecutionStatus);
       }
 
-      return formatter.getExecutionStatusText.call(this, sExecutionStatus) + " (" + 
+      return formatter.getExecutionStatusText.call(this, sExecutionStatus) + " (" +
       formatter.lastReportedEventStatusTableText.call(this, sLastReportedEvent, sLastLocationDescription, sLastVPLocationType) + ")";
     },
 
@@ -436,6 +477,132 @@ sap.ui.define([
       }
     },
 
+    /**
+     * Format delayed value for PO table
+     * @param {String} sValue delayed value
+     * @param {String} sTotal total net value
+     * @param {String} sUom unit of measure
+     *
+     * @returns {String} formatted delayed value
+     */
+    formattedDelayedValue: function (sValue, sTotal, sUom) {
+      if (Number(sValue) === 0 || Number(sTotal) === 0) {
+        return "";
+      }
+
+      var rate = formatter.getFormattedFloatNumber(formatter.getPercentValue(sValue, sTotal));
+      return rate + "% (" + formatter.floatNumberFormat.format(sValue) + " " + sUom + ")";
+    },
+
+    /**
+     * Format delayed quantity for PO items table
+     * @param {String} sValue delayed quantity
+     * @param {String} sTotal total order quantity
+     * @param {String} sUom unit of measure
+     *
+     * @returns {String} formatted delayed quantity
+     */
+    formattedDelayedQuantity: function (sValue, sTotal, sUom) {
+      if (Number(sValue) === 0 || Number(sTotal) === 0) {
+        return "";
+      }
+
+      var rate = formatter.getFormattedFloatNumber(formatter.getPercentValue(sValue, sTotal));
+      return rate + "% (" + formatter.floatNumberFormat3Decimals.format(sValue) + " " + sUom + ")";
+    },
+
+    /**
+     * Format float number with 2 decimals
+     * @param {String} sValue value of number
+     *
+     * @returns {String} formatted float number with 2 decimals
+     */
+    getFormattedFloatNumber: function (sValue) {
+      if (sValue !== null) {
+        return formatter.floatNumberFormat.format(sValue);
+      }
+
+      return "";
+    },
+
+    /**
+     * Format float number with 3 decimals
+     * @param {String} sValue value of number
+     *
+     * @returns {String} formatted float number with 3 decimals
+     */
+    getFormatted3DFloatNumber: function (sValue) {
+      if (sValue !== null) {
+        return formatter.floatNumberFormat3Decimals.format(sValue);
+      }
+
+      return "";
+    },
+
+    /**
+     * Get percentage of value from total
+     * @param {String} sValue value of number
+     * @param {String} sTotal total value
+     *
+     * @returns {Number} number of percent value to total
+     */
+    getPercentValue: function (sValue, sTotal) {
+      if (Number(sValue) && Number(sTotal)) {
+        return Number(sValue / sTotal * 100);
+      }
+
+      return 0;
+    },
+
+    /**
+     * Get color status according to value
+     * @param {String} sValue value of number
+     *
+     * @returns {String} status color
+     */
+    delayStatus: function (sValue) {
+      if (Number(sValue) === 0) {
+        return ValueState.None;
+      }
+
+      return ValueState.Error;
+    },
+
+    /**
+     * Get formatted float percentage of value from total
+     * @param {String} sValue value of number
+     * @param {String} sTotal total value
+     *
+     * @returns {String} formatted float percentage of value from total
+     */
+    formattedRate: function (sValue, sTotal) {
+      return formatter.getFormattedFloatNumber(formatter.getPercentValue(sValue, sTotal));
+    },
+
+    /** Return Error value state for the row in case of negative value.
+     * @param {boolean} bIsNegative is negative value
+     * @returns {string} error - if there is a value, none - if there is no value
+     */
+    formatRowHighlight: function (bIsNegative) {
+      return bIsNegative ? ValueState.Error : ValueState.None;
+    },
+
+    /** Return completedAndLate Value/Quantity if exists
+     * @param {String} sValue value of completedAndLate Value/Quantity field
+     * @returns {string} Value if there is a value, if not - "–"
+     */
+    formatCompletedAndLateValueAndQuantityColumn: function (sValue) {
+      return sValue && sValue !== "0.00" && sValue !== "0.000" ? sValue : "–";
+    },
+
+    /** Return unit of measure of completedAndLate Value/Quantity if exists
+     * @param {String} sValue value or completedAndLateQuantity field
+     * @param {String} sUnit unit of measure
+     * @returns {string} Unit of measure if there is a value, if not - ""
+     */
+    formatCompletedAndLateUnit: function (sValue, sUnit) {
+      return sValue && sValue !== "0.00" && sValue !== "0.000" ? sUnit : "";
+    },
   };
   return formatter;
 });

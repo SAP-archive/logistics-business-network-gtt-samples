@@ -61,12 +61,10 @@ sap.ui.define(
 
       subscribeEvents: function () {
         this.getEventBus().subscribe(this.CHANNEL, "clear-map", this.clearMap.bind(this));
-        this.getEventBus().subscribe(this.CHANNEL, "cancel-map-request", this.cancelMapRequest.bind(this));
       },
 
       unsubscribeEvents: function () {
         this.getEventBus().unsubscribe(this.CHANNEL, "clear-map");
-        this.getEventBus().unsubscribe(this.CHANNEL, "cancel-map-request");
       },
 
       initControls: function () {
@@ -241,7 +239,6 @@ sap.ui.define(
           unplannedEvents: unplannedEvents,
           refPlannedEvents: refPlannedEvents,
           timeZones: this.getModel("globalJson").getProperty(CONSTANTS.SLASH + CONSTANTS.TIMEZONES),
-          disableDeliveryItemsReporting: this.getModel("parentView").getProperty(CONSTANTS.SLASH + CONSTANTS.IS_FREIGHT_UNIT),
         });
       },
 
@@ -350,8 +347,6 @@ sap.ui.define(
       // ======================================================================
 
       updateMap: function () {
-        this.clearMap();
-
         var model = this.getModel("map");
         model.setProperty("/isStopsRoutesLoaded", false);
 
@@ -361,7 +356,9 @@ sap.ui.define(
           this.processMapData(request, data);
         }.bind(this));
         AsyncUtils.finally(request, function () {
-          model.setProperty("/isStopsRoutesLoaded", true);
+          if (!request.isCanceled) {
+            model.setProperty("/isStopsRoutesLoaded", true);
+          }
         });
       },
 
@@ -373,9 +370,7 @@ sap.ui.define(
           plannedActualRoutes: [],
           stopsWithETA: [],
         });
-      },
 
-      cancelMapRequest: function () {
         if (this.mapRequest) {
           this.mapRequest.isCanceled = true;
         }

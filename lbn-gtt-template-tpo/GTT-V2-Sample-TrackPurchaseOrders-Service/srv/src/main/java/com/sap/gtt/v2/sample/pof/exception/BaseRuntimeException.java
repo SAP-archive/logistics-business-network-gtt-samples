@@ -1,6 +1,8 @@
 package com.sap.gtt.v2.sample.pof.exception;
 
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 import com.sap.gtt.v2.sample.pof.utils.SpringContextUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -12,21 +14,31 @@ public abstract class BaseRuntimeException extends RuntimeException {
 
     private final transient Object[] localizedMsgParams;
     private final String messageCode;
-
+    private Throwable cause;
+    private String rootMessage;
 
     public BaseRuntimeException(String internalMessage, Throwable cause, String messageCode, Object[] localizedMsgParams) {
         super(internalMessage, cause);
         this.messageCode = messageCode;
+        this.cause = cause;
         if (localizedMsgParams != null) {
             this.localizedMsgParams = localizedMsgParams.clone();
         } else {
             this.localizedMsgParams = new Object[]{};
         }
     }
-
+    public BaseRuntimeException(String internalMessage, String rootMessage, String messageCode, Object[] localizedMsgParams) {
+       super(internalMessage,null);
+        this.messageCode = messageCode;
+        this.rootMessage = rootMessage;
+        if (localizedMsgParams != null) {
+            this.localizedMsgParams = localizedMsgParams.clone();
+        } else {
+            this.localizedMsgParams = new Object[]{};
+        }
+    }
     public BaseRuntimeException(String messageCode, Object[] localizedMsgParams) {
-        this(null, null, messageCode, localizedMsgParams);
-
+        this(null,(Throwable) null, messageCode, localizedMsgParams);
     }
 
     public Object[] getLocalizedMsgParams() {
@@ -58,16 +70,18 @@ public abstract class BaseRuntimeException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        String msg = super.getMessage();
+        Locale currentRequestedLocale = LocaleContextHolder.getLocale();
+        org.springframework.context.MessageSource messageSource = SpringContextUtils.getMessageSource();
+        return messageSource.getMessage(this.getMessageCode(), this.getLocalizedMsgParams(), null, currentRequestedLocale);
+       /* String msg = super.getMessage();
         if (!StringUtils.isBlank(msg)) {
             return msg;
         }
-
         if (!StringUtils.isBlank(this.getMessageCode())) {
             msg = this.getLocalizedMessage(Locale.ENGLISH);
         }
 
-        return msg;
+        return msg;*/
 
     }
 
@@ -77,8 +91,15 @@ public abstract class BaseRuntimeException extends RuntimeException {
         return ERROR_CODE;
     }
 
+    public String rootCauseMessage() {
+        if(isNotBlank(rootMessage)) {
+            return rootMessage;
+        }
+        return cause.getMessage();
+    }
+
     public FormattedErrorMessage getFormattedErrorMessage() {
-        return new FormattedErrorMessage(this.getMessageCode(), this.getLocalizedMessage(), this.getHttpStatus());
+        return new FormattedErrorMessage(this.getErrorCode(), this.getMessage(),this.rootCauseMessage(),this.getHttpStatus());
     }
 
 }

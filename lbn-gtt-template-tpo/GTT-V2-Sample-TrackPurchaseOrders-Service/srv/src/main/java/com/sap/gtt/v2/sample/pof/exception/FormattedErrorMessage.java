@@ -6,10 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class FormattedErrorMessage {
 
     private transient int httpStatus;
@@ -26,7 +22,15 @@ public class FormattedErrorMessage {
     public static class Error {
         private String code;
         private String message;
-        private List<Detail> details;
+        private String rootCauseMessage;
+
+        public String getRootCauseMessage() {
+            return rootCauseMessage;
+        }
+
+        public void setRootCauseMessage(String rootCauseMessage) {
+            this.rootCauseMessage = rootCauseMessage;
+        }
 
         public String getCode() {
             return code;
@@ -36,62 +40,13 @@ public class FormattedErrorMessage {
             return message;
         }
 
-        public List<Detail> getDetails() {
-            return details;
-        }
-
-        public static class Detail {
-            private String lang;
-            private String code;
-            private String message;
-
-            public String getLang() {
-                return lang;
-            }
-
-            public String getCode() {
-                return code;
-            }
-
-            public void setCode(String code) {
-                this.code = code;
-            }
-
-            public String getMessage() {
-                return message;
-            }
-
-            public void setMessage(String message) {
-                this.message = message;
-            }
-        }
-
-
     }
 
-    public FormattedErrorMessage(String messageCode, String message, int httpStatus) {
+    public FormattedErrorMessage(String messageCode, String message, String rootCauseMessage,int httpStatus) {
         this.error = new Error();
         this.error.code = messageCode;
         this.error.message = message;
-        this.httpStatus = httpStatus;
-        this.error.details = Collections.emptyList();
-    }
-
-    public FormattedErrorMessage(List<FormattedErrorMessage> containedFormattedErrorMessages, String lang, int httpStatus) {
-        this.error = new Error();
-        List<Error.Detail> detailList = new ArrayList<>();
-        this.error.code = "";
-        this.error.message = "";
-        for (FormattedErrorMessage e : containedFormattedErrorMessages) {
-            Error.Detail detail = new Error.Detail();
-            if (e.error != null) {
-                detail.code = e.error.code;
-                detail.lang = lang;
-                detail.message = e.error.message;
-            }
-            detailList.add(detail);
-        }
-        this.error.details = detailList;
+        this.error.rootCauseMessage = rootCauseMessage;
         this.httpStatus = httpStatus;
     }
 

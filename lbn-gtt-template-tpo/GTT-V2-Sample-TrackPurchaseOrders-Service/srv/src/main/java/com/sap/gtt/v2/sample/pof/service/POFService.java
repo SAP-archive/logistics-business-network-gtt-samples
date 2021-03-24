@@ -20,7 +20,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
-
+import org.springframework.http.HttpStatus;
 import static com.sap.gtt.v2.sample.pof.constant.Constants.EXPAND;
 import static com.sap.gtt.v2.sample.pof.constant.Constants.URL_SPLITTER;
 
@@ -112,12 +112,12 @@ public class POFService {
                                     .append(getName.invoke(entity));
                         }
                     } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
-                        throw new POFServiceException(e);
+                        throw new POFServiceException(e, HttpStatus.INTERNAL_SERVER_ERROR.value());
                     }
                 });
                 sb.append(System.lineSeparator());
             } catch (ClassNotFoundException e) {
-                throw new POFServiceException(e);
+                throw new POFServiceException(e,HttpStatus.INTERNAL_SERVER_ERROR.value());
             }
         });
 
@@ -133,24 +133,25 @@ public class POFService {
         if (inboundDeliveryItem.getInboundDelivery() != null) {
             for (ShipmentTP shipmentTP : inboundDeliveryItem.getInboundDelivery().getShipmentTPs()) {
                 Shipment shipment = shipmentTP.getShipment();
-                if (shipment != null) {
-                    List<CarrierRefDocument> carrierRefDocuments = shipment.getCarrierRefDocuments();
-                    for (CarrierRefDocument carrierRefDocument : carrierRefDocuments) {
-                        CarrierRefDocumentForDeliveryItem doc = new CarrierRefDocumentForDeliveryItem();
-                        doc.setDocId(carrierRefDocument.getDocId());
-                        doc.setDocTypeCode(carrierRefDocument.getDocTypeCode());
-                        doc.setShipmentNo(shipment.getShipmentNo());
-                        doc.setShipmentId(shipment.getId());
-                        res.add(doc);
-                    }
-
+                if (shipment == null) {
+                    continue;
+                }
+                List<CarrierRefDocument> carrierRefDocuments = shipment.getCarrierRefDocuments();
+                for (CarrierRefDocument carrierRefDocument : carrierRefDocuments) {
                     CarrierRefDocumentForDeliveryItem doc = new CarrierRefDocumentForDeliveryItem();
-                    doc.setDocTypeCode(VP);
-                    doc.setDocId(shipment.getTrackId());
+                    doc.setDocId(carrierRefDocument.getDocId());
+                    doc.setDocTypeCode(carrierRefDocument.getDocTypeCode());
                     doc.setShipmentNo(shipment.getShipmentNo());
                     doc.setShipmentId(shipment.getId());
                     res.add(doc);
                 }
+
+                CarrierRefDocumentForDeliveryItem doc = new CarrierRefDocumentForDeliveryItem();
+                doc.setDocTypeCode(VP);
+                doc.setDocId(shipment.getTrackId());
+                doc.setShipmentNo(shipment.getShipmentNo());
+                doc.setShipmentId(shipment.getId());
+                res.add(doc);
             }
         }
 

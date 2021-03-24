@@ -11,14 +11,13 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import static com.sap.gtt.v2.sample.pof.constant.Constants.EXECUTION_STATUS_COMPLETED;
+import static com.sap.gtt.v2.sample.pof.constant.Constants.EXECUTION_STATUS_IN_TRANSIT;
 import static com.sap.gtt.v2.sample.pof.constant.Constants.POD_EVENT;
 import static com.sap.gtt.v2.sample.pof.utils.FulfillmentProcessUtils.isLastReversal;
 
 @Service
 public class InternalExecutionStatusService extends AbstractEventService {
-
-    private static final String EXECUTION_STATUS_COMPLETED = "COMPLETED";
-    private static final String EXECUTION_STATUS_IN_TRANSIT = "IN_TRANSIT";
 
     public void updateForNotPODInboundDelivery(InboundDeliveryItem inboundDeliveryItem) {
         if (isPodRelevant(inboundDeliveryItem.getId())) {

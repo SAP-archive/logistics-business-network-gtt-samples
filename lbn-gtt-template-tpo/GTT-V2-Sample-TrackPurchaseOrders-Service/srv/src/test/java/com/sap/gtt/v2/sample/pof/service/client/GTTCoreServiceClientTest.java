@@ -1,11 +1,24 @@
 package com.sap.gtt.v2.sample.pof.service.client;
 
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+
 import com.sap.gtt.v2.sample.pof.domain.Location;
-import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
+import com.sap.gtt.v2.sample.pof.exception.LocationServiceException;
+import com.sap.gtt.v2.sample.pof.exception.MetadataServiceException;
+import com.sap.gtt.v2.sample.pof.exception.ReadServiceException;
+import com.sap.gtt.v2.sample.pof.exception.WriteServiceException;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.odata.model.TrackedProcess;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,21 +30,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.contains;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GTTCoreServiceClientTest {
@@ -79,11 +82,11 @@ public class GTTCoreServiceClientTest {
                 any(HttpEntity.class), eq(String.class));
     }
 
-    @Test(expected = POFServiceException.class)
+    @Test(expected = ReadServiceException.class)
     public void testQueryShouldThrowException() {
         String uri = "/PurchaseOrder";
         Mockito.when(restTemplate.exchange(contains(uri), eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)))
-                .thenThrow(HttpServerErrorException.class);
+                .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
         gttCoreServiceClient.query(uri);
     }
@@ -96,11 +99,11 @@ public class GTTCoreServiceClientTest {
                 any(HttpEntity.class), eq(String.class));
     }
 
-    @Test(expected = POFServiceException.class)
+    @Test(expected = WriteServiceException.class)
     public void testWriteShouldThrowException() {
         String uri = "/PurchaseOrder";
         Mockito.when(restTemplate.exchange(contains(uri), eq(HttpMethod.POST), any(HttpEntity.class), eq(String.class)))
-                .thenThrow(HttpServerErrorException.class);
+                .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
         gttCoreServiceClient.write(EMPTY, uri);
     }
@@ -145,6 +148,15 @@ public class GTTCoreServiceClientTest {
         Assertions.assertThat(i18n).isEqualTo("com.sap.gtt.core.DisplayFields=Display Fields");
     }
 
+    @Test(expected = MetadataServiceException.class)
+    public void testGetI18nError() {
+        Mockito.when(restTemplate.exchange(contains("/i18n"), eq(HttpMethod.GET),
+            any(HttpEntity.class), eq(String.class)))
+            .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
+        gttCoreServiceClient.getI18n("i18n.properties");
+
+    }
+
     @Test
     public void testGetLocation() {
         Mockito.when(restTemplate.exchange(contains("/Location"), eq(HttpMethod.GET),
@@ -164,7 +176,13 @@ public class GTTCoreServiceClientTest {
 
         Assertions.assertThat(location.getFormattedAddress()).isEqualTo("Created by CoreEngine: {{ExternalId_CoreEngine}}$No.10 TIanze road$Des Moines Iowa 100000$United States");
     }
-
+    @Test(expected = LocationServiceException.class)
+    public void testGetLocationError() {
+        Mockito.when(restTemplate.exchange(contains("/Location"), eq(HttpMethod.GET),
+            any(HttpEntity.class), eq(String.class)))
+            .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
+        gttCoreServiceClient.getLocation("locationAltKey");
+    }
     @Test
     public void testGetLocations() {
         Mockito.when(restTemplate.exchange(contains("/Location"), eq(HttpMethod.GET),

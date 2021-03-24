@@ -88,8 +88,17 @@ public class PurchaseOrder {
     @SerializedName("processStatus_code")
     private String processStatusCode;
 
+    @EdmProperty(name = "isDelayed", facets = @EdmFacets(maxLength = 1))
+    private String isDelayed;
+
+    @EdmProperty(name = "delayedValue", facets = @EdmFacets(precision = 15, scale = 2))
+    private BigDecimal delayedValue;
+
     @EdmProperty(name = "supplierDescription", facets = @EdmFacets(maxLength = 255))
     private String supplierDescription;
+
+    @EdmProperty(name = "completedAndLateValue", facets = @EdmFacets(precision = 15, scale = 2))
+    private BigDecimal completedAndLateValue;
 
     @EdmNavigationProperty(name = "incoterms", toType = Incoterms.class, toMultiplicity = EdmNavigationProperty.Multiplicity.ONE)
     private Incoterms incoterms;
@@ -278,6 +287,30 @@ public class PurchaseOrder {
         this.supplierDescription = supplierDescription;
     }
 
+    public BigDecimal getCompletedAndLateValue() {
+        return completedAndLateValue;
+    }
+
+    public void setCompletedAndLateValue(BigDecimal completedAndLateValue) {
+        this.completedAndLateValue = completedAndLateValue;
+    }
+
+    public String getIsDelayed() {
+        return isDelayed;
+    }
+
+    public void setIsDelayed(String isDelayed) {
+        this.isDelayed = isDelayed;
+    }
+
+    public BigDecimal getDelayedValue() {
+        return delayedValue;
+    }
+
+    public void setDelayedValue(BigDecimal delayedValue) {
+        this.delayedValue = delayedValue;
+    }
+
     public Incoterms getIncoterms() {
         return incoterms;
     }
@@ -358,7 +391,10 @@ public class PurchaseOrder {
                 ", incotermsCode='" + incotermsCode + '\'' +
                 ", receivingLocationTypeCode='" + receivingLocationTypeCode + '\'' +
                 ", processStatusCode='" + processStatusCode + '\'' +
+                ", isDelayed='" + isDelayed + '\'' +
+                ", delayedValue=" + delayedValue +
                 ", supplierDescription='" + supplierDescription + '\'' +
+                ", completedAndLateValue='" + completedAndLateValue + '\'' +
                 ", incoterms=" + incoterms +
                 ", receivingLocationType=" + receivingLocationType +
                 ", processStatus=" + processStatus +

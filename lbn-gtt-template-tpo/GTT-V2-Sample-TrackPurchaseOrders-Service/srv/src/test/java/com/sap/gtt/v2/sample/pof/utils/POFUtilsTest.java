@@ -33,7 +33,7 @@ public class POFUtilsTest {
         targetEntityName = Constants.PROCESS_EVENT_DIRECTORY_ENTITY_NAME;
         expand = new ArrayList<>();
         expand.add(Constants.EVENT_EXPAND);
-        filter = "null";
+        filter = "and event/value eq 'value'";
     }
 
     @Test
@@ -224,13 +224,13 @@ public class POFUtilsTest {
     @Test
     public void testGenerateUrl4() {
         String url = POFUtils.generateUrl(targetEntityName,filter,filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
-        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
+        String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20and%20event/value%20eq%20'value'&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }
 
     @Test
     public void testGenerateUrl5() {
-        String url = POFUtils.generateUrl(targetEntityName,"null",filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
+        String url = POFUtils.generateUrl(targetEntityName,null,filterConditions, BinaryOperator.AND,false,false,expand,orderByList);
         String expected = "/ProcessEventDirectory?$filter=%20(process_id%20eq%20guid'41a26e89-cf88-517b-9a67-962d75459369')%20&$expand=event%20&$orderby=event/altKey%20,event/actualBusinessTimestamp%20";
         Assert.assertEquals(expected,url);
     }

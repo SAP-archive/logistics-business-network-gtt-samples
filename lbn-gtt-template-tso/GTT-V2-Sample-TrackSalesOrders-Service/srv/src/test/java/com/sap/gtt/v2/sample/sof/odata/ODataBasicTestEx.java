@@ -222,7 +222,7 @@ public class ODataBasicTestEx {
 
     @Test
     public void testGetLocation() {
-        //locationService = "https://lbn-gtt-samples.gtt-flp-lbnplatform-int.cfapps.sap.hana.ondemand.com/api/location/v1/Location?$format=json&$inlinecount=allpages&$filter=locationAltKey%20eq%20'xri://sap.com/id:LBN%2310010001006:INT_TEST_CORE_ENGINE:Location:Customer:%7B%7BEXTERNALID_COREENGINE%7D%7D'";
+        //locationService = "https://dummy/api/location/v1/Location?$format=json&$inlinecount=allpages&$filter=locationAltKey%20eq%20'xri://sap.com/id:LBN%2310010001006:INT_TEST_CORE_ENGINE:Location:Customer:%7B%7BEXTERNALID_COREENGINE%7D%7D'";
         String locationAltKey = "xri://sap.com/id:LBN#10010001006:INT_TEST_CORE_ENGINE:Location:Customer:{{EXTERNALID_COREENGINE}}";
 
         Location location = gttCoreServiceClient.getLocation(locationAltKey);
@@ -251,7 +251,7 @@ public class ODataBasicTestEx {
         ResponseEntity<String> response = restTemplate.getForEntity(query, String.class);
         System.out.println(response.getBody());
         Assertions.assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        Assertions.assertThat(response.getBody()).isEqualTo("{\"key\":\"6OYdhmagtGi6hns0-O56oK6gy1QxujVp1peN0XeN4Sc\"}");
+        Assertions.assertThat(response.getBody()).isEqualTo("{\"key\":\"dummy\"}");
     }
 
     @Test

@@ -11,7 +11,10 @@ function (BaseController, Constants, RestClient, JSONModel) {
     routeName: "PurchaseOrderItemDetails",
 
     initModel: function () {
-      var oModel = new JSONModel({});
+      var oModel = new JSONModel({
+        // One week in milliseconds
+        criticalThreshold: 604800000,
+      });
       this.setModel(oModel, this.routeName);
     },
 

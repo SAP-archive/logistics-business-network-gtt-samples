@@ -3,9 +3,14 @@ package com.sap.gtt.v2.sample.pof.rest.service;
 import com.sap.gtt.v2.sample.pof.odata.model.InboundDeliveryItem;
 import com.sap.gtt.v2.sample.pof.odata.model.PurchaseOrder;
 import com.sap.gtt.v2.sample.pof.rest.service.forward.ForwardConverter;
+import com.sap.gtt.v2.sample.pof.rest.service.forward.ForwardFacadeService;
 import com.sap.gtt.v2.sample.pof.rest.service.forward.ForwardService;
 import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalCompleteValueService;
+import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalCompletedAndLateService;
+import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalDelayImpactService;
+import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalDelayedService;
 import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalExecutionStatusService;
+import com.sap.gtt.v2.sample.pof.rest.service.forward.InternalLastActivityService;
 import com.sap.gtt.v2.sample.pof.service.client.GTTCoreServiceClient;
 import com.sap.gtt.v2.sample.pof.utils.POFUtils;
 import org.junit.Before;
@@ -49,6 +54,21 @@ public class ForwardServiceTest {
     private InternalExecutionStatusService executionStatusService;
 
     @Spy
+    private InternalDelayedService delayedService;
+
+    @Spy
+    private InternalLastActivityService lastActivityService;
+
+    @Spy
+    private InternalDelayImpactService delayImpactService;
+
+    @Spy
+    private InternalCompletedAndLateService completedAndLateService;
+
+    @Spy
+    private ForwardFacadeService facadeService;
+
+    @Spy
     private ForwardService forwardService;
 
     @Before
@@ -59,10 +79,17 @@ public class ForwardServiceTest {
 
         ReflectionTestUtils.setField(completeValueService, "gttCoreServiceClient", gttCoreServiceClient);
         ReflectionTestUtils.setField(executionStatusService, "gttCoreServiceClient", gttCoreServiceClient);
+        ReflectionTestUtils.setField(lastActivityService, "gttCoreServiceClient", gttCoreServiceClient);
+
+        ReflectionTestUtils.setField(facadeService, "internalCompleteValueService", completeValueService);
+        ReflectionTestUtils.setField(facadeService, "internalExecutionStatusService", executionStatusService);
+        ReflectionTestUtils.setField(facadeService, "internalLastActivityService", lastActivityService);
+        ReflectionTestUtils.setField(facadeService, "internalDelayedService", delayedService);
+        ReflectionTestUtils.setField(facadeService, "internalDelayImpactService", delayImpactService);
+        ReflectionTestUtils.setField(facadeService, "internalCompletedAndLateService", completedAndLateService);
 
         ReflectionTestUtils.setField(forwardService, "gttCoreServiceClient", gttCoreServiceClient);
-        ReflectionTestUtils.setField(forwardService, "internalCompleteValueService", completeValueService);
-        ReflectionTestUtils.setField(forwardService, "internalExecutionStatusService", executionStatusService);
+        ReflectionTestUtils.setField(forwardService, "facadeService", facadeService);
         ReflectionTestUtils.setField(forwardService, "forwardConverter", new ForwardConverter());
     }
 

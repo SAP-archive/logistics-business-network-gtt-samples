@@ -4,11 +4,19 @@ import com.sap.gtt.v2.sample.pof.configuration.Destination;
 import com.sap.gtt.v2.sample.pof.configuration.VcapParser;
 import com.sap.gtt.v2.sample.pof.constant.Constants;
 import com.sap.gtt.v2.sample.pof.domain.Location;
-import com.sap.gtt.v2.sample.pof.exception.POFServiceException;
+import com.sap.gtt.v2.sample.pof.exception.LocationServiceException;
+import com.sap.gtt.v2.sample.pof.exception.MetadataServiceException;
+import com.sap.gtt.v2.sample.pof.exception.ReadServiceException;
+import com.sap.gtt.v2.sample.pof.exception.WriteServiceException;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterCondition;
 import com.sap.gtt.v2.sample.pof.odata.filter.FilterExpressionBuilder;
 import com.sap.gtt.v2.sample.pof.odata.helper.ODataResultList;
 import com.sap.gtt.v2.sample.pof.utils.ODataUtils;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.olingo.odata2.api.uri.expression.BinaryOperator;
 import org.apache.olingo.odata2.api.uri.expression.FilterExpression;
@@ -26,17 +34,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED;
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED;
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_CALL_READ_SERVICE_FAILED;
-import static com.sap.gtt.v2.sample.pof.exception.POFServiceException.MESSAGE_CODE_CALL_WRITE_SERVICE_FAILED;
 
 @Service
 public class GTTCoreServiceClient {
@@ -74,10 +71,14 @@ public class GTTCoreServiceClient {
         criticalInfo = destination.getPassword();
     }
 
+    @Value("${GTT_CORE_ENGINE_API_URL_FLP_BASED}")
     private String gttBaseUrl;
-    private String techUser;
-    private String criticalInfo;
 
+    @Value("${GTT_CORE_ENGINE_TECHNICAL_USER}")
+    private String techUser;
+
+    @Value("${GTT_CORE_ENGINE_TECHNICAL_PWD}")
+    private String criticalInfo;
 
     public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT, HttpHeaders headers) {
         uri = StringUtils.replaceIgnoreCase(uri, INLINECOUNT_NONE, INLINECOUNT_ALLPAGES);
@@ -158,7 +159,7 @@ public class GTTCoreServiceClient {
                     new HttpEntity<>(null, finalHeaders), String.class);
         } catch (HttpStatusCodeException e) {
             logger.error("Call read service failed:", e);
-            throw new POFServiceException(MESSAGE_CODE_CALL_READ_SERVICE_FAILED);
+            throw new ReadServiceException(e, e.getStatusCode().value());
         }
         return responseEntity.getBody();
 
@@ -174,7 +175,7 @@ public class GTTCoreServiceClient {
             restTemplate.exchange(writeServiceUrl, HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
         } catch (HttpStatusCodeException e) {
             logger.error("Call write service failed:", e);
-            throw new POFServiceException(MESSAGE_CODE_CALL_WRITE_SERVICE_FAILED);
+            throw new WriteServiceException(e, e.getStatusCode().value());
         }
     }
 
@@ -194,7 +195,7 @@ public class GTTCoreServiceClient {
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
             logger.error("Call metadata service failed:", e);
-            throw new POFServiceException(MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED);
+            throw new MetadataServiceException(e, e.getStatusCode().value());
         }
         return responseEntity.getBody();
     }
@@ -211,7 +212,7 @@ public class GTTCoreServiceClient {
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
             logger.error("Call metadata service failed:", e);
-            throw new POFServiceException(MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED);
+            throw new MetadataServiceException(e, e.getStatusCode().value());
         }
 
         return responseEntity.getBody();
@@ -234,7 +235,7 @@ public class GTTCoreServiceClient {
                     new HttpEntity<>(null, headers), String.class);
         } catch (HttpStatusCodeException e) {
             logger.error("Call location service failed:", e);
-            throw new POFServiceException(MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED);
+            throw new LocationServiceException(e, e.getStatusCode().value());
         }
 
         ODataResultList<Location> res = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class);
@@ -257,10 +258,14 @@ public class GTTCoreServiceClient {
                     .queryParam(FORMAT, JSON)
                     .queryParam(INLINECOUNT, ALLPAGES)
                     .queryParam(FILTER, filter.getExpressionString()).build().encode().toUriString();
-
-            ResponseEntity<String> responseEntity = restTemplate.exchange(locationService, HttpMethod.GET,
-                    new HttpEntity<>(null, headers), String.class);
-
+            ResponseEntity<String> responseEntity;
+            try {
+                responseEntity = restTemplate
+                    .exchange(locationService, HttpMethod.GET, new HttpEntity<>(null, headers), String.class);
+            } catch(HttpStatusCodeException e) {
+                logger.error("Call location service failed:", e);
+                throw new LocationServiceException(e, e.getStatusCode().value());
+            }
             result = ODataUtils.readEntitySet(responseEntity.getBody(), Location.class).getResults();
         }
 

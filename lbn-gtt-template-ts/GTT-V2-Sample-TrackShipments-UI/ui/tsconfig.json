@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES5",
+    "allowJs": true,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "types": [
+      "@sapui5/ts-types"
+    ]
+  },
+  "include": [
+    "webapp/**/*"
+  ]
+}

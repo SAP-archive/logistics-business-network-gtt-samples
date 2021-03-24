@@ -987,23 +987,32 @@ CLASS lcl_pe_filler_dl_header IMPLEMENTATION.
     TYPES: tt_milestones    TYPE STANDARD TABLE OF /saptrx/appl_event_tag
                               WITH EMPTY KEY.
 
-    IF is_time_of_delivery_changed( is_app_objects = is_app_objects ) = abap_true.
-      rv_result = lif_ef_constants=>cs_condition-true.
+    rv_result = lif_ef_constants=>cs_condition-false.
 
-    ELSE.
-      DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_header(
-                                      io_ef_parameters = mo_ef_parameters
-                                      is_app_objects   = VALUE #(
-                                                           appobjid   = is_app_objects-appobjid ) ).
+    IF lcl_dl_tools=>is_appropriate_dl_type( ir_struct = is_app_objects-maintabref ) = abap_true.
 
-      DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_header(
-                                      io_ef_parameters = mo_ef_parameters
-                                      is_app_objects   = is_app_objects ).
+      IF is_time_of_delivery_changed( is_app_objects = is_app_objects ) = abap_true.
+        rv_result = lif_ef_constants=>cs_condition-true.
 
-      DATA(lv_milestone)      = lif_app_constants=>cs_milestone-dl_goods_receipt.
+      ELSE.
+        DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_header(
+                                        io_ef_parameters = mo_ef_parameters
+                                        is_app_objects   = VALUE #(
+                                                             appobjid = is_app_objects-appobjid ) ).
 
-      rv_result = boolc( lo_relevance_old->is_enabled( iv_milestone = lv_milestone ) <>
-                         lo_relevance_new->is_enabled( iv_milestone = lv_milestone ) ).
+        DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_header(
+                                        io_ef_parameters = mo_ef_parameters
+                                        is_app_objects   = is_app_objects ).
+
+        DATA(lv_milestone)      = lif_app_constants=>cs_milestone-dl_goods_receipt.
+
+        rv_result = boolc( lo_relevance_old->is_enabled( iv_milestone = lv_milestone ) <>
+                           lo_relevance_new->is_enabled( iv_milestone = lv_milestone ) ).
+
+        rv_result = COND #( WHEN rv_result = abap_true
+                              THEN lif_ef_constants=>cs_condition-true
+                              ELSE lif_ef_constants=>cs_condition-false ).
+      ENDIF.
     ENDIF.
   ENDMETHOD.
 
@@ -1217,33 +1226,39 @@ CLASS lcl_pe_filler_dl_item IMPLEMENTATION.
     TYPES: tt_milestones    TYPE STANDARD TABLE OF /saptrx/appl_event_tag
                               WITH EMPTY KEY.
 
-    IF is_time_of_delivery_changed( is_app_objects = is_app_objects ) = abap_true.
-      rv_result = lif_ef_constants=>cs_condition-true.
+    rv_result = lif_ef_constants=>cs_condition-false.
 
-    ELSE.
-      DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_item(
-                                      io_ef_parameters = mo_ef_parameters ).
+    IF lcl_dl_tools=>is_appropriate_dl_type( ir_struct = is_app_objects-mastertabref ) = abap_true AND
+       lcl_dl_tools=>is_appropriate_dl_item( ir_struct = is_app_objects-maintabref ) = abap_true.
 
-      DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_item(
-                                      io_ef_parameters = mo_ef_parameters
-                                      is_app_objects   = is_app_objects ).
+      IF is_time_of_delivery_changed( is_app_objects = is_app_objects ) = abap_true.
+        rv_result = lif_ef_constants=>cs_condition-true.
 
-      DATA(lt_milestones)     = VALUE tt_milestones(
-        ( lif_app_constants=>cs_milestone-dl_goods_receipt )
-        ( lif_app_constants=>cs_milestone-dl_packing )
-        ( lif_app_constants=>cs_milestone-dl_put_away )
-      ).
+      ELSE.
+        DATA(lo_relevance_old)  = NEW lcl_dl_event_relevance_item(
+                                        io_ef_parameters = mo_ef_parameters ).
 
-      rv_result = lif_ef_constants=>cs_condition-false.
+        DATA(lo_relevance_new)  = NEW lcl_dl_event_relevance_item(
+                                        io_ef_parameters = mo_ef_parameters
+                                        is_app_objects   = is_app_objects ).
 
-      LOOP AT lt_milestones ASSIGNING FIELD-SYMBOL(<lv_milestone>).
-        IF lo_relevance_old->is_enabled( iv_milestone = <lv_milestone> ) <>
-             lo_relevance_new->is_enabled( iv_milestone = <lv_milestone> ).
+        DATA(lt_milestones)     = VALUE tt_milestones(
+          ( lif_app_constants=>cs_milestone-dl_goods_receipt )
+          ( lif_app_constants=>cs_milestone-dl_packing )
+          ( lif_app_constants=>cs_milestone-dl_put_away )
+        ).
 
-          rv_result = lif_ef_constants=>cs_condition-true.
-          EXIT.
-        ENDIF.
-      ENDLOOP.
+        rv_result = lif_ef_constants=>cs_condition-false.
+
+        LOOP AT lt_milestones ASSIGNING FIELD-SYMBOL(<lv_milestone>).
+          IF lo_relevance_old->is_enabled( iv_milestone = <lv_milestone> ) <>
+               lo_relevance_new->is_enabled( iv_milestone = <lv_milestone> ).
+
+            rv_result = lif_ef_constants=>cs_condition-true.
+            EXIT.
+          ENDIF.
+        ENDLOOP.
+      ENDIF.
     ENDIF.
   ENDMETHOD.
 
@@ -1290,7 +1305,7 @@ ENDCLASS.
 **********************************************************************
 *** Planned Events Shipment Header ***********************************
 **********************************************************************
-CLASS lcl_pe_filler_sh_item DEFINITION.
+CLASS lcl_pe_filler_sh_header DEFINITION.
   PUBLIC SECTION.
     INTERFACES lif_pe_filler.
 
@@ -1378,7 +1393,7 @@ CLASS lcl_pe_filler_sh_item DEFINITION.
 
 ENDCLASS.
 
-CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
+CLASS lcl_pe_filler_sh_header IMPLEMENTATION.
   METHOD add_shipment_events.
     FIELD-SYMBOLS: <ls_vttk>  TYPE vttkvb.
 
@@ -1690,30 +1705,38 @@ CLASS lcl_pe_filler_sh_item IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD lif_pe_filler~check_relevance.
+    DATA(lr_vttp) = mo_ef_parameters->get_appl_table(
+                          iv_tabledef = lif_app_constants=>cs_tabledef-sh_item_new ).
+
+    rv_result = lif_ef_constants=>cs_condition-false.
+
     " check the fields, used in PE extractor and not used in TP extractor
+    IF lcl_sh_tools=>is_appropriate_type( ir_vttk = is_app_objects-maintabref ) = abap_true AND
+       lcl_sh_tools=>is_delivery_assigned( ir_vttp = lr_vttp ) = abap_true.
 
-    " check in, load start, load end
-    get_header_fields(
-      IMPORTING
-        et_fields = DATA(lt_header_fields) ).
-
-    rv_result = lcl_tools=>are_fields_different(
-                  ir_data1  = is_app_objects-maintabref
-                  ir_data2  = get_shippment_header(
-                                is_app_object = is_app_objects
-                                ir_vttk       = mo_sh_data_old->get_vttk( ) )
-                  it_fields = lt_header_fields ).
-
-    " departure, arrival
-    IF rv_result = lif_ef_constants=>cs_condition-false.
-      get_stop_fields(
+      " check in, load start, load end
+      get_header_fields(
         IMPORTING
-          et_fields = DATA(lt_stop_fields) ).
+          et_fields = DATA(lt_header_fields) ).
 
-      rv_result = is_stop_changed(
-                    is_app_object = is_app_objects
-                    it_fields     = lt_stop_fields ).
+      rv_result = lcl_tools=>are_fields_different(
+                    ir_data1  = is_app_objects-maintabref
+                    ir_data2  = get_shippment_header(
+                                  is_app_object = is_app_objects
+                                  ir_vttk       = mo_sh_data_old->get_vttk( ) )
+                    it_fields = lt_header_fields ).
 
+      " departure, arrival
+      IF rv_result = lif_ef_constants=>cs_condition-false.
+        get_stop_fields(
+          IMPORTING
+            et_fields = DATA(lt_stop_fields) ).
+
+        rv_result = is_stop_changed(
+                      is_app_object = is_app_objects
+                      it_fields     = lt_stop_fields ).
+
+      ENDIF.
     ENDIF.
   ENDMETHOD.
 

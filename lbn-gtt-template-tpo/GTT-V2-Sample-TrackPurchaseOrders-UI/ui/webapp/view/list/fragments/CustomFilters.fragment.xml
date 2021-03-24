@@ -32,4 +32,21 @@
             liveChange="onItemChanged"/>
       </smartfilterbar:customControl>
     </smartfilterbar:ControlConfiguration>
+      <smartfilterbar:ControlConfiguration 
+        key="isDelayed"
+        displayBehaviour="descriptionAndId"
+        label="{@i18n>EL_PurchaseOrder_isDelayed_LABEL}" 
+        index="8">
+        <smartfilterbar:customControl>
+          <m:ComboBox 
+            id="isDelayedComboBox"
+            selectedKey="{purchaseOrderList>/customFilters/isDelayed/selectedKey}"
+            change="onIsDelayedChanged">
+            <m:items>
+              <core:Item key="yes" text="{i18n>yes}"/>
+              <core:Item key="no" text="{i18n>no}"/>
+            </m:items>
+          </m:ComboBox>
+        </smartfilterbar:customControl>
+      </smartfilterbar:ControlConfiguration>
 </core:FragmentDefinition>

@@ -50,13 +50,13 @@ public class TimeTrackingServiceTest {
     public void testGetByDeliveryItemId() throws IOException {
         String deliveryItemId = "c75316ce-a2cd-5f8c-82e4-b4661d3a48e2";
 
-        String pedJson = IOUtils.toString(new ClassPathResource("/rest/timeline-ped.json").getInputStream());
+        String pedJson = IOUtils.toString(new ClassPathResource("/rest/timeline-ped.json").getInputStream(), "UTF-8");
         ODataResultList<ProcessEventDirectory> processEventDirectoryODataResultList = ODataUtils.readEntitySet(pedJson, ProcessEventDirectory.class);
         List<ProcessEventDirectory> processEventDirectories = processEventDirectoryODataResultList.getResults();
         Mockito.when(processEventDirectoryService.getAllByDeliveryItemId(deliveryItemId)).thenReturn(
                 processEventDirectories);
 
-        String plannedEventJson = IOUtils.toString(new ClassPathResource("/rest/timeline-plannedEvent.json").getInputStream());
+        String plannedEventJson = IOUtils.toString(new ClassPathResource("/rest/timeline-plannedEvent.json").getInputStream(), "UTF-8");
         ODataResultList<PlannedEvent> plannedEventODataResultList = ODataUtils.readEntitySet(plannedEventJson, PlannedEvent.class);
         Mockito.when(plannedEventService.getAllByDeliveryItemId(deliveryItemId)).thenReturn(
                 plannedEventODataResultList.getResults());

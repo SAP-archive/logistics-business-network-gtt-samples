@@ -1,2 +1,2 @@
 # GTT-V2-Sample-TrackSalesOrders-Service
-template app - track sales orders
+Template app - track sales orders

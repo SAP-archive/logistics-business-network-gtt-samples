@@ -275,7 +275,7 @@
 					<table:Column>
 						<Label text="{label>/DeliveryItem/deliveryNo} / {label>/DeliveryItem/itemNo}" />
 						<table:template>
-							<Text text="{state>deliveryNo} / {state>itemNo}" />
+							<Text text="{state>deliveryNo} / {state>deliveryItemNo}" />
 						</table:template>
 					</table:Column>
 

@@ -61,6 +61,7 @@ INTERFACE lif_actual_event.
       i_all_appl_tables  TYPE trxas_tabcontainer
       i_event            TYPE trxas_evt_ctab_wa OPTIONAL
       iv_event_code      TYPE /scmtms/tor_event
+      it_eventid_map     TYPE trxas_evtid_evtcnt_map OPTIONAL
     CHANGING
       ct_trackingheader  TYPE tt_trackingheader
       ct_tracklocation   TYPE tt_tracklocation

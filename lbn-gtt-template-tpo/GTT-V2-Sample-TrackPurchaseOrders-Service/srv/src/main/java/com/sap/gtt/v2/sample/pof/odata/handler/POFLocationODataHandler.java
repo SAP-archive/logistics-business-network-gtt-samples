@@ -8,8 +8,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.apache.olingo.odata2.api.processor.ODataContext;
 import org.apache.olingo.odata2.api.uri.info.GetEntitySetUriInfo;
 import org.apache.olingo.odata2.api.uri.info.GetEntityUriInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +27,6 @@ public class POFLocationODataHandler extends POFDefaultODataHandler {
         throw new NotImplementedException();
     }
 
-
     @Override
     public Map<String, Object> handleReadEntity(GetEntityUriInfo uriInfo, ODataContext oDataContext) {
         throw new NotImplementedException();
@@ -42,7 +39,7 @@ public class POFLocationODataHandler extends POFDefaultODataHandler {
     public Map<String,LocationDTO> getLocations(Set<String> locationAltKeys) {
         List<Location> locations = gttCoreServiceClient.getLocations(locationAltKeys);
         Map<String, LocationDTO> map = new HashMap<>();
-        locations.forEach(location -> map.put(location.getLocationAltKey(),mapService.getLocationDetail(location)));
+        locations.forEach(location -> map.put(location.getLocationAltKey(), mapService.getLocationDetail(location)));
         return map;
     }
 }

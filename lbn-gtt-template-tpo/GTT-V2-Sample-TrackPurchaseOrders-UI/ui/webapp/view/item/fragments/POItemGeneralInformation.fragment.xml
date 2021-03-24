@@ -42,18 +42,21 @@
         <smartField:SmartField value="{materialId}" />
       </GroupElement>
       <GroupElement label="{@i18n>EL_PurchaseOrderItem_netValue_LABEL}" >
-        <smartField:SmartField value="{netValue}"/>
+        <smartField:SmartField value="{netValue}" uomVisible="{= !!${netValue}}"/>
+      </GroupElement>
+      <GroupElement label="{@i18n>EL_PurchaseOrderItem_completedAndLateQuantity_LABEL}" >
+        <smartField:SmartField value="{completedAndLateQuantity}" uomVisible="{= !!${completedAndLateQuantity}}"/>
       </GroupElement>
     </Group>
     <Group label=" ">
       <GroupElement label="{@i18n>EL_PurchaseOrderItem_netWeight_LABEL}">
-        <smartField:SmartField value="{netWeight}" />
+        <smartField:SmartField value="{netWeight}" uomVisible="{= !!${netWeight}}"/>
       </GroupElement>
       <GroupElement label="{@i18n>EL_PurchaseOrderItem_grossWeight_LABEL}">
-        <smartField:SmartField value="{grossWeight}" />
+        <smartField:SmartField value="{grossWeight}" uomVisible="{= !!${grossWeight}}"/>
       </GroupElement>
       <GroupElement label="{@i18n>EL_PurchaseOrderItem_volume_LABEL}">
-        <smartField:SmartField value="{volume}"/>
+        <smartField:SmartField value="{volume}" uomVisible="{= !!${volume}}"/>
       </GroupElement>
     </Group>
     <Group label="{i18n>incotermsTitle}">

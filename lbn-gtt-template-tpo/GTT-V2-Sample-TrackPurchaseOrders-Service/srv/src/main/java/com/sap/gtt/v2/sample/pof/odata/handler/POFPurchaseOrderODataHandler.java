@@ -25,7 +25,6 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 @Component
 public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
@@ -45,7 +44,7 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
     @Override
     public ODataResultList<Map<String, Object>> handleReadEntitySet(GetEntitySetUriInfo uriInfo, ODataContext oDataContext) {
         String uri = POFUtils.getNormalizedUri(oDataContext);
-        Boolean isLocation = isLocationExists(uri);
+        boolean isLocation = isLocationExists(uri);
         uri = removeUnnecessaryExpands(uri);
 
         ODataResultList<PurchaseOrder> entityList = gttCoreServiceClient.readEntitySet(uri, PurchaseOrder.class);
@@ -53,15 +52,15 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
         if (isLocation) {
             setLocations(entityList);
         }
-        removeUnneededLeadingZero(entityList.getResults());
         updateNetValuesForExpands(entityList.getResults());
+        removeUnneededLeadingZero(entityList.getResults());
         return convertResults(entityList);
     }
 
     @Override
     public Map<String, Object> handleReadEntity(GetEntityUriInfo uriInfo, ODataContext oDataContext) {
         String uri = POFUtils.getNormalizedUri(oDataContext);
-        Boolean isLocation = isLocationExists(uri);
+        boolean isLocation = isLocationExists(uri);
 
         uri = removeUnnecessaryExpands(uri);
 
@@ -177,16 +176,16 @@ public class POFPurchaseOrderODataHandler extends POFDefaultODataHandler {
         if (purchaseOrderItem == null) {
             return;
         }
-        if (isNotEmpty(purchaseOrderItem.getPurchaseOrderNo())) {
+        if (isNotBlank(purchaseOrderItem.getPurchaseOrderNo())) {
             purchaseOrderItem.setPurchaseOrderNo(purchaseOrderItem.getPurchaseOrderNo().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
-        if (isNotEmpty(purchaseOrderItem.getMaterialId())) {
+        if (isNotBlank(purchaseOrderItem.getMaterialId())) {
             purchaseOrderItem.setMaterialId(purchaseOrderItem.getMaterialId().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
-        if (isNotEmpty(purchaseOrderItem.getItemNo())) {
+        if (isNotBlank(purchaseOrderItem.getItemNo())) {
             purchaseOrderItem.setItemNo(purchaseOrderItem.getItemNo().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
-        if (isNotEmpty(purchaseOrderItem.getSupplierId())) {
+        if (isNotBlank(purchaseOrderItem.getSupplierId())) {
             purchaseOrderItem.setSupplierId(purchaseOrderItem.getSupplierId().replaceAll(REGEX_LEADING_ZERO, EMPTY));
         }
     }

@@ -24,6 +24,7 @@ public class ODataHandlerFactory {
         map.put(Constants.MODEL_NAMESPACE + ".PurchaseOrder", POFPurchaseOrderODataHandler.class);
         map.put(Constants.MODEL_NAMESPACE + ".PurchaseOrderItem", POFPurchaseOrderItemODataHandler.class);
         map.put(Constants.MODEL_NAMESPACE + ".InboundDeliveryItem", POFInboundDeliveryItemODataHandler.class);
+        map.put(Constants.MODEL_NAMESPACE + ".ArrivalTime", ArrivalTimeODataHandler.class);
     }
 
     public ODataHandlerFactory(ApplicationContext applicationContext) {

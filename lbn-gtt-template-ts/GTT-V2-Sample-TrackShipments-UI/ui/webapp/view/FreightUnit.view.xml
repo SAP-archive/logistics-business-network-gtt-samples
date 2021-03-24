@@ -18,12 +18,12 @@
 				areaShrinkRatio="1:1.6:1.6">
 				<expandedHeading>
 					<m:Title id="expandedHeadingTitle"
-						text="{i18n>deliveryItem} {view>/freightUnitItem/deliveryNo} / {view>/urlParams/itemNo}"
+						text="{i18n>deliveryItem} {view>/freightUnitItem/deliveryNo} / {view>/freightUnitItem/deliveryItemNo}"
 						wrapping="true" />
 				</expandedHeading>
 				<snappedHeading>
 					<m:Title id="snappedHeadingTitle"
-						text="{i18n>deliveryItem} {view>/freightUnitItem/deliveryNo} / {view>/urlParams/itemNo}"
+						text="{i18n>deliveryItem} {view>/freightUnitItem/deliveryNo} / {view>/freightUnitItem/deliveryItemNo}"
 						wrapping="true" />
 				</snappedHeading>
 				<content>

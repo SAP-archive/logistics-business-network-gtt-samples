@@ -62,7 +62,7 @@ public class LocationServiceTest {
         ODataResultList<PurchaseOrderItem> entityList = ODataUtils.readEntitySet(json, PurchaseOrderItem.class);
 
         Map<String, LocationDTO> locationDTOMap = locationService.getLocationsForPurchaseOrderItems(entityList.getResults());
-        Assert.assertNotNull(locationDTOMap);
+        Assert.assertTrue(locationDTOMap.isEmpty());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class LocationServiceTest {
         ODataResultList<InboundDeliveryItem> entityList = ODataUtils.readEntitySet(json, InboundDeliveryItem.class);
 
         Map<String, LocationDTO> locationDTOMap = locationService.getLocationsForInboundDeliveryItem(entityList.getResults());
-        Assert.assertNotNull(locationDTOMap);
+        Assert.assertTrue(locationDTOMap.isEmpty());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class LocationServiceTest {
         ODataResultList<PurchaseOrder> entityList = ODataUtils.readEntitySet(json, PurchaseOrder.class);
 
         Map<String, LocationDTO> locationDTOMap = locationService.getLocationsForPurchaseOrders(entityList.getResults());
-        Assert.assertNotNull(locationDTOMap);
+        Assert.assertTrue(locationDTOMap.isEmpty());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class LocationServiceTest {
         ODataResultList<PurchaseOrder> entityList = ODataUtils.readEntitySet(json, PurchaseOrder.class);
 
         locationService.setLocationsForPurchaseOrder(entityList.getResults().get(0), new HashMap<>());
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class LocationServiceTest {
         PurchaseOrder purchaseOrder = ODataUtils.readEntity(json, PurchaseOrder.class);
 
         Map<String, LocationDTO> locations = locationService.getLocationsForPurchaseOrderTP(purchaseOrder.getPurchaseOrderItemTPs());
-        Assert.assertNotNull(locations);
+        Assert.assertTrue(locations.isEmpty());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class LocationServiceTest {
         ODataResultList<PurchaseOrderItem> entityList = ODataUtils.readEntitySet(json, PurchaseOrderItem.class);
 
         locationService.setLocationsForPurchaseOrderItem(entityList.getResults().get(0), new HashMap<>());
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class LocationServiceTest {
 
         locationService.getLocationsForPurchaseOrderItemInboundDeliveryItem(entityList.getResults()
                 .get(0).getInboundDeliveryItems());
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0).getInboundDeliveryItems());
     }
 
 
@@ -138,7 +138,7 @@ public class LocationServiceTest {
         ODataResultList<InboundDeliveryItem> entityList = ODataUtils.readEntitySet(json, InboundDeliveryItem.class);
 
         locationService.setLocationsForInboundDelivery(entityList.getResults().get(0), new HashMap<>());
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 
     @Test
@@ -147,7 +147,7 @@ public class LocationServiceTest {
         ODataResultList<PurchaseOrder> entityList = ODataUtils.readEntitySet(json, PurchaseOrder.class);
 
         locationService.setLocationsForPurchaseOrder(entityList.getResults().get(0), new HashMap<>());
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 
     @Test
@@ -157,7 +157,7 @@ public class LocationServiceTest {
 
         locationService.setReceivingLocation(entityList.getResults().get(0));
         locationService.setSupplierLocation(entityList.getResults().get(0));
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 
     @Test
@@ -167,6 +167,6 @@ public class LocationServiceTest {
 
         locationService.setPlantLocation(entityList.getResults().get(0));
         locationService.setSupplierLocation(entityList.getResults().get(0));
-        Assert.assertNotNull(entityList.getResults());
+        Assert.assertNotNull(entityList.getResults().get(0));
     }
 }

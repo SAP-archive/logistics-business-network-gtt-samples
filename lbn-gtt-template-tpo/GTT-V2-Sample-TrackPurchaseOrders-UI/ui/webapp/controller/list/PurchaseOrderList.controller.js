@@ -28,6 +28,9 @@ sap.ui.define([
           "inboundDeliveryItems.inboundDelivery.shipmentTPs.shipment.shipmentNo":{
             inputValue: "",
           },
+          "isDelayed": {
+            selectedKey: "",
+          },
         }});
       this.setModel(oListModel, this.routeName);
     },
@@ -132,11 +135,9 @@ sap.ui.define([
       } else if (oFilter.sPath) {
         if(oFilter.sPath === Constants.PO_ITEM_MATERIAL_ID_PROP || oFilter.sPath === Constants.PO_ITEM_MATERIAL_DESC_PROP) {
           oFilter.sPath = Constants.PO_TO_PO_ITEM_NAV_PATH + "/" + oFilter.sPath;
-        }
-        if(oFilter.sPath === Constants.PO_ITEM_DELIVERY_NO) {
+        } else if(oFilter.sPath === Constants.PO_ITEM_DELIVERY_NO) {
           oFilter.sPath = Constants.PO_DELIVERY_NO;
-        }
-        if(oFilter.sPath === Constants.PO_ITEM_SHIPMENT_NO) {
+        } else if(oFilter.sPath === Constants.PO_ITEM_SHIPMENT_NO) {
           oFilter.sPath = Constants.PO_SHIPMENT_NO;
         }
       }
@@ -173,6 +174,44 @@ sap.ui.define([
 
       var oSmartFilterBar = this.byId("smartFilterBar");
       oSmartFilterBar.fireFilterChange(oEvent);
+    },
+
+    /**
+     * IsDelayed filter change event handler.
+     * @param {sap.ui.base.Event} oEvent change event object
+     */
+    onIsDelayedChanged: function (oEvent) {
+      var oListModel = this.getModel(this.routeName);
+      var sSelectedKey = oListModel.getProperty("/customFilters/isDelayed/selectedKey");
+
+      var aIsDelayedFilters = [];
+      if (sSelectedKey === this.getText("yes").toLowerCase()) {
+        aIsDelayedFilters.push(new Filter({
+          path: "isDelayed",
+          operator: FilterOperator.EQ,
+          value1: "X",
+        }));
+      } else if (sSelectedKey === this.getText("no").toLowerCase()) {
+        aIsDelayedFilters.push(new Filter({
+          path: "isDelayed",
+          operator: FilterOperator.EQ,
+          value1: "",
+        }));
+        aIsDelayedFilters.push(new Filter({
+          path: "isDelayed",
+          operator: FilterOperator.EQ,
+          value1: null,
+        }));
+      }
+
+      if (aIsDelayedFilters.length) {
+        var oFilter = new Filter(aIsDelayedFilters, false);
+        oListModel.setProperty("/customFilters/isDelayed/filter", oFilter);
+      } else {
+        oListModel.setProperty("/customFilters/isDelayed/filter", null);
+      }
+
+      this.byId("smartFilterBar").fireFilterChange(oEvent);
     },
 
     /**

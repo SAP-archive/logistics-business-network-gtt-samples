@@ -107,6 +107,32 @@ CLASS lcl_factory_dl_item IMPLEMENTATION.
 ENDCLASS.
 
 **********************************************************************
+*** Shipment Header **************************************************
+**********************************************************************
+CLASS lcl_factory_sh_header DEFINITION
+  INHERITING FROM lcl_factory.
+
+  PUBLIC SECTION.
+    METHODS lif_factory~get_bo_reader REDEFINITION.
+
+    METHODS lif_factory~get_pe_filler REDEFINITION.
+
+ENDCLASS.
+
+CLASS lcl_factory_sh_header IMPLEMENTATION.
+  METHOD lif_factory~get_bo_reader.
+    ro_bo_reader    = NEW lcl_bo_reader_sh_header(
+                        io_ef_parameters = io_ef_parameters ).
+  ENDMETHOD.
+
+  METHOD lif_factory~get_pe_filler.
+    ro_pe_filler    = NEW lcl_pe_filler_sh_header(
+                        io_ef_parameters = io_ef_parameters
+                        io_bo_reader     = io_bo_reader ).
+  ENDMETHOD.
+ENDCLASS.
+
+**********************************************************************
 *** Confirmation of Purchasing Order Item ****************************
 **********************************************************************
 CLASS lcl_ae_factory_po_item_conf DEFINITION
@@ -211,32 +237,6 @@ CLASS lcl_ae_factory_dl_item_pkng IMPLEMENTATION.
   METHOD lif_ae_factory~get_ae_filler.
     ro_ae_filler    = NEW lcl_ae_filler_dl_item_pkng(
                         io_ae_parameters = io_ae_parameters ).
-  ENDMETHOD.
-ENDCLASS.
-
-**********************************************************************
-*** Shipment Header **************************************************
-**********************************************************************
-CLASS lcl_factory_sh_header DEFINITION
-  INHERITING FROM lcl_factory.
-
-  PUBLIC SECTION.
-    METHODS lif_factory~get_bo_reader REDEFINITION.
-
-    METHODS lif_factory~get_pe_filler REDEFINITION.
-
-ENDCLASS.
-
-CLASS lcl_factory_sh_header IMPLEMENTATION.
-  METHOD lif_factory~get_bo_reader.
-    ro_bo_reader    = NEW lcl_bo_reader_sh_header(
-                        io_ef_parameters = io_ef_parameters ).
-  ENDMETHOD.
-
-  METHOD lif_factory~get_pe_filler.
-    ro_pe_filler    = NEW lcl_pe_filler_sh_item(
-                        io_ef_parameters = io_ef_parameters
-                        io_bo_reader     = io_bo_reader ).
   ENDMETHOD.
 ENDCLASS.
 

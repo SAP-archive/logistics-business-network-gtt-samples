@@ -1,15 +1,12 @@
 package com.sap.gtt.v2.sample.pof.exception;
 
 
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
-
-import java.util.Locale;
-
 public class POFServiceException extends BaseRuntimeException {
     private static final long serialVersionUID = 1L;
+    public static final String ERROR_CODE = "INTERNAL_SERVER_ERROR";
 
     public static final String MESSAGE_CODE = POFServiceException.class.getName();
+    public static final String MESSAGE_CODE_INTERNAL_SERVER_ERROR = POFServiceException.class.getName()+".InternalServerError";
     public static final String MESSAGE_CODE_ERROR_NO_DATA_FOUND = POFServiceException.class.getName() + ".NoDataFound";
     public static final String MESSAGE_CODE_ERROR_UNKNOWN_MODEL_NAME = POFServiceException.class.getName() + ".UnknownModelName";
     public static final String MESSAGE_CODE_ERROR_ODATA_INIT_FAILED = POFServiceException.class.getName() + ".ODataInitFailed";
@@ -25,35 +22,46 @@ public class POFServiceException extends BaseRuntimeException {
     public static final String MESSAGE_CODE_CALL_METADATA_SERVICE_FAILED = POFServiceException.class.getName() + ".CallMetadataServiceFailed";
     public static final String MESSAGE_CODE_CALL_LOCATION_SERVICE_FAILED = POFServiceException.class.getName() + ".CallLocationServiceFailed";
     public static final String MESSAGE_CODE_DESTINATION_SERVICE_BINDING_NOT_FOUND = POFServiceException.class.getName() + ".DestinationServiceBindingNotFound";
+    public static final String MESSAGE_CODE_UNSUPPORTABLE_DOCUMENT_FLOW_STATUS = POFServiceException.class.getName()+ ".UnsupportableDocumentFlowGeneralStatusEnum";
 
-    public POFServiceException(String internalMessage, Throwable cause, String messageCode) {
-        super(internalMessage, cause, messageCode, new Object[]{});
-    }
+    private int httpStatus;
 
-    public POFServiceException(String internalMessage, Throwable cause, String messageCode, Object[] localizedMsgParams) {
-        super(internalMessage, cause, messageCode, localizedMsgParams);
-    }
 
-    public POFServiceException(String messageCode) {
-        super(messageCode, new Object[]{});
-    }
-
-    public POFServiceException(Throwable cause) {
-        super(cause.getMessage(), cause, MESSAGE_CODE, new Object[]{});
-    }
-
-    public POFServiceException(String messageCode, Object[] localizedMsgParams) {
+    public POFServiceException(String messageCode, Object[] localizedMsgParams,int httpStatus) {
         super(messageCode, localizedMsgParams);
+        this.httpStatus = httpStatus;
     }
 
-    @Override
-    public String getLocalizedMessage() {
-        Locale locale = LocaleContextHolder.getLocale();
-        return getLocalizedMessage(locale);
+    public POFServiceException(Throwable cause,String message, int httpStatus) {
+        super(ERROR_CODE, cause, message, null);
+        this.httpStatus = httpStatus;
+    }
+    public POFServiceException(String message, int httpStatus) {
+        super(message, null);
+        this.httpStatus = httpStatus;
     }
 
+    public POFServiceException(String message,String rootMessage, int httpStatus) {
+        super(message, rootMessage,ERROR_CODE,null);
+        this.httpStatus = httpStatus;
+    }
+
+    public POFServiceException(Throwable cause, int httpStatus) {
+        super(ERROR_CODE, cause, MESSAGE_CODE_INTERNAL_SERVER_ERROR, null);
+        this.httpStatus = httpStatus;
+    }
+    public POFServiceException(String messageCode,String message, Throwable cause, int httpStatus) {
+        super(message, cause, messageCode, null);
+        this.httpStatus = httpStatus;
+    }
     @Override
     public int getHttpStatus() {
-        return HttpStatus.INTERNAL_SERVER_ERROR.value();
+        return httpStatus;
     }
+
+    @Override
+    public String getErrorCode() {
+        return ERROR_CODE;
+    }
+
 }

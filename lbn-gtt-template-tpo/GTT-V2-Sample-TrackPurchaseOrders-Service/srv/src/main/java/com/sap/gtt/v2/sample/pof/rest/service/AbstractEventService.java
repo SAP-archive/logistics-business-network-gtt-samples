@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.sap.gtt.v2.sample.pof.constant.Constants.DELETION_EVENT_ENTITY_NAME;
 import static com.sap.gtt.v2.sample.pof.constant.Constants.UNDELETION_EVENT_ENTITY_NAME;
@@ -54,17 +55,12 @@ public abstract class AbstractEventService {
         String[] split = uriTemplate.split("\\?");
         String httpUrl = split[0];
         String initialQuery = split.length > 1 ? split[1] + "&" : EMPTY;
-        StringBuilder queryBuilder = new StringBuilder(initialQuery + FILTER + "=(");
-        for (Object arg : args) {
-            String filter = String.format(filterPart + delimiter, arg);
-            queryBuilder.append(filter);
-        }
-        if (args.size() > 0) {
-            queryBuilder.delete(queryBuilder.length() - delimiter.length(), queryBuilder.length());
-        }
-        String query = queryBuilder.append(")").toString();
-        String url = UriComponentsBuilder.fromUriString(httpUrl).query(query).encode().toUriString();
-        return queryAll(url, clazz);
+        List<String> filters = POFUtils.generateSplitLargeFilterExpr(filterPart, delimiter, args);
+        return filters.parallelStream()
+                .map(it -> initialQuery + FILTER + "=(" + it + ")")
+                .map(it -> UriComponentsBuilder.fromUriString(httpUrl).query(it).encode().toUriString())
+                .flatMap(it -> queryAll(it, clazz).stream())
+                .collect(Collectors.toList());
     }
 
     protected <T> List<T> queryAll(String url, Class<T> clazz) {

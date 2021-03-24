@@ -29,9 +29,13 @@ sap.ui.define([
         "OpenStreet": "39c0ee96f30349beaba4850a6be58b45",
       };
 
-      this.getHereMapKey().then(function () {
-        this.setMapConfiguration("HERE");
-      }.bind(this));
+      this.getHereMapKey()
+        .then(function () {
+          this.setMapConfiguration("HERE");
+        }.bind(this))
+        .catch(function (oError) {
+          this.handleServerError(oError);
+        }.bind(this));
     },
 
     getHereMapKey: function () {
@@ -289,7 +293,9 @@ sap.ui.define([
     getTempStops: function (aTempStops) {
       return aTempStops.filter(function (oStop) {
         var sEventType = oStop.eventType;
-        return sEventType !== Constants.EVENT_TYPE.LOCATION_UPDATE && sEventType !== Constants.EVENT_TYPE.DELAY;
+        return sEventType !== Constants.EVENT_TYPE.LOCATION_UPDATE
+          && sEventType !== Constants.EVENT_TYPE.LOCATION_UPDATE_NEW
+          && sEventType !== Constants.EVENT_TYPE.DELAY;
       });
     },
 

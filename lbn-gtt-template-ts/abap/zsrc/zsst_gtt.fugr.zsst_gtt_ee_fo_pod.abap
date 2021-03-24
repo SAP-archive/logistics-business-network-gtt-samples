@@ -93,6 +93,7 @@ FUNCTION zsst_gtt_ee_fo_pod.
             i_all_appl_tables  = i_all_appl_tables
             i_event            = <ls_event>
             iv_event_code      = /scmtms/if_tor_const=>sc_tor_event-pod
+            it_eventid_map     = c_eventid_map
           CHANGING
             ct_trackingheader  = ct_trackingheader[]
             ct_tracklocation   = ct_tracklocation[]

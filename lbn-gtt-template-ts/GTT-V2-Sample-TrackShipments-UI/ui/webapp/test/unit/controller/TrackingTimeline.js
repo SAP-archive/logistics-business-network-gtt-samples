@@ -168,15 +168,16 @@ sap.ui.define([
     controller.fetchUnplannedEvents();
   });
 
-  QUnit.test("cancelMapRequest, processMapData", function (assert) {
+  QUnit.test("processMapData", function (assert) {
     assert.expect(0);
     var controller = this.controller;
 
     // Arrange
-    controller.mapRequest = {};
+    controller.mapRequest = {
+      isCanceled: true,
+    };
 
     // Act
-    controller.cancelMapRequest();
     controller.processMapData(controller.mapRequest);
   });
 });

@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PlannedEventServiceImpl implements PlannedEventService {
     private static final String PLANNED_EVENT_ENDPOINT = "/PlannedEvent";
     private static final String PROCESS_ID_PARAM = "process_id";
-    public static final String LAST_PROCESS_EVENT_DIRECTORY_EVENT = "lastProcessEventDirectory/event";
+    private static final String LAST_PROCESS_EVENT_DIRECTORY_EVENT = "lastProcessEventDirectory/event";
 
     @Autowired
     private GTTCoreServiceClient gttCoreServiceClient;
