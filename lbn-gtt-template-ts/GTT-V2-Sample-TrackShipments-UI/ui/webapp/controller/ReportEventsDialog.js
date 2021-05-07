@@ -89,7 +89,6 @@ sap.ui.define(
        *   unplannedEvents?: object[],
        *   refPlannedEvents?: object[],
        *   timeZones?: object[],
-       *   disableDeliveryItemsReporting?: boolean,
        *   onReportSuccess?: () => void,
        *   onReportFailed?: () => void,
        *   onClose?: () => void,
@@ -246,10 +245,11 @@ sap.ui.define(
         this.setIsPlannedEventValid(true);
 
         this.updateDeliveryItemsTable((
-          !this.props.disableDeliveryItemsReporting &&
           selectedEvent.eventType === "POD" &&
           Array.isArray(selectedEvent.deliveryItems)
-        ) ? selectedEvent.deliveryItems : []);
+        ) ? selectedEvent.deliveryItems.filter(function (deliveryItem) {
+          return !deliveryItem.isInFreightUnit;
+        }) : []);
       },
 
       /**
