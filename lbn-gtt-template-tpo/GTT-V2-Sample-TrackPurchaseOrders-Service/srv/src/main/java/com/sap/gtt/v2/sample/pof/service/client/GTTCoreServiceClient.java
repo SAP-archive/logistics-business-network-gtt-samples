@@ -71,13 +71,10 @@ public class GTTCoreServiceClient {
         criticalInfo = destination.getPassword();
     }
 
-    @Value("${GTT_CORE_ENGINE_API_URL_FLP_BASED}")
     private String gttBaseUrl;
 
-    @Value("${GTT_CORE_ENGINE_TECHNICAL_USER}")
     private String techUser;
 
-    @Value("${GTT_CORE_ENGINE_TECHNICAL_PWD}")
     private String criticalInfo;
 
     public <T> ODataResultList<T> readEntitySetAll(String uri, Class<T> classOfT, HttpHeaders headers) {
