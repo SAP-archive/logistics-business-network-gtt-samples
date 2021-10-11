@@ -50,7 +50,7 @@ Track PO Fulfillment template app is designed for purchase representatives to mo
 ![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/screenshot.png)
 
 ## Requirements
-* A SAP Cloud Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
+* A SAP Business Technology Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
 * To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.
 * To integrate with Visibility Providers, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”.
 
