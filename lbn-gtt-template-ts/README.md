@@ -18,7 +18,7 @@ More details, please refer to </br>
 ## Requirements
 * An SAP Business Technology Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota
 * To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP NOTE 2937175 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.
-* To integrate with visibility provider, log your incident in SAP BCP system with component “SCM-LBN-GTT-COR”
+* To integrate with visibility provider, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”
 
 ## Download and Installation
 * [02_Implementation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/02_Implementation_Guide-TS.pdf) 
@@ -47,4 +47,4 @@ You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SCM-LBN-GTT-APP”.
+If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
