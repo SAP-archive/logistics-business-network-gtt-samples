@@ -1,4 +1,4 @@
-FUNCTION zpof_gtt_ote_sh_hdr.
+FUNCTION ZPOF_GTT_OTE_SH_HDR .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -20,10 +20,10 @@ FUNCTION zpof_gtt_ote_sh_hdr.
         ls_bapiret        TYPE bapiret2.
 
   TRY.
-      lcl_ef_performer=>get_control_data(
+      zcl_gtt_pof_ef_performer=>get_control_data(
         EXPORTING
-          is_definition         = VALUE #( maintab = lif_app_constants=>cs_tabledef-sh_header_new )
-          io_bo_factory         = NEW lcl_factory_sh_header( )
+          is_definition         = VALUE #( maintab = zif_gtt_pof_app_constants=>cs_tabledef-sh_header_new )
+          io_bo_factory         = NEW zcl_gtt_pof_tp_factory_shh( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types
           it_all_appl_tables    = i_all_appl_tables
@@ -33,7 +33,7 @@ FUNCTION zpof_gtt_ote_sh_hdr.
           ct_control_data       = e_control_data[] ).
 
     CATCH cx_udm_message INTO lo_udm_message.
-      lcl_tools=>get_errors_log(
+      zcl_gtt_pof_tools=>get_errors_log(
         EXPORTING
           io_umd_message = lo_udm_message
           iv_appsys      = i_appsys
@@ -45,9 +45,9 @@ FUNCTION zpof_gtt_ote_sh_hdr.
 
       " throw corresponding exception
       CASE lo_udm_message->textid.
-        WHEN lif_ef_constants=>cs_errors-stop_processing.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-stop_processing.
           RAISE stop_processing.
-        WHEN lif_ef_constants=>cs_errors-table_determination.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-table_determination.
           RAISE table_determination_error.
       ENDCASE.
   ENDTRY.

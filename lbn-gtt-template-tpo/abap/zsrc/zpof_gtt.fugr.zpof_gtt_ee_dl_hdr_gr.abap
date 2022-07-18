@@ -1,4 +1,4 @@
-FUNCTION zpof_gtt_ee_dl_hdr_gr.
+FUNCTION ZPOF_GTT_EE_DL_HDR_GR .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -56,14 +56,16 @@ FUNCTION zpof_gtt_ee_dl_hdr_gr.
 *"      EVENT_DATA_ERROR
 *"      STOP_PROCESSING
 *"----------------------------------------------------------------------
+
+
  DATA: lo_udm_message    TYPE REF TO cx_udm_message,
         ls_bapiret        TYPE bapiret2.
 
   TRY.
-      lcl_ae_performer=>get_event_data(
+      zcl_gtt_pof_ae_performer=>get_event_data(
         EXPORTING
-          is_definition           = VALUE #( maintab   = lif_app_constants=>cs_tabledef-md_material_header )
-          io_ae_factory           = NEW lcl_ae_factory_dl_header_gr( )
+          is_definition           = VALUE #( maintab   = zif_gtt_pof_app_constants=>cs_tabledef-md_material_header )
+          io_ae_factory           = NEW zcl_gtt_pof_ae_factory_dlh_gr( )
           iv_appsys               = i_appsys
           is_event_type           = i_event_type
           it_all_appl_tables      = i_all_appl_tables
@@ -77,7 +79,7 @@ FUNCTION zpof_gtt_ee_dl_hdr_gr.
           ct_trackparameters      = ct_trackparameters[] ).
 
     CATCH cx_udm_message INTO lo_udm_message.
-      lcl_tools=>get_errors_log(
+      zcl_gtt_pof_tools=>get_errors_log(
         EXPORTING
           io_umd_message = lo_udm_message
           iv_appsys      = i_appsys
@@ -89,9 +91,9 @@ FUNCTION zpof_gtt_ee_dl_hdr_gr.
 
       " throw corresponding exception
       CASE lo_udm_message->textid.
-        WHEN lif_ef_constants=>cs_errors-stop_processing.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-stop_processing.
           RAISE stop_processing.
-        WHEN lif_ef_constants=>cs_errors-table_determination.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-table_determination.
           RAISE event_data_error.
       ENDCASE.
   ENDTRY.

@@ -75,8 +75,6 @@ FUNCTION zgtt_add_trackid_ote_shphdr.
 
     e_trackiddata-trxcod = 'SHIPMENT_ORDER'.
     e_trackiddata-trxid = <ls_xvttk>-tknum.
-    CONCATENATE '0' sy-datum sy-uzeit INTO e_trackiddata-start_date.
-    e_trackiddata-end_date = '099991231000000'.
     e_trackiddata-timzon = lv_tzone.
     e_trackiddata-msrid = space.
     APPEND e_trackiddata.

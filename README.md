@@ -1,5 +1,9 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/logistics-business-network-gtt-samples)](https://api.reuse.software/info/github.com/SAP-samples/logistics-business-network-gtt-samples) 
 # Template Apps for SAP Logistics Business Network, Global Track and Trace Option
+## Announcement (2022.07.16) 
+In this release, the following changes are made: 
+* The valid from/to segment (1970/9999) is removed from all the Tracking ID functions.
+* The key specification "SOURCE_STOP_KEY" is enhanced.
 
 ## Announcement (2021.03.21) 
 In this release, the following changes are made. For more information, refer to Read Me and What’s New in the relevant document folder.  </br>

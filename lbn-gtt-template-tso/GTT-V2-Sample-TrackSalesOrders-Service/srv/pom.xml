@@ -20,8 +20,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <olingo.version>2.0.11</olingo.version>
-        <spring-boot-starter.version>2.4.0</spring-boot-starter.version>
-        <spring-security.version>5.5.0-M1</spring-security.version>
+        <spring-boot-starter.version>2.4.3</spring-boot-starter.version>
+        <spring-security.version>5.5.0</spring-security.version>
         <tomcat-embed-core.version>9.0.37</tomcat-embed-core.version>
         <whitesource.projectName>gtt-v2-sample-track-salesorders-service</whitesource.projectName>
 

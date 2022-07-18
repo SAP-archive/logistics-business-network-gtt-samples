@@ -415,8 +415,6 @@ METHOD if_ex_badi_le_shipment~before_update.
         ls_tracking_id-appobjid   = ls_likp_new-vbeln.
         ls_tracking_id-trxcod          = 'OUTBOUND_DELIVERY'.
         ls_tracking_id-trxid           = ls_likp_new-vbeln.
-        CONCATENATE '0' sy-datum sy-uzeit INTO ls_tracking_id-start_date.
-        ls_tracking_id-end_date        = '099991231000000'.
         ls_tracking_id-timzon          = lv_tzone.
         APPEND ls_tracking_id TO lt_tracking_id.
 
@@ -581,8 +579,6 @@ METHOD if_ex_badi_le_shipment~before_update.
         CONCATENATE ls_lips-vbeln ls_lips-posnr INTO ls_tracking_id-appobjid.
         ls_tracking_id-trxcod          = 'OUTBOUND_DELIVERY_IT'.
         CONCATENATE ls_lips-vbeln ls_lips-posnr INTO ls_tracking_id-trxid.
-        CONCATENATE '0' sy-datum sy-uzeit INTO ls_tracking_id-start_date.
-        ls_tracking_id-end_date        = '099991231000000'.
         ls_tracking_id-timzon          = lv_tzone.
         APPEND ls_tracking_id TO lt_tracking_id.
 

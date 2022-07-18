@@ -16,7 +16,7 @@
       "keywords": [],
       "technicalAttributes": []
     },
-    "ach": "SCM-LBN-GTT-COR",
+    "ach": "SBN-LBN-GTT-APP",
     "dataSources": {
       "mainService": {
         "uri": "tracksalesorders/sap/logistics/gtt/sample/sof/odata/v1/",

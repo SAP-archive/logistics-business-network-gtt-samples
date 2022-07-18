@@ -1,4 +1,4 @@
-FUNCTION zpof_gtt_ee_dl_item.
+FUNCTION ZPOF_GTT_EE_DL_ITEM .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -24,12 +24,12 @@ FUNCTION zpof_gtt_ee_dl_item.
   CLEAR e_logtable[].
 
   TRY.
-      lcl_ef_performer=>get_planned_events(
+      zcl_gtt_pof_ef_performer=>get_planned_events(
         EXPORTING
           is_definition         = VALUE #(
-                                    maintab   = lif_app_constants=>cs_tabledef-dl_item_new
-                                    mastertab = lif_app_constants=>cs_tabledef-dl_header_new )
-          io_factory            = NEW lcl_factory_dl_item( )
+                                    maintab   = zif_gtt_pof_app_constants=>cs_tabledef-dl_item_new
+                                    mastertab = zif_gtt_pof_app_constants=>cs_tabledef-dl_header_new )
+          io_factory            = NEW zcl_gtt_pof_tp_factory_dli( )
           iv_appsys             = i_appsys
           is_app_obj_types      = i_app_obj_types
           it_all_appl_tables    = i_all_appl_tables
@@ -41,7 +41,7 @@ FUNCTION zpof_gtt_ee_dl_item.
           ct_infodata           = e_infodata[] ).
 
     CATCH cx_udm_message INTO lo_udm_message.
-      lcl_tools=>get_errors_log(
+      zcl_gtt_pof_tools=>get_errors_log(
         EXPORTING
           io_umd_message = lo_udm_message
           iv_appsys      = i_appsys
@@ -53,9 +53,9 @@ FUNCTION zpof_gtt_ee_dl_item.
 
       " throw corresponding exception
       CASE lo_udm_message->textid.
-        WHEN lif_ef_constants=>cs_errors-stop_processing.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-stop_processing.
           RAISE stop_processing.
-        WHEN lif_ef_constants=>cs_errors-table_determination.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-table_determination.
           RAISE table_determination_error.
       ENDCASE.
   ENDTRY.

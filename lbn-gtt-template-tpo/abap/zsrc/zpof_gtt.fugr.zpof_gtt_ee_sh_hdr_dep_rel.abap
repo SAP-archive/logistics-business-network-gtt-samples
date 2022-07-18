@@ -1,4 +1,4 @@
-FUNCTION zpof_gtt_ee_sh_hdr_dep_rel.
+FUNCTION ZPOF_GTT_EE_SH_HDR_DEP_REL .
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -20,10 +20,10 @@ FUNCTION zpof_gtt_ee_sh_hdr_dep_rel.
         ls_bapiret     TYPE bapiret2.
 
   TRY.
-      e_result  = lcl_ae_performer=>check_relevance(
+      e_result  = zcl_gtt_pof_ae_performer=>check_relevance(
         EXPORTING
-          is_definition       = VALUE #( maintab = lif_app_constants=>cs_tabledef-sh_header_new )
-          io_ae_factory       = NEW lcl_ae_factory_sh_header_dep( )
+          is_definition       = VALUE #( maintab = zif_gtt_pof_app_constants=>cs_tabledef-sh_header_new )
+          io_ae_factory       = NEW zcl_gtt_pof_ae_factory_shh_dep( )
           iv_appsys           = i_appsys
           is_event_type       = i_event_types
           it_all_appl_tables  = i_all_appl_tables
@@ -31,7 +31,7 @@ FUNCTION zpof_gtt_ee_sh_hdr_dep_rel.
       ).
 
     CATCH cx_udm_message INTO lo_udm_message.
-      lcl_tools=>get_errors_log(
+      zcl_gtt_pof_tools=>get_errors_log(
         EXPORTING
           io_umd_message = lo_udm_message
           iv_appsys      = i_appsys
@@ -43,9 +43,9 @@ FUNCTION zpof_gtt_ee_sh_hdr_dep_rel.
 
       " throw corresponding exception
       CASE lo_udm_message->textid.
-        WHEN lif_ef_constants=>cs_errors-stop_processing.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-stop_processing.
           RAISE stop_processing.
-        WHEN lif_ef_constants=>cs_errors-table_determination.
+        WHEN zif_gtt_pof_ef_constants=>cs_errors-table_determination.
           RAISE relevance_determ_error.
       ENDCASE.
   ENDTRY.

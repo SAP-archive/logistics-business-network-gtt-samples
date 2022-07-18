@@ -2,17 +2,8 @@
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
-   <AREAT>POF GTT</AREAT>
+   <AREAT>GTT TPOF Extraction Functions</AREAT>
    <INCLUDES>
-    <SOBJ_NAME>LZPOF_GTTD00</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD01</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD10</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD11</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD20</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD30</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD40</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD80</SOBJ_NAME>
-    <SOBJ_NAME>LZPOF_GTTD90</SOBJ_NAME>
     <SOBJ_NAME>LZPOF_GTTTOP</SOBJ_NAME>
     <SOBJ_NAME>SAPLZPOF_GTT</SOBJ_NAME>
    </INCLUDES>
@@ -6617,7 +6608,7 @@
     </item>
     <item>
      <FUNCNAME>ZPOF_GTT_UPDATE_RELEVANCE_TAB</FUNCNAME>
-     <REMOTE_CALL>R</REMOTE_CALL>
+     <UPDATE_TASK>1</UPDATE_TASK>
      <SHORT_TEXT>Update values of relevance table</SHORT_TEXT>
      <IMPORT>
       <RSIMP>

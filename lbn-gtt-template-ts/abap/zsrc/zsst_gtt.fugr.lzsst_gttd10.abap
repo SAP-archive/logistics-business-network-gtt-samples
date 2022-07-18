@@ -180,8 +180,6 @@ CLASS lcl_tools IMPLEMENTATION.
                           appobjid    = is_app_object-appobjid
                           trxcod      = <ls_track_id_data>-trxcod
                           trxid       = <ls_track_id_data>-trxid
-                          start_date  = lcl_tools=>get_system_date_time( )
-                          end_date    = lif_ef_constants=>cv_max_end_date
                           timzon      = lcl_tools=>get_system_time_zone( )
                           msrid       = space  ) TO ct_track_id_data.
 
@@ -190,8 +188,6 @@ CLASS lcl_tools IMPLEMENTATION.
                           appobjid    = is_app_object-appobjid
                           trxcod      = <ls_track_id_data_old>-trxcod
                           trxid       = <ls_track_id_data_old>-trxid
-                          start_date  = lcl_tools=>get_system_date_time( )
-                          end_date    = lif_ef_constants=>cv_max_end_date
                           timzon      = lcl_tools=>get_system_time_zone( )
                           msrid       = space
                           action      = /scmtms/cl_scem_int_c=>sc_param_action-delete ) TO ct_track_id_data.
@@ -205,8 +201,6 @@ CLASS lcl_tools IMPLEMENTATION.
                         appobjid    = is_app_object-appobjid
                         trxcod      = <ls_track_id_data>-trxcod
                         trxid       = <ls_track_id_data>-trxid
-                        start_date  = lcl_tools=>get_system_date_time( )
-                        end_date    = lif_ef_constants=>cv_max_end_date
                         timzon      = lcl_tools=>get_system_time_zone( )
                         msrid       = space ) TO ct_track_id_data.
       ENDIF.
@@ -219,8 +213,6 @@ CLASS lcl_tools IMPLEMENTATION.
                       appobjid    = is_app_object-appobjid
                       trxcod      = <ls_track_id_data_del>-trxcod
                       trxid       = <ls_track_id_data_del>-trxid
-                      start_date  = lcl_tools=>get_system_date_time( )
-                      end_date    = lif_ef_constants=>cv_max_end_date
                       timzon      = lcl_tools=>get_system_time_zone( )
                       msrid       = space
                       action      = /scmtms/cl_scem_int_c=>sc_param_action-delete ) TO ct_track_id_data.
@@ -244,8 +236,6 @@ CLASS lcl_tools IMPLEMENTATION.
                   appobjid    = is_app_object-appobjid
                   trxcod      = cs_trxcod_resource
                   trxid       = |{ is_root-tor_id }{ <ls_item>-res_id }|
-                  start_date  = lcl_tools=>get_system_date_time( )
-                  end_date    = lif_ef_constants=>cv_max_end_date
                   timzon      = lcl_tools=>get_system_time_zone( )
                   msrid       = space  ) TO ct_track_id_data.
         ENDIF.
@@ -260,8 +250,6 @@ CLASS lcl_tools IMPLEMENTATION.
                   appobjid    = is_app_object-appobjid
                   trxcod      = cs_trxcod_resource
                   trxid       = |{ is_root-tor_id }{ <ls_item>-platenumber }|
-                  start_date  = lcl_tools=>get_system_date_time( )
-                  end_date    = lif_ef_constants=>cv_max_end_date
                   timzon      = lcl_tools=>get_system_time_zone( )
                   msrid       = space  ) TO ct_track_id_data.
         ENDIF.

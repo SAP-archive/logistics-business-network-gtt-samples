@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_im_pof_gtt_le_shipment IMPLEMENTATION.
+CLASS ZCL_IM_POF_GTT_LE_SHIPMENT IMPLEMENTATION.
 
 
   METHOD if_ex_badi_le_shipment~at_save.

@@ -820,8 +820,6 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
                     appobjid   = is_app_object-appobjid
                     trxcod     = iv_trxcod
                     trxid      = iv_trxid
-                    start_date = lcl_tools=>get_system_date_time( )
-                    end_date   = lif_ef_constants=>cv_max_end_date
                     timzon     = lcl_tools=>get_system_time_zone( )
                     msrid      = space
                     action     = iv_action ) TO ct_track_id.
@@ -858,8 +856,6 @@ CLASS lcl_bo_tor_reader IMPLEMENTATION.
                    appobjid    = is_app_object-appobjid
                    trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
                    trxid       = |{ <ls_root>-tor_id }{ <fs_text_content>-text }|
-                   start_date  = lcl_tools=>get_system_date_time( )
-                   end_date    = lif_ef_constants=>cv_max_end_date
                    timzon      = lcl_tools=>get_system_time_zone( )
                    msrid       = space  ) TO ct_track_id_data.
         ENDIF.
@@ -1677,8 +1673,6 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
                     appobjid    = is_app_object-appobjid
                     trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
                     trxid       = |{ <ls_root_new>-tor_id }{ <ls_item>-vessel_id }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
                     timzon      = lcl_tools=>get_system_time_zone( )
                     msrid       = space  ) TO lt_track_id_data_new.
           ENDIF.
@@ -1701,8 +1695,6 @@ CLASS lcl_bo_freight_booking_reader IMPLEMENTATION.
                     appobjid    = is_app_object-appobjid
                     trxcod      = lif_sst_constants=>cs_trxcod-fo_resource
                     trxid       = |{ <ls_root_old>-tor_id }{ <ls_item>-vessel_id }|
-                    start_date  = lcl_tools=>get_system_date_time( )
-                    end_date    = lif_ef_constants=>cv_max_end_date
                     timzon      = lcl_tools=>get_system_time_zone( )
                     msrid       = space  ) TO lt_track_id_data_old.
           ENDIF.
@@ -2327,8 +2319,7 @@ CLASS lcl_bo_freight_unit_reader IMPLEMENTATION.
 
     DO 1 TIMES.
 
-      ASSIGN lt_capa_stage[ KEY source_stop_key COMPONENTS
-        source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num>).
+      ASSIGN lt_capa_stage[ source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num>).
       CHECK sy-subrc = 0.
 
       ASSIGN lt_capa_stage[ dest_stop_key = lv_stop_des_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_last_num>).
@@ -2336,8 +2327,7 @@ CLASS lcl_bo_freight_unit_reader IMPLEMENTATION.
 
       lv_stage_num_difference = <lv_capa_stage_last_num> - <lv_capa_stage_first_num>.
 
-      ASSIGN lt_capa_stage_bi[ KEY source_stop_key COMPONENTS
-        source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num_bi>).
+      ASSIGN lt_capa_stage_bi[ source_stop_key = lv_stop_src_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_first_num_bi>).
       CHECK sy-subrc = 0.
 
       ASSIGN lt_capa_stage_bi[ dest_stop_key = lv_stop_des_key ]-seq_num TO FIELD-SYMBOL(<lv_capa_stage_last_num_bi>).
