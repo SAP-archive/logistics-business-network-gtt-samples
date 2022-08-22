@@ -1,5 +1,15 @@
 # Track Shipments Template App
 
+## Announcement (2022.08.20) 
+In this release, the following changes are made: 
+* The UI5 version for Track Shipments template app is upgraded to 1.96.10.
+* For visibility provider integration, the mapping of the field 'trackid" is removed in the model.
+
+## Announcement (2022.07.16) 
+In this release, the following changes are made: 
+* The valid from/to segment (1970/9999) is removed from all the Tracking ID functions.
+* The key specification "SOURCE_STOP_KEY" is enhanced.
+
 ## What's New in Track Shipments app (Micro Delivery 2021.03.21)
 * Enable air tracking mode with integration of visibility provider and TM (air freight booking) in the Track Shipments template app
 * Enhance forwardEventtoTM event-to-action script with actual event’s message type in Track Shipments template app.
@@ -17,8 +27,7 @@ More details, please refer to </br>
 
 ## Requirements
 * An SAP Business Technology Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
-* To integrate the global track and trace option with ERP, your SAP ERP system should be running on Netweaver 7.31 or higher with SAP Notes 2370356, 2937175, and 2974952 being implemented. Besides, to implement the template apps' extractor codes, your SAP ERP system version should be S4 1909 SP03 on premise or higher.
-* The node “Interface to Global Track and Trace” in the IMG and the related GTT-specific versions of the IMG activities are available in the software component version SAP_BW 750 from SP 12 on. They cannot be downloaded as a correction via note assistant. We recommend upgrading to the service package level accordingly.
+* Make sure that you have met the requirements for the product version mentioned in the [Prerequisites](https://help.sap.com/docs/SAP_LBN_GTT_OPTION/d0802f41861a4f81a3610d873fdcf148/c9f7baf5f6e14be4ba9045786961de14.html) section of Appendix one: Connect to SAP ERP in Administration Guide for Version 2. You can find this guide at http://help.sap.com/gtt. 
 * To integrate with visibility provider, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
 
 ## Download and Installation
