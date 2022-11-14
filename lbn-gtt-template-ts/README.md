@@ -26,9 +26,10 @@ More details, please refer to </br>
 [01_Application_Introduction-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/01_Application_Introduction-TS.pdf)
 
 ## Requirements
-* An SAP Business Technology Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
+* An SAP Business Technology Platform global account with entitlement to the SAP Business Network Global Track and Trace, 1 portal service quota and 2 GB Application Runtime quota.
 * Make sure that you have met the requirements for the product version mentioned in the [Prerequisites](https://help.sap.com/docs/SAP_LBN_GTT_OPTION/d0802f41861a4f81a3610d873fdcf148/c9f7baf5f6e14be4ba9045786961de14.html) section of Appendix one: Connect to SAP ERP in Administration Guide for Version 2. You can find this guide at http://help.sap.com/gtt. 
-* To integrate with visibility provider, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
+* The ABAP codes on Github to support sample apps for SAP Business Network Global Track and Trace shall be implemented in SAP S/4HANA 1909 SP03 on premise or higher. Please note that the codes are not validated in its lower version or other ECC series of products, so you might need to do further adaptation work or build your own extractor.
+* To integrate with visibility providers, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
 
 ## Download and Installation
 * [02_Implementation_Guide-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/02_Implementation_Guide-TS.pdf) 
@@ -37,7 +38,7 @@ More details, please refer to </br>
 * [05_What'sNew(Feb_2021)-TS.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-ts/Documents/05_What'sNew(Feb_2021)-TS.pdf)
 
 ## Limitations
-1.	To integrate with visibility provider, the following code list sent out from ERP system should be consistent with the code list in Track SO Fulfillment template model: </br>
+1.	To integrate with visibility providers, the following code list sent out from ERP system should be consistent with the code list in Track SO Fulfillment template model: </br>
 transportation mode code, shipping type code, tracked process type code, carrier reference document type code</br>  
 2.	To integrate with shipment and freight order/freight booking at the same time, please implement the Track Shipment Extractor and Track SO Fulfillment Extractor in different ERP system. This is because Track Shipment Extractor and Track SO Fulfillment Extractor share the same AOT Type name. </br>
 
@@ -57,4 +58,4 @@ You can set your own execution status logic in Event-to-Action. </br>
 
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with global track and trace option, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
+If your issue is concerned with SAP Business Network Global Track and Trace, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.

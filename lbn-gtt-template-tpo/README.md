@@ -42,7 +42,7 @@ For more information, refer to What’s New in the relevant document folder [04_
 * Include new introduction material [03_Introduction_Material_for_TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/03_Introduction_Material_for_TPOF.pdf).
 * Include new FAQ material [05_FAQs_for_Template_Code_Implementation.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/05_FAQs_for_Template_Code_Implementation.pdf).</br>
 
-If you choose not to upgrade to the latest version, here are some mandatory steps for you to adapt to GTT V2 February 2021 Delivery.</br>
+If you choose not to upgrade to the latest version, here are some mandatory steps for you to adapt to SAP Business Network Global Track and Trace V2 February 2021 Delivery.</br>
 *	[Mandatory for VP integration] Add LBN# as the prefix for Service Agent LBN ID for the shipment extractor.
 *	[Mandatory for receiving actual events from data contributor] Grant report and read authorization to Service Agent LBN ID in the shipment and resource process type of the model 'Purchase Order Fulfillment'.</br>
 
@@ -59,9 +59,10 @@ Track PO Fulfillment template app is designed for purchase representatives to mo
 ![image](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/screenshot.png)
 
 ## Requirements
-* An SAP Business Technology Platform global account with entitlement to the global track and trace option for SAP Logistics Business Network, 1 portal service quota and 2 GB Application Runtime quota.
+* An SAP Business Technology Platform global account with entitlement to SAP Business Network Global Track and Trace, 1 portal service quota and 2 GB Application Runtime quota.
 * Make sure that you have met the requirements for the product version mentioned in the [Prerequisites](https://help.sap.com/docs/SAP_LBN_GTT_OPTION/d0802f41861a4f81a3610d873fdcf148/c9f7baf5f6e14be4ba9045786961de14.html) section of Appendix one: Connect to SAP ERP in Administration Guide for Version 2. You can find this guide at http://help.sap.com/gtt. 
-* To integrate with Visibility Providers, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
+* The ABAP codes on Github to support sample apps for SAP Business Network Global Track and Trace shall be implemented in SAP S/4HANA 1909 SP03 on premise or higher. Please note that the codes are not validated in its lower version or other ECC series of products, so you might need to do further adaptation work or build your own extractor.
+* To integrate with visibility providers, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
 
 ## Download and Installation
 * [01_Implementation_Guide-TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/01_Implementation_Guide-TPOF.pdf) 
@@ -71,7 +72,7 @@ Track PO Fulfillment template app is designed for purchase representatives to mo
 * Notes for ERP Extractor Implementation:</br>
 The eventMatchKey of the shipment’s planned event at the stage level = shipmentNo + stopId. "stopId" is set by the stage’s sequence.</br>
 The eventMatchKey of the purchase order item's and delivery item's planned event is null.</br>
-To integrate with the Manage Locations app on the platform of SAP Logistics Business Network, the following code list sent out from ERP system should be consistent with the code list in the template model of Track PO Fulfillment – "Purchase Order fulfillment":</br>
+To integrate with the Manage Locations app on the platform of SAP Business Network for Logistics, the following code list sent out from ERP system should be consistent with the code list in the template model of Track PO Fulfillment – "Purchase Order fulfillment":</br>
   -- Location type code</br>
 To integrate with Visibility Providers, the following code list sent out from ERP system should be consistent with the code list in the template model of Track PO Fulfillment – "Purchase Order fulfillment":</br>
   -- Transportation mode code</br>
@@ -114,4 +115,4 @@ You can set your own execution status logic in Event-to-Action. </br>
  
 ## How to Obtain Support
 The project is provided "as-is", with no expected support. </br>
-If your issue is concerned with the global track and trace option, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.</br>
+If your issue is concerned with SAP Business Network Global Track and Trace, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.</br>
