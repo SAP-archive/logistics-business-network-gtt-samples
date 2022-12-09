@@ -1,263 +1,275 @@
 {
-  "_version": "1.12.0",
-  "sap.app": {
-    "id": "com.sap.gtt.app.sample.sst",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "1.0.1"
-    },
-    "title": "{{appTitle}}",
-    "subTitle": "{{appSubTitle}}",
-    "shortTitle": "",
-    "info": "",
-    "description": "{{appDescription}}",
-    "tags": {
-      "keywords": [],
-      "technicalAttributes": []
-    },
-    "ach": "SBN-LBN-GTT-APP",
-    "dataSources": {
-      "mainService": {
-        "uri": "trackshipments/sap/logistics/gtt/sample/sst/odata/v1/",
-        "type": "OData",
-        "settings": {
-          "odataVersion": "2.0",
-          "localUri": "localService/metadata.xml",
-          "annotations": [
-            "mainAnnotations",
-            "localAnnotations"
-          ],
-          "maxAge": 360
-        }
-      },
-      "mainAnnotations": {
-        "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1/uiAnnotation",
-        "type": "ODataAnnotation",
-        "settings": {
-          "localUri": "localService/annotations.xml"
-        }
-      },
-      "localAnnotations": {
-        "uri": "annotations/annotations.xml",
-        "type": "ODataAnnotation"
-      },
-      "restService": {
-        "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1",
-        "type": "JSON",
-        "settings": {
-          "localUri": "localService/mockdata/",
-          "maxAge": 30
-        }
-      }
-    },
-    "resources": "resources.json",
-    "offline": false,
-    "sourceTemplate": {
-      "id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
-      "version": "1.40.12"
-    },
-    "crossNavigation": {
-      "inbounds": {
-        "Shipment-track": {
-          "semanticObject": "Shipment",
-          "action": "track",
-          "icon": "sap-icon://BusinessSuiteInAppSymbols/icon-container-loading",
-          "title": "{{appTitle}}",
-          "subTitle": "{{appSubTitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
-        }
-      }
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    },
-    "supportedThemes": [
-      "sap_fiori_3",
-      "sap_belize_hcb",
-      "sap_belize_hcw"
-    ],
-    "fullWidth": true
-  },
-  "sap.ui5": {
-    "flexEnabled": false,
-    "resources": {
-      "js": [],
-      "css": [{
-        "uri": "css/style.css",
-        "id": "sst-css"
-      }]
-    },
-    "dependencies": {
-      "minUI5Version": "1.71.4",
-      "libs": {
-        "sap.ui.core": {},
-        "sap.m": {},
-        "sap.ui.comp": {},
-        "sap.ui.fl": {},
-        "sap.ui.layout": {},
-        "sap.ui.table": {},
-        "sap.ui.vbm": {},
-        "sap.ui.vk": {},
-        "sap.f": {},
-        "sap.uxap": {},
-        "sap.suite.ui.commons": {},
-        "sap.suite.ui.microchart": {}
-      },
-      "components": {}
-    },
-    "componentUsages": {},
-    "models": {
-      "globalJson": {
-        "type": "sap.ui.model.json.JSONModel"
-      },
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "com.sap.gtt.app.sample.sst.i18n.i18n"
-        }
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1/i18n/i18n.properties",
-        "settings": {
-          "enhanceWith": [
-            {
-              "bundleName": "com.sap.gtt.app.sample.sst.i18n.i18n"
-            }
-          ]
-        }
-      },
-      "label": {
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {
-          "defaultBindingMode": "OneTime"
-        }
-      },
-      "": {
-        "dataSource": "mainService",
-        "settings": {
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": true
-        },
-        "preload": true
-      }
-    },
-    "rootView": {
-      "viewName": "com.sap.gtt.app.sample.sst.view.App",
-      "type": "XML",
-      "id": "app",
-      "async": true
-    },
-    "handleValidation": true,
-    "config": {
-      "css": [{
+    "_version": "1.12.0",
+    "sap.app": {
         "id": "com.sap.gtt.app.sample.sst",
-        "uri": "css/sst.less"
-      }]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "viewPath": "com.sap.gtt.app.sample.sst.view",
-        "controlId": "app",
-        "controlAggregation": "pages",
-        "bypassed": {
-          "target": ["notFound"]
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.1"
         },
-        "async": true
-      },
-      "routes": [
-        {
-          "name": "shipmentList",
-          "pattern": ":?sap-iapp-state:",
-          "target": "shipmentList"
+        "title": "{{appTitle}}",
+        "subTitle": "{{appSubTitle}}",
+        "shortTitle": "",
+        "info": "",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": [],
+            "technicalAttributes": []
         },
-        {
-          "name": "shipment",
-          "pattern": "Shipment(guid'{id}')",
-          "target": "shipment"
+        "ach": "SBN-LBN-GTT-APP",
+        "dataSources": {
+            "mainService": {
+                "uri": "trackshipments/sap/logistics/gtt/sample/sst/odata/v1/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml",
+                    "annotations": [
+                        "mainAnnotations",
+                        "localAnnotations"
+                    ],
+                    "maxAge": 360
+                }
+            },
+            "mainAnnotations": {
+                "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1/uiAnnotation",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/annotations.xml"
+                }
+            },
+            "localAnnotations": {
+                "uri": "annotations/annotations.xml",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/localAnnotations.xml"
+                }
+            },
+            "restService": {
+                "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1",
+                "type": "JSON",
+                "settings": {
+                    "localUri": "localService/mockdata/",
+                    "maxAge": 30
+                }
+            }
         },
-        {
-          "name": "freightUnit",
-          "pattern": "FreightUnit(guid'{id}'):?params:",
-          "target": "freightUnit"
+        "resources": "resources.json",
+        "offline": false,
+        "sourceTemplate": {
+            "id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+            "version": "1.40.12",
+            "toolsId": "bd83a560-e0f5-4c6e-a091-b3b23d190ac2"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "Shipment-track": {
+                    "semanticObject": "Shipment",
+                    "action": "track",
+                    "icon": "sap-icon://BusinessSuiteInAppSymbols/icon-container-loading",
+                    "title": "{{appTitle}}",
+                    "subTitle": "{{appSubTitle}}",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    }
+                }
+            }
         }
-      ],
-      "targets": {
-        "shipmentList": {
-          "viewId": "shipmentList",
-          "viewType": "XML",
-          "viewName": "ShipmentList",
-          "viewLevel": 0,
-          "title": "{{shipmentListViewTitle}}"
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
         },
-        "shipment": {
-          "viewId": "shipment",
-          "viewType": "XML",
-          "viewName": "Shipment",
-          "viewLevel": 1,
-          "title": "{{shipmentViewTitle}}"
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
         },
-        "freightUnit": {
-          "viewId": "freightUnit",
-          "viewType": "XML",
-          "viewName": "FreightUnit",
-          "viewLevel": 1,
-          "title": "{{freightUnitViewTitle}}"
+        "supportedThemes": [
+            "sap_fiori_3",
+            "sap_belize_hcb",
+            "sap_belize_hcw"
+        ],
+        "fullWidth": true
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "resources": {
+            "js": [],
+            "css": [
+                {
+                    "uri": "css/style.css",
+                    "id": "sst-css"
+                }
+            ]
         },
-        "notFound": {
-          "viewId": "notFound",
-          "viewType": "XML",
-          "viewName": "NotFound",
-          "viewLevel": 0,
-          "title": "{{notFoundViewTitle}}"
+        "dependencies": {
+            "minUI5Version": "1.71.4",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.comp": {},
+                "sap.ui.fl": {},
+                "sap.ui.layout": {},
+                "sap.ui.table": {},
+                "sap.ui.vbm": {},
+                "sap.ui.vk": {},
+                "sap.f": {},
+                "sap.uxap": {},
+                "sap.suite.ui.commons": {},
+                "sap.suite.ui.microchart": {}
+            },
+            "components": {}
+        },
+        "componentUsages": {},
+        "models": {
+            "globalJson": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sap.gtt.app.sample.sst.i18n.i18n"
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "trackshipments/sap/logistics/gtt/sample/sst/rest/v1/i18n/i18n.properties",
+                "settings": {
+                    "enhanceWith": [
+                        {
+                            "bundleName": "com.sap.gtt.app.sample.sst.i18n.i18n"
+                        }
+                    ]
+                }
+            },
+            "label": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {
+                    "defaultBindingMode": "OneTime"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "settings": {
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": true
+                },
+                "preload": true
+            }
+        },
+        "rootView": {
+            "viewName": "com.sap.gtt.app.sample.sst.view.App",
+            "type": "XML",
+            "id": "app",
+            "async": true
+        },
+        "handleValidation": true,
+        "config": {
+            "css": [
+                {
+                    "id": "com.sap.gtt.app.sample.sst",
+                    "uri": "css/sst.less"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.sap.gtt.app.sample.sst.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "name": "shipmentList",
+                    "pattern": ":?sap-iapp-state:",
+                    "target": "shipmentList"
+                },
+                {
+                    "name": "shipment",
+                    "pattern": "Shipment(guid'{id}')",
+                    "target": "shipment"
+                },
+                {
+                    "name": "freightUnit",
+                    "pattern": "FreightUnit(guid'{id}'):?params:",
+                    "target": "freightUnit"
+                }
+            ],
+            "targets": {
+                "shipmentList": {
+                    "viewId": "shipmentList",
+                    "viewType": "XML",
+                    "viewName": "ShipmentList",
+                    "viewLevel": 0,
+                    "title": "{{shipmentListViewTitle}}"
+                },
+                "shipment": {
+                    "viewId": "shipment",
+                    "viewType": "XML",
+                    "viewName": "Shipment",
+                    "viewLevel": 1,
+                    "title": "{{shipmentViewTitle}}"
+                },
+                "freightUnit": {
+                    "viewId": "freightUnit",
+                    "viewType": "XML",
+                    "viewName": "FreightUnit",
+                    "viewLevel": 1,
+                    "title": "{{freightUnitViewTitle}}"
+                },
+                "notFound": {
+                    "viewId": "notFound",
+                    "viewType": "XML",
+                    "viewName": "NotFound",
+                    "viewLevel": 0,
+                    "title": "{{notFoundViewTitle}}"
+                }
+            }
+        },
+        "extends": {
+            "extensions": {}
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "resourceRoots": {},
+        "services": {
+            "ShellUIService": {
+                "factoryName": "sap.ushell.ui5service.ShellUIService",
+                "lazy": false,
+                "settings": {
+                    "setHierarchy": "auto",
+                    "setTitle": "auto"
+                }
+            }
         }
-      }
     },
-    "extends": {
-      "extensions": {}
+    "sap.fiori": {
+        "registrationIds": [
+            "F4036"
+        ],
+        "archeType": "transactional"
     },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "resourceRoots": {},
-    "services": {
-      "ShellUIService": {
-        "factoryName": "sap.ushell.ui5service.ShellUIService",
-        "lazy": false,
-        "settings": {
-          "setHierarchy": "auto",
-          "setTitle": "auto"
-        }
-      }
+    "sap.platform.cf": {
+        "oAuthScopes": [
+            "$XSAPPNAME.sst.r"
+        ]
     }
-  },
-  "sap.fiori": {
-    "registrationIds": ["F4036"],
-    "archeType": "transactional"
-  },
-  "sap.platform.cf": {
-    "oAuthScopes": [
-      "$XSAPPNAME.sst.r"
-    ]
-  }
 }
