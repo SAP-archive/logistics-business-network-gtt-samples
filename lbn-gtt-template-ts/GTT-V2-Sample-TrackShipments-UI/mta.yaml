@@ -15,9 +15,9 @@ modules:
     requires:
     - artifacts:
       - comsapgttappsamplesst.zip
-      name: comsapgttappsamplesst
+      name: gtt-ui-sample-track-shipments
       target-path: resources/
-- name: comsapgttappsamplesst
+- name: gtt-ui-sample-track-shipments
   type: html5
   path: ui
   build-parameters:
