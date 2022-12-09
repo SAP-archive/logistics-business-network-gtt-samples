@@ -1,69 +1,76 @@
 {
-  "name": "com.sap.gtt.app.sample.sst",
-  "version": "0.0.1",
-  "description": "GTT Sample Track Shipments UI",
-  "license": "ISC",
-  "author": "SAP SE",
-  "repository": {
-    "type": "git",
-    "url": "https://github.wdf.sap.corp/TrackAndTrace/GTT-V2-Sample-Trackshipments-UI.git"
-  },
-  "private": true,
-  "engines": {
-    "node": "^14",
-    "npm": "^8"
-  },
-  "devDependencies": {
-    "@sap/grunt-sapui5-bestpractice-build": "^1.4.15",
-    "@sapui5/ts-types": "1.86.3",
-    "dotenv": "^8.2.0",
-    "eslint": "^6.8.0",
-    "fs-extra": "^9.0.0",
-    "grunt-sonar-runner": "^2.4.8",
-    "karma": "^4.4.1",
-    "karma-chrome-launcher": "^3.1.1",
-    "karma-coverage": "^2.2.0",
-    "karma-junit-reporter": "^2.0.1",
-    "karma-ui5": "^1.1.0",
-    "koa": "^2.11.0",
-    "koa-compress": "^3.0.0",
-    "koa-conditional-get": "^2.0.0",
-    "koa-etag": "^3.0.0",
-    "koa-mount": "^4.0.0",
-    "koa-static": "^5.0.0",
-    "prettier": "^2.0.4",
-    "@ui5/cli": "^2.14.16",
-    "@sap/ux-ui5-tooling": "^1.8.3",
-    "rimraf": "^3.0.2"
-  },
-  "dependencies": {},
-  "scripts": {
-    "lint": "grunt eslint",
-    "test": "npm run lint && npm run test:ci && npm run sonar",
-    "test:ci": "karma start karma-ci.conf.js",
-    "test:debug": "karma start",
-    "build_old": "grunt",
-    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#Shipment-track\"",
-    "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandboxMockServer.html?sap-ui-xx-viewCache=false#Shipment-track\"",
-    "start-noflp": "fiori run --open \"index.html?sap-ui-xx-viewCache=false\"",
-    "start-variants-management": "fiori run --open \"preview.html?sap-ui-xx-viewCache=false&fiori-tools-rta-mode=true&sap-ui-rta-skip-flex-validation=true#preview-app\"",
-    "build": "ui5 build -a --clean-dest --include-task=generateCachebusterInfo",
-    "deploy": "fiori verify",
-    "deploy-config": "fiori add deploy-config",
-    "start-mock": "fiori run --open \"test/flpSandboxMockServer.html?sap-ui-xx-viewCache=false#Shipment-track\"",
-    "suite-tests": "fiori run --open 'test/testsuite.qunit.html'",
-    "int-tests": "fiori run --open 'test/integration/opaTests.qunit.html'"
-  },
-  "sapuxLayer": "CUSTOMER_BASE",
-  "keywords": [
-    "ui5",
-    "openui5",
-    "sapui5"
-  ],
-  "main": "webapp/index.html",
-  "ui5": {
-    "dependencies": [
-      "@sap/ux-ui5-tooling"
-    ]
-  }
+    "name": "com.sap.gtt.app.sample.sst",
+    "version": "0.0.1",
+    "description": "GTT Sample Track Shipments UI",
+    "license": "ISC",
+    "author": "SAP SE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.wdf.sap.corp/TrackAndTrace/GTT-V2-Sample-Trackshipments-UI.git"
+    },
+    "private": true,
+    "engines": {
+        "node": "^14",
+        "npm": "^8"
+    },
+    "devDependencies": {
+        "@sap/grunt-sapui5-bestpractice-build": "^1.4.15",
+        "@sapui5/ts-types": "1.86.3",
+        "dotenv": "^8.2.0",
+        "eslint": "^6.8.0",
+        "fs-extra": "^9.0.0",
+        "grunt-sonar-runner": "^2.4.8",
+        "karma": "^4.4.1",
+        "karma-chrome-launcher": "^3.1.1",
+        "karma-coverage": "^2.2.0",
+        "karma-junit-reporter": "^2.0.1",
+        "karma-ui5": "^1.1.0",
+        "koa": "^2.11.0",
+        "koa-compress": "^3.0.0",
+        "koa-conditional-get": "^2.0.0",
+        "koa-etag": "^3.0.0",
+        "koa-mount": "^4.0.0",
+        "koa-static": "^5.0.0",
+        "prettier": "^2.0.4",
+        "@ui5/cli": "^2.14.16",
+        "@sap/ux-ui5-tooling": "^1.8.3",
+        "rimraf": "^3.0.2",
+        "@sap/ui5-builder-webide-extension": "^1.1.8",
+        "ui5-task-zipper": "^0.5.0",
+        "mbt": "^1.2.18"
+    },
+    "dependencies": {},
+    "scripts": {
+        "lint": "grunt eslint",
+        "test": "npm run lint && npm run test:ci && npm run sonar",
+        "test:ci": "karma start karma-ci.conf.js",
+        "test:debug": "karma start",
+        "build_old": "grunt",
+        "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#Shipment-track\"",
+        "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandboxMockServer.html?sap-ui-xx-viewCache=false#Shipment-track\"",
+        "start-noflp": "fiori run --open \"index.html?sap-ui-xx-viewCache=false\"",
+        "start-variants-management": "fiori run --open \"preview.html?sap-ui-xx-viewCache=false&fiori-tools-rta-mode=true&sap-ui-rta-skip-flex-validation=true#preview-app\"",
+        "build": "ui5 build -a --clean-dest --include-task=generateCachebusterInfo",
+        "deploy": "fiori verify",
+        "deploy-config": "fiori add deploy-config",
+        "start-mock": "fiori run --open \"test/flpSandboxMockServer.html?sap-ui-xx-viewCache=false#Shipment-track\"",
+        "suite-tests": "fiori run --open 'test/testsuite.qunit.html'",
+        "int-tests": "fiori run --open 'test/integration/opaTests.qunit.html'",
+        "build:cf": "ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateCachebusterInfo"
+    },
+    "sapuxLayer": "CUSTOMER_BASE",
+    "keywords": [
+        "ui5",
+        "openui5",
+        "sapui5"
+    ],
+    "main": "webapp/index.html",
+    "ui5": {
+        "dependencies": [
+            "@sap/ux-ui5-tooling",
+            "@sap/ui5-builder-webide-extension",
+            "ui5-task-zipper",
+            "mbt"
+        ]
+    }
 }

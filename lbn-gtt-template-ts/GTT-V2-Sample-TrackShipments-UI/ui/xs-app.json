@@ -1,29 +1,18 @@
 {
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
-  "logout": {
-    "logoutEndpoint": "/do/logout"
-  },
   "routes": [
     {
-      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/odata/v1/(.*)$",
-      "target": "sap/logistics/gtt/sample/sst/odata/v1/$1",
-      "destination": "lbn-gtt-sst-api",
-      "scope": ["$XSAPPNAME.sst.r"]
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
     },
     {
-      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/rest/v1/(.*)$",
-      "target": "sap/logistics/gtt/sample/sst/rest/v1/$1",
-      "httpMethods": ["GET"],
-      "destination": "lbn-gtt-sst-api",
-      "scope": ["$XSAPPNAME.sst.r"]
-    },
-    {
-      "source": "^/trackshipments/sap/logistics/gtt/sample/sst/rest/v1/(.*)$",
-      "target": "sap/logistics/gtt/sample/sst/rest/v1/$1",
-      "httpMethods": ["POST"],
-      "destination": "lbn-gtt-sst-api",
-      "scope": ["$XSAPPNAME.sst.w"]
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
     },
     {
       "source": "^(.*)$",

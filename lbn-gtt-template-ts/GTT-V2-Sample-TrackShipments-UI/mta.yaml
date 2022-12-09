@@ -1,11 +1,7 @@
----
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: gtt-v2-ui-sample-track-shipments
 description: GTT Sample UI Track Shipments
 version: 2.4.0
-parameters:
-  deploy_mode: html5-repo
-  enable-parallel-deployments: true
 modules:
 - name: gtt-ui-sample-track-shipments_ui_deployer
   type: com.sap.html5.application-content
@@ -14,24 +10,69 @@ modules:
   - name: gtt-ui-sample-track-shipments-app-host
   build-parameters:
     requires:
-    - name: gtt-ui-sample-track-shipments
-      artifacts:
-      - "./*"
+    - artifacts:
+      - ./*
+      name: gtt-ui-sample-track-shipments
       target-path: resources/gtt-ui-sample-track-shipments
 - name: gtt-ui-sample-track-shipments
   type: html5
   path: ui
   parameters:
+    buildpack: staticfile_buildpack
     disk-quota: 64M
     memory: 64M
-    buildpack: staticfile_buildpack
   build-parameters:
+    build-result: dist
     builder: grunt
     supported-platforms: []
+- name: gtt-v2-ui-sample-track-shipments-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: gtt-ui-sample-track-shipments-app-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comsapgttappsamplesst.zip
+      name: comsapgttappsamplesst
+      target-path: resources/
+- name: comsapgttappsamplesst
+  type: html5
+  path: ui
+  build-parameters:
     build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: gtt-ui-sample-track-shipments-app-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-plan: app-host
+- name: gtt-v2-ui-sample-track-shipments-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: gtt-v2-ui-sample-track-shipments-destination-service
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
