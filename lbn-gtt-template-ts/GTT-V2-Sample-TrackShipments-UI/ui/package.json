@@ -10,19 +10,19 @@
   },
   "private": true,
   "engines": {
-    "node": "^10",
-    "npm": "^6"
+    "node": "^14",
+    "npm": "^8"
   },
   "devDependencies": {
-    "@sap/grunt-sapui5-bestpractice-build": "1.4.15",
+    "@sap/grunt-sapui5-bestpractice-build": "^1.4.15",
     "@sapui5/ts-types": "1.86.3",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "fs-extra": "^9.0.0",
     "grunt-sonar-runner": "^2.4.8",
     "karma": "^4.4.1",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage": "^2.0.1",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-coverage": "^2.2.0",
     "karma-junit-reporter": "^2.0.1",
     "karma-ui5": "^1.1.0",
     "koa": "^2.11.0",
@@ -32,9 +32,9 @@
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "prettier": "^2.0.4",
-    "@ui5/cli": "^2.14.1",
-    "@sap/ux-ui5-tooling": "1",
-    "rimraf": "3.0.2"
+    "@ui5/cli": "^2.14.16",
+    "@sap/ux-ui5-tooling": "^1.8.3",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {},
   "scripts": {
