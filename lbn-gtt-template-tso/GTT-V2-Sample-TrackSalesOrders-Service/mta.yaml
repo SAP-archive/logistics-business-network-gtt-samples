@@ -15,6 +15,9 @@ modules:
     health-check-timeout: 180
     host: gtt-sample-track-salesorders-service-{unique-identifier}
   build-parameters:
+    builder: custom
+    commands:
+    - mvn clean verify package -DskipTests=true
     ignore:
     - "*.md"
     build-result: target/*.jar

@@ -15,6 +15,9 @@ modules:
     health-check-timeout: 180
     host: gtt-sample-track-shipments-service-{unique-identifier}
   build-parameters:
+    builder: custom
+    commands:
+      - mvn clean verify package -Dunit-tests.skip=true
     ignore:
     - "*.md"
     build-result: target/*.jar
