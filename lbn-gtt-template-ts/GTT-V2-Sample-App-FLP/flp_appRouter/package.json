@@ -2,11 +2,11 @@
 	"name": "html5-apps-approuter",
 	"description": "Node.js based application router service for html5-apps",
 	"engines": {
-		"node": "^12.22.12",
-		"npm": ">=5"
+		"node": ">=18",
+		"npm": ">=6.14.15"
 	},
 	"dependencies": {
-		"@sap/approuter": "6.7.0"
+    "@sap/approuter": "^14.0.0"
 	},
 	"scripts": {
 		"start": "node node_modules/@sap/approuter/approuter.js"

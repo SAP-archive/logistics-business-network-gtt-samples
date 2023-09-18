@@ -10,8 +10,8 @@
   },
   "private": true,
   "engines": {
-    "node": "^12",
-    "npm": "^6"
+    "node": ">=18",
+    "npm": ">=6"
   },
   "devDependencies": {
     "@sap/grunt-sapui5-bestpractice-build": "1.4.2",

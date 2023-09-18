@@ -1,6 +1,6 @@
 {
 	"engines": {
-		"node": ">=8.0.0"
+		"node": ">=18.0.0"
 	},
 	"name": "site-content",
 	"version": "3.17.0",

@@ -1,7 +1,7 @@
 {
   "name": "ui-deployer",
   "engines": {
-    "node": ">=6.0.0"
+		"node": ">=18"
   },
   "dependencies": {
     "@sap/html5-app-deployer": "2.0.3"

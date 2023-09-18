@@ -13,8 +13,9 @@ modules:
   path: flp_appRouter
   parameters:
     disk-quota: 256M
+    stack: cflinuxfs3
     memory: 256M
-    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.7.69/nodejs-buildpack-cflinuxfs3-v1.7.69.zip
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.8.15/nodejs-buildpack-cflinuxfs3-v1.8.15.zip
     routes:
     - route: lbn-gtt-samples-app-flp-{unique-identifier}.${domain}
   properties:
@@ -44,7 +45,7 @@ modules:
   parameters:
     stack: cflinuxfs3
     memory: 128M
-    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.7.69/nodejs-buildpack-cflinuxfs3-v1.7.69.zip
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.8.15/nodejs-buildpack-cflinuxfs3-v1.8.15.zip
   requires:
   - name: lbn-gtt-sample-app-uaa
   - name: lbn-gtt-sample-portal-resources

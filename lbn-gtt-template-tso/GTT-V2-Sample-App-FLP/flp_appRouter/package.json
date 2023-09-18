@@ -2,7 +2,7 @@
 	"name": "html5-apps-approuter",
 	"description": "Node.js based application router service for html5-apps",
 	"engines": {
-		"node": "^12.22.12",
+		"node": ">=18",
 		"npm": ">=5"
 	},
 	"dependencies": {
