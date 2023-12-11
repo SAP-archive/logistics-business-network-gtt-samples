@@ -1,7 +1,10 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/logistics-business-network-gtt-samples)](https://api.reuse.software/info/github.com/SAP-samples/logistics-business-network-gtt-samples) 
 # Template Apps for SAP Business Network Global Track and Trace
+>:heavy_exclamation_mark:**Important:**
+>The sample codes provided here are only for **template** apps, which are out of mainstream maintenance. If you are using **standard** apps, please download the codes at [Fulfillment Tracking Apps for SAP Business Network Global Track and Trace](https://github.com/SAP-samples/logistics-business-network-gtt-standardapps-samples).
+
 ## Description
-You can find the template code for [SAP Business Network Global Track and Trace]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the solution. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes: 
+You can find the template code for [SAP Business Network Global Track and Trace]( https://help.sap.com/viewer/product/SAP_LBN_GTT_OPTION/LBN/en-US?task=discover_task) in this project. The project aims to provide examples to build your own tracking application based on the solution. You can either implement the sample code or customize it to fit your needs. For each tracking scenario, the template code includes:
 * ERP extractors to send out the tracked processes and events to SAP Business Network Global Track and Trace (ABAP) 
 * Tracked process model that needs to be imported into SAP Business Network Global Track and Trace (model file) 
 * Backend and frontend codes to build Fiori application on SAP Business Network Global Track and Trace (Java and JavaScript)

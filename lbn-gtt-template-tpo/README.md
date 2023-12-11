@@ -1,5 +1,6 @@
 # Track PO Fulfillment Template App
-
+>:heavy_exclamation_mark:**Important:**
+>The sample codes provided here are only for the **template** Track PO Fulfillment app, which is out of mainstream maintenance. If you are using the **standard** app, please download the codes at [Fulfillment Tracking Apps for SAP Business Network Global Track and Trace](https://github.com/SAP-samples/logistics-business-network-gtt-standardapps-samples).
 ## Announcement (2022.08.20) 
 In this release, the following changes are made: 
 * The UI5 version for Track PO Fulfillment template app is upgraded to 1.96.10.
