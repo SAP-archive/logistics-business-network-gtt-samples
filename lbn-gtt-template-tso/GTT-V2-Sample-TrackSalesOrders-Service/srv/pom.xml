@@ -36,6 +36,8 @@
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
         <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
         <xsuaa-spring-boot-starter.version>2.7.5</xsuaa-spring-boot-starter.version>
+        <httpclient.version>4.5.14</httpclient.version>
+
     </properties>
     <artifactId>gtt-v2-sample-track-salesorders-service</artifactId>
     <version>1.0.0</version>
@@ -155,6 +157,11 @@
             <artifactId>commons-beanutils</artifactId>
             <version>${commons-beanutils.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
 
 
         <dependency>
@@ -240,6 +247,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-starter.version}</version>
                 <executions>
                     <execution>
                         <goals>

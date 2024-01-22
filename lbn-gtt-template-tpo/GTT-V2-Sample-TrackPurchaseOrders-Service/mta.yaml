@@ -24,6 +24,13 @@ modules:
     timeout: 10m
   requires:
   - name: lbn-gtt-sample-app-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 300
+          validity-type: DAYS
   - name: lbn-gtt-sample-destination
 
 resources:

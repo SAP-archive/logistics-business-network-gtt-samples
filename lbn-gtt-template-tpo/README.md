@@ -37,7 +37,7 @@ For more information, refer to What’s New in the relevant document folder [04_
 * Enable features for new model field type of one-to-many association: purchase order – purchase order items, purchase order item – delivery items, delivery – delivery items.
 * Enable error logging on Cross TP Update BADI.
 * Minor enhancement for the Delivery Item page.
-*	Add the requirement “To implement the extractor code, your SAP ERP system version should be S4 1909 SP03 or higher”.
+*	Add the requirement “To implement the extractor code, your ERP system version should be S4 1909 SP03 or higher”.
 * Include combined IDOC implementation guide into the document 02_Extractor_Creation_Guide-TPOF.pdf.
 * Include sample extractor configuration list into the document 02_Extractor_Creation_Guide-TPOF.pdf.
 * Include new introduction material [03_Introduction_Material_for_TPOF.pdf](https://github.com/SAP-samples/logistics-business-network-gtt-samples/blob/master/lbn-gtt-template-tpo/Documents/03_Introduction_Material_for_TPOF.pdf).
@@ -61,7 +61,7 @@ Track PO Fulfillment template app is designed for purchase representatives to mo
 
 ## Requirements
 * An SAP Business Technology Platform global account with entitlement to SAP Business Network Global Track and Trace, 1 portal service quota and 2 GB Application Runtime quota.
-* Make sure that you have met the requirements for the product version mentioned in the [Prerequisites](https://help.sap.com/docs/business-network-global-track-and-trace/cea0ff17c5ab4c1d96de9ccda35b6a6f/c9f7baf5f6e14be4ba9045786961de14.html) chapter of How to Send Documents from SAP ERP to SAP Business Network Global Track and Trace. You can find this guide at http://help.sap.com/gtt. 
+* Make sure that you have met the requirements for the product version mentioned in the [Prerequisites](https://help.sap.com/docs/business-network-global-track-and-trace/cea0ff17c5ab4c1d96de9ccda35b6a6f/c9f7baf5f6e14be4ba9045786961de14.html) chapter of How to Send Documents from SAP S/4HANA to SAP Business Network Global Track and Trace. You can find this guide at http://help.sap.com/gtt. 
 * The ABAP codes on Github to support sample apps for SAP Business Network Global Track and Trace shall be implemented in SAP S/4HANA 1909 SP03 on premise or higher. Please note that the codes are not validated in its lower version or other ECC series of products, so you might need to do further adaptation work or build your own extractor.
 * To integrate with visibility providers, log your incident in SAP BCP system with component “SBN-LBN-GTT-APP”.
 
